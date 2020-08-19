@@ -50,16 +50,16 @@ config =
 
 
 
-dataTable :
+dataTable ::
     Config r i
     ->
         { thead :: Array (Row r i)
         , tbody :: Array (Row r i)
         }
     -> Html r i
-dataTable ((Config { additionalAttributes }) as config_) { thead, tbody } =
+dataTable (config_@(Config { additionalAttributes })) { thead, tbody } =
     HH.node "mdc-data-table"
-        (dataTableCs <> additionalAttributes)
+        ([dataTableCs] <> additionalAttributes)
         [ HH.table
             (Array.filterMap identity
                 [ dataTableTableCs
@@ -118,7 +118,7 @@ dataTableRowSelectedCs =
 
 headerRow :: Row r i -> Html r i
 headerRow (Row { attributes, nodes }) =
-    HH.tr (dataTableHeaderRowCs :: attributes) (Array.map headerCell nodes)
+    HH.tr ([dataTableHeaderRowCs, attributes] <> (Array.map headerCell nodes))
 
 
 dataTableHeaderRowCs :: HH.Attribute r i
@@ -128,7 +128,7 @@ dataTableHeaderRowCs =
 
 bodyRow :: Row r i -> Html r i
 bodyRow (Row { attributes, nodes }) =
-    HH.tr (dataTableRowCs :: attributes) (Array.map bodyCell nodes)
+    HH.tr ([ dataTableRowCs, attributes] <> (Array.map bodyCell nodes))
 
 
 dataTableRowCs :: HH.Attribute r i
@@ -147,7 +147,7 @@ headerCell cell_ =
                     , colScopeAttr
                     , dataTableHeaderCellNumericCs numeric
                     ]
-                    ++ attributes
+                    <> attributes
                 )
                 nodes
 
@@ -159,17 +159,12 @@ headerCell cell_ =
                     , colScopeAttr
                     , dataTableHeaderCellCheckboxCs
                     ]
-                    ++ attributes
+                    <> attributes
                 )
                 [ Checkbox.checkbox
                     (case config_ of
                         Material.Checkbox.Internal.Config config__ ->
-                            Material.Checkbox.Internal.Config
-                                { config__
-                                    | additionalAttributes =
-                                        HP.class_ mdc_data_table__row_checkbox
-                                            :: config__.additionalAttributes
-                                }
+                            Material.Checkbox.Internal.Config (config__ { additionalAttributes = [HP.class_ mdc_data_table__row_checkbox] <> config__.additionalAttributes })
                     )
                 ]
 
@@ -212,7 +207,7 @@ bodyCell cell_ =
                     [ dataTableCellCs
                     , dataTableCellNumericCs numeric
                     ]
-                    ++ attributes
+                    <> attributes
                 )
                 nodes
 
@@ -222,17 +217,12 @@ bodyCell cell_ =
                     [ dataTableCellCs
                     , dataTableCellCheckboxCs
                     ]
-                    ++ attributes
+                    <> attributes
                 )
                 [ Checkbox.checkbox
                     (case config_ of
                         Material.Checkbox.Internal.Config config__ ->
-                            Material.Checkbox.Internal.Config
-                                { config__
-                                    | additionalAttributes =
-                                        HP.class_ mdc_data_table__row_checkbox
-                                            :: config__.additionalAttributes
-                                }
+                            Material.Checkbox.Internal.Config (config__ { additionalAttributes = [HP.class_ mdc_data_table__row_checkbox] <> config__.additionalAttributes })
                     )
                 ]
 

@@ -256,7 +256,7 @@ textField outlined_ ((Config { additionalAttributes, fullwidth }) as config_) =
 
 icon :: Array (IProp r i) -> String -> Icon r i
 icon additionalAttributes iconName =
-    Icon (Icon.icon (HP.class_ mdc_text_field__icon <> additionalAttributes) iconName)
+    Icon (Icon.icon ([HP.class_ mdc_text_field__icon] <> additionalAttributes) iconName)
 
 
 rootCs :: Maybe (HH.Attribute r i)
@@ -472,7 +472,7 @@ labelElt (Config { label, value }) =
         Just str ->
             HH.div
                 [ if Maybe.withDefault "" value /= "" then
-                    HP.class_ (floatingLabelCs ++ " " ++ floatingLabelFloatAboveCs)
+                    HP.class_ (floatingLabelCs <> " " <> floatingLabelFloatAboveCs)
 
                   else
                     HP.class_ floatingLabelCs

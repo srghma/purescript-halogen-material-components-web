@@ -59,7 +59,7 @@ helperText ((Config { additionalAttributes }) as config_) string =
 
 helperLine :: Array (IProp r i) -> Array (Html r i) -> Html r i
 helperLine additionalAttributes nodes =
-    HH.div (helperLineCs <> additionalAttributes) nodes
+    HH.div ([helperLineCs] <> additionalAttributes) nodes
 
 
 helperTextCs :: Maybe (HH.Attribute r i)
@@ -89,7 +89,7 @@ ariaHiddenAttr =
 
 characterCounter :: Array (IProp r i) -> Html r i
 characterCounter additionalAttributes =
-    HH.div (characterCounterCs <> additionalAttributes) []
+    HH.div ([characterCounterCs] <> additionalAttributes) []
 
 
 characterCounterCs :: HH.Attribute r i

@@ -53,7 +53,7 @@ config =
 
 
 
-data Content r i =
+type Content r i =
     { title :: Maybe String
     , content :: Array (Html r i)
     , actions :: Array (Html r i)
@@ -62,7 +62,7 @@ data Content r i =
 
 
 dialog :: Config r i -> Content r i -> Html r i
-dialog ((Config { additionalAttributes }) as config_) content =
+dialog (config_@(Config { additionalAttributes })) content =
     HH.node "mdc-dialog"
         (Array.filterMap identity
             [ rootCs

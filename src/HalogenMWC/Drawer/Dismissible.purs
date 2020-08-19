@@ -72,13 +72,13 @@ drawer ((Config { additionalAttributes }) as config_) nodes =
 
 content :: Array (IProp r i) -> Array (Html r i) -> Html r i
 content attributes nodes =
-    HH.div (HP.class_ mdc_drawer__content :: attributes) nodes
+    HH.div ([ HP.class_ mdc_drawer__content ] <> attributes) nodes
 
 
 
 header :: Array (IProp r i) -> Array (Html r i) -> Html r i
 header additionalAttributes nodes =
-    HH.div (HP.class_ mdc_drawer__header <> additionalAttributes) nodes
+    HH.div ([HP.class_ mdc_drawer__header] <> additionalAttributes) nodes
 
 
 

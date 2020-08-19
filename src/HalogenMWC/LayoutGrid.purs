@@ -69,22 +69,22 @@ alignTop =
 
 span :: Int -> HH.Attribute r i
 span n =
-    HP.class_ ("mdc-layout-grid__cell--span-" ++ String.fromInt n)
+    HP.class_ ("mdc-layout-grid__cell--span-" <> String.fromInt n)
 
 
 spanDesktop :: Int -> HH.Attribute r i
 spanDesktop n =
-    HP.class_ ("mdc-layout-grid__cell--span-" ++ String.fromInt n ++ "-desktop")
+    HP.class_ ("mdc-layout-grid__cell--span-" <> String.fromInt n <> "-desktop")
 
 
 spanTablet :: Int -> HH.Attribute r i
 spanTablet n =
-    HP.class_ ("mdc-layout-grid__cell--span-" ++ String.fromInt n ++ "-tablet")
+    HP.class_ ("mdc-layout-grid__cell--span-" <> String.fromInt n <> "-tablet")
 
 
 spanPhone :: Int -> HH.Attribute r i
 spanPhone n =
-    HP.class_ ("mdc-layout-grid__cell--span-" ++ String.fromInt n ++ "-phone")
+    HP.class_ ("mdc-layout-grid__cell--span-" <> String.fromInt n <> "-phone")
 
 
 

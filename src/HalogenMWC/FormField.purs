@@ -75,7 +75,7 @@ formField ((Config { additionalAttributes }) as config_) nodes =
             ]
             <> additionalAttributes
         )
-        (nodes ++ [ labelElt config_ ])
+        (nodes <> [ labelElt config_ ])
 
 
 rootCs :: Maybe (HH.Attribute r i)

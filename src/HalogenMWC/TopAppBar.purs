@@ -108,7 +108,7 @@ prominent config_ nodes =
 
 row :: Array (IProp r i) -> Array (Html r i) -> Html r i
 row attributes nodes =
-    HH.section ([ HP.class_ mdc_top_app_bar__row ] ++ attributes) nodes
+    HH.section ([ HP.class_ mdc_top_app_bar__row ] <> attributes) nodes
 
 
 {-| Sections subdivide the top app bar's rows. A section may be start- or
@@ -117,7 +117,7 @@ app bar's navigation icon and title.
 -}
 section :: Array (IProp r i) -> Array (Html r i) -> Html r i
 section attributes nodes =
-    HH.section ([ HP.class_ mdc_top_app_bar__section ] ++ attributes) nodes
+    HH.section ([ HP.class_ mdc_top_app_bar__section ] <> attributes) nodes
 
 
 {-| Start-align a top app bar's `section`

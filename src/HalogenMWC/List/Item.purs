@@ -66,45 +66,8 @@ activated =
 
 
 
-
-
-
-
-
-
-
-
-
-{-| Specify a link list item's HTML5 target attribute
-
-Note that non-link list items ignore this configuration option.
-
--}
-
-
-
-
-
-
-
-        { config_ | additionalAttributes = additionalAttributes }
-
-
-
-
-
-        { config_ | onClick = Just onClick }
-
-
-{-| Array item type
-
-Array items can only be rendered within a [list container](Material-Array).
-
--}
 data ArrayItem r i =
     Material.Array.Item.Internal.ArrayItem r i
-
-
 
 listItem :: Config r i -> Array (Html r i) -> ArrayItem r i
 listItem (Config ({ additionalAttributes, href } as config_)) nodes =
@@ -169,7 +132,6 @@ ariaSelectedAttr :: Config r i -> Maybe (HH.Attribute r i)
 ariaSelectedAttr (Config { selection }) =
     if selection /= Nothing then
         Just (HH.Attributes.attribute "aria-selected" "true")
-
     else
         Nothing
 
@@ -198,7 +160,7 @@ text :
         }
     -> Html r i
 text additionalAttributes { primary, secondary } =
-    HH.div (HP.class_ mdc_list_item__text <> additionalAttributes)
+    HH.div (HP.class_ mdc_list_item__text] <> additionalAttributes)
         [ primaryText [] primary
         , secondaryText [] secondary
         ]
@@ -206,21 +168,21 @@ text additionalAttributes { primary, secondary } =
 
 primaryText :: Array (IProp r i) -> Array (Html r i) -> Html r i
 primaryText additionalAttributes nodes =
-    HH.div (HP.class_ mdc_list_item__primary_text <> additionalAttributes) nodes
+    HH.div ([HP.class_ mdc_list_item__primary_text] <> additionalAttributes) nodes
 
 
 secondaryText :: Array (IProp r i) -> Array (Html r i) -> Html r i
 secondaryText additionalAttributes nodes =
-    HH.div (HP.class_ mdc_list_item__secondary_text <> additionalAttributes) nodes
+    HH.div ([HP.class_ mdc_list_item__secondary_text] <> additionalAttributes) nodes
 
 
 
 graphic :: Array (IProp r i) -> Array (Html r i) -> Html r i
 graphic additionalAttributes nodes =
-    HH.div (HP.class_ mdc_list_item__graphic <> additionalAttributes) nodes
+    HH.div ([HP.class_ mdc_list_item__graphic] <> additionalAttributes) nodes
 
 
 
 meta :: Array (IProp r i) -> Array (Html r i) -> Html r i
 meta additionalAttributes nodes =
-    HH.div (HP.class_ mdc_list_item__meta <> additionalAttributes) nodes
+    HH.div ([HP.class_ mdc_list_item__meta] <> additionalAttributes) nodes

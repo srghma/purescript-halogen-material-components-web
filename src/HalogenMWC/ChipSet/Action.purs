@@ -16,7 +16,7 @@ import HalogenMWC.Chip.Action.Internal as Chip
 chipSet :: Array (IProp r i) -> Array (Chip r i) -> Html r i
 chipSet additionalAttributes chips =
     HH.node "mdc-chip-set"
-        (chipSetCs :: chipSetActionCs :: gridRole <> additionalAttributes)
+        ([ chipSetCs, chipSetActionCs, gridRole] <> additionalAttributes)
         (Array.map chip chips)
 
 

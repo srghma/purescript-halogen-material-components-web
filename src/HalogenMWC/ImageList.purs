@@ -101,7 +101,7 @@ listItemElt ((Config { masonry }) as config_) ((ImageArrayItem.ImageArrayItem (I
             ]
     in
     HH.node "mdc-image-list-item"
-        (HP.class_ mdc_image_list__item <> additionalAttributes)
+        ([HP.class_ mdc_image_list__item] <> additionalAttributes)
         (href
             # Maybe.map (\href_ -> [ HH.a [ HH.Attributes.href href_ ] inner ])
             # Maybe.withDefault inner
@@ -139,7 +139,7 @@ imageElt masonry (ImageArrayItem.ImageArrayItem (ImageArrayItem.Config { href, i
     else
         HH.div
             [ HP.class_ mdc_image_list__image
-            , style "background-image" ("url('" ++ image ++ "')")
+            , style "background-image" ("url('" <> image <> "')")
             ]
             []
 

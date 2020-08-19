@@ -18,12 +18,12 @@ import HalogenMWC.Chip.Input.Internal as Chip
 chipSet :: Array (IProp r i) -> Array ( String, Chip r i ) -> Html r i
 chipSet additionalAttributes keyedChips =
     HH.Keyed.node "mdc-chip-set"
-        (chipSetCs :: chipSetInputCs :: gridRole <> additionalAttributes)
+        ([ chipSetCs, chipSetInputCs, gridRole] <> additionalAttributes)
         (Array.map (Tuple.mapSecond chip) keyedChips)
 
 
 chip :: Chip r i -> Html r i
-chip (Chip ((Chip.Config { additionalAttributes }) as config_) label) =
+chip (Chip (config_@(Chip.Config { additionalAttributes })) label) =
     HH.div [ HP.class_ mdc_touch_target_wrapper ]
         [ HH.node "mdc-chip"
             (Array.filterMap identity

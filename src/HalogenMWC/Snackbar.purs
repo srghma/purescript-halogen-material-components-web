@@ -78,7 +78,7 @@ addMessage :: Message r i -> Queue r i -> Queue r i
 addMessage message_ (Queue queue) =
     Queue
         { queue
-            | messages = queue.messages ++ [ ( queue.nextMessageId, message_ ) ]
+            | messages = queue.messages <> [ ( queue.nextMessageId, message_ ) ]
             , nextMessageId = inc queue.nextMessageId
         }
 

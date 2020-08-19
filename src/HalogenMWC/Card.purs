@@ -189,7 +189,7 @@ mediaCs =
 
 backgroundImageAttr :: String -> Maybe (HH.Attribute r i)
 backgroundImageAttr url =
-    Just (style "background-image" ("url(\"" ++ url ++ "\")"))
+    Just (style "background-image" ("url(\"" <> url <> "\")"))
 
 
 aspectCs :: Maybe Aspect -> Maybe (HH.Attribute r i)
