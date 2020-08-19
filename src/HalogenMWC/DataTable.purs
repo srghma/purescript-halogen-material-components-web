@@ -1,6 +1,8 @@
 module HalogenMWC.DataTable where
 
+import HalogenMWC.Checkbox
 import Protolude
+
 import Data.Array as Array
 import Data.Maybe as Maybe
 import Halogen (AttrName(..))
@@ -9,7 +11,7 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Checkbox as Checkbox
-import HalogenMWC.Checkbox
+import Material.Classes.DataTable
 
 type Config r i
   = { label :: Maybe String

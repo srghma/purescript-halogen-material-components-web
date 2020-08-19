@@ -1,6 +1,9 @@
 module HalogenMWC.Card where
 
+import HalogenMWC.Button
+import HalogenMWC.IconButton
 import Protolude
+
 import Data.Array as Array
 import Data.Maybe as Maybe
 import Halogen (AttrName(..))
@@ -9,9 +12,8 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Button as Button
-import HalogenMWC.Button
 import HalogenMWC.IconButton as IconButton
-import HalogenMWC.IconButton
+import Material.Classes.Card
 
 type Config r i
   = { outlined :: Boolean

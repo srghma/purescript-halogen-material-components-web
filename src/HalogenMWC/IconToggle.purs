@@ -1,6 +1,9 @@
 module HalogenMWC.IconToggle where
 
+import Material.Classes.IconButton
+import MaterialIconsFont.Classes
 import Protolude
+
 import Data.Array as Array
 import Data.Maybe as Maybe
 import Halogen (AttrName(..))
@@ -60,7 +63,7 @@ iconCs :: Maybe (IProp r i)
 iconCs = Just (HP.class_ mdc_icon_button__icon)
 
 onIconCs :: Maybe (IProp r i)
-onIconCs = Just (HP.class_ "mdc-icon-button__icon mdc-icon-button__icon--on")
+onIconCs = Just (HP.class_ [ mdc_icon_button__icon, mdc_icon_button__icon____on ])
 
 tabIndexProp :: Maybe (IProp r i)
 tabIndexProp = Just (HP.tabindex 0)

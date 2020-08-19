@@ -1,6 +1,7 @@
 module HalogenMWC.Button where
 
 import Protolude
+
 import Data.Array as Array
 import Data.Maybe as Maybe
 import Halogen (AttrName(..))
@@ -8,6 +9,7 @@ import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import Material.Classes.Button
 
 type Config r i
   = { icon :: Maybe String
@@ -80,23 +82,15 @@ button variant (config_@{ additionalAttributes, touch, href }) label =
               )
           ]
 
-{-| Text button variant (flush without outline)
--}
 text :: Config r i -> String -> HH.HTML w i
 text config_ label = button Text config_ label
 
-{-| Outlined button variant (flush with outline)
--}
 outlined :: Config r i -> String -> HH.HTML w i
 outlined config_ label = button Outlined config_ label
 
-{-| Raised button variant (contained with elevation)
--}
 raised :: Config r i -> String -> HH.HTML w i
 raised config_ label = button Raised config_ label
 
-{-| Unelevated button variant (contained without elevation)
--}
 unelevated :: Config r i -> String -> HH.HTML w i
 unelevated config_ label = button Unelevated config_ label
 
