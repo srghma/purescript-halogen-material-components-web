@@ -84,7 +84,7 @@ import Material.Chip.Choice.Internal (Chip(..), Config(..))
 
 {-| Configuration of a choice chip
 -}
-data Config msg =
+type Config r i =
     Material.Chip.Choice.Internal.Config msg
 
 
@@ -107,7 +107,7 @@ setIcon icon (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 

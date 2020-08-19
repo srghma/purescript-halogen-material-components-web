@@ -1,9 +1,9 @@
-module HalogenMWC.ImageList.Item.Internal (Config(..), ImageListItem(..))
+module HalogenMWC.ImageArray.Item.Internal (Config(..), ImageArrayItem(..))
 
 import Html
 
 
-data Config msg
+type Config r i
     = Config
         { label :: Maybe String
         , href :: Maybe String
@@ -12,5 +12,5 @@ data Config msg
         }
 
 
-data ImageListItem msg
-    = ImageListItem (Config msg)
+data ImageArrayItem msg
+    = ImageArrayItem (Config msg)

@@ -23,7 +23,7 @@ other functionality on an app.
 
   - [Demo: Drawers](https://aforemny.github.io/material-components-web-elm/#drawer)
   - [Material Design Guidelines: Navigation Drawer](https://material.io/go/design-navigation-drawer)
-  - [MDC Web: List](https://github.com/material-components/material-components-web/tree/master/packages/mdc-drawer)
+  - [MDC Web: Array](https://github.com/material-components/material-components-web/tree/master/packages/mdc-drawer)
   - [Sass Mixins (MDC Web)](https://github.com/material-components/material-components-web/tree/master/packages/mdc-drawer#sass-mixins)
 
 
@@ -32,8 +32,8 @@ other functionality on an app.
     import Html (Html, text)
     import Html.Attributes (style)
     import Material.Drawer.Permanent as PermanentDrawer
-    import Material.List as List
-    import Material.ListItem as ListItem
+    import Material.Array as Array
+    import Material.ArrayItem as ArrayItem
 
     main =
         Html.div
@@ -42,10 +42,10 @@ other functionality on an app.
             ]
             [ PermanentDrawer.drawer PermanentDrawer.config
                 [ PermanentDrawer.content []
-                    [ List.list List.config
-                        [ ListItem.listItem ListItem.config
+                    [ Array.list Array.config
+                        [ ArrayItem.listItem ArrayItem.config
                             [ text "Home" ]
-                        , ListItem.listItem ListItem.config
+                        , ArrayItem.listItem ArrayItem.config
                             [ text "Log out" ]
                         ]
                     ]
@@ -85,7 +85,7 @@ import Html.Attributes (class)
 
 {-| Configuration of a permanent drawer
 -}
-data Config msg
+type Config r i
     = Config { additionalAttributes :: Array (IProp r i) }
 
 
@@ -98,23 +98,23 @@ config =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Permanent drawer view function
 -}
-drawer :: Config msg -> List (Html msg) -> Html msg
+drawer :: Config msg -> Array (Html msg) -> Html msg
 drawer (Config { additionalAttributes }) nodes =
     Html.div
-        (List.filterMap identity [ rootCs ] ++ additionalAttributes)
+        (Array.filterMap identity [ rootCs ] ++ additionalAttributes)
         nodes
 
 
 {-| Drawer content
 -}
-content :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
+content :: Array (IProp r i) -> Array (Html msg) -> Html msg
 content attributes nodes =
     Html.div (class "mdc-drawer__content" :: attributes) nodes
 
@@ -132,7 +132,7 @@ content attributes nodes =
         ]
 
 -}
-header :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
+header :: Array (IProp r i) -> Array (Html msg) -> Html msg
 header additionalAttributes nodes =
     Html.div (class "mdc-drawer__header" :: additionalAttributes) nodes
 

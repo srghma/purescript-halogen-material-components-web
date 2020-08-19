@@ -139,7 +139,7 @@ import Svg.Attributes
 
 {-| Configuration of a checkbox
 -}
-data Config msg =
+type Config r i =
     Material.Checkbox.Internal.Config msg
 
 
@@ -179,7 +179,7 @@ setDisabled disabled (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
@@ -247,7 +247,7 @@ checkbox ((Config { touch, additionalAttributes }) as config_) =
     in
     wrapTouch <|
         Html.node "mdc-checkbox"
-            (List.filterMap identity
+            (Array.filterMap identity
                 [ rootCs
                 , touchCs config_
                 , checkedProp config_
@@ -292,7 +292,7 @@ disabledProp (Config { disabled }) =
 
 changeHandler :: Config msg -> Maybe (Html.Attribute msg)
 changeHandler (Config { state, onChange }) =
-    -- Note: MDCList choses to send a change event to all checkboxes, thus we
+    -- Note: MDCArray choses to send a change event to all checkboxes, thus we
     -- have to check here if the state actually changed.
     Maybe.map
         (\msg ->
@@ -317,7 +317,7 @@ changeHandler (Config { state, onChange }) =
 nativeControlElt :: Config msg -> Html msg
 nativeControlElt config_ =
     Html.input
-        (List.filterMap identity
+        (Array.filterMap identity
             [ Just (Html.Attributes.type_ "checkbox")
             , Just (class "mdc-checkbox__native-control")
             , checkedProp config_

@@ -89,7 +89,7 @@ import Json.Encode as Encode
 
 {-| Ripple configuration
 -}
-data Config msg
+type Config r i
     = Config
         { color :: Maybe Color
         , additionalAttributes :: Array (IProp r i)
@@ -115,7 +115,7 @@ setColor color (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
@@ -144,7 +144,7 @@ accent =
 ripple :: Bool -> Config msg -> Html msg
 ripple isUnbounded ((Config { additionalAttributes }) as config_) =
     Html.node "mdc-ripple"
-        (List.filterMap identity
+        (Array.filterMap identity
             [ unboundedProp isUnbounded
             , unboundedData isUnbounded
             , colorCs config_

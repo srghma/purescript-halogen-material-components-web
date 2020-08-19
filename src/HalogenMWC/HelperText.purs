@@ -93,7 +93,7 @@ import Html.Attributes (class)
 
 {-| Configuration of a helper text
 -}
-data Config msg
+type Config r i
     = Config
         { persistent :: Bool
         , additionalAttributes :: Array (IProp r i)
@@ -123,7 +123,7 @@ setPersistent persistent (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
@@ -136,7 +136,7 @@ The helper text is expected to be a direct child of the helper line.
 helperText :: Config msg -> String -> Html msg
 helperText ((Config { additionalAttributes }) as config_) string =
     Html.div
-        (List.filterMap identity
+        (Array.filterMap identity
             [ helperTextCs
             , persistentCs config_
             , ariaHiddenAttr
@@ -152,7 +152,7 @@ The helper line is expected to be the wrapping element of the helper text. It
 is expected to be a direct sibling of the text field that it belongs to.
 
 -}
-helperLine :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
+helperLine :: Array (IProp r i) -> Array (Html msg) -> Html msg
 helperLine additionalAttributes nodes =
     Html.div (helperLineCs :: additionalAttributes) nodes
 
@@ -183,7 +183,7 @@ ariaHiddenAttr =
 
 {-| Character counter view function
 -}
-characterCounter :: List (Html.Attribute msg) -> Html msg
+characterCounter :: Array (IProp r i) -> Html msg
 characterCounter additionalAttributes =
     Html.div (characterCounterCs :: additionalAttributes) []
 

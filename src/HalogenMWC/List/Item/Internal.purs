@@ -1,13 +1,13 @@
-module HalogenMWC.List.Item.Internal
+module HalogenMWC.Array.Item.Internal
     ( Config(..)
-    , ListItem(..)
+    , ArrayItem(..)
     , Selection(..)
     ) where
 
 import Html (Html)
 
 
-data Config msg
+type Config r i
     = Config
         { disabled :: Bool
         , selection :: Maybe Selection
@@ -24,7 +24,7 @@ data Selection
     | Activated
 
 
-data ListItem msg
-    = ListItem (Config msg)
-    | ListItemDivider (Html msg)
-    | ListGroupSubheader (Html msg)
+data ArrayItem msg
+    = ArrayItem (Config msg)
+    | ArrayItemDivider (Html msg)
+    | ArrayGroupSubheader (Html msg)

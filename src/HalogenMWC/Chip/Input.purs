@@ -73,7 +73,7 @@ import Material.Chip.Input.Internal (Chip(..), Config(..))
 
 {-| Configuration of an input chip
 -}
-data Config msg =
+type Config r i =
     Material.Chip.Input.Internal.Config msg
 
 
@@ -106,7 +106,7 @@ setTrailingIcon trailingIcon (Config config_) =
 
 {-| Specify additonal attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 

@@ -171,7 +171,7 @@ import Material.Button.Internal (Config(..))
 
 {-| Configuration of a button
 -}
-data Config msg =
+type Config r i =
     Material.Button.Internal.Config msg
 
 
@@ -254,7 +254,7 @@ setTarget target (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
@@ -300,14 +300,14 @@ button variant ((Config { additionalAttributes, touch, href }) as config_) label
     in
     wrapTouch <|
         Html.node "mdc-button"
-            (List.filterMap identity [ disabledProp config_ ])
+            (Array.filterMap identity [ disabledProp config_ ])
             [ (if href /= Nothing then
                 Html.a
 
                else
                 Html.button
               )
-                (List.filterMap identity
+                (Array.filterMap identity
                     [ rootCs
                     , variantCs variant
                     , denseCs config_
@@ -320,7 +320,7 @@ button variant ((Config { additionalAttributes, touch, href }) as config_) label
                     ]
                     ++ additionalAttributes
                 )
-                (List.filterMap identity
+                (Array.filterMap identity
                     [ rippleElt
                     , leadingIconElt config_
                     , labelElt label

@@ -107,7 +107,7 @@ import Json.Encode as Encode
 
 {-| Configuration of a switch
 -}
-data Config msg
+type Config r i
     = Config
         { checked :: Bool
         , disabled :: Bool
@@ -148,7 +148,7 @@ setDisabled disabled (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
@@ -165,7 +165,7 @@ setOnChange onChange (Config config_) =
 switch :: Config msg -> Html msg
 switch ((Config { additionalAttributes }) as config_) =
     Html.node "mdc-switch"
-        (List.filterMap identity
+        (Array.filterMap identity
             [ rootCs
             , checkedProp config_
             , disabledProp config_
@@ -230,7 +230,7 @@ thumbElt config_ =
 nativeControlElt :: Config msg -> Html msg
 nativeControlElt config_ =
     Html.input
-        (List.filterMap identity
+        (Array.filterMap identity
             [ nativeControlCs
             , checkboxTypeAttr
             , switchRoleAttr

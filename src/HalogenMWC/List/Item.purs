@@ -1,4 +1,4 @@
-module HalogenMWC.List.Item
+module HalogenMWC.Array.Item
     ( Config, config
     , setOnClick
     , setDisabled
@@ -6,7 +6,7 @@ module HalogenMWC.List.Item
     , setHref
     , setTarget
     , setAttributes
-    , ListItem, listItem
+    , ArrayItem, listItem
     , graphic
     , meta
     , text
@@ -14,10 +14,10 @@ module HalogenMWC.List.Item
     , activated
     ) where
 
-{-| Lists are continuous, vertical indexes of text or images.
+{-| Arrays are continuous, vertical indexes of text or images.
 
 This module concerns the list items. If you are looking for the list container,
-refer to [Material.List](Material-List).
+refer to [Material.Array](Material-Array).
 
 
 # Table of Contents
@@ -26,33 +26,33 @@ refer to [Material.List](Material-List).
   - [Basic Usage](#basic-usage)
   - [Configuration](#configuration)
       - [Configuration Options](#configuration-options)
-  - [List Item](#list-item)
-  - [List Item with Graphic](#list-item-with-graphic)
-  - [List Item with Meta](#list-item-with-meta)
-  - [Two-Line List Item](#two-line-list-item)
-  - [Disabled List Item](#disabled-list-item)
-  - [Selected List Item](#selected-list-item)
-  - [Activated List Item](#activated-list-item)
-  - [Link List Item](#link-list-item)
-  - [List Item Divider](#list-item-divider)
+  - [Array Item](#list-item)
+  - [Array Item with Graphic](#list-item-with-graphic)
+  - [Array Item with Meta](#list-item-with-meta)
+  - [Two-Line Array Item](#two-line-list-item)
+  - [Disabled Array Item](#disabled-list-item)
+  - [Selected Array Item](#selected-list-item)
+  - [Activated Array Item](#activated-list-item)
+  - [Link Array Item](#link-list-item)
+  - [Array Item Divider](#list-item-divider)
 
 
 # Resources
 
-  - [Demo: Lists](https://aforemny.github.io/material-components-web-elm/#lists)
-  - [Material Design Guidelines: Lists](https://material.io/design/components/lists.html)
-  - [MDC Web: List](https://github.com/material-components/material-components-web/tree/master/packages/mdc-list)
+  - [Demo: Arrays](https://aforemny.github.io/material-components-web-elm/#lists)
+  - [Material Design Guidelines: Arrays](https://material.io/design/components/lists.html)
+  - [MDC Web: Array](https://github.com/material-components/material-components-web/tree/master/packages/mdc-list)
   - [Sass Mixins (MDC Web)](https://github.com/material-components/material-components-web/tree/master/packages/mdc-list#sass-mixins)
 
 
 # Basic Usage
 
-    import Material.List as List
-    import Material.List.Item as ListItem
+    import Material.Array as Array
+    import Material.Array.Item as ArrayItem
 
     main =
-        List.list List.config
-            [ ListItem.listItem ListItem.config
+        Array.list Array.config
+            [ ArrayItem.listItem ArrayItem.config
                 [ text "Line item" ]
             ]
 
@@ -72,12 +72,12 @@ refer to [Material.List](Material-List).
 @docs setAttributes
 
 
-# List Item
+# Array Item
 
-@docs ListItem, listItem
+@docs ArrayItem, listItem
 
 
-# List Item with Graphic
+# Array Item with Graphic
 
 In addition to their text, list itemss may optionally contain a starting tile
 referred to as _graphic_.
@@ -85,35 +85,35 @@ referred to as _graphic_.
 Common examples for graphics are icons and images, avatar images and selection
 controls such as checkboxes.
 
-    ListItem.listItem ListItem.config
-        [ ListItem.graphic [] [ Icon.icon Icon.config "star" ]
-        , text "List item"
+    ArrayItem.listItem ArrayItem.config
+        [ ArrayItem.graphic [] [ Icon.icon Icon.config "star" ]
+        , text "Array item"
         ]
 
 @docs graphic
 
 
-# List Item with Meta
+# Array Item with Meta
 
 In addition to their text child, list items may optionally contain a starting
 tile referred to as _meta_.
 
 Common examples for metas are text, icons and images and selection controls.
 
-    ListItem.listItem ListItem.config
-        [ text "List item"
-        , ListItem.meta [] [ Icon.icon Icon.config "star" ]
+    ArrayItem.listItem ArrayItem.config
+        [ text "Array item"
+        , ArrayItem.meta [] [ Icon.icon Icon.config "star" ]
         ]
 
 @docs meta
 
 
-# Two-Line List Item
+# Two-Line Array Item
 
-List items may be two-line list items by using `text`.
+Array items may be two-line list items by using `text`.
 
-    ListItem.listItem ListItem.config
-        [ ListItem.text []
+    ArrayItem.listItem ArrayItem.config
+        [ ArrayItem.text []
             { primary = [ text "First line" ]
             , secondary = [ text "Second line" ]
             }
@@ -122,19 +122,19 @@ List items may be two-line list items by using `text`.
 @docs text
 
 
-# Disabled List Item
+# Disabled Array Item
 
-List items may be disabled by setting their `setDisabled` configuration option
+Array items may be disabled by setting their `setDisabled` configuration option
 to `True`.
 
-    ListItem.listItem
-        (ListItem.config |> ListItem.setDisabled True)
-        [ text "List item" ]
+    ArrayItem.listItem
+        (ArrayItem.config |> ArrayItem.setDisabled True)
+        [ text "Array item" ]
 
 
-### Selected List Item
+### Selected Array Item
 
-List items may be selected by setting their `setSelected` configuration option
+Array items may be selected by setting their `setSelected` configuration option
 to a value of `Selection`.
 
 A list item that may change its selection state within the current page, should
@@ -143,18 +143,18 @@ be selected rather than activated.
 As a rule of thumb, a navigation list item should be activated, while any other
 list item should be selected.
 
-    ListItem.listItem
-        (ListItem.config
-            |> ListItem.setSelected (Just ListItem.selected)
+    ArrayItem.listItem
+        (ArrayItem.config
+            |> ArrayItem.setSelected (Just ArrayItem.selected)
         )
-        [ text "List item" ]
+        [ text "Array item" ]
 
 @docs Selection, selected
 
 
-### Activated List Item
+### Activated Array Item
 
-List items may be activated by setting their `setSelected` configuration option
+Array items may be activated by setting their `setSelected` configuration option
 to a value of `Selection`.
 
 A list item that may not change its state within the current page should be
@@ -163,24 +163,24 @@ activated rather than selected.
 As a rule of thumb, a navigation list item should be activated, while any other
 list item should be selected.
 
-    ListItem.listItem
-        (ListItem.config
-            |> ListItem.setSelected (Just ListItem.activated)
+    ArrayItem.listItem
+        (ArrayItem.config
+            |> ArrayItem.setSelected (Just ArrayItem.activated)
         )
-        [ text "List item" ]
+        [ text "Array item" ]
 
 @docs activated
 
 
-## Link List Item
+## Link Array Item
 
-List items may using the `setHref` configuration option in which case the list
+Array items may using the `setHref` configuration option in which case the list
 item essentially behaves like a HTML anchor element. You may specify the
 configuration option `setTarget` as well.
 
-    ListItem.listItem
-        (ListItem.config
-            |> ListItem.setHref (Just "https://elm-lang.org")
+    ArrayItem.listItem
+        (ArrayItem.config
+            |> ArrayItem.setHref (Just "https://elm-lang.org")
         )
         [ text "Elm programming language" ]
 
@@ -190,13 +190,13 @@ Note that link list items cannot be disabled.
 
 import Html (Html)
 import Html.Attributes (class)
-import Material.List.Item.Internal (Config(..), ListItem(..), Selection(..))
+import Material.Array.Item.Internal (Config(..), ArrayItem(..), Selection(..))
 
 
 {-| Configuration of a list item
 -}
-data Config msg =
-    Material.List.Item.Internal.Config msg
+type Config r i =
+    Material.Array.Item.Internal.Config msg
 
 
 {-| Default configuration of a list item
@@ -231,7 +231,7 @@ A list item may be either in selected or in activated selection state.
 
 -}
 data Selection =
-    Material.List.Item.Internal.Selection
+    Material.Array.Item.Internal.Selection
 
 
 {-| Selected selection state
@@ -286,7 +286,7 @@ setTarget target (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config
         { config_ | additionalAttributes = additionalAttributes }
@@ -300,23 +300,23 @@ setOnClick onClick (Config config_) =
         { config_ | onClick = Just onClick }
 
 
-{-| List item type
+{-| Array item type
 
-List items can only be rendered within a [list container](Material-List).
+Array items can only be rendered within a [list container](Material-Array).
 
 -}
-data ListItem msg =
-    Material.List.Item.Internal.ListItem msg
+data ArrayItem msg =
+    Material.Array.Item.Internal.ArrayItem msg
 
 
-{-| List item constructor
+{-| Array item constructor
 -}
-listItem :: Config msg -> List (Html msg) -> ListItem msg
+listItem :: Config msg -> Array (Html msg) -> ArrayItem msg
 listItem (Config ({ additionalAttributes, href } as config_)) nodes =
-    ListItem (Config { config_ | node = listItemView (Config config_) nodes })
+    ArrayItem (Config { config_ | node = listItemView (Config config_) nodes })
 
 
-listItemView :: Config msg -> List (Html msg) -> Html msg
+listItemView :: Config msg -> Array (Html msg) -> Html msg
 listItemView ((Config { additionalAttributes, href }) as config_) nodes =
     (\attributes ->
         if href /= Nothing then
@@ -325,7 +325,7 @@ listItemView ((Config { additionalAttributes, href }) as config_) nodes =
         else
             Html.node "mdc-list-item" attributes nodes
     ) where
-        (List.filterMap identity
+        (Array.filterMap identity
             [ listItemCs
             , hrefAttr config_
             , targetAttr config_
@@ -396,10 +396,10 @@ targetAttr (Config { href, target }) =
 {-| Two-line list item's text
 -}
 text :
-    List (Html.Attribute msg)
+    Array (IProp r i)
     ->
-        { primary :: List (Html msg)
-        , secondary :: List (Html msg)
+        { primary :: Array (Html msg)
+        , secondary :: Array (Html msg)
         }
     -> Html msg
 text additionalAttributes { primary, secondary } =
@@ -409,25 +409,25 @@ text additionalAttributes { primary, secondary } =
         ]
 
 
-primaryText :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
+primaryText :: Array (IProp r i) -> Array (Html msg) -> Html msg
 primaryText additionalAttributes nodes =
     Html.div (class "mdc-list-item__primary-text" :: additionalAttributes) nodes
 
 
-secondaryText :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
+secondaryText :: Array (IProp r i) -> Array (Html msg) -> Html msg
 secondaryText additionalAttributes nodes =
     Html.div (class "mdc-list-item__secondary-text" :: additionalAttributes) nodes
 
 
 {-| A list item's graphic tile
 -}
-graphic :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
+graphic :: Array (IProp r i) -> Array (Html msg) -> Html msg
 graphic additionalAttributes nodes =
     Html.div (class "mdc-list-item__graphic" :: additionalAttributes) nodes
 
 
 {-| A list item's meta tile
 -}
-meta :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
+meta :: Array (IProp r i) -> Array (Html msg) -> Html msg
 meta additionalAttributes nodes =
     Html.div (class "mdc-list-item__meta" :: additionalAttributes) nodes

@@ -180,7 +180,7 @@ import Json.Encode as Encode
 
 {-| Configuration of a text area
 -}
-data Config msg
+type Config r i
     = Config
         { label :: Maybe String
         , fullwidth :: Bool
@@ -304,7 +304,7 @@ setMaxLength maxLength (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
@@ -341,7 +341,7 @@ outlined config_ =
 textArea :: Bool -> Config msg -> Html msg
 textArea outlined_ ((Config { additionalAttributes, fullwidth }) as config_) =
     Html.node "mdc-text-field"
-        (List.filterMap identity
+        (Array.filterMap identity
             [ rootCs
             , noLabelCs config_
             , outlinedCs outlined_
@@ -356,7 +356,7 @@ textArea outlined_ ((Config { additionalAttributes, fullwidth }) as config_) =
             ]
             ++ additionalAttributes
         )
-        (List.concat
+        (Array.concat
             [ if fullwidth then
                 [ inputElt config_
                 , notchedOutlineElt config_
@@ -446,7 +446,7 @@ changeHandler (Config { onChange }) =
 inputElt :: Config msg -> Html msg
 inputElt config_ =
     Html.textarea
-        (List.filterMap identity
+        (Array.filterMap identity
             [ inputCs
             , ariaLabelAttr config_
             , rowsAttr config_

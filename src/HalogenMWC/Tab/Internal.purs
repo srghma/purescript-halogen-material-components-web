@@ -7,7 +7,7 @@ module HalogenMWC.Tab.Internal
 import Html
 
 
-data Config msg
+type Config r i
     = Config
         { active :: Bool
         , additionalAttributes :: Array (IProp r i)

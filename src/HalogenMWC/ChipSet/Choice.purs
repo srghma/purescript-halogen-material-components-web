@@ -127,25 +127,25 @@ setOnChange onChange (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config a msg -> Config a msg
+setAttributes :: Array (IProp r i) -> Config a msg -> Config a msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Choice chip set view function
 -}
-chipSet :: Config a msg -> List (Chip a msg) -> Html msg
+chipSet :: Config a msg -> Array (Chip a msg) -> Html msg
 chipSet ((Config { selected, onChange, toLabel, additionalAttributes }) as config_) chips =
     Html.node "mdc-chip-set"
         (chipSetCs :: chipSetChoiceCs :: gridRole :: additionalAttributes)
-        (List.map (chip selected onChange toLabel) chips)
+        (Array.map (chip selected onChange toLabel) chips)
 
 
 chip :: Maybe a -> Maybe (a -> msg) -> (a -> String) -> Chip a msg -> Html msg
 chip selected onChange toLabel (Chip ((Chip.Config { additionalAttributes }) as config_) value) =
     Html.div [ class "mdc-touch-target-wrapper" ]
         [ Html.node "mdc-chip"
-            (List.filterMap identity
+            (Array.filterMap identity
                 [ chipCs
                 , chipTouchCs
                 , rowRole
@@ -154,7 +154,7 @@ chip selected onChange toLabel (Chip ((Chip.Config { additionalAttributes }) as 
                 ]
                 ++ additionalAttributes
             )
-            (List.filterMap identity
+            (Array.filterMap identity
                 [ rippleElt
                 , leadingIconElt config_
                 , primaryActionElt (toLabel value)
@@ -242,7 +242,7 @@ primaryActionElt :: String -> Maybe (Html msg)
 primaryActionElt label =
     Just <|
         Html.span [ chipPrimaryActionCs, gridcellRole ]
-            (List.filterMap identity [ textElt label, touchElt ])
+            (Array.filterMap identity [ textElt label, touchElt ])
 
 
 textElt :: String -> Maybe (Html msg)

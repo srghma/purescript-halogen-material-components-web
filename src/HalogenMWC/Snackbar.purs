@@ -228,7 +228,7 @@ import Json.Encode as Encode
 -}
 data Queue msg
     = Queue
-        { messages :: List ( MessageId, Message msg )
+        { messages :: Array ( MessageId, Message msg )
         , nextMessageId :: MessageId
         }
 
@@ -287,7 +287,7 @@ addMessage message_ (Queue queue) =
 
 {-| Configuration of a snackbar
 -}
-data Config msg
+type Config r i
     = Config
         { closeOnEscape :: Bool
         , additionalAttributes :: Array (IProp r i)
@@ -316,7 +316,7 @@ setCloseOnEscape closeOnEscape (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
@@ -327,12 +327,12 @@ snackbar :: Config msg -> Queue msg -> Html msg
 snackbar ((Config { additionalAttributes }) as config_) ((Queue { messages, nextMessageId }) as queue) =
     let
         ( currentMessageId, currentMessage ) =
-            List.head messages
+            Array.head messages
                 |> Maybe.map (Tuple.mapSecond Just)
                 |> Maybe.withDefault ( MessageId -1, Nothing )
     in
     Html.node "mdc-snackbar"
-        (List.filterMap identity
+        (Array.filterMap identity
             [ rootCs
             , closeOnEscapeProp config_
             , leadingCs currentMessage
@@ -523,7 +523,7 @@ labelElt (Message { label }) =
 actionsElt :: MessageId -> Message msg -> Html msg
 actionsElt messageId message_ =
     Html.div [ class "mdc-snackbar__actions" ]
-        (List.filterMap identity
+        (Array.filterMap identity
             [ actionButtonElt messageId message_
             , actionIconElt messageId message_
             ]
@@ -535,7 +535,7 @@ actionButtonElt messageId ((Message { actionButton }) as message_) =
     Maybe.map
         (\actionButtonLabel ->
             Html.button
-                (List.filterMap identity
+                (Array.filterMap identity
                     [ actionButtonCs
                     , actionButtonClickHandler messageId message_
                     ]
@@ -560,7 +560,7 @@ actionIconElt messageId ((Message { actionIcon }) as message_) =
     Maybe.map
         (\actionIconLabel ->
             Html.i
-                (List.filterMap identity
+                (Array.filterMap identity
                     [ actionIconCs
                     , actionIconClickHandler messageId message_
                     ]

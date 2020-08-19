@@ -144,7 +144,7 @@ import Json.Encode as Encode
 
 {-| Icon toggle configuration
 -}
-data Config msg
+type Config r i
     = Config
         { on :: Bool
         , disabled :: Bool
@@ -194,7 +194,7 @@ setLabel label (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
@@ -211,7 +211,7 @@ setOnChange onChange (Config config_) =
 iconToggle :: Config msg -> { onIcon :: String, offIcon :: String } -> Html msg
 iconToggle ((Config { additionalAttributes }) as config_) { onIcon, offIcon } =
     Html.node "mdc-icon-button"
-        (List.filterMap identity
+        (Array.filterMap identity
             [ rootCs
             , onProp config_
             , tabIndexProp
@@ -223,8 +223,8 @@ iconToggle ((Config { additionalAttributes }) as config_) { onIcon, offIcon } =
             ]
             ++ additionalAttributes
         )
-        [ Html.i (List.filterMap identity [ materialIconsCs, onIconCs ]) [ text onIcon ]
-        , Html.i (List.filterMap identity [ materialIconsCs, iconCs ]) [ text offIcon ]
+        [ Html.i (Array.filterMap identity [ materialIconsCs, onIconCs ]) [ text onIcon ]
+        , Html.i (Array.filterMap identity [ materialIconsCs, iconCs ]) [ text offIcon ]
         ]
 
 

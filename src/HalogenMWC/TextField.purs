@@ -235,7 +235,7 @@ import Material.Icon as Icon
 
 {-| Configuration of a text field
 -}
-data Config msg
+type Config r i
     = Config
         { label :: Maybe String
         , fullwidth :: Bool
@@ -410,7 +410,7 @@ setTrailingIcon trailingIcon (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
@@ -447,7 +447,7 @@ outlined config_ =
 textField :: Bool -> Config msg -> Html msg
 textField outlined_ ((Config { additionalAttributes, fullwidth }) as config_) =
     Html.node "mdc-text-field"
-        (List.filterMap identity
+        (Array.filterMap identity
             [ rootCs
             , noLabelCs config_
             , outlinedCs outlined_
@@ -468,7 +468,7 @@ textField outlined_ ((Config { additionalAttributes, fullwidth }) as config_) =
             ]
             ++ additionalAttributes
         )
-        (List.concat
+        (Array.concat
             [ leadingIconElt config_
             , if fullwidth then
                 if outlined_ then
@@ -498,7 +498,7 @@ textField outlined_ ((Config { additionalAttributes, fullwidth }) as config_) =
 
 {-| A text field's icon, either leading or trailing
 -}
-icon :: List (Html.Attribute msg) -> String -> Icon msg
+icon :: Array (IProp r i) -> String -> Icon msg
 icon additionalAttributes iconName =
     Icon (Icon.icon (class "mdc-text-field__icon" :: additionalAttributes) iconName)
 
@@ -623,7 +623,7 @@ placeholderAttr (Config { placeholder }) =
     Maybe.map Html.Attributes.placeholder placeholder
 
 
-leadingIconElt :: Config msg -> List (Html msg)
+leadingIconElt :: Config msg -> Array (Html msg)
 leadingIconElt (Config { leadingIcon }) =
     case leadingIcon of
         Nothing ->
@@ -633,7 +633,7 @@ leadingIconElt (Config { leadingIcon }) =
             [ html ]
 
 
-trailingIconElt :: Config msg -> List (Html msg)
+trailingIconElt :: Config msg -> Array (Html msg)
 trailingIconElt (Config { trailingIcon }) =
     case trailingIcon of
         Nothing ->
@@ -657,7 +657,7 @@ changeHandler (Config { onChange }) =
 inputElt :: Config msg -> Html msg
 inputElt config_ =
     Html.input
-        (List.filterMap identity
+        (Array.filterMap identity
             [ inputCs
             , typeAttr config_
             , ariaLabelAttr config_

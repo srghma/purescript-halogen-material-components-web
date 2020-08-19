@@ -1,17 +1,17 @@
-module HalogenMWC.ImageList.Item
+module HalogenMWC.ImageArray.Item
     ( Config, config
     , setLabel
     , setHref
     , setAttributes
-    , ImageListItem, imageListItem
+    , ImageArrayItem, imageArrayItem
     ) where
 
-{-| An Image List consists of several items, each containing an image and
+{-| An Image Array consists of several items, each containing an image and
 optionally supporting a text label.
 
 This modules concerns the image list item. If you are looking for information
 about the image list contianer, refer to
-[Material.ImageList](Material-ImageList).
+[Material.ImageArray](Material-ImageArray).
 
 
 # Table of Contents
@@ -20,14 +20,14 @@ about the image list contianer, refer to
   - [Configuration](#configuration)
       - [Configuration Options](#configuration-options)
   - [Basic Usage](#basic-usage)
-  - [Image List Item](#image-list-item)
+  - [Image Array Item](#image-list-item)
 
 
 # Resources
 
-  - [Demo: Image Lists](https://aforemny.github.io/material-components-web-elm/#image-list)
+  - [Demo: Image Arrays](https://aforemny.github.io/material-components-web-elm/#image-list)
   - [Material Design Guidelines: Image list](https://material.io/go/design-image-list)
-  - [MDC Web: Image List](https://github.com/material-components/material-components-web/tree/master/packages/mdc-image-list)
+  - [MDC Web: Image Array](https://github.com/material-components/material-components-web/tree/master/packages/mdc-image-list)
   - [Sass Mixins (MDC Web)](https://github.com/material-components/material-components-web/tree/master/packages/mdc-image-list#sass-mixins)
 
 
@@ -37,14 +37,14 @@ Note that you will have to set the width and margin of image list items
 yourself, preferably through SASS or through inline CSS.
 
     import Html.Attributes (style)
-    import Material.ImageList as ImageList
-    import Material.ImageList.Item as ImageListItem
+    import Material.ImageArray as ImageArray
+    import Material.ImageArray.Item as ImageArrayItem
 
     main =
-        ImageList.imageList ImageList.config
-            [ ImageListItem.imageListItem
-                (ImageList.itemConfig
-                    |> ImageList.setAttributes
+        ImageArray.imageArray ImageArray.config
+            [ ImageArrayItem.imageArrayItem
+                (ImageArray.itemConfig
+                    |> ImageArray.setAttributes
                         [ style "width" "calc(100% / 5 - 4px)"
                         , style "margin" "2px"
                         ]
@@ -67,18 +67,18 @@ yourself, preferably through SASS or through inline CSS.
 
 # Image list Item
 
-@docs ImageListItem, imageListItem
+@docs ImageArrayItem, imageArrayItem
 
 -}
 
 import Html
-import Material.ImageList.Item.Internal (Config(..), ImageListItem(..))
+import Material.ImageArray.Item.Internal (Config(..), ImageArrayItem(..))
 
 
 {-| Configuration of an image list item
 -}
-data Config msg =
-    Material.ImageList.Item.Internal.Config msg
+type Config r i =
+    Material.ImageArray.Item.Internal.Config msg
 
 
 {-| Default configuration of an image list item
@@ -112,7 +112,7 @@ setHref href (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
@@ -120,15 +120,15 @@ setAttributes additionalAttributes (Config config_) =
 {-| Image list item type
 
 Image list items can only be rendered within a [image list
-container](Material-ImageList)
+container](Material-ImageArray)
 
 -}
-data ImageListItem msg =
-    Material.ImageList.Item.Internal.ImageListItem msg
+data ImageArrayItem msg =
+    Material.ImageArray.Item.Internal.ImageArrayItem msg
 
 
 {-| Image list item constructor
 -}
-imageListItem :: Config msg -> String -> ImageListItem msg
-imageListItem (Config config_) image =
-    ImageListItem (Config { config_ | image = image })
+imageArrayItem :: Config msg -> String -> ImageArrayItem msg
+imageArrayItem (Config config_) image =
+    ImageArrayItem (Config { config_ | image = image })

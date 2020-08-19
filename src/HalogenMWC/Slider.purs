@@ -153,7 +153,7 @@ import Svg.Attributes
 
 {-| Configuration of a slider
 -}
-data Config msg
+type Config r i
     = Config
         { discrete :: Bool
         , displayMarkers :: Bool
@@ -248,7 +248,7 @@ setDisabled disabled (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
@@ -265,7 +265,7 @@ setOnInput onInput (Config config_) =
 slider :: Config msg -> Html msg
 slider ((Config { additionalAttributes }) as config_) =
     Html.node "mdc-slider"
-        (List.filterMap identity
+        (Array.filterMap identity
             [ rootCs
             , displayCss
             , discreteCs config_

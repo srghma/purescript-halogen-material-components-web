@@ -12,4 +12,4 @@ data Config a msg
 
 
 data SelectItem a msg
-    = SelectItem (Config a msg) (List (Html msg))
+    = SelectItem (Config a msg) (Array (Html msg))

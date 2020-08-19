@@ -157,7 +157,7 @@ import Material.Tab.Internal as Tab (Tab(..))
 
 {-| Configuration of a tab bar
 -}
-data Config msg
+type Config r i
     = Config
         { stacked :: Bool
         , minWidth :: Bool
@@ -221,17 +221,17 @@ setAlign align (Config config_) =
 
 {-| Specify additional attribtues
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Tab bar view function
 -}
-tabBar :: Config msg -> List (Tab msg) -> Html msg
+tabBar :: Config msg -> Array (Tab msg) -> Html msg
 tabBar ((Config { additionalAttributes, align }) as config_) tabs =
     Html.node "mdc-tab-bar"
-        (List.filterMap identity
+        (Array.filterMap identity
             [ rootCs
             , tablistRoleAttr
             , activeTabIndexProp tabs
@@ -251,13 +251,13 @@ tablistRoleAttr =
     Just (Html.Attributes.attribute "role" "tablist")
 
 
-activeTabIndexProp :: List (Tab msg) -> Maybe (Html.Attribute msg)
+activeTabIndexProp :: Array (Tab msg) -> Maybe (Html.Attribute msg)
 activeTabIndexProp tabs =
     let
         activeTabIndex =
-            List.indexedMap Tuple.pair tabs
-                |> List.filter (\( _, Tab (Tab.Config { active }) ) -> active)
-                |> List.head
+            Array.indexedMap Tuple.pair tabs
+                |> Array.filter (\( _, Tab (Tab.Config { active }) ) -> active)
+                |> Array.head
                 |> Maybe.map Tuple.first
     in
     Maybe.map (Html.Attributes.property "activeTabIndex" << Encode.int) activeTabIndex
@@ -266,7 +266,7 @@ activeTabIndexProp tabs =
 viewTab :: Config msg -> Tab msg -> Html msg
 viewTab ((Config { indicatorSpansContent }) as barConfig) ((Tab ((Tab.Config { additionalAttributes, content }) as tabConfig)) as tab) =
     Html.button
-        (List.filterMap identity
+        (Array.filterMap identity
             [ tabCs
             , tabRoleAttr
             , tabStackedCs barConfig
@@ -275,7 +275,7 @@ viewTab ((Config { indicatorSpansContent }) as barConfig) ((Tab ((Tab.Config { a
             ]
             ++ additionalAttributes
         )
-        (List.filterMap identity <|
+        (Array.filterMap identity <|
             if indicatorSpansContent then
                 [ tabContentElt barConfig tabConfig content
                 , tabRippleElt
@@ -327,14 +327,14 @@ tabContentElt ((Config { indicatorSpansContent }) as barConfig) config_ content 
     Just
         (Html.div [ class "mdc-tab__content" ]
             (if indicatorSpansContent then
-                List.filterMap identity
+                Array.filterMap identity
                     [ tabIconElt content
                     , tabTextLabelElt content
                     , tabIndicatorElt config_
                     ]
 
              else
-                List.filterMap identity
+                Array.filterMap identity
                     [ tabIconElt content
                     , tabTextLabelElt content
                     ]
@@ -385,10 +385,10 @@ data Align
     | Center
 
 
-tabScroller :: Config msg -> Maybe Align -> List (Tab msg) -> Html msg
+tabScroller :: Config msg -> Maybe Align -> Array (Tab msg) -> Html msg
 tabScroller config_ align tabs =
     Html.div
-        (List.filterMap identity
+        (Array.filterMap identity
             [ tabScrollerCs
             , tabScrollerAlignCs align
             ]
@@ -417,13 +417,13 @@ tabScrollerAlignCs align =
             Nothing
 
 
-tabScrollerScrollAreaElt :: Config msg -> List (Tab msg) -> Html msg
+tabScrollerScrollAreaElt :: Config msg -> Array (Tab msg) -> Html msg
 tabScrollerScrollAreaElt barConfig tabs =
     Html.div [ class "mdc-tab-scroller__scroll-area" ]
         [ tabScrollerScrollContentElt barConfig tabs ]
 
 
-tabScrollerScrollContentElt :: Config msg -> List (Tab msg) -> Html msg
+tabScrollerScrollContentElt :: Config msg -> Array (Tab msg) -> Html msg
 tabScrollerScrollContentElt barConfig tabs =
     Html.div [ class "mdc-tab-scroller__scroll-content" ]
-        (List.map (viewTab barConfig) tabs)
+        (Array.map (viewTab barConfig) tabs)

@@ -30,7 +30,7 @@ app content is prioritized.
 
   - [Demo: Drawers](https://aforemny.github.io/material-components-web-elm/#drawer)
   - [Material Design Guidelines: Navigation Drawer](https://material.io/go/design-navigation-drawer)
-  - [MDC Web: List](https://github.com/material-components/material-components-web/tree/master/packages/mdc-drawer)
+  - [MDC Web: Array](https://github.com/material-components/material-components-web/tree/master/packages/mdc-drawer)
   - [Sass Mixins (MDC Web)](https://github.com/material-components/material-components-web/tree/master/packages/mdc-drawer#sass-mixins)
 
 
@@ -39,8 +39,8 @@ app content is prioritized.
     import Html (Html, text)
     import Html.Attributes (style)
     import Material.Drawer.Dismissible as DismissibleDrawer
-    import Material.List as List
-    import Material.ListItem as ListItem
+    import Material.Array as Array
+    import Material.ArrayItem as ArrayItem
 
     main =
         Html.div
@@ -49,10 +49,10 @@ app content is prioritized.
             ]
             [ DismissibleDrawer.drawer DismissibleDrawer.config
                 [ DismissibleDrawer.content []
-                    [ List.list List.config
-                        [ ListItem.listItem ListItem.config
+                    [ Array.list Array.config
+                        [ ArrayItem.listItem ArrayItem.config
                             [ text "Home" ]
-                        , ListItem.listItem ListItem.config
+                        , ArrayItem.listItem ArrayItem.config
                             [ text "Log out" ]
                         ]
                     ]
@@ -99,7 +99,7 @@ import Json.Encode as Encode
 
 {-| Configuration of a dismissible drawer
 -}
-data Config msg
+type Config r i
     = Config
         { open :: Bool
         , additionalAttributes :: Array (IProp r i)
@@ -134,17 +134,17 @@ setOnClose onClose (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Dismissible drawer view function
 -}
-drawer :: Config msg -> List (Html msg) -> Html msg
+drawer :: Config msg -> Array (Html msg) -> Html msg
 drawer ((Config { additionalAttributes }) as config_) nodes =
     Html.node "mdc-drawer"
-        (List.filterMap identity
+        (Array.filterMap identity
             [ rootCs
             , dismissibleCs
             , openProp config_
@@ -157,7 +157,7 @@ drawer ((Config { additionalAttributes }) as config_) nodes =
 
 {-| Drawer content
 -}
-content :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
+content :: Array (IProp r i) -> Array (Html msg) -> Html msg
 content attributes nodes =
     Html.div (class "mdc-drawer__content" :: attributes) nodes
 
@@ -175,7 +175,7 @@ content attributes nodes =
         ]
 
 -}
-header :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
+header :: Array (IProp r i) -> Array (Html msg) -> Html msg
 header additionalAttributes nodes =
     Html.div (class "mdc-drawer__header" :: additionalAttributes) nodes
 

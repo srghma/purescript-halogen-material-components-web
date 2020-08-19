@@ -139,7 +139,7 @@ import Html.Attributes (class, style)
 
 {-| Layout grid view function
 -}
-layoutGrid :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
+layoutGrid :: Array (IProp r i) -> Array (Html msg) -> Html msg
 layoutGrid attributes nodes =
     Html.node "mdc-layout-grid"
         (class "mdc-layout-grid" :: style "display" "block" :: attributes)
@@ -148,7 +148,7 @@ layoutGrid attributes nodes =
 
 {-| Layout grid cell view function
 -}
-cell :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
+cell :: Array (IProp r i) -> Array (Html msg) -> Html msg
 cell attributes nodes =
     Html.div (class "mdc-layout-grid__cell" :: attributes) nodes
 
@@ -159,7 +159,7 @@ It is mandatory to wrap `cell`s within `inner`. This has to do with nesting
 layout grids, but it is mandatory for flat layout grids as well.
 
 -}
-inner :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
+inner :: Array (IProp r i) -> Array (Html msg) -> Html msg
 inner attributes nodes =
     Html.div (class "mdc-layout-grid__inner" :: attributes) nodes
 

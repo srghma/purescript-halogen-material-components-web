@@ -3,7 +3,7 @@ module HalogenMWC.Chip.Filter.Internal (Chip(..), Config(..))
 import Html
 
 
-data Config msg
+type Config r i
     = Config
         { icon :: Maybe String
         , selected :: Bool

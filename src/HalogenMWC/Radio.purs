@@ -118,7 +118,7 @@ import Json.Encode as Encode
 
 {-| Radio button configuration
 -}
-data Config msg
+type Config r i
     = Config
         { checked :: Bool
         , disabled :: Bool
@@ -161,7 +161,7 @@ setDisabled disabled (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
@@ -202,7 +202,7 @@ radio ((Config { touch, additionalAttributes }) as config_) =
     in
     wrapTouch <|
         Html.node "mdc-radio"
-            (List.filterMap identity
+            (Array.filterMap identity
                 [ rootCs
                 , touchCs config_
                 , checkedProp config_
@@ -242,7 +242,7 @@ disabledProp (Config { disabled }) =
 
 changeHandler :: Config msg -> Maybe (Html.Attribute msg)
 changeHandler (Config { checked, onChange }) =
-    -- Note: MDCList choses to send a change event to all checkboxes, thus we
+    -- Note: MDCArray choses to send a change event to all checkboxes, thus we
     -- have to check here if the state actually changed.
     Maybe.map
         (\msg ->
@@ -264,7 +264,7 @@ changeHandler (Config { checked, onChange }) =
 nativeControlElt :: Config msg -> Html msg
 nativeControlElt config_ =
     Html.input
-        (List.filterMap identity
+        (Array.filterMap identity
             [ nativeControlCs
             , radioTypeAttr
             , checkedProp config_

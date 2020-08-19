@@ -113,7 +113,7 @@ import Material.IconButton.Internal (Config(..))
 
 {-| Icon button configuration
 -}
-data Config msg =
+type Config r i =
     Material.IconButton.Internal.Config msg
 
 
@@ -149,7 +149,7 @@ setLabel label (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
@@ -166,7 +166,7 @@ setOnClick onClick (Config config_) =
 iconButton :: Config msg -> String -> Html msg
 iconButton ((Config { additionalAttributes }) as config_) iconName =
     Html.node "mdc-icon-button"
-        (List.filterMap identity
+        (Array.filterMap identity
             [ rootCs
             , materialIconsCs
             , tabIndexProp
@@ -179,10 +179,10 @@ iconButton ((Config { additionalAttributes }) as config_) iconName =
 
 {-| TODO
 -}
-custom :: Config msg -> List (Html msg) -> Html msg
+custom :: Config msg -> Array (Html msg) -> Html msg
 custom ((Config { additionalAttributes }) as config_) nodes =
     Html.node "mdc-icon-button"
-        (List.filterMap identity
+        (Array.filterMap identity
             [ rootCs
             , tabIndexProp
             , clickHandler config_

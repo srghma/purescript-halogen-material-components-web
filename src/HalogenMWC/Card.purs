@@ -209,7 +209,7 @@ import Material.IconButton.Internal
 
 {-| Configuration of a card
 -}
-data Config msg
+type Config r i
     = Config
         { outlined :: Bool
         , additionalAttributes :: Array (IProp r i)
@@ -235,7 +235,7 @@ setOutlined outlined (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
@@ -245,30 +245,30 @@ setAttributes additionalAttributes (Config config_) =
 card :: Config msg -> Content msg -> Html msg
 card ((Config { additionalAttributes }) as config_) content =
     Html.node "mdc-card"
-        (List.filterMap identity
+        (Array.filterMap identity
             [ rootCs
             , outlinedCs config_
             ]
             ++ additionalAttributes
         )
-        (List.concat
+        (Array.concat
             [ blocksElt content
             , actionsElt content
             ]
         )
 
 
-blocksElt :: Content msg -> List (Html msg)
+blocksElt :: Content msg -> Array (Html msg)
 blocksElt { blocks } =
-    List.map (\(Block html) -> html) blocks
+    Array.map (\(Block html) -> html) blocks
 
 
-actionsElt :: Content msg -> List (Html msg)
+actionsElt :: Content msg -> Array (Html msg)
 actionsElt content =
     case content.actions of
         Just (Actions { buttons, icons, fullBleed }) ->
             [ Html.div
-                (List.filterMap identity
+                (Array.filterMap identity
                     [ Just (class "mdc-card__actions")
                     , if fullBleed then
                         Just (class "mdc-card__actions--full-bleed")
@@ -277,17 +277,17 @@ actionsElt content =
                         Nothing
                     ]
                 )
-                (List.concat
-                    [ if not (List.isEmpty buttons) then
+                (Array.concat
+                    [ if not (Array.isEmpty buttons) then
                         [ Html.div [ class "mdc-card__action-buttons" ]
-                            (List.map (\(Button button_) -> button_) buttons)
+                            (Array.map (\(Button button_) -> button_) buttons)
                         ]
 
                       else
                         []
-                    , if not (List.isEmpty icons) then
+                    , if not (Array.isEmpty icons) then
                         [ Html.div [ class "mdc-card__action-icons" ]
-                            (List.map (\(Icon icon_) -> icon_) icons)
+                            (Array.map (\(Icon icon_) -> icon_) icons)
                         ]
 
                       else
@@ -317,7 +317,7 @@ outlinedCs (Config { outlined }) =
 {-| The content of a card is comprised of _blocks_ and _actions_.
 -}
 data Content msg =
-    { blocks :: List (Block msg)
+    { blocks :: Array (Block msg)
     , actions :: Maybe (Actions msg)
     }
 
@@ -344,11 +344,11 @@ data Aspect
     | SixteenToNine
 
 
-mediaView :: Maybe Aspect -> List (Html.Attribute msg) -> String -> Block msg
+mediaView :: Maybe Aspect -> Array (IProp r i) -> String -> Block msg
 mediaView aspect additionalAttributes backgroundImage =
     Block <|
         Html.div
-            (List.filterMap identity
+            (Array.filterMap identity
                 [ mediaCs
                 , backgroundImageAttr backgroundImage
                 , aspectCs aspect
@@ -360,21 +360,21 @@ mediaView aspect additionalAttributes backgroundImage =
 
 {-| Card media block with a square aspect ratio
 -}
-squareMedia :: List (Html.Attribute msg) -> String -> Block msg
+squareMedia :: Array (IProp r i) -> String -> Block msg
 squareMedia additionalAttributes backgroundImage =
     mediaView (Just Square) additionalAttributes backgroundImage
 
 
 {-| Card media block with a 16:9 aspect ratio
 -}
-sixteenToNineMedia :: List (Html.Attribute msg) -> String -> Block msg
+sixteenToNineMedia :: Array (IProp r i) -> String -> Block msg
 sixteenToNineMedia additionalAttributes backgroundImage =
     mediaView (Just SixteenToNine) additionalAttributes backgroundImage
 
 
 {-| Card media block of unspecified aspect ratio
 -}
-media :: List (Html.Attribute msg) -> String -> Block msg
+media :: Array (IProp r i) -> String -> Block msg
 media additionalAttributes backgroundImage =
     mediaView Nothing additionalAttributes backgroundImage
 
@@ -404,7 +404,7 @@ aspectCs aspect =
 
 {-| A card's primary action block
 -}
-primaryAction :: List (Html.Attribute msg) -> List (Block msg) -> List (Block msg)
+primaryAction :: Array (IProp r i) -> Array (Block msg) -> Array (Block msg)
 primaryAction additionalAttributes blocks =
     [ Block <|
         Html.div
@@ -413,7 +413,7 @@ primaryAction additionalAttributes blocks =
              ]
                 ++ additionalAttributes
             )
-            (List.map (\(Block html) -> html) blocks)
+            (Array.map (\(Block html) -> html) blocks)
     ]
 
 
@@ -431,8 +431,8 @@ tabIndexProp tabIndex =
 -}
 data Actions msg
     = Actions
-        { buttons :: List (Button msg)
-        , icons :: List (Icon msg)
+        { buttons :: Array (Button msg)
+        , icons :: Array (Icon msg)
         , fullBleed :: Bool
         }
 
@@ -442,7 +442,7 @@ data Actions msg
 A card may contain as actions buttons as well as icons.
 
 -}
-actions :: { buttons :: List (Button msg), icons :: List (Icon msg) } -> Actions msg
+actions :: { buttons :: Array (Button msg), icons :: Array (Icon msg) } -> Actions msg
 actions { buttons, icons } =
     Actions { buttons = buttons, icons = icons, fullBleed = False }
 

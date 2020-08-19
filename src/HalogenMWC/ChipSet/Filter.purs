@@ -69,18 +69,18 @@ import Svg.Attributes
 
 {-| Filter chip set view function
 -}
-chipSet :: List (Html.Attribute msg) -> List (Chip msg) -> Html msg
+chipSet :: Array (IProp r i) -> Array (Chip msg) -> Html msg
 chipSet additionalAttributes chips =
     Html.node "mdc-chip-set"
         (chipSetCs :: chipSetFilterCs :: gridRole :: additionalAttributes)
-        (List.map chip chips)
+        (Array.map chip chips)
 
 
 chip :: Chip msg -> Html msg
 chip (Chip ((Chip.Config { additionalAttributes }) as config_) label) =
     Html.div [ class "mdc-touch-target-wrapper" ]
         [ Html.node "mdc-chip"
-            (List.filterMap identity
+            (Array.filterMap identity
                 [ chipCs
                 , chipTouchCs
                 , rowRole
@@ -89,7 +89,7 @@ chip (Chip ((Chip.Config { additionalAttributes }) as config_) label) =
                 ]
                 ++ additionalAttributes
             )
-            (List.filterMap identity
+            (Array.filterMap identity
                 [ rippleElt
                 , leadingIconElt config_
                 , checkmarkElt
@@ -201,7 +201,7 @@ primaryActionElt :: String -> Maybe (Html msg)
 primaryActionElt label =
     Just <|
         Html.span [ chipPrimaryActionCs, gridcellRole ]
-            (List.filterMap identity [ textElt label, touchElt ])
+            (Array.filterMap identity [ textElt label, touchElt ])
 
 
 textElt :: String -> Maybe (Html msg)

@@ -56,11 +56,11 @@ import Material.Chip.Action.Internal as Chip (Chip(..))
 
 {-| Chip set view function
 -}
-chipSet :: List (Html.Attribute msg) -> List (Chip msg) -> Html msg
+chipSet :: Array (IProp r i) -> Array (Chip msg) -> Html msg
 chipSet additionalAttributes chips =
     Html.node "mdc-chip-set"
         (chipSetCs :: chipSetActionCs :: gridRole :: additionalAttributes)
-        (List.map chip chips)
+        (Array.map chip chips)
 
 
 chipSetCs :: Html.Attribute msg
@@ -82,7 +82,7 @@ chip :: Chip msg -> Html msg
 chip (Chip ((Chip.Config { additionalAttributes }) as config_) label) =
     Html.div [ class "mdc-touch-target-wrapper" ]
         [ Html.node "mdc-chip"
-            (List.filterMap identity
+            (Array.filterMap identity
                 [ chipCs
                 , chipTouchCs
                 , rowRole
@@ -90,7 +90,7 @@ chip (Chip ((Chip.Config { additionalAttributes }) as config_) label) =
                 ]
                 ++ additionalAttributes
             )
-            (List.filterMap identity
+            (Array.filterMap identity
                 [ rippleElt
                 , leadingIconElt config_
                 , primaryActionElt label
@@ -158,7 +158,7 @@ primaryActionElt :: String -> Maybe (Html msg)
 primaryActionElt label =
     Just <|
         Html.span [ chipPrimaryActionCs, gridcellRole ]
-            (List.filterMap identity [ textElt label, touchElt ])
+            (Array.filterMap identity [ textElt label, touchElt ])
 
 
 textElt :: String -> Maybe (Html msg)

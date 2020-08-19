@@ -1,8 +1,8 @@
-module HalogenMWC.List
+module HalogenMWC.Array
     ( Config, config
     , setNonInteractive
     , setDense
-    , setAvatarList
+    , setAvatarArray
     , setTwoLine
     , setAttributes
     , setWrapFocus
@@ -10,10 +10,10 @@ module HalogenMWC.List
     , group, subheader
     ) where
 
-{-| Lists are continuous, vertical indexes of text or images.
+{-| Arrays are continuous, vertical indexes of text or images.
 
 This module concerns the container list. If you are looking for information
-about the list items, refer to [Material.List.Item](Material-List-Item).
+about the list items, refer to [Material.Array.Item](Material-Array-Item).
 
 
 # Table of Contents
@@ -22,35 +22,35 @@ about the list items, refer to [Material.List.Item](Material-List-Item).
   - [Basic Usage](#basic-usage)
   - [Configuration](#configuration)
       - [Configuration Options](#configuration-options)
-  - [List](#list)
-  - [Two-Line List](#two-line-list)
-  - [Non-interactive List](#non-interactive-list)
-  - [Dense List](#dense-list)
-  - [Avatar List](#avatar-list)
-  - [List Group](#list-group)
-      - [List Group Divider](#list-group-divider)
-  - [Focus a List](#focus-a-list)
+  - [Array](#list)
+  - [Two-Line Array](#two-line-list)
+  - [Non-interactive Array](#non-interactive-list)
+  - [Dense Array](#dense-list)
+  - [Avatar Array](#avatar-list)
+  - [Array Group](#list-group)
+      - [Array Group Divider](#list-group-divider)
+  - [Focus a Array](#focus-a-list)
 
 
 # Resources
 
-  - [Demo: Lists](https://aforemny.github.io/material-components-web-elm/#lists)
-  - [Material Design Guidelines: Lists](https://material.io/design/components/lists.html)
-  - [MDC Web: List](https://github.com/material-components/material-components-web/tree/master/packages/mdc-list)
+  - [Demo: Arrays](https://aforemny.github.io/material-components-web-elm/#lists)
+  - [Material Design Guidelines: Arrays](https://material.io/design/components/lists.html)
+  - [MDC Web: Array](https://github.com/material-components/material-components-web/tree/master/packages/mdc-list)
   - [Sass Mixins (MDC Web)](https://github.com/material-components/material-components-web/tree/master/packages/mdc-list#sass-mixins)
 
 
 # Basic Usage
 
-    import Material.List as List
-    import Material.List.Item as ListItem
+    import Material.Array as Array
+    import Material.Array.Item as ArrayItem
 
     main =
-        List.list List.config
-            (ListItem.listItem ListItem.config
+        Array.list Array.config
+            (ArrayItem.listItem ArrayItem.config
                 [ text "Line item" ]
             )
-            [ ListItem.listItem ListItem.config
+            [ ArrayItem.listItem ArrayItem.config
                 [ text "Line item" ]
             ]
 
@@ -64,26 +64,26 @@ about the list items, refer to [Material.List.Item](Material-List-Item).
 
 @docs setNonInteractive
 @docs setDense
-@docs setAvatarList
+@docs setAvatarArray
 @docs setTwoLine
 @docs setAttributes
 @docs setWrapFocus
 
 
-# List
+# Array
 
 @docs list
 
 
-# Two-Line List
+# Two-Line Array
 
-Lists may be _two-line_ lists by setting its `setTwoLine` configuration option
+Arrays may be _two-line_ lists by setting its `setTwoLine` configuration option
 to `True`. In that case, list items should wrap their contents inside
-`ListItem.text`.
+`ArrayItem.text`.
 
-    List.list (List.config |> List.setTwoLine True)
-        (ListItem.listItem ListItem.config
-            [ ListItem.text []
+    Array.list (Array.config |> Array.setTwoLine True)
+        (ArrayItem.listItem ArrayItem.config
+            [ ArrayItem.text []
                 { primary = [ text "First line" ]
                 , secondary = [ text "Second line" ]
                 }
@@ -92,78 +92,78 @@ to `True`. In that case, list items should wrap their contents inside
         []
 
 
-# Non-interactive List
+# Non-interactive Array
 
-Lists may be non-interactive by its setting `setNonInteractive` configuration
+Arrays may be non-interactive by its setting `setNonInteractive` configuration
 option to `True`.
 
 Non-interactive lists do not feature keyboard interaction and list items have
 no visual interaction effect.
 
-    List.list
-        (List.config |> List.setNonInteractive True)
-        (ListItem.listItem ListItem.config [ text "List item" ])
+    Array.list
+        (Array.config |> Array.setNonInteractive True)
+        (ArrayItem.listItem ArrayItem.config [ text "Array item" ])
         []
 
 
-## Dense List
+## Dense Array
 
-Lists may be styled more compact by setting its `setDense` configuration option
+Arrays may be styled more compact by setting its `setDense` configuration option
 to `True`.
 
 Dense lists feature smaller than normal margins.
 
-    List.list
-        (List.config |> List.setDense True)
-        (ListItem.listItem ListItem.config [ text "List item" ])
+    Array.list
+        (Array.config |> Array.setDense True)
+        (ArrayItem.listItem ArrayItem.config [ text "Array item" ])
         []
 
 
-## Avatar List
+## Avatar Array
 
 A list item's graphics may be configured to appear larger by setting its
-`setAvatarList` configuration option to `True`.
+`setAvatarArray` configuration option to `True`.
 
-    List.list
-        (List.config |> List.setAvatarList True)
-        (ListItem.listItem ListItem.config
-            [ ListItem.graphic [] [ Html.img [] [] ]
-            , text "List item"
+    Array.list
+        (Array.config |> Array.setAvatarArray True)
+        (ArrayItem.listItem ArrayItem.config
+            [ ArrayItem.graphic [] [ Html.img [] [] ]
+            , text "Array item"
             ]
         )
         []
 
 
-## List Group
+## Array Group
 
 Multiple related lists, such as folders and files in a file hierarchy, may be
 grouped using `group` and labeled by `subheader`.
 
-    List.group []
-        [ List.subheader [] [ text "Folders" ]
-        , List.list List.config
-            (ListItem.listItem ListItem.config [ text "Folder" ])
-            [ ListItem.listItem ListItem.config [ text "Folder" ] ]
-        , List.subheader [] [ text "Files" ]
-        , List.list List.config
-            (ListItem.listItem ListItem.config [ text "File" ])
-            [ ListItem.listItem ListItem.config [ text "File" ] ]
+    Array.group []
+        [ Array.subheader [] [ text "Folders" ]
+        , Array.list Array.config
+            (ArrayItem.listItem ArrayItem.config [ text "Folder" ])
+            [ ArrayItem.listItem ArrayItem.config [ text "Folder" ] ]
+        , Array.subheader [] [ text "Files" ]
+        , Array.list Array.config
+            (ArrayItem.listItem ArrayItem.config [ text "File" ])
+            [ ArrayItem.listItem ArrayItem.config [ text "File" ] ]
         ]
 
 @docs group, subheader
 
 
-# Focus a List
+# Focus a Array
 
 You may programatically focus a list by assigning an id attribute to it and use
 `Browser.Dom.focus`.
 
-    List.list
-        (List.config
-            |> List.setAttributes
+    Array.list
+        (Array.config
+            |> Array.setAttributes
                 [ Html.Attributes.id "my-list" ]
         )
-        (ListItem.listItem ListItem.config [ text "Line item" ])
+        (ArrayItem.listItem ArrayItem.config [ text "Line item" ])
 
 -}
 
@@ -172,17 +172,17 @@ import Html.Attributes (class)
 import Html.Events
 import Json.Decode as Decode
 import Json.Encode as Encode
-import Material.List.Item (Config, ListItem)
-import Material.List.Item.Internal as ListItem
+import Material.Array.Item (Config, ArrayItem)
+import Material.Array.Item.Internal as ArrayItem
 
 
 {-| Configuration of a list
 -}
-data Config msg
+type Config r i
     = Config
         { nonInteractive :: Bool
         , dense :: Bool
-        , avatarList :: Bool
+        , avatarArray :: Bool
         , twoLine :: Bool
         , vertical :: Bool
         , wrapFocus :: Bool
@@ -197,7 +197,7 @@ config =
     Config
         { nonInteractive = False
         , dense = False
-        , avatarList = False
+        , avatarArray = False
         , twoLine = False
         , vertical = False
         , wrapFocus = False
@@ -231,9 +231,9 @@ setDense dense (Config config_) =
 An avatar list features a larger than usual list item _graphic_.
 
 -}
-setAvatarList :: Bool -> Config msg -> Config msg
-setAvatarList avatarList (Config config_) =
-    Config { config_ | avatarList = avatarList }
+setAvatarArray :: Bool -> Config msg -> Config msg
+setAvatarArray avatarArray (Config config_) =
+    Config { config_ | avatarArray = avatarArray }
 
 
 {-| Specify whether a list should be a _two line_ list
@@ -260,30 +260,30 @@ setWrapFocus wrapFocus (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| List view function
+{-| Array view function
 
 The list view function takes its list items as two arguments. The first
 argument represents the first list item, and the second argument reresents the
 remaining list items. This way we guarantee lists to be non-empty.
 
 -}
-list :: Config msg -> ListItem msg -> List (ListItem msg) -> Html msg
-list ((Config { additionalAttributes }) as config_) firstListItem remainingListItems =
+list :: Config msg -> ArrayItem msg -> Array (ArrayItem msg) -> Html msg
+list ((Config { additionalAttributes }) as config_) firstArrayItem remainingArrayItems =
     let
         listItems =
-            firstListItem :: remainingListItems
+            firstArrayItem :: remainingArrayItems
     in
     Html.node "mdc-list"
-        (List.filterMap identity
+        (Array.filterMap identity
             [ rootCs
             , nonInteractiveCs config_
             , denseCs config_
-            , avatarListCs config_
+            , avatarArrayCs config_
             , twoLineCs config_
             , wrapFocusProp config_
             , clickHandler listItems
@@ -291,16 +291,16 @@ list ((Config { additionalAttributes }) as config_) firstListItem remainingListI
             ]
             ++ additionalAttributes
         )
-        (List.map
+        (Array.map
             (\listItem_ ->
                 case listItem_ of
-                    ListItem.ListItem (ListItem.Config { node }) ->
+                    ArrayItem.ArrayItem (ArrayItem.Config { node }) ->
                         node
 
-                    ListItem.ListItemDivider node ->
+                    ArrayItem.ArrayItemDivider node ->
                         node
 
-                    ListItem.ListGroupSubheader node ->
+                    ArrayItem.ArrayGroupSubheader node ->
                         node
             )
             listItems
@@ -330,9 +330,9 @@ denseCs (Config { dense }) =
         Nothing
 
 
-avatarListCs :: Config msg -> Maybe (Html.Attribute msg)
-avatarListCs (Config { avatarList }) =
-    if avatarList then
+avatarArrayCs :: Config msg -> Maybe (Html.Attribute msg)
+avatarArrayCs (Config { avatarArray }) =
+    if avatarArray then
         Just (class "mdc-list--avatar-list")
 
     else
@@ -348,26 +348,26 @@ twoLineCs (Config { twoLine }) =
         Nothing
 
 
-clickHandler :: List (ListItem msg) -> Maybe (Html.Attribute msg)
+clickHandler :: Array (ArrayItem msg) -> Maybe (Html.Attribute msg)
 clickHandler listItems =
     let
         getOnClick listItem_ =
             case listItem_ of
-                ListItem.ListItem (ListItem.Config { onClick }) ->
+                ArrayItem.ArrayItem (ArrayItem.Config { onClick }) ->
                     Just onClick
 
-                ListItem.ListItemDivider _ ->
+                ArrayItem.ArrayItemDivider _ ->
                     Nothing
 
-                ListItem.ListGroupSubheader _ ->
+                ArrayItem.ArrayGroupSubheader _ ->
                     Nothing
 
         nthOnClick index =
             listItems
-                |> List.map getOnClick
-                |> List.filterMap identity
-                |> List.drop index
-                |> List.head
+                |> Array.map getOnClick
+                |> Array.filterMap identity
+                |> Array.drop index
+                |> Array.head
                 |> Maybe.andThen identity
 
         mergedClickHandler =
@@ -382,50 +382,50 @@ clickHandler listItems =
                                 Decode.fail ""
                     )
     in
-    Just (Html.Events.on "MDCList:action" mergedClickHandler)
+    Just (Html.Events.on "MDCArray:action" mergedClickHandler)
 
 
-selectedIndexProp :: List (ListItem msg) -> Maybe (Html.Attribute msg)
+selectedIndexProp :: Array (ArrayItem msg) -> Maybe (Html.Attribute msg)
 selectedIndexProp listItems =
     let
         selectedIndex =
             listItems
-                |> List.filter
+                |> Array.filter
                     (\listItem_ ->
                         case listItem_ of
-                            ListItem.ListItem _ ->
+                            ArrayItem.ArrayItem _ ->
                                 True
 
-                            ListItem.ListItemDivider _ ->
+                            ArrayItem.ArrayItemDivider _ ->
                                 False
 
-                            ListItem.ListGroupSubheader _ ->
+                            ArrayItem.ArrayGroupSubheader _ ->
                                 False
                     )
-                |> List.indexedMap
+                |> Array.indexedMap
                     (\index listItem_ ->
                         case listItem_ of
-                            ListItem.ListItem (ListItem.Config { selection }) ->
+                            ArrayItem.ArrayItem (ArrayItem.Config { selection }) ->
                                 if selection /= Nothing then
                                     Just index
 
                                 else
                                     Nothing
 
-                            ListItem.ListItemDivider _ ->
+                            ArrayItem.ArrayItemDivider _ ->
                                 Nothing
 
-                            ListItem.ListGroupSubheader _ ->
+                            ArrayItem.ArrayGroupSubheader _ ->
                                 Nothing
                     )
-                |> List.filterMap identity
+                |> Array.filterMap identity
     in
     Just (Html.Attributes.property "selectedIndex" (Encode.list Encode.int selectedIndex))
 
 
-{-| List group view function
+{-| Array group view function
 -}
-group :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
+group :: Array (IProp r i) -> Array (Html msg) -> Html msg
 group additionalAttributes nodes =
     Html.div (listGroupCs :: additionalAttributes) nodes
 
@@ -435,9 +435,9 @@ listGroupCs =
     class "mdc-list-group"
 
 
-{-| List group subheader view function
+{-| Array group subheader view function
 -}
-subheader :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
+subheader :: Array (IProp r i) -> Array (Html msg) -> Html msg
 subheader additionalAttributes nodes =
     Html.span (listGroupSubheaderCs :: additionalAttributes) nodes
 

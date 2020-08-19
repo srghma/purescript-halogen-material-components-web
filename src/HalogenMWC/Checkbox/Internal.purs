@@ -3,7 +3,7 @@ module HalogenMWC.Checkbox.Internal (Config(..), State(..))
 import Html
 
 
-data Config msg
+type Config r i
     = Config
         { state :: Maybe State
         , disabled :: Bool

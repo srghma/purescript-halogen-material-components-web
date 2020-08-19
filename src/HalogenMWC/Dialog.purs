@@ -81,7 +81,7 @@ import Json.Encode as Encode
 
 {-| Configuration of a dialog
 -}
-data Config msg
+type Config r i
     = Config
         { open :: Bool
         , additionalAttributes :: Array (IProp r i)
@@ -109,7 +109,7 @@ setOpen open (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
@@ -125,8 +125,8 @@ setOnClose onClose (Config config_) =
 -}
 data Content msg =
     { title :: Maybe String
-    , content :: List (Html msg)
-    , actions :: List (Html msg)
+    , content :: Array (Html msg)
+    , actions :: Array (Html msg)
     }
 
 
@@ -135,7 +135,7 @@ data Content msg =
 dialog :: Config msg -> Content msg -> Html msg
 dialog ((Config { additionalAttributes }) as config_) content =
     Html.node "mdc-dialog"
-        (List.filterMap identity
+        (Array.filterMap identity
             [ rootCs
             , openProp config_
             , roleAttr
@@ -183,7 +183,7 @@ surfaceElt :: Content msg -> Html msg
 surfaceElt content =
     Html.div
         [ class "mdc-dialog__surface" ]
-        (List.filterMap identity
+        (Array.filterMap identity
             [ titleElt content
             , contentElt content
             , actionsElt content
@@ -208,7 +208,7 @@ contentElt { content } =
 
 actionsElt :: Content msg -> Maybe (Html msg)
 actionsElt { actions } =
-    if List.isEmpty actions then
+    if Array.isEmpty actions then
         Nothing
 
     else

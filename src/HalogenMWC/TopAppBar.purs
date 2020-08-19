@@ -40,7 +40,7 @@ navigation icon, and action items.
 
   - [Demo: Top App Bars](https://aforemny.github.io/material-components-web-elm/#top-app-bar)
   - [Material Design Guidelines: Top App Bar](https://material.io/go/design-app-bar-top)
-  - [MDC Web: List](https://github.com/material-components/material-components-web/tree/master/packages/mdc-top-app-bar)
+  - [MDC Web: Array](https://github.com/material-components/material-components-web/tree/master/packages/mdc-top-app-bar)
   - [Sass Mixins (MDC Web)](https://github.com/material-components/material-components-web/tree/master/packages/mdc-top-app-bar#sass-mixins)
 
 
@@ -187,7 +187,7 @@ import Html.Attributes (class)
 
 {-| Configuration of a top app bar
 -}
-data Config msg
+type Config r i
     = Config
         { dense :: Bool
         , fixed :: Bool
@@ -235,15 +235,15 @@ setFixed fixed (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-genericTopAppBar :: Variant -> Config msg -> List (Html msg) -> Html msg
+genericTopAppBar :: Variant -> Config msg -> Array (Html msg) -> Html msg
 genericTopAppBar variant ((Config { additionalAttributes }) as config_) nodes =
     Html.node "mdc-top-app-bar"
-        (List.filterMap identity
+        (Array.filterMap identity
             [ rootCs
             , variantCs variant
             , denseCs config_
@@ -256,28 +256,28 @@ genericTopAppBar variant ((Config { additionalAttributes }) as config_) nodes =
 
 {-| Regular top app bar view function
 -}
-regular :: Config msg -> List (Html msg) -> Html msg
+regular :: Config msg -> Array (Html msg) -> Html msg
 regular config_ nodes =
     genericTopAppBar Regular config_ nodes
 
 
 {-| Short top app bar view function
 -}
-short :: Config msg -> List (Html msg) -> Html msg
+short :: Config msg -> Array (Html msg) -> Html msg
 short config_ nodes =
     genericTopAppBar Short config_ nodes
 
 
 {-| Short always closed top app bar view function
 -}
-shortCollapsed :: Config msg -> List (Html msg) -> Html msg
+shortCollapsed :: Config msg -> Array (Html msg) -> Html msg
 shortCollapsed config_ nodes =
     genericTopAppBar ShortCollapsed config_ nodes
 
 
 {-| Prominent top app bar view function
 -}
-prominent :: Config msg -> List (Html msg) -> Html msg
+prominent :: Config msg -> Array (Html msg) -> Html msg
 prominent config_ nodes =
     genericTopAppBar Prominent config_ nodes
 
@@ -285,7 +285,7 @@ prominent config_ nodes =
 {-| A row is the first child of a top app bar. It contains the top app bar's
 `section`s.
 -}
-row :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
+row :: Array (IProp r i) -> Array (Html msg) -> Html msg
 row attributes nodes =
     Html.section ([ class "mdc-top-app-bar__row" ] ++ attributes) nodes
 
@@ -294,7 +294,7 @@ row attributes nodes =
 end-aligned. Usually, the first section is start-aligned and contains the top
 app bar's navigation icon and title.
 -}
-section :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
+section :: Array (IProp r i) -> Array (Html msg) -> Html msg
 section attributes nodes =
     Html.section ([ class "mdc-top-app-bar__section" ] ++ attributes) nodes
 

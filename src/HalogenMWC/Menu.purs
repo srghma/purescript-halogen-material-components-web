@@ -34,11 +34,11 @@ users interact with a button, action, or other control.
 A menu is usually tied to an element that opens it, such as a button. For
 positioning, wrap the button and the menu within an element that sets the
 `surfaceAnchor` attribute. The menu's items are simply a
-[list](Material-List).
+[list](Material-Array).
 
     import Material.Button as Button
-    import Material.List as List
-    import Material.ListItem as ListItem
+    import Material.Array as Array
+    import Material.ArrayItem as ArrayItem
     import Material.Menu as Menu
 
     data Msg
@@ -55,12 +55,12 @@ positioning, wrap the button and the menu within an element that sets the
                     |> Menu.setOpen True
                     |> Menu.setOnClose MenuClosed
                 )
-                [ List.list
-                    (List.config |> List.setWrapFocus True)
-                    (ListItem.listItem ListItem.config
+                [ Array.list
+                    (Array.config |> Array.setWrapFocus True)
+                    (ArrayItem.listItem ArrayItem.config
                         [ text "Menu item" ]
                     )
-                    [ ListItem.listItem ListItem.config
+                    [ ArrayItem.listItem ArrayItem.config
                         [ text "Menu item" ]
                     ]
                 ]
@@ -103,7 +103,7 @@ import Json.Encode as Encode
 
 {-| Configuration of a menu
 -}
-data Config msg
+type Config r i
     = Config
         { open :: Bool
         , quickOpen :: Bool
@@ -150,17 +150,17 @@ setOnClose onClose (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Menu view function
 -}
-menu :: Config msg -> List (Html msg) -> Html msg
+menu :: Config msg -> Array (Html msg) -> Html msg
 menu ((Config { additionalAttributes }) as config_) nodes =
     Html.node "mdc-menu"
-        (List.filterMap identity
+        (Array.filterMap identity
             [ rootCs
             , openProp config_
             , quickOpenProp config_

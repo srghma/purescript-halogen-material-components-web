@@ -1,4 +1,4 @@
-module HalogenMWC.List.Divider
+module HalogenMWC.Array.Divider
     ( Config, config
     , setPadded
     , setInset
@@ -7,11 +7,11 @@ module HalogenMWC.List.Divider
     , group
     ) where
 
-{-| Lists are continuous, vertical indexes of text or images.
+{-| Arrays are continuous, vertical indexes of text or images.
 
 This module concerns a list's divider elements. If you are looking for the list
-container, refer to [Material.List](Material-List), and if you are looking for
-the list item, refer to [Material.List.Item](Material-List-Item).
+container, refer to [Material.Array](Material-Array), and if you are looking for
+the list item, refer to [Material.Array.Item](Material-Array-Item).
 
 
 # Table of Contents
@@ -20,30 +20,30 @@ the list item, refer to [Material.List.Item](Material-List-Item).
   - [Basic Usage](#basic-usage)
   - [Configuration](#configuration)
       - [Configuration Options](#configuration-options)
-  - [List Item Divider](#list-item-divider)
-  - [List Group Divider](#list-group-divider)
+  - [Array Item Divider](#list-item-divider)
+  - [Array Group Divider](#list-group-divider)
 
 
 # Resources
 
-  - [Demo: Lists](https://aforemny.github.io/material-components-web-elm/#lists)
-  - [Material Design Guidelines: Lists](https://material.io/design/components/lists.html)
-  - [MDC Web: List](https://github.com/material-components/material-components-web/tree/master/packages/mdc-list)
+  - [Demo: Arrays](https://aforemny.github.io/material-components-web-elm/#lists)
+  - [Material Design Guidelines: Arrays](https://material.io/design/components/lists.html)
+  - [MDC Web: Array](https://github.com/material-components/material-components-web/tree/master/packages/mdc-list)
   - [Sass Mixins (MDC Web)](https://github.com/material-components/material-components-web/tree/master/packages/mdc-list#sass-mixins)
 
 
 # Basic Usage
 
-    import Material.List as List
-    import Material.List.Divider as ListDivider
-    import Material.List.Item as ListItem
+    import Material.Array as Array
+    import Material.Array.Divider as ArrayDivider
+    import Material.Array.Item as ArrayItem
 
     main =
-        List.list List.config
-            [ ListItem.listItem ListItem.config
+        Array.list Array.config
+            [ ArrayItem.listItem ArrayItem.config
                 [ text "Line item" ]
-            , ListDivider.listItem ListDivider.config
-            , ListItem.listItem ListItem.config
+            , ArrayDivider.listItem ArrayDivider.config
+            , ArrayItem.listItem ArrayItem.config
                 [ text "Line item" ]
             ]
 
@@ -60,36 +60,36 @@ the list item, refer to [Material.List.Item](Material-List-Item).
 @docs setAttributes
 
 
-# List Item Divider
+# Array Item Divider
 
-List items may be seperated by a divider. The divider may optionally be _inset_
+Array items may be seperated by a divider. The divider may optionally be _inset_
 so that it does not intersect the list item's graphic, or _padded_ so that it
 does not intersect the list item's meta.
 
-    List.list List.config
-        [ ListItem.listItem ListItem.config
-            [ text "List item" ]
-        , ListDivider.listItem ListDivider.config
-        , ListItem.listItem ListItem.config
-            [ text "List item" ]
+    Array.list Array.config
+        [ ArrayItem.listItem ArrayItem.config
+            [ text "Array item" ]
+        , ArrayDivider.listItem ArrayDivider.config
+        , ArrayItem.listItem ArrayItem.config
+            [ text "Array item" ]
         ]
 
 @docs listItem
 
 
-### List Group Divider
+### Array Group Divider
 
 Multiple lists within a group may be visually seperated by a list group divider.
 
-    List.group []
-        [ List.list List.config
-            [ ListItem.listItem ListItem.config [ text "Folder" ]
-            , ListItem.listItem ListItem.config [ text "Folder" ]
+    Array.group []
+        [ Array.list Array.config
+            [ ArrayItem.listItem ArrayItem.config [ text "Folder" ]
+            , ArrayItem.listItem ArrayItem.config [ text "Folder" ]
             ]
-        , ListDivider.group []
-        , List.list List.config
-            [ ListItem.listItem ListItem.config [ text "File" ]
-            , ListItem.listItem ListItem.config [ text "File" ]
+        , ArrayDivider.group []
+        , Array.list Array.config
+            [ ArrayItem.listItem ArrayItem.config [ text "File" ]
+            , ArrayItem.listItem ArrayItem.config [ text "File" ]
             ]
         ]
 
@@ -99,13 +99,13 @@ Multiple lists within a group may be visually seperated by a list group divider.
 
 import Html (Html)
 import Html.Attributes (class)
-import Material.List.Item (ListItem)
-import Material.List.Item.Internal as ListItem
+import Material.Array.Item (ArrayItem)
+import Material.Array.Item.Internal as ArrayItem
 
 
 {-| Configuration of a list item divider
 -}
-data Config msg
+type Config r i
     = Config
         { inset :: Bool
         , padded :: Bool
@@ -146,18 +146,18 @@ setPadded padded (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| List item divider view function
+{-| Array item divider view function
 -}
-listItem :: Config msg -> ListItem msg
+listItem :: Config msg -> ArrayItem msg
 listItem ((Config { additionalAttributes }) as config_) =
-    ListItem.ListItemDivider <|
+    ArrayItem.ArrayItemDivider <|
         Html.li
-            (List.filterMap identity
+            (Array.filterMap identity
                 [ listDividerCs
                 , separatorRoleAttr
                 , insetCs config_
@@ -196,8 +196,8 @@ paddedCs (Config { padded }) =
         Nothing
 
 
-{-| List group divider view function
+{-| Array group divider view function
 -}
-group :: List (Html.Attribute msg) -> Html msg
+group :: Array (IProp r i) -> Html msg
 group additionalAttributes =
-    Html.hr (List.filterMap identity [ listDividerCs ] ++ additionalAttributes) []
+    Html.hr (Array.filterMap identity [ listDividerCs ] ++ additionalAttributes) []

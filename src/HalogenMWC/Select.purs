@@ -203,8 +203,8 @@ import Html (Html, text)
 import Html.Attributes (class, style)
 import Json.Encode as Encode
 import Material.Icon as Icon
-import Material.List as List
-import Material.List.Item as ListItem (ListItem)
+import Material.Array as Array
+import Material.Array.Item as ArrayItem (ArrayItem)
 import Material.Menu as Menu
 import Material.Select.Item (SelectItem)
 import Material.Select.Item.Internal as SelectItem
@@ -289,7 +289,7 @@ setLeadingIcon leadingIcon (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config a msg -> Config a msg
+setAttributes :: Array (IProp r i) -> Config a msg -> Config a msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
@@ -306,11 +306,11 @@ data Variant
     | Outlined
 
 
-select :: Variant -> Config a msg -> SelectItem a msg -> List (SelectItem a msg) -> Html msg
+select :: Variant -> Config a msg -> SelectItem a msg -> Array (SelectItem a msg) -> Html msg
 select variant ((Config { leadingIcon, selected, additionalAttributes, onChange }) as config_) firstSelectItem remainingSelectItems =
     let
         selectedIndex =
-            List.indexedMap
+            Array.indexedMap
                 (\index (SelectItem.SelectItem (SelectItem.Config { value }) _) ->
                     if Just value == selected then
                         Just index
@@ -319,11 +319,11 @@ select variant ((Config { leadingIcon, selected, additionalAttributes, onChange 
                         Nothing
                 )
                 (firstSelectItem :: remainingSelectItems)
-                |> List.filterMap identity
-                |> List.head
+                |> Array.filterMap identity
+                |> Array.head
     in
     Html.node "mdc-select"
-        (List.filterMap identity
+        (Array.filterMap identity
             [ rootCs
             , outlinedCs variant
             , leadingIconCs config_
@@ -335,7 +335,7 @@ select variant ((Config { leadingIcon, selected, additionalAttributes, onChange 
             ++ additionalAttributes
         )
         [ anchorElt []
-            (List.concat
+            (Array.concat
                 [ [ leadingIconElt config_
                   , dropdownIconElt
                   , selectedTextElt
@@ -355,14 +355,14 @@ select variant ((Config { leadingIcon, selected, additionalAttributes, onChange 
 
 {-| Filled select view function
 -}
-filled :: Config a msg -> SelectItem a msg -> List (SelectItem a msg) -> Html msg
+filled :: Config a msg -> SelectItem a msg -> Array (SelectItem a msg) -> Html msg
 filled config_ firstSelectItem remainingSelectItems =
     select Filled config_ firstSelectItem remainingSelectItems
 
 
 {-| Outlined select view function
 -}
-outlined :: Config a msg -> SelectItem a msg -> List (SelectItem a msg) -> Html msg
+outlined :: Config a msg -> SelectItem a msg -> Array (SelectItem a msg) -> Html msg
 outlined config_ firstSelectItem remainingSelectItems =
     select Outlined config_ firstSelectItem remainingSelectItems
 
@@ -375,7 +375,7 @@ data Icon msg
 
 {-| Select leading icon
 -}
-icon :: List (Html.Attribute msg) -> String -> Icon msg
+icon :: Array (IProp r i) -> String -> Icon msg
 icon additionalAttributes iconName =
     Icon (Icon.icon (class "mdc-select__icon" :: additionalAttributes) iconName)
 
@@ -422,7 +422,7 @@ requiredProp (Config { required }) =
     Just (Html.Attributes.property "required" (Encode.bool required))
 
 
-anchorElt :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
+anchorElt :: Array (IProp r i) -> Array (Html msg) -> Html msg
 anchorElt additionalAttributes nodes =
     Html.div (class "mdc-select__anchor" :: additionalAttributes) nodes
 
@@ -464,7 +464,7 @@ notchedOutlineElt (Config { label }) =
         ]
 
 
-menuElt :: Maybe (Icon msg) -> Maybe a -> Maybe (a -> msg) -> SelectItem a msg -> List (SelectItem a msg) -> Html msg
+menuElt :: Maybe (Icon msg) -> Maybe a -> Maybe (a -> msg) -> SelectItem a msg -> Array (SelectItem a msg) -> Html msg
 menuElt leadingIcon selected onChange firstSelectItem remainingSelectItems =
     Menu.menu
         (Menu.config
@@ -473,31 +473,31 @@ menuElt leadingIcon selected onChange firstSelectItem remainingSelectItems =
                 , style "width" "100%"
                 ]
         )
-        [ List.list (List.config |> List.setWrapFocus True)
+        [ Array.list (Array.config |> Array.setWrapFocus True)
             (listItem leadingIcon selected onChange firstSelectItem)
-            (List.map (listItem leadingIcon selected onChange) remainingSelectItems)
+            (Array.map (listItem leadingIcon selected onChange) remainingSelectItems)
         ]
 
 
-listItem :: Maybe (Icon msg) -> Maybe a -> Maybe (a -> msg) -> SelectItem a msg -> ListItem msg
+listItem :: Maybe (Icon msg) -> Maybe a -> Maybe (a -> msg) -> SelectItem a msg -> ArrayItem msg
 listItem leadingIcon selected onChange (SelectItem.SelectItem config_ nodes) =
-    ListItem.listItem (listItemConfig selected onChange config_)
+    ArrayItem.listItem (listItemConfig selected onChange config_)
         (if leadingIcon /= Nothing then
-            ListItem.graphic [] [] :: nodes
+            ArrayItem.graphic [] [] :: nodes
 
          else
             nodes
         )
 
 
-listItemConfig :: Maybe a -> Maybe (a -> msg) -> SelectItem.Config a msg -> ListItem.Config msg
+listItemConfig :: Maybe a -> Maybe (a -> msg) -> SelectItem.Config a msg -> ArrayItem.Config msg
 listItemConfig selectedValue onChange (SelectItem.Config { value, disabled, additionalAttributes }) =
-    ListItem.config
-        |> ListItem.setDisabled disabled
-        |> ListItem.setAttributes additionalAttributes
+    ArrayItem.config
+        |> ArrayItem.setDisabled disabled
+        |> ArrayItem.setAttributes additionalAttributes
         |> (case onChange of
                 Just onChange_ ->
-                    ListItem.setOnClick (onChange_ value)
+                    ArrayItem.setOnClick (onChange_ value)
 
                 Nothing ->
                     identity

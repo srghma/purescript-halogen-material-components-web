@@ -3,7 +3,7 @@ module HalogenMWC.Chip.Choice.Internal (Chip(..), Config(..))
 import Html
 
 
-data Config msg
+type Config r i
     = Config
         { icon :: Maybe String
         , additionalAttributes :: Array (IProp r i)

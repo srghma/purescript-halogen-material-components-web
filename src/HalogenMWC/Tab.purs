@@ -91,7 +91,7 @@ import Material.Tab.Internal (Config(..), Tab(..))
 
 {-| Configuration of a tab
 -}
-data Config msg =
+type Config r i =
     Material.Tab.Internal.Config msg
 
 
@@ -123,7 +123,7 @@ setActive active (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 

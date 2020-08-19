@@ -112,7 +112,7 @@ import Material.Checkbox.Internal
 
 {-| Configuration of a data table
 -}
-data Config msg
+type Config r i
     = Config
         { label :: Maybe String
         , additionalAttributes :: Array (IProp r i)
@@ -138,7 +138,7 @@ setLabel label (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
@@ -148,21 +148,21 @@ setAttributes additionalAttributes (Config config_) =
 dataTable :
     Config msg
     ->
-        { thead :: List (Row msg)
-        , tbody :: List (Row msg)
+        { thead :: Array (Row msg)
+        , tbody :: Array (Row msg)
         }
     -> Html msg
 dataTable ((Config { additionalAttributes }) as config_) { thead, tbody } =
     Html.node "mdc-data-table"
         (dataTableCs :: additionalAttributes)
         [ Html.table
-            (List.filterMap identity
+            (Array.filterMap identity
                 [ dataTableTableCs
                 , ariaLabelAttr config_
                 ]
             )
-            [ Html.thead [] (List.map headerRow thead)
-            , Html.tbody [ dataTableContentCs ] (List.map bodyRow tbody)
+            [ Html.thead [] (Array.map headerRow thead)
+            , Html.tbody [ dataTableContentCs ] (Array.map bodyRow tbody)
             ]
         ]
 
@@ -190,12 +190,12 @@ ariaLabelAttr (Config { label }) =
 {-| Row type
 -}
 data Row msg
-    = Row { attributes :: List (Html.Attribute msg), nodes :: List (Cell msg) }
+    = Row { attributes :: Array (IProp r i), nodes :: Array (Cell msg) }
 
 
 {-| Row view function
 -}
-row :: List (Html.Attribute msg) -> List (Cell msg) -> Row msg
+row :: Array (IProp r i) -> Array (Cell msg) -> Row msg
 row attributes nodes =
     Row { attributes = attributes, nodes = nodes }
 
@@ -208,7 +208,7 @@ Note that this is a list of attributes because it actually sets two HTML
 attributes at once.
 
 -}
-selected :: List (Html.Attribute msg)
+selected :: Array (IProp r i)
 selected =
     [ dataTableRowSelectedCs
     , Html.Attributes.attribute "aria-selected" "true"
@@ -222,7 +222,7 @@ dataTableRowSelectedCs =
 
 headerRow :: Row msg -> Html msg
 headerRow (Row { attributes, nodes }) =
-    Html.tr (dataTableHeaderRowCs :: attributes) (List.map headerCell nodes)
+    Html.tr (dataTableHeaderRowCs :: attributes) (Array.map headerCell nodes)
 
 
 dataTableHeaderRowCs :: Html.Attribute msg
@@ -232,7 +232,7 @@ dataTableHeaderRowCs =
 
 bodyRow :: Row msg -> Html msg
 bodyRow (Row { attributes, nodes }) =
-    Html.tr (dataTableRowCs :: attributes) (List.map bodyCell nodes)
+    Html.tr (dataTableRowCs :: attributes) (Array.map bodyCell nodes)
 
 
 dataTableRowCs :: Html.Attribute msg
@@ -245,7 +245,7 @@ headerCell cell_ =
     case cell_ of
         Cell { numeric, attributes, nodes } ->
             Html.th
-                (List.filterMap identity
+                (Array.filterMap identity
                     [ dataTableHeaderCellCs
                     , columnHeaderRoleAttr
                     , colScopeAttr
@@ -257,7 +257,7 @@ headerCell cell_ =
 
         CheckboxCell { attributes, config_ } ->
             Html.th
-                (List.filterMap identity
+                (Array.filterMap identity
                     [ dataTableHeaderCellCs
                     , columnHeaderRoleAttr
                     , colScopeAttr
@@ -312,7 +312,7 @@ bodyCell cell_ =
     case cell_ of
         Cell { numeric, attributes, nodes } ->
             Html.td
-                (List.filterMap identity
+                (Array.filterMap identity
                     [ dataTableCellCs
                     , dataTableCellNumericCs numeric
                     ]
@@ -322,7 +322,7 @@ bodyCell cell_ =
 
         CheckboxCell { attributes, config_ } ->
             Html.td
-                (List.filterMap identity
+                (Array.filterMap identity
                     [ dataTableCellCs
                     , dataTableCellCheckboxCs
                     ]
@@ -346,32 +346,32 @@ bodyCell cell_ =
 data Cell msg
     = Cell
         { numeric :: Bool
-        , attributes :: List (Html.Attribute msg)
-        , nodes :: List (Html msg)
+        , attributes :: Array (IProp r i)
+        , nodes :: Array (Html msg)
         }
     | CheckboxCell
         { config_ :: Checkbox.Config msg
-        , attributes :: List (Html.Attribute msg)
+        , attributes :: Array (IProp r i)
         }
 
 
 {-| Data table cell
 -}
-cell :: List (Html.Attribute msg) -> List (Html msg) -> Cell msg
+cell :: Array (IProp r i) -> Array (Html msg) -> Cell msg
 cell attributes nodes =
     Cell { numeric = False, attributes = attributes, nodes = nodes }
 
 
 {-| Numeric data table cell (right-aligned contents)
 -}
-numericCell :: List (Html.Attribute msg) -> List (Html msg) -> Cell msg
+numericCell :: Array (IProp r i) -> Array (Html msg) -> Cell msg
 numericCell attributes nodes =
     Cell { numeric = True, attributes = attributes, nodes = nodes }
 
 
 {-| Data table cell that contians a checkbox
 -}
-checkboxCell :: List (Html.Attribute msg) -> Checkbox.Config msg -> Cell msg
+checkboxCell :: Array (IProp r i) -> Checkbox.Config msg -> Cell msg
 checkboxCell attributes config_ =
     CheckboxCell { attributes = attributes, config_ = config_ }
 

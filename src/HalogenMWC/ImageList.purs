@@ -1,17 +1,17 @@
-module HalogenMWC.ImageList
+module HalogenMWC.ImageArray
     ( Config, config
     , setMasonry
     , setWithTextProtection
     , setAttributes
-    , imageList
+    , imageArray
     ) where
 
-{-| An Image List consists of several items, each containing an image and
+{-| An Image Array consists of several items, each containing an image and
 optionally supporting a text label.
 
 This modules concerns the container image list. If you are looking for
 information about the image list items, refer to
-[Material.ImageList.Item](Material-ImageList-Item).
+[Material.ImageArray.Item](Material-ImageArray-Item).
 
 
 # Table of Contents
@@ -20,16 +20,16 @@ information about the image list items, refer to
   - [Configuration](#configuration)
       - [Configuration Options](#configuration-options)
   - [Basic Usage](#basic-usage)
-  - [Image List](#image-list)
-  - [Masonry Image List](#masonry-image-list)
-  - [Image List with Text Label](#image-list-with-text-label)
+  - [Image Array](#image-list)
+  - [Masonry Image Array](#masonry-image-list)
+  - [Image Array with Text Label](#image-list-with-text-label)
 
 
 # Resources
 
-  - [Demo: Image Lists](https://aforemny.github.io/material-components-web-elm/#image-list)
+  - [Demo: Image Arrays](https://aforemny.github.io/material-components-web-elm/#image-list)
   - [Material Design Guidelines: Image list](https://material.io/go/design-image-list)
-  - [MDC Web: Image List](https://github.com/material-components/material-components-web/tree/master/packages/mdc-image-list)
+  - [MDC Web: Image Array](https://github.com/material-components/material-components-web/tree/master/packages/mdc-image-list)
   - [Sass Mixins (MDC Web)](https://github.com/material-components/material-components-web/tree/master/packages/mdc-image-list#sass-mixins)
 
 
@@ -39,14 +39,14 @@ Note that you will have to set the width and margin of image list items
 yourself, preferably through SASS or through inline CSS.
 
     import Html.Attributes (style)
-    import Material.ImageList as ImageList
-    import Material.ImageList.Item as ImageListItem
+    import Material.ImageArray as ImageArray
+    import Material.ImageArray.Item as ImageArrayItem
 
     main =
-        ImageList.imageList ImageList.config
-            [ ImageListItem.imageListItem
-                (ImageListItem.config
-                    |> ImageListItem.setAttributes
+        ImageArray.imageArray ImageArray.config
+            [ ImageArrayItem.imageArrayItem
+                (ImageArrayItem.config
+                    |> ImageArrayItem.setAttributes
                         [ style "width" "calc(100% / 5 - 4px)"
                         , style "margin" "2px"
                         ]
@@ -67,35 +67,35 @@ yourself, preferably through SASS or through inline CSS.
 @docs setAttributes
 
 
-# Image List
+# Image Array
 
-@docs imageList
+@docs imageArray
 
 
-# Masonry Image List
+# Masonry Image Array
 
 The _masonry image list_ variant presents images vertically arranged into
 several columns. In this layout, images may be any combination of aspect
 ratios.
 
-    ImageList.imageList
-        (ImageList.config |> ImageList.setMasonry True)
+    ImageArray.imageArray
+        (ImageArray.config |> ImageArray.setMasonry True)
         []
 
 
-# Image List with Label
+# Image Array with Label
 
 Image's labels are by default positioned below the image. If you want image
 labels to be positioned in a scrim overlaying each image, use the image list's
 `setWithTextProtection` configuration option.
 
-    ImageList.imageList
-        (ImageList.config
-            |> ImageList.setWithTextProtection True
+    ImageArray.imageArray
+        (ImageArray.config
+            |> ImageArray.setWithTextProtection True
         )
-        [ ImageListItem.imageListItem
-            (ImageListItem.config
-                |> ImageListItem.setLabel (Just "Photo")
+        [ ImageArrayItem.imageArrayItem
+            (ImageArrayItem.config
+                |> ImageArrayItem.setLabel (Just "Photo")
             )
             "images/photos/3x2/1.jpg"
         ]
@@ -104,13 +104,13 @@ labels to be positioned in a scrim overlaying each image, use the image list's
 
 import Html (Html, text)
 import Html.Attributes (class, style)
-import Material.ImageList.Item (ImageListItem)
-import Material.ImageList.Item.Internal as ImageListItem
+import Material.ImageArray.Item (ImageArrayItem)
+import Material.ImageArray.Item.Internal as ImageArrayItem
 
 
 {-| Configuration of an image list
 -}
-data Config msg
+type Config r i
     = Config
         { masonry :: Bool
         , withTextProtection :: Bool
@@ -153,24 +153,24 @@ setWithTextProtection withTextProtection (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Image list view function
 -}
-imageList :: Config msg -> List (ImageListItem msg) -> Html msg
-imageList ((Config { additionalAttributes }) as config_) listItems =
+imageArray :: Config msg -> Array (ImageArrayItem msg) -> Html msg
+imageArray ((Config { additionalAttributes }) as config_) listItems =
     Html.node "mdc-image-list"
-        (List.filterMap identity
+        (Array.filterMap identity
             [ rootCs
             , masonryCs config_
             , withTextProtectionCs config_
             ]
             ++ additionalAttributes
         )
-        (List.map (listItemElt config_) listItems)
+        (Array.map (listItemElt config_) listItems)
 
 
 rootCs :: Maybe (Html.Attribute msg)
@@ -196,8 +196,8 @@ withTextProtectionCs (Config { withTextProtection }) =
         Nothing
 
 
-listItemElt :: Config msg -> ImageListItem msg -> Html msg
-listItemElt ((Config { masonry }) as config_) ((ImageListItem.ImageListItem (ImageListItem.Config { href, additionalAttributes })) as listItem) =
+listItemElt :: Config msg -> ImageArrayItem msg -> Html msg
+listItemElt ((Config { masonry }) as config_) ((ImageArrayItem.ImageArrayItem (ImageArrayItem.Config { href, additionalAttributes })) as listItem) =
     let
         inner =
             [ if masonry then
@@ -216,10 +216,10 @@ listItemElt ((Config { masonry }) as config_) ((ImageListItem.ImageListItem (Ima
         )
 
 
-imageAspectContainerElt :: Bool -> ImageListItem msg -> Html msg
-imageAspectContainerElt masonry ((ImageListItem.ImageListItem (ImageListItem.Config { href })) as listItem) =
+imageAspectContainerElt :: Bool -> ImageArrayItem msg -> Html msg
+imageAspectContainerElt masonry ((ImageArrayItem.ImageArrayItem (ImageArrayItem.Config { href })) as listItem) =
     Html.div
-        (List.filterMap identity
+        (Array.filterMap identity
             [ Just (class "mdc-image-list__image-aspect-container")
             , Maybe.map (\_ -> class "mdc-ripple-surface") href
             ]
@@ -227,8 +227,8 @@ imageAspectContainerElt masonry ((ImageListItem.ImageListItem (ImageListItem.Con
         [ imageElt masonry listItem ]
 
 
-imageElt :: Bool -> ImageListItem msg -> Html msg
-imageElt masonry (ImageListItem.ImageListItem (ImageListItem.Config { href, image })) =
+imageElt :: Bool -> ImageArrayItem msg -> Html msg
+imageElt masonry (ImageArrayItem.ImageArrayItem (ImageArrayItem.Config { href, image })) =
     let
         img =
             Html.img
@@ -252,8 +252,8 @@ imageElt masonry (ImageListItem.ImageListItem (ImageListItem.Config { href, imag
             []
 
 
-supportingElt :: ImageListItem msg -> Html msg
-supportingElt (ImageListItem.ImageListItem (ImageListItem.Config { label })) =
+supportingElt :: ImageArrayItem msg -> Html msg
+supportingElt (ImageArrayItem.ImageArrayItem (ImageArrayItem.Config { label })) =
     case label of
         Just string ->
             Html.div

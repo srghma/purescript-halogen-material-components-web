@@ -90,7 +90,7 @@ import Html.Events
 
 {-| Configuration of a form field
 -}
-data Config msg
+type Config r i
     = Config
         { label :: Maybe String
         , for :: Maybe String
@@ -126,7 +126,7 @@ setAlignEnd alignEnd (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
@@ -153,10 +153,10 @@ config =
 
 {-| Form field view function
 -}
-formField :: Config msg -> List (Html msg) -> Html msg
+formField :: Config msg -> Array (Html msg) -> Html msg
 formField ((Config { additionalAttributes }) as config_) nodes =
     Html.node "mdc-form-field"
-        (List.filterMap identity
+        (Array.filterMap identity
             [ rootCs
             , alignEndCs config_
             ]
@@ -192,7 +192,7 @@ clickHandler (Config { onClick }) =
 labelElt :: Config msg -> Html msg
 labelElt ((Config { label }) as config_) =
     Html.label
-        (List.filterMap identity
+        (Array.filterMap identity
             [ forAttr config_
             , clickHandler config_
             ]

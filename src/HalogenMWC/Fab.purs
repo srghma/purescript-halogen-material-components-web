@@ -114,7 +114,7 @@ import Json.Encode as Encode
 
 {-| Floating action button configuration
 -}
-data Config msg
+type Config r i
     = Config
         { mini :: Bool
         , exited :: Bool
@@ -151,7 +151,7 @@ setExited exited (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
@@ -168,7 +168,7 @@ setOnClick onClick (Config config_) =
 fab :: Config msg -> String -> Html msg
 fab ((Config { additionalAttributes }) as config_) iconName =
     Html.node "mdc-fab"
-        (List.filterMap identity
+        (Array.filterMap identity
             [ rootCs
             , miniCs config_
             , exitedCs config_

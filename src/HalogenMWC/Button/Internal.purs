@@ -3,7 +3,7 @@ module HalogenMWC.Button.Internal (Config(..))
 import Html
 
 
-data Config msg
+type Config r i
     = Config
         { icon :: Maybe String
         , trailingIcon :: Bool

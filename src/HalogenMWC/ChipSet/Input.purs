@@ -54,18 +54,18 @@ import Material.Chip.Input.Internal as Chip (Chip(..))
 
 {-| Input chip set view function
 -}
-chipSet :: List (Html.Attribute msg) -> List ( String, Chip msg ) -> Html msg
+chipSet :: Array (IProp r i) -> Array ( String, Chip msg ) -> Html msg
 chipSet additionalAttributes keyedChips =
     Html.Keyed.node "mdc-chip-set"
         (chipSetCs :: chipSetInputCs :: gridRole :: additionalAttributes)
-        (List.map (Tuple.mapSecond chip) keyedChips)
+        (Array.map (Tuple.mapSecond chip) keyedChips)
 
 
 chip :: Chip msg -> Html msg
 chip (Chip ((Chip.Config { additionalAttributes }) as config_) label) =
     Html.div [ class "mdc-touch-target-wrapper" ]
         [ Html.node "mdc-chip"
-            (List.filterMap identity
+            (Array.filterMap identity
                 [ chipCs
                 , chipTouchCs
                 , rowRole
@@ -73,7 +73,7 @@ chip (Chip ((Chip.Config { additionalAttributes }) as config_) label) =
                 ]
                 ++ additionalAttributes
             )
-            (List.filterMap identity
+            (Array.filterMap identity
                 [ rippleElt
                 , leadingIconElt config_
                 , primaryActionElt label
@@ -162,7 +162,7 @@ primaryActionElt :: String -> Maybe (Html msg)
 primaryActionElt label =
     Just <|
         Html.span [ chipPrimaryActionCs, gridcellRole, tabIndexProp -1 ]
-            (List.filterMap identity [ textElt label, touchElt ])
+            (Array.filterMap identity [ textElt label, touchElt ])
 
 
 textElt :: String -> Maybe (Html msg)

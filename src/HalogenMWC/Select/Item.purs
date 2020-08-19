@@ -117,7 +117,7 @@ setDisabled disabled (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config a msg -> Config a msg
+setAttributes :: Array (IProp r i) -> Config a msg -> Config a msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
@@ -130,6 +130,6 @@ data SelectItem a msg =
 
 {-| Select item constructor
 -}
-selectItem :: Config a msg -> List (Html msg) -> SelectItem a msg
+selectItem :: Config a msg -> Array (Html msg) -> SelectItem a msg
 selectItem =
     SelectItem

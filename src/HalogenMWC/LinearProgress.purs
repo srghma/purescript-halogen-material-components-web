@@ -100,7 +100,7 @@ import Json.Encode as Encode
 
 {-| Linear progress configuration
 -}
-data Config msg
+type Config r i
     = Config
         { reverse :: Bool
         , closed :: Bool
@@ -141,7 +141,7 @@ setReverse reverse (Config config_) =
 
 {-| Specify additional attributes
 -}
-setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
@@ -149,7 +149,7 @@ setAttributes additionalAttributes (Config config_) =
 linearProgress :: Variant -> Config msg -> Html msg
 linearProgress variant ((Config { additionalAttributes }) as config_) =
     Html.node "mdc-linear-progress"
-        (List.filterMap identity
+        (Array.filterMap identity
             [ rootCs
             , displayCss
             , roleAttr
