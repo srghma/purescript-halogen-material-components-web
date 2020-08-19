@@ -193,7 +193,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 {-| Configuration of a top app bar
 -}
 type Config r i
-    = Config
+    =
         { dense :: Boolean
         , fixed :: Boolean
         , additionalAttributes :: Array (IProp r i)

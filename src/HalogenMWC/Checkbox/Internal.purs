@@ -4,7 +4,7 @@ import Html
 
 
 type Config r i
-    = Config
+    =
         { state :: Maybe State
         , disabled :: Boolean
         , additionalAttributes :: Array (IProp r i)

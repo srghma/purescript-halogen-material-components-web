@@ -106,7 +106,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 {-| Linear progress configuration
 -}
 type Config r i
-    = Config
+    =
         { reverse :: Boolean
         , closed :: Boolean
         , additionalAttributes :: Array (IProp r i)

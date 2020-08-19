@@ -109,7 +109,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 {-| Configuration of a menu
 -}
 type Config r i
-    = Config
+    =
         { open :: Boolean
         , quickOpen :: Boolean
         , additionalAttributes :: Array (IProp r i)

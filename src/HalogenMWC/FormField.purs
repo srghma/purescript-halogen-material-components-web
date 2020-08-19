@@ -96,7 +96,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 {-| Configuration of a form field
 -}
 type Config r i
-    = Config
+    =
         { label :: Maybe String
         , for :: Maybe String
         , alignEnd :: Boolean

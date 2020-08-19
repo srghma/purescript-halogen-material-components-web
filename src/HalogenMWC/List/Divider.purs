@@ -111,7 +111,7 @@ import HalogenMWC.Array.Item.Internal as ArrayItem
 {-| Configuration of a list item divider
 -}
 type Config r i
-    = Config
+    =
         { inset :: Boolean
         , padded :: Boolean
         , additionalAttributes :: Array (IProp r i)

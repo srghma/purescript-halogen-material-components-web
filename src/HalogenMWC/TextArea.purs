@@ -186,7 +186,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 {-| Configuration of a text area
 -}
 type Config r i
-    = Config
+    =
         { label :: Maybe String
         , fullwidth :: Boolean
         , value :: Maybe String

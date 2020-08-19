@@ -8,7 +8,7 @@ import Html
 
 
 type Config r i
-    = Config
+    =
         { active :: Boolean
         , additionalAttributes :: Array (IProp r i)
         , onClick :: Maybe r i

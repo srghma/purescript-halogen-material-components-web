@@ -145,7 +145,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 {-| Extended floating action button configuration
 -}
 type Config r i
-    = Config
+    =
         { icon :: Maybe String
         , trailingIcon :: Boolean
         , exited :: Boolean

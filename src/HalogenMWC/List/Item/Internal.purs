@@ -13,7 +13,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 
 type Config r i
-    = Config
+    =
         { disabled :: Boolean
         , selection :: Maybe Selection
         , href :: Maybe String

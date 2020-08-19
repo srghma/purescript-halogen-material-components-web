@@ -9,7 +9,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 
 data Config a r i
-    = Config
+    =
         { value :: a
         , disabled :: Boolean
         , additionalAttributes :: Array (IProp r i)

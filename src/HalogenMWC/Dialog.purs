@@ -87,7 +87,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 {-| Configuration of a dialog
 -}
 type Config r i
-    = Config
+    =
         { open :: Boolean
         , additionalAttributes :: Array (IProp r i)
         , onClose :: Maybe r i

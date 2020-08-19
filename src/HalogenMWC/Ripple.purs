@@ -95,7 +95,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 {-| Ripple configuration
 -}
 type Config r i
-    = Config
+    =
         { color :: Maybe Color
         , additionalAttributes :: Array (IProp r i)
         }

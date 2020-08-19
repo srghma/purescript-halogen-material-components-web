@@ -218,7 +218,7 @@ import HalogenMWC.Select.Item.Internal as SelectItem
 {-| Configuration of a select
 -}
 data Config a r i
-    = Config
+    =
         { label :: Maybe String
         , disabled :: Boolean
         , required :: Boolean

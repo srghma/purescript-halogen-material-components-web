@@ -4,7 +4,7 @@ import Html
 
 
 type Config r i
-    = Config
+    =
         { icon :: Maybe String
         , additionalAttributes :: Array (IProp r i)
         , onClick :: Maybe r i

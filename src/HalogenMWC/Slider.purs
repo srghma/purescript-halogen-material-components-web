@@ -159,7 +159,7 @@ import Svg.Attributes
 {-| Configuration of a slider
 -}
 type Config r i
-    = Config
+    =
         { discrete :: Boolean
         , displayMarkers :: Boolean
         , min :: Maybe Float

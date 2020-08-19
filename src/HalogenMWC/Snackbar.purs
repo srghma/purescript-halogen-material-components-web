@@ -293,7 +293,7 @@ addMessage message_ (Queue queue) =
 {-| Configuration of a snackbar
 -}
 type Config r i
-    = Config
+    =
         { closeOnEscape :: Boolean
         , additionalAttributes :: Array (IProp r i)
         , onClosed :: MessageId -> r i

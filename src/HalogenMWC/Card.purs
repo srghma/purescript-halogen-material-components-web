@@ -220,7 +220,7 @@ import HalogenMWC.IconButton.Internal
 {-| Configuration of a card
 -}
 type Config r i
-    = Config
+    =
         { outlined :: Boolean
         , additionalAttributes :: Array (IProp r i)
         }

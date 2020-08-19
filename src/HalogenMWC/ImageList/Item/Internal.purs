@@ -4,7 +4,7 @@ import Html
 
 
 type Config r i
-    = Config
+    =
         { label :: Maybe String
         , href :: Maybe String
         , additionalAttributes :: Array (IProp r i)

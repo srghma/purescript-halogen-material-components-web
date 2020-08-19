@@ -4,7 +4,7 @@ import Html
 
 
 type Config r i
-    = Config
+    =
         { icon :: Maybe String
         , trailingIcon :: Boolean
         , disabled :: Boolean

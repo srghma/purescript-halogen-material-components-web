@@ -96,7 +96,7 @@ import HalogenMWC.Chip.Choice.Internal as Chip
 {-| Configuration of a choice chip set
 -}
 data Config a r i
-    = Config
+    =
         { selected :: Maybe a
         , onChange :: Maybe (a -> r i)
         , toLabel :: a -> String

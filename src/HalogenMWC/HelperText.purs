@@ -99,7 +99,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 {-| Configuration of a helper text
 -}
 type Config r i
-    = Config
+    =
         { persistent :: Boolean
         , additionalAttributes :: Array (IProp r i)
         }

@@ -184,7 +184,7 @@ import HalogenMWC.Array.Item.Internal as ArrayItem
 {-| Configuration of a list
 -}
 type Config r i
-    = Config
+    =
         { nonInteractive :: Boolean
         , dense :: Boolean
         , avatarArray :: Boolean

@@ -4,7 +4,7 @@ import Html
 
 
 type Config r i
-    = Config
+    =
         { leadingIcon :: Maybe String
         , trailingIcon :: Maybe String
         , additionalAttributes :: Array (IProp r i)

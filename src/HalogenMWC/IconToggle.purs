@@ -150,7 +150,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 {-| Icon toggle configuration
 -}
 type Config r i
-    = Config
+    =
         { on :: Boolean
         , disabled :: Boolean
         , label :: Maybe String

@@ -163,7 +163,7 @@ import HalogenMWC.Tab.Internal as Tab
 {-| Configuration of a tab bar
 -}
 type Config r i
-    = Config
+    =
         { stacked :: Boolean
         , minWidth :: Boolean
         , indicatorSpansContent :: Boolean

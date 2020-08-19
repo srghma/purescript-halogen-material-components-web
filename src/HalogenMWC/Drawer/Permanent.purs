@@ -96,7 +96,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 {-| Configuration of a permanent drawer
 -}
 type Config r i
-    = Config { additionalAttributes :: Array (IProp r i) }
+    = { additionalAttributes :: Array (IProp r i) }
 
 
 {-| Default configuration of a permanent drawer

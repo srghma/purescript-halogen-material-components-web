@@ -124,7 +124,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 {-| Radio button configuration
 -}
 type Config r i
-    = Config
+    =
         { checked :: Boolean
         , disabled :: Boolean
         , additionalAttributes :: Array (IProp r i)

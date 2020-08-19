@@ -116,7 +116,7 @@ import HalogenMWC.ImageArray.Item.Internal as ImageArrayItem
 {-| Configuration of an image list
 -}
 type Config r i
-    = Config
+    =
         { masonry :: Boolean
         , withTextProtection :: Boolean
         , additionalAttributes :: Array (IProp r i)

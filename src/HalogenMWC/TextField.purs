@@ -241,7 +241,7 @@ import HalogenMWC.Icon as Icon
 {-| Configuration of a text field
 -}
 type Config r i
-    = Config
+    =
         { label :: Maybe String
         , fullwidth :: Boolean
         , value :: Maybe String

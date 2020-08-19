@@ -118,7 +118,7 @@ import HalogenMWC.Checkbox.Internal
 {-| Configuration of a data table
 -}
 type Config r i
-    = Config
+    =
         { label :: Maybe String
         , additionalAttributes :: Array (IProp r i)
         }

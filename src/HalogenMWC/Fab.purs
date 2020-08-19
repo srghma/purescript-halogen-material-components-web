@@ -120,7 +120,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 {-| Floating action button configuration
 -}
 type Config r i
-    = Config
+    =
         { mini :: Boolean
         , exited :: Boolean
         , additionalAttributes :: Array (IProp r i)

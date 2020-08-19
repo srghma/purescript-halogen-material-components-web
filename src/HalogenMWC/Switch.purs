@@ -113,7 +113,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 {-| Configuration of a switch
 -}
 type Config r i
-    = Config
+    =
         { checked :: Boolean
         , disabled :: Boolean
         , additionalAttributes :: Array (IProp r i)
