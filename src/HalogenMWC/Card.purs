@@ -210,7 +210,7 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
-import Json.Encode as Encode
+
 import HalogenMWC.Button as Button
 import HalogenMWC.Button.Internal
 import HalogenMWC.IconButton as IconButton

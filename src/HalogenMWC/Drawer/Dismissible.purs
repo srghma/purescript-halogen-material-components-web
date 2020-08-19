@@ -42,7 +42,7 @@ import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
-    
+
     import HalogenMWC.Drawer.Dismissible as DismissibleDrawer
     import HalogenMWC.Array as Array
     import HalogenMWC.ArrayItem as ArrayItem
@@ -102,9 +102,9 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
-import Html.Events
-import Json.Decode as Decode
-import Json.Encode as Encode
+
+
+
 
 
 {-| Configuration of a dismissible drawer
