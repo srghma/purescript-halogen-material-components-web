@@ -19,8 +19,8 @@ type Config r i
 data Chip a r i
   = Chip (Config r i) a
 
-config :: Config r i
-config =
+defaultConfig :: Config r i
+defaultConfig =
         { icon = Nothing
         , additionalAttributes = []
         }

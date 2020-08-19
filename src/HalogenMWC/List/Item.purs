@@ -21,8 +21,8 @@ import HalogenMWC.Array.Item.Internal (Config(..), ArrayItem(..), Selection(..))
 type Config r i =
     Material.Array.Item.Internal.Config r i
 
-config :: Config r i
-config =
+defaultConfig :: Config r i
+defaultConfig =
     Config
         { disabled = False
         , selection = Nothing

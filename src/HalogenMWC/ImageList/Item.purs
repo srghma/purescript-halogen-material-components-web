@@ -16,8 +16,8 @@ type Config r i
 
 newtype ImageArrayItem r i = ImageArrayItem (Config r i)
 
-config :: Config r i
-config =
+defaultConfig :: Config r i
+defaultConfig =
     Config
         { label = Nothing
         , href = Nothing

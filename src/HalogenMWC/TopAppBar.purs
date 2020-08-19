@@ -35,8 +35,8 @@ data Variant
     | ShortCollapsed
     | Prominent
 
-config :: Config r i
-config =
+defaultConfig :: Config r i
+defaultConfig =
     Config
         { dense = False
         , fixed = False

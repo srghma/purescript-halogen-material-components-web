@@ -33,7 +33,7 @@ data Config a r i
         }
 
 config :: Config a r i
-config =
+defaultConfig =
     Config
         { label = Nothing
         , disabled = False

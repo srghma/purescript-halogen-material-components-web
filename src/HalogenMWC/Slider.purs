@@ -29,8 +29,8 @@ type Config r i
         , onInput :: Maybe (Float -> r i)
         }
 
-config :: Config r i
-config =
+defaultConfig :: Config r i
+defaultConfig =
     Config
         { discrete = False
         , displayMarkers = False

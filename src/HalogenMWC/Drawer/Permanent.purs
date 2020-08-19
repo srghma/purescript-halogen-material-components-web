@@ -15,8 +15,8 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 type Config r i
     = { additionalAttributes :: Array (IProp r i) }
 
-config :: Config r i
-config =
+defaultConfig :: Config r i
+defaultConfig =
     { additionalAttributes = [] }
 
 drawer :: Config r i -> Array (Html r i) -> Html r i

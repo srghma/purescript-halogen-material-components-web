@@ -19,8 +19,8 @@ type Config r i
         , onClose :: Maybe r i
         }
 
-config :: Config r i
-config =
+defaultConfig :: Config r i
+defaultConfig =
     Config
         { open = False
         , quickOpen = False

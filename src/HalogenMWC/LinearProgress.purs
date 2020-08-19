@@ -25,8 +25,8 @@ data Variant
     | Determinate Float
     | Buffered Float Float
 
-config :: Config r i
-config =
+defaultConfig :: Config r i
+defaultConfig =
     Config
         { reverse = False
         , closed = False

@@ -19,8 +19,8 @@ type Config r i
         , additionalAttributes :: Array (IProp r i)
         }
 
-config :: Config r i
-config =
+defaultConfig :: Config r i
+defaultConfig =
     Config
         { color = Nothing
         , additionalAttributes = []

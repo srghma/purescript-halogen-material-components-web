@@ -15,8 +15,8 @@ import HalogenMWC.Tab.Internal (Config(..), Tab(..))
 type Config r i =
     Material.Tab.Internal.Config r i
 
-config :: Config r i
-config =
+defaultConfig :: Config r i
+defaultConfig =
     Config
         { active = False
         , additionalAttributes = []

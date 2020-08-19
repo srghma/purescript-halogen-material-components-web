@@ -23,8 +23,8 @@ type Config r i
         , align :: Maybe Align
         }
 
-config :: Config r i
-config =
+defaultConfig :: Config r i
+defaultConfig =
     Config
         { stacked = False
         , minWidth = False

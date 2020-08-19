@@ -20,8 +20,8 @@ type Config r i
         , touch :: Boolean
         }
 
-config :: Config r i
-config =
+defaultConfig :: Config r i
+defaultConfig =
     Config
         { checked = False
         , disabled = False

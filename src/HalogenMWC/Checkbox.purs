@@ -23,8 +23,8 @@ data State
   | Checked
   | Indeterminate
 
-config :: Config r i
-config =
+defaultConfig :: Config r i
+defaultConfig =
     Config
         { state = Nothing
         , disabled = False

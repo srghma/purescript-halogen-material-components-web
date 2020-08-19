@@ -19,8 +19,8 @@ type Config r i
     , onClick :: Maybe r i
     }
 
-config :: Config r i
-config =
+defaultConfig :: Config r i
+defaultConfig =
     Config
         { disabled = False
         , label = Nothing

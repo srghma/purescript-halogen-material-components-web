@@ -23,8 +23,8 @@ type Config r i
 data Chip r i
   = Chip (Config r i) String
 
-config :: Config r i
-config =
+defaultConfig :: Config r i
+defaultConfig =
         { leadingIcon = Nothing
         , trailingIcon = Nothing
         , additionalAttributes = []

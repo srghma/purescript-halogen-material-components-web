@@ -30,8 +30,8 @@ type Config r i
         , onChange :: Maybe (String -> r i)
         }
 
-config :: Config r i
-config =
+defaultConfig :: Config r i
+defaultConfig =
     Config
         { label = Nothing
         , fullwidth = False

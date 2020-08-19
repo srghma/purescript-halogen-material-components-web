@@ -43,8 +43,8 @@ type Config r i
 data Icon r i
     = Icon (Html r i)
 
-config :: Config r i
-config =
+defaultConfig :: Config r i
+defaultConfig =
     Config
         { label = Nothing
         , fullwidth = False

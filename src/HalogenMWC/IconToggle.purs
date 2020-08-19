@@ -20,8 +20,8 @@ type Config r i
         , onChange :: Maybe r i
         }
 
-config :: Config r i
-config =
+defaultConfig :: Config r i
+defaultConfig =
     Config
         { on = False
         , disabled = False
