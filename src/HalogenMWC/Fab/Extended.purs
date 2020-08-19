@@ -57,19 +57,19 @@ leadingIconElt { icon, trailingIcon } = case Tuple icon trailingIcon of
   Just (Tuple iconName false) ->
     Just
       ( HH.span [ HP.class_ material_icons, HP.class_ mdc_fab__icon ]
-          [ text iconName ]
+          [ HH.text iconName ]
       )
   _ -> Nothing
 
 labelElt :: String -> Maybe (HH.HTML w i)
-labelElt label = Just (HH.span [ HP.class_ mdc_fab__label ] [ text label ])
+labelElt label = Just (HH.span [ HP.class_ mdc_fab__label ] [ HH.text label ])
 
 trailingIconElt :: Config r i -> Maybe (HH.HTML w i)
 trailingIconElt { icon, trailingIcon } = case (Tuple icon trailingIcon) of
   Just (Tuple iconName true) ->
     Just
       ( HH.span [ HP.class_ material_icons, HP.class_ mdc_fab__icon ]
-          [ text iconName ]
+          [ HH.text iconName ]
       )
   _ -> Nothing
 

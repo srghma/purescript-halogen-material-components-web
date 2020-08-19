@@ -35,7 +35,7 @@ iconButton config_ iconName =
         ]
         <> config_.additionalAttributes
     )
-    [ text iconName ]
+    [ HH.text iconName ]
 
 custom :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
 custom config_ nodes =

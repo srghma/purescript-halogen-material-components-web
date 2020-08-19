@@ -52,7 +52,7 @@ leadingIconElt { leadingIcon } =
   map
     ( \iconName ->
         HH.i [ HP.class_ "material-icons mdc-chip__icon mdc-chip__icon--leading" ]
-          [ text iconName ]
+          [ HH.text iconName ]
     )
     leadingIcon
 
@@ -60,10 +60,10 @@ primaryActionElt :: String -> Maybe (HH.HTML w i)
 primaryActionElt label =
   Just
     $ HH.span [ HP.class_ mdc_chip__primary_action, HP.attr "role" "gridcell", tabIndexProp - 1 ]
-        (Array.catMaybes [ textElt label, touchElt ])
+        (Array.catMaybes [ HH.textElt label, touchElt ])
 
 textElt :: String -> Maybe (HH.HTML w i)
-textElt label = Just (HH.span [ HP.class_ mdc_chip__text, HP.attr "role" "button" ] [ text label ])
+textElt label = Just (HH.span [ HP.class_ mdc_chip__text, HP.attr "role" "button" ] [ HH.text label ])
 
 touchElt :: Maybe (HH.HTML w i)
 touchElt = Just (HH.div [ HP.class_ mdc_chip__touch ] [])
@@ -77,6 +77,6 @@ trailingIconElt { trailingIcon, onDelete } =
           , tabIndexProp - 1
           , HP.attr "role" "button"
           ]
-          [ text (Maybe.fromMaybe "cancel" trailingIcon) ]
+          [ HH.text (Maybe.fromMaybe "cancel" trailingIcon) ]
   else
     Nothing

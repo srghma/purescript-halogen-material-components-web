@@ -131,12 +131,12 @@ tabIconElt { icon } =
     ( \iconName ->
         HH.span
           [ HP.class_ mdc_tab__icon material_icons ]
-          [ text iconName ]
+          [ HH.text iconName ]
     )
     icon
 
 tabTextLabelElt :: Tab.Content -> Maybe (HH.HTML w i)
-tabTextLabelElt { label } = Just (HH.span [ HP.class_ mdc_tab__text_label ] [ text label ])
+tabTextLabelElt { label } = Just (HH.span [ HP.class_ mdc_tab__text_label ] [ HH.text label ])
 
 tabIndicatorElt :: Tab.Config r i -> Maybe (HH.HTML w i)
 tabIndicatorElt config_ = Just (HH.span [ HP.class_ mdc_tab_indicator ] [ tabIndicatorContentElt ])

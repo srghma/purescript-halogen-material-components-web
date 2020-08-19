@@ -139,7 +139,7 @@ dropdownIconElt :: HH.HTML w i
 dropdownIconElt = HH.i [ HP.class_ mdc_select__dropdown_icon ] []
 
 floatingLabelElt :: Config a r i -> HH.HTML w i
-floatingLabelElt { label } = HH.div [ HP.class_ mdc_floating_label ] [ text (Maybe.fromMaybe "" label) ]
+floatingLabelElt { label } = HH.div [ HP.class_ mdc_floating_label ] [ HH.text (Maybe.fromMaybe "" label) ]
 
 lineRippleElt :: HH.HTML w i
 lineRippleElt = HH.label [ HP.class_ mdc_line_ripple ] []
@@ -150,7 +150,7 @@ notchedOutlineElt { label } =
     [ HH.div [ HP.class_ mdc_notched_outline__leading ] []
     , HH.div [ HP.class_ mdc_notched_outline__notch ]
         [ HH.label [ HP.class_ mdc_floating_label ]
-            [ text (Maybe.fromMaybe "" label) ]
+            [ HH.text (Maybe.fromMaybe "" label) ]
         ]
     , HH.div [ HP.class_ mdc_notched_outline__trailing ] []
     ]

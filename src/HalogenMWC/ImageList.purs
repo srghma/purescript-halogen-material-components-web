@@ -105,5 +105,5 @@ supportingElt (ImageArrayItem.ImageArrayItem { label }) = case label of
   Just string ->
     HH.div
       [ HP.class_ mdc_image_list__supporting ]
-      [ HH.span [ HP.class_ mdc_image_list__label ] [ text string ] ]
+      [ HH.span [ HP.class_ mdc_image_list__label ] [ HH.text string ] ]
   Nothing -> text ""

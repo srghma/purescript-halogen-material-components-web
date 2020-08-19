@@ -75,7 +75,7 @@ surfaceElt content =
 
 titleElt :: Content r i -> Maybe (HH.HTML w i)
 titleElt { title } = case title of
-  Just title_ -> Just (HH.div [ HP.class_ mdc_dialog__title ] [ text title_ ])
+  Just title_ -> Just (HH.div [ HP.class_ mdc_dialog__title ] [ HH.text title_ ])
   Nothing -> Nothing
 
 contentElt :: Content r i -> Maybe (HH.HTML w i)

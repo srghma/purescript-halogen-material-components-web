@@ -286,7 +286,7 @@ labelElt { label, value } =
           , HP.prop "foucClassNames"
               (Encode.list Encode.string [ floatingLabelFloatAboveCs ])
           ]
-          [ text str ]
+          [ HH.text str ]
       Nothing -> text ""
 
 noLabelCs :: Config r i -> Maybe (IProp r i)

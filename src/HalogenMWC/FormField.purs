@@ -61,4 +61,4 @@ labelElt config_ =
         , clickHandler config_
         ]
     )
-    [ text (Maybe.fromMaybe "" config_.label) ]
+    [ HH.text (Maybe.fromMaybe "" config_.label) ]

@@ -64,7 +64,7 @@ rippleElt :: HH.HTML w i
 rippleElt = HH.div [ HP.class_ mdc_fab__ripple ] []
 
 iconElt :: String -> HH.HTML w i
-iconElt iconName = HH.span [ HP.class_ material_icons, HP.class_ mdc_fab__icon ] [ text iconName ]
+iconElt iconName = HH.span [ HP.class_ material_icons, HP.class_ mdc_fab__icon ] [ HH.text iconName ]
 
 clickHandler :: Config r i -> Maybe (IProp r i)
 clickHandler { onClick } = map HH.Events.onClick onClick

@@ -175,7 +175,7 @@ surfaceElt messageId message_ =
 labelElt :: Message r i -> HH.HTML w i
 labelElt (Message { label }) =
   HH.div [ HP.class_ mdc_snackbar__label, ariaStatusRoleAttr, ariaPoliteLiveAttr ]
-    [ text label ]
+    [ HH.text label ]
 
 actionsElt :: MessageId -> Message r i -> HH.HTML w i
 actionsElt messageId message_ =
@@ -196,7 +196,7 @@ actionButtonElt messageId (message_@(Message { actionButton })) =
               , actionButtonClickHandler messageId message_
               ]
           )
-          [ text actionButtonLabel ]
+          [ HH.text actionButtonLabel ]
     )
     actionButton
 
@@ -216,7 +216,7 @@ actionIconElt messageId (message_@(Message { actionIcon })) =
               , actionIconClickHandler messageId message_
               ]
           )
-          [ text actionIconLabel ]
+          [ HH.text actionIconLabel ]
     )
     actionIcon
 

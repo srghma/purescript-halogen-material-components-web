@@ -43,8 +43,8 @@ iconToggle (config_@{ additionalAttributes }) { onIcon, offIcon } =
         ]
         <> additionalAttributes
     )
-    [ HH.i (Array.catMaybes [ materialIconsCs, onIconCs ]) [ text onIcon ]
-    , HH.i (Array.catMaybes [ materialIconsCs, iconCs ]) [ text offIcon ]
+    [ HH.i (Array.catMaybes [ materialIconsCs, onIconCs ]) [ HH.text onIcon ]
+    , HH.i (Array.catMaybes [ materialIconsCs, iconCs ]) [ HH.text offIcon ]
     ]
 
 rootCs :: Maybe (IProp r i)

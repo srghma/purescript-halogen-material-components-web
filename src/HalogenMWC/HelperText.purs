@@ -30,7 +30,7 @@ helperText (config_@{ additionalAttributes }) string =
         ]
         <> additionalAttributes
     )
-    [ text string ]
+    [ HH.text string ]
 
 helperLine :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
 helperLine additionalAttributes nodes = HH.div ([ helperLineCs ] <> additionalAttributes) nodes
