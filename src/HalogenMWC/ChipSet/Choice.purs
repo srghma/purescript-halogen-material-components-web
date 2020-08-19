@@ -33,7 +33,7 @@ chip :: Maybe a -> Maybe (a -> r i) -> (a -> String) -> Chip a r i -> HH.HTML w 
 chip selected onChange toLabel (Chip config_ value) =
   HH.div [ HP.class_ mdc_touch_target_wrapper ]
     [ HH.element "mdc-chip"
-        ( Array.filterMap identity
+        ( Array.catMaybes
             [ chipCs
             , chipTouchCs
             , rowRole
@@ -42,7 +42,7 @@ chip selected onChange toLabel (Chip config_ value) =
             ]
             <> config_.additionalAttributes
         )
-        ( Array.filterMap identity
+        ( Array.catMaybes
             [ rippleElt
             , leadingIconElt config_
             , primaryActionElt (toLabel value)
@@ -102,7 +102,7 @@ primaryActionElt :: String -> Maybe (HH.HTML w i)
 primaryActionElt label =
   Just
     $ HH.span [ chipPrimaryActionCs, gridcellRole ]
-        (Array.filterMap identity [ textElt label, touchElt ])
+        (Array.catMaybes [ textElt label, touchElt ])
 
 textElt :: String -> Maybe (HH.HTML w i)
 textElt label = Just (HH.span [ chipTextCs, buttonRole ] [ text label ])

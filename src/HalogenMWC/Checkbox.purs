@@ -42,7 +42,7 @@ checkbox (config_@{ touch, additionalAttributes }) =
   in
     wrapTouch
       $ HH.element "mdc-checkbox"
-          ( Array.filterMap identity
+          ( Array.catMaybes
               [ rootCs
               , touchCs config_
               , checkedProp config_
@@ -97,7 +97,7 @@ changeHandler { state, onChange } =
 nativeControlElt :: Config r i -> HH.HTML w i
 nativeControlElt config_ =
   HH.input
-    ( Array.filterMap identity
+    ( Array.catMaybes
         [ Just (HH.Attributes.type_ "checkbox")
         , Just (HP.class_ mdc_checkbox__native_control)
         , checkedProp config_

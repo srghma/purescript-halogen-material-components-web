@@ -31,7 +31,7 @@ defaultConfig =
 genericTopAppBar :: Variant -> Config r i -> Array (HH.HTML w i) -> HH.HTML w i
 genericTopAppBar variant (config_@{ additionalAttributes }) nodes =
   HH.element "mdc-top-app-bar"
-    ( Array.filterMap identity
+    ( Array.catMaybes
         [ HP.class_ mdc_top_app_bar
         , variantCs variant
         , denseCs config_

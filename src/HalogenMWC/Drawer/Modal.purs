@@ -23,7 +23,7 @@ defaultConfig =
 drawer :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
 drawer (config_@{ additionalAttributes }) nodes =
   HH.element "mdc-drawer"
-    ( Array.filterMap identity
+    ( Array.catMaybes
         [ rootCs
         , modalCs
         , openProp config_

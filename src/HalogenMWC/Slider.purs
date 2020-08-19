@@ -51,7 +51,7 @@ Note that this option is ignored by non-discrete sliders.
 slider :: Config r i -> HH.HTML w i
 slider (config_@{ additionalAttributes }) =
   HH.element "mdc-slider"
-    ( Array.filterMap identity
+    ( Array.catMaybes
         [ rootCs
         , displayCss
         , discreteCs config_

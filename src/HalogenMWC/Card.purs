@@ -25,7 +25,7 @@ defaultConfig =
 card :: Config r i -> Content r i -> HH.HTML w i
 card (config_@{ additionalAttributes }) content =
   HH.element "mdc-card"
-    ( Array.filterMap identity
+    ( Array.catMaybes
         [ HP.class_ mdc_card
         , outlinedCs config_
         ]
@@ -44,7 +44,7 @@ actionsElt :: Content r i -> Array (HH.HTML w i)
 actionsElt content = case content.actions of
   Just (Actions { buttons, icons, fullBleed }) ->
     [ HH.div
-        ( Array.filterMap identity
+        ( Array.catMaybes
             [ Just (HP.class_ mdc_card__actions)
             , if fullBleed then
                 Just (HP.class_ mdc_card__actions____full_bleed)
@@ -89,7 +89,7 @@ data Aspect
 mediaView :: Maybe Aspect -> Array (IProp r i) -> String -> HH.HTML w i
 mediaView aspect additionalAttributes backgroundImage =
   HH.div
-    ( Array.filterMap identity
+    ( Array.catMaybes
         [ mediaCs
         , backgroundImageAttr backgroundImage
         , aspectCs aspect

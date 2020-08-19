@@ -49,13 +49,13 @@ button variant (config_@{ additionalAttributes, touch, href }) label =
   in
     wrapTouch
       $ HH.element "mdc-button"
-          (Array.filterMap identity [ disabledProp config_ ])
+          (Array.catMaybes [ disabledProp config_ ])
           [ ( if href /= Nothing then
                 HH.a
               else
                 HH.button
             )
-              ( Array.filterMap identity
+              ( Array.catMaybes
                   [ rootCs
                   , variantCs variant
                   , denseCs config_
@@ -68,7 +68,7 @@ button variant (config_@{ additionalAttributes, touch, href }) label =
                   ]
                   <> additionalAttributes
               )
-              ( Array.filterMap identity
+              ( Array.catMaybes
                   [ rippleElt
                   , leadingIconElt config_
                   , labelElt label

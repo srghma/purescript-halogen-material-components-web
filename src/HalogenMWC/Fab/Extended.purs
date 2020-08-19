@@ -27,7 +27,7 @@ defaultConfig =
 fab :: Config r i -> String -> HH.HTML w i
 fab (config_@{ additionalAttributes }) label =
   HH.element "mdc-fab"
-    ( Array.filterMap identity
+    ( Array.catMaybes
         [ rootCs
         , HP.classes [ mdc_fab mdc_fab____extended ]
         , exitedCs config_
@@ -36,7 +36,7 @@ fab (config_@{ additionalAttributes }) label =
         ]
         <> additionalAttributes
     )
-    ( Array.filterMap identity
+    ( Array.catMaybes
         [ rippleElt
         , leadingIconElt config_
         , labelElt label

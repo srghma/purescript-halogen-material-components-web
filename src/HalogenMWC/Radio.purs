@@ -45,7 +45,7 @@ radio (config_@{ touch, additionalAttributes }) =
   in
     wrapTouch
       $ HH.element "mdc-radio"
-          ( Array.filterMap identity
+          ( Array.catMaybes
               [ rootCs
               , touchCs config_
               , checkedProp config_
@@ -96,7 +96,7 @@ changeHandler { checked, onChange } =
 nativeControlElt :: Config r i -> HH.HTML w i
 nativeControlElt config_ =
   HH.input
-    ( Array.filterMap identity
+    ( Array.catMaybes
         [ nativeControlCs
         , radioTypeAttr
         , checkedProp config_

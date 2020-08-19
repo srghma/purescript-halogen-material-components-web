@@ -29,7 +29,7 @@ defaultConfig =
 iconToggle :: Config r i -> { onIcon :: String, offIcon :: String } -> HH.HTML w i
 iconToggle (config_@{ additionalAttributes }) { onIcon, offIcon } =
   HH.element "mdc-icon-button"
-    ( Array.filterMap identity
+    ( Array.catMaybes
         [ rootCs
         , onProp config_
         , tabIndexProp
@@ -41,8 +41,8 @@ iconToggle (config_@{ additionalAttributes }) { onIcon, offIcon } =
         ]
         <> additionalAttributes
     )
-    [ HH.i (Array.filterMap identity [ materialIconsCs, onIconCs ]) [ text onIcon ]
-    , HH.i (Array.filterMap identity [ materialIconsCs, iconCs ]) [ text offIcon ]
+    [ HH.i (Array.catMaybes [ materialIconsCs, onIconCs ]) [ text onIcon ]
+    , HH.i (Array.catMaybes [ materialIconsCs, iconCs ]) [ text offIcon ]
     ]
 
 rootCs :: Maybe (IProp r i)

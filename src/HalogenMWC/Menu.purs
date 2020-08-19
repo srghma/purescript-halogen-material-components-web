@@ -25,7 +25,7 @@ defaultConfig =
 menu :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
 menu (config_@{ additionalAttributes }) nodes =
   HH.element "mdc-menu"
-    ( Array.filterMap identity
+    ( Array.catMaybes
         [ rootCs
         , openProp config_
         , quickOpenProp config_

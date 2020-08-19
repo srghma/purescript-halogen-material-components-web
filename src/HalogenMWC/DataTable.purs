@@ -32,7 +32,7 @@ dataTable (config_@{ additionalAttributes }) { thead, tbody } =
   HH.element "mdc-data-table"
     ([ dataTableCs ] <> additionalAttributes)
     [ HH.table
-        ( Array.filterMap identity
+        ( Array.catMaybes
             [ dataTableTableCs
             , ariaLabelAttr config_
             ]
@@ -85,7 +85,7 @@ headerCell :: Cell r i -> HH.HTML w i
 headerCell cell_ = case cell_ of
   Cell { numeric, attributes, nodes } ->
     HH.th
-      ( Array.filterMap identity
+      ( Array.catMaybes
           [ dataTableHeaderCellCs
           , columnHeaderRoleAttr
           , colScopeAttr
@@ -96,7 +96,7 @@ headerCell cell_ = case cell_ of
       nodes
   CheckboxCell { attributes, config_ } ->
     HH.th
-      ( Array.filterMap identity
+      ( Array.catMaybes
           [ dataTableHeaderCellCs
           , columnHeaderRoleAttr
           , colScopeAttr
@@ -130,7 +130,7 @@ bodyCell :: Cell r i -> HH.HTML w i
 bodyCell cell_ = case cell_ of
   Cell { numeric, attributes, nodes } ->
     HH.td
-      ( Array.filterMap identity
+      ( Array.catMaybes
           [ dataTableCellCs
           , dataTableCellNumericCs numeric
           ]
@@ -139,7 +139,7 @@ bodyCell cell_ = case cell_ of
       nodes
   CheckboxCell { attributes, config_ } ->
     HH.td
-      ( Array.filterMap identity
+      ( Array.catMaybes
           [ dataTableCellCs
           , dataTableCellCheckboxCs
           ]

@@ -25,7 +25,7 @@ defaultConfig =
 imageArray :: Config r i -> Array (ImageArrayItem r i) -> HH.HTML w i
 imageArray config_ listItems =
   HH.element "mdc-image-list"
-    ( Array.filterMap identity
+    ( Array.catMaybes
         [ HP.class_ mdc_image_list
         , masonryCs config_
         , withTextProtectionCs config_
@@ -69,7 +69,7 @@ listItemElt (config_@{ masonry }) (listItem@(ImageArrayItem.ImageArrayItem { hre
 imageAspectContainerElt :: Boolean -> ImageArrayItem r i -> HH.HTML w i
 imageAspectContainerElt masonry (listItem@(ImageArrayItem.ImageArrayItem { href })) =
   HH.div
-    ( Array.filterMap identity
+    ( Array.catMaybes
         [ Just (HP.class_ mdc_image_list__image_aspect_container)
         , map (\_ -> HP.class_ mdc_ripple_surface) href
         ]

@@ -53,7 +53,7 @@ outlined config_ = textArea true config_
 textArea :: Boolean -> Config r i -> HH.HTML w i
 textArea outlined_ (config_@{ additionalAttributes, fullwidth }) =
   HH.element "mdc-text-field"
-    ( Array.filterMap identity
+    ( Array.catMaybes
         [ rootCs
         , noLabelCs config_
         , outlinedCs outlined_
@@ -133,7 +133,7 @@ changeHandler { onChange } =
 inputElt :: Config r i -> HH.HTML w i
 inputElt config_ =
   HH.textarea
-    ( Array.filterMap identity
+    ( Array.catMaybes
         [ inputCs
         , ariaLabelAttr config_
         , rowsAttr config_

@@ -29,7 +29,7 @@ type Content r i
 dialog :: Config r i -> Content r i -> HH.HTML w i
 dialog (config_@{ additionalAttributes }) content =
   HH.element "mdc-dialog"
-    ( Array.filterMap identity
+    ( Array.catMaybes
         [ rootCs
         , openProp config_
         , roleAttr
@@ -64,7 +64,7 @@ surfaceElt :: Content r i -> HH.HTML w i
 surfaceElt content =
   HH.div
     [ HP.class_ mdc_dialog__surface ]
-    ( Array.filterMap identity
+    ( Array.catMaybes
         [ titleElt content
         , contentElt content
         , actionsElt content

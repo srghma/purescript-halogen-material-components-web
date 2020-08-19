@@ -28,7 +28,7 @@ defaultConfig =
 linearProgress :: Variant -> Config r i -> HH.HTML w i
 linearProgress variant (config_@{ additionalAttributes }) =
   HH.element "mdc-linear-progress"
-    ( Array.filterMap identity
+    ( Array.catMaybes
         [ rootCs
         , displayCss
         , roleAttr

@@ -25,7 +25,7 @@ defaultConfig =
 iconButton :: Config r i -> String -> HH.HTML w i
 iconButton config_ iconName =
   HH.element "mdc-icon-button"
-    ( Array.filterMap identity
+    ( Array.catMaybes
         [ rootCs
         , materialIconsCs
         , tabIndexProp
@@ -38,7 +38,7 @@ iconButton config_ iconName =
 custom :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
 custom config_ nodes =
   HH.element "mdc-icon-button"
-    ( Array.filterMap identity
+    ( Array.catMaybes
         [ rootCs
         , tabIndexProp
         , clickHandler config_

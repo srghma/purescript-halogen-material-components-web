@@ -26,7 +26,7 @@ listItem :: Config r i -> ArrayItem r i
 listItem (config_@{ additionalAttributes }) =
   ArrayItem.ArrayItemDivider
     $ HH.li
-        ( Array.filterMap identity
+        ( Array.catMaybes
             [ listDividerCs
             , separatorRoleAttr
             , insetCs config_
@@ -56,4 +56,4 @@ paddedCs { padded } =
     Nothing
 
 group :: Array (IProp r i) -> HH.HTML w i
-group additionalAttributes = HH.hr (Array.filterMap identity [ listDividerCs ] <> additionalAttributes) []
+group additionalAttributes = HH.hr (Array.catMaybes [ listDividerCs ] <> additionalAttributes) []

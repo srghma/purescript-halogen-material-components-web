@@ -25,7 +25,7 @@ defaultConfig =
 fab :: Config r i -> String -> HH.HTML w i
 fab (config_@{ additionalAttributes }) iconName =
   HH.element "mdc-fab"
-    ( Array.filterMap identity
+    ( Array.catMaybes
         [ rootCs
         , miniCs config_
         , exitedCs config_

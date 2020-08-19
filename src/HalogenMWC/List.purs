@@ -49,7 +49,7 @@ list (config_@{ additionalAttributes }) firstArrayItem remainingArrayItems =
     listItems = [ firstArrayItem ] <> remainingArrayItems
   in
     HH.element "mdc-list"
-      ( Array.filterMap identity
+      ( Array.catMaybes
           [ rootCs
           , nonInteractiveCs config_
           , denseCs config_
@@ -112,7 +112,7 @@ clickHandler listItems =
     nthOnClick index =
       listItems
         # map getOnClick
-        # Array.filterMap identity
+        # Array.catMaybes
         # Array.drop index
         # Array.head
         # bindFlipped identity
@@ -149,7 +149,7 @@ selectedIndexProp listItems =
                 ArrayItem.ArrayItemDivider _ -> Nothing
                 ArrayItem.ArrayGroupSubheader _ -> Nothing
             )
-        # Array.filterMap identity
+        # Array.catMaybes
   in
     Just (HP.prop "selectedIndex" (Encode.list selectedIndex))
 

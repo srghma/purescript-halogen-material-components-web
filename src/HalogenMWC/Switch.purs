@@ -27,7 +27,7 @@ defaultConfig =
 switch :: Config r i -> HH.HTML w i
 switch (config_@{ additionalAttributes }) =
   HH.element "mdc-switch"
-    ( Array.filterMap identity
+    ( Array.catMaybes
         [ rootCs
         , checkedProp config_
         , disabledProp config_
@@ -71,7 +71,7 @@ thumbElt config_ = HH.div [ HP.class_ mdc_switch__thumb ] [ nativeControlElt con
 nativeControlElt :: Config r i -> HH.HTML w i
 nativeControlElt config_ =
   HH.input
-    ( Array.filterMap identity
+    ( Array.catMaybes
         [ nativeControlCs
         , checkboxTypeAttr
         , switchRoleAttr

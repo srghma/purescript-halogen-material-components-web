@@ -16,7 +16,7 @@ defaultConfig = { additionalAttributes: [] }
 drawer :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
 drawer { additionalAttributes } nodes =
   HH.div
-    (Array.filterMap identity [ rootCs ] <> additionalAttributes)
+    (Array.catMaybes [ rootCs ] <> additionalAttributes)
     nodes
 
 content :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i

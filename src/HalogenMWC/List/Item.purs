@@ -54,7 +54,7 @@ listItemView config_ nodes =
       else
         HH.element "mdc-list-item" attributes nodes
   )
-    ( Array.filterMap identity
+    ( Array.catMaybes
         [ HP.class_ mdc_list_item
         , hrefAttr config_
         , targetAttr config_

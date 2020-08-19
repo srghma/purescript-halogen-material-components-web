@@ -52,11 +52,11 @@ select variant (config_@{ leadingIcon, selected, additionalAttributes, onChange 
               Nothing
         )
         [ firstSelectItem, remainingSelectItems ]
-        # Array.filterMap identity
+        # Array.catMaybes
         # Array.head
   in
     HH.element "mdc-select"
-      ( Array.filterMap identity
+      ( Array.catMaybes
           [ rootCs
           , outlinedCs variant
           , leadingIconCs config_

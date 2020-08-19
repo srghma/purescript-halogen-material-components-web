@@ -70,7 +70,7 @@ snackbar config_ queue =
         # Maybe.withDefault (Tuple (MessageId - 1) Nothing)
   in
     HH.element "mdc-snackbar"
-      ( Array.filterMap identity
+      ( Array.catMaybes
           [ rootCs
           , closeOnEscapeProp config_
           , leadingCs currentMessage
@@ -178,7 +178,7 @@ labelElt (Message { label }) =
 actionsElt :: MessageId -> Message r i -> HH.HTML w i
 actionsElt messageId message_ =
   HH.div [ HP.class_ mdc_snackbar__actions ]
-    ( Array.filterMap identity
+    ( Array.catMaybes
         [ actionButtonElt messageId message_
         , actionIconElt messageId message_
         ]
@@ -189,7 +189,7 @@ actionButtonElt messageId (message_@(Message { actionButton })) =
   map
     ( \actionButtonLabel ->
         HH.button
-          ( Array.filterMap identity
+          ( Array.catMaybes
               [ actionButtonCs
               , actionButtonClickHandler messageId message_
               ]
@@ -209,7 +209,7 @@ actionIconElt messageId (message_@(Message { actionIcon })) =
   map
     ( \actionIconLabel ->
         HH.i
-          ( Array.filterMap identity
+          ( Array.catMaybes
               [ actionIconCs
               , actionIconClickHandler messageId message_
               ]

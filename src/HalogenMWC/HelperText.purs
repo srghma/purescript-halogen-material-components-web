@@ -21,7 +21,7 @@ defaultConfig =
 helperText :: Config r i -> String -> HH.HTML w i
 helperText (config_@{ additionalAttributes }) string =
   HH.div
-    ( Array.filterMap identity
+    ( Array.catMaybes
         [ helperTextCs
         , persistentCs config_
         , ariaHiddenAttr

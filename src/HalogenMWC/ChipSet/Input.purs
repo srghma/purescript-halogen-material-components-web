@@ -19,7 +19,7 @@ chip :: Chip r i -> HH.HTML w i
 chip (Chip config_ label) =
   HH.div [ HP.class_ mdc_touch_target_wrapper ]
     [ HH.element "mdc-chip"
-        ( Array.filterMap identity
+        ( Array.catMaybes
             [ HP.class_ mdc_chip
             , HP.class_ mdc_chip____touch
             , HH.Attributes.attribute "role" "row"
@@ -27,7 +27,7 @@ chip (Chip config_ label) =
             ]
             <> config_.additionalAttributes
         )
-        ( Array.filterMap identity
+        ( Array.catMaybes
             [ rippleElt
             , leadingIconElt config_
             , primaryActionElt label
@@ -58,7 +58,7 @@ primaryActionElt :: String -> Maybe (HH.HTML w i)
 primaryActionElt label =
   Just
     $ HH.span [ HP.class_ mdc_chip__primary_action, HH.Attributes.attribute "role" "gridcell", tabIndexProp - 1 ]
-        (Array.filterMap identity [ textElt label, touchElt ])
+        (Array.catMaybes [ textElt label, touchElt ])
 
 textElt :: String -> Maybe (HH.HTML w i)
 textElt label = Just (HH.span [ HP.class_ mdc_chip__text, HH.Attributes.attribute "role" "button" ] [ text label ])

@@ -32,7 +32,7 @@ defaultConfig =
 tabBar :: Config r i -> Array (Tab r i) -> HH.HTML w i
 tabBar (config_@{ additionalAttributes, align }) tabs =
   HH.element "mdc-tab-bar"
-    ( Array.filterMap identity
+    ( Array.catMaybes
         [ rootCs
         , tablistRoleAttr
         , activeTabIndexProp tabs
@@ -61,7 +61,7 @@ activeTabIndexProp tabs =
 viewTab :: Config r i -> Tab r i -> HH.HTML w i
 viewTab (barConfig@{ indicatorSpansContent }) (tabConfig@(Tab ({ additionalAttributes, content }))) =
   HH.button
-    ( Array.filterMap identity
+    ( Array.catMaybes
         [ tabCs
         , tabRoleAttr
         , tabStackedCs barConfig
@@ -70,7 +70,7 @@ viewTab (barConfig@{ indicatorSpansContent }) (tabConfig@(Tab ({ additionalAttri
         ]
         <> additionalAttributes
     )
-    ( Array.filterMap identity
+    ( Array.catMaybes
         $ if indicatorSpansContent then
             [ tabContentElt barConfig tabConfig content
             , tabRippleElt
@@ -110,13 +110,13 @@ tabContentElt (barConfig@{ indicatorSpansContent }) config_ content =
   Just
     ( HH.div [ HP.class_ mdc_tab__content ]
         ( if indicatorSpansContent then
-            Array.filterMap identity
+            Array.catMaybes
               [ tabIconElt content
               , tabTextLabelElt content
               , tabIndicatorElt config_
               ]
           else
-            Array.filterMap identity
+            Array.catMaybes
               [ tabIconElt content
               , tabTextLabelElt content
               ]
@@ -158,7 +158,7 @@ data Align
 tabScroller :: Config r i -> Maybe Align -> Array (Tab r i) -> HH.HTML w i
 tabScroller config_ align tabs =
   HH.div
-    ( Array.filterMap identity
+    ( Array.catMaybes
         [ tabScrollerCs
         , tabScrollerAlignCs align
         ]
