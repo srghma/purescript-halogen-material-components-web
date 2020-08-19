@@ -1,8 +1,8 @@
 module HalogenMWC.TopAppBar
     ( Config, config
-    , setFixed
-    , setDense
-    , setAttributes
+    
+    
+    
     , regular
     , row, section, alignEnd, alignStart
     , navigationIcon, title
@@ -127,7 +127,7 @@ bar's row. Do not forget to set the `actionItem` attribute on the icons.
 
 # Fixed Variant
 
-To make a top app bar fixed to the top, set its `setFixed` configuration option
+To make a top app bar fixed to the top its `setFixed` configuration option
 to `True`. Since a fixed top app bar would overlay the pages content, an
 appropriate margin has to be applied to the page's content, called the _fixed
 adjust_.

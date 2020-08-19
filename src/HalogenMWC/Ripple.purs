@@ -1,7 +1,7 @@
 module HalogenMWC.Ripple
     ( Config, config
-    , setColor
-    , setAttributes
+    
+    
     , bounded
     , unbounded
     , Color, primary, accent

@@ -1,9 +1,9 @@
 module HalogenMWC.Fab.Extended
     ( Config, config
-    , setOnClick
-    , setIcon, setTrailingIcon
-    , setExited
-    , setAttributes
+    
+    
+    
+    
     , fab
     ) where
 
@@ -69,7 +69,7 @@ their page layout, for instance by setting a fixed position via CSS.
 ### Configuration Options
 
 @docs setOnClick
-@docs setIcon, setTrailingIcon
+@docs setIcon
 @docs setExited
 @docs setAttributes
 

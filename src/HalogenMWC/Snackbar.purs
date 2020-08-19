@@ -1,18 +1,18 @@
 module HalogenMWC.Snackbar
     ( Config, config
-    , setCloseOnEscape
-    , setAttributes
+    
+    
     , snackbar
     , Queue, initialQueue, MessageId, close
     , addMessage
     , message, Message
-    , setActionButton
-    , setOnActionButtonClick
-    , setActionIcon
-    , setOnActionIconClick
-    , setLeading
-    , setStacked
-    , setTimeoutMs
+    
+    
+    
+    
+    
+    
+    
     ) where
 
 {-| Snackbars provide brief messages about the application's processes at the
@@ -163,7 +163,7 @@ At the minimum, a message contains only a label.
 ## Message with action button
 
 Messages may contain an action button that the user can click. To display an
-action button, set the message's `setActionButton` configuration option to a
+action button the message's `setActionButton` configuration option to a
 string, and handle the event in `onActionButtonClick`.
 
     Snackbar.message "Something happened"
@@ -174,7 +174,7 @@ string, and handle the event in `onActionButtonClick`.
 ## Message with action icon
 
 Messages may contain an action icon that the user can click. To display an
-action icon, set the message's `setActionIcon` configuration option to a string
+action icon the message's `setActionIcon` configuration option to a string
 representing a Material Icon, and handle the event in `onActionIconClick`.
 
     Snackbar.message "Something happened"
@@ -185,7 +185,7 @@ representing a Material Icon, and handle the event in `onActionIconClick`.
 ## Stacked messages
 
 Messages with a long label and action button should display the action button
-below the label. To archieve this, set the message's `setStacked` configuration
+below the label. To archieve this the message's `setStacked` configuration
 option to `True`.
 
     Snackbar.message "Something happened"
@@ -197,7 +197,7 @@ option to `True`.
 
 Messages are by default centered within the viewport. On larger screens, they
 can optionally be displyed on the _leading_ edge of the screen. To display a
-message as leading, set its `setLeading` configuration option to `True`.
+message as leading its `setLeading` configuration option to `True`.
 
     Snackbar.message "Something happened"
         |> Snackbar.setLeading True
@@ -205,7 +205,7 @@ message as leading, set its `setLeading` configuration option to `True`.
 
 ## Custom timeout
 
-To set a custom timeout for a message, set its `setTimeoutMs` configuration
+To set a custom timeout for a message its `setTimeoutMs` configuration
 option to a floating point value, representing the on-screen time in
 milliseconds.
 
@@ -398,7 +398,7 @@ setOnActionIconClick onActionIconClick (Message message_) =
 
 Messages are by default centered within the viewport. On larger screens, they
 can optionally be displyed on the _leading_ edge of the screen. To display a
-message as leading, set its `setLeading` configuration option to `True`.
+message as leading its `setLeading` configuration option to `True`.
 
 -}
 setLeading :: Boolean -> Message r i -> Message r i

@@ -1,9 +1,9 @@
 module HalogenMWC.Fab
     ( Config, config
-    , setOnClick
-    , setMini
-    , setExited
-    , setAttributes
+    
+    
+    
+    
     , fab
     ) where
 
@@ -78,7 +78,7 @@ their page layout, for instance by setting a fixed position via CSS.
 
 # Mini FAB
 
-If you want the floating action button to appear in smaller size, set its
+If you want the floating action button to appear in smaller size its
 `setMini` configuration option to `True`.
 
     Fab.fab (Fab.config |> Fab.setMini True) "favorite"
@@ -86,7 +86,7 @@ If you want the floating action button to appear in smaller size, set its
 
 # Exited FAB
 
-If you want the floating action button to transition off the screen, set its
+If you want the floating action button to transition off the screen its
 `setExited` configuration option to `True`.
 
     Fab.fab (Fab.config |> Fab.setExited True) "favorite"

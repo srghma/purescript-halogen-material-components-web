@@ -1,8 +1,8 @@
 module HalogenMWC.Array.Divider
     ( Config, config
-    , setPadded
-    , setInset
-    , setAttributes
+    
+    
+    
     , listItem
     , group
     ) where

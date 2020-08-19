@@ -1,12 +1,12 @@
 module HalogenMWC.Button
     ( Config, config
-    , setOnClick
-    , setIcon, setTrailingIcon
-    , setDisabled
-    , setDense
-    , setHref, setTarget
-    , setTouch
-    , setAttributes
+    
+    
+    
+    
+    
+    
+    
     , text, outlined, raised, unelevated
     ) where
 
@@ -59,10 +59,10 @@ module HalogenMWC.Button
 ## Configuration Options
 
 @docs setOnClick
-@docs setIcon, setTrailingIcon
+@docs setIcon
 @docs setDisabled
 @docs setDense
-@docs setHref, setTarget
+@docs setHref
 @docs setTouch
 @docs setAttributes
 

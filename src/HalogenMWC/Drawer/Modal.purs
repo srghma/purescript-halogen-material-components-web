@@ -1,8 +1,8 @@
 module HalogenMWC.Drawer.Modal
     ( Config, config
-    , setOnClose
-    , setOpen
-    , setAttributes
+    
+    
+    
     , drawer, content
     , scrim
     , header, title, subtitle

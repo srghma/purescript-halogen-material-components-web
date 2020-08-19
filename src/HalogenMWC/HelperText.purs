@@ -1,7 +1,7 @@
 module HalogenMWC.HelperText
     ( Config, config
-    , setPersistent
-    , setAttributes
+    
+    
     , helperText
     , helperLine, characterCounter
     ) where
@@ -74,7 +74,7 @@ helper text only shows when the text field has focus.
 
 # Helper Text with Character Counter
 
-To have a text field or text area display a character counter, set its
+To have a text field or text area display a character counter its
 `setMaxLength` configuration option, and also add a `characterCounter` as a
 child of `helperLine`.
 

@@ -1,11 +1,11 @@
 module HalogenMWC.Array.Item
     ( Config, config
-    , setOnClick
-    , setDisabled
-    , setSelected
-    , setHref
-    , setTarget
-    , setAttributes
+    
+    
+    
+    
+    
+    
     , ArrayItem, listItem
     , graphic
     , meta

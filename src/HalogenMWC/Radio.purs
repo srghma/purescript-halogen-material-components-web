@@ -1,10 +1,10 @@
 module HalogenMWC.Radio
     ( Config, config
-    , setOnChange
-    , setChecked
-    , setDisabled
-    , setTouch
-    , setAttributes
+    
+    
+    
+    
+    
     , radio
     ) where
 
@@ -72,7 +72,7 @@ fields](Material-FormField).
 
 # Checked Radio
 
-To make a radio button display its checked state, set its `setChecked`
+To make a radio button display its checked state its `setChecked`
 configuration option to `True`.
 
     Radio.radio (Radio.config |> Radio.setChecked True)
@@ -80,7 +80,7 @@ configuration option to `True`.
 
 # Disabled Radio
 
-To disable a radio button, set its `setDisabled` configuration option to `True`.
+To disable a radio button its `setDisabled` configuration option to `True`.
 
 Disabled radio buttons cannot be interacted with and have no visual interaction
 effect.

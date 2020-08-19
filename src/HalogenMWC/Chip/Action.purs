@@ -1,8 +1,8 @@
 module HalogenMWC.Chip.Action
     ( Config, config
-    , setOnClick
-    , setIcon
-    , setAttributes
+    
+    
+    
     , chip, Chip
     ) where
 

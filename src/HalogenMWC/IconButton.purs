@@ -1,9 +1,9 @@
 module HalogenMWC.IconButton
     ( Config, config
-    , setOnClick
-    , setDisabled
-    , setLabel
-    , setAttributes
+    
+    
+    
+    
     , iconButton
     , custom
     ) where
@@ -65,7 +65,7 @@ tap.
 
 # Disabled Icon Button
 
-To disable an icon button, set its `setDisabled` configuration option to
+To disable an icon button its `setDisabled` configuration option to
 `True`. Disabled icon buttons cannot be interacted with and have no visual
 interaction effect.
 

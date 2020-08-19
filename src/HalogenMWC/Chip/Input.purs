@@ -1,10 +1,10 @@
 module HalogenMWC.Chip.Input
     ( Config, config
-    , setOnClick
-    , setOnDelete
-    , setLeadingIcon
-    , setTrailingIcon
-    , setAttributes
+    
+    
+    
+    
+    
     , chip, Chip
     ) where
 

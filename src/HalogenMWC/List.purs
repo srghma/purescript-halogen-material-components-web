@@ -1,11 +1,11 @@
 module HalogenMWC.Array
     ( Config, config
-    , setNonInteractive
-    , setDense
-    , setAvatarArray
-    , setTwoLine
-    , setAttributes
-    , setWrapFocus
+    
+    
+    
+    
+    
+    
     , list
     , group, subheader
     ) where

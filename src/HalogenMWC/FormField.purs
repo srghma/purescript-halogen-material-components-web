@@ -1,9 +1,9 @@
 module HalogenMWC.FormField
     ( Config, config
-    , setOnClick
-    , setLabel, setAlignEnd
-    , setFor
-    , setAttributes
+    
+    
+    
+    
     , formField
     ) where
 
@@ -50,7 +50,7 @@ interacting with the label.
 ## Configuration Options
 
 @docs setOnClick
-@docs setLabel, setAlignEnd
+@docs setLabel
 @docs setFor
 @docs setAttributes
 
@@ -62,7 +62,7 @@ interacting with the label.
 
 # Label Position
 
-If you want to position the label after the form field's control, set its
+If you want to position the label after the form field's control its
 `setAlignEnd` configuration option to `True`.
 
     FormField.formField

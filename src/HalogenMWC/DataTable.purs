@@ -1,7 +1,7 @@
 module HalogenMWC.DataTable
     ( Config, config
-    , setLabel
-    , setAttributes
+    
+    
     , dataTable
     , Row, row
     , selected

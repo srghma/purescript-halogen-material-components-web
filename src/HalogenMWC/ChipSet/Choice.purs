@@ -1,8 +1,8 @@
 module HalogenMWC.ChipSet.Choice
     ( Config, config
-    , setSelected
-    , setOnChange
-    , setAttributes
+    
+    
+    
     , chipSet
     ) where
 

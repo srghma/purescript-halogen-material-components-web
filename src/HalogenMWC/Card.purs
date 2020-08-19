@@ -1,7 +1,7 @@
 module HalogenMWC.Card
     ( Config, config
-    , setOutlined
-    , setAttributes
+    
+    
     , card, Content
     , Block
     , block

@@ -1,10 +1,10 @@
 module HalogenMWC.Checkbox
     ( Config, config
-    , setOnChange
-    , State, setState
-    , setDisabled
-    , setTouch
-    , setAttributes
+    
+    , State
+    
+    
+    
     , checkbox
     , checked, unchecked
     , indeterminate
@@ -61,7 +61,7 @@ Note that checkboxes are usually used in conjunction with form fields. Refer to
 ## Configuration Options
 
 @docs setOnChange
-@docs State, setState
+@docs State
 @docs setDisabled
 @docs setTouch
 @docs setAttributes

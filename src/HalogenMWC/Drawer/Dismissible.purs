@@ -1,8 +1,8 @@
 module HalogenMWC.Drawer.Dismissible
     ( Config, config
-    , setOnClose
-    , setOpen
-    , setAttributes
+    
+    
+    
     , drawer, content
     , appContent
     , header, title, subtitle

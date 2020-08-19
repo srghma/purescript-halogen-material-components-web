@@ -1,8 +1,8 @@
 module HalogenMWC.ImageArray.Item
     ( Config, config
-    , setLabel
-    , setHref
-    , setAttributes
+    
+    
+    
     , ImageArrayItem, imageArrayItem
     ) where
 

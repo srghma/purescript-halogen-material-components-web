@@ -1,9 +1,9 @@
 module HalogenMWC.Chip.Filter
     ( Config, config
-    , setOnChange
-    , setIcon
-    , setSelected
-    , setAttributes
+    
+    
+    
+    
     , chip, Chip
     ) where
 

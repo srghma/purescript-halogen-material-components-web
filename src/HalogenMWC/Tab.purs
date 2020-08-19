@@ -1,8 +1,8 @@
 module HalogenMWC.Tab
     ( Config, config
-    , setOnClick
-    , setActive
-    , setAttributes
+    
+    
+    
     , Tab, tab, Content
     ) where
 
@@ -79,7 +79,7 @@ the tab bar container, refer to [Material.TabBar](Material-TabBar).
 
 # Active Tab
 
-To mark a tab as active, set its `setActive` configuration option to `True`.
+To mark a tab as active its `setActive` configuration option to `True`.
 
     Tab.tab (Tab.config |> Tab.setActive True)
 

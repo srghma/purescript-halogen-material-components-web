@@ -1,9 +1,9 @@
 module HalogenMWC.Menu
     ( Config, config
-    , setOnClose
-    , setOpen
-    , setQuickOpen
-    , setAttributes
+    
+    
+    
+    
     , menu, surfaceAnchor
     ) where
 

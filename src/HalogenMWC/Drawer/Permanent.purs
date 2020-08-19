@@ -1,6 +1,6 @@
 module HalogenMWC.Drawer.Permanent
     ( Config, config
-    , setAttributes
+    
     , drawer, content
     , header, title, subtitle
     ) where

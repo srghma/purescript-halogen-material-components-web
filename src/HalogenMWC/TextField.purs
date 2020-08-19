@@ -1,24 +1,24 @@
 module HalogenMWC.TextField
     ( Config, config
-    , setOnInput
-    , setOnChange
-    , setLabel
-    , setFullwidth
-    , setValue
-    , setPlaceholder
-    , setDisabled
-    , setRequired
-    , setValid
-    , setMinLength
-    , setMaxLength
-    , setPattern
-    , setType
-    , setMin
-    , setMax
-    , setStep
-    , setLeadingIcon
-    , setTrailingIcon
-    , setAttributes
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     , filled
     , outlined
     , Icon, icon
@@ -123,7 +123,7 @@ Note that `setFullwidth` does not have any effect on an outlined text field.
 
 # Full Width Text Field
 
-To make a text field span all of its available width, set its `setFullwidth`
+To make a text field span all of its available width its `setFullwidth`
 configuration option to `True`.
 
     TextField.filled
@@ -139,7 +139,7 @@ configuration option.
 
 # Disabled Text Field
 
-To disable a text field, set its `setDisabled` configuration option to `True`.
+To disable a text field its `setDisabled` configuration option to `True`.
 
     TextField.filled
         (TextField.config |> TextField.setDisabled True)
@@ -158,7 +158,7 @@ Other input types besides `"password"` may or may not be supported.
 
 # Required Text Field
 
-To mark a text field as required, set its `setRequired` configuration option to
+To mark a text field as required its `setRequired` configuration option to
 `True`.
 
     TextField.filled
@@ -167,7 +167,7 @@ To mark a text field as required, set its `setRequired` configuration option to
 
 # Valid Text Field
 
-To mark a text field as valid, set its `setValid` configuration option to
+To mark a text field as valid its `setValid` configuration option to
 `True`.
 
     TextField.filled

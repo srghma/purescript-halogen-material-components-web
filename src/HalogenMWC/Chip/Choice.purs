@@ -1,7 +1,7 @@
 module HalogenMWC.Chip.Choice
     ( Config, config
-    , setIcon
-    , setAttributes
+    
+    
     , chip, Chip
     ) where
 

@@ -1,10 +1,10 @@
 module HalogenMWC.Switch
     ( switch
     , Config, config
-    , setOnChange
-    , setChecked
-    , setDisabled
-    , setAttributes
+    
+    
+    
+    
     ) where
 
 {-| Switches toggle the state of a single setting on or off. They are the
@@ -69,7 +69,7 @@ fields](Material-FormField).
 
 # On Switch
 
-To set the state of a switch to on, set its `setChecked` configuration option
+To set the state of a switch to on its `setChecked` configuration option
 to `True`.
 
     Switch.switch (Switch.config |> Switch.setChecked True)
@@ -77,7 +77,7 @@ to `True`.
 
 # Disabled Switch
 
-To disable a switch, set its `setDisabled` configuration option to `True`.
+To disable a switch its `setDisabled` configuration option to `True`.
 
 Disabled switches cannot be interacted with and have no visual interaction
 effect.

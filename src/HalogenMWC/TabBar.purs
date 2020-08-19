@@ -1,10 +1,10 @@
 module HalogenMWC.TabBar
     ( Config, config
-    , setStacked
-    , setMinWidth
-    , setIndicatorSpansContent
-    , setAlign
-    , setAttributes
+    
+    
+    
+    
+    
     , tabBar
     , Align(..)
     ) where
@@ -90,7 +90,7 @@ item, refer to [Material.Tab](Material-Tab).
 # Stacked Tabs
 
 In a _stacked_ tab bar, the label and icon of a tab flow vertically instead of
-horizontally. To make a tab bar stacked, set its `setStacked` configuration
+horizontally. To make a tab bar stacked its `setStacked` configuration
 option to `True`.
 
 Tabs within a stacked tab bar should specify both a label and an icon.
@@ -101,7 +101,7 @@ Tabs within a stacked tab bar should specify both a label and an icon.
 # Minimum Width Tabs
 
 Tabs by defauls span a minimum width. If you want tabs to be as narrow as
-possible, set the tab bar's `setMinWidth` configuration option to `True`.
+possible the tab bar's `setMinWidth` configuration option to `True`.
 
     TabBar.tabBar (TabBar.config |> TabBar.setMinWidth True) []
 
@@ -109,7 +109,7 @@ possible, set the tab bar's `setMinWidth` configuration option to `True`.
 # Content-Spanning Tab Indicator
 
 The tab's active indicator by default spans the entire tab. If you want active
-indicators to only span their tab's content, set the tab bar's
+indicators to only span their tab's content the tab bar's
 `setIndicatorSpansContent` configuration option to `True`.
 
     TabBar.tabBar

@@ -1,13 +1,13 @@
 module HalogenMWC.Select
     ( Config, config
-    , setOnChange
-    , setLabel
-    , setSelected
-    , setDisabled
-    , setRequired
-    , setValid
-    , setLeadingIcon
-    , setAttributes
+    
+    
+    
+    
+    
+    
+    
+    
     , filled
     , outlined
     , Icon, icon
@@ -109,7 +109,7 @@ Instead of a filled select, you may choose a select with a outline by using the
 
 # Disabled Select
 
-To disable a select, set its `setDisabled` configuration option to `True`.
+To disable a select its `setDisabled` configuration option to `True`.
 
     Select.filled (Select.config |> Select.setDisabled True)
         (SelectItem.selectItem (SelectItem.config { value = "" })
@@ -120,7 +120,7 @@ To disable a select, set its `setDisabled` configuration option to `True`.
 
 # Required Select
 
-To mark a select as required, set its `setRequired` configuration option to
+To mark a select as required its `setRequired` configuration option to
 `True`.
 
     Select.filled (Select.config |> Select.setRequired True)

@@ -1,8 +1,8 @@
 module HalogenMWC.Dialog
     ( Config, config
-    , setOnClose
-    , setOpen
-    , setAttributes
+    
+    
+    
     , dialog, Content
     ) where
 

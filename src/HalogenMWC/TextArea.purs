@@ -1,19 +1,19 @@
 module HalogenMWC.TextArea
     ( Config, config
-    , setOnInput
-    , setOnChange
-    , setLabel
-    , setFullwidth
-    , setValue
-    , setPlaceholder
-    , setRows
-    , setCols
-    , setDisabled
-    , setRequired
-    , setValid
-    , setMinLength
-    , setMaxLength
-    , setAttributes
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     , filled
     , outlined
     ) where
@@ -107,7 +107,7 @@ Note that `setFullwidth` does not have any effect on an outlined text area.
 
 # Full Width Text Area
 
-To make a text area span all of its available width, set its `setFullwidth`
+To make a text area span all of its available width its `setFullwidth`
 configuration option to `True`.
 
     TextArea.filled
@@ -123,7 +123,7 @@ configuration option.
 
 # Disabled Text Area
 
-To disable a text area, set its `setDisabled` configuration option to `True`.
+To disable a text area its `setDisabled` configuration option to `True`.
 
     TextArea.filled
         (TextArea.config |> TextArea.setDisabled True)
@@ -131,7 +131,7 @@ To disable a text area, set its `setDisabled` configuration option to `True`.
 
 # Required Text Area
 
-To mark a text area as required, set its `setRequired` configuration option to
+To mark a text area as required its `setRequired` configuration option to
 `True`.
 
     TextArea.filled
@@ -140,7 +140,7 @@ To mark a text area as required, set its `setRequired` configuration option to
 
 # Valid Text Area
 
-To mark a text area as valid, set its `setValid` configuration option to
+To mark a text area as valid its `setValid` configuration option to
 `True`.
 
     TextArea.filled (TextArea.config |> TextArea.setValid True)

@@ -1,14 +1,14 @@
 module HalogenMWC.Slider
     ( Config, config
-    , setOnInput
-    , setDiscrete
-    , setDisplayMarkers
-    , setMin
-    , setMax
-    , setStep
-    , setValue
-    , setDisabled
-    , setAttributes
+    
+    
+    
+    
+    
+    
+    
+    
+    
     , slider
     ) where
 
@@ -98,7 +98,7 @@ configuration option.
 
 # Disabled Slider
 
-To disable a slider, set its `setDisabled` configuration option to `True`.
+To disable a slider its `setDisabled` configuration option to `True`.
 
 Disabled sliders cannot be interacted with and have no visual interaction
 effect.
@@ -108,7 +108,7 @@ effect.
 
 # Discrete Slider
 
-To treat a slider as a discrete slider, set its `setDiscrete` configuration
+To treat a slider as a discrete slider its `setDiscrete` configuration
 option to `True`.
 
     Slider.slider (Slider.config |> Slider.setDiscrete True)
@@ -116,7 +116,7 @@ option to `True`.
 
 ## Track Markers
 
-To have a discrete slider show track markers, set its `setDisplayMarkers`
+To have a discrete slider show track markers its `setDisplayMarkers`
 configuration option to `True`.
 
 Note that non-discrete sliders ignore this configuration option.

@@ -1,8 +1,8 @@
 module HalogenMWC.LinearProgress
     ( Config, config
-    , setReverse
-    , setClosed
-    , setAttributes
+    
+    
+    
     , indeterminate
     , determinate
     , buffered
@@ -76,7 +76,7 @@ determinate or indeterminate activities.
 
 # Closed Linear Progress
 
-If you want to hide the linear progress indicator, set its `setClosed`
+If you want to hide the linear progress indicator its `setClosed`
 configuration option to `True`.
 
     LinearProgress.indeterminate
@@ -85,7 +85,7 @@ configuration option to `True`.
 
 # Reverse Linear Progress
 
-If you want to reverse the direction of the linear progress indicator, set its
+If you want to reverse the direction of the linear progress indicator its
 `setReverse` configuration option to `True`.
 
     LinearProgress.indeterminate

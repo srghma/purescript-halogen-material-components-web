@@ -1,10 +1,10 @@
 module HalogenMWC.IconToggle
     ( Config, config
-    , setOnChange
-    , setOn
-    , setDisabled
-    , setLabel
-    , setAttributes
+    
+    
+    
+    
+    
     , iconToggle
     ) where
 
@@ -81,7 +81,7 @@ the icon when their state changes.
 
 # On Icon Toggle
 
-To set an icon toggle to its on state, set its `setOn` configuration option to
+To set an icon toggle to its on state its `setOn` configuration option to
 `True`.
 
     IconToggle.iconToggle
@@ -93,7 +93,7 @@ To set an icon toggle to its on state, set its `setOn` configuration option to
 
 # Disabled Icon Toggle
 
-To disable an icon toggle, set its `setDisabled` configuration option to
+To disable an icon toggle its `setDisabled` configuration option to
 `True`.
 Disabled icon buttons cannot be interacted with and have no visual interaction
 effect.

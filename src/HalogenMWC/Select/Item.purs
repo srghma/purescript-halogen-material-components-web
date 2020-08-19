@@ -1,7 +1,7 @@
 module HalogenMWC.Select.Item
     ( Config, config
-    , setDisabled
-    , setAttributes
+    
+    
     , SelectItem, selectItem
     ) where
 

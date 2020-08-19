@@ -1,8 +1,8 @@
 module HalogenMWC.ImageArray
     ( Config, config
-    , setMasonry
-    , setWithTextProtection
-    , setAttributes
+    
+    
+    
     , imageArray
     ) where
 
