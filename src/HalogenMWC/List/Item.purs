@@ -147,7 +147,7 @@ listItemCs =
 disabledCs :: Config r i -> Maybe (Html.Attribute r i)
 disabledCs (Config { disabled }) =
     if disabled then
-        Just (HP.class_ "mdc-list-item--disabled")
+        Just (HP.class_ mdc_list_item____disabled)
 
     else
         Nothing
@@ -156,7 +156,7 @@ disabledCs (Config { disabled }) =
 selectedCs :: Config r i -> Maybe (Html.Attribute r i)
 selectedCs (Config { selection }) =
     if selection == Just Selected then
-        Just (HP.class_ "mdc-list-item--selected")
+        Just (HP.class_ mdc_list_item____selected)
 
     else
         Nothing
@@ -165,7 +165,7 @@ selectedCs (Config { selection }) =
 activatedCs :: Config r i -> Maybe (Html.Attribute r i)
 activatedCs (Config { selection }) =
     if selection == Just Activated then
-        Just (HP.class_ "mdc-list-item--activated")
+        Just (HP.class_ mdc_list_item____activated)
 
     else
         Nothing

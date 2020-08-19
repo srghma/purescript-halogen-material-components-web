@@ -22,25 +22,25 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 primary :: Html.Attribute r i
 primary =
-    HP.class_ "mdc-theme--primary"
+    HP.class_ mdc_theme____primary
 
 
 
 secondary :: Html.Attribute r i
 secondary =
-    HP.class_ "mdc-theme--secondary"
+    HP.class_ mdc_theme____secondary
 
 
 
 background :: Html.Attribute r i
 background =
-    HP.class_ "mdc-theme--background"
+    HP.class_ mdc_theme____background
 
 
 
 surface :: Html.Attribute r i
 surface =
-    HP.class_ "mdc-theme--surface"
+    HP.class_ mdc_theme____surface
 
 
 {-| Sets the text color to the theme on-primary color

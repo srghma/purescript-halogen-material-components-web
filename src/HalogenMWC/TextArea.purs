@@ -207,7 +207,7 @@ rootCs =
 outlinedCs :: Boolean -> Maybe (Html.Attribute r i)
 outlinedCs outlined_ =
     if outlined_ then
-        Just (HP.class_ "mdc-text-field--outlined")
+        Just (HP.class_ mdc_text_field____outlined)
 
     else
         Nothing
@@ -216,7 +216,7 @@ outlinedCs outlined_ =
 fullwidthCs :: Config r i -> Maybe (Html.Attribute r i)
 fullwidthCs (Config { fullwidth }) =
     if fullwidth then
-        Just (HP.class_ "mdc-text-field--fullwidth")
+        Just (HP.class_ mdc_text_field____fullwidth)
 
     else
         Nothing
@@ -225,7 +225,7 @@ fullwidthCs (Config { fullwidth }) =
 disabledCs :: Config r i -> Maybe (Html.Attribute r i)
 disabledCs (Config { disabled }) =
     if disabled then
-        Just (HP.class_ "mdc-text-field--disabled")
+        Just (HP.class_ mdc_text_field____disabled)
 
     else
         Nothing

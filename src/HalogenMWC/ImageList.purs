@@ -76,7 +76,7 @@ rootCs =
 masonryCs :: Config r i -> Maybe (Html.Attribute r i)
 masonryCs (Config { masonry }) =
     if masonry then
-        Just (HP.class_ "mdc-image-list--masonry")
+        Just (HP.class_ mdc_image_list____masonry)
 
     else
         Nothing

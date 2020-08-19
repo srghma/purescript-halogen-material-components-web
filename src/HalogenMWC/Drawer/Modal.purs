@@ -103,7 +103,7 @@ rootCs =
 
 modalCs :: Maybe (Html.Attribute r i)
 modalCs =
-    Just (HP.class_ "mdc-drawer--modal")
+    Just (HP.class_ mdc_drawer____modal)
 
 
 openProp :: Config r i -> Maybe (Html.Attribute r i)

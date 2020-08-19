@@ -84,7 +84,7 @@ separatorRoleAttr =
 insetCs :: Config r i -> Maybe (Html.Attribute r i)
 insetCs (Config { inset }) =
     if inset then
-        Just (HP.class_ "mdc-list-divider--inset")
+        Just (HP.class_ mdc_list_divider____inset)
 
     else
         Nothing
@@ -93,7 +93,7 @@ insetCs (Config { inset }) =
 paddedCs :: Config r i -> Maybe (Html.Attribute r i)
 paddedCs (Config { padded }) =
     if padded then
-        Just (HP.class_ "mdc-list-divider--padded")
+        Just (HP.class_ mdc_list_divider____padded)
 
     else
         Nothing

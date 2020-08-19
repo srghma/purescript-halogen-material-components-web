@@ -167,7 +167,7 @@ displayCss =
 discreteCs :: Config r i -> Maybe (Html.Attribute r i)
 discreteCs (Config { discrete }) =
     if discrete then
-        Just (HP.class_ "mdc-slider--discrete")
+        Just (HP.class_ mdc_slider____discrete)
 
     else
         Nothing

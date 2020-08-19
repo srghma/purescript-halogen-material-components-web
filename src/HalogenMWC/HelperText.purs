@@ -77,7 +77,7 @@ helperLineCs =
 persistentCs :: Config r i -> Maybe (Html.Attribute r i)
 persistentCs (Config config_) =
     if config_.persistent then
-        Just (HP.class_ "mdc-text-field-helper-text--persistent")
+        Just (HP.class_ mdc_text_field_helper_text____persistent)
 
     else
         Nothing

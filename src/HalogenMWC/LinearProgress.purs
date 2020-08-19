@@ -121,7 +121,7 @@ variantCs :: Variant -> Maybe (Html.Attribute r i)
 variantCs variant =
     case variant of
         Indeterminate ->
-            Just (HP.class_ "mdc-linear-progress--indeterminate")
+            Just (HP.class_ mdc_linear_progress____indeterminate)
 
         _ ->
             Nothing

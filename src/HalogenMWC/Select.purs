@@ -189,7 +189,7 @@ rootCs =
 outlinedCs :: Variant -> Maybe (Html.Attribute r i)
 outlinedCs variant =
     if variant == Outlined then
-        Just (HP.class_ "mdc-select--outlined")
+        Just (HP.class_ mdc_select____outlined)
 
     else
         Nothing

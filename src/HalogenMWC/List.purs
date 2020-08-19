@@ -151,7 +151,7 @@ nonInteractiveCs (Config { nonInteractive }) =
 denseCs :: Config r i -> Maybe (Html.Attribute r i)
 denseCs (Config { dense }) =
     if dense then
-        Just (HP.class_ "mdc-list--dense")
+        Just (HP.class_ mdc_list____dense)
 
     else
         Nothing

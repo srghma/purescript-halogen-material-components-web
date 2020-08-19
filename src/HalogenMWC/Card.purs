@@ -123,7 +123,7 @@ rootCs =
 outlinedCs :: Config r i -> Maybe (Html.Attribute r i)
 outlinedCs (Config { outlined }) =
     if outlined then
-        Just (HP.class_ "mdc-card--outlined")
+        Just (HP.class_ mdc_card____outlined)
 
     else
         Nothing
@@ -198,7 +198,7 @@ aspectCs :: Maybe Aspect -> Maybe (Html.Attribute r i)
 aspectCs aspect =
     case aspect of
         Just Square ->
-            Just (HP.class_ "mdc-card__media--square")
+            Just (HP.class_ mdc_card__media____square)
 
         Just SixteenToNine ->
             Just (HP.class_ "mdc-card__media--16-9")
@@ -274,7 +274,7 @@ button (Material.Button.Internal.Config buttonConfig) label =
                 { buttonConfig
                     | additionalAttributes =
                         HP.class_ mdc_card__action
-                            :: HP.class_ "mdc-card__action--button"
+                            :: HP.class_ mdc_card__action____button
                             :: buttonConfig.additionalAttributes
                 }
             )
@@ -295,7 +295,7 @@ icon (Material.IconButton.Internal.Config iconButtonConfig) iconName =
                 { iconButtonConfig
                     | additionalAttributes =
                         HP.class_ mdc_card__action
-                            :: HP.class_ "mdc-card__action--icon"
+                            :: HP.class_ mdc_card__action____icon
                             :: iconButtonConfig.additionalAttributes
                 }
             )

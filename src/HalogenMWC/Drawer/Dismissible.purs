@@ -103,7 +103,7 @@ rootCs =
 
 dismissibleCs :: Maybe (Html.Attribute r i)
 dismissibleCs =
-    Just (HP.class_ "mdc-drawer--dismissible")
+    Just (HP.class_ mdc_drawer____dismissible)
 
 
 openProp :: Config r i -> Maybe (Html.Attribute r i)

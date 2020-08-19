@@ -115,7 +115,7 @@ selected =
 
 dataTableRowSelectedCs :: Html.Attribute r i
 dataTableRowSelectedCs =
-    HP.class_ "mdc-data-table__row--selected"
+    HP.class_ mdc_data_table__row____selected
 
 
 headerRow :: Row r i -> Html r i
@@ -194,7 +194,7 @@ colScopeAttr =
 dataTableHeaderCellNumericCs :: Boolean -> Maybe (Html.Attribute r i)
 dataTableHeaderCellNumericCs numeric =
     if numeric then
-        Just (HP.class_ "mdc-data-table__header-cell--numeric")
+        Just (HP.class_ mdc_data_table__header_cell____numeric)
 
     else
         Nothing
@@ -202,7 +202,7 @@ dataTableHeaderCellNumericCs numeric =
 
 dataTableHeaderCellCheckboxCs :: Maybe (Html.Attribute r i)
 dataTableHeaderCellCheckboxCs =
-    Just (HP.class_ "mdc-data-table__header-cell--checkbox")
+    Just (HP.class_ mdc_data_table__header_cell____checkbox)
 
 
 bodyCell :: Cell r i -> Html r i
@@ -279,7 +279,7 @@ dataTableCellCs =
 dataTableCellNumericCs :: Boolean -> Maybe (Html.Attribute r i)
 dataTableCellNumericCs numeric =
     if numeric then
-        Just (HP.class_ "mdc-data-table__cell--numeric")
+        Just (HP.class_ mdc_data_table__cell____numeric)
 
     else
         Nothing
@@ -287,4 +287,4 @@ dataTableCellNumericCs numeric =
 
 dataTableCellCheckboxCs :: Maybe (Html.Attribute r i)
 dataTableCellCheckboxCs =
-    Just (HP.class_ "mdc-data-table__cell--checkbox")
+    Just (HP.class_ mdc_data_table__cell____checkbox)

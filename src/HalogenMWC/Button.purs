@@ -172,19 +172,19 @@ variantCs variant =
             Nothing
 
         Raised ->
-            Just (HP.class_ "mdc-button--raised")
+            Just (HP.class_ mdc_button____raised)
 
         Unelevated ->
-            Just (HP.class_ "mdc-button--unelevated")
+            Just (HP.class_ mdc_button____unelevated)
 
         Outlined ->
-            Just (HP.class_ "mdc-button--outlined")
+            Just (HP.class_ mdc_button____outlined)
 
 
 denseCs :: Config r i -> Maybe (Html.Attribute r i)
 denseCs (Config { dense }) =
     if dense then
-        Just (HP.class_ "mdc-button--dense")
+        Just (HP.class_ mdc_button____dense)
 
     else
         Nothing
@@ -193,7 +193,7 @@ denseCs (Config { dense }) =
 touchCs :: Config r i -> Maybe (Html.Attribute r i)
 touchCs (Config { touch }) =
     if touch then
-        Just (HP.class_ "mdc-button--touch")
+        Just (HP.class_ mdc_button____touch)
 
     else
         Nothing

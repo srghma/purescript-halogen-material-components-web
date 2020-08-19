@@ -167,19 +167,19 @@ variantCs variant =
             Nothing
 
         Short ->
-            Just (HP.class_ "mdc-top-app-bar--short")
+            Just (HP.class_ mdc_top_app_bar____short)
 
         ShortCollapsed ->
             Just (HP.class_ "mdc-top-app-bar--short mdc-top-app-bar--short-collapsed")
 
         Prominent ->
-            Just (HP.class_ "mdc-top-app-bar--prominent")
+            Just (HP.class_ mdc_top_app_bar____prominent)
 
 
 denseCs :: Config r i -> Maybe (Html.Attribute r i)
 denseCs (Config { dense }) =
     if dense then
-        Just (HP.class_ "mdc-top-app-bar--dense")
+        Just (HP.class_ mdc_top_app_bar____dense)
 
     else
         Nothing
@@ -188,7 +188,7 @@ denseCs (Config { dense }) =
 fixedCs :: Config r i -> Maybe (Html.Attribute r i)
 fixedCs (Config { fixed }) =
     if fixed then
-        Just (HP.class_ "mdc-top-app-bar--fixed")
+        Just (HP.class_ mdc_top_app_bar____fixed)
 
     else
         Nothing

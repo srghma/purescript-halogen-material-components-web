@@ -94,7 +94,7 @@ rootCs =
 miniCs :: Config r i -> Maybe (Html.Attribute r i)
 miniCs (Config { mini }) =
     if mini then
-        Just (HP.class_ "mdc-fab--mini")
+        Just (HP.class_ mdc_fab____mini)
 
     else
         Nothing
@@ -103,7 +103,7 @@ miniCs (Config { mini }) =
 exitedCs :: Config r i -> Maybe (Html.Attribute r i)
 exitedCs (Config { exited }) =
     if exited then
-        Just (HP.class_ "mdc-fab--exited")
+        Just (HP.class_ mdc_fab____exited)
 
     else
         Nothing

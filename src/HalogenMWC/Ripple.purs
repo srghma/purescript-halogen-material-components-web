@@ -104,10 +104,10 @@ colorCs :: Config r i -> Maybe (Html.Attribute r i)
 colorCs (Config { color }) =
     case color of
         Just Primary ->
-            Just (HP.class_ "mdc-ripple-surface--primary")
+            Just (HP.class_ mdc_ripple_surface____primary)
 
         Just Accent ->
-            Just (HP.class_ "mdc-ripple-surface--accent")
+            Just (HP.class_ mdc_ripple_surface____accent)
 
         Nothing ->
             Nothing

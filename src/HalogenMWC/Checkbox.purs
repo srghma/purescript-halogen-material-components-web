@@ -139,7 +139,7 @@ rootCs =
 touchCs :: Config r i -> Maybe (Html.Attribute r i)
 touchCs (Config { touch }) =
     if touch then
-        Just (HP.class_ "mdc-checkbox--touch")
+        Just (HP.class_ mdc_checkbox____touch)
 
     else
         Nothing

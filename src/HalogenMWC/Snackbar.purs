@@ -225,7 +225,7 @@ leadingCs message_ =
     Maybe.andThen
         (\(Message { leading }) ->
             if leading then
-                Just (HP.class_ "mdc-snackbar--leading")
+                Just (HP.class_ mdc_snackbar____leading)
 
             else
                 Nothing
@@ -238,7 +238,7 @@ stackedCs message_ =
     Maybe.andThen
         (\(Message { stacked }) ->
             if stacked then
-                Just (HP.class_ "mdc-snackbar--stacked")
+                Just (HP.class_ mdc_snackbar____stacked)
 
             else
                 Nothing

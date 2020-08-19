@@ -145,7 +145,7 @@ tabCs =
 tabStackedCs :: Config r i -> Maybe (Html.Attribute r i)
 tabStackedCs (Config { stacked }) =
     if stacked then
-        Just (HP.class_ "mdc-tab--stacked")
+        Just (HP.class_ mdc_tab____stacked)
 
     else
         Nothing
@@ -215,7 +215,7 @@ tabIndicatorContentElt :: Html r i
 tabIndicatorContentElt =
     Html.span
         [ HP.class_ mdc_tab_indicator__content
-        , HP.class_ "mdc-tab-indicator__content--underline"
+        , HP.class_ mdc_tab_indicator__content____underline
         ]
         []
 

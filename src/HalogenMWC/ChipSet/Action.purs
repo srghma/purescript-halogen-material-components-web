@@ -27,7 +27,7 @@ chipSetCs =
 
 chipSetActionCs :: Html.Attribute r i
 chipSetActionCs =
-    HP.class_ "mdc-chip-set--action"
+    HP.class_ mdc_chip_set____action
 
 
 gridRole :: Html.Attribute r i
@@ -68,7 +68,7 @@ chipTextCs =
 
 chipTouchCs :: Maybe (Html.Attribute r i)
 chipTouchCs =
-    Just (HP.class_ "mdc-chip--touch")
+    Just (HP.class_ mdc_chip____touch)
 
 
 chipPrimaryActionCs :: Html.Attribute r i
