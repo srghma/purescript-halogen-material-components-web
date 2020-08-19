@@ -21,8 +21,8 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 
 import HalogenMWC.Checkbox.Internal (Config(..), State(..))
-import Svg
-import Svg.Attributes
+import Halogen.SVG.Elements as Halogen.SVG.Elements
+import Halogen.SVG.Attributes as Halogen.SVG.Attributes
 
 
 
@@ -197,14 +197,14 @@ backgroundElt :: Html r i
 backgroundElt =
     HH.div
         [ HP.class_ mdc_checkbox__background ]
-        [ Svg.svg
-            [ Svg.Attributes.class_ "mdc-checkbox__checkmark"
-            , Svg.Attributes.viewBox "0 0 24 24"
+        [ Halogen.SVG.Elements.svg
+            [ Halogen.SVG.Attributes.class_ "mdc-checkbox__checkmark"
+            , Halogen.SVG.Attributes.viewBox "0 0 24 24"
             ]
-            [ Svg.path
-                [ Svg.Attributes.class_ "mdc-checkbox__checkmark-path"
-                , Svg.Attributes.fill "none"
-                , Svg.Attributes.d "M1.73,12.91 8.1,19.28 22.79,4.59"
+            [ Halogen.SVG.Elements.path
+                [ Halogen.SVG.Attributes.class_ "mdc-checkbox__checkmark-path"
+                , Halogen.SVG.Attributes.fill "none"
+                , Halogen.SVG.Attributes.d "M1.73,12.91 8.1,19.28 22.79,4.59"
                 ]
                 []
             ]

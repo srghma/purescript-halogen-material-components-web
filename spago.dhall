@@ -3,6 +3,8 @@
   [ "arrays"
   , "console"
   , "debug"
+  , "event"
+  , "halogen-svg"
   , "effect"
   , "generics-rep"
   , "halogen"

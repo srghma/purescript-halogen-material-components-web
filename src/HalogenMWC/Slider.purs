@@ -22,8 +22,8 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 
 
-import Svg
-import Svg.Attributes
+import Halogen.SVG.Elements as Halogen.SVG.Elements
+import Halogen.SVG.Attributes as Halogen.SVG.Attributes
 
 
 
@@ -271,15 +271,15 @@ pinValueMarkerElt =
 
 thumbElt :: Html r i
 thumbElt =
-    Svg.svg
-        [ Svg.Attributes.class_ "mdc-slider__thumb"
-        , Svg.Attributes.width "21"
-        , Svg.Attributes.height "21"
+    Halogen.SVG.Elements.svg
+        [ Halogen.SVG.Attributes.class_ "mdc-slider__thumb"
+        , Halogen.SVG.Attributes.width "21"
+        , Halogen.SVG.Attributes.height "21"
         ]
-        [ Svg.circle
-            [ Svg.Attributes.cx "10.5"
-            , Svg.Attributes.cy "10.5"
-            , Svg.Attributes.r "7.875"
+        [ Halogen.SVG.Elements.circle
+            [ Halogen.SVG.Attributes.cx "10.5"
+            , Halogen.SVG.Attributes.cy "10.5"
+            , Halogen.SVG.Attributes.r "7.875"
             ]
             []
         ]

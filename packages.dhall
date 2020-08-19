@@ -43,6 +43,36 @@ let additions =
         , repo = "ssh://git@github.com/srghma/purescript-either.git"
         , version = "patch-1"
         }
+      , halogen-vdom =
+        { dependencies =
+          [ "bifunctors"
+          , "console"
+          , "effect"
+          , "exists"
+          , "foreign"
+          , "foreign-object"
+          , "js-timers"
+          , "maybe"
+          , "prelude"
+          , "psci-support"
+          , "refs"
+          , "tuples"
+          , "unsafe-coerce"
+          , "web-html"
+          , "web-dom"
+          , "debug"
+          , "strings"
+          , "control"
+          , "lazy"
+          ]
+        , repo = "ssh://git@github.com/srghma/purescript-halogen-vdom.git"
+        , version = "master"
+        }
+      , halogen-svg =
+        { dependencies = [ "prelude" ]
+        , repo = "ssh://git@github.com/srghma/purescript-halogen-svg.git"
+        , version = "master"
+        }
       }
 
 in  upstream // overrides // additions
