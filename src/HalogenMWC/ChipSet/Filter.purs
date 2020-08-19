@@ -16,7 +16,7 @@ import Halogen.SVG.Attributes as Halogen.SVG.Attributes
 chipSet :: Array (IProp r i) -> Array (Chip r i) -> HH.HTML w i
 chipSet additionalAttributes chips =
   HH.element "mdc-chip-set"
-    ([ HP.class_ mdc_chip_set, HP.class_ mdc_chip_set____filter, HH.Attributes.attribute "role" "grid" ] <> additionalAttributes)
+    ([ HP.class_ mdc_chip_set, HP.class_ mdc_chip_set____filter, HP.attr "role" "grid" ] <> additionalAttributes)
     (map chip chips)
 
 chip :: Chip r i -> HH.HTML w i
@@ -26,7 +26,7 @@ chip (Chip (config_@{ additionalAttributes }) label) =
         ( Array.catMaybes
             [ HP.class_ mdc_chip
             , HP.class_ mdc_chip____touch
-            , HH.Attributes.attribute "role" "row"
+            , HP.attr "role" "row"
             , selectedProp config_
             , interactionHandler config_
             ]
@@ -84,11 +84,11 @@ checkmarkElt =
 primaryActionElt :: String -> Maybe (HH.HTML w i)
 primaryActionElt label =
   Just
-    $ HH.span [ HP.class_ mdc_chip__primary_action, HH.Attributes.attribute "role" "gridcell" ]
+    $ HH.span [ HP.class_ mdc_chip__primary_action, HP.attr "role" "gridcell" ]
         (Array.catMaybes [ textElt label, touchElt ])
 
 textElt :: String -> Maybe (HH.HTML w i)
-textElt label = Just (HH.span [ HP.class_ mdc_chip__text, HH.Attributes.attribute "role" "button" ] [ text label ])
+textElt label = Just (HH.span [ HP.class_ mdc_chip__text, HP.attr "role" "button" ] [ text label ])
 
 touchElt :: Maybe (HH.HTML w i)
 touchElt = Just (HH.div [ HP.class_ mdc_chip__touch ] [])

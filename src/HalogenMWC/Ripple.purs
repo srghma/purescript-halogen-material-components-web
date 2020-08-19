@@ -69,6 +69,6 @@ unboundedProp isUnbounded = Just (HP.prop "unbounded" isUnbounded)
 unboundedData :: Boolean -> Maybe (IProp r i)
 unboundedData isUnbounded =
   if isUnbounded then
-    Just (HH.Attributes.attribute "data-mdc-ripple-is-unbounded" "")
+    Just (HP.attr "data-mdc-ripple-is-unbounded" "")
   else
     Nothing

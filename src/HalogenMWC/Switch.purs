@@ -53,7 +53,7 @@ nativeControlCs :: Maybe (IProp r i)
 nativeControlCs = Just (HP.class_ mdc_switch__native_control)
 
 switchRoleAttr :: Maybe (IProp r i)
-switchRoleAttr = Just (HH.Attributes.attribute "role" "switch")
+switchRoleAttr = Just (HP.attr "role" "switch")
 
 checkboxTypeAttr :: Maybe (IProp r i)
 checkboxTypeAttr = Just (HH.Attributes.type_ "checkbox")

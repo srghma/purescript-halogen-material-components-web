@@ -54,7 +54,7 @@ dataTableContentCs :: IProp r i
 dataTableContentCs = HP.class_ mdc_data_table__content
 
 ariaLabelAttr :: Config r i -> Maybe (IProp r i)
-ariaLabelAttr { label } = map (HH.Attributes.attribute "aria-label") label
+ariaLabelAttr { label } = map (HP.attr "aria-label") label
 
 data Row r i
   = Row { attributes :: Array (IProp r i), nodes :: Array (Cell r i) }
@@ -65,7 +65,7 @@ row attributes nodes = Row { attributes = attributes, nodes = nodes }
 selected :: Array (IProp r i)
 selected =
   [ dataTableRowSelectedCs
-  , HH.Attributes.attribute "aria-selected" "true"
+  , HP.attr "aria-selected" "true"
   ]
 
 dataTableRowSelectedCs :: IProp r i
@@ -113,10 +113,10 @@ dataTableHeaderCellCs :: Maybe (IProp r i)
 dataTableHeaderCellCs = Just (HP.class_ mdc_data_table__header_cell)
 
 columnHeaderRoleAttr :: Maybe (IProp r i)
-columnHeaderRoleAttr = Just (HH.Attributes.attribute "role" "columnheader")
+columnHeaderRoleAttr = Just (HP.attr "role" "columnheader")
 
 colScopeAttr :: Maybe (IProp r i)
-colScopeAttr = Just (HH.Attributes.attribute "scope" "col")
+colScopeAttr = Just (HP.attr "scope" "col")
 
 dataTableHeaderCellNumericCs :: Boolean -> Maybe (IProp r i)
 dataTableHeaderCellNumericCs numeric =

@@ -42,7 +42,7 @@ listDividerCs :: Maybe (IProp r i)
 listDividerCs = Just (HP.class_ mdc_list_divider)
 
 separatorRoleAttr :: Maybe (IProp r i)
-separatorRoleAttr = Just (HH.Attributes.attribute "role" "separator")
+separatorRoleAttr = Just (HP.attr "role" "separator")
 
 insetCs { inset } =
   if inset then

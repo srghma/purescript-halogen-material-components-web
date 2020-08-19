@@ -113,10 +113,10 @@ validProp :: Config r i -> Maybe (IProp r i)
 validProp { valid } = Just (HP.prop "valid" valid)
 
 minLengthAttr :: Config r i -> Maybe (IProp r i)
-minLengthAttr { minLength } = map (HH.Attributes.attribute "minLength" << String.fromInt) minLength
+minLengthAttr { minLength } = map (HP.attr "minLength" << String.fromInt) minLength
 
 maxLengthAttr :: Config r i -> Maybe (IProp r i)
-maxLengthAttr { maxLength } = map (HH.Attributes.attribute "maxLength" << String.fromInt) maxLength
+maxLengthAttr { maxLength } = map (HP.attr "maxLength" << String.fromInt) maxLength
 
 valueProp :: Config r i -> Maybe (IProp r i)
 valueProp { value } = map (HP.prop "value" << Encode.string) value
@@ -161,7 +161,7 @@ colsAttr { cols } = map HH.Attributes.cols cols
 ariaLabelAttr :: Config r i -> Maybe (IProp r i)
 ariaLabelAttr { fullwidth, placeholder, label } =
   if fullwidth then
-    map (HH.Attributes.attribute "aria-label") label
+    map (HP.attr "aria-label") label
   else
     Nothing
 

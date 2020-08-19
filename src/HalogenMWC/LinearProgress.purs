@@ -65,7 +65,7 @@ displayCss :: Maybe (IProp r i)
 displayCss = Just (style "display" "block")
 
 roleAttr :: Maybe (IProp r i)
-roleAttr = Just (HH.Attributes.attribute "role" "progressbar")
+roleAttr = Just (HP.attr "role" "progressbar")
 
 variantCs :: Variant -> Maybe (IProp r i)
 variantCs variant = case variant of

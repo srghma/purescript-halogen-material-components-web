@@ -14,7 +14,7 @@ import HalogenMWC.Chip.Input as Chip
 chipSet :: Array (IProp r i) -> Array (Tuple String (Chip r i)) -> HH.HTML w i
 chipSet additionalAttributes keyedChips =
   HH.keyed "mdc-chip-set"
-    ([ HP.class_ mdc_chip_set, HP.class_ mdc_chip_set____input, HH.Attributes.attribute "role" "grid" ] <> additionalAttributes)
+    ([ HP.class_ mdc_chip_set, HP.class_ mdc_chip_set____input, HP.attr "role" "grid" ] <> additionalAttributes)
     (map (Tuple.mapSecond chip) keyedChips)
 
 chip :: Chip r i -> HH.HTML w i
@@ -24,7 +24,7 @@ chip (Chip config_ label) =
         ( Array.catMaybes
             [ HP.class_ mdc_chip
             , HP.class_ mdc_chip____touch
-            , HH.Attributes.attribute "role" "row"
+            , HP.attr "role" "row"
             , removalHandler config_
             ]
             <> config_.additionalAttributes
@@ -59,11 +59,11 @@ leadingIconElt { leadingIcon } =
 primaryActionElt :: String -> Maybe (HH.HTML w i)
 primaryActionElt label =
   Just
-    $ HH.span [ HP.class_ mdc_chip__primary_action, HH.Attributes.attribute "role" "gridcell", tabIndexProp - 1 ]
+    $ HH.span [ HP.class_ mdc_chip__primary_action, HP.attr "role" "gridcell", tabIndexProp - 1 ]
         (Array.catMaybes [ textElt label, touchElt ])
 
 textElt :: String -> Maybe (HH.HTML w i)
-textElt label = Just (HH.span [ HP.class_ mdc_chip__text, HH.Attributes.attribute "role" "button" ] [ text label ])
+textElt label = Just (HH.span [ HP.class_ mdc_chip__text, HP.attr "role" "button" ] [ text label ])
 
 touchElt :: Maybe (HH.HTML w i)
 touchElt = Just (HH.div [ HP.class_ mdc_chip__touch ] [])
@@ -75,7 +75,7 @@ trailingIconElt { trailingIcon, onDelete } =
       $ HH.i
           [ HP.class_ "material-icons mdc-chip__icon mdc-chip__icon--trailing"
           , tabIndexProp - 1
-          , HH.Attributes.attribute "role" "button"
+          , HP.attr "role" "button"
           ]
           [ text (Maybe.fromMaybe "cancel" trailingIcon) ]
   else

@@ -92,7 +92,7 @@ activatedCs { selection } =
 ariaSelectedAttr :: Config r i -> Maybe (IProp r i)
 ariaSelectedAttr { selection } =
   if selection /= Nothing then
-    Just (HH.Attributes.attribute "aria-selected" "true")
+    Just (HP.attr "aria-selected" "true")
   else
     Nothing
 

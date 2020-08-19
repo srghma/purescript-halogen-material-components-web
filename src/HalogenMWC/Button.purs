@@ -156,7 +156,7 @@ iconElt { icon } =
     ( \iconName ->
         HH.i
           [ HP.class_ "mdc-button__icon material-icons"
-          , HH.Attributes.attribute "aria-hidden" "true"
+          , HP.attr "aria-hidden" "true"
           ]
           [ HH.text iconName ]
     )

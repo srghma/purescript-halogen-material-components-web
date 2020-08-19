@@ -180,10 +180,10 @@ maxLengthProp { maxLength } =
     )
 
 minLengthAttr :: Config r i -> Maybe (IProp r i)
-minLengthAttr { minLength } = map (HH.Attributes.attribute "minLength" << String.fromInt) minLength
+minLengthAttr { minLength } = map (HP.attr "minLength" << String.fromInt) minLength
 
 maxLengthAttr :: Config r i -> Maybe (IProp r i)
-maxLengthAttr { maxLength } = map (HH.Attributes.attribute "maxLength" << String.fromInt) maxLength
+maxLengthAttr { maxLength } = map (HP.attr "maxLength" << String.fromInt) maxLength
 
 minProp :: Config r i -> Maybe (IProp r i)
 minProp { min } =
@@ -262,7 +262,7 @@ typeAttr { type_ } = map HH.Attributes.type_ type_
 ariaLabelAttr :: Config r i -> Maybe (IProp r i)
 ariaLabelAttr { fullwidth, placeholder, label } =
   if fullwidth then
-    map (HH.Attributes.attribute "aria-label") label
+    map (HP.attr "aria-label") label
   else
     Nothing
 

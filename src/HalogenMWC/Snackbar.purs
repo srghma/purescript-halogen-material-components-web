@@ -160,10 +160,10 @@ closedHandler :: MessageId -> Config r i -> Maybe (IProp r i)
 closedHandler messageId { onClosed } = Just (HH.Events.on "MDCSnackbar:closed" (Decode.succeed (onClosed messageId)))
 
 ariaStatusRoleAttr :: IProp r i
-ariaStatusRoleAttr = HH.Attributes.attribute "aria-role" "status"
+ariaStatusRoleAttr = HP.attr "aria-role" "status"
 
 ariaPoliteLiveAttr :: IProp r i
-ariaPoliteLiveAttr = HH.Attributes.attribute "aria-live" "polite"
+ariaPoliteLiveAttr = HP.attr "aria-live" "polite"
 
 surfaceElt :: MessageId -> Message r i -> HH.HTML w i
 surfaceElt messageId message_ =

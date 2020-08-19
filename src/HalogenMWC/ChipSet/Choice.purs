@@ -59,7 +59,7 @@ chipSetChoiceCs :: IProp r i
 chipSetChoiceCs = HP.class_ mdc_chip_set____choice
 
 gridRole :: IProp r i
-gridRole = HH.Attributes.attribute "role" "grid"
+gridRole = HP.attr "role" "grid"
 
 chipCs :: Maybe (IProp r i)
 chipCs = Just (HP.class_ mdc_chip)
@@ -77,13 +77,13 @@ selectedProp :: Boolean -> Maybe (IProp r i)
 selectedProp selected = Just (HP.prop "selected" selected)
 
 buttonRole :: IProp r i
-buttonRole = HH.Attributes.attribute "role" "button"
+buttonRole = HP.attr "role" "button"
 
 rowRole :: Maybe (IProp r i)
-rowRole = Just (HH.Attributes.attribute "role" "row")
+rowRole = Just (HP.attr "role" "row")
 
 gridcellRole :: IProp r i
-gridcellRole = HH.Attributes.attribute "role" "gridcell"
+gridcellRole = HP.attr "role" "gridcell"
 
 interactionHandler :: Maybe r i -> Maybe (IProp r i)
 interactionHandler r i = map (HH.Events.on "MDCChip:interaction" << Decode.succeed) r i

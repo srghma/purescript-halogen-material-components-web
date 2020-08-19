@@ -51,10 +51,10 @@ openProp :: Config r i -> Maybe (IProp r i)
 openProp { open } = Just (HP.prop "open" open)
 
 roleAttr :: Maybe (IProp r i)
-roleAttr = Just (HH.Attributes.attribute "role" "alertdialog")
+roleAttr = Just (HP.attr "role" "alertdialog")
 
 ariaModalAttr :: Maybe (IProp r i)
-ariaModalAttr = Just (HH.Attributes.attribute "aria-modal" "true")
+ariaModalAttr = Just (HP.attr "aria-modal" "true")
 
 closeHandler :: Config r i -> Maybe (IProp r i)
 closeHandler { onClose } = map (HH.Events.on "MDCDialog:close" << Decode.succeed) onClose

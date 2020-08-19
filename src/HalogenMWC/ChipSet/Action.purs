@@ -13,7 +13,7 @@ chipSet :: Array (IProp r i) -> Array (Chip r i) -> HH.HTML w i
 chipSet additionalAttributes chips =
   HH.element "mdc-chip-set"
     ( [ HP.classes [ mdc_chip_set, mdc_chip_set____action ]
-      , HH.Attributes.attribute "role" "grid"
+      , HP.attr "role" "grid"
       ]
         <> additionalAttributes
     )
@@ -26,7 +26,7 @@ chip (Chip config_ label) =
         ( Array.catMaybes
             [ HP.class_ mdc_chip
             , HP.class_ mdc_chip____touch
-            , HH.Attributes.attribute "role" "row"
+            , HP.attr "role" "row"
             , interactionHandler config_
             ]
             <> config_.additionalAttributes
@@ -57,11 +57,11 @@ leadingIconElt config =
 primaryActionElt :: String -> Maybe (HH.HTML w i)
 primaryActionElt label =
   Just
-    $ HH.span [ HP.class_ mdc_chip__primary_action, HH.Attributes.attribute "role" "gridcell" ]
+    $ HH.span [ HP.class_ mdc_chip__primary_action, HP.attr "role" "gridcell" ]
         (Array.catMaybes [ textElt label, touchElt ])
 
 textElt :: String -> Maybe (HH.HTML w i)
-textElt label = Just (HH.span [ HP.class_ mdc_chip__text, HH.Attributes.attribute "role" "button" ] [ text label ])
+textElt label = Just (HH.span [ HP.class_ mdc_chip__text, HP.attr "role" "button" ] [ text label ])
 
 touchElt :: Maybe (HH.HTML w i)
 touchElt = Just (HH.div [ HP.class_ mdc_chip__touch ] [])

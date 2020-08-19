@@ -47,7 +47,7 @@ rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_tab_bar)
 
 tablistRoleAttr :: Maybe (IProp r i)
-tablistRoleAttr = Just (HH.Attributes.attribute "role" "tablist")
+tablistRoleAttr = Just (HP.attr "role" "tablist")
 
 activeTabIndexProp :: Array (Tab r i) -> Maybe (IProp r i)
 activeTabIndexProp tabs =
@@ -102,7 +102,7 @@ tabMinWidthCs { minWidth } =
     Nothing
 
 tabRoleAttr :: Maybe (IProp r i)
-tabRoleAttr = Just (HH.Attributes.attribute "role" "tab")
+tabRoleAttr = Just (HP.attr "role" "tab")
 
 tabClickHandler :: Tab.Config r i -> Maybe (IProp r i)
 tabClickHandler { onClick } = map (HH.Events.on "MDCTab:interacted" << Decode.succeed) onClick

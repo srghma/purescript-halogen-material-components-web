@@ -66,12 +66,12 @@ tabIndexProp :: Maybe (IProp r i)
 tabIndexProp = Just (HH.Attributes.tabindex 0)
 
 ariaHiddenAttr :: Maybe (IProp r i)
-ariaHiddenAttr = Just (HH.Attributes.attribute "aria-hidden" "true")
+ariaHiddenAttr = Just (HP.attr "aria-hidden" "true")
 
 ariaPressedAttr :: Config r i -> Maybe (IProp r i)
 ariaPressedAttr { on } =
   Just
-    ( HH.Attributes.attribute "aria-pressed"
+    ( HP.attr "aria-pressed"
         ( if on then
             "true"
           else
@@ -80,7 +80,7 @@ ariaPressedAttr { on } =
     )
 
 ariaLabelAttr :: Config r i -> Maybe (IProp r i)
-ariaLabelAttr { label } = map (HH.Attributes.attribute "aria-label") label
+ariaLabelAttr { label } = map (HP.attr "aria-label") label
 
 changeHandler :: Config r i -> Maybe (IProp r i)
 changeHandler { onChange } =

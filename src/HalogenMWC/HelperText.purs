@@ -49,7 +49,7 @@ persistentCs (Config config_) =
     Nothing
 
 ariaHiddenAttr :: Maybe (IProp r i)
-ariaHiddenAttr = Just (HH.Attributes.attribute "aria-hidden" "true")
+ariaHiddenAttr = Just (HP.attr "aria-hidden" "true")
 
 characterCounter :: Array (IProp r i) -> HH.HTML w i
 characterCounter additionalAttributes = HH.div ([ characterCounterCs ] <> additionalAttributes) []
