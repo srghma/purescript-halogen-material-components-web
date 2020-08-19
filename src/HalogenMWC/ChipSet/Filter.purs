@@ -1,4 +1,4 @@
-module Material.ChipSet.Filter exposing (chipSet)
+module HalogenMWC.ChipSet.Filter (chipSet)
 
 {-| Chips are compact elements that allow users to enter information, select a
 choice, filter content, or trigger an action.
@@ -57,12 +57,12 @@ icon. If the chip already has a leading icon, the checkmark replaces it.
 
 -}
 
-import Html exposing (Html, text)
-import Html.Attributes exposing (class)
+import Html (Html, text)
+import Html.Attributes (class)
 import Html.Events
 import Json.Decode as Decode
 import Json.Encode as Encode
-import Material.Chip.Filter.Internal as Chip exposing (Chip(..))
+import Material.Chip.Filter.Internal as Chip (Chip(..))
 import Svg
 import Svg.Attributes
 

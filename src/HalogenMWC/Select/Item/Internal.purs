@@ -1,6 +1,6 @@
-module Material.Select.Item.Internal exposing (Config(..), SelectItem(..))
+module HalogenMWC.Select.Item.Internal (Config(..), SelectItem(..))
 
-import Html exposing (Html)
+import Html (Html)
 
 
 data Config a msg

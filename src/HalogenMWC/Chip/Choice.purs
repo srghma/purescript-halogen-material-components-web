@@ -1,9 +1,9 @@
-module Material.Chip.Choice exposing
+module HalogenMWC.Chip.Choice
     ( Config, config
     , setIcon
     , setAttributes
     , chip, Chip
-    )
+    ) where
 
 {-| Chips are compact elements that allow users to enter information, select a
 choice, filter content, or trigger an action.
@@ -79,7 +79,7 @@ options.
 -}
 
 import Html
-import Material.Chip.Choice.Internal exposing (Chip(..), Config(..))
+import Material.Chip.Choice.Internal (Chip(..), Config(..))
 
 
 {-| Configuration of a choice chip

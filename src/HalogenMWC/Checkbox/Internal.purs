@@ -1,4 +1,4 @@
-module Material.Checkbox.Internal exposing (Config(..), State(..))
+module HalogenMWC.Checkbox.Internal (Config(..), State(..))
 
 import Html
 

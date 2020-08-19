@@ -1,4 +1,4 @@
-module Material.IconButton exposing
+module HalogenMWC.IconButton
     ( Config, config
     , setOnClick
     , setDisabled
@@ -6,7 +6,7 @@ module Material.IconButton exposing
     , setAttributes
     , iconButton
     , custom
-    )
+    ) where
 
 {-| Icon buttons allow users to take actions and make choices with a single
 tap.
@@ -105,10 +105,10 @@ and use `Browser.Dom.focus`.
 
 -}
 
-import Html exposing (Html, text)
-import Html.Attributes exposing (class)
+import Html (Html, text)
+import Html.Attributes (class)
 import Html.Events
-import Material.IconButton.Internal exposing (Config(..))
+import Material.IconButton.Internal (Config(..))
 
 
 {-| Icon button configuration

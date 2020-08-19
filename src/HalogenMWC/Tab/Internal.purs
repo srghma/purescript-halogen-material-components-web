@@ -1,8 +1,8 @@
-module Material.Tab.Internal exposing
+module HalogenMWC.Tab.Internal
     ( Config(..)
     , Content
     , Tab(..)
-    )
+    ) where
 
 import Html
 

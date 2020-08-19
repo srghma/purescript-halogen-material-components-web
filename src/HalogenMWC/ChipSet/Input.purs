@@ -1,4 +1,4 @@
-module Material.ChipSet.Input exposing (chipSet)
+module HalogenMWC.ChipSet.Input (chipSet)
 
 {-| Chips are compact elements that allow users to enter information, select a
 choice, filter content, or trigger an action.
@@ -43,13 +43,13 @@ into chips.
 
 -}
 
-import Html exposing (Html, text)
-import Html.Attributes exposing (class)
+import Html (Html, text)
+import Html.Attributes (class)
 import Html.Events
 import Html.Keyed
 import Json.Decode as Decode
 import Json.Encode as Encode
-import Material.Chip.Input.Internal as Chip exposing (Chip(..))
+import Material.Chip.Input.Internal as Chip (Chip(..))
 
 
 {-| Input chip set view function

@@ -1,10 +1,10 @@
-module Material.HelperText exposing
+module HalogenMWC.HelperText
     ( Config, config
     , setPersistent
     , setAttributes
     , helperText
     , helperLine, characterCounter
-    )
+    ) where
 
 {-| Helper text gives context about a field’s input, such as how the input will
 be used. It should be visible either persistently or only on focus.
@@ -87,8 +87,8 @@ child of `helperLine`.
 
 -}
 
-import Html exposing (Html, text)
-import Html.Attributes exposing (class)
+import Html (Html, text)
+import Html.Attributes (class)
 
 
 {-| Configuration of a helper text

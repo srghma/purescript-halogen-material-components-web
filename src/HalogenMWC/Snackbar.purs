@@ -1,4 +1,4 @@
-module Material.Snackbar exposing
+module HalogenMWC.Snackbar
     ( Config, config
     , setCloseOnEscape
     , setAttributes
@@ -13,7 +13,7 @@ module Material.Snackbar exposing
     , setLeading
     , setStacked
     , setTimeoutMs
-    )
+    ) where
 
 {-| Snackbars provide brief messages about the application's processes at the
 bottom of the screen.
@@ -217,8 +217,8 @@ may specify an indefinite timeout by setting it to `Nothing`.
 
 -}
 
-import Html exposing (Html, text)
-import Html.Attributes exposing (class)
+import Html (Html, text)
+import Html.Attributes (class)
 import Html.Events
 import Json.Decode as Decode
 import Json.Encode as Encode

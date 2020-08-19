@@ -1,4 +1,4 @@
-module Material.DataTable exposing
+module HalogenMWC.DataTable
     ( Config, config
     , setLabel
     , setAttributes
@@ -8,7 +8,7 @@ module Material.DataTable exposing
     , Cell, cell
     , numericCell
     , checkboxCell
-    )
+    ) where
 
 {-| Data tables display information in a way that’s easy to scan, so that users
 can look for patterns and insights.
@@ -104,8 +104,8 @@ can look for patterns and insights.
 
 -}
 
-import Html exposing (Html)
-import Html.Attributes exposing (class)
+import Html (Html)
+import Html.Attributes (class)
 import Material.Checkbox as Checkbox
 import Material.Checkbox.Internal
 

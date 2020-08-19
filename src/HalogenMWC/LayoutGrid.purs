@@ -1,4 +1,4 @@
-module Material.LayoutGrid exposing
+module HalogenMWC.LayoutGrid
     ( layoutGrid, cell, inner
     , span1, span2, span3, span4, span5, span6, span7, span8, span9, span10, span11, span12
     , alignTop, alignMiddle, alignBottom
@@ -6,7 +6,7 @@ module Material.LayoutGrid exposing
     , span1Desktop, span2Desktop, span3Desktop, span4Desktop, span5Desktop, span6Desktop, span7Desktop, span8Desktop, span9Desktop, span10Desktop, span11Desktop, span12Desktop
     , span1Tablet, span2Tablet, span3Tablet, span4Tablet, span5Tablet, span6Tablet, span7Tablet, span8Tablet
     , span1Phone, span2Phone, span3Phone, span4Phone
-    )
+    ) where
 
 {-| Material Design’s responsive user interface is based on a _column-variate_
 grid layout: it has 12 columns on desktop, 8 columns on tablet and 4 columns on
@@ -133,8 +133,8 @@ grid as it might mean an over complicated user experience.
 
 -}
 
-import Html exposing (Html)
-import Html.Attributes exposing (class, style)
+import Html (Html)
+import Html.Attributes (class, style)
 
 
 {-| Layout grid view function

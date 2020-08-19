@@ -1,10 +1,10 @@
-module Material.Chip.Action exposing
+module HalogenMWC.Chip.Action
     ( Config, config
     , setOnClick
     , setIcon
     , setAttributes
     , chip, Chip
-    )
+    ) where
 
 {-| Action chips offer actions related to primary content. They should appear
 dynamically and contextually in a UI.
@@ -68,7 +68,7 @@ appear persistently and consistently.
 -}
 
 import Html
-import Material.Chip.Action.Internal exposing (Chip(..), Config(..))
+import Material.Chip.Action.Internal (Chip(..), Config(..))
 
 
 {-| Configuration of an action chip

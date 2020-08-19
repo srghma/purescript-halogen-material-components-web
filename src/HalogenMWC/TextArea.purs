@@ -1,4 +1,4 @@
-module Material.TextArea exposing
+module HalogenMWC.TextArea
     ( Config, config
     , setOnInput
     , setOnChange
@@ -16,7 +16,7 @@ module Material.TextArea exposing
     , setAttributes
     , filled
     , outlined
-    )
+    ) where
 
 {-| Text areas allow users to input, edit, and select multiline text.
 
@@ -171,8 +171,8 @@ and use `Browser.Dom.focus`.
 
 -}
 
-import Html exposing (Html, text)
-import Html.Attributes exposing (class)
+import Html (Html, text)
+import Html.Attributes (class)
 import Html.Events
 import Json.Decode as Decode
 import Json.Encode as Encode

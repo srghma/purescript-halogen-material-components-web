@@ -1,4 +1,4 @@
-module Material.Chip.Input exposing
+module HalogenMWC.Chip.Input
     ( Config, config
     , setOnClick
     , setOnDelete
@@ -6,7 +6,7 @@ module Material.Chip.Input exposing
     , setTrailingIcon
     , setAttributes
     , chip, Chip
-    )
+    ) where
 
 {-| Chips are compact elements that allow users to enter information, select a
 choice, filter content, or trigger an action.
@@ -68,7 +68,7 @@ into chips.
 -}
 
 import Html
-import Material.Chip.Input.Internal exposing (Chip(..), Config(..))
+import Material.Chip.Input.Internal (Chip(..), Config(..))
 
 
 {-| Configuration of an input chip

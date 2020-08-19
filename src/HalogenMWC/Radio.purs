@@ -1,4 +1,4 @@
-module Material.Radio exposing
+module HalogenMWC.Radio
     ( Config, config
     , setOnChange
     , setChecked
@@ -6,7 +6,7 @@ module Material.Radio exposing
     , setTouch
     , setAttributes
     , radio
-    )
+    ) where
 
 {-| Radio buttons allow the user to select one option from a set while seeing
 all available options.
@@ -109,8 +109,8 @@ Touch support is enabled by default. To disable touch support set a radio's
 
 -}
 
-import Html exposing (Html)
-import Html.Attributes exposing (class)
+import Html (Html)
+import Html.Attributes (class)
 import Html.Events
 import Json.Decode as Decode
 import Json.Encode as Encode

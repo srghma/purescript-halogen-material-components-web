@@ -1,10 +1,10 @@
-module Material.ChipSet.Choice exposing
+module HalogenMWC.ChipSet.Choice
     ( Config, config
     , setSelected
     , setOnChange
     , setAttributes
     , chipSet
-    )
+    ) where
 
 {-| Chips are compact elements that allow users to enter information, select a
 choice, filter content, or trigger an action.
@@ -80,12 +80,12 @@ options.
 
 -}
 
-import Html exposing (Html, text)
-import Html.Attributes exposing (class)
+import Html (Html, text)
+import Html.Attributes (class)
 import Html.Events
 import Json.Decode as Decode
 import Json.Encode as Encode
-import Material.Chip.Choice.Internal as Chip exposing (Chip(..))
+import Material.Chip.Choice.Internal as Chip (Chip(..))
 
 
 {-| Configuration of a choice chip set

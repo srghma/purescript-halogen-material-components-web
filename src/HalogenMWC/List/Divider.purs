@@ -1,11 +1,11 @@
-module Material.List.Divider exposing
+module HalogenMWC.List.Divider
     ( Config, config
     , setPadded
     , setInset
     , setAttributes
     , listItem
     , group
-    )
+    ) where
 
 {-| Lists are continuous, vertical indexes of text or images.
 
@@ -97,9 +97,9 @@ Multiple lists within a group may be visually seperated by a list group divider.
 
 -}
 
-import Html exposing (Html)
-import Html.Attributes exposing (class)
-import Material.List.Item exposing (ListItem)
+import Html (Html)
+import Html.Attributes (class)
+import Material.List.Item (ListItem)
 import Material.List.Item.Internal as ListItem
 
 

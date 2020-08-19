@@ -1,4 +1,4 @@
-module Material.LinearProgress exposing
+module HalogenMWC.LinearProgress
     ( Config, config
     , setReverse
     , setClosed
@@ -6,7 +6,7 @@ module Material.LinearProgress exposing
     , indeterminate
     , determinate
     , buffered
-    )
+    ) where
 
 {-| Linear progress indicators visualize the linear progression of either
 determinate or indeterminate activities.
@@ -93,8 +93,8 @@ If you want to reverse the direction of the linear progress indicator, set its
 
 -}
 
-import Html exposing (Html)
-import Html.Attributes exposing (class, style)
+import Html (Html)
+import Html.Attributes (class, style)
 import Json.Encode as Encode
 
 

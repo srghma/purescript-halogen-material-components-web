@@ -1,9 +1,9 @@
-module Material.Drawer.Permanent exposing
+module HalogenMWC.Drawer.Permanent
     ( Config, config
     , setAttributes
     , drawer, content
     , header, title, subtitle
-    )
+    ) where
 
 {-| The drawer is used to organize access to destinations and
 other functionality on an app.
@@ -29,8 +29,8 @@ other functionality on an app.
 
 # Basic Usage
 
-    import Html exposing (Html, text)
-    import Html.Attributes exposing (style)
+    import Html (Html, text)
+    import Html.Attributes (style)
     import Material.Drawer.Permanent as PermanentDrawer
     import Material.List as List
     import Material.ListItem as ListItem
@@ -79,8 +79,8 @@ header element.
 
 -}
 
-import Html exposing (Html)
-import Html.Attributes exposing (class)
+import Html (Html)
+import Html.Attributes (class)
 
 
 {-| Configuration of a permanent drawer

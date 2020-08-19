@@ -1,4 +1,4 @@
-module Material.TabBar exposing
+module HalogenMWC.TabBar
     ( Config, config
     , setStacked
     , setMinWidth
@@ -7,7 +7,7 @@ module Material.TabBar exposing
     , setAttributes
     , tabBar
     , Align(..)
-    )
+    ) where
 
 {-| Tabs organize and allow navigation between groups of content that are
 related and at the same level of hierarchy. The tab bar contains the tab
@@ -147,12 +147,12 @@ use `Browser.Dom.focus`.
 
 -}
 
-import Html exposing (Html, text)
-import Html.Attributes exposing (class)
+import Html (Html, text)
+import Html.Attributes (class)
 import Html.Events
 import Json.Decode as Decode
 import Json.Encode as Encode
-import Material.Tab.Internal as Tab exposing (Tab(..))
+import Material.Tab.Internal as Tab (Tab(..))
 
 
 {-| Configuration of a tab bar

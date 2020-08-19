@@ -1,4 +1,4 @@
-module Material.Icon exposing (icon)
+module HalogenMWC.Icon (icon)
 
 {-| Icon renders a Material Icon.
 
@@ -29,8 +29,8 @@ module Material.Icon exposing (icon)
 
 -}
 
-import Html exposing (Html, text)
-import Html.Attributes exposing (class)
+import Html (Html, text)
+import Html.Attributes (class)
 
 
 {-| Icon view function

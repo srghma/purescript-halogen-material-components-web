@@ -1,4 +1,4 @@
-module Material.List exposing
+module HalogenMWC.List
     ( Config, config
     , setNonInteractive
     , setDense
@@ -8,7 +8,7 @@ module Material.List exposing
     , setWrapFocus
     , list
     , group, subheader
-    )
+    ) where
 
 {-| Lists are continuous, vertical indexes of text or images.
 
@@ -167,12 +167,12 @@ You may programatically focus a list by assigning an id attribute to it and use
 
 -}
 
-import Html exposing (Html)
-import Html.Attributes exposing (class)
+import Html (Html)
+import Html.Attributes (class)
 import Html.Events
 import Json.Decode as Decode
 import Json.Encode as Encode
-import Material.List.Item exposing (Config, ListItem)
+import Material.List.Item (Config, ListItem)
 import Material.List.Item.Internal as ListItem
 
 

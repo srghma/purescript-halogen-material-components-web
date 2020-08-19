@@ -1,10 +1,10 @@
-module Material.List.Item.Internal exposing
+module HalogenMWC.List.Item.Internal
     ( Config(..)
     , ListItem(..)
     , Selection(..)
-    )
+    ) where
 
-import Html exposing (Html)
+import Html (Html)
 
 
 data Config msg

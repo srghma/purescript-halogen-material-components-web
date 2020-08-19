@@ -1,10 +1,10 @@
-module Material.Dialog exposing
+module HalogenMWC.Dialog
     ( Config, config
     , setOnClose
     , setOpen
     , setAttributes
     , dialog, Content
-    )
+    ) where
 
 {-| Dialogs inform users about a task and can contain critical information,
 require decisions, or involve multiple tasks.
@@ -72,8 +72,8 @@ require decisions, or involve multiple tasks.
 
 -}
 
-import Html exposing (Html, text)
-import Html.Attributes exposing (class)
+import Html (Html, text)
+import Html.Attributes (class)
 import Html.Events
 import Json.Decode as Decode
 import Json.Encode as Encode

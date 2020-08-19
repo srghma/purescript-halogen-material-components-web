@@ -1,4 +1,4 @@
-module Material.TopAppBar exposing
+module HalogenMWC.TopAppBar
     ( Config, config
     , setFixed
     , setDense
@@ -15,7 +15,7 @@ module Material.TopAppBar exposing
     , short
     , shortCollapsed
     , prominent
-    )
+    ) where
 
 {-| Top App Bar acts as a container for items such as application title,
 navigation icon, and action items.
@@ -181,8 +181,8 @@ configuration option.
 
 -}
 
-import Html exposing (Html)
-import Html.Attributes exposing (class)
+import Html (Html)
+import Html.Attributes (class)
 
 
 {-| Configuration of a top app bar

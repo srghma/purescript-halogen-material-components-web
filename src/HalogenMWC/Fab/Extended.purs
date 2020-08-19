@@ -1,11 +1,11 @@
-module Material.Fab.Extended exposing
+module HalogenMWC.Fab.Extended
     ( Config, config
     , setOnClick
     , setIcon, setTrailingIcon
     , setExited
     , setAttributes
     , fab
-    )
+    ) where
 
 {-| A floating action button represents the primary action in an application.
 
@@ -42,7 +42,7 @@ action button that primarily contains an icon, and no text, refer to the
 Developers are required to manually position the floating action button within
 their page layout, for instance by setting a fixed position via CSS.
 
-    import Html.Attributes exposing (style)
+    import Html.Attributes (style)
     import Material.Fab.Extended as ExtendedFab
 
     data Msg
@@ -131,8 +131,8 @@ an id attribute to it and use `Browser.Dom.focus`.
 
 -}
 
-import Html exposing (Html, text)
-import Html.Attributes exposing (class)
+import Html (Html, text)
+import Html.Attributes (class)
 import Html.Events
 import Json.Encode as Encode
 

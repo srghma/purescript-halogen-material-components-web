@@ -1,4 +1,4 @@
-module Material.TextField exposing
+module HalogenMWC.TextField
     ( Config, config
     , setOnInput
     , setOnChange
@@ -22,7 +22,7 @@ module Material.TextField exposing
     , filled
     , outlined
     , Icon, icon
-    )
+    ) where
 
 {-| Text fields allow users to input, edit, and select text.
 
@@ -225,8 +225,8 @@ and use `Browser.Dom.focus`.
 
 -}
 
-import Html exposing (Html, text)
-import Html.Attributes exposing (class)
+import Html (Html, text)
+import Html.Attributes (class)
 import Html.Events
 import Json.Decode as Decode
 import Json.Encode as Encode

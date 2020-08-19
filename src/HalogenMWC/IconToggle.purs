@@ -1,4 +1,4 @@
-module Material.IconToggle exposing
+module HalogenMWC.IconToggle
     ( Config, config
     , setOnChange
     , setOn
@@ -6,7 +6,7 @@ module Material.IconToggle exposing
     , setLabel
     , setAttributes
     , iconToggle
-    )
+    ) where
 
 {-| Icon toggles allow users to take actions and make choices with a single
 tap.
@@ -135,8 +135,8 @@ and use `Browser.Dom.focus`.
 
 -}
 
-import Html exposing (Html, text)
-import Html.Attributes exposing (class)
+import Html (Html, text)
+import Html.Attributes (class)
 import Html.Events
 import Json.Decode as Decode
 import Json.Encode as Encode

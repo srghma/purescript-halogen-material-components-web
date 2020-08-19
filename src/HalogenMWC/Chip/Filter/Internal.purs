@@ -1,4 +1,4 @@
-module Material.Chip.Filter.Internal exposing (Chip(..), Config(..))
+module HalogenMWC.Chip.Filter.Internal (Chip(..), Config(..))
 
 import Html
 

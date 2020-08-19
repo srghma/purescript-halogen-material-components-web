@@ -1,4 +1,4 @@
-module Material.Slider exposing
+module HalogenMWC.Slider
     ( Config, config
     , setOnInput
     , setDiscrete
@@ -10,7 +10,7 @@ module Material.Slider exposing
     , setDisabled
     , setAttributes
     , slider
-    )
+    ) where
 
 {-| Slider provides a component to select a numerical value within a range.
 
@@ -138,8 +138,8 @@ use `Browser.Dom.focus`.
 
 -}
 
-import Html exposing (Html)
-import Html.Attributes exposing (class, style)
+import Html (Html)
+import Html.Attributes (class, style)
 import Html.Events
 import Json.Decode as Decode
 import Json.Encode as Encode

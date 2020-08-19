@@ -1,4 +1,4 @@
-module Material.Checkbox exposing
+module HalogenMWC.Checkbox
     ( Config, config
     , setOnChange
     , State, setState
@@ -8,7 +8,7 @@ module Material.Checkbox exposing
     , checkbox
     , checked, unchecked
     , indeterminate
-    )
+    ) where
 
 {-| Checkboxes allow the user to select one or more items from a set.
 
@@ -127,12 +127,12 @@ Touch support is enabled by default. To disable touch support set a checkbox'
 
 -}
 
-import Html exposing (Html)
-import Html.Attributes exposing (class)
+import Html (Html)
+import Html.Attributes (class)
 import Html.Events
 import Json.Decode as Decode
 import Json.Encode as Encode
-import Material.Checkbox.Internal exposing (Config(..), State(..))
+import Material.Checkbox.Internal (Config(..), State(..))
 import Svg
 import Svg.Attributes
 

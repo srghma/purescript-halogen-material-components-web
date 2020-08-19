@@ -1,11 +1,11 @@
-module Material.Switch exposing
+module HalogenMWC.Switch
     ( switch
     , Config, config
     , setOnChange
     , setChecked
     , setDisabled
     , setAttributes
-    )
+    ) where
 
 {-| Switches toggle the state of a single setting on or off. They are the
 preferred way to adjust settings on mobile.
@@ -98,8 +98,8 @@ use `Browser.Dom.focus`.
 
 -}
 
-import Html exposing (Html)
-import Html.Attributes exposing (class)
+import Html (Html)
+import Html.Attributes (class)
 import Html.Events
 import Json.Decode as Decode
 import Json.Encode as Encode

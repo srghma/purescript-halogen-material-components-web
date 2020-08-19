@@ -1,11 +1,11 @@
-module Material.FormField exposing
+module HalogenMWC.FormField
     ( Config, config
     , setOnClick
     , setLabel, setAlignEnd
     , setFor
     , setAttributes
     , formField
-    )
+    ) where
 
 {-| FormField aligns a form field (for example, a checkbox) with
 its label and makes it RTL-aware. It also activates a ripple effect upon
@@ -83,8 +83,8 @@ and use `Browser.Dom.focus`.
 
 -}
 
-import Html exposing (Html, text)
-import Html.Attributes exposing (class)
+import Html (Html, text)
+import Html.Attributes (class)
 import Html.Events
 
 

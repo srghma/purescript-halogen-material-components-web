@@ -1,11 +1,11 @@
-module Material.Chip.Filter exposing
+module HalogenMWC.Chip.Filter
     ( Config, config
     , setOnChange
     , setIcon
     , setSelected
     , setAttributes
     , chip, Chip
-    )
+    ) where
 
 {-| Chips are compact elements that allow users to enter information, select a
 choice, filter content, or trigger an action.
@@ -78,7 +78,7 @@ icon. If the chip already has a leading icon, the checkmark replaces it.
 -}
 
 import Html
-import Material.Chip.Filter.Internal exposing (Chip(..), Config(..))
+import Material.Chip.Filter.Internal (Chip(..), Config(..))
 
 
 {-| Configuration of a filter chip

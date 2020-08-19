@@ -1,4 +1,4 @@
-module Material.Theme exposing
+module HalogenMWC.Theme
     ( primary, secondary, background
     , onPrimary, onSecondary, onSurface
     , primaryBg, secondaryBg, surface
@@ -8,7 +8,7 @@ module Material.Theme exposing
     , textDisabledOnLight, textIconOnLight
     , textPrimaryOnDark, textSecondaryOnDark, textHintOnDark
     , textDisabledOnDark, textIconOnDark
-    )
+    ) where
 
 {-| The Material Design color system can be used to create a color scheme that
 reflects your brand or style.
@@ -120,7 +120,7 @@ the theme's primary or secondary colors.
 -}
 
 import Html
-import Html.Attributes exposing (class)
+import Html.Attributes (class)
 
 
 {-| Sets the text color to the theme primary color

@@ -1,4 +1,4 @@
-module Material.Drawer.Dismissible exposing
+module HalogenMWC.Drawer.Dismissible
     ( Config, config
     , setOnClose
     , setOpen
@@ -6,7 +6,7 @@ module Material.Drawer.Dismissible exposing
     , drawer, content
     , appContent
     , header, title, subtitle
-    )
+    ) where
 
 {-| The drawer is used to organize access to destinations and
 other functionality on an app.
@@ -36,8 +36,8 @@ app content is prioritized.
 
 # Basic Usage
 
-    import Html exposing (Html, text)
-    import Html.Attributes exposing (style)
+    import Html (Html, text)
+    import Html.Attributes (style)
     import Material.Drawer.Dismissible as DismissibleDrawer
     import Material.List as List
     import Material.ListItem as ListItem
@@ -90,8 +90,8 @@ header element.
 
 -}
 
-import Html exposing (Html)
-import Html.Attributes exposing (class)
+import Html (Html)
+import Html.Attributes (class)
 import Html.Events
 import Json.Decode as Decode
 import Json.Encode as Encode

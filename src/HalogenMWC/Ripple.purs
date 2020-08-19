@@ -1,11 +1,11 @@
-module Material.Ripple exposing
+module HalogenMWC.Ripple
     ( Config, config
     , setColor
     , setAttributes
     , bounded
     , unbounded
     , Color, primary, accent
-    )
+    ) where
 
 {-| Material “ink ripple” interaction effect.
 
@@ -82,8 +82,8 @@ If you want to set the ripple effect to either primary or accent color, use its
 
 -}
 
-import Html exposing (Html)
-import Html.Attributes exposing (class, style)
+import Html (Html)
+import Html.Attributes (class, style)
 import Json.Encode as Encode
 
 

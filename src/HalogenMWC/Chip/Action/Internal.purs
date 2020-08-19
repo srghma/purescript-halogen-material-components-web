@@ -1,4 +1,4 @@
-module Material.Chip.Action.Internal exposing (Chip(..), Config(..))
+module HalogenMWC.Chip.Action.Internal (Chip(..), Config(..))
 
 import Html
 

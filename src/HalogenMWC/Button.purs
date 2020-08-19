@@ -1,4 +1,4 @@
-module Material.Button exposing
+module HalogenMWC.Button
     ( Config, config
     , setOnClick
     , setIcon, setTrailingIcon
@@ -8,7 +8,7 @@ module Material.Button exposing
     , setTouch
     , setAttributes
     , text, outlined, raised, unelevated
-    )
+    ) where
 
 {-| Buttons allow users to take actions and make choices with a single tap.
 
@@ -162,11 +162,11 @@ Touch support is enabled by default. To disable touch support set a button's
 
 -}
 
-import Html exposing (Html)
-import Html.Attributes exposing (class)
+import Html (Html)
+import Html.Attributes (class)
 import Html.Events
 import Json.Encode as Encode
-import Material.Button.Internal exposing (Config(..))
+import Material.Button.Internal (Config(..))
 
 
 {-| Configuration of a button

@@ -1,4 +1,4 @@
-module Material.IconButton.Internal exposing (Config(..))
+module HalogenMWC.IconButton.Internal (Config(..))
 
 import Html
 

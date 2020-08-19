@@ -1,9 +1,9 @@
-module Material.Select.Item exposing
+module HalogenMWC.Select.Item
     ( Config, config
     , setDisabled
     , setAttributes
     , SelectItem, selectItem
-    )
+    ) where
 
 {-| Select provides a single-option select menus.
 
@@ -83,8 +83,8 @@ to `True`.
 
 -}
 
-import Html exposing (Html)
-import Material.Select.Item.Internal exposing (Config(..), SelectItem(..))
+import Html (Html)
+import Material.Select.Item.Internal (Config(..), SelectItem(..))
 
 
 {-| Configuration of a select item

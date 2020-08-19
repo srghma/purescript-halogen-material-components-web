@@ -1,11 +1,11 @@
-module Material.Menu exposing
+module HalogenMWC.Menu
     ( Config, config
     , setOnClose
     , setOpen
     , setQuickOpen
     , setAttributes
     , menu, surfaceAnchor
-    )
+    ) where
 
 {-| A menu displays a list of choices on a temporary surface. They appear when
 users interact with a button, action, or other control.
@@ -94,8 +94,8 @@ configuration option to `True`.
 
 -}
 
-import Html exposing (Html)
-import Html.Attributes exposing (class)
+import Html (Html)
+import Html.Attributes (class)
 import Html.Events
 import Json.Decode as Decode
 import Json.Encode as Encode

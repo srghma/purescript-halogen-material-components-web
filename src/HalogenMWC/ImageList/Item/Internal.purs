@@ -1,4 +1,4 @@
-module Material.ImageList.Item.Internal exposing (Config(..), ImageListItem(..))
+module HalogenMWC.ImageList.Item.Internal (Config(..), ImageListItem(..))
 
 import Html
 

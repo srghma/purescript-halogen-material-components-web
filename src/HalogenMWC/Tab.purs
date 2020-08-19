@@ -1,10 +1,10 @@
-module Material.Tab exposing
+module HalogenMWC.Tab
     ( Config, config
     , setOnClick
     , setActive
     , setAttributes
     , Tab, tab, Content
-    )
+    ) where
 
 {-| Tabs organize and allow navigation between groups of content that are
 related and at the same level of hierarchy. The tab bar contains the tab
@@ -86,7 +86,7 @@ To mark a tab as active, set its `setActive` configuration option to `True`.
 -}
 
 import Html
-import Material.Tab.Internal exposing (Config(..), Tab(..))
+import Material.Tab.Internal (Config(..), Tab(..))
 
 
 {-| Configuration of a tab

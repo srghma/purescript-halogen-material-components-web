@@ -1,4 +1,4 @@
-module Material.ChipSet.Action exposing (chipSet)
+module HalogenMWC.ChipSet.Action (chipSet)
 
 {-| Action chips offer actions related to primary content. They should appear
 dynamically and contextually in a UI.
@@ -47,11 +47,11 @@ appear persistently and consistently.
 
 -}
 
-import Html exposing (Html, text)
-import Html.Attributes exposing (class)
+import Html (Html, text)
+import Html.Attributes (class)
 import Html.Events
 import Json.Decode as Decode
-import Material.Chip.Action.Internal as Chip exposing (Chip(..))
+import Material.Chip.Action.Internal as Chip (Chip(..))
 
 
 {-| Chip set view function

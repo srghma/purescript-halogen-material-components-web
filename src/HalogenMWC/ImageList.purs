@@ -1,10 +1,10 @@
-module Material.ImageList exposing
+module HalogenMWC.ImageList
     ( Config, config
     , setMasonry
     , setWithTextProtection
     , setAttributes
     , imageList
-    )
+    ) where
 
 {-| An Image List consists of several items, each containing an image and
 optionally supporting a text label.
@@ -38,7 +38,7 @@ information about the image list items, refer to
 Note that you will have to set the width and margin of image list items
 yourself, preferably through SASS or through inline CSS.
 
-    import Html.Attributes exposing (style)
+    import Html.Attributes (style)
     import Material.ImageList as ImageList
     import Material.ImageList.Item as ImageListItem
 
@@ -102,9 +102,9 @@ labels to be positioned in a scrim overlaying each image, use the image list's
 
 -}
 
-import Html exposing (Html, text)
-import Html.Attributes exposing (class, style)
-import Material.ImageList.Item exposing (ImageListItem)
+import Html (Html, text)
+import Html.Attributes (class, style)
+import Material.ImageList.Item (ImageListItem)
 import Material.ImageList.Item.Internal as ImageListItem
 
 

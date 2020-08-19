@@ -1,4 +1,4 @@
-module Material.Select exposing
+module HalogenMWC.Select
     ( Config, config
     , setOnChange
     , setLabel
@@ -11,7 +11,7 @@ module Material.Select exposing
     , filled
     , outlined
     , Icon, icon
-    )
+    ) where
 
 {-| Select provides a single-option select menus.
 
@@ -199,14 +199,14 @@ use `Browser.Dom.focus`.
 
 -}
 
-import Html exposing (Html, text)
-import Html.Attributes exposing (class, style)
+import Html (Html, text)
+import Html.Attributes (class, style)
 import Json.Encode as Encode
 import Material.Icon as Icon
 import Material.List as List
-import Material.List.Item as ListItem exposing (ListItem)
+import Material.List.Item as ListItem (ListItem)
 import Material.Menu as Menu
-import Material.Select.Item exposing (SelectItem)
+import Material.Select.Item (SelectItem)
 import Material.Select.Item.Internal as SelectItem
 
 

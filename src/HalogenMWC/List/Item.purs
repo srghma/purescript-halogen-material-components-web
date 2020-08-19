@@ -1,4 +1,4 @@
-module Material.List.Item exposing
+module HalogenMWC.List.Item
     ( Config, config
     , setOnClick
     , setDisabled
@@ -12,7 +12,7 @@ module Material.List.Item exposing
     , text
     , Selection, selected
     , activated
-    )
+    ) where
 
 {-| Lists are continuous, vertical indexes of text or images.
 
@@ -188,9 +188,9 @@ Note that link list items cannot be disabled.
 
 -}
 
-import Html exposing (Html)
-import Html.Attributes exposing (class)
-import Material.List.Item.Internal exposing (Config(..), ListItem(..), Selection(..))
+import Html (Html)
+import Html.Attributes (class)
+import Material.List.Item.Internal (Config(..), ListItem(..), Selection(..))
 
 
 {-| Configuration of a list item
@@ -324,7 +324,7 @@ listItemView ((Config { additionalAttributes, href }) as config_) nodes =
 
         else
             Html.node "mdc-list-item" attributes nodes
-    )
+    ) where
         (List.filterMap identity
             [ listItemCs
             , hrefAttr config_

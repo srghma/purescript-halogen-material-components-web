@@ -1,4 +1,4 @@
-module Material.Card exposing
+module HalogenMWC.Card
     ( Config, config
     , setOutlined
     , setAttributes
@@ -11,7 +11,7 @@ module Material.Card exposing
     , Button, button
     , Icon, icon
     , fullBleedActions
-    )
+    ) where
 
 {-| Cards contain content and actions about a single subject.
 
@@ -43,7 +43,7 @@ module Material.Card exposing
 
 # Basic Usage
 
-    import Html exposing (Html, text)
+    import Html (Html, text)
     import Material.Button as Button
     import Material.Card as Card
     import Material.IconButton as IconButton
@@ -198,8 +198,8 @@ Note that cards must have a primary action element to be focusable.
 
 -}
 
-import Html exposing (Html)
-import Html.Attributes exposing (class, style)
+import Html (Html)
+import Html.Attributes (class, style)
 import Json.Encode as Encode
 import Material.Button as Button
 import Material.Button.Internal
