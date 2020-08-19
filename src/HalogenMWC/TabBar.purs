@@ -92,7 +92,7 @@ tabStackedCs { stacked } =
 tabMinWidthCs :: Config r i -> Maybe (IProp r i)
 tabMinWidthCs { minWidth } =
   if minWidth then
-    Just (HP.class_ "mdc-tab--min-width")
+    Just (HP.class_ mdc_tab____min_width)
   else
     Nothing
 

@@ -107,7 +107,7 @@ outlinedCs variant =
     Nothing
 
 leadingIconCs :: Config a r i -> Maybe (IProp r i)
-leadingIconCs { leadingIcon } = map (\_ -> HP.class_ "mdc-select--with-leading-icon") leadingIcon
+leadingIconCs { leadingIcon } = map (\_ -> HP.class_ mdc_select____with_leading_icon) leadingIcon
 
 disabledProp :: Config a r i -> Maybe (IProp r i)
 disabledProp { disabled } = Just (HH.Attributes.property "disabled" (Encode.bool disabled))

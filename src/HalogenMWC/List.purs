@@ -76,7 +76,7 @@ rootCs = Just (HP.class_ mdc_list)
 nonInteractiveCs :: Config r i -> Maybe (IProp r i)
 nonInteractiveCs { nonInteractive } =
   if nonInteractive then
-    Just (HP.class_ "mdc-list--non-interactive")
+    Just (HP.class_ mdc_list____non_interactive)
   else
     Nothing
 
@@ -90,14 +90,14 @@ denseCs { dense } =
 avatarArrayCs :: Config r i -> Maybe (IProp r i)
 avatarArrayCs { avatarArray } =
   if avatarArray then
-    Just (HP.class_ "mdc-list--avatar-list")
+    Just (HP.class_ mdc_list____avatar_list)
   else
     Nothing
 
 twoLineCs :: Config r i -> Maybe (IProp r i)
 twoLineCs { twoLine } =
   if twoLine then
-    Just (HP.class_ "mdc-list--two-line")
+    Just (HP.class_ mdc_list____two_line)
   else
     Nothing
 

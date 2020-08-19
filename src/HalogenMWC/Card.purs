@@ -47,7 +47,7 @@ actionsElt content = case content.actions of
         ( Array.filterMap identity
             [ Just (HP.class_ mdc_card__actions)
             , if fullBleed then
-                Just (HP.class_ "mdc-card__actions--full-bleed")
+                Just (HP.class_ mdc_card__actions____full_bleed)
               else
                 Nothing
             ]
@@ -116,7 +116,7 @@ backgroundImageAttr url = Just (style "background-image" ("url(\"" <> url <> "\"
 aspectCs :: Maybe Aspect -> Maybe (IProp r i)
 aspectCs aspect = case aspect of
   Just Square -> Just (HP.class_ mdc_card__media____square)
-  Just SixteenToNine -> Just (HP.class_ "mdc-card__media--16-9")
+  Just SixteenToNine -> Just (HP.class_ mdc_card__media____16_9)
   Nothing -> Nothing
 
 primaryAction :: Array (IProp r i) -> Array (Html r i) -> Array (Html r i)

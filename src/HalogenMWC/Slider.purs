@@ -90,7 +90,7 @@ discreteCs { discrete } =
 displayMarkersCs :: Config r i -> Maybe (IProp r i)
 displayMarkersCs { discrete, displayMarkers } =
   if discrete && displayMarkers then
-    Just (HP.class_ "mdc-slider--display-markers")
+    Just (HP.class_ mdc_slider____display_markers)
   else
     Nothing
 
