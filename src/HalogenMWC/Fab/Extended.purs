@@ -42,7 +42,7 @@ action button that primarily contains an icon, and no text, refer to the
 Developers are required to manually position the floating action button within
 their page layout, for instance by setting a fixed position via CSS.
 
-    import Html.Attributes (style)
+    
     import Material.Fab.Extended as ExtendedFab
 
     data Msg
@@ -132,7 +132,7 @@ an id attribute to it and use `Browser.Dom.focus`.
 -}
 
 import Html (Html, text)
-import Html.Attributes (class)
+
 import Html.Events
 import Json.Encode as Encode
 

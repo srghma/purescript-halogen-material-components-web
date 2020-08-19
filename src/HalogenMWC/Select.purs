@@ -200,7 +200,7 @@ use `Browser.Dom.focus`.
 -}
 
 import Html (Html, text)
-import Html.Attributes (class, style)
+
 import Json.Encode as Encode
 import Material.Icon as Icon
 import Material.Array as Array

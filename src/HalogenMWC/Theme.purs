@@ -120,7 +120,7 @@ the theme's primary or secondary colors.
 -}
 
 import Html
-import Html.Attributes (class)
+
 
 
 {-| Sets the text color to the theme primary color

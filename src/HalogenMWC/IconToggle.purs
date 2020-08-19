@@ -136,7 +136,7 @@ and use `Browser.Dom.focus`.
 -}
 
 import Html (Html, text)
-import Html.Attributes (class)
+
 import Html.Events
 import Json.Decode as Decode
 import Json.Encode as Encode

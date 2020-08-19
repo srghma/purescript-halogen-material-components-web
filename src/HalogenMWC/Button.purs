@@ -168,7 +168,7 @@ import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
-import Html.Attributes (class)
+
 import Html.Events
 import Json.Encode as Encode
 import Material.Button.Internal (Config(..))

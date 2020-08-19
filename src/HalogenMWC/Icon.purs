@@ -30,7 +30,7 @@ module HalogenMWC.Icon (icon)
 -}
 
 import Html (Html, text)
-import Html.Attributes (class)
+
 
 
 {-| Icon view function

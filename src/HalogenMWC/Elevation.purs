@@ -43,7 +43,7 @@ shadow. The elevation values are mapped out in a "z-space" and range from 0
 -}
 
 import Html
-import Html.Attributes (class)
+
 
 
 {-| 0dp elevation (no elevation)

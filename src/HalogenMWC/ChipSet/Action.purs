@@ -48,7 +48,7 @@ appear persistently and consistently.
 -}
 
 import Html (Html, text)
-import Html.Attributes (class)
+
 import Html.Events
 import Json.Decode as Decode
 import Material.Chip.Action.Internal as Chip (Chip(..))

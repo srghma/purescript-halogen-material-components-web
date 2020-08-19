@@ -44,7 +44,7 @@ into chips.
 -}
 
 import Html (Html, text)
-import Html.Attributes (class)
+
 import Html.Events
 import Html.Keyed
 import Json.Decode as Decode

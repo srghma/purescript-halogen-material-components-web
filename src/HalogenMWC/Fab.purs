@@ -39,7 +39,7 @@ action button](Material-Fab-Extended).
 Developers are required to manually position the floating action button within
 their page layout, for instance by setting a fixed position via CSS.
 
-    import Html.Attributes (style)
+    
     import Material.Fab as Fab
 
     data Msg
@@ -107,7 +107,7 @@ attribute to it and use `Browser.Dom.focus`.
 -}
 
 import Html (Html, text)
-import Html.Attributes (class)
+
 import Html.Events
 import Json.Encode as Encode
 

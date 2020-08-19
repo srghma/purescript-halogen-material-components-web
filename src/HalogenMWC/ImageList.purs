@@ -38,7 +38,7 @@ information about the image list items, refer to
 Note that you will have to set the width and margin of image list items
 yourself, preferably through SASS or through inline CSS.
 
-    import Html.Attributes (style)
+    
     import Material.ImageArray as ImageArray
     import Material.ImageArray.Item as ImageArrayItem
 
@@ -103,7 +103,7 @@ labels to be positioned in a scrim overlaying each image, use the image list's
 -}
 
 import Html (Html, text)
-import Html.Attributes (class, style)
+
 import Material.ImageArray.Item (ImageArrayItem)
 import Material.ImageArray.Item.Internal as ImageArrayItem
 

@@ -88,7 +88,7 @@ child of `helperLine`.
 -}
 
 import Html (Html, text)
-import Html.Attributes (class)
+
 
 
 {-| Configuration of a helper text

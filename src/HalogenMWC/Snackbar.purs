@@ -218,7 +218,7 @@ may specify an indefinite timeout by setting it to `Nothing`.
 -}
 
 import Html (Html, text)
-import Html.Attributes (class)
+
 import Html.Events
 import Json.Decode as Decode
 import Json.Encode as Encode
