@@ -67,7 +67,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Html.Events
 import Json.Decode as Decode
 import Json.Encode as Encode
-import HalogenMWC.Chip.Filter.Internal as Chip (Chip(..))
+import HalogenMWC.Chip.Filter.Internal as Chip
 import Svg
 import Svg.Attributes
 

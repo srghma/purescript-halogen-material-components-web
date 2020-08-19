@@ -209,7 +209,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Json.Encode as Encode
 import HalogenMWC.Icon as Icon
 import HalogenMWC.Array as Array
-import HalogenMWC.Array.Item as ArrayItem (ArrayItem)
+import HalogenMWC.Array.Item as ArrayItem
 import HalogenMWC.Menu as Menu
 import HalogenMWC.Select.Item (SelectItem)
 import HalogenMWC.Select.Item.Internal as SelectItem

@@ -54,7 +54,7 @@ import Html.Events
 import Html.Keyed
 import Json.Decode as Decode
 import Json.Encode as Encode
-import HalogenMWC.Chip.Input.Internal as Chip (Chip(..))
+import HalogenMWC.Chip.Input.Internal as Chip
 
 
 {-| Input chip set view function

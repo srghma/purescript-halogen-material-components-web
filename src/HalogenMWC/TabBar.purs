@@ -157,7 +157,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Html.Events
 import Json.Decode as Decode
 import Json.Encode as Encode
-import HalogenMWC.Tab.Internal as Tab (Tab(..))
+import HalogenMWC.Tab.Internal as Tab
 
 
 {-| Configuration of a tab bar
