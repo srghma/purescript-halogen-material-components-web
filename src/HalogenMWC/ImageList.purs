@@ -89,7 +89,7 @@ withTextProtectionCs (Config { withTextProtection }) =
 
 
 listItemElt :: Config r i -> ImageArrayItem r i -> Html r i
-listItemElt ((Config { masonry }) as config_) ((ImageArrayItem.ImageArrayItem ({ href, additionalAttributes })) as listItem) =
+listItemElt ((Config { masonry }) as config_) ((ImageArrayItem.ImageArrayItem { href, additionalAttributes }) as listItem) =
     let
         inner =
             [ if masonry then
@@ -109,7 +109,7 @@ listItemElt ((Config { masonry }) as config_) ((ImageArrayItem.ImageArrayItem ({
 
 
 imageAspectContainerElt :: Boolean -> ImageArrayItem r i -> Html r i
-imageAspectContainerElt masonry ((ImageArrayItem.ImageArrayItem ({ href })) as listItem) =
+imageAspectContainerElt masonry ((ImageArrayItem.ImageArrayItem { href }) as listItem) =
     HH.div
         (Array.filterMap identity
             [ Just (HP.class_ mdc_image_list__image_aspect_container)
@@ -120,7 +120,7 @@ imageAspectContainerElt masonry ((ImageArrayItem.ImageArrayItem ({ href })) as l
 
 
 imageElt :: Boolean -> ImageArrayItem r i -> Html r i
-imageElt masonry (ImageArrayItem.ImageArrayItem ({ href, image })) =
+imageElt masonry (ImageArrayItem.ImageArrayItem { href, image }) =
     let
         img =
             HH.img
@@ -145,7 +145,7 @@ imageElt masonry (ImageArrayItem.ImageArrayItem ({ href, image })) =
 
 
 supportingElt :: ImageArrayItem r i -> Html r i
-supportingElt (ImageArrayItem.ImageArrayItem ({ label })) =
+supportingElt (ImageArrayItem.ImageArrayItem { label }) =
     case label of
         Just string ->
             HH.div

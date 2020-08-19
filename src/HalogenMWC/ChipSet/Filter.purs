@@ -24,7 +24,7 @@ chipSet additionalAttributes chips =
 
 
 chip :: Chip r i -> Html r i
-chip (Chip (config_@({ additionalAttributes })) label) =
+chip (Chip (config_@{ additionalAttributes }) label) =
     HH.div [ HP.class_ mdc_touch_target_wrapper ]
         [ HH.node "mdc-chip"
             (Array.filterMap identity
@@ -82,7 +82,7 @@ chipPrimaryActionCs =
 
 
 selectedProp :: Chip.Config r i -> Maybe (HH.Attribute r i)
-selectedProp ({ selected }) =
+selectedProp { selected } =
     Just (HH.Attributes.property "selected" (Encode.bool selected))
 
 
@@ -102,7 +102,7 @@ gridcellRole =
 
 
 interactionHandler :: Chip.Config r i -> Maybe (HH.Attribute r i)
-interactionHandler ({ onChange }) =
+interactionHandler { onChange } =
     Maybe.map (HH.Events.on "MDCChip:interaction" << Decode.succeed) onChange
 
 
@@ -112,7 +112,7 @@ rippleElt =
 
 
 leadingIconElt :: Chip.Config r i -> Maybe (Html r i)
-leadingIconElt ({ icon, selected }) =
+leadingIconElt { icon, selected } =
     Maybe.map
         (\iconName ->
             HH.i

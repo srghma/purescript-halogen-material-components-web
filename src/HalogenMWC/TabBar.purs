@@ -99,7 +99,7 @@ activeTabIndexProp tabs =
     let
         activeTabIndex =
             Array.indexedMap Tuple.pair tabs
-                # Array.filter (\( _, Tab ({ active }) ) -> active)
+                # Array.filter (\( _, Tab { active } ) -> active)
                 # Array.head
                 # Maybe.map Tuple.first
     in
@@ -107,7 +107,7 @@ activeTabIndexProp tabs =
 
 
 viewTab :: Config r i -> Tab r i -> Html r i
-viewTab ((Config { indicatorSpansContent }) as barConfig) ((Tab (({ additionalAttributes, content }) as tabConfig)) as tab) =
+viewTab ((Config { indicatorSpansContent }) as barConfig) ((Tab ({ additionalAttributes, content } as tabConfig)) as tab) =
     HH.button
         (Array.filterMap identity
             [ tabCs
@@ -161,7 +161,7 @@ tabRoleAttr =
 
 
 tabClickHandler :: Tab.Config r i -> Maybe (HH.Attribute r i)
-tabClickHandler ({ onClick }) =
+tabClickHandler { onClick } =
     Maybe.map (HH.Events.on "MDCTab:interacted" << Decode.succeed) onClick
 
 

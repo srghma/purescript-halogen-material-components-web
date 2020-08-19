@@ -115,7 +115,7 @@ list ((Config { additionalAttributes }) as config_) firstArrayItem remainingArra
         (Array.map
             (\listItem_ ->
                 case listItem_ of
-                    ArrayItem.ArrayItem ({ node }) ->
+                    ArrayItem.ArrayItem { node } ->
                         node
 
                     ArrayItem.ArrayItemDivider node ->
@@ -174,7 +174,7 @@ clickHandler listItems =
     let
         getOnClick listItem_ =
             case listItem_ of
-                ArrayItem.ArrayItem ({ onClick }) ->
+                ArrayItem.ArrayItem { onClick } ->
                     Just onClick
 
                 ArrayItem.ArrayItemDivider _ ->
@@ -226,7 +226,7 @@ selectedIndexProp listItems =
                 # Array.indexedMap
                     (\index listItem_ ->
                         case listItem_ of
-                            ArrayItem.ArrayItem ({ selection }) ->
+                            ArrayItem.ArrayItem { selection } ->
                                 if selection /= Nothing then
                                     Just index
 
