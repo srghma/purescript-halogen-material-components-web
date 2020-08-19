@@ -36,7 +36,7 @@ gridRole =
 
 
 chip :: Chip r i -> Html r i
-chip (Chip ({ additionalAttributes } as config_) label) =
+chip (config_@Chip ({ additionalAttributes }) label) =
     HH.div [ HP.class_ mdc_touch_target_wrapper ]
         [ HH.node "mdc-chip"
             (Array.filterMap identity

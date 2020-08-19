@@ -56,7 +56,7 @@ config =
 
 
 drawer :: Config r i -> Array (Html r i) -> Html r i
-drawer ({ additionalAttributes } as config_) nodes =
+drawer (config_@{ additionalAttributes }) nodes =
     HH.node "mdc-drawer"
         (Array.filterMap identity
             [ rootCs

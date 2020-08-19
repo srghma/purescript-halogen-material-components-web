@@ -53,7 +53,7 @@ config =
 
 
 imageArray :: Config r i -> Array (ImageArrayItem r i) -> Html r i
-imageArray ({ additionalAttributes } as config_) listItems =
+imageArray (config_@{ additionalAttributes }) listItems =
     HH.node "mdc-image-list"
         (Array.filterMap identity
             [ rootCs
@@ -89,7 +89,7 @@ withTextProtectionCs { withTextProtection } =
 
 
 listItemElt :: Config r i -> ImageArrayItem r i -> Html r i
-listItemElt ({ masonry } as config_) ((ImageArrayItem.ImageArrayItem { href, additionalAttributes }) as listItem) =
+listItemElt (config_@{ masonry }) ((ImageArrayItem.ImageArrayItem { href, additionalAttributes }) as listItem) =
     let
         inner =
             [ if masonry then

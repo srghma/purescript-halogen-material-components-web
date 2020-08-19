@@ -68,7 +68,7 @@ config =
 
 
 fab :: Config r i -> String -> Html r i
-fab ({ additionalAttributes } as config_) label =
+fab (config_@{ additionalAttributes }) label =
     HH.node "mdc-fab"
         (Array.filterMap identity
             [ rootCs

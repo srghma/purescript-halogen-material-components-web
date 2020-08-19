@@ -104,7 +104,7 @@ data Variant
 
 
 select :: Variant -> Config a r i -> SelectItem a r i -> Array (SelectItem a r i) -> Html r i
-select variant ({ leadingIcon, selected, additionalAttributes, onChange } as config_) firstSelectItem remainingSelectItems =
+select variant (config_@{ leadingIcon, selected, additionalAttributes, onChange }) firstSelectItem remainingSelectItems =
     let
         selectedIndex =
             Array.indexedMap

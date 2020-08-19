@@ -72,7 +72,7 @@ config =
 
 
 tabBar :: Config r i -> Array (Tab r i) -> Html r i
-tabBar ({ additionalAttributes, align } as config_) tabs =
+tabBar (config_@{ additionalAttributes, align }) tabs =
     HH.node "mdc-tab-bar"
         (Array.filterMap identity
             [ rootCs
@@ -107,7 +107,7 @@ activeTabIndexProp tabs =
 
 
 viewTab :: Config r i -> Tab r i -> Html r i
-viewTab ({ indicatorSpansContent } as barConfig) ((Tab ({ additionalAttributes, content } as tabConfig)) as tab) =
+viewTab (barConfig@{ indicatorSpansContent }) (tabConfig@(Tab ({ additionalAttributes, content })) as tab) =
     HH.button
         (Array.filterMap identity
             [ tabCs
@@ -166,7 +166,7 @@ tabClickHandler { onClick } =
 
 
 tabContentElt :: Config r i -> Tab.Config r i -> Tab.Content -> Maybe (Html r i)
-tabContentElt ({ indicatorSpansContent } as barConfig) config_ content =
+tabContentElt (barConfig@{ indicatorSpansContent }) config_ content =
     Just
         (HH.div [ HP.class_ mdc_tab__content ]
             (if indicatorSpansContent then

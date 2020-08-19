@@ -62,7 +62,7 @@ config =
 
 
 menu :: Config r i -> Array (Html r i) -> Html r i
-menu ({ additionalAttributes } as config_) nodes =
+menu (config_@{ additionalAttributes }) nodes =
     HH.node "mdc-menu"
         (Array.filterMap identity
             [ rootCs

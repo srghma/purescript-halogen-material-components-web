@@ -101,7 +101,7 @@ indeterminate =
 
 
 checkbox :: Config r i -> Html r i
-checkbox ({ touch, additionalAttributes } as config_) =
+checkbox (config_@{ touch, additionalAttributes }) =
     let
         wrapTouch node =
             if touch then

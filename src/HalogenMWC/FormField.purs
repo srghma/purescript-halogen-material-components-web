@@ -67,7 +67,7 @@ config =
 
 
 formField :: Config r i -> Array (Html r i) -> Html r i
-formField ({ additionalAttributes } as config_) nodes =
+formField (config_@{ additionalAttributes }) nodes =
     HH.node "mdc-form-field"
         (Array.filterMap identity
             [ rootCs
@@ -103,7 +103,7 @@ clickHandler { onClick } =
 
 
 labelElt :: Config r i -> Html r i
-labelElt ({ label } as config_) =
+labelElt (config_@{ label }) =
     HH.label
         (Array.filterMap identity
             [ forAttr config_

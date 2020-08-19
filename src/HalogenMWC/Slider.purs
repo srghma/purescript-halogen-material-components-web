@@ -119,7 +119,7 @@ Note that this option is ignored by non-discrete sliders.
 
 
 slider :: Config r i -> Html r i
-slider ({ additionalAttributes } as config_) =
+slider (config_@{ additionalAttributes }) =
     HH.node "mdc-slider"
         (Array.filterMap identity
             [ rootCs

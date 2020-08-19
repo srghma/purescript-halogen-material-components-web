@@ -70,12 +70,12 @@ data ArrayItem r i =
     Material.Array.Item.Internal.ArrayItem r i
 
 listItem :: Config r i -> Array (Html r i) -> ArrayItem r i
-listItem (Config ({ additionalAttributes, href } as config_)) nodes =
+listItem (config_@Config ({ additionalAttributes, href })) nodes =
     ArrayItem { config_ | node = listItemView (Config config_) nodes }
 
 
 listItemView :: Config r i -> Array (Html r i) -> Html r i
-listItemView ({ additionalAttributes, href } as config_) nodes =
+listItemView (config_@{ additionalAttributes, href }) nodes =
     (\attributes ->
         if href /= Nothing then
             HH.node "mdc-list-item" [] [ HH.a attributes nodes ]

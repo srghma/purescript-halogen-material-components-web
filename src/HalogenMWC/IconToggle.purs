@@ -71,7 +71,7 @@ config =
 
 
 iconToggle :: Config r i -> { onIcon :: String, offIcon :: String } -> Html r i
-iconToggle ({ additionalAttributes } as config_) { onIcon, offIcon } =
+iconToggle (config_@{ additionalAttributes }) { onIcon, offIcon } =
     HH.node "mdc-icon-button"
         (Array.filterMap identity
             [ rootCs

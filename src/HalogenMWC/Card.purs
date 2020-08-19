@@ -56,7 +56,7 @@ config =
 
 
 card :: Config r i -> Content r i -> Html r i
-card ({ additionalAttributes } as config_) content =
+card (config_@{ additionalAttributes }) content =
     HH.node "mdc-card"
         (Array.filterMap identity
             [ rootCs

@@ -114,7 +114,7 @@ config { onClosed } =
 
 
 snackbar :: Config r i -> Queue r i -> Html r i
-snackbar ({ additionalAttributes } as config_) ((Queue { messages, nextMessageId }) as queue) =
+snackbar (config_@{ additionalAttributes }) ((Queue { messages, nextMessageId }) as queue) =
     let
         ( currentMessageId, currentMessage ) =
             Array.head messages

@@ -217,7 +217,7 @@ rippleElt =
 
 
 leadingIconElt :: Config r i -> Maybe (Html r i)
-leadingIconElt ({ trailingIcon } as config_) =
+leadingIconElt (config_@{ trailingIcon }) =
     if not trailingIcon then
         iconElt config_
 
@@ -226,7 +226,7 @@ leadingIconElt ({ trailingIcon } as config_) =
 
 
 trailingIconElt :: Config r i -> Maybe (Html r i)
-trailingIconElt ({ trailingIcon } as config_) =
+trailingIconElt (config_@{ trailingIcon }) =
     if trailingIcon then
         iconElt config_
 

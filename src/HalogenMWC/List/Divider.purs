@@ -54,7 +54,7 @@ config =
 
 
 listItem :: Config r i -> ArrayItem r i
-listItem ({ additionalAttributes } as config_) =
+listItem (config_@{ additionalAttributes }) =
     ArrayItem.ArrayItemDivider $
         HH.li
             (Array.filterMap identity

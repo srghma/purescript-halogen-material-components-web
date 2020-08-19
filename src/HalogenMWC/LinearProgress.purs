@@ -59,7 +59,7 @@ config =
 
 
 linearProgress :: Variant -> Config r i -> Html r i
-linearProgress variant ({ additionalAttributes } as config_) =
+linearProgress variant (config_@{ additionalAttributes }) =
     HH.node "mdc-linear-progress"
         (Array.filterMap identity
             [ rootCs

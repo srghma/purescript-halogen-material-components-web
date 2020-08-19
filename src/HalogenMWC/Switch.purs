@@ -62,7 +62,7 @@ config =
 
 
 switch :: Config r i -> Html r i
-switch ({ additionalAttributes } as config_) =
+switch (config_@{ additionalAttributes }) =
     HH.node "mdc-switch"
         (Array.filterMap identity
             [ rootCs

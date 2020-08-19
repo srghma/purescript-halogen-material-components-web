@@ -79,7 +79,7 @@ prevent potentially overlapping touch targets on adjacent elements.
 
 
 radio :: Config r i -> Html r i
-radio ({ touch, additionalAttributes } as config_) =
+radio (config_@{ touch, additionalAttributes }) =
     let
         wrapTouch node =
             if touch then
