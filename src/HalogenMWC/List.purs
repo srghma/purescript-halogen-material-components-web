@@ -48,7 +48,7 @@ list (config_@{ additionalAttributes }) firstArrayItem remainingArrayItems =
   let
     listItems = firstArrayItem :: remainingArrayItems
   in
-    HH.node "mdc-list"
+    HH.element "mdc-list"
       ( Array.filterMap identity
           [ rootCs
           , nonInteractiveCs config_

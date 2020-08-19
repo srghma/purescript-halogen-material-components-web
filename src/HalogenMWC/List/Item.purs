@@ -45,10 +45,10 @@ listItemView :: Config r i -> Array (Html r i) -> Html r i
 listItemView (config_@{ additionalAttributes, href }) nodes =
     (\attributes ->
         if href /= Nothing then
-            HH.node "mdc-list-item" [] [ HH.a attributes nodes ]
+            HH.element "mdc-list-item" [] [ HH.a attributes nodes ]
 
         else
-            HH.node "mdc-list-item" attributes nodes
+            HH.element "mdc-list-item" attributes nodes
     ) where
         (Array.filterMap identity
             [ listItemCs

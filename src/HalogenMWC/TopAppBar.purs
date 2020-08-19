@@ -28,7 +28,7 @@ defaultConfig =
 
 genericTopAppBar :: Variant -> Config r i -> Array (Html r i) -> Html r i
 genericTopAppBar variant (config_@{ additionalAttributes }) nodes =
-  HH.node "mdc-top-app-bar"
+  HH.element "mdc-top-app-bar"
     ( Array.filterMap identity
         [ rootCs
         , variantCs variant

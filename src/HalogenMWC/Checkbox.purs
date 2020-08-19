@@ -41,7 +41,7 @@ checkbox (config_@{ touch, additionalAttributes }) =
         node
   in
     wrapTouch
-      $ HH.node "mdc-checkbox"
+      $ HH.element "mdc-checkbox"
           ( Array.filterMap identity
               [ rootCs
               , touchCs config_

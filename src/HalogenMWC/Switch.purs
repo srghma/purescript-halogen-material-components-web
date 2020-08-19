@@ -24,7 +24,7 @@ defaultConfig =
 
 switch :: Config r i -> Html r i
 switch (config_@{ additionalAttributes }) =
-  HH.node "mdc-switch"
+  HH.element "mdc-switch"
     ( Array.filterMap identity
         [ rootCs
         , checkedProp config_

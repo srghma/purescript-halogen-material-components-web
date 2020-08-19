@@ -10,7 +10,7 @@ import HalogenMWC.Chip.Action as Chip
 
 chipSet :: Array (IProp r i) -> Array (Chip r i) -> Html r i
 chipSet additionalAttributes chips =
-  HH.node "mdc-chip-set"
+  HH.element "mdc-chip-set"
     ( [ HP.classes [ mdc_chip_set, mdc_chip_set____action ]
       , HH.Attributes.attribute "role" "grid"
       ]
@@ -21,7 +21,7 @@ chipSet additionalAttributes chips =
 chip :: Chip r i -> Html r i
 chip (Chip config_ label) =
   HH.div [ HP.class_ mdc_touch_target_wrapper ]
-    [ HH.node "mdc-chip"
+    [ HH.element "mdc-chip"
         ( Array.filterMap identity
             [ HP.class_ mdc_chip
             , HP.class_ mdc_chip____touch

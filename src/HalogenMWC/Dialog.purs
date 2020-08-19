@@ -28,7 +28,7 @@ type Content r i
 
 dialog :: Config r i -> Content r i -> Html r i
 dialog (config_@{ additionalAttributes }) content =
-  HH.node "mdc-dialog"
+  HH.element "mdc-dialog"
     ( Array.filterMap identity
         [ rootCs
         , openProp config_

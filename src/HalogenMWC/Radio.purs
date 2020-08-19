@@ -44,7 +44,7 @@ radio (config_@{ touch, additionalAttributes }) =
         node
   in
     wrapTouch
-      $ HH.node "mdc-radio"
+      $ HH.element "mdc-radio"
           ( Array.filterMap identity
               [ rootCs
               , touchCs config_

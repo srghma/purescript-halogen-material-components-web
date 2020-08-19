@@ -12,14 +12,14 @@ import Halogen.SVG.Attributes as Halogen.SVG.Attributes
 
 chipSet :: Array (IProp r i) -> Array (Chip r i) -> Html r i
 chipSet additionalAttributes chips =
-  HH.node "mdc-chip-set"
+  HH.element "mdc-chip-set"
     ([ chipSetCs, chipSetFilterCs, gridRole ] <> additionalAttributes)
     (Array.map chip chips)
 
 chip :: Chip r i -> Html r i
 chip (Chip (config_@{ additionalAttributes }) label) =
   HH.div [ HP.class_ mdc_touch_target_wrapper ]
-    [ HH.node "mdc-chip"
+    [ HH.element "mdc-chip"
         ( Array.filterMap identity
             [ chipCs
             , chipTouchCs

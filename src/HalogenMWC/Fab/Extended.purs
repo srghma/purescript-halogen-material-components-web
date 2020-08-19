@@ -27,7 +27,7 @@ defaultConfig =
 
 fab :: Config r i -> String -> Html r i
 fab (config_@{ additionalAttributes }) label =
-    HH.node "mdc-fab"
+    HH.element "mdc-fab"
         (Array.filterMap identity
             [ rootCs
             , extendedFabCs

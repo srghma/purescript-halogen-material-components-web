@@ -48,7 +48,7 @@ button variant (config_@{ additionalAttributes, touch, href }) label =
         node
   in
     wrapTouch
-      $ HH.node "mdc-button"
+      $ HH.element "mdc-button"
           (Array.filterMap identity [ disabledProp config_ ])
           [ ( if href /= Nothing then
                 HH.a

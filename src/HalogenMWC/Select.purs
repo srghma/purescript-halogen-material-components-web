@@ -58,7 +58,7 @@ select variant (config_@{ leadingIcon, selected, additionalAttributes, onChange 
                 # Array.filterMap identity
                 # Array.head
     in
-    HH.node "mdc-select"
+    HH.element "mdc-select"
         (Array.filterMap identity
             [ rootCs
             , outlinedCs variant

@@ -28,7 +28,7 @@ defaultConfig =
 
 linearProgress :: Variant -> Config r i -> Html r i
 linearProgress variant (config_@{ additionalAttributes }) =
-    HH.node "mdc-linear-progress"
+    HH.element "mdc-linear-progress"
         (Array.filterMap identity
             [ rootCs
             , displayCss

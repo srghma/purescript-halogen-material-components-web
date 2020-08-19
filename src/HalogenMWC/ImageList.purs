@@ -26,7 +26,7 @@ defaultConfig =
 
 imageArray :: Config r i -> Array (ImageArrayItem r i) -> Html r i
 imageArray (config_@{ additionalAttributes }) listItems =
-    HH.node "mdc-image-list"
+    HH.element "mdc-image-list"
         (Array.filterMap identity
             [ rootCs
             , masonryCs config_
@@ -68,7 +68,7 @@ listItemElt (config_@{ masonry }) ((ImageArrayItem.ImageArrayItem { href, additi
             , supportingElt listItem
             ]
     in
-    HH.node "mdc-image-list-item"
+    HH.element "mdc-image-list-item"
         ([HP.class_ mdc_image_list__item] <> additionalAttributes)
         (href
             # map (\href_ -> [ HH.a [ HH.Attributes.href href_ ] inner ])

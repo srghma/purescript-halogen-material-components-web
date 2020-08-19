@@ -24,7 +24,7 @@ defaultConfig =
 
 card :: Config r i -> Content r i -> Html r i
 card (config_@{ additionalAttributes }) content =
-  HH.node "mdc-card"
+  HH.element "mdc-card"
     ( Array.filterMap identity
         [ HP.class_ mdc_card
         , outlinedCs config_

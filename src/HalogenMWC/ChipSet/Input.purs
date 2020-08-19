@@ -18,7 +18,7 @@ chipSet additionalAttributes keyedChips =
 chip :: Chip r i -> Html r i
 chip (Chip (config_@{ additionalAttributes }) label) =
     HH.div [ HP.class_ mdc_touch_target_wrapper ]
-        [ HH.node "mdc-chip"
+        [ HH.element "mdc-chip"
             (Array.filterMap identity
                 [ chipCs
                 , chipTouchCs

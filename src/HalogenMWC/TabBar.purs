@@ -29,7 +29,7 @@ defaultConfig =
 
 tabBar :: Config r i -> Array (Tab r i) -> Html r i
 tabBar (config_@{ additionalAttributes, align }) tabs =
-    HH.node "mdc-tab-bar"
+    HH.element "mdc-tab-bar"
         (Array.filterMap identity
             [ rootCs
             , tablistRoleAttr

@@ -26,7 +26,7 @@ defaultConfig =
 
 formField :: Config r i -> Array (Html r i) -> Html r i
 formField config_ nodes =
-  HH.node "mdc-form-field"
+  HH.element "mdc-form-field"
     ( Array.filterMap identity
         [ rootCs
         , alignEndCs config_

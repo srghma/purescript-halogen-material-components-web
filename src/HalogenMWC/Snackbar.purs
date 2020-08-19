@@ -74,7 +74,7 @@ snackbar (config_@{ additionalAttributes }) ((Queue { messages, nextMessageId })
                 # map (Tuple.mapSecond Just)
                 # Maybe.withDefault ( MessageId -1, Nothing )
     in
-    HH.node "mdc-snackbar"
+    HH.element "mdc-snackbar"
         (Array.filterMap identity
             [ rootCs
             , closeOnEscapeProp config_

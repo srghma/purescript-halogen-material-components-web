@@ -27,14 +27,14 @@ config { toLabel } =
 
 chipSet :: Config a r i -> Array (Chip a r i) -> Html r i
 chipSet (config_@{ selected, onChange, toLabel, additionalAttributes }) chips =
-    HH.node "mdc-chip-set"
+    HH.element "mdc-chip-set"
         ([ chipSetCs, chipSetChoiceCs, gridRole] <> additionalAttributes)
         (Array.map (chip selected onChange toLabel) chips)
 
 chip :: Maybe a -> Maybe (a -> r i) -> (a -> String) -> Chip a r i -> Html r i
 chip selected onChange toLabel (config_@Chip ({ additionalAttributes }) value) =
     HH.div [ HP.class_ mdc_touch_target_wrapper ]
-        [ HH.node "mdc-chip"
+        [ HH.element "mdc-chip"
             (Array.filterMap identity
                 [ chipCs
                 , chipTouchCs

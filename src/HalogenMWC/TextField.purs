@@ -66,7 +66,7 @@ outlined config_ = textField True config_
 
 textField :: Boolean -> Config r i -> Html r i
 textField outlined_ (config_@{ additionalAttributes, fullwidth }) =
-  HH.node "mdc-text-field"
+  HH.element "mdc-text-field"
     ( Array.filterMap identity
         [ rootCs
         , noLabelCs config_

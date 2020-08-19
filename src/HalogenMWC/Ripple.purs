@@ -30,7 +30,7 @@ accent = Accent
 
 ripple :: Boolean -> Config r i -> Html r i
 ripple isUnbounded (config_@{ additionalAttributes }) =
-  HH.node "mdc-ripple"
+  HH.element "mdc-ripple"
     ( Array.filterMap identity
         [ unboundedProp isUnbounded
         , unboundedData isUnbounded

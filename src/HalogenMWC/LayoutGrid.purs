@@ -9,7 +9,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 layoutGrid :: Array (IProp r i) -> Array (Html r i) -> Html r i
 layoutGrid attributes nodes =
-    HH.node "mdc-layout-grid"
+    HH.element "mdc-layout-grid"
         (HP.class_ mdc_layout_grid :: style "display" "block" :: attributes)
         nodes
 

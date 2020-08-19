@@ -22,7 +22,7 @@ defaultConfig =
 
 drawer :: Config r i -> Array (Html r i) -> Html r i
 drawer (config_@{ additionalAttributes }) nodes =
-  HH.node "mdc-drawer"
+  HH.element "mdc-drawer"
     ( Array.filterMap identity
         [ rootCs
         , dismissibleCs
