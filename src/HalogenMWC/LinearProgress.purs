@@ -21,8 +21,8 @@ data Variant
 
 defaultConfig :: Config r i
 defaultConfig =
-        { reverse: False
-        , closed: False
+        { reverse: false
+        , closed: false
         , additionalAttributes: []
         }
 

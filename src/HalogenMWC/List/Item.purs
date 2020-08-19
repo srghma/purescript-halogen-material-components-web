@@ -28,7 +28,7 @@ data ArrayItem r i
 
 defaultConfig :: Config r i
 defaultConfig =
-        { disabled: False
+        { disabled: false
         , selection: Nothing
         , href: Nothing
         , target: Nothing

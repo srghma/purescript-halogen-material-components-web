@@ -19,8 +19,8 @@ type Config r i
 
 defaultConfig :: Config r i
 defaultConfig =
-        { masonry: False
-        , withTextProtection: False
+        { masonry: false
+        , withTextProtection: false
         , additionalAttributes: []
         }
 

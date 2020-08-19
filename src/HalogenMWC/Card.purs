@@ -18,7 +18,7 @@ type Config r i
 
 defaultConfig :: Config r i
 defaultConfig =
-  { outlined: False
+  { outlined: false
   , additionalAttributes: []
   }
 
@@ -141,7 +141,7 @@ newtype Actions r i
   }
 
 actions :: { buttons :: Array (Button r i), icons :: Array (Icon r i) } -> Actions r i
-actions { buttons, icons } = Actions { buttons = buttons, icons = icons, fullBleed = False }
+actions { buttons, icons } = Actions { buttons = buttons, icons = icons, fullBleed = false }
 
 {-| Card full bleed action
 
@@ -153,7 +153,7 @@ full width by using `cardFullBleedActions`.
 
 -}
 fullBleedActions :: Button r i -> Actions r i
-fullBleedActions button_ = Actions { buttons = [ button_ ], icons = [], fullBleed = True }
+fullBleedActions button_ = Actions { buttons = [ button_ ], icons = [], fullBleed = true }
 
 button :: Button.Config r i -> String -> Html r i
 button config label =

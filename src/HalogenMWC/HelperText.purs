@@ -14,7 +14,7 @@ type Config r i
 
 defaultConfig :: Config r i
 defaultConfig =
-  { persistent: False
+  { persistent: false
   , additionalAttributes: []
   }
 

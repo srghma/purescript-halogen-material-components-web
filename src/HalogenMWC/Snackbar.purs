@@ -51,7 +51,7 @@ type Config r i =
 
 config :: { onClosed :: MessageId -> r i } -> Config r i
 config { onClosed } =
-        { closeOnEscape: False
+        { closeOnEscape: false
         , additionalAttributes: []
         , onClosed: onClosed
         }
@@ -100,8 +100,8 @@ message label =
         , onActionButtonClick: Nothing
         , actionIcon: Nothing
         , onActionIconClick: Nothing
-        , leading: False
-        , stacked: False
+        , leading: false
+        , stacked: false
         , timeoutMs: Just 5000
         }
 

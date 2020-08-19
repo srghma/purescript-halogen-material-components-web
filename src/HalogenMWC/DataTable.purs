@@ -160,15 +160,13 @@ data Cell r i
     }
 
 cell :: Array (IProp r i) -> Array (Html r i) -> Cell r i
-cell attributes nodes = Cell { numeric = False, attributes = attributes, nodes = nodes }
+cell attributes nodes = Cell { numeric = false, attributes = attributes, nodes = nodes }
 
-{-| Numeric data table cell (right-aligned contents)
--}
 numericCell :: Array (IProp r i) -> Array (Html r i) -> Cell r i
-numericCell attributes nodes = Cell { numeric = True, attributes = attributes, nodes = nodes }
+numericCell attributes nodes = Cell { numeric: true, attributes: attributes, nodes: nodes }
 
 checkboxCell :: Array (IProp r i) -> Checkbox.Config r i -> Cell r i
-checkboxCell attributes config_ = CheckboxCell { attributes = attributes, config_ = config_ }
+checkboxCell attributes config_ = CheckboxCell { attributes: attributes, config_: config_ }
 
 dataTableCellCs :: Maybe (IProp r i)
 dataTableCellCs = Just (HP.class_ mdc_data_table__cell)

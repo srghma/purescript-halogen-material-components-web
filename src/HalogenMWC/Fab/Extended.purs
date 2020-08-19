@@ -19,8 +19,8 @@ type Config r i
 defaultConfig :: Config r i
 defaultConfig =
         { icon: Nothing
-        , trailingIcon: False
-        , exited: False
+        , trailingIcon: false
+        , exited: false
         , onClick: Nothing
         , additionalAttributes: []
         }
@@ -56,7 +56,7 @@ rippleElt =
 leadingIconElt :: Config r i -> Maybe (Html r i)
 leadingIconElt { icon, trailingIcon } =
     case Tuple icon trailingIcon of
-        Just (Tuple iconName False)  ->
+        Just (Tuple iconName false)  ->
             Just
                 (HH.span [ HP.class_ material_icons, HP.class_ mdc_fab__icon ]
                     [ text iconName ]
@@ -72,7 +72,7 @@ labelElt label =
 trailingIconElt :: Config r i -> Maybe (Html r i)
 trailingIconElt { icon, trailingIcon } =
     case (Tuple icon trailingIcon) of
-        ( Just iconName, True ) ->
+        ( Just iconName, true ) ->
             Just
                 (HH.span [ HP.class_ material_icons, HP.class_ mdc_fab__icon ]
                     [ text iconName ]

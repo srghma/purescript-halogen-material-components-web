@@ -47,10 +47,10 @@ ripple isUnbounded (config_@{ additionalAttributes }) =
     []
 
 bounded :: Config r i -> Html r i
-bounded = ripple False
+bounded = ripple false
 
 unbounded :: Config r i -> Html r i
-unbounded = ripple True
+unbounded = ripple true
 
 rippleSurface :: Maybe (IProp r i)
 rippleSurface = Just (HP.class_ mdc_ripple_surface)

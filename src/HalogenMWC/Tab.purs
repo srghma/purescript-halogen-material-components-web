@@ -23,7 +23,7 @@ newtype Tab r i = Tab (Config r i)
 
 defaultConfig :: Config r i
 defaultConfig =
-        { active: False
+        { active: false
         , additionalAttributes: []
         , onClick: Nothing
         , content:

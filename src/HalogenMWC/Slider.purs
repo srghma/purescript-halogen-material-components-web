@@ -24,13 +24,13 @@ type Config r i
 
 defaultConfig :: Config r i
 defaultConfig =
-  { discrete: False
-  , displayMarkers: False
+  { discrete: false
+  , displayMarkers: false
   , min: Nothing
   , max: Nothing
   , step: Nothing
   , value: Nothing
-  , disabled: False
+  , disabled: false
   , additionalAttributes: []
   , onInput: Nothing
   }

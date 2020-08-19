@@ -27,14 +27,14 @@ type Config r i
 defaultConfig :: Config r i
 defaultConfig =
   { label: Nothing
-  , fullwidth: False
+  , fullwidth: false
   , value: Nothing
   , placeholder: Nothing
   , rows: Nothing
   , cols: Nothing
-  , disabled: False
-  , required: False
-  , valid: True
+  , disabled: false
+  , required: false
+  , valid: true
   , minLength: Nothing
   , maxLength: Nothing
   , additionalAttributes: []
@@ -43,10 +43,10 @@ defaultConfig =
   }
 
 filled :: Config r i -> Html r i
-filled config_ = textArea False config_
+filled config_ = textArea false config_
 
 outlined :: Config r i -> Html r i
-outlined config_ = textArea True config_
+outlined config_ = textArea true config_
 
 textArea :: Boolean -> Config r i -> Html r i
 textArea outlined_ (config_@{ additionalAttributes, fullwidth }) =

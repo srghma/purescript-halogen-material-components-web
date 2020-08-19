@@ -22,14 +22,14 @@ type Config r i
 defaultConfig :: Config r i
 defaultConfig =
   { icon: Nothing
-  , trailingIcon: False
-  , disabled: False
-  , dense: False
+  , trailingIcon: false
+  , disabled: false
+  , dense: false
   , href: Nothing
   , target: Nothing
   , additionalAttributes: []
   , onClick: Nothing
-  , touch: True
+  , touch: true
   }
 
 data Variant

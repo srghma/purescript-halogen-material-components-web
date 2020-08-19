@@ -21,12 +21,12 @@ type Config r i
 
 defaultConfig :: Config r i
 defaultConfig =
-  { nonInteractive: False
-  , dense: False
-  , avatarArray: False
-  , twoLine: False
-  , vertical: False
-  , wrapFocus: False
+  { nonInteractive: false
+  , dense: false
+  , avatarArray: false
+  , twoLine: false
+  , vertical: false
+  , wrapFocus: false
   , additionalAttributes: []
   }
 
@@ -134,9 +134,9 @@ selectedIndexProp listItems =
       listItems
         # Array.filter
             ( \listItem_ -> case listItem_ of
-                ArrayItem.ArrayItem _ -> True
-                ArrayItem.ArrayItemDivider _ -> False
-                ArrayItem.ArrayGroupSubheader _ -> False
+                ArrayItem.ArrayItem _ -> true
+                ArrayItem.ArrayItemDivider _ -> false
+                ArrayItem.ArrayGroupSubheader _ -> false
             )
         # Array.indexedMap
             ( \index listItem_ -> case listItem_ of

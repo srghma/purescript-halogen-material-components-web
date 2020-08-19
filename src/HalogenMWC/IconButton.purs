@@ -16,7 +16,7 @@ type Config r i
 
 defaultConfig :: Config r i
 defaultConfig =
-  { disabled: False
+  { disabled: false
   , label: Nothing
   , additionalAttributes: []
   , onClick: Nothing

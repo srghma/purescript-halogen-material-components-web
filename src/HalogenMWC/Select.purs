@@ -29,9 +29,9 @@ data Config a r i
 config :: Config a r i
 defaultConfig =
         { label: Nothing
-        , disabled: False
-        , required: False
-        , valid: True
+        , disabled: false
+        , required: false
+        , valid: true
         , selected: Nothing
         , leadingIcon: Nothing
         , additionalAttributes: []
@@ -183,7 +183,7 @@ menuElt leadingIcon selected onChange firstSelectItem remainingSelectItems =
                 , style "width" "100%"
                 ]
         )
-        [ Array.list (Array.config # Array.setWrapFocus True)
+        [ Array.list (Array.config # Array.setWrapFocus true)
             (listItem leadingIcon selected onChange firstSelectItem)
             (map (listItem leadingIcon selected onChange) remainingSelectItems)
         ]

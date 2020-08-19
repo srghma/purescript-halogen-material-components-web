@@ -19,7 +19,7 @@ defaultConfig :: Config r i
 defaultConfig =
   { label: Nothing
   , for: Nothing
-  , alignEnd: False
+  , alignEnd: false
   , additionalAttributes: []
   , onClick: Nothing
   }

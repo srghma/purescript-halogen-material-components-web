@@ -16,8 +16,8 @@ type Config r i
 
 defaultConfig :: Config r i
 defaultConfig =
-  { mini: False
-  , exited: False
+  { mini: false
+  , exited: false
   , onClick: Nothing
   , additionalAttributes: []
   }

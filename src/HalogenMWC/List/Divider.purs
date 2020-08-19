@@ -19,8 +19,8 @@ type Config r i
 
 defaultConfig :: Config r i
 defaultConfig =
-        { inset: False
-        , padded: False
+        { inset: false
+        , padded: false
         , additionalAttributes: []
         }
 

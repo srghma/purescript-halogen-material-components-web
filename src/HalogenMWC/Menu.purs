@@ -16,8 +16,8 @@ type Config r i
 
 defaultConfig :: Config r i
 defaultConfig =
-  { open: False
-  , quickOpen: False
+  { open: false
+  , quickOpen: false
   , additionalAttributes: []
   , onClose: Nothing
   }

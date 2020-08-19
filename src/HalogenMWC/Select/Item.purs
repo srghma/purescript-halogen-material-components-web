@@ -18,6 +18,6 @@ data SelectItem a r i = SelectItem (Config a r i) (Array (Html r i))
 defaultConfig :: { value :: a } -> Config a r i
 defaultConfig { value } =
         { value: value
-        , disabled: False
+        , disabled: false
         , additionalAttributes: []
         }

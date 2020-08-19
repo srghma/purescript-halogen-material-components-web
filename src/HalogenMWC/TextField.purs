@@ -38,12 +38,12 @@ data Icon r i
 defaultConfig :: Config r i
 defaultConfig =
   { label: Nothing
-  , fullwidth: False
+  , fullwidth: false
   , value: Nothing
   , placeholder: Nothing
-  , disabled: False
-  , required: False
-  , valid: True
+  , disabled: false
+  , required: false
+  , valid: true
   , minLength: Nothing
   , maxLength: Nothing
   , pattern: Nothing
@@ -59,10 +59,10 @@ defaultConfig =
   }
 
 filled :: Config r i -> Html r i
-filled config_ = textField False config_
+filled config_ = textField false config_
 
 outlined :: Config r i -> Html r i
-outlined config_ = textField True config_
+outlined config_ = textField true config_
 
 textField :: Boolean -> Config r i -> Html r i
 textField outlined_ (config_@{ additionalAttributes, fullwidth }) =

@@ -16,8 +16,8 @@ type Config r i
 
 defaultConfig :: Config r i
 defaultConfig =
-  { checked: False
-  , disabled: False
+  { checked: false
+  , disabled: false
   , additionalAttributes: []
   , onChange: Nothing
   }
