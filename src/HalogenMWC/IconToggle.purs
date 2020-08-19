@@ -63,7 +63,7 @@ onIconCs :: Maybe (IProp r i)
 onIconCs = Just (HP.class_ "mdc-icon-button__icon mdc-icon-button__icon--on")
 
 tabIndexProp :: Maybe (IProp r i)
-tabIndexProp = Just (HH.Attributes.tabindex 0)
+tabIndexProp = Just (HP.tabindex 0)
 
 ariaHiddenAttr :: Maybe (IProp r i)
 ariaHiddenAttr = Just (HP.attr "aria-hidden" "true")
@@ -88,4 +88,4 @@ changeHandler { onChange } =
     onChange
 
 disabledAttr :: Config r i -> Maybe (IProp r i)
-disabledAttr { disabled } = Just (HH.Attributes.disabled disabled)
+disabledAttr { disabled } = Just (HP.disabled disabled)

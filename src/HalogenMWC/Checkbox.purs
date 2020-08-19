@@ -100,7 +100,7 @@ nativeControlElt :: Config r i -> HH.HTML w i
 nativeControlElt config_ =
   HH.input
     ( Array.catMaybes
-        [ Just (HH.Attributes.type_ "checkbox")
+        [ Just (HP.type_ "checkbox")
         , Just (HP.class_ mdc_checkbox__native_control)
         , checkedProp config_
         , indeterminateProp config_

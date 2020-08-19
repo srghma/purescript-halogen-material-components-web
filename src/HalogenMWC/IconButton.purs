@@ -56,7 +56,7 @@ materialIconsCs :: Maybe (IProp r i)
 materialIconsCs = Just (HP.class_ material_icons)
 
 tabIndexProp :: Maybe (IProp r i)
-tabIndexProp = Just (HH.Attributes.tabindex 0)
+tabIndexProp = Just (HP.tabindex 0)
 
 clickHandler :: Config r i -> Maybe (IProp r i)
 clickHandler config_ = map HH.Events.onClick config_.onClick

@@ -107,7 +107,7 @@ disabledProp :: Config r i -> Maybe (IProp r i)
 disabledProp { disabled } = Just (HP.prop "disabled" disabled)
 
 disabledAttr :: Config r i -> Maybe (IProp r i)
-disabledAttr { disabled } = Just (HH.Attributes.disabled disabled)
+disabledAttr { disabled } = Just (HP.disabled disabled)
 
 tabIndexProp :: Config r i -> Maybe (IProp r i)
 tabIndexProp { disabled } =
@@ -117,12 +117,12 @@ tabIndexProp { disabled } =
     Just (HP.prop "tabIndex" 0)
 
 hrefAttr :: Config r i -> Maybe (IProp r i)
-hrefAttr { href } = map HH.Attributes.href href
+hrefAttr { href } = map HP.href href
 
 targetAttr :: Config r i -> Maybe (IProp r i)
 targetAttr { href, target } =
   if href /= Nothing then
-    map HH.Attributes.target target
+    map HP.target target
   else
     Nothing
 

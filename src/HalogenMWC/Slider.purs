@@ -97,7 +97,7 @@ displayMarkersCs { discrete, displayMarkers } =
     Nothing
 
 tabIndexProp :: Maybe (IProp r i)
-tabIndexProp = Just (HH.Attributes.tabindex 0)
+tabIndexProp = Just (HP.tabindex 0)
 
 sliderRoleAttr :: Maybe (IProp r i)
 sliderRoleAttr = Just (HP.attr "role" "slider")

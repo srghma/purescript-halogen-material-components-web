@@ -48,17 +48,17 @@ alignEndCs { alignEnd } =
     Nothing
 
 forAttr :: Config r i -> Maybe (IProp r i)
-forAttr { for } = map HH.Attributes.for for
+forAttr { for } = map HP.for for
 
 clickHandler :: Config r i -> Maybe (IProp r i)
 clickHandler { onClick } = map HH.Events.onClick onClick
 
 labelElt :: Config r i -> HH.HTML w i
-labelElt (config_@{ label }) =
+labelElt config_ =
   HH.label
     ( Array.catMaybes
         [ forAttr config_
         , clickHandler config_
         ]
     )
-    [ text (Maybe.fromMaybe "" label) ]
+    [ text (Maybe.fromMaybe "" config_.label) ]

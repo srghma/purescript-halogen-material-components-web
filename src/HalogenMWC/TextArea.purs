@@ -122,7 +122,7 @@ valueProp :: Config r i -> Maybe (IProp r i)
 valueProp { value } = map (HP.prop "value" << Encode.string) value
 
 placeholderAttr :: Config r i -> Maybe (IProp r i)
-placeholderAttr { placeholder } = map HH.Attributes.placeholder placeholder
+placeholderAttr { placeholder } = map HP.placeholder placeholder
 
 inputHandler :: Config r i -> Maybe (IProp r i)
 inputHandler { onInput } = map HH.Events.onInput onInput
@@ -153,10 +153,10 @@ inputCs :: Maybe (IProp r i)
 inputCs = Just (HP.class_ mdc_text_field__input)
 
 rowsAttr :: Config r i -> Maybe (IProp r i)
-rowsAttr { rows } = map HH.Attributes.rows rows
+rowsAttr { rows } = map HP.rows rows
 
 colsAttr :: Config r i -> Maybe (IProp r i)
-colsAttr { cols } = map HH.Attributes.cols cols
+colsAttr { cols } = map HP.cols cols
 
 ariaLabelAttr :: Config r i -> Maybe (IProp r i)
 ariaLabelAttr { fullwidth, placeholder, label } =

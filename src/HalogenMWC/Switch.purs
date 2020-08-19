@@ -56,7 +56,7 @@ switchRoleAttr :: Maybe (IProp r i)
 switchRoleAttr = Just (HP.attr "role" "switch")
 
 checkboxTypeAttr :: Maybe (IProp r i)
-checkboxTypeAttr = Just (HH.Attributes.type_ "checkbox")
+checkboxTypeAttr = Just (HP.type_ "checkbox")
 
 changeHandler :: Config r i -> Maybe (IProp r i)
 changeHandler { onChange } = map (HH.Events.on "change" << Decode.succeed) onChange

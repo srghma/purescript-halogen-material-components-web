@@ -111,7 +111,7 @@ nativeControlCs :: Maybe (IProp r i)
 nativeControlCs = Just (HP.class_ mdc_radio__native_control)
 
 radioTypeAttr :: Maybe (IProp r i)
-radioTypeAttr = Just (HH.Attributes.type_ "radio")
+radioTypeAttr = Just (HP.type_ "radio")
 
 backgroundElt :: HH.HTML w i
 backgroundElt = HH.div [ HP.class_ mdc_radio__background ] [ outerCircleElt, innerCircleElt ]

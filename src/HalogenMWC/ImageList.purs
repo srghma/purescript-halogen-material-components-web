@@ -64,7 +64,7 @@ listItemElt (config_@{ masonry }) (listItem@(ImageArrayItem.ImageArrayItem { hre
     HH.element "mdc-image-list-item"
       ([ HP.class_ mdc_image_list__item ] <> additionalAttributes)
       ( href
-          # map (\href_ -> [ HH.a [ HH.Attributes.href href_ ] inner ])
+          # map (\href_ -> [ HH.a [ HP.href href_ ] inner ])
           # Maybe.fromMaybe inner
       )
 
@@ -84,7 +84,7 @@ imageElt masonry (ImageArrayItem.ImageArrayItem { href, image }) =
     img =
       HH.img
         [ HP.class_ mdc_image_list__image
-        , HH.Attributes.src image
+        , HP.src image
         ]
         []
   in

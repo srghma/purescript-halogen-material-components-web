@@ -210,7 +210,7 @@ valueProp :: Config r i -> Maybe (IProp r i)
 valueProp { value } = map (HP.prop "value" << Encode.string) value
 
 placeholderAttr :: Config r i -> Maybe (IProp r i)
-placeholderAttr { placeholder } = map HH.Attributes.placeholder placeholder
+placeholderAttr { placeholder } = map HP.placeholder placeholder
 
 leadingIconElt :: Config r i -> Array (HH.HTML w i)
 leadingIconElt { leadingIcon } = case leadingIcon of
@@ -257,7 +257,7 @@ patternProp { pattern } =
     )
 
 typeAttr :: Config r i -> Maybe (IProp r i)
-typeAttr { type_ } = map HH.Attributes.type_ type_
+typeAttr { type_ } = map HP.type_ type_
 
 ariaLabelAttr :: Config r i -> Maybe (IProp r i)
 ariaLabelAttr { fullwidth, placeholder, label } =
