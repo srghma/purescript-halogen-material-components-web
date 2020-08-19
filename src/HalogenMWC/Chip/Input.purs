@@ -1,8 +1,9 @@
 module HalogenMWC.Chip.Input
-    ( Config, config
-
-    , chip, Chip
-    ) where
+  ( Config
+  , config
+  , chip
+  , Chip
+  ) where
 
 import Protolude
 import Halogen (AttrName(..))
@@ -25,9 +26,9 @@ data Chip r i
 
 defaultConfig :: Config r i
 defaultConfig =
-        { leadingIcon: Nothing
-        , trailingIcon: Nothing
-        , additionalAttributes: []
-        , onDelete: Nothing
-        , onClick: Nothing
-        }
+  { leadingIcon: Nothing
+  , trailingIcon: Nothing
+  , additionalAttributes: []
+  , onDelete: Nothing
+  , onClick: Nothing
+  }

@@ -1,8 +1,9 @@
 module HalogenMWC.Chip.Action
-    ( Config, config
-
-    , chip, Chip
-    ) where
+  ( Config
+  , config
+  , chip
+  , Chip
+  ) where
 
 import Protolude
 import Halogen (AttrName(..))

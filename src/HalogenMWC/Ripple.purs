@@ -1,10 +1,12 @@
 module HalogenMWC.Ripple
-    ( Config, config
-
-    , bounded
-    , unbounded
-    , Color, primary, accent
-    ) where
+  ( Config
+  , config
+  , bounded
+  , unbounded
+  , Color
+  , primary
+  , accent
+  ) where
 
 import Protolude
 import Halogen (AttrName(..))
@@ -14,79 +16,65 @@ import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 type Config r i
-    =
-        { color :: Maybe Color
-        , additionalAttributes :: Array (IProp r i)
-        }
+  = { color :: Maybe Color
+    , additionalAttributes :: Array (IProp r i)
+    }
 
 defaultConfig :: Config r i
 defaultConfig =
-        { color: Nothing
-        , additionalAttributes: []
-        }
+  { color: Nothing
+  , additionalAttributes: []
+  }
 
 data Color
-    = Primary
-    | Accent
+  = Primary
+  | Accent
 
 primary :: Color
-primary =
-    Primary
+primary = Primary
 
 accent :: Color
-accent =
-    Accent
+accent = Accent
 
 ripple :: Boolean -> Config r i -> Html r i
 ripple isUnbounded (config_@{ additionalAttributes }) =
-    HH.node "mdc-ripple"
-        (Array.filterMap identity
-            [ unboundedProp isUnbounded
-            , unboundedData isUnbounded
-            , colorCs config_
-            , rippleSurface
-            , Just (style "position" "absolute")
-            , Just (style "top" "0")
-            , Just (style "left" "0")
-            , Just (style "right" "0")
-            , Just (style "bottom" "0")
-            ]
-            <> additionalAttributes
-        )
-        []
+  HH.node "mdc-ripple"
+    ( Array.filterMap identity
+        [ unboundedProp isUnbounded
+        , unboundedData isUnbounded
+        , colorCs config_
+        , rippleSurface
+        , Just (style "position" "absolute")
+        , Just (style "top" "0")
+        , Just (style "left" "0")
+        , Just (style "right" "0")
+        , Just (style "bottom" "0")
+        ]
+        <> additionalAttributes
+    )
+    []
 
 bounded :: Config r i -> Html r i
-bounded =
-    ripple False
+bounded = ripple False
 
 unbounded :: Config r i -> Html r i
-unbounded =
-    ripple True
+unbounded = ripple True
 
 rippleSurface :: Maybe (HH.Attribute r i)
-rippleSurface =
-    Just (HP.class_ mdc_ripple_surface)
+rippleSurface = Just (HP.class_ mdc_ripple_surface)
 
 colorCs :: Config r i -> Maybe (HH.Attribute r i)
-colorCs { color } =
-    case color of
-        Just Primary ->
-            Just (HP.class_ mdc_ripple_surface____primary)
-
-        Just Accent ->
-            Just (HP.class_ mdc_ripple_surface____accent)
-
-        Nothing ->
-            Nothing
+colorCs { color } = case color of
+  Just Primary -> Just (HP.class_ mdc_ripple_surface____primary)
+  Just Accent -> Just (HP.class_ mdc_ripple_surface____accent)
+  Nothing -> Nothing
 
 unboundedProp :: Boolean -> Maybe (HH.Attribute r i)
-unboundedProp isUnbounded =
-    Just (HH.Attributes.property "unbounded" (Encode.bool isUnbounded))
+unboundedProp isUnbounded = Just (HH.Attributes.property "unbounded" (Encode.bool isUnbounded))
 
 unboundedData :: Boolean -> Maybe (HH.Attribute r i)
 unboundedData isUnbounded =
-    if isUnbounded then
-        Just (HH.Attributes.attribute "data-mdc-ripple-is-unbounded" "")
-
-    else
-        Nothing
+  if isUnbounded then
+    Just (HH.Attributes.attribute "data-mdc-ripple-is-unbounded" "")
+  else
+    Nothing
