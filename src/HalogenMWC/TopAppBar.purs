@@ -111,7 +111,7 @@ prominent config_ nodes =
 
 row :: Array (IProp r i) -> Array (Html r i) -> Html r i
 row attributes nodes =
-    Html.section ([ class "mdc-top-app-bar__row" ] ++ attributes) nodes
+    Html.section ([ HP.class_ "mdc-top-app-bar__row" ] ++ attributes) nodes
 
 
 {-| Sections subdivide the top app bar's rows. A section may be start- or
@@ -120,44 +120,44 @@ app bar's navigation icon and title.
 -}
 section :: Array (IProp r i) -> Array (Html r i) -> Html r i
 section attributes nodes =
-    Html.section ([ class "mdc-top-app-bar__section" ] ++ attributes) nodes
+    Html.section ([ HP.class_ "mdc-top-app-bar__section" ] ++ attributes) nodes
 
 
 {-| Start-align a top app bar's `section`
 -}
 alignStart :: Html.Attribute r i
 alignStart =
-    class "mdc-top-app-bar__section--align-start"
+    HP.class_ "mdc-top-app-bar__section--align-start"
 
 
 {-| End-align a top app bar's `section`
 -}
 alignEnd :: Html.Attribute r i
 alignEnd =
-    class "mdc-top-app-bar__section--align-end"
+    HP.class_ "mdc-top-app-bar__section--align-end"
 
 
 
 navigationIcon :: Html.Attribute r i
 navigationIcon =
-    class "mdc-top-app-bar__navigation-icon"
+    HP.class_ "mdc-top-app-bar__navigation-icon"
 
 
 
 title :: Html.Attribute r i
 title =
-    class "mdc-top-app-bar__title"
+    HP.class_ "mdc-top-app-bar__title"
 
 
 
 actionItem :: Html.Attribute r i
 actionItem =
-    class "mdc-top-app-bar__action-item"
+    HP.class_ "mdc-top-app-bar__action-item"
 
 
 rootCs :: Maybe (Html.Attribute r i)
 rootCs =
-    Just (class "mdc-top-app-bar")
+    Just (HP.class_ "mdc-top-app-bar")
 
 
 variantCs :: Variant -> Maybe (Html.Attribute r i)
@@ -167,19 +167,19 @@ variantCs variant =
             Nothing
 
         Short ->
-            Just (class "mdc-top-app-bar--short")
+            Just (HP.class_ "mdc-top-app-bar--short")
 
         ShortCollapsed ->
-            Just (class "mdc-top-app-bar--short mdc-top-app-bar--short-collapsed")
+            Just (HP.class_ "mdc-top-app-bar--short mdc-top-app-bar--short-collapsed")
 
         Prominent ->
-            Just (class "mdc-top-app-bar--prominent")
+            Just (HP.class_ "mdc-top-app-bar--prominent")
 
 
 denseCs :: Config r i -> Maybe (Html.Attribute r i)
 denseCs (Config { dense }) =
     if dense then
-        Just (class "mdc-top-app-bar--dense")
+        Just (HP.class_ "mdc-top-app-bar--dense")
 
     else
         Nothing
@@ -188,7 +188,7 @@ denseCs (Config { dense }) =
 fixedCs :: Config r i -> Maybe (Html.Attribute r i)
 fixedCs (Config { fixed }) =
     if fixed then
-        Just (class "mdc-top-app-bar--fixed")
+        Just (HP.class_ "mdc-top-app-bar--fixed")
 
     else
         Nothing
@@ -197,28 +197,28 @@ fixedCs (Config { fixed }) =
 
 fixedAdjust :: Html.Attribute r i
 fixedAdjust =
-    class "mdc-top-app-bar--fixed-adjust"
+    HP.class_ "mdc-top-app-bar--fixed-adjust"
 
 
 
 denseFixedAdjust :: Html.Attribute r i
 denseFixedAdjust =
-    class "mdc-top-app-bar--dense-fixed-adjust"
+    HP.class_ "mdc-top-app-bar--dense-fixed-adjust"
 
 
 
 shortFixedAdjust :: Html.Attribute r i
 shortFixedAdjust =
-    class "mdc-top-app-bar--short-fixed-adjust"
+    HP.class_ "mdc-top-app-bar--short-fixed-adjust"
 
 
 
 prominentFixedAdjust :: Html.Attribute r i
 prominentFixedAdjust =
-    class "mdc-top-app-bar--prominent-fixed-adjust"
+    HP.class_ "mdc-top-app-bar--prominent-fixed-adjust"
 
 
 
 denseProminentFixedAdjust :: Html.Attribute r i
 denseProminentFixedAdjust =
-    class "mdc-top-app-bar--dense-prominent-fixed-adjust"
+    HP.class_ "mdc-top-app-bar--dense-prominent-fixed-adjust"

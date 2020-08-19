@@ -76,17 +76,17 @@ dataTable ((Config { additionalAttributes }) as config_) { thead, tbody } =
 
 dataTableCs :: Html.Attribute r i
 dataTableCs =
-    class "mdc-data-table"
+    HP.class_ "mdc-data-table"
 
 
 dataTableTableCs :: Maybe (Html.Attribute r i)
 dataTableTableCs =
-    Just (class "mdc-data-table__table")
+    Just (HP.class_ "mdc-data-table__table")
 
 
 dataTableContentCs :: Html.Attribute r i
 dataTableContentCs =
-    class "mdc-data-table__content"
+    HP.class_ "mdc-data-table__content"
 
 
 ariaLabelAttr :: Config r i -> Maybe (Html.Attribute r i)
@@ -115,7 +115,7 @@ selected =
 
 dataTableRowSelectedCs :: Html.Attribute r i
 dataTableRowSelectedCs =
-    class "mdc-data-table__row--selected"
+    HP.class_ "mdc-data-table__row--selected"
 
 
 headerRow :: Row r i -> Html r i
@@ -125,7 +125,7 @@ headerRow (Row { attributes, nodes }) =
 
 dataTableHeaderRowCs :: Html.Attribute r i
 dataTableHeaderRowCs =
-    class "mdc-data-table__header-row"
+    HP.class_ "mdc-data-table__header-row"
 
 
 bodyRow :: Row r i -> Html r i
@@ -135,7 +135,7 @@ bodyRow (Row { attributes, nodes }) =
 
 dataTableRowCs :: Html.Attribute r i
 dataTableRowCs =
-    class "mdc-data-table__row"
+    HP.class_ "mdc-data-table__row"
 
 
 headerCell :: Cell r i -> Html r i
@@ -169,7 +169,7 @@ headerCell cell_ =
                             Material.Checkbox.Internal.Config
                                 { config__
                                     | additionalAttributes =
-                                        class "mdc-data-table__row-checkbox"
+                                        HP.class_ "mdc-data-table__row-checkbox"
                                             :: config__.additionalAttributes
                                 }
                     )
@@ -178,7 +178,7 @@ headerCell cell_ =
 
 dataTableHeaderCellCs :: Maybe (Html.Attribute r i)
 dataTableHeaderCellCs =
-    Just (class "mdc-data-table__header-cell")
+    Just (HP.class_ "mdc-data-table__header-cell")
 
 
 columnHeaderRoleAttr :: Maybe (Html.Attribute r i)
@@ -194,7 +194,7 @@ colScopeAttr =
 dataTableHeaderCellNumericCs :: Boolean -> Maybe (Html.Attribute r i)
 dataTableHeaderCellNumericCs numeric =
     if numeric then
-        Just (class "mdc-data-table__header-cell--numeric")
+        Just (HP.class_ "mdc-data-table__header-cell--numeric")
 
     else
         Nothing
@@ -202,7 +202,7 @@ dataTableHeaderCellNumericCs numeric =
 
 dataTableHeaderCellCheckboxCs :: Maybe (Html.Attribute r i)
 dataTableHeaderCellCheckboxCs =
-    Just (class "mdc-data-table__header-cell--checkbox")
+    Just (HP.class_ "mdc-data-table__header-cell--checkbox")
 
 
 bodyCell :: Cell r i -> Html r i
@@ -232,7 +232,7 @@ bodyCell cell_ =
                             Material.Checkbox.Internal.Config
                                 { config__
                                     | additionalAttributes =
-                                        class "mdc-data-table__row-checkbox"
+                                        HP.class_ "mdc-data-table__row-checkbox"
                                             :: config__.additionalAttributes
                                 }
                     )
@@ -273,13 +273,13 @@ checkboxCell attributes config_ =
 
 dataTableCellCs :: Maybe (Html.Attribute r i)
 dataTableCellCs =
-    Just (class "mdc-data-table__cell")
+    Just (HP.class_ "mdc-data-table__cell")
 
 
 dataTableCellNumericCs :: Boolean -> Maybe (Html.Attribute r i)
 dataTableCellNumericCs numeric =
     if numeric then
-        Just (class "mdc-data-table__cell--numeric")
+        Just (HP.class_ "mdc-data-table__cell--numeric")
 
     else
         Nothing
@@ -287,4 +287,4 @@ dataTableCellNumericCs numeric =
 
 dataTableCellCheckboxCs :: Maybe (Html.Attribute r i)
 dataTableCellCheckboxCs =
-    Just (class "mdc-data-table__cell--checkbox")
+    Just (HP.class_ "mdc-data-table__cell--checkbox")

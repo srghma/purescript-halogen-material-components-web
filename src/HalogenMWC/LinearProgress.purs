@@ -104,7 +104,7 @@ buffered config_ data =
 
 rootCs :: Maybe (Html.Attribute r i)
 rootCs =
-    Just (class "mdc-linear-progress")
+    Just (HP.class_ "mdc-linear-progress")
 
 
 displayCss :: Maybe (Html.Attribute r i)
@@ -121,7 +121,7 @@ variantCs :: Variant -> Maybe (Html.Attribute r i)
 variantCs variant =
     case variant of
         Indeterminate ->
-            Just (class "mdc-linear-progress--indeterminate")
+            Just (HP.class_ "mdc-linear-progress--indeterminate")
 
         _ ->
             Nothing
@@ -179,26 +179,26 @@ closedProp (Config { closed }) =
 
 bufferingDotsElt :: Html r i
 bufferingDotsElt =
-    Html.div [ class "mdc-linear-progress__buffering-dots" ] []
+    Html.div [ HP.class_ "mdc-linear-progress__buffering-dots" ] []
 
 
 bufferElt :: Html r i
 bufferElt =
-    Html.div [ class "mdc-linear-progress__buffer" ] []
+    Html.div [ HP.class_ "mdc-linear-progress__buffer" ] []
 
 
 primaryBarElt :: Html r i
 primaryBarElt =
-    Html.div [ class "mdc-linear-progress__bar mdc-linear-progress__primary-bar" ]
+    Html.div [ HP.class_ "mdc-linear-progress__bar mdc-linear-progress__primary-bar" ]
         [ barInnerElt ]
 
 
 secondaryBarElt :: Html r i
 secondaryBarElt =
-    Html.div [ class "mdc-linear-progress__bar mdc-linear-progress__secondary-bar" ]
+    Html.div [ HP.class_ "mdc-linear-progress__bar mdc-linear-progress__secondary-bar" ]
         [ barInnerElt ]
 
 
 barInnerElt :: Html r i
 barInnerElt =
-    Html.div [ class "mdc-linear-progress__bar-inner" ] []
+    Html.div [ HP.class_ "mdc-linear-progress__bar-inner" ] []

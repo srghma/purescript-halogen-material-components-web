@@ -212,7 +212,7 @@ message label =
 
 rootCs :: Maybe (Html.Attribute r i)
 rootCs =
-    Just (class "mdc-snackbar")
+    Just (HP.class_ "mdc-snackbar")
 
 
 closeOnEscapeProp :: Config r i -> Maybe (Html.Attribute r i)
@@ -225,7 +225,7 @@ leadingCs message_ =
     Maybe.andThen
         (\(Message { leading }) ->
             if leading then
-                Just (class "mdc-snackbar--leading")
+                Just (HP.class_ "mdc-snackbar--leading")
 
             else
                 Nothing
@@ -238,7 +238,7 @@ stackedCs message_ =
     Maybe.andThen
         (\(Message { stacked }) ->
             if stacked then
-                Just (class "mdc-snackbar--stacked")
+                Just (HP.class_ "mdc-snackbar--stacked")
 
             else
                 Nothing
@@ -283,7 +283,7 @@ ariaPoliteLiveAttr =
 
 surfaceElt :: MessageId -> Message r i -> Html r i
 surfaceElt messageId message_ =
-    Html.div [ class "mdc-snackbar__surface" ]
+    Html.div [ HP.class_ "mdc-snackbar__surface" ]
         [ labelElt message_
         , actionsElt messageId message_
         ]
@@ -291,13 +291,13 @@ surfaceElt messageId message_ =
 
 labelElt :: Message r i -> Html r i
 labelElt (Message { label }) =
-    Html.div [ class "mdc-snackbar__label", ariaStatusRoleAttr, ariaPoliteLiveAttr ]
+    Html.div [ HP.class_ "mdc-snackbar__label", ariaStatusRoleAttr, ariaPoliteLiveAttr ]
         [ text label ]
 
 
 actionsElt :: MessageId -> Message r i -> Html r i
 actionsElt messageId message_ =
-    Html.div [ class "mdc-snackbar__actions" ]
+    Html.div [ HP.class_ "mdc-snackbar__actions" ]
         (Array.filterMap identity
             [ actionButtonElt messageId message_
             , actionIconElt messageId message_
@@ -322,7 +322,7 @@ actionButtonElt messageId ((Message { actionButton }) as message_) =
 
 actionButtonCs :: Maybe (Html.Attribute r i)
 actionButtonCs =
-    Just (class "mdc-button mdc-snackbar__action")
+    Just (HP.class_ "mdc-button mdc-snackbar__action")
 
 
 actionButtonClickHandler :: MessageId -> Message r i -> Maybe (Html.Attribute r i)
@@ -347,7 +347,7 @@ actionIconElt messageId ((Message { actionIcon }) as message_) =
 
 actionIconCs :: Maybe (Html.Attribute r i)
 actionIconCs =
-    Just (class "mdc-icon-button mdc-snackbar__dismiss material-icons")
+    Just (HP.class_ "mdc-icon-button mdc-snackbar__dismiss material-icons")
 
 
 actionIconClickHandler :: MessageId -> Message r i -> Maybe (Html.Attribute r i)

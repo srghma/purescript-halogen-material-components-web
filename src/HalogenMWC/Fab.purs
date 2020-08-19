@@ -88,13 +88,13 @@ tabIndexProp tabIndex =
 
 rootCs :: Maybe (Html.Attribute r i)
 rootCs =
-    Just (class "mdc-fab")
+    Just (HP.class_ "mdc-fab")
 
 
 miniCs :: Config r i -> Maybe (Html.Attribute r i)
 miniCs (Config { mini }) =
     if mini then
-        Just (class "mdc-fab--mini")
+        Just (HP.class_ "mdc-fab--mini")
 
     else
         Nothing
@@ -103,7 +103,7 @@ miniCs (Config { mini }) =
 exitedCs :: Config r i -> Maybe (Html.Attribute r i)
 exitedCs (Config { exited }) =
     if exited then
-        Just (class "mdc-fab--exited")
+        Just (HP.class_ "mdc-fab--exited")
 
     else
         Nothing
@@ -111,12 +111,12 @@ exitedCs (Config { exited }) =
 
 rippleElt :: Html r i
 rippleElt =
-    Html.div [ class "mdc-fab__ripple" ] []
+    Html.div [ HP.class_ "mdc-fab__ripple" ] []
 
 
 iconElt :: String -> Html r i
 iconElt iconName =
-    Html.span [ class "material-icons", class "mdc-fab__icon" ] [ text iconName ]
+    Html.span [ HP.class_ "material-icons", HP.class_ "mdc-fab__icon" ] [ text iconName ]
 
 
 clickHandler :: Config r i -> Maybe (Html.Attribute r i)

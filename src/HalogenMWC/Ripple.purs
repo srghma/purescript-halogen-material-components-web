@@ -97,17 +97,17 @@ unbounded =
 
 rippleSurface :: Maybe (Html.Attribute r i)
 rippleSurface =
-    Just (class "mdc-ripple-surface")
+    Just (HP.class_ "mdc-ripple-surface")
 
 
 colorCs :: Config r i -> Maybe (Html.Attribute r i)
 colorCs (Config { color }) =
     case color of
         Just Primary ->
-            Just (class "mdc-ripple-surface--primary")
+            Just (HP.class_ "mdc-ripple-surface--primary")
 
         Just Accent ->
-            Just (class "mdc-ripple-surface--accent")
+            Just (HP.class_ "mdc-ripple-surface--accent")
 
         Nothing ->
             Nothing

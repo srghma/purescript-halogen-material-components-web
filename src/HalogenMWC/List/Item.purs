@@ -141,13 +141,13 @@ listItemView ((Config { additionalAttributes, href }) as config_) nodes =
 
 listItemCs :: Maybe (Html.Attribute r i)
 listItemCs =
-    Just (class "mdc-list-item")
+    Just (HP.class_ "mdc-list-item")
 
 
 disabledCs :: Config r i -> Maybe (Html.Attribute r i)
 disabledCs (Config { disabled }) =
     if disabled then
-        Just (class "mdc-list-item--disabled")
+        Just (HP.class_ "mdc-list-item--disabled")
 
     else
         Nothing
@@ -156,7 +156,7 @@ disabledCs (Config { disabled }) =
 selectedCs :: Config r i -> Maybe (Html.Attribute r i)
 selectedCs (Config { selection }) =
     if selection == Just Selected then
-        Just (class "mdc-list-item--selected")
+        Just (HP.class_ "mdc-list-item--selected")
 
     else
         Nothing
@@ -165,7 +165,7 @@ selectedCs (Config { selection }) =
 activatedCs :: Config r i -> Maybe (Html.Attribute r i)
 activatedCs (Config { selection }) =
     if selection == Just Activated then
-        Just (class "mdc-list-item--activated")
+        Just (HP.class_ "mdc-list-item--activated")
 
     else
         Nothing
@@ -204,7 +204,7 @@ text :
         }
     -> Html r i
 text additionalAttributes { primary, secondary } =
-    Html.div (class "mdc-list-item__text" :: additionalAttributes)
+    Html.div (HP.class_ "mdc-list-item__text" :: additionalAttributes)
         [ primaryText [] primary
         , secondaryText [] secondary
         ]
@@ -212,21 +212,21 @@ text additionalAttributes { primary, secondary } =
 
 primaryText :: Array (IProp r i) -> Array (Html r i) -> Html r i
 primaryText additionalAttributes nodes =
-    Html.div (class "mdc-list-item__primary-text" :: additionalAttributes) nodes
+    Html.div (HP.class_ "mdc-list-item__primary-text" :: additionalAttributes) nodes
 
 
 secondaryText :: Array (IProp r i) -> Array (Html r i) -> Html r i
 secondaryText additionalAttributes nodes =
-    Html.div (class "mdc-list-item__secondary-text" :: additionalAttributes) nodes
+    Html.div (HP.class_ "mdc-list-item__secondary-text" :: additionalAttributes) nodes
 
 
 
 graphic :: Array (IProp r i) -> Array (Html r i) -> Html r i
 graphic additionalAttributes nodes =
-    Html.div (class "mdc-list-item__graphic" :: additionalAttributes) nodes
+    Html.div (HP.class_ "mdc-list-item__graphic" :: additionalAttributes) nodes
 
 
 
 meta :: Array (IProp r i) -> Array (Html r i) -> Html r i
 meta additionalAttributes nodes =
-    Html.div (class "mdc-list-item__meta" :: additionalAttributes) nodes
+    Html.div (HP.class_ "mdc-list-item__meta" :: additionalAttributes) nodes

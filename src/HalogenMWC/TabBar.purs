@@ -91,7 +91,7 @@ tabBar ((Config { additionalAttributes, align }) as config_) tabs =
 
 rootCs :: Maybe (Html.Attribute r i)
 rootCs =
-    Just (class "mdc-tab-bar")
+    Just (HP.class_ "mdc-tab-bar")
 
 
 tablistRoleAttr :: Maybe (Html.Attribute r i)
@@ -139,13 +139,13 @@ viewTab ((Config { indicatorSpansContent }) as barConfig) ((Tab ((Tab.Config { a
 
 tabCs :: Maybe (Html.Attribute r i)
 tabCs =
-    Just (class "mdc-tab")
+    Just (HP.class_ "mdc-tab")
 
 
 tabStackedCs :: Config r i -> Maybe (Html.Attribute r i)
 tabStackedCs (Config { stacked }) =
     if stacked then
-        Just (class "mdc-tab--stacked")
+        Just (HP.class_ "mdc-tab--stacked")
 
     else
         Nothing
@@ -154,7 +154,7 @@ tabStackedCs (Config { stacked }) =
 tabMinWidthCs :: Config r i -> Maybe (Html.Attribute r i)
 tabMinWidthCs (Config { minWidth }) =
     if minWidth then
-        Just (class "mdc-tab--min-width")
+        Just (HP.class_ "mdc-tab--min-width")
 
     else
         Nothing
@@ -173,7 +173,7 @@ tabClickHandler (Tab.Config { onClick }) =
 tabContentElt :: Config r i -> Tab.Config r i -> Tab.Content -> Maybe (Html r i)
 tabContentElt ((Config { indicatorSpansContent }) as barConfig) config_ content =
     Just
-        (Html.div [ class "mdc-tab__content" ]
+        (Html.div [ HP.class_ "mdc-tab__content" ]
             (if indicatorSpansContent then
                 Array.filterMap identity
                     [ tabIconElt content
@@ -195,7 +195,7 @@ tabIconElt { icon } =
     Maybe.map
         (\iconName ->
             Html.span
-                [ class "mdc-tab__icon material-icons" ]
+                [ HP.class_ "mdc-tab__icon material-icons" ]
                 [ text iconName ]
         )
         icon
@@ -203,26 +203,26 @@ tabIconElt { icon } =
 
 tabTextLabelElt :: Tab.Content -> Maybe (Html r i)
 tabTextLabelElt { label } =
-    Just (Html.span [ class "mdc-tab__text-label" ] [ text label ])
+    Just (Html.span [ HP.class_ "mdc-tab__text-label" ] [ text label ])
 
 
 tabIndicatorElt :: Tab.Config r i -> Maybe (Html r i)
 tabIndicatorElt config_ =
-    Just (Html.span [ class "mdc-tab-indicator" ] [ tabIndicatorContentElt ])
+    Just (Html.span [ HP.class_ "mdc-tab-indicator" ] [ tabIndicatorContentElt ])
 
 
 tabIndicatorContentElt :: Html r i
 tabIndicatorContentElt =
     Html.span
-        [ class "mdc-tab-indicator__content"
-        , class "mdc-tab-indicator__content--underline"
+        [ HP.class_ "mdc-tab-indicator__content"
+        , HP.class_ "mdc-tab-indicator__content--underline"
         ]
         []
 
 
 tabRippleElt :: Maybe (Html r i)
 tabRippleElt =
-    Just (Html.span [ class "mdc-tab__ripple" ] [])
+    Just (Html.span [ HP.class_ "mdc-tab__ripple" ] [])
 
 
 
@@ -245,20 +245,20 @@ tabScroller config_ align tabs =
 
 tabScrollerCs :: Maybe (Html.Attribute r i)
 tabScrollerCs =
-    Just (class "mdc-tab-scroller")
+    Just (HP.class_ "mdc-tab-scroller")
 
 
 tabScrollerAlignCs :: Maybe Align -> Maybe (Html.Attribute r i)
 tabScrollerAlignCs align =
     case align of
         Just Start ->
-            Just (class "mdc-tab-scroller--align-start")
+            Just (HP.class_ "mdc-tab-scroller--align-start")
 
         Just End ->
-            Just (class "mdc-tab-scroller--align-end")
+            Just (HP.class_ "mdc-tab-scroller--align-end")
 
         Just Center ->
-            Just (class "mdc-tab-scroller--align-center")
+            Just (HP.class_ "mdc-tab-scroller--align-center")
 
         Nothing ->
             Nothing
@@ -266,11 +266,11 @@ tabScrollerAlignCs align =
 
 tabScrollerScrollAreaElt :: Config r i -> Array (Tab r i) -> Html r i
 tabScrollerScrollAreaElt barConfig tabs =
-    Html.div [ class "mdc-tab-scroller__scroll-area" ]
+    Html.div [ HP.class_ "mdc-tab-scroller__scroll-area" ]
         [ tabScrollerScrollContentElt barConfig tabs ]
 
 
 tabScrollerScrollContentElt :: Config r i -> Array (Tab r i) -> Html r i
 tabScrollerScrollContentElt barConfig tabs =
-    Html.div [ class "mdc-tab-scroller__scroll-content" ]
+    Html.div [ HP.class_ "mdc-tab-scroller__scroll-content" ]
         (Array.map (viewTab barConfig) tabs)

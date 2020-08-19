@@ -22,12 +22,12 @@ chipSet additionalAttributes chips =
 
 chipSetCs :: Html.Attribute r i
 chipSetCs =
-    class "mdc-chip-set"
+    HP.class_ "mdc-chip-set"
 
 
 chipSetActionCs :: Html.Attribute r i
 chipSetActionCs =
-    class "mdc-chip-set--action"
+    HP.class_ "mdc-chip-set--action"
 
 
 gridRole :: Html.Attribute r i
@@ -37,7 +37,7 @@ gridRole =
 
 chip :: Chip r i -> Html r i
 chip (Chip ((Chip.Config { additionalAttributes }) as config_) label) =
-    Html.div [ class "mdc-touch-target-wrapper" ]
+    Html.div [ HP.class_ "mdc-touch-target-wrapper" ]
         [ Html.node "mdc-chip"
             (Array.filterMap identity
                 [ chipCs
@@ -58,22 +58,22 @@ chip (Chip ((Chip.Config { additionalAttributes }) as config_) label) =
 
 chipCs :: Maybe (Html.Attribute r i)
 chipCs =
-    Just (class "mdc-chip")
+    Just (HP.class_ "mdc-chip")
 
 
 chipTextCs :: Html.Attribute r i
 chipTextCs =
-    class "mdc-chip__text"
+    HP.class_ "mdc-chip__text"
 
 
 chipTouchCs :: Maybe (Html.Attribute r i)
 chipTouchCs =
-    Just (class "mdc-chip--touch")
+    Just (HP.class_ "mdc-chip--touch")
 
 
 chipPrimaryActionCs :: Html.Attribute r i
 chipPrimaryActionCs =
-    class "mdc-chip__primary-action"
+    HP.class_ "mdc-chip__primary-action"
 
 
 buttonRole :: Html.Attribute r i
@@ -98,14 +98,14 @@ interactionHandler (Chip.Config { onClick }) =
 
 rippleElt :: Maybe (Html r i)
 rippleElt =
-    Just (Html.div [ class "mdc-chip__ripple" ] [])
+    Just (Html.div [ HP.class_ "mdc-chip__ripple" ] [])
 
 
 leadingIconElt :: Chip.Config r i -> Maybe (Html r i)
 leadingIconElt (Chip.Config { icon }) =
     Maybe.map
         (\iconName ->
-            Html.i [ class "material-icons mdc-chip__icon mdc-chip__icon--leading" ]
+            Html.i [ HP.class_ "material-icons mdc-chip__icon mdc-chip__icon--leading" ]
                 [ text iconName ]
         )
         icon
@@ -125,4 +125,4 @@ textElt label =
 
 touchElt :: Maybe (Html r i)
 touchElt =
-    Just (Html.div [ class "mdc-chip__touch" ] [])
+    Just (Html.div [ HP.class_ "mdc-chip__touch" ] [])

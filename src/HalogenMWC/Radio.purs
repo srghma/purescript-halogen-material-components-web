@@ -88,7 +88,7 @@ radio ((Config { touch, additionalAttributes }) as config_) =
     let
         wrapTouch node =
             if touch then
-                Html.div [ class "mdc-touch-target-wrapper" ] [ node ]
+                Html.div [ HP.class_ "mdc-touch-target-wrapper" ] [ node ]
 
             else
                 node
@@ -111,13 +111,13 @@ radio ((Config { touch, additionalAttributes }) as config_) =
 
 rootCs :: Maybe (Html.Attribute r i)
 rootCs =
-    Just (class "mdc-radio")
+    Just (HP.class_ "mdc-radio")
 
 
 touchCs :: Config r i -> Maybe (Html.Attribute r i)
 touchCs (Config { touch }) =
     if touch then
-        Just (class "mdc-radio--touch")
+        Just (HP.class_ "mdc-radio--touch")
 
     else
         Nothing
@@ -169,7 +169,7 @@ nativeControlElt config_ =
 
 nativeControlCs :: Maybe (Html.Attribute r i)
 nativeControlCs =
-    Just (class "mdc-radio__native-control")
+    Just (HP.class_ "mdc-radio__native-control")
 
 
 radioTypeAttr :: Maybe (Html.Attribute r i)
@@ -179,19 +179,19 @@ radioTypeAttr =
 
 backgroundElt :: Html r i
 backgroundElt =
-    Html.div [ class "mdc-radio__background" ] [ outerCircleElt, innerCircleElt ]
+    Html.div [ HP.class_ "mdc-radio__background" ] [ outerCircleElt, innerCircleElt ]
 
 
 outerCircleElt :: Html r i
 outerCircleElt =
-    Html.div [ class "mdc-radio__outer-circle" ] []
+    Html.div [ HP.class_ "mdc-radio__outer-circle" ] []
 
 
 innerCircleElt :: Html r i
 innerCircleElt =
-    Html.div [ class "mdc-radio__inner-circle" ] []
+    Html.div [ HP.class_ "mdc-radio__inner-circle" ] []
 
 
 rippleElt :: Html r i
 rippleElt =
-    Html.div [ class "mdc-radio__ripple" ] []
+    Html.div [ HP.class_ "mdc-radio__ripple" ] []

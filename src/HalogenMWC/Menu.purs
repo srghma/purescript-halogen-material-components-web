@@ -82,12 +82,12 @@ menu ((Config { additionalAttributes }) as config_) nodes =
 
 surfaceAnchor :: Html.Attribute r i
 surfaceAnchor =
-    class "mdc-menu-surface--anchor"
+    HP.class_ "mdc-menu-surface--anchor"
 
 
 rootCs :: Maybe (Html.Attribute r i)
 rootCs =
-    Just (class "mdc-menu mdc-menu-surface")
+    Just (HP.class_ "mdc-menu mdc-menu-surface")
 
 
 openProp :: Config r i -> Maybe (Html.Attribute r i)

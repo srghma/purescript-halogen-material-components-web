@@ -201,13 +201,13 @@ textArea outlined_ ((Config { additionalAttributes, fullwidth }) as config_) =
 
 rootCs :: Maybe (Html.Attribute r i)
 rootCs =
-    Just (class "mdc-text-field mdc-text-field--textarea")
+    Just (HP.class_ "mdc-text-field mdc-text-field--textarea")
 
 
 outlinedCs :: Boolean -> Maybe (Html.Attribute r i)
 outlinedCs outlined_ =
     if outlined_ then
-        Just (class "mdc-text-field--outlined")
+        Just (HP.class_ "mdc-text-field--outlined")
 
     else
         Nothing
@@ -216,7 +216,7 @@ outlinedCs outlined_ =
 fullwidthCs :: Config r i -> Maybe (Html.Attribute r i)
 fullwidthCs (Config { fullwidth }) =
     if fullwidth then
-        Just (class "mdc-text-field--fullwidth")
+        Just (HP.class_ "mdc-text-field--fullwidth")
 
     else
         Nothing
@@ -225,7 +225,7 @@ fullwidthCs (Config { fullwidth }) =
 disabledCs :: Config r i -> Maybe (Html.Attribute r i)
 disabledCs (Config { disabled }) =
     if disabled then
-        Just (class "mdc-text-field--disabled")
+        Just (HP.class_ "mdc-text-field--disabled")
 
     else
         Nothing
@@ -292,7 +292,7 @@ inputElt config_ =
 
 inputCs :: Maybe (Html.Attribute r i)
 inputCs =
-    Just (class "mdc-text-field__input")
+    Just (HP.class_ "mdc-text-field__input")
 
 
 rowsAttr :: Config r i -> Maybe (Html.Attribute r i)
@@ -332,10 +332,10 @@ labelElt (Config { label, value }) =
         Just str ->
             Html.div
                 [ if Maybe.withDefault "" value /= "" then
-                    class (floatingLabelCs ++ " " ++ floatingLabelFloatAboveCs)
+                    HP.class_ (floatingLabelCs ++ " " ++ floatingLabelFloatAboveCs)
 
                   else
-                    class floatingLabelCs
+                    HP.class_ floatingLabelCs
                 , Html.Attributes.property "foucClassNames"
                     (Encode.list Encode.string [ floatingLabelFloatAboveCs ])
                 ]
@@ -348,7 +348,7 @@ labelElt (Config { label, value }) =
 noLabelCs :: Config r i -> Maybe (Html.Attribute r i)
 noLabelCs (Config { label }) =
     if label == Nothing then
-        Just (class "mdc-text-field--no-label")
+        Just (HP.class_ "mdc-text-field--no-label")
 
     else
         Nothing
@@ -356,7 +356,7 @@ noLabelCs (Config { label }) =
 
 notchedOutlineElt :: Config r i -> Html r i
 notchedOutlineElt config_ =
-    Html.div [ class "mdc-notched-outline" ]
+    Html.div [ HP.class_ "mdc-notched-outline" ]
         [ notchedOutlineLeadingElt
         , notchedOutlineNotchElt config_
         , notchedOutlineTrailingElt
@@ -365,14 +365,14 @@ notchedOutlineElt config_ =
 
 notchedOutlineLeadingElt :: Html r i
 notchedOutlineLeadingElt =
-    Html.div [ class "mdc-notched-outline__leading" ] []
+    Html.div [ HP.class_ "mdc-notched-outline__leading" ] []
 
 
 notchedOutlineTrailingElt :: Html r i
 notchedOutlineTrailingElt =
-    Html.div [ class "mdc-notched-outline__trailing" ] []
+    Html.div [ HP.class_ "mdc-notched-outline__trailing" ] []
 
 
 notchedOutlineNotchElt :: Config r i -> Html r i
 notchedOutlineNotchElt config_ =
-    Html.div [ class "mdc-notched-outline__notch" ] [ labelElt config_ ]
+    Html.div [ HP.class_ "mdc-notched-outline__notch" ] [ labelElt config_ ]

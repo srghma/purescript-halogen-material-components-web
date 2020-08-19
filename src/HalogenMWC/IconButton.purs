@@ -91,12 +91,12 @@ custom ((Config { additionalAttributes }) as config_) nodes =
 
 rootCs :: Maybe (Html.Attribute r i)
 rootCs =
-    Just (class "mdc-icon-button")
+    Just (HP.class_ "mdc-icon-button")
 
 
 materialIconsCs :: Maybe (Html.Attribute r i)
 materialIconsCs =
-    Just (class "material-icons")
+    Just (HP.class_ "material-icons")
 
 
 tabIndexProp :: Maybe (Html.Attribute r i)

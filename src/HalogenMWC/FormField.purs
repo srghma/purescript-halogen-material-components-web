@@ -85,13 +85,13 @@ formField ((Config { additionalAttributes }) as config_) nodes =
 
 rootCs :: Maybe (Html.Attribute r i)
 rootCs =
-    Just (class "mdc-form-field")
+    Just (HP.class_ "mdc-form-field")
 
 
 alignEndCs :: Config r i -> Maybe (Html.Attribute r i)
 alignEndCs (Config { alignEnd }) =
     if alignEnd then
-        Just (class "mdc-form-field--align-end")
+        Just (HP.class_ "mdc-form-field--align-end")
 
     else
         Nothing

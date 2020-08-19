@@ -166,4 +166,4 @@ z24 =
 
 z :: Int -> Html.Attribute r i
 z n =
-    class ("mdc-elevation--z" ++ String.fromInt n)
+    HP.class_ ("mdc-elevation--z" ++ String.fromInt n)

@@ -110,7 +110,7 @@ checkbox ((Config { touch, additionalAttributes }) as config_) =
     let
         wrapTouch node =
             if touch then
-                Html.div [ class "mdc-touch-target-wrapper" ] [ node ]
+                Html.div [ HP.class_ "mdc-touch-target-wrapper" ] [ node ]
 
             else
                 node
@@ -133,13 +133,13 @@ checkbox ((Config { touch, additionalAttributes }) as config_) =
 
 rootCs :: Maybe (Html.Attribute r i)
 rootCs =
-    Just (class "mdc-checkbox")
+    Just (HP.class_ "mdc-checkbox")
 
 
 touchCs :: Config r i -> Maybe (Html.Attribute r i)
 touchCs (Config { touch }) =
     if touch then
-        Just (class "mdc-checkbox--touch")
+        Just (HP.class_ "mdc-checkbox--touch")
 
     else
         Nothing
@@ -189,7 +189,7 @@ nativeControlElt config_ =
     Html.input
         (Array.filterMap identity
             [ Just (Html.Attributes.type_ "checkbox")
-            , Just (class "mdc-checkbox__native-control")
+            , Just (HP.class_ "mdc-checkbox__native-control")
             , checkedProp config_
             , indeterminateProp config_
             , changeHandler config_
@@ -201,17 +201,17 @@ nativeControlElt config_ =
 backgroundElt :: Html r i
 backgroundElt =
     Html.div
-        [ class "mdc-checkbox__background" ]
+        [ HP.class_ "mdc-checkbox__background" ]
         [ Svg.svg
-            [ Svg.Attributes.class "mdc-checkbox__checkmark"
+            [ Svg.Attributes.class_ "mdc-checkbox__checkmark"
             , Svg.Attributes.viewBox "0 0 24 24"
             ]
             [ Svg.path
-                [ Svg.Attributes.class "mdc-checkbox__checkmark-path"
+                [ Svg.Attributes.class_ "mdc-checkbox__checkmark-path"
                 , Svg.Attributes.fill "none"
                 , Svg.Attributes.d "M1.73,12.91 8.1,19.28 22.79,4.59"
                 ]
                 []
             ]
-        , Html.div [ class "mdc-checkbox__mixedmark" ] []
+        , Html.div [ HP.class_ "mdc-checkbox__mixedmark" ] []
         ]

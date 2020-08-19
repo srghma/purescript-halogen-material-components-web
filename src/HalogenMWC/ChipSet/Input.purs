@@ -24,7 +24,7 @@ chipSet additionalAttributes keyedChips =
 
 chip :: Chip r i -> Html r i
 chip (Chip ((Chip.Config { additionalAttributes }) as config_) label) =
-    Html.div [ class "mdc-touch-target-wrapper" ]
+    Html.div [ HP.class_ "mdc-touch-target-wrapper" ]
         [ Html.node "mdc-chip"
             (Array.filterMap identity
                 [ chipCs
@@ -46,12 +46,12 @@ chip (Chip ((Chip.Config { additionalAttributes }) as config_) label) =
 
 chipSetCs :: Html.Attribute r i
 chipSetCs =
-    class "mdc-chip-set"
+    HP.class_ "mdc-chip-set"
 
 
 chipSetInputCs :: Html.Attribute r i
 chipSetInputCs =
-    class "mdc-chip-set--input"
+    HP.class_ "mdc-chip-set--input"
 
 
 gridRole :: Html.Attribute r i
@@ -61,22 +61,22 @@ gridRole =
 
 chipCs :: Maybe (Html.Attribute r i)
 chipCs =
-    Just (class "mdc-chip")
+    Just (HP.class_ "mdc-chip")
 
 
 chipTextCs :: Html.Attribute r i
 chipTextCs =
-    class "mdc-chip__text"
+    HP.class_ "mdc-chip__text"
 
 
 chipTouchCs :: Maybe (Html.Attribute r i)
 chipTouchCs =
-    Just (class "mdc-chip--touch")
+    Just (HP.class_ "mdc-chip--touch")
 
 
 chipPrimaryActionCs :: Html.Attribute r i
 chipPrimaryActionCs =
-    class "mdc-chip__primary-action"
+    HP.class_ "mdc-chip__primary-action"
 
 
 tabIndexProp :: Int -> Html.Attribute r i
@@ -106,14 +106,14 @@ removalHandler (Chip.Config { onDelete }) =
 
 rippleElt :: Maybe (Html r i)
 rippleElt =
-    Just (Html.div [ class "mdc-chip__ripple" ] [])
+    Just (Html.div [ HP.class_ "mdc-chip__ripple" ] [])
 
 
 leadingIconElt :: Chip.Config r i -> Maybe (Html r i)
 leadingIconElt (Chip.Config { leadingIcon }) =
     Maybe.map
         (\iconName ->
-            Html.i [ class "material-icons mdc-chip__icon mdc-chip__icon--leading" ]
+            Html.i [ HP.class_ "material-icons mdc-chip__icon mdc-chip__icon--leading" ]
                 [ text iconName ]
         )
         leadingIcon
@@ -133,7 +133,7 @@ textElt label =
 
 touchElt :: Maybe (Html r i)
 touchElt =
-    Just (Html.div [ class "mdc-chip__touch" ] [])
+    Just (Html.div [ HP.class_ "mdc-chip__touch" ] [])
 
 
 trailingIconElt :: Chip.Config r i -> Maybe (Html r i)
@@ -141,7 +141,7 @@ trailingIconElt (Chip.Config { trailingIcon, onDelete }) =
     if onDelete /= Nothing then
         Just $
             Html.i
-                [ class "material-icons mdc-chip__icon mdc-chip__icon--trailing"
+                [ HP.class_ "material-icons mdc-chip__icon mdc-chip__icon--trailing"
                 , tabIndexProp -1
                 , buttonRole
                 ]

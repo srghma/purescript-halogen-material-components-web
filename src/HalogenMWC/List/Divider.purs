@@ -73,7 +73,7 @@ listItem ((Config { additionalAttributes }) as config_) =
 
 listDividerCs :: Maybe (Html.Attribute r i)
 listDividerCs =
-    Just (class "mdc-list-divider")
+    Just (HP.class_ "mdc-list-divider")
 
 
 separatorRoleAttr :: Maybe (Html.Attribute r i)
@@ -84,7 +84,7 @@ separatorRoleAttr =
 insetCs :: Config r i -> Maybe (Html.Attribute r i)
 insetCs (Config { inset }) =
     if inset then
-        Just (class "mdc-list-divider--inset")
+        Just (HP.class_ "mdc-list-divider--inset")
 
     else
         Nothing
@@ -93,7 +93,7 @@ insetCs (Config { inset }) =
 paddedCs :: Config r i -> Maybe (Html.Attribute r i)
 paddedCs (Config { padded }) =
     if padded then
-        Just (class "mdc-list-divider--padded")
+        Just (HP.class_ "mdc-list-divider--padded")
 
     else
         Nothing

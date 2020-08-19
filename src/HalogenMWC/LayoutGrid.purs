@@ -21,70 +21,70 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 layoutGrid :: Array (IProp r i) -> Array (Html r i) -> Html r i
 layoutGrid attributes nodes =
     Html.node "mdc-layout-grid"
-        (class "mdc-layout-grid" :: style "display" "block" :: attributes)
+        (HP.class_ "mdc-layout-grid" :: style "display" "block" :: attributes)
         nodes
 
 
 
 cell :: Array (IProp r i) -> Array (Html r i) -> Html r i
 cell attributes nodes =
-    Html.div (class "mdc-layout-grid__cell" :: attributes) nodes
+    Html.div (HP.class_ "mdc-layout-grid__cell" :: attributes) nodes
 
 
 
 inner :: Array (IProp r i) -> Array (Html r i) -> Html r i
 inner attributes nodes =
-    Html.div (class "mdc-layout-grid__inner" :: attributes) nodes
+    Html.div (HP.class_ "mdc-layout-grid__inner" :: attributes) nodes
 
 
 
 alignBottom :: Html.Attribute r i
 alignBottom =
-    class "mdc-layout-grid__cell--align-bottom"
+    HP.class_ "mdc-layout-grid__cell--align-bottom"
 
 
 
 alignLeft :: Html.Attribute r i
 alignLeft =
-    class "mdc-layout-grid--align-left"
+    HP.class_ "mdc-layout-grid--align-left"
 
 
 
 alignRight :: Html.Attribute r i
 alignRight =
-    class "mdc-layout-grid--align-right"
+    HP.class_ "mdc-layout-grid--align-right"
 
 
 
 alignMiddle :: Html.Attribute r i
 alignMiddle =
-    class "mdc-layout-grid__cell--align-middle"
+    HP.class_ "mdc-layout-grid__cell--align-middle"
 
 
 
 alignTop :: Html.Attribute r i
 alignTop =
-    class "mdc-layout-grid__cell--align-top"
+    HP.class_ "mdc-layout-grid__cell--align-top"
 
 
 span :: Int -> Html.Attribute r i
 span n =
-    class ("mdc-layout-grid__cell--span-" ++ String.fromInt n)
+    HP.class_ ("mdc-layout-grid__cell--span-" ++ String.fromInt n)
 
 
 spanDesktop :: Int -> Html.Attribute r i
 spanDesktop n =
-    class ("mdc-layout-grid__cell--span-" ++ String.fromInt n ++ "-desktop")
+    HP.class_ ("mdc-layout-grid__cell--span-" ++ String.fromInt n ++ "-desktop")
 
 
 spanTablet :: Int -> Html.Attribute r i
 spanTablet n =
-    class ("mdc-layout-grid__cell--span-" ++ String.fromInt n ++ "-tablet")
+    HP.class_ ("mdc-layout-grid__cell--span-" ++ String.fromInt n ++ "-tablet")
 
 
 spanPhone :: Int -> Html.Attribute r i
 spanPhone n =
-    class ("mdc-layout-grid__cell--span-" ++ String.fromInt n ++ "-phone")
+    HP.class_ ("mdc-layout-grid__cell--span-" ++ String.fromInt n ++ "-phone")
 
 
 

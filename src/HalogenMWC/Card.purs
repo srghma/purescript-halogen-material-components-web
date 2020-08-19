@@ -84,9 +84,9 @@ actionsElt content =
         Just (Actions { buttons, icons, fullBleed }) ->
             [ Html.div
                 (Array.filterMap identity
-                    [ Just (class "mdc-card__actions")
+                    [ Just (HP.class_ "mdc-card__actions")
                     , if fullBleed then
-                        Just (class "mdc-card__actions--full-bleed")
+                        Just (HP.class_ "mdc-card__actions--full-bleed")
 
                       else
                         Nothing
@@ -94,14 +94,14 @@ actionsElt content =
                 )
                 (Array.concat
                     [ if not (Array.isEmpty buttons) then
-                        [ Html.div [ class "mdc-card__action-buttons" ]
+                        [ Html.div [ HP.class_ "mdc-card__action-buttons" ]
                             (Array.map (\(Button button_) -> button_) buttons)
                         ]
 
                       else
                         []
                     , if not (Array.isEmpty icons) then
-                        [ Html.div [ class "mdc-card__action-icons" ]
+                        [ Html.div [ HP.class_ "mdc-card__action-icons" ]
                             (Array.map (\(Icon icon_) -> icon_) icons)
                         ]
 
@@ -117,13 +117,13 @@ actionsElt content =
 
 rootCs :: Maybe (Html.Attribute r i)
 rootCs =
-    Just (class "mdc-card")
+    Just (HP.class_ "mdc-card")
 
 
 outlinedCs :: Config r i -> Maybe (Html.Attribute r i)
 outlinedCs (Config { outlined }) =
     if outlined then
-        Just (class "mdc-card--outlined")
+        Just (HP.class_ "mdc-card--outlined")
 
     else
         Nothing
@@ -186,7 +186,7 @@ media additionalAttributes backgroundImage =
 
 mediaCs :: Maybe (Html.Attribute r i)
 mediaCs =
-    Just (class "mdc-card__media")
+    Just (HP.class_ "mdc-card__media")
 
 
 backgroundImageAttr :: String -> Maybe (Html.Attribute r i)
@@ -198,10 +198,10 @@ aspectCs :: Maybe Aspect -> Maybe (Html.Attribute r i)
 aspectCs aspect =
     case aspect of
         Just Square ->
-            Just (class "mdc-card__media--square")
+            Just (HP.class_ "mdc-card__media--square")
 
         Just SixteenToNine ->
-            Just (class "mdc-card__media--16-9")
+            Just (HP.class_ "mdc-card__media--16-9")
 
         Nothing ->
             Nothing
@@ -223,7 +223,7 @@ primaryAction additionalAttributes blocks =
 
 primaryActionCs :: Html.Attribute r i
 primaryActionCs =
-    class "mdc-card__primary-action"
+    HP.class_ "mdc-card__primary-action"
 
 
 tabIndexProp :: Int -> Html.Attribute r i
@@ -273,8 +273,8 @@ button (Material.Button.Internal.Config buttonConfig) label =
             (Material.Button.Internal.Config
                 { buttonConfig
                     | additionalAttributes =
-                        class "mdc-card__action"
-                            :: class "mdc-card__action--button"
+                        HP.class_ "mdc-card__action"
+                            :: HP.class_ "mdc-card__action--button"
                             :: buttonConfig.additionalAttributes
                 }
             )
@@ -294,8 +294,8 @@ icon (Material.IconButton.Internal.Config iconButtonConfig) iconName =
             (Material.IconButton.Internal.Config
                 { iconButtonConfig
                     | additionalAttributes =
-                        class "mdc-card__action"
-                            :: class "mdc-card__action--icon"
+                        HP.class_ "mdc-card__action"
+                            :: HP.class_ "mdc-card__action--icon"
                             :: iconButtonConfig.additionalAttributes
                 }
             )

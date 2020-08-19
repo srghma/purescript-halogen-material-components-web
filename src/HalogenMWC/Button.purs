@@ -56,7 +56,7 @@ button variant (config_@{ additionalAttributes, touch, href }) label =
     let
         wrapTouch node =
             if touch then
-                Html.div [ class "mdc-touch-target-wrapper" ] [ node ]
+                Html.div [ HP.class_ "mdc-touch-target-wrapper" ] [ node ]
 
             else
                 node
@@ -124,7 +124,7 @@ unelevated config_ label =
 
 rootCs :: Maybe (Html.Attribute r i)
 rootCs =
-    Just (class "mdc-button")
+    Just (HP.class_ "mdc-button")
 
 
 disabledProp :: Config r i -> Maybe (Html.Attribute r i)
@@ -172,19 +172,19 @@ variantCs variant =
             Nothing
 
         Raised ->
-            Just (class "mdc-button--raised")
+            Just (HP.class_ "mdc-button--raised")
 
         Unelevated ->
-            Just (class "mdc-button--unelevated")
+            Just (HP.class_ "mdc-button--unelevated")
 
         Outlined ->
-            Just (class "mdc-button--outlined")
+            Just (HP.class_ "mdc-button--outlined")
 
 
 denseCs :: Config r i -> Maybe (Html.Attribute r i)
 denseCs (Config { dense }) =
     if dense then
-        Just (class "mdc-button--dense")
+        Just (HP.class_ "mdc-button--dense")
 
     else
         Nothing
@@ -193,7 +193,7 @@ denseCs (Config { dense }) =
 touchCs :: Config r i -> Maybe (Html.Attribute r i)
 touchCs (Config { touch }) =
     if touch then
-        Just (class "mdc-button--touch")
+        Just (HP.class_ "mdc-button--touch")
 
     else
         Nothing
@@ -204,7 +204,7 @@ iconElt (Config { icon }) =
     Maybe.map
         (\iconName ->
             Html.i
-                [ class "mdc-button__icon material-icons"
+                [ HP.class_ "mdc-button__icon material-icons"
                 , Html.Attributes.attribute "aria-hidden" "true"
                 ]
                 [ Html.text iconName ]
@@ -214,7 +214,7 @@ iconElt (Config { icon }) =
 
 rippleElt :: Maybe (Html r i)
 rippleElt =
-    Just (Html.div [ class "mdc-button__ripple" ] [])
+    Just (Html.div [ HP.class_ "mdc-button__ripple" ] [])
 
 
 leadingIconElt :: Config r i -> Maybe (Html r i)
@@ -238,7 +238,7 @@ trailingIconElt ((Config { trailingIcon }) as config_) =
 touchElt :: Config r i -> Maybe (Html r i)
 touchElt (Config { touch }) =
     if touch then
-        Just (Html.div [ class "mdc-button__touch" ] [])
+        Just (Html.div [ HP.class_ "mdc-button__touch" ] [])
 
     else
         Nothing
@@ -246,4 +246,4 @@ touchElt (Config { touch }) =
 
 labelElt :: String -> Maybe (Html r i)
 labelElt label =
-    Just (Html.span [ class "mdc-button__label" ] [ Html.text label ])
+    Just (Html.span [ HP.class_ "mdc-button__label" ] [ Html.text label ])

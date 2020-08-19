@@ -156,7 +156,7 @@ slider ((Config { additionalAttributes }) as config_) =
 
 rootCs :: Maybe (Html.Attribute r i)
 rootCs =
-    Just (class "mdc-slider")
+    Just (HP.class_ "mdc-slider")
 
 
 displayCss :: Maybe (Html.Attribute r i)
@@ -167,7 +167,7 @@ displayCss =
 discreteCs :: Config r i -> Maybe (Html.Attribute r i)
 discreteCs (Config { discrete }) =
     if discrete then
-        Just (class "mdc-slider--discrete")
+        Just (HP.class_ "mdc-slider--discrete")
 
     else
         Nothing
@@ -176,7 +176,7 @@ discreteCs (Config { discrete }) =
 displayMarkersCs :: Config r i -> Maybe (Html.Attribute r i)
 displayMarkersCs (Config { discrete, displayMarkers }) =
     if discrete && displayMarkers then
-        Just (class "mdc-slider--display-markers")
+        Just (HP.class_ "mdc-slider--display-markers")
 
     else
         Nothing
@@ -244,22 +244,22 @@ changeHandler (Config { onInput }) =
 
 trackContainerElt :: Html r i
 trackContainerElt =
-    Html.div [ class "mdc-slider__track-container" ] [ trackElt, trackMarkerContainerElt ]
+    Html.div [ HP.class_ "mdc-slider__track-container" ] [ trackElt, trackMarkerContainerElt ]
 
 
 trackElt :: Html r i
 trackElt =
-    Html.div [ class "mdc-slider__track" ] []
+    Html.div [ HP.class_ "mdc-slider__track" ] []
 
 
 trackMarkerContainerElt :: Html r i
 trackMarkerContainerElt =
-    Html.div [ class "mdc-slider__track-marker-container" ] []
+    Html.div [ HP.class_ "mdc-slider__track-marker-container" ] []
 
 
 thumbContainerElt :: Config r i -> Html r i
 thumbContainerElt (Config { discrete }) =
-    Html.div [ class "mdc-slider__thumb-container" ]
+    Html.div [ HP.class_ "mdc-slider__thumb-container" ]
         (if discrete then
             [ pinElt, thumbElt, focusRingElt ]
 
@@ -270,18 +270,18 @@ thumbContainerElt (Config { discrete }) =
 
 pinElt :: Html r i
 pinElt =
-    Html.div [ class "mdc-slider__pin" ] [ pinValueMarkerElt ]
+    Html.div [ HP.class_ "mdc-slider__pin" ] [ pinValueMarkerElt ]
 
 
 pinValueMarkerElt :: Html r i
 pinValueMarkerElt =
-    Html.div [ class "mdc-slider__pin-value-marker" ] []
+    Html.div [ HP.class_ "mdc-slider__pin-value-marker" ] []
 
 
 thumbElt :: Html r i
 thumbElt =
     Svg.svg
-        [ Svg.Attributes.class "mdc-slider__thumb"
+        [ Svg.Attributes.class_ "mdc-slider__thumb"
         , Svg.Attributes.width "21"
         , Svg.Attributes.height "21"
         ]
@@ -296,4 +296,4 @@ thumbElt =
 
 focusRingElt :: Html r i
 focusRingElt =
-    Html.div [ class "mdc-slider__focus-ring" ] []
+    Html.div [ HP.class_ "mdc-slider__focus-ring" ] []

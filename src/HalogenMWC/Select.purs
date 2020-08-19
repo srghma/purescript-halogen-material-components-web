@@ -178,18 +178,18 @@ data Icon r i
 
 icon :: Array (IProp r i) -> String -> Icon r i
 icon additionalAttributes iconName =
-    Icon (Icon.icon (class "mdc-select__icon" :: additionalAttributes) iconName)
+    Icon (Icon.icon (HP.class_ "mdc-select__icon" :: additionalAttributes) iconName)
 
 
 rootCs :: Maybe (Html.Attribute r i)
 rootCs =
-    Just (class "mdc-select")
+    Just (HP.class_ "mdc-select")
 
 
 outlinedCs :: Variant -> Maybe (Html.Attribute r i)
 outlinedCs variant =
     if variant == Outlined then
-        Just (class "mdc-select--outlined")
+        Just (HP.class_ "mdc-select--outlined")
 
     else
         Nothing
@@ -197,7 +197,7 @@ outlinedCs variant =
 
 leadingIconCs :: Config a r i -> Maybe (Html.Attribute r i)
 leadingIconCs (Config { leadingIcon }) =
-    Maybe.map (\_ -> class "mdc-select--with-leading-icon") leadingIcon
+    Maybe.map (\_ -> HP.class_ "mdc-select--with-leading-icon") leadingIcon
 
 
 disabledProp :: Config a r i -> Maybe (Html.Attribute r i)
@@ -225,7 +225,7 @@ requiredProp (Config { required }) =
 
 anchorElt :: Array (IProp r i) -> Array (Html r i) -> Html r i
 anchorElt additionalAttributes nodes =
-    Html.div (class "mdc-select__anchor" :: additionalAttributes) nodes
+    Html.div (HP.class_ "mdc-select__anchor" :: additionalAttributes) nodes
 
 
 leadingIconElt :: Config a r i -> Html r i
@@ -240,28 +240,28 @@ leadingIconElt (Config { leadingIcon }) =
 
 dropdownIconElt :: Html r i
 dropdownIconElt =
-    Html.i [ class "mdc-select__dropdown-icon" ] []
+    Html.i [ HP.class_ "mdc-select__dropdown-icon" ] []
 
 
 floatingLabelElt :: Config a r i -> Html r i
 floatingLabelElt (Config { label }) =
-    Html.div [ class "mdc-floating-label" ] [ text (Maybe.withDefault "" label) ]
+    Html.div [ HP.class_ "mdc-floating-label" ] [ text (Maybe.withDefault "" label) ]
 
 
 lineRippleElt :: Html r i
 lineRippleElt =
-    Html.label [ class "mdc-line-ripple" ] []
+    Html.label [ HP.class_ "mdc-line-ripple" ] []
 
 
 notchedOutlineElt :: Config a r i -> Html r i
 notchedOutlineElt (Config { label }) =
-    Html.div [ class "mdc-notched-outline" ]
-        [ Html.div [ class "mdc-notched-outline__leading" ] []
-        , Html.div [ class "mdc-notched-outline__notch" ]
-            [ Html.label [ class "mdc-floating-label" ]
+    Html.div [ HP.class_ "mdc-notched-outline" ]
+        [ Html.div [ HP.class_ "mdc-notched-outline__leading" ] []
+        , Html.div [ HP.class_ "mdc-notched-outline__notch" ]
+            [ Html.label [ HP.class_ "mdc-floating-label" ]
                 [ text (Maybe.withDefault "" label) ]
             ]
-        , Html.div [ class "mdc-notched-outline__trailing" ] []
+        , Html.div [ HP.class_ "mdc-notched-outline__trailing" ] []
         ]
 
 
@@ -270,7 +270,7 @@ menuElt leadingIcon selected onChange firstSelectItem remainingSelectItems =
     Menu.menu
         (Menu.config
             # Menu.setAttributes
-                [ class "mdc-select__menu"
+                [ HP.class_ "mdc-select__menu"
                 , style "width" "100%"
                 ]
         )
@@ -307,4 +307,4 @@ listItemConfig selectedValue onChange (SelectItem.Config { value, disabled, addi
 
 selectedTextElt :: Html r i
 selectedTextElt =
-    Html.div [ class "mdc-select__selected-text" ] []
+    Html.div [ HP.class_ "mdc-select__selected-text" ] []

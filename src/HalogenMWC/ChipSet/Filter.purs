@@ -25,7 +25,7 @@ chipSet additionalAttributes chips =
 
 chip :: Chip r i -> Html r i
 chip (Chip ((Chip.Config { additionalAttributes }) as config_) label) =
-    Html.div [ class "mdc-touch-target-wrapper" ]
+    Html.div [ HP.class_ "mdc-touch-target-wrapper" ]
         [ Html.node "mdc-chip"
             (Array.filterMap identity
                 [ chipCs
@@ -48,12 +48,12 @@ chip (Chip ((Chip.Config { additionalAttributes }) as config_) label) =
 
 chipSetCs :: Html.Attribute r i
 chipSetCs =
-    class "mdc-chip-set"
+    HP.class_ "mdc-chip-set"
 
 
 chipSetFilterCs :: Html.Attribute r i
 chipSetFilterCs =
-    class "mdc-chip-set--filter"
+    HP.class_ "mdc-chip-set--filter"
 
 
 gridRole :: Html.Attribute r i
@@ -63,22 +63,22 @@ gridRole =
 
 chipCs :: Maybe (Html.Attribute r i)
 chipCs =
-    Just (class "mdc-chip")
+    Just (HP.class_ "mdc-chip")
 
 
 chipTextCs :: Html.Attribute r i
 chipTextCs =
-    class "mdc-chip__text"
+    HP.class_ "mdc-chip__text"
 
 
 chipTouchCs :: Maybe (Html.Attribute r i)
 chipTouchCs =
-    Just (class "mdc-chip--touch")
+    Just (HP.class_ "mdc-chip--touch")
 
 
 chipPrimaryActionCs :: Html.Attribute r i
 chipPrimaryActionCs =
-    class "mdc-chip__primary-action"
+    HP.class_ "mdc-chip__primary-action"
 
 
 selectedProp :: Chip.Config r i -> Maybe (Html.Attribute r i)
@@ -108,7 +108,7 @@ interactionHandler (Chip.Config { onChange }) =
 
 rippleElt :: Maybe (Html r i)
 rippleElt =
-    Just (Html.div [ class "mdc-chip__ripple" ] [])
+    Just (Html.div [ HP.class_ "mdc-chip__ripple" ] [])
 
 
 leadingIconElt :: Chip.Config r i -> Maybe (Html r i)
@@ -116,8 +116,8 @@ leadingIconElt (Chip.Config { icon, selected }) =
     Maybe.map
         (\iconName ->
             Html.i
-                [ class "material-icons"
-                , class "mdc-chip__icon mdc-chip__icon--leading"
+                [ HP.class_ "material-icons"
+                , HP.class_ "mdc-chip__icon mdc-chip__icon--leading"
                 ]
                 [ text iconName ]
         )
@@ -127,13 +127,13 @@ leadingIconElt (Chip.Config { icon, selected }) =
 checkmarkElt :: Maybe (Html r i)
 checkmarkElt =
     Just
-        (Html.div [ class "mdc-chip__checkmark" ]
+        (Html.div [ HP.class_ "mdc-chip__checkmark" ]
             [ Svg.svg
-                [ Svg.Attributes.class "mdc-chip__checkmark-svg"
+                [ Svg.Attributes.class_ "mdc-chip__checkmark-svg"
                 , Svg.Attributes.viewBox "-2 -3 30 30"
                 ]
                 [ Svg.path
-                    [ Svg.Attributes.class "mdc-chip__checkmark-path"
+                    [ Svg.Attributes.class_ "mdc-chip__checkmark-path"
                     , Svg.Attributes.fill "none"
                     , Svg.Attributes.stroke "black"
                     , Svg.Attributes.d "M1.73,12.91 8.1,19.28 22.79,4.59"
@@ -158,4 +158,4 @@ textElt label =
 
 touchElt :: Maybe (Html r i)
 touchElt =
-    Just (Html.div [ class "mdc-chip__touch" ] [])
+    Just (Html.div [ HP.class_ "mdc-chip__touch" ] [])

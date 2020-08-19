@@ -136,13 +136,13 @@ list ((Config { additionalAttributes }) as config_) firstArrayItem remainingArra
 
 rootCs :: Maybe (Html.Attribute r i)
 rootCs =
-    Just (class "mdc-list")
+    Just (HP.class_ "mdc-list")
 
 
 nonInteractiveCs :: Config r i -> Maybe (Html.Attribute r i)
 nonInteractiveCs (Config { nonInteractive }) =
     if nonInteractive then
-        Just (class "mdc-list--non-interactive")
+        Just (HP.class_ "mdc-list--non-interactive")
 
     else
         Nothing
@@ -151,7 +151,7 @@ nonInteractiveCs (Config { nonInteractive }) =
 denseCs :: Config r i -> Maybe (Html.Attribute r i)
 denseCs (Config { dense }) =
     if dense then
-        Just (class "mdc-list--dense")
+        Just (HP.class_ "mdc-list--dense")
 
     else
         Nothing
@@ -160,7 +160,7 @@ denseCs (Config { dense }) =
 avatarArrayCs :: Config r i -> Maybe (Html.Attribute r i)
 avatarArrayCs (Config { avatarArray }) =
     if avatarArray then
-        Just (class "mdc-list--avatar-list")
+        Just (HP.class_ "mdc-list--avatar-list")
 
     else
         Nothing
@@ -169,7 +169,7 @@ avatarArrayCs (Config { avatarArray }) =
 twoLineCs :: Config r i -> Maybe (Html.Attribute r i)
 twoLineCs (Config { twoLine }) =
     if twoLine then
-        Just (class "mdc-list--two-line")
+        Just (HP.class_ "mdc-list--two-line")
 
     else
         Nothing
@@ -258,7 +258,7 @@ group additionalAttributes nodes =
 
 listGroupCs :: Html.Attribute r i
 listGroupCs =
-    class "mdc-list-group"
+    HP.class_ "mdc-list-group"
 
 
 
@@ -269,7 +269,7 @@ subheader additionalAttributes nodes =
 
 listGroupSubheaderCs :: Html.Attribute r i
 listGroupSubheaderCs =
-    class "mdc-list-group__subheader"
+    HP.class_ "mdc-list-group__subheader"
 
 
 wrapFocusProp :: Config r i -> Maybe (Html.Attribute r i)

@@ -75,35 +75,35 @@ drawer ((Config { additionalAttributes }) as config_) nodes =
 
 content :: Array (IProp r i) -> Array (Html r i) -> Html r i
 content attributes nodes =
-    Html.div (class "mdc-drawer__content" :: attributes) nodes
+    Html.div (HP.class_ "mdc-drawer__content" :: attributes) nodes
 
 
 
 header :: Array (IProp r i) -> Array (Html r i) -> Html r i
 header additionalAttributes nodes =
-    Html.div (class "mdc-drawer__header" :: additionalAttributes) nodes
+    Html.div (HP.class_ "mdc-drawer__header" :: additionalAttributes) nodes
 
 
 
 title :: Html.Attribute r i
 title =
-    class "mdc-drawer__title"
+    HP.class_ "mdc-drawer__title"
 
 
 
 subtitle :: Html.Attribute r i
 subtitle =
-    class "mdc-drawer__subtitle"
+    HP.class_ "mdc-drawer__subtitle"
 
 
 rootCs :: Maybe (Html.Attribute r i)
 rootCs =
-    Just (class "mdc-drawer")
+    Just (HP.class_ "mdc-drawer")
 
 
 modalCs :: Maybe (Html.Attribute r i)
 modalCs =
-    Just (class "mdc-drawer--modal")
+    Just (HP.class_ "mdc-drawer--modal")
 
 
 openProp :: Config r i -> Maybe (Html.Attribute r i)
@@ -119,4 +119,4 @@ closeHandler (Config { onClose }) =
 
 scrim :: Array (IProp r i) -> Array (Html r i) -> Html r i
 scrim additionalAttributes nodes =
-    Html.div (class "mdc-drawer-scrim" :: additionalAttributes) nodes
+    Html.div (HP.class_ "mdc-drawer-scrim" :: additionalAttributes) nodes

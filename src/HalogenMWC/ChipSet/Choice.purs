@@ -68,7 +68,7 @@ chipSet ((Config { selected, onChange, toLabel, additionalAttributes }) as confi
 
 chip :: Maybe a -> Maybe (a -> r i) -> (a -> String) -> Chip a r i -> Html r i
 chip selected onChange toLabel (Chip ((Chip.Config { additionalAttributes }) as config_) value) =
-    Html.div [ class "mdc-touch-target-wrapper" ]
+    Html.div [ HP.class_ "mdc-touch-target-wrapper" ]
         [ Html.node "mdc-chip"
             (Array.filterMap identity
                 [ chipCs
@@ -90,12 +90,12 @@ chip selected onChange toLabel (Chip ((Chip.Config { additionalAttributes }) as 
 
 chipSetCs :: Html.Attribute r i
 chipSetCs =
-    class "mdc-chip-set"
+    HP.class_ "mdc-chip-set"
 
 
 chipSetChoiceCs :: Html.Attribute r i
 chipSetChoiceCs =
-    class "mdc-chip-set--choice"
+    HP.class_ "mdc-chip-set--choice"
 
 
 gridRole :: Html.Attribute r i
@@ -105,22 +105,22 @@ gridRole =
 
 chipCs :: Maybe (Html.Attribute r i)
 chipCs =
-    Just (class "mdc-chip")
+    Just (HP.class_ "mdc-chip")
 
 
 chipTextCs :: Html.Attribute r i
 chipTextCs =
-    class "mdc-chip__text"
+    HP.class_ "mdc-chip__text"
 
 
 chipTouchCs :: Maybe (Html.Attribute r i)
 chipTouchCs =
-    Just (class "mdc-chip--touch")
+    Just (HP.class_ "mdc-chip--touch")
 
 
 chipPrimaryActionCs :: Html.Attribute r i
 chipPrimaryActionCs =
-    class "mdc-chip__primary-action"
+    HP.class_ "mdc-chip__primary-action"
 
 
 selectedProp :: Boolean -> Maybe (Html.Attribute r i)
@@ -150,14 +150,14 @@ interactionHandler r i =
 
 rippleElt :: Maybe (Html r i)
 rippleElt =
-    Just (Html.div [ class "mdc-chip__ripple" ] [])
+    Just (Html.div [ HP.class_ "mdc-chip__ripple" ] [])
 
 
 leadingIconElt :: Chip.Config r i -> Maybe (Html r i)
 leadingIconElt (Chip.Config { icon }) =
     Maybe.map
         (\iconName ->
-            Html.i [ class "material-icons mdc-chip__icon mdc-chip__icon--leading" ]
+            Html.i [ HP.class_ "material-icons mdc-chip__icon mdc-chip__icon--leading" ]
                 [ text iconName ]
         )
         icon
@@ -177,4 +177,4 @@ textElt label =
 
 touchElt :: Maybe (Html r i)
 touchElt =
-    Just (Html.div [ class "mdc-chip__touch" ] [])
+    Just (Html.div [ HP.class_ "mdc-chip__touch" ] [])
