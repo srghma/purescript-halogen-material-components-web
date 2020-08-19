@@ -23,7 +23,6 @@ type Config r i =
 
 defaultConfig :: Config r i
 defaultConfig =
-    Config
         { disabled: False
         , selection: Nothing
         , href: Nothing

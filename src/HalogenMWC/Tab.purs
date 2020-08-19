@@ -17,7 +17,6 @@ type Config r i =
 
 defaultConfig :: Config r i
 defaultConfig =
-    Config
         { active: False
         , additionalAttributes: []
         , onClick: Nothing

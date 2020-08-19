@@ -69,7 +69,6 @@ type Config r i
 
 config :: { onClosed :: MessageId -> r i } -> Config r i
 config { onClosed } =
-    Config
         { closeOnEscape: False
         , additionalAttributes: []
         , onClosed: onClosed

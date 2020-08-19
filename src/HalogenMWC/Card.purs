@@ -32,7 +32,6 @@ type Config r i
 
 defaultConfig :: Config r i
 defaultConfig =
-    Config
         { outlined: False
         , additionalAttributes: []
         }

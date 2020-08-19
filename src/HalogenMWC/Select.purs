@@ -34,7 +34,6 @@ data Config a r i
 
 config :: Config a r i
 defaultConfig =
-    Config
         { label: Nothing
         , disabled: False
         , required: False

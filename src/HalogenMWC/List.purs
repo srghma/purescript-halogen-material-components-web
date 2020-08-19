@@ -28,7 +28,6 @@ type Config r i
 
 defaultConfig :: Config r i
 defaultConfig =
-    Config
         { nonInteractive: False
         , dense: False
         , avatarArray: False

@@ -17,7 +17,6 @@ data Config a r i =
 
 config :: { value :: a } -> Config a r i
 config { value } =
-    Config
         { value: value
         , disabled: False
         , additionalAttributes: []

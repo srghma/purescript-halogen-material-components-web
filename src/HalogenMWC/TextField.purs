@@ -45,7 +45,6 @@ data Icon r i
 
 defaultConfig :: Config r i
 defaultConfig =
-    Config
         { label: Nothing
         , fullwidth: False
         , value: Nothing

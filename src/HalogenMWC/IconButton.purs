@@ -21,7 +21,6 @@ type Config r i
 
 defaultConfig :: Config r i
 defaultConfig =
-    Config
         { disabled: False
         , label: Nothing
         , additionalAttributes: []

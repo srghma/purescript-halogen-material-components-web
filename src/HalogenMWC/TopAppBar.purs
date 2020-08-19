@@ -37,7 +37,6 @@ data Variant
 
 defaultConfig :: Config r i
 defaultConfig =
-    Config
         { dense: False
         , fixed: False
         , additionalAttributes: []

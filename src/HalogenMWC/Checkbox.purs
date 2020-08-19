@@ -25,7 +25,6 @@ data State
 
 defaultConfig :: Config r i
 defaultConfig =
-    Config
         { state: Nothing
         , disabled: False
         , additionalAttributes: []

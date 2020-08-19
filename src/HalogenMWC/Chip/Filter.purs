@@ -24,7 +24,6 @@ data Chip r i
 
 defaultConfig :: Config r i
 defaultConfig =
-    Config
         { selected: False
         , icon: Nothing
         , onChange: Nothing

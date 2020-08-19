@@ -23,7 +23,6 @@ data Config a r i
 
 config :: { toLabel :: a -> String } -> Config a r i
 config { toLabel } =
-    Config
         { selected: Nothing
         , onChange: Nothing
         , toLabel: toLabel

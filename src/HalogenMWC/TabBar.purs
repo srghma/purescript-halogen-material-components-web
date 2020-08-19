@@ -25,7 +25,6 @@ type Config r i
 
 defaultConfig :: Config r i
 defaultConfig =
-    Config
         { stacked: False
         , minWidth: False
         , indicatorSpansContent: False

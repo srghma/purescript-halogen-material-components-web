@@ -31,7 +31,6 @@ type Config r i
 
 defaultConfig :: Config r i
 defaultConfig =
-    Config
         { discrete: False
         , displayMarkers: False
         , min: Nothing

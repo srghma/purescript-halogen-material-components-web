@@ -18,7 +18,6 @@ newtype ImageArrayItem r i = ImageArrayItem (Config r i)
 
 defaultConfig :: Config r i
 defaultConfig =
-    Config
         { label: Nothing
         , href: Nothing
         , additionalAttributes: []
