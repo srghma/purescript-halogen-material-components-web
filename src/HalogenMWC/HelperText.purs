@@ -66,12 +66,12 @@ helperLine additionalAttributes nodes =
 
 helperTextCs :: Maybe (Html.Attribute r i)
 helperTextCs =
-    Just (HP.class_ "mdc-text-field-helper-text")
+    Just (HP.class_ mdc_text_field_helper_text)
 
 
 helperLineCs :: Html.Attribute r i
 helperLineCs =
-    HP.class_ "mdc-text-field-helper-line"
+    HP.class_ mdc_text_field_helper_line
 
 
 persistentCs :: Config r i -> Maybe (Html.Attribute r i)
@@ -96,4 +96,4 @@ characterCounter additionalAttributes =
 
 characterCounterCs :: Html.Attribute r i
 characterCounterCs =
-    HP.class_ "mdc-text-field-character-counter"
+    HP.class_ mdc_text_field_character_counter

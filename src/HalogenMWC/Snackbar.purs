@@ -212,7 +212,7 @@ message label =
 
 rootCs :: Maybe (Html.Attribute r i)
 rootCs =
-    Just (HP.class_ "mdc-snackbar")
+    Just (HP.class_ mdc_snackbar)
 
 
 closeOnEscapeProp :: Config r i -> Maybe (Html.Attribute r i)
@@ -283,7 +283,7 @@ ariaPoliteLiveAttr =
 
 surfaceElt :: MessageId -> Message r i -> Html r i
 surfaceElt messageId message_ =
-    Html.div [ HP.class_ "mdc-snackbar__surface" ]
+    Html.div [ HP.class_ mdc_snackbar__surface ]
         [ labelElt message_
         , actionsElt messageId message_
         ]
@@ -291,13 +291,13 @@ surfaceElt messageId message_ =
 
 labelElt :: Message r i -> Html r i
 labelElt (Message { label }) =
-    Html.div [ HP.class_ "mdc-snackbar__label", ariaStatusRoleAttr, ariaPoliteLiveAttr ]
+    Html.div [ HP.class_ mdc_snackbar__label, ariaStatusRoleAttr, ariaPoliteLiveAttr ]
         [ text label ]
 
 
 actionsElt :: MessageId -> Message r i -> Html r i
 actionsElt messageId message_ =
-    Html.div [ HP.class_ "mdc-snackbar__actions" ]
+    Html.div [ HP.class_ mdc_snackbar__actions ]
         (Array.filterMap identity
             [ actionButtonElt messageId message_
             , actionIconElt messageId message_

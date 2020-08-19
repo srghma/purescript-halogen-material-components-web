@@ -111,7 +111,7 @@ prominent config_ nodes =
 
 row :: Array (IProp r i) -> Array (Html r i) -> Html r i
 row attributes nodes =
-    Html.section ([ HP.class_ "mdc-top-app-bar__row" ] ++ attributes) nodes
+    Html.section ([ HP.class_ mdc_top_app_bar__row ] ++ attributes) nodes
 
 
 {-| Sections subdivide the top app bar's rows. A section may be start- or
@@ -120,7 +120,7 @@ app bar's navigation icon and title.
 -}
 section :: Array (IProp r i) -> Array (Html r i) -> Html r i
 section attributes nodes =
-    Html.section ([ HP.class_ "mdc-top-app-bar__section" ] ++ attributes) nodes
+    Html.section ([ HP.class_ mdc_top_app_bar__section ] ++ attributes) nodes
 
 
 {-| Start-align a top app bar's `section`
@@ -140,24 +140,24 @@ alignEnd =
 
 navigationIcon :: Html.Attribute r i
 navigationIcon =
-    HP.class_ "mdc-top-app-bar__navigation-icon"
+    HP.class_ mdc_top_app_bar__navigation_icon
 
 
 
 title :: Html.Attribute r i
 title =
-    HP.class_ "mdc-top-app-bar__title"
+    HP.class_ mdc_top_app_bar__title
 
 
 
 actionItem :: Html.Attribute r i
 actionItem =
-    HP.class_ "mdc-top-app-bar__action-item"
+    HP.class_ mdc_top_app_bar__action_item
 
 
 rootCs :: Maybe (Html.Attribute r i)
 rootCs =
-    Just (HP.class_ "mdc-top-app-bar")
+    Just (HP.class_ mdc_top_app_bar)
 
 
 variantCs :: Variant -> Maybe (Html.Attribute r i)

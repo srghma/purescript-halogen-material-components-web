@@ -82,7 +82,7 @@ switch ((Config { additionalAttributes }) as config_) =
 
 rootCs :: Maybe (Html.Attribute r i)
 rootCs =
-    Just (HP.class_ "mdc-switch")
+    Just (HP.class_ mdc_switch)
 
 
 checkedProp :: Config r i -> Maybe (Html.Attribute r i)
@@ -97,7 +97,7 @@ disabledProp (Config { disabled }) =
 
 nativeControlCs :: Maybe (Html.Attribute r i)
 nativeControlCs =
-    Just (HP.class_ "mdc-switch__native-control")
+    Just (HP.class_ mdc_switch__native_control)
 
 
 switchRoleAttr :: Maybe (Html.Attribute r i)
@@ -117,17 +117,17 @@ changeHandler (Config { onChange }) =
 
 trackElt :: Html r i
 trackElt =
-    Html.div [ HP.class_ "mdc-switch__track" ] []
+    Html.div [ HP.class_ mdc_switch__track ] []
 
 
 thumbUnderlayElt :: Config r i -> Html r i
 thumbUnderlayElt config_ =
-    Html.div [ HP.class_ "mdc-switch__thumb-underlay" ] [ thumbElt config_ ]
+    Html.div [ HP.class_ mdc_switch__thumb_underlay ] [ thumbElt config_ ]
 
 
 thumbElt :: Config r i -> Html r i
 thumbElt config_ =
-    Html.div [ HP.class_ "mdc-switch__thumb" ] [ nativeControlElt config_ ]
+    Html.div [ HP.class_ mdc_switch__thumb ] [ nativeControlElt config_ ]
 
 
 nativeControlElt :: Config r i -> Html r i

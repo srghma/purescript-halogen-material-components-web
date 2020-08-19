@@ -83,7 +83,7 @@ dialog ((Config { additionalAttributes }) as config_) content =
 
 rootCs :: Maybe (Html.Attribute r i)
 rootCs =
-    Just (HP.class_ "mdc-dialog")
+    Just (HP.class_ mdc_dialog)
 
 
 openProp :: Config r i -> Maybe (Html.Attribute r i)
@@ -108,13 +108,13 @@ closeHandler (Config { onClose }) =
 
 containerElt :: Content r i -> Html r i
 containerElt content =
-    Html.div [ HP.class_ "mdc-dialog__container" ] [ surfaceElt content ]
+    Html.div [ HP.class_ mdc_dialog__container ] [ surfaceElt content ]
 
 
 surfaceElt :: Content r i -> Html r i
 surfaceElt content =
     Html.div
-        [ HP.class_ "mdc-dialog__surface" ]
+        [ HP.class_ mdc_dialog__surface ]
         (Array.filterMap identity
             [ titleElt content
             , contentElt content
@@ -127,7 +127,7 @@ titleElt :: Content r i -> Maybe (Html r i)
 titleElt { title } =
     case title of
         Just title_ ->
-            Just (Html.div [ HP.class_ "mdc-dialog__title" ] [ text title_ ])
+            Just (Html.div [ HP.class_ mdc_dialog__title ] [ text title_ ])
 
         Nothing ->
             Nothing
@@ -135,7 +135,7 @@ titleElt { title } =
 
 contentElt :: Content r i -> Maybe (Html r i)
 contentElt { content } =
-    Just (Html.div [ HP.class_ "mdc-dialog__content" ] content)
+    Just (Html.div [ HP.class_ mdc_dialog__content ] content)
 
 
 actionsElt :: Content r i -> Maybe (Html r i)
@@ -144,9 +144,9 @@ actionsElt { actions } =
         Nothing
 
     else
-        Just (Html.div [ HP.class_ "mdc-dialog__actions" ] actions)
+        Just (Html.div [ HP.class_ mdc_dialog__actions ] actions)
 
 
 scrimElt :: Html r i
 scrimElt =
-    Html.div [ HP.class_ "mdc-dialog__scrim" ] []
+    Html.div [ HP.class_ mdc_dialog__scrim ] []

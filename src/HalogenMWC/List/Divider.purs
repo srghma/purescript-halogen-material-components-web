@@ -73,7 +73,7 @@ listItem ((Config { additionalAttributes }) as config_) =
 
 listDividerCs :: Maybe (Html.Attribute r i)
 listDividerCs =
-    Just (HP.class_ "mdc-list-divider")
+    Just (HP.class_ mdc_list_divider)
 
 
 separatorRoleAttr :: Maybe (Html.Attribute r i)

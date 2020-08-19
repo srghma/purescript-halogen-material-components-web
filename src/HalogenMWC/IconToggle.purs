@@ -97,7 +97,7 @@ iconToggle ((Config { additionalAttributes }) as config_) { onIcon, offIcon } =
 
 rootCs :: Maybe (Html.Attribute r i)
 rootCs =
-    Just (HP.class_ "mdc-icon-button")
+    Just (HP.class_ mdc_icon_button)
 
 
 onProp :: Config r i -> Maybe (Html.Attribute r i)
@@ -107,12 +107,12 @@ onProp (Config { on }) =
 
 materialIconsCs :: Maybe (Html.Attribute r i)
 materialIconsCs =
-    Just (HP.class_ "material-icons")
+    Just (HP.class_ material_icons)
 
 
 iconCs :: Maybe (Html.Attribute r i)
 iconCs =
-    Just (HP.class_ "mdc-icon-button__icon")
+    Just (HP.class_ mdc_icon_button__icon)
 
 
 onIconCs :: Maybe (Html.Attribute r i)

@@ -156,7 +156,7 @@ slider ((Config { additionalAttributes }) as config_) =
 
 rootCs :: Maybe (Html.Attribute r i)
 rootCs =
-    Just (HP.class_ "mdc-slider")
+    Just (HP.class_ mdc_slider)
 
 
 displayCss :: Maybe (Html.Attribute r i)
@@ -244,22 +244,22 @@ changeHandler (Config { onInput }) =
 
 trackContainerElt :: Html r i
 trackContainerElt =
-    Html.div [ HP.class_ "mdc-slider__track-container" ] [ trackElt, trackMarkerContainerElt ]
+    Html.div [ HP.class_ mdc_slider__track_container ] [ trackElt, trackMarkerContainerElt ]
 
 
 trackElt :: Html r i
 trackElt =
-    Html.div [ HP.class_ "mdc-slider__track" ] []
+    Html.div [ HP.class_ mdc_slider__track ] []
 
 
 trackMarkerContainerElt :: Html r i
 trackMarkerContainerElt =
-    Html.div [ HP.class_ "mdc-slider__track-marker-container" ] []
+    Html.div [ HP.class_ mdc_slider__track_marker_container ] []
 
 
 thumbContainerElt :: Config r i -> Html r i
 thumbContainerElt (Config { discrete }) =
-    Html.div [ HP.class_ "mdc-slider__thumb-container" ]
+    Html.div [ HP.class_ mdc_slider__thumb_container ]
         (if discrete then
             [ pinElt, thumbElt, focusRingElt ]
 
@@ -270,12 +270,12 @@ thumbContainerElt (Config { discrete }) =
 
 pinElt :: Html r i
 pinElt =
-    Html.div [ HP.class_ "mdc-slider__pin" ] [ pinValueMarkerElt ]
+    Html.div [ HP.class_ mdc_slider__pin ] [ pinValueMarkerElt ]
 
 
 pinValueMarkerElt :: Html r i
 pinValueMarkerElt =
-    Html.div [ HP.class_ "mdc-slider__pin-value-marker" ] []
+    Html.div [ HP.class_ mdc_slider__pin_value_marker ] []
 
 
 thumbElt :: Html r i
@@ -296,4 +296,4 @@ thumbElt =
 
 focusRingElt :: Html r i
 focusRingElt =
-    Html.div [ HP.class_ "mdc-slider__focus-ring" ] []
+    Html.div [ HP.class_ mdc_slider__focus_ring ] []

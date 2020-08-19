@@ -84,7 +84,7 @@ actionsElt content =
         Just (Actions { buttons, icons, fullBleed }) ->
             [ Html.div
                 (Array.filterMap identity
-                    [ Just (HP.class_ "mdc-card__actions")
+                    [ Just (HP.class_ mdc_card__actions)
                     , if fullBleed then
                         Just (HP.class_ "mdc-card__actions--full-bleed")
 
@@ -94,14 +94,14 @@ actionsElt content =
                 )
                 (Array.concat
                     [ if not (Array.isEmpty buttons) then
-                        [ Html.div [ HP.class_ "mdc-card__action-buttons" ]
+                        [ Html.div [ HP.class_ mdc_card__action_buttons ]
                             (Array.map (\(Button button_) -> button_) buttons)
                         ]
 
                       else
                         []
                     , if not (Array.isEmpty icons) then
-                        [ Html.div [ HP.class_ "mdc-card__action-icons" ]
+                        [ Html.div [ HP.class_ mdc_card__action_icons ]
                             (Array.map (\(Icon icon_) -> icon_) icons)
                         ]
 
@@ -117,7 +117,7 @@ actionsElt content =
 
 rootCs :: Maybe (Html.Attribute r i)
 rootCs =
-    Just (HP.class_ "mdc-card")
+    Just (HP.class_ mdc_card)
 
 
 outlinedCs :: Config r i -> Maybe (Html.Attribute r i)
@@ -186,7 +186,7 @@ media additionalAttributes backgroundImage =
 
 mediaCs :: Maybe (Html.Attribute r i)
 mediaCs =
-    Just (HP.class_ "mdc-card__media")
+    Just (HP.class_ mdc_card__media)
 
 
 backgroundImageAttr :: String -> Maybe (Html.Attribute r i)
@@ -223,7 +223,7 @@ primaryAction additionalAttributes blocks =
 
 primaryActionCs :: Html.Attribute r i
 primaryActionCs =
-    HP.class_ "mdc-card__primary-action"
+    HP.class_ mdc_card__primary_action
 
 
 tabIndexProp :: Int -> Html.Attribute r i
@@ -273,7 +273,7 @@ button (Material.Button.Internal.Config buttonConfig) label =
             (Material.Button.Internal.Config
                 { buttonConfig
                     | additionalAttributes =
-                        HP.class_ "mdc-card__action"
+                        HP.class_ mdc_card__action
                             :: HP.class_ "mdc-card__action--button"
                             :: buttonConfig.additionalAttributes
                 }
@@ -294,7 +294,7 @@ icon (Material.IconButton.Internal.Config iconButtonConfig) iconName =
             (Material.IconButton.Internal.Config
                 { iconButtonConfig
                     | additionalAttributes =
-                        HP.class_ "mdc-card__action"
+                        HP.class_ mdc_card__action
                             :: HP.class_ "mdc-card__action--icon"
                             :: iconButtonConfig.additionalAttributes
                 }

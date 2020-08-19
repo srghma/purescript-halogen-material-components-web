@@ -24,7 +24,7 @@ chipSet additionalAttributes keyedChips =
 
 chip :: Chip r i -> Html r i
 chip (Chip ((Chip.Config { additionalAttributes }) as config_) label) =
-    Html.div [ HP.class_ "mdc-touch-target-wrapper" ]
+    Html.div [ HP.class_ mdc_touch_target_wrapper ]
         [ Html.node "mdc-chip"
             (Array.filterMap identity
                 [ chipCs
@@ -46,7 +46,7 @@ chip (Chip ((Chip.Config { additionalAttributes }) as config_) label) =
 
 chipSetCs :: Html.Attribute r i
 chipSetCs =
-    HP.class_ "mdc-chip-set"
+    HP.class_ mdc_chip_set
 
 
 chipSetInputCs :: Html.Attribute r i
@@ -61,12 +61,12 @@ gridRole =
 
 chipCs :: Maybe (Html.Attribute r i)
 chipCs =
-    Just (HP.class_ "mdc-chip")
+    Just (HP.class_ mdc_chip)
 
 
 chipTextCs :: Html.Attribute r i
 chipTextCs =
-    HP.class_ "mdc-chip__text"
+    HP.class_ mdc_chip__text
 
 
 chipTouchCs :: Maybe (Html.Attribute r i)
@@ -76,7 +76,7 @@ chipTouchCs =
 
 chipPrimaryActionCs :: Html.Attribute r i
 chipPrimaryActionCs =
-    HP.class_ "mdc-chip__primary-action"
+    HP.class_ mdc_chip__primary_action
 
 
 tabIndexProp :: Int -> Html.Attribute r i
@@ -106,7 +106,7 @@ removalHandler (Chip.Config { onDelete }) =
 
 rippleElt :: Maybe (Html r i)
 rippleElt =
-    Just (Html.div [ HP.class_ "mdc-chip__ripple" ] [])
+    Just (Html.div [ HP.class_ mdc_chip__ripple ] [])
 
 
 leadingIconElt :: Chip.Config r i -> Maybe (Html r i)
@@ -133,7 +133,7 @@ textElt label =
 
 touchElt :: Maybe (Html r i)
 touchElt =
-    Just (Html.div [ HP.class_ "mdc-chip__touch" ] [])
+    Just (Html.div [ HP.class_ mdc_chip__touch ] [])
 
 
 trailingIconElt :: Chip.Config r i -> Maybe (Html r i)

@@ -97,7 +97,7 @@ unbounded =
 
 rippleSurface :: Maybe (Html.Attribute r i)
 rippleSurface =
-    Just (HP.class_ "mdc-ripple-surface")
+    Just (HP.class_ mdc_ripple_surface)
 
 
 colorCs :: Config r i -> Maybe (Html.Attribute r i)

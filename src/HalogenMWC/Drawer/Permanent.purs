@@ -42,27 +42,27 @@ drawer (Config { additionalAttributes }) nodes =
 
 content :: Array (IProp r i) -> Array (Html r i) -> Html r i
 content attributes nodes =
-    Html.div (HP.class_ "mdc-drawer__content" :: attributes) nodes
+    Html.div (HP.class_ mdc_drawer__content :: attributes) nodes
 
 
 
 header :: Array (IProp r i) -> Array (Html r i) -> Html r i
 header additionalAttributes nodes =
-    Html.div (HP.class_ "mdc-drawer__header" :: additionalAttributes) nodes
+    Html.div (HP.class_ mdc_drawer__header :: additionalAttributes) nodes
 
 
 
 title :: Html.Attribute r i
 title =
-    HP.class_ "mdc-drawer__title"
+    HP.class_ mdc_drawer__title
 
 
 
 subtitle :: Html.Attribute r i
 subtitle =
-    HP.class_ "mdc-drawer__subtitle"
+    HP.class_ mdc_drawer__subtitle
 
 
 rootCs :: Maybe (Html.Attribute r i)
 rootCs =
-    Just (HP.class_ "mdc-drawer")
+    Just (HP.class_ mdc_drawer)

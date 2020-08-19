@@ -136,7 +136,7 @@ list ((Config { additionalAttributes }) as config_) firstArrayItem remainingArra
 
 rootCs :: Maybe (Html.Attribute r i)
 rootCs =
-    Just (HP.class_ "mdc-list")
+    Just (HP.class_ mdc_list)
 
 
 nonInteractiveCs :: Config r i -> Maybe (Html.Attribute r i)
@@ -258,7 +258,7 @@ group additionalAttributes nodes =
 
 listGroupCs :: Html.Attribute r i
 listGroupCs =
-    HP.class_ "mdc-list-group"
+    HP.class_ mdc_list_group
 
 
 
@@ -269,7 +269,7 @@ subheader additionalAttributes nodes =
 
 listGroupSubheaderCs :: Html.Attribute r i
 listGroupSubheaderCs =
-    HP.class_ "mdc-list-group__subheader"
+    HP.class_ mdc_list_group__subheader
 
 
 wrapFocusProp :: Config r i -> Maybe (Html.Attribute r i)

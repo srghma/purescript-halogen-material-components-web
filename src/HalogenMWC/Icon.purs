@@ -12,4 +12,4 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 icon :: Array (IProp r i) -> String -> Html r i
 icon additionalAttributes iconName =
-    Html.i (HP.class_ "material-icons" :: additionalAttributes) [ text iconName ]
+    Html.i (HP.class_ material_icons :: additionalAttributes) [ text iconName ]

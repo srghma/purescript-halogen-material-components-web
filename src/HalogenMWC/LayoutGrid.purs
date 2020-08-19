@@ -21,20 +21,20 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 layoutGrid :: Array (IProp r i) -> Array (Html r i) -> Html r i
 layoutGrid attributes nodes =
     Html.node "mdc-layout-grid"
-        (HP.class_ "mdc-layout-grid" :: style "display" "block" :: attributes)
+        (HP.class_ mdc_layout_grid :: style "display" "block" :: attributes)
         nodes
 
 
 
 cell :: Array (IProp r i) -> Array (Html r i) -> Html r i
 cell attributes nodes =
-    Html.div (HP.class_ "mdc-layout-grid__cell" :: attributes) nodes
+    Html.div (HP.class_ mdc_layout_grid__cell :: attributes) nodes
 
 
 
 inner :: Array (IProp r i) -> Array (Html r i) -> Html r i
 inner attributes nodes =
-    Html.div (HP.class_ "mdc-layout-grid__inner" :: attributes) nodes
+    Html.div (HP.class_ mdc_layout_grid__inner :: attributes) nodes
 
 
 

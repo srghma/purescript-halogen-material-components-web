@@ -105,7 +105,7 @@ extendedFabCs =
 
 rippleElt :: Maybe (Html r i)
 rippleElt =
-    Just (Html.div [ HP.class_ "mdc-fab__ripple" ] [])
+    Just (Html.div [ HP.class_ mdc_fab__ripple ] [])
 
 
 leadingIconElt :: Config r i -> Maybe (Html r i)
@@ -113,7 +113,7 @@ leadingIconElt (Config { icon, trailingIcon }) =
     case ( icon, trailingIcon ) of
         ( Just iconName, False ) ->
             Just
-                (Html.span [ HP.class_ "material-icons", HP.class_ "mdc-fab__icon" ]
+                (Html.span [ HP.class_ material_icons, HP.class_ mdc_fab__icon ]
                     [ text iconName ]
                 )
 
@@ -123,7 +123,7 @@ leadingIconElt (Config { icon, trailingIcon }) =
 
 labelElt :: String -> Maybe (Html r i)
 labelElt label =
-    Just (Html.span [ HP.class_ "mdc-fab__label" ] [ text label ])
+    Just (Html.span [ HP.class_ mdc_fab__label ] [ text label ])
 
 
 trailingIconElt :: Config r i -> Maybe (Html r i)
@@ -131,7 +131,7 @@ trailingIconElt (Config { icon, trailingIcon }) =
     case ( icon, trailingIcon ) of
         ( Just iconName, True ) ->
             Just
-                (Html.span [ HP.class_ "material-icons", HP.class_ "mdc-fab__icon" ]
+                (Html.span [ HP.class_ material_icons, HP.class_ mdc_fab__icon ]
                     [ text iconName ]
                 )
 
@@ -141,7 +141,7 @@ trailingIconElt (Config { icon, trailingIcon }) =
 
 rootCs :: Maybe (Html.Attribute r i)
 rootCs =
-    Just (HP.class_ "mdc-fab")
+    Just (HP.class_ mdc_fab)
 
 
 exitedCs :: Config r i -> Maybe (Html.Attribute r i)

@@ -70,7 +70,7 @@ imageArray ((Config { additionalAttributes }) as config_) listItems =
 
 rootCs :: Maybe (Html.Attribute r i)
 rootCs =
-    Just (HP.class_ "mdc-image-list")
+    Just (HP.class_ mdc_image_list)
 
 
 masonryCs :: Config r i -> Maybe (Html.Attribute r i)
@@ -104,7 +104,7 @@ listItemElt ((Config { masonry }) as config_) ((ImageArrayItem.ImageArrayItem (I
             ]
     in
     Html.node "mdc-image-list-item"
-        (HP.class_ "mdc-image-list__item" :: additionalAttributes)
+        (HP.class_ mdc_image_list__item :: additionalAttributes)
         (href
             # Maybe.map (\href_ -> [ Html.a [ Html.Attributes.href href_ ] inner ])
             # Maybe.withDefault inner
@@ -115,8 +115,8 @@ imageAspectContainerElt :: Boolean -> ImageArrayItem r i -> Html r i
 imageAspectContainerElt masonry ((ImageArrayItem.ImageArrayItem (ImageArrayItem.Config { href })) as listItem) =
     Html.div
         (Array.filterMap identity
-            [ Just (HP.class_ "mdc-image-list__image-aspect-container")
-            , Maybe.map (\_ -> HP.class_ "mdc-ripple-surface") href
+            [ Just (HP.class_ mdc_image_list__image_aspect_container)
+            , Maybe.map (\_ -> HP.class_ mdc_ripple_surface) href
             ]
         )
         [ imageElt masonry listItem ]
@@ -127,21 +127,21 @@ imageElt masonry (ImageArrayItem.ImageArrayItem (ImageArrayItem.Config { href, i
     let
         img =
             Html.img
-                [ HP.class_ "mdc-image-list__image"
+                [ HP.class_ mdc_image_list__image
                 , Html.Attributes.src image
                 ]
                 []
     in
     if masonry then
         if href /= Nothing then
-            Html.div [ HP.class_ "mdc-ripple-surface" ] [ img ]
+            Html.div [ HP.class_ mdc_ripple_surface ] [ img ]
 
         else
             img
 
     else
         Html.div
-            [ HP.class_ "mdc-image-list__image"
+            [ HP.class_ mdc_image_list__image
             , style "background-image" ("url('" ++ image ++ "')")
             ]
             []
@@ -152,8 +152,8 @@ supportingElt (ImageArrayItem.ImageArrayItem (ImageArrayItem.Config { label })) 
     case label of
         Just string ->
             Html.div
-                [ HP.class_ "mdc-image-list__supporting" ]
-                [ Html.span [ HP.class_ "mdc-image-list__label" ] [ text string ] ]
+                [ HP.class_ mdc_image_list__supporting ]
+                [ Html.span [ HP.class_ mdc_image_list__label ] [ text string ] ]
 
         Nothing ->
             text ""

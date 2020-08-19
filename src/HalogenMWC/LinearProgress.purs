@@ -104,7 +104,7 @@ buffered config_ data =
 
 rootCs :: Maybe (Html.Attribute r i)
 rootCs =
-    Just (HP.class_ "mdc-linear-progress")
+    Just (HP.class_ mdc_linear_progress)
 
 
 displayCss :: Maybe (Html.Attribute r i)
@@ -179,12 +179,12 @@ closedProp (Config { closed }) =
 
 bufferingDotsElt :: Html r i
 bufferingDotsElt =
-    Html.div [ HP.class_ "mdc-linear-progress__buffering-dots" ] []
+    Html.div [ HP.class_ mdc_linear_progress__buffering_dots ] []
 
 
 bufferElt :: Html r i
 bufferElt =
-    Html.div [ HP.class_ "mdc-linear-progress__buffer" ] []
+    Html.div [ HP.class_ mdc_linear_progress__buffer ] []
 
 
 primaryBarElt :: Html r i
@@ -201,4 +201,4 @@ secondaryBarElt =
 
 barInnerElt :: Html r i
 barInnerElt =
-    Html.div [ HP.class_ "mdc-linear-progress__bar-inner" ] []
+    Html.div [ HP.class_ mdc_linear_progress__bar_inner ] []

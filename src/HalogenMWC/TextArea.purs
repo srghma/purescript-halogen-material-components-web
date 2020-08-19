@@ -292,7 +292,7 @@ inputElt config_ =
 
 inputCs :: Maybe (Html.Attribute r i)
 inputCs =
-    Just (HP.class_ "mdc-text-field__input")
+    Just (HP.class_ mdc_text_field__input)
 
 
 rowsAttr :: Config r i -> Maybe (Html.Attribute r i)
@@ -356,7 +356,7 @@ noLabelCs (Config { label }) =
 
 notchedOutlineElt :: Config r i -> Html r i
 notchedOutlineElt config_ =
-    Html.div [ HP.class_ "mdc-notched-outline" ]
+    Html.div [ HP.class_ mdc_notched_outline ]
         [ notchedOutlineLeadingElt
         , notchedOutlineNotchElt config_
         , notchedOutlineTrailingElt
@@ -365,14 +365,14 @@ notchedOutlineElt config_ =
 
 notchedOutlineLeadingElt :: Html r i
 notchedOutlineLeadingElt =
-    Html.div [ HP.class_ "mdc-notched-outline__leading" ] []
+    Html.div [ HP.class_ mdc_notched_outline__leading ] []
 
 
 notchedOutlineTrailingElt :: Html r i
 notchedOutlineTrailingElt =
-    Html.div [ HP.class_ "mdc-notched-outline__trailing" ] []
+    Html.div [ HP.class_ mdc_notched_outline__trailing ] []
 
 
 notchedOutlineNotchElt :: Config r i -> Html r i
 notchedOutlineNotchElt config_ =
-    Html.div [ HP.class_ "mdc-notched-outline__notch" ] [ labelElt config_ ]
+    Html.div [ HP.class_ mdc_notched_outline__notch ] [ labelElt config_ ]

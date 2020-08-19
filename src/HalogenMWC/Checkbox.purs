@@ -110,7 +110,7 @@ checkbox ((Config { touch, additionalAttributes }) as config_) =
     let
         wrapTouch node =
             if touch then
-                Html.div [ HP.class_ "mdc-touch-target-wrapper" ] [ node ]
+                Html.div [ HP.class_ mdc_touch_target_wrapper ] [ node ]
 
             else
                 node
@@ -133,7 +133,7 @@ checkbox ((Config { touch, additionalAttributes }) as config_) =
 
 rootCs :: Maybe (Html.Attribute r i)
 rootCs =
-    Just (HP.class_ "mdc-checkbox")
+    Just (HP.class_ mdc_checkbox)
 
 
 touchCs :: Config r i -> Maybe (Html.Attribute r i)
@@ -189,7 +189,7 @@ nativeControlElt config_ =
     Html.input
         (Array.filterMap identity
             [ Just (Html.Attributes.type_ "checkbox")
-            , Just (HP.class_ "mdc-checkbox__native-control")
+            , Just (HP.class_ mdc_checkbox__native_control)
             , checkedProp config_
             , indeterminateProp config_
             , changeHandler config_
@@ -201,7 +201,7 @@ nativeControlElt config_ =
 backgroundElt :: Html r i
 backgroundElt =
     Html.div
-        [ HP.class_ "mdc-checkbox__background" ]
+        [ HP.class_ mdc_checkbox__background ]
         [ Svg.svg
             [ Svg.Attributes.class_ "mdc-checkbox__checkmark"
             , Svg.Attributes.viewBox "0 0 24 24"
@@ -213,5 +213,5 @@ backgroundElt =
                 ]
                 []
             ]
-        , Html.div [ HP.class_ "mdc-checkbox__mixedmark" ] []
+        , Html.div [ HP.class_ mdc_checkbox__mixedmark ] []
         ]
