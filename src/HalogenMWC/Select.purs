@@ -124,8 +124,8 @@ select variant ((Config { leadingIcon, selected, additionalAttributes, onChange 
                         Nothing
                 )
                 (firstSelectItem :: remainingSelectItems)
-                |> Array.filterMap identity
-                |> Array.head
+                # Array.filterMap identity
+                # Array.head
     in
     Html.node "mdc-select"
         (Array.filterMap identity
@@ -269,12 +269,12 @@ menuElt :: Maybe (Icon r i) -> Maybe a -> Maybe (a -> r i) -> SelectItem a r i -
 menuElt leadingIcon selected onChange firstSelectItem remainingSelectItems =
     Menu.menu
         (Menu.config
-            |> Menu.setAttributes
+            # Menu.setAttributes
                 [ class "mdc-select__menu"
                 , style "width" "100%"
                 ]
         )
-        [ Array.list (Array.config |> Array.setWrapFocus True)
+        [ Array.list (Array.config # Array.setWrapFocus True)
             (listItem leadingIcon selected onChange firstSelectItem)
             (Array.map (listItem leadingIcon selected onChange) remainingSelectItems)
         ]
@@ -294,9 +294,9 @@ listItem leadingIcon selected onChange (SelectItem.SelectItem config_ nodes) =
 listItemConfig :: Maybe a -> Maybe (a -> r i) -> SelectItem.Config a r i -> ArrayItem.Config r i
 listItemConfig selectedValue onChange (SelectItem.Config { value, disabled, additionalAttributes }) =
     ArrayItem.config
-        |> ArrayItem.setDisabled disabled
-        |> ArrayItem.setAttributes additionalAttributes
-        |> (case onChange of
+        # ArrayItem.setDisabled disabled
+        # ArrayItem.setAttributes additionalAttributes
+        # (case onChange of
                 Just onChange_ ->
                     ArrayItem.setOnClick (onChange_ value)
 

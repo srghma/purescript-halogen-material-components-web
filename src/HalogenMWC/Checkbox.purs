@@ -115,7 +115,7 @@ checkbox ((Config { touch, additionalAttributes }) as config_) =
             else
                 node
     in
-    wrapTouch <|
+    wrapTouch $
         Html.node "mdc-checkbox"
             (Array.filterMap identity
                 [ rootCs
@@ -168,7 +168,7 @@ changeHandler (Config { state, onChange }) =
         (\r i ->
             Html.Events.on "change"
                 (Decode.at [ "target", "checked" ] Decode.bool
-                    |> Decode.andThen
+                    # Decode.andThen
                         (\isChecked ->
                             if
                                 (isChecked && state /= Just Checked)

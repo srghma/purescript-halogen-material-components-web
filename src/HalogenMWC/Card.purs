@@ -154,7 +154,7 @@ data Aspect
 
 mediaView :: Maybe Aspect -> Array (IProp r i) -> String -> Block r i
 mediaView aspect additionalAttributes backgroundImage =
-    Block <|
+    Block $
         Html.div
             (Array.filterMap identity
                 [ mediaCs
@@ -210,7 +210,7 @@ aspectCs aspect =
 
 primaryAction :: Array (IProp r i) -> Array (Block r i) -> Array (Block r i)
 primaryAction additionalAttributes blocks =
-    [ Block <|
+    [ Block $
         Html.div
             ([ primaryActionCs
              , tabIndexProp 0
@@ -268,7 +268,7 @@ data Button r i
 
 button :: Button.Config r i -> String -> Button r i
 button (Material.Button.Internal.Config buttonConfig) label =
-    Button <|
+    Button $
         Button.text
             (Material.Button.Internal.Config
                 { buttonConfig
@@ -289,7 +289,7 @@ data Icon r i
 
 icon :: IconButton.Config r i -> String -> Icon r i
 icon (Material.IconButton.Internal.Config iconButtonConfig) iconName =
-    Icon <|
+    Icon $
         IconButton.iconButton
             (Material.IconButton.Internal.Config
                 { iconButtonConfig

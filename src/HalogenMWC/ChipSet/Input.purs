@@ -121,7 +121,7 @@ leadingIconElt (Chip.Config { leadingIcon }) =
 
 primaryActionElt :: String -> Maybe (Html r i)
 primaryActionElt label =
-    Just <|
+    Just $
         Html.span [ chipPrimaryActionCs, gridcellRole, tabIndexProp -1 ]
             (Array.filterMap identity [ textElt label, touchElt ])
 
@@ -139,7 +139,7 @@ touchElt =
 trailingIconElt :: Chip.Config r i -> Maybe (Html r i)
 trailingIconElt (Chip.Config { trailingIcon, onDelete }) =
     if onDelete /= Nothing then
-        Just <|
+        Just $
             Html.i
                 [ class "material-icons mdc-chip__icon mdc-chip__icon--trailing"
                 , tabIndexProp -1

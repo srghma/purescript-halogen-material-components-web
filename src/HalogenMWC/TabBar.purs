@@ -104,9 +104,9 @@ activeTabIndexProp tabs =
     let
         activeTabIndex =
             Array.indexedMap Tuple.pair tabs
-                |> Array.filter (\( _, Tab (Tab.Config { active }) ) -> active)
-                |> Array.head
-                |> Maybe.map Tuple.first
+                # Array.filter (\( _, Tab (Tab.Config { active }) ) -> active)
+                # Array.head
+                # Maybe.map Tuple.first
     in
     Maybe.map (Html.Attributes.property "activeTabIndex" << Encode.int) activeTabIndex
 
@@ -123,7 +123,7 @@ viewTab ((Config { indicatorSpansContent }) as barConfig) ((Tab ((Tab.Config { a
             ]
             ++ additionalAttributes
         )
-        (Array.filterMap identity <|
+        (Array.filterMap identity $
             if indicatorSpansContent then
                 [ tabContentElt barConfig tabConfig content
                 , tabRippleElt

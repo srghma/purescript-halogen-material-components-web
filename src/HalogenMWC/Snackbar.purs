@@ -57,7 +57,7 @@ initialQueue =
 
 close :: MessageId -> Queue r i -> Queue r i
 close messageId (Queue queue) =
-    Queue <|
+    Queue $
         { queue
             | messages =
                 case queue.messages of
@@ -120,8 +120,8 @@ snackbar ((Config { additionalAttributes }) as config_) ((Queue { messages, next
     let
         ( currentMessageId, currentMessage ) =
             Array.head messages
-                |> Maybe.map (Tuple.mapSecond Just)
-                |> Maybe.withDefault ( MessageId -1, Nothing )
+                # Maybe.map (Tuple.mapSecond Just)
+                # Maybe.withDefault ( MessageId -1, Nothing )
     in
     Html.node "mdc-snackbar"
         (Array.filterMap identity
@@ -256,9 +256,9 @@ timeoutMsProp message_ =
     let
         normalizedTimeoutMs =
             message_
-                |> Maybe.andThen
+                # Maybe.andThen
                     (\(Message { timeoutMs }) -> Maybe.map (clamp 4000 10000) timeoutMs)
-                |> Maybe.withDefault indefiniteTimeout
+                # Maybe.withDefault indefiniteTimeout
 
         indefiniteTimeout =
             -1
@@ -327,7 +327,7 @@ actionButtonCs =
 
 actionButtonClickHandler :: MessageId -> Message r i -> Maybe (Html.Attribute r i)
 actionButtonClickHandler messageId (Message { onActionButtonClick }) =
-    Maybe.map (Html.Events.onClick << (|>) messageId) onActionButtonClick
+    Maybe.map (Html.Events.onClick << (#) messageId) onActionButtonClick
 
 
 actionIconElt :: MessageId -> Message r i -> Maybe (Html r i)
@@ -352,4 +352,4 @@ actionIconCs =
 
 actionIconClickHandler :: MessageId -> Message r i -> Maybe (Html.Attribute r i)
 actionIconClickHandler messageId (Message { onActionIconClick }) =
-    Maybe.map (Html.Events.onClick << (|>) messageId) onActionIconClick
+    Maybe.map (Html.Events.onClick << (#) messageId) onActionIconClick

@@ -191,15 +191,15 @@ clickHandler listItems =
 
         nthOnClick index =
             listItems
-                |> Array.map getOnClick
-                |> Array.filterMap identity
-                |> Array.drop index
-                |> Array.head
-                |> Maybe.andThen identity
+                # Array.map getOnClick
+                # Array.filterMap identity
+                # Array.drop index
+                # Array.head
+                # Maybe.andThen identity
 
         mergedClickHandler =
             Decode.at [ "detail", "index" ] Decode.int
-                |> Decode.andThen
+                # Decode.andThen
                     (\index ->
                         case nthOnClick index of
                             Just msg_ ->
@@ -217,7 +217,7 @@ selectedIndexProp listItems =
     let
         selectedIndex =
             listItems
-                |> Array.filter
+                # Array.filter
                     (\listItem_ ->
                         case listItem_ of
                             ArrayItem.ArrayItem _ ->
@@ -229,7 +229,7 @@ selectedIndexProp listItems =
                             ArrayItem.ArrayGroupSubheader _ ->
                                 False
                     )
-                |> Array.indexedMap
+                # Array.indexedMap
                     (\index listItem_ ->
                         case listItem_ of
                             ArrayItem.ArrayItem (ArrayItem.Config { selection }) ->
@@ -245,7 +245,7 @@ selectedIndexProp listItems =
                             ArrayItem.ArrayGroupSubheader _ ->
                                 Nothing
                     )
-                |> Array.filterMap identity
+                # Array.filterMap identity
     in
     Just (Html.Attributes.property "selectedIndex" (Encode.list Encode.int selectedIndex))
 

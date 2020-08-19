@@ -93,7 +93,7 @@ radio ((Config { touch, additionalAttributes }) as config_) =
             else
                 node
     in
-    wrapTouch <|
+    wrapTouch $
         Html.node "mdc-radio"
             (Array.filterMap identity
                 [ rootCs
@@ -141,7 +141,7 @@ changeHandler (Config { checked, onChange }) =
         (\r i ->
             Html.Events.on "change"
                 (Decode.at [ "target", "checked" ] Decode.bool
-                    |> Decode.andThen
+                    # Decode.andThen
                         (\checked_ ->
                             if (checked_ && not checked) || (not checked_ && checked) then
                                 Decode.succeed r i

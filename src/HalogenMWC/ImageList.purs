@@ -106,8 +106,8 @@ listItemElt ((Config { masonry }) as config_) ((ImageArrayItem.ImageArrayItem (I
     Html.node "mdc-image-list-item"
         (class "mdc-image-list__item" :: additionalAttributes)
         (href
-            |> Maybe.map (\href_ -> [ Html.a [ Html.Attributes.href href_ ] inner ])
-            |> Maybe.withDefault inner
+            # Maybe.map (\href_ -> [ Html.a [ Html.Attributes.href href_ ] inner ])
+            # Maybe.withDefault inner
         )
 
 

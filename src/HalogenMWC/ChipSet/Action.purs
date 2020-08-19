@@ -113,7 +113,7 @@ leadingIconElt (Chip.Config { icon }) =
 
 primaryActionElt :: String -> Maybe (Html r i)
 primaryActionElt label =
-    Just <|
+    Just $
         Html.span [ chipPrimaryActionCs, gridcellRole ]
             (Array.filterMap identity [ textElt label, touchElt ])
 

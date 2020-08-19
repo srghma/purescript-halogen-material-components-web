@@ -58,7 +58,7 @@ setAttributes additionalAttributes (Config config_) =
 
 listItem :: Config r i -> ArrayItem r i
 listItem ((Config { additionalAttributes }) as config_) =
-    ArrayItem.ArrayItemDivider <|
+    ArrayItem.ArrayItemDivider $
         Html.li
             (Array.filterMap identity
                 [ listDividerCs

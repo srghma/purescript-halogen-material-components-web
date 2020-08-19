@@ -75,7 +75,7 @@ chip selected onChange toLabel (Chip ((Chip.Config { additionalAttributes }) as 
                 , chipTouchCs
                 , rowRole
                 , selectedProp (Just value == selected)
-                , interactionHandler (Maybe.map ((|>) value) onChange)
+                , interactionHandler (Maybe.map ((#) value) onChange)
                 ]
                 ++ additionalAttributes
             )
@@ -165,7 +165,7 @@ leadingIconElt (Chip.Config { icon }) =
 
 primaryActionElt :: String -> Maybe (Html r i)
 primaryActionElt label =
-    Just <|
+    Just $
         Html.span [ chipPrimaryActionCs, gridcellRole ]
             (Array.filterMap identity [ textElt label, touchElt ])
 

@@ -44,68 +44,6 @@ config =
 
 
 
-setIcon :: Maybe String -> Config r i -> Config r i
-setIcon icon (Config config_) =
-    Config { config_ | icon = icon }
-
-
-
-setTrailingIcon :: Boolean -> Config r i -> Config r i
-setTrailingIcon trailingIcon (Config config_) =
-    Config { config_ | trailingIcon = trailingIcon }
-
-
-
-setDisabled :: Boolean -> Config r i -> Config r i
-setDisabled disabled (Config config_) =
-    Config { config_ | disabled = disabled }
-
-
-
-setDense :: Boolean -> Config r i -> Config r i
-setDense dense (Config config_) =
-    Config { config_ | dense = dense }
-
-
-
-setHref :: Maybe String -> Config r i -> Config r i
-setHref href (Config config_) =
-    Config { config_ | href = href }
-
-
-
-setTarget :: Maybe String -> Config r i -> Config r i
-setTarget target (Config config_) =
-    Config { config_ | target = target }
-
-
-
-setAttributes :: Array (IProp r i) -> Config r i -> Config r i
-setAttributes additionalAttributes (Config config_) =
-    Config { config_ | additionalAttributes = additionalAttributes }
-
-
-
-setOnClick :: r i -> Config r i -> Config r i
-setOnClick onClick (Config config_) =
-    Config { config_ | onClick = Just onClick }
-
-
-{-| Specify whether touch support is enabled (enabled by default)
-
-Touch support is an accessibility guideline that states that touch targets
-should be at least 48 x 48 pixels in size. Use this configuration option to
-disable increased touch target size.
-
-**Note:** Buttons with touch support will be wrapped in a HTML div element to
-prevent potentially overlapping touch targets on adjacent elements.
-
--}
-setTouch :: Boolean -> Config r i -> Config r i
-setTouch touch (Config config_) =
-    Config { config_ | touch = touch }
-
-
 data Variant
     = Text
     | Raised
@@ -114,7 +52,7 @@ data Variant
 
 
 button :: Variant -> Config r i -> String -> Html r i
-button variant ((Config { additionalAttributes, touch, href }) as config_) label =
+button variant (config_@{ additionalAttributes, touch, href }) label =
     let
         wrapTouch node =
             if touch then
@@ -123,7 +61,7 @@ button variant ((Config { additionalAttributes, touch, href }) as config_) label
             else
                 node
     in
-    wrapTouch <|
+    wrapTouch $
         Html.node "mdc-button"
             (Array.filterMap identity [ disabledProp config_ ])
             [ (if href /= Nothing then
