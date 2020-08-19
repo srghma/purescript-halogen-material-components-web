@@ -19,13 +19,17 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 
 
-import HalogenMWC.Button.Internal (Config(..))
-
-
-
-type Config r i =
-    Material.Button.Internal.Config r i
-
+type Config r i
+  = { icon :: Maybe String
+    , trailingIcon :: Boolean
+    , disabled :: Boolean
+    , dense :: Boolean
+    , href :: Maybe String
+    , target :: Maybe String
+    , additionalAttributes :: Array (IProp r i)
+    , onClick :: Maybe r i
+    , touch :: Boolean
+    }
 
 
 config :: Config r i

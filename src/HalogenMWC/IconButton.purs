@@ -35,7 +35,7 @@ config =
 
 
 iconButton :: Config r i -> String -> Html r i
-iconButton (config_@{ additionalAttributes }) iconName =
+iconButton config_ iconName =
     HH.node "mdc-icon-button"
         (Array.filterMap identity
             [ rootCs
@@ -43,21 +43,21 @@ iconButton (config_@{ additionalAttributes }) iconName =
             , tabIndexProp
             , clickHandler config_
             ]
-            <> additionalAttributes
+            <> config_.additionalAttributes
         )
         [ text iconName ]
 
 
 
 custom :: Config r i -> Array (Html r i) -> Html r i
-custom (config_@{ additionalAttributes }) nodes =
+custom config_ nodes =
     HH.node "mdc-icon-button"
         (Array.filterMap identity
             [ rootCs
             , tabIndexProp
             , clickHandler config_
             ]
-            <> additionalAttributes
+            <> config_.additionalAttributes
         )
         nodes
 
@@ -78,5 +78,5 @@ tabIndexProp =
 
 
 clickHandler :: Config r i -> Maybe (HH.Attribute r i)
-clickHandler { onClick } =
-    Maybe.map HH.Events.onClick onClick
+clickHandler config_ =
+    Maybe.map HH.Events.onClick config_.onClick
