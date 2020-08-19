@@ -2,7 +2,7 @@ module HalogenMWC.Checkbox where
 
 import Protolude
 import Halogen (AttrName(..))
-import Halogen.HTML (IProp)
+import Halogen.HTML IProp
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
@@ -72,7 +72,7 @@ indeterminateProp :: Config r i -> Maybe (IProp r i)
 indeterminateProp { state } = Just (HP.prop "indeterminate" (Encode.bool (state == Just Indeterminate)))
 
 disabledProp :: Config r i -> Maybe (IProp r i)
-disabledProp { disabled } = Just (HP.prop "disabled" (Encode.bool disabled))
+disabledProp { disabled } = Just (HP.prop "disabled" disabled)
 
 changeHandler :: Config r i -> Maybe (IProp r i)
 changeHandler { state, onChange } =

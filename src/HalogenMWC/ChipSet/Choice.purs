@@ -2,7 +2,7 @@ module HalogenMWC.ChipSet.Choice where
 
 import Protolude
 import Halogen (AttrName(..))
-import Halogen.HTML (IProp)
+import Halogen.HTML IProp
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
@@ -72,7 +72,7 @@ chipPrimaryActionCs :: IProp r i
 chipPrimaryActionCs = HP.class_ mdc_chip__primary_action
 
 selectedProp :: Boolean -> Maybe (IProp r i)
-selectedProp selected = Just (HP.prop "selected" (Encode.bool selected))
+selectedProp selected = Just (HP.prop "selected" selected)
 
 buttonRole :: IProp r i
 buttonRole = HH.Attributes.attribute "role" "button"

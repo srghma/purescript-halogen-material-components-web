@@ -2,7 +2,7 @@ module HalogenMWC.Drawer.Dismissible where
 
 import Protolude
 import Halogen (AttrName(..))
-import Halogen.HTML (IProp)
+import Halogen.HTML IProp
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
@@ -52,7 +52,7 @@ dismissibleCs :: Maybe (IProp r i)
 dismissibleCs = Just (HP.class_ mdc_drawer____dismissible)
 
 openProp :: Config r i -> Maybe (IProp r i)
-openProp { open } = Just (HP.prop "open" (Encode.bool open))
+openProp { open } = Just (HP.prop "open" open)
 
 closeHandler :: Config r i -> Maybe (IProp r i)
 closeHandler { onClose } = map (HH.Events.on "MDCDrawer:close" << Decode.succeed) onClose

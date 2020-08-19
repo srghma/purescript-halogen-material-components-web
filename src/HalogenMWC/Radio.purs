@@ -2,7 +2,7 @@ module HalogenMWC.Radio where
 
 import Protolude
 import Halogen (AttrName(..))
-import Halogen.HTML (IProp)
+import Halogen.HTML IProp
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
@@ -69,10 +69,10 @@ touchCs { touch } =
     Nothing
 
 checkedProp :: Config r i -> Maybe (IProp r i)
-checkedProp { checked } = Just (HP.prop "checked" (Encode.bool checked))
+checkedProp { checked } = Just (HP.prop "checked" checked)
 
 disabledProp :: Config r i -> Maybe (IProp r i)
-disabledProp { disabled } = Just (HP.prop "disabled" (Encode.bool disabled))
+disabledProp { disabled } = Just (HP.prop "disabled" disabled)
 
 changeHandler :: Config r i -> Maybe (IProp r i)
 changeHandler { checked, onChange } =

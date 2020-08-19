@@ -3,7 +3,7 @@ module HalogenMWC.TextField where
 import Protolude
 
 import Halogen (AttrName(..))
-import Halogen.HTML (IProp)
+import Halogen.HTML IProp
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
@@ -158,10 +158,10 @@ withTrailingIconCs { trailingIcon } =
     Nothing
 
 requiredProp :: Config r i -> Maybe (IProp r i)
-requiredProp { required } = Just (HP.prop "required" (Encode.bool required))
+requiredProp { required } = Just (HP.prop "required" required)
 
 validProp :: Config r i -> Maybe (IProp r i)
-validProp { valid } = Just (HP.prop "valid" (Encode.bool valid))
+validProp { valid } = Just (HP.prop "valid" valid)
 
 minLengthProp :: Config r i -> Maybe (IProp r i)
 minLengthProp { minLength } =
@@ -265,7 +265,7 @@ ariaLabelAttr { fullwidth, placeholder, label } =
     Nothing
 
 disabledProp :: Config r i -> Maybe (IProp r i)
-disabledProp { disabled } = Just (HP.prop "disabled" (Encode.bool disabled))
+disabledProp { disabled } = Just (HP.prop "disabled" disabled)
 
 labelElt :: Config r i -> HH.HTML w i
 labelElt { label, value } =

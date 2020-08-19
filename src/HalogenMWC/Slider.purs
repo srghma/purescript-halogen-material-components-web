@@ -2,7 +2,7 @@ module HalogenMWC.Slider where
 
 import Protolude
 import Halogen (AttrName(..))
-import Halogen.HTML (IProp)
+import Halogen.HTML IProp
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
@@ -113,7 +113,7 @@ stepProp :: Config r i -> Maybe (IProp r i)
 stepProp { step } = map (HP.prop "step" << Encode.float) step
 
 disabledProp :: Config r i -> Maybe (IProp r i)
-disabledProp { disabled } = Just (HP.prop "disabled" (Encode.bool disabled))
+disabledProp { disabled } = Just (HP.prop "disabled" disabled)
 
 ariaValueMinAttr :: Config r i -> Maybe (IProp r i)
 ariaValueMinAttr { min } = map (HH.Attributes.attribute "aria-valuemin" << String.fromFloat) min

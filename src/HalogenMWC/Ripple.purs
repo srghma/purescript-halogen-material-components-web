@@ -2,7 +2,7 @@ module HalogenMWC.Ripple where
 
 import Protolude
 import Halogen (AttrName(..))
-import Halogen.HTML (IProp)
+import Halogen.HTML IProp
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
@@ -62,7 +62,7 @@ colorCs { color } = case color of
   Nothing -> Nothing
 
 unboundedProp :: Boolean -> Maybe (IProp r i)
-unboundedProp isUnbounded = Just (HP.prop "unbounded" (Encode.bool isUnbounded))
+unboundedProp isUnbounded = Just (HP.prop "unbounded" isUnbounded)
 
 unboundedData :: Boolean -> Maybe (IProp r i)
 unboundedData isUnbounded =

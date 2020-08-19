@@ -2,7 +2,7 @@ module HalogenMWC.ChipSet.Filter where
 
 import Protolude
 import Halogen (AttrName(..))
-import Halogen.HTML (IProp)
+import Halogen.HTML IProp
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
@@ -40,7 +40,7 @@ chip (Chip (config_@{ additionalAttributes }) label) =
     ]
 
 selectedProp :: Chip.Config r i -> Maybe (IProp r i)
-selectedProp { selected } = Just (HP.prop "selected" (Encode.bool selected))
+selectedProp { selected } = Just (HP.prop "selected" selected)
 
 interactionHandler :: Chip.Config r i -> Maybe (IProp r i)
 interactionHandler { onChange } = map (HH.Events.on "MDCChip:interaction" << Decode.succeed) onChange

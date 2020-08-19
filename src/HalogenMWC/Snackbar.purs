@@ -5,7 +5,7 @@ import Protolude
 import Data.List (List(..), (:))
 import Data.List as List
 import Halogen (AttrName(..))
-import Halogen.HTML (IProp)
+import Halogen.HTML IProp
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
@@ -114,7 +114,7 @@ rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_snackbar)
 
 closeOnEscapeProp :: Config r i -> Maybe (IProp r i)
-closeOnEscapeProp { closeOnEscape } = Just (HP.prop "closeOnEscape" (Encode.bool closeOnEscape))
+closeOnEscapeProp { closeOnEscape } = Just (HP.prop "closeOnEscape" closeOnEscape)
 
 leadingCs :: Maybe (Message r i) -> Maybe (IProp r i)
 leadingCs message_ =

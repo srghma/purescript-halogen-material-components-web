@@ -2,7 +2,7 @@ module HalogenMWC.Array where
 
 import Protolude
 import Halogen (AttrName(..))
-import Halogen.HTML (IProp)
+import Halogen.HTML IProp
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
@@ -165,4 +165,4 @@ listGroupSubheaderCs :: IProp r i
 listGroupSubheaderCs = HP.class_ mdc_list_group__subheader
 
 wrapFocusProp :: Config r i -> Maybe (IProp r i)
-wrapFocusProp { wrapFocus } = Just (HP.prop "wrapFocus" (Encode.bool wrapFocus))
+wrapFocusProp { wrapFocus } = Just (HP.prop "wrapFocus" wrapFocus)

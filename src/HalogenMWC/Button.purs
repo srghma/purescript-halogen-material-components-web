@@ -2,7 +2,7 @@ module HalogenMWC.Button where
 
 import Protolude
 import Halogen (AttrName(..))
-import Halogen.HTML (IProp)
+import Halogen.HTML IProp
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
@@ -102,7 +102,7 @@ rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_button)
 
 disabledProp :: Config r i -> Maybe (IProp r i)
-disabledProp { disabled } = Just (HP.prop "disabled" (Encode.bool disabled))
+disabledProp { disabled } = Just (HP.prop "disabled" disabled)
 
 disabledAttr :: Config r i -> Maybe (IProp r i)
 disabledAttr { disabled } = Just (HH.Attributes.disabled disabled)

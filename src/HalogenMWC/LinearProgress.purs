@@ -2,7 +2,7 @@ module HalogenMWC.LinearProgress where
 
 import Protolude
 import Halogen (AttrName(..))
-import Halogen.HTML (IProp)
+import Halogen.HTML IProp
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
@@ -99,10 +99,10 @@ bufferProp variant =
     )
 
 reverseProp :: Config r i -> Maybe (IProp r i)
-reverseProp { reverse } = Just (HP.prop "reverse" (Encode.bool reverse))
+reverseProp { reverse } = Just (HP.prop "reverse" reverse)
 
 closedProp :: Config r i -> Maybe (IProp r i)
-closedProp { closed } = Just (HP.prop "closed" (Encode.bool closed))
+closedProp { closed } = Just (HP.prop "closed" closed)
 
 bufferingDotsElt :: HH.HTML w i
 bufferingDotsElt = HH.div [ HP.class_ mdc_linear_progress__buffering_dots ] []

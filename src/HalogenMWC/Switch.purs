@@ -3,7 +3,7 @@ module HalogenMWC.Switch where
 import Protolude
 
 import Halogen (AttrName(..))
-import Halogen.HTML (IProp)
+import Halogen.HTML IProp
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
@@ -42,10 +42,10 @@ rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_switch)
 
 checkedProp :: Config r i -> Maybe (IProp r i)
-checkedProp { checked } = Just (HP.prop "checked" (Encode.bool checked))
+checkedProp { checked } = Just (HP.prop "checked" checked)
 
 disabledProp :: Config r i -> Maybe (IProp r i)
-disabledProp { disabled } = Just (HP.prop "disabled" (Encode.bool disabled))
+disabledProp { disabled } = Just (HP.prop "disabled" disabled)
 
 nativeControlCs :: Maybe (IProp r i)
 nativeControlCs = Just (HP.class_ mdc_switch__native_control)

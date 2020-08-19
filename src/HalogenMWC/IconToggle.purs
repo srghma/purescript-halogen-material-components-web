@@ -2,7 +2,7 @@ module HalogenMWC.IconToggle where
 
 import Protolude
 import Halogen (AttrName(..))
-import Halogen.HTML (IProp)
+import Halogen.HTML IProp
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
@@ -49,7 +49,7 @@ rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_icon_button)
 
 onProp :: Config r i -> Maybe (IProp r i)
-onProp { on } = Just (HP.prop "on" (Encode.bool on))
+onProp { on } = Just (HP.prop "on" on)
 
 materialIconsCs :: Maybe (IProp r i)
 materialIconsCs = Just (HP.class_ material_icons)

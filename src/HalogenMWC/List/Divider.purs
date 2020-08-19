@@ -2,11 +2,11 @@ module HalogenMWC.Array.Divider where
 
 import Protolude
 import Halogen (AttrName(..))
-import Halogen.HTML (IProp)
+import Halogen.HTML IProp
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
-import HalogenMWC.Array.Item (ArrayItem)
+import HalogenMWC.Array.Item ArrayItem
 import HalogenMWC.Array.Item as ArrayItem
 
 type Config r i

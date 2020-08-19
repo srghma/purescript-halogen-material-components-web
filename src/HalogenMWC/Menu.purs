@@ -2,7 +2,7 @@ module HalogenMWC.Menu where
 
 import Protolude
 import Halogen (AttrName(..))
-import Halogen.HTML (IProp)
+import Halogen.HTML IProp
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
@@ -42,10 +42,10 @@ rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ "mdc-menu mdc-menu-surface")
 
 openProp :: Config r i -> Maybe (IProp r i)
-openProp { open } = Just (HP.prop "open" (Encode.bool open))
+openProp { open } = Just (HP.prop "open" open)
 
 quickOpenProp :: Config r i -> Maybe (IProp r i)
-quickOpenProp { quickOpen } = Just (HP.prop "quickOpen" (Encode.bool quickOpen))
+quickOpenProp { quickOpen } = Just (HP.prop "quickOpen" quickOpen)
 
 closeHandler :: Config r i -> Maybe (IProp r i)
 closeHandler { onClose } = map (HH.Events.on "MDCMenu:close" << Decode.succeed) onClose

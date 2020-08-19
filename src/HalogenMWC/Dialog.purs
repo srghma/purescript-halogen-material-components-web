@@ -2,7 +2,7 @@ module HalogenMWC.Dialog where
 
 import Protolude
 import Halogen (AttrName(..))
-import Halogen.HTML (IProp)
+import Halogen.HTML IProp
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
@@ -46,7 +46,7 @@ rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_dialog)
 
 openProp :: Config r i -> Maybe (IProp r i)
-openProp { open } = Just (HP.prop "open" (Encode.bool open))
+openProp { open } = Just (HP.prop "open" open)
 
 roleAttr :: Maybe (IProp r i)
 roleAttr = Just (HH.Attributes.attribute "role" "alertdialog")

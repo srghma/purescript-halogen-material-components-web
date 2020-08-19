@@ -2,7 +2,7 @@ module HalogenMWC.Select where
 
 import Protolude
 import Halogen (AttrName(..))
-import Halogen.HTML (IProp)
+import Halogen.HTML IProp
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
@@ -10,7 +10,7 @@ import HalogenMWC.Icon as Icon
 import HalogenMWC.Array as Array
 import HalogenMWC.Array.Item as ArrayItem
 import HalogenMWC.Menu as Menu
-import HalogenMWC.Select.Item (SelectItem)
+import HalogenMWC.Select.Item SelectItem
 import HalogenMWC.Select.Item as SelectItem
 
 type Config a r i
@@ -110,10 +110,10 @@ leadingIconCs :: Config a r i -> Maybe (IProp r i)
 leadingIconCs { leadingIcon } = map (\_ -> HP.class_ mdc_select____with_leading_icon) leadingIcon
 
 disabledProp :: Config a r i -> Maybe (IProp r i)
-disabledProp { disabled } = Just (HP.prop "disabled" (Encode.bool disabled))
+disabledProp { disabled } = Just (HP.prop "disabled" disabled)
 
 validProp :: Config a r i -> Maybe (IProp r i)
-validProp { valid } = Just (HP.prop "valid" (Encode.bool valid))
+validProp { valid } = Just (HP.prop "valid" valid)
 
 selectedIndexProp :: Maybe Int -> Maybe (IProp r i)
 selectedIndexProp selectedIndex =
@@ -123,7 +123,7 @@ selectedIndexProp selectedIndex =
     )
 
 requiredProp :: Config a r i -> Maybe (IProp r i)
-requiredProp { required } = Just (HP.prop "required" (Encode.bool required))
+requiredProp { required } = Just (HP.prop "required" required)
 
 anchorElt :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
 anchorElt additionalAttributes nodes = HH.div ([ HP.class_ mdc_select__anchor ] <> additionalAttributes) nodes
