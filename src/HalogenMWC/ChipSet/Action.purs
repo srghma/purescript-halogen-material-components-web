@@ -47,13 +47,13 @@ rippleElt =
     Just (HH.div [ HP.class_ mdc_chip__ripple ] [])
 
 leadingIconElt :: Chip.Config r i -> Maybe (Html r i)
-leadingIconElt { icon } =
+leadingIconElt config =
     map
         (\iconName ->
             HH.i [ HP.class_ "material-icons mdc-chip__icon mdc-chip__icon--leading" ]
                 [ text iconName ]
         )
-        icon
+        config.icon
 
 primaryActionElt :: String -> Maybe (Html r i)
 primaryActionElt label =
