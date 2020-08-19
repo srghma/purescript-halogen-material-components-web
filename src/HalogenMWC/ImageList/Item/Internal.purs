@@ -1,4 +1,4 @@
-module HalogenMWC.ImageArray.Item.Internal (Config(..), ImageArrayItem(..))
+module HalogenMWC.ImageArray.Item.Internal (Config(..), ImageArrayItem(..)) where
 
 import Html
 

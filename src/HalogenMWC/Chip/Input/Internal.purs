@@ -1,4 +1,4 @@
-module HalogenMWC.Chip.Input.Internal (Chip(..), Config(..))
+module HalogenMWC.Chip.Input.Internal (Chip(..), Config(..)) where
 
 import Html
 

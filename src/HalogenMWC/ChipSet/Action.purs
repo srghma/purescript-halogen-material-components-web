@@ -1,4 +1,4 @@
-module HalogenMWC.ChipSet.Action (chipSet)
+module HalogenMWC.ChipSet.Action (chipSet) where
 
 {-| Action chips offer actions related to primary content. They should appear
 dynamically and contextually in a UI.

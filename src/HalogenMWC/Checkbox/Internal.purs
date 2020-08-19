@@ -1,4 +1,4 @@
-module HalogenMWC.Checkbox.Internal (Config(..), State(..))
+module HalogenMWC.Checkbox.Internal (Config(..), State(..)) where
 
 import Html
 

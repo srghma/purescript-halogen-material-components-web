@@ -1,4 +1,4 @@
-module HalogenMWC.Button.Internal (Config(..))
+module HalogenMWC.Button.Internal (Config(..)) where
 
 import Html
 

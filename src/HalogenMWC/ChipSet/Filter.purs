@@ -1,4 +1,4 @@
-module HalogenMWC.ChipSet.Filter (chipSet)
+module HalogenMWC.ChipSet.Filter (chipSet) where
 
 {-| Chips are compact elements that allow users to enter information, select a
 choice, filter content, or trigger an action.

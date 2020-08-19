@@ -1,4 +1,4 @@
-module HalogenMWC.Icon (icon)
+module HalogenMWC.Icon (icon) where
 
 {-| Icon renders a Material Icon.
 

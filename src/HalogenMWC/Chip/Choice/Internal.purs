@@ -1,4 +1,4 @@
-module HalogenMWC.Chip.Choice.Internal (Chip(..), Config(..))
+module HalogenMWC.Chip.Choice.Internal (Chip(..), Config(..)) where
 
 import Html
 
