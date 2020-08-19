@@ -31,21 +31,18 @@ config =
 
 
 
-setIcon :: Maybe String -> Config r i -> Config r i
-setIcon icon (Config config_) =
-    Config { config_ | icon = icon }
 
 
 
-setAttributes :: Array (IProp r i) -> Config r i -> Config r i
-setAttributes additionalAttributes (Config config_) =
-    Config { config_ | additionalAttributes = additionalAttributes }
 
 
 
-setOnClick :: r i -> Config r i -> Config r i
-setOnClick onClick (Config config_) =
-    Config { config_ | onClick = Just onClick }
+
+
+
+
+
+
 
 
 

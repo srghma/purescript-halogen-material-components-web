@@ -26,9 +26,8 @@ config =
 
 
 
-setAttributes :: Array (IProp r i) -> Config r i -> Config r i
-setAttributes additionalAttributes (Config config_) =
-    Config { config_ | additionalAttributes = additionalAttributes }
+
+
 
 
 

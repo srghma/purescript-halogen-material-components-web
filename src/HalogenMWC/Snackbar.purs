@@ -103,15 +103,13 @@ config { onClosed } =
 
 
 
-setCloseOnEscape :: Boolean -> Config r i -> Config r i
-setCloseOnEscape closeOnEscape (Config config_) =
-    Config { config_ | closeOnEscape = closeOnEscape }
 
 
 
-setAttributes :: Array (IProp r i) -> Config r i -> Config r i
-setAttributes additionalAttributes (Config config_) =
-    Config { config_ | additionalAttributes = additionalAttributes }
+
+
+
+
 
 
 
@@ -153,45 +151,38 @@ data Message r i
 
 
 
-setActionButton :: Maybe String -> Message r i -> Message r i
-setActionButton actionButton (Message message_) =
-    Message { message_ | actionButton = actionButton }
 
 
 
-setOnActionButtonClick :: (MessageId -> r i) -> Message r i -> Message r i
-setOnActionButtonClick onActionButtonClick (Message message_) =
-    Message { message_ | onActionButtonClick = Just onActionButtonClick }
 
 
 
-setActionIcon :: Maybe String -> Message r i -> Message r i
-setActionIcon actionIcon (Message message_) =
-    Message { message_ | actionIcon = actionIcon }
 
 
 
-setOnActionIconClick :: (MessageId -> r i) -> Message r i -> Message r i
-setOnActionIconClick onActionIconClick (Message message_) =
-    Message { message_ | onActionIconClick = Just onActionIconClick }
 
 
 
-setLeading :: Boolean -> Message r i -> Message r i
-setLeading leading (Message message_) =
-    Message { message_ | leading = leading }
 
 
 
-setStacked :: Boolean -> Message r i -> Message r i
-setStacked stacked (Message message_) =
-    Message { message_ | stacked = stacked }
 
 
 
-setTimeoutMs :: Maybe Int -> Message r i -> Message r i
-setTimeoutMs timeoutMs (Message message_) =
-    Message { message_ | timeoutMs = timeoutMs }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 {-| Default snackbar message (empty label)

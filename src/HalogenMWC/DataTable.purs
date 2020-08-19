@@ -40,15 +40,13 @@ config =
 
 {-| Specify the data table's HTML5 aria-label attribute
 -}
-setLabel :: Maybe String -> Config r i -> Config r i
-setLabel label (Config config_) =
-    Config { config_ | label = label }
 
 
 
-setAttributes :: Array (IProp r i) -> Config r i -> Config r i
-setAttributes additionalAttributes (Config config_) =
-    Config { config_ | additionalAttributes = additionalAttributes }
+
+
+
+
 
 
 

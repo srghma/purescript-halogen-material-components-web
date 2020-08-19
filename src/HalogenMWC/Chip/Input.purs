@@ -35,33 +35,28 @@ config =
 
 
 
-setLeadingIcon :: Maybe String -> Config r i -> Config r i
-setLeadingIcon leadingIcon (Config config_) =
-    Config { config_ | leadingIcon = leadingIcon }
 
 
 
-setTrailingIcon :: Maybe String -> Config r i -> Config r i
-setTrailingIcon trailingIcon (Config config_) =
-    Config { config_ | trailingIcon = trailingIcon }
 
 
 
-setAttributes :: Array (IProp r i) -> Config r i -> Config r i
-setAttributes additionalAttributes (Config config_) =
-    Config { config_ | additionalAttributes = additionalAttributes }
 
 
 
-setOnDelete :: r i -> Config r i -> Config r i
-setOnDelete onDelete (Config config_) =
-    Config { config_ | onDelete = Just onDelete }
 
 
 
-setOnClick :: r i -> Config r i -> Config r i
-setOnClick onClick (Config config_) =
-    Config { config_ | onClick = Just onClick }
+
+
+
+
+
+
+
+
+
+
 
 
 

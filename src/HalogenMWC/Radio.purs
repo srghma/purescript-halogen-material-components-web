@@ -44,27 +44,23 @@ config =
 
 
 
-setChecked :: Boolean -> Config r i -> Config r i
-setChecked checked (Config config_) =
-    Config { config_ | checked = checked }
 
 
 
-setDisabled :: Boolean -> Config r i -> Config r i
-setDisabled disabled (Config config_) =
-    Config { config_ | disabled = disabled }
 
 
 
-setAttributes :: Array (IProp r i) -> Config r i -> Config r i
-setAttributes additionalAttributes (Config config_) =
-    Config { config_ | additionalAttributes = additionalAttributes }
 
 
 
-setOnChange :: r i -> Config r i -> Config r i
-setOnChange onChange (Config config_) =
-    Config { config_ | onChange = Just onChange }
+
+
+
+
+
+
+
+
 
 
 {-| Specify whether touch support is enabled (enabled by default)
@@ -77,9 +73,8 @@ disable increased touch target size.
 prevent potentially overlapping touch targets on adjacent elements.
 
 -}
-setTouch :: Boolean -> Config r i -> Config r i
-setTouch touch (Config config_) =
-    Config { config_ | touch = touch }
+
+
 
 
 

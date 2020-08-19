@@ -29,33 +29,28 @@ type Config r i
 
 
 
-setLabel :: Maybe String -> Config r i -> Config r i
-setLabel label (Config config_) =
-    Config { config_ | label = label }
 
 
 
-setFor :: Maybe String -> Config r i -> Config r i
-setFor for (Config config_) =
-    Config { config_ | for = for }
 
 
 
-setAlignEnd :: Boolean -> Config r i -> Config r i
-setAlignEnd alignEnd (Config config_) =
-    Config { config_ | alignEnd = alignEnd }
 
 
 
-setAttributes :: Array (IProp r i) -> Config r i -> Config r i
-setAttributes additionalAttributes (Config config_) =
-    Config { config_ | additionalAttributes = additionalAttributes }
 
 
 
-setOnClick :: r i -> Config r i -> Config r i
-setOnClick onClick (Config config_) =
-    Config { config_ | onClick = Just onClick }
+
+
+
+
+
+
+
+
+
+
 
 
 

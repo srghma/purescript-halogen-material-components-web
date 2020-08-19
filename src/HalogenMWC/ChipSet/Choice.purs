@@ -41,21 +41,18 @@ config { toLabel } =
 
 
 
-setSelected :: Maybe a -> Config a r i -> Config a r i
-setSelected selected (Config config_) =
-    Config { config_ | selected = selected }
 
 
 
-setOnChange :: (a -> r i) -> Config a r i -> Config a r i
-setOnChange onChange (Config config_) =
-    Config { config_ | onChange = Just onChange }
 
 
 
-setAttributes :: Array (IProp r i) -> Config a r i -> Config a r i
-setAttributes additionalAttributes (Config config_) =
-    Config { config_ | additionalAttributes = additionalAttributes }
+
+
+
+
+
+
 
 
 

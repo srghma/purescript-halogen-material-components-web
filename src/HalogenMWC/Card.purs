@@ -45,15 +45,13 @@ config =
 
 
 
-setOutlined :: Boolean -> Config r i -> Config r i
-setOutlined outlined (Config config_) =
-    Config { config_ | outlined = outlined }
 
 
 
-setAttributes :: Array (IProp r i) -> Config r i -> Config r i
-setAttributes additionalAttributes (Config config_) =
-    Config { config_ | additionalAttributes = additionalAttributes }
+
+
+
+
 
 
 

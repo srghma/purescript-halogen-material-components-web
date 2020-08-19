@@ -59,51 +59,43 @@ config =
 
 
 
-setLabel :: Maybe String -> Config a r i -> Config a r i
-setLabel label (Config config_) =
-    Config { config_ | label = label }
 
 
 
-setSelected :: Maybe a -> Config a r i -> Config a r i
-setSelected selected (Config config_) =
-    Config { config_ | selected = selected }
 
 
 
-setDisabled :: Boolean -> Config a r i -> Config a r i
-setDisabled disabled (Config config_) =
-    Config { config_ | disabled = disabled }
 
 
 
-setRequired :: Boolean -> Config a r i -> Config a r i
-setRequired required (Config config_) =
-    Config { config_ | required = required }
 
 
 
-setValid :: Boolean -> Config a r i -> Config a r i
-setValid valid (Config config_) =
-    Config { config_ | valid = valid }
 
 
 
-setLeadingIcon :: Maybe (Icon r i) -> Config a r i -> Config a r i
-setLeadingIcon leadingIcon (Config config_) =
-    Config { config_ | leadingIcon = leadingIcon }
 
 
 
-setAttributes :: Array (IProp r i) -> Config a r i -> Config a r i
-setAttributes additionalAttributes (Config config_) =
-    Config { config_ | additionalAttributes = additionalAttributes }
 
 
 
-setOnChange :: (a -> r i) -> Config a r i -> Config a r i
-setOnChange onChange (Config config_) =
-    Config { config_ | onChange = Just onChange }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 data Variant

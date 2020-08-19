@@ -37,21 +37,18 @@ config =
 
 
 
-setMasonry :: Boolean -> Config r i -> Config r i
-setMasonry masonry (Config config_) =
-    Config { config_ | masonry = masonry }
 
 
 
-setWithTextProtection :: Boolean -> Config r i -> Config r i
-setWithTextProtection withTextProtection (Config config_) =
-    Config { config_ | withTextProtection = withTextProtection }
 
 
 
-setAttributes :: Array (IProp r i) -> Config r i -> Config r i
-setAttributes additionalAttributes (Config config_) =
-    Config { config_ | additionalAttributes = additionalAttributes }
+
+
+
+
+
+
 
 
 

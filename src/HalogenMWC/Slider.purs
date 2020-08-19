@@ -69,9 +69,8 @@ interacting with the slider.
 This works best for integer-valued sliders, but this is not a requirement.
 
 -}
-setDiscrete :: Boolean -> Config r i -> Config r i
-setDiscrete discrete (Config config_) =
-    Config { config_ | discrete = discrete }
+
+
 
 
 {-| Specify whether a slider should display markers
@@ -79,51 +78,43 @@ setDiscrete discrete (Config config_) =
 Note that this option is ignored by non-discrete sliders.
 
 -}
-setDisplayMarkers :: Boolean -> Config r i -> Config r i
-setDisplayMarkers displayMarkers (Config config_) =
-    Config { config_ | displayMarkers = displayMarkers }
 
 
 
-setMin :: Maybe Float -> Config r i -> Config r i
-setMin min (Config config_) =
-    Config { config_ | min = min }
 
 
 
-setMax :: Maybe Float -> Config r i -> Config r i
-setMax max (Config config_) =
-    Config { config_ | max = max }
 
 
 
-setStep :: Maybe Float -> Config r i -> Config r i
-setStep step (Config config_) =
-    Config { config_ | step = step }
 
 
 
-setValue :: Maybe Float -> Config r i -> Config r i
-setValue value (Config config_) =
-    Config { config_ | value = value }
 
 
 
-setDisabled :: Boolean -> Config r i -> Config r i
-setDisabled disabled (Config config_) =
-    Config { config_ | disabled = disabled }
 
 
 
-setAttributes :: Array (IProp r i) -> Config r i -> Config r i
-setAttributes additionalAttributes (Config config_) =
-    Config { config_ | additionalAttributes = additionalAttributes }
 
 
 
-setOnInput :: (Float -> r i) -> Config r i -> Config r i
-setOnInput onInput (Config config_) =
-    Config { config_ | onInput = Just onInput }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

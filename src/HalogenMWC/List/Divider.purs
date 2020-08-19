@@ -38,21 +38,18 @@ config =
 
 
 
-setInset :: Boolean -> Config r i -> Config r i
-setInset inset (Config config_) =
-    Config { config_ | inset = inset }
 
 
 
-setPadded :: Boolean -> Config r i -> Config r i
-setPadded padded (Config config_) =
-    Config { config_ | padded = padded }
 
 
 
-setAttributes :: Array (IProp r i) -> Config r i -> Config r i
-setAttributes additionalAttributes (Config config_) =
-    Config { config_ | additionalAttributes = additionalAttributes }
+
+
+
+
+
+
 
 
 
@@ -81,7 +78,7 @@ separatorRoleAttr =
     Just (HH.Attributes.attribute "role" "separator")
 
 
-insetCs :: Config r i -> Maybe (HH.Attribute r i)
+in
 insetCs (Config { inset }) =
     if inset then
         Just (HP.class_ mdc_list_divider____inset)

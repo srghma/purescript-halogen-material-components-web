@@ -33,27 +33,23 @@ config =
 
 
 
-setSelected :: Boolean -> Config r i -> Config r i
-setSelected selected (Config config_) =
-    Config { config_ | selected = selected }
 
 
 
-setIcon :: Maybe String -> Config r i -> Config r i
-setIcon icon (Config config_) =
-    Config { config_ | icon = icon }
 
 
 
-setAttributes :: Array (IProp r i) -> Config r i -> Config r i
-setAttributes additionalAttributes (Config config_) =
-    Config { config_ | additionalAttributes = additionalAttributes }
 
 
 
-setOnChange :: r i -> Config r i -> Config r i
-setOnChange onChange (Config config_) =
-    Config { config_ | onChange = Just onChange }
+
+
+
+
+
+
+
+
 
 
 

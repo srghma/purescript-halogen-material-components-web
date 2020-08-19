@@ -44,34 +44,29 @@ config =
 
 
 
-setOn :: Boolean -> Config r i -> Config r i
-setOn on (Config config_) =
-    Config { config_ | on = on }
 
 
 
-setDisabled :: Boolean -> Config r i -> Config r i
-setDisabled disabled (Config config_) =
-    Config { config_ | disabled = disabled }
+
+
+
+
 
 
 {-| Specify the HTML5 aria-label attribute of an icon toggle
 -}
-setLabel :: Maybe String -> Config r i -> Config r i
-setLabel label (Config config_) =
-    Config { config_ | label = label }
 
 
 
-setAttributes :: Array (IProp r i) -> Config r i -> Config r i
-setAttributes additionalAttributes (Config config_) =
-    Config { config_ | additionalAttributes = additionalAttributes }
 
 
 
-setOnChange :: r i -> Config r i -> Config r i
-setOnChange onChange (Config config_) =
-    Config { config_ | onChange = Just onChange }
+
+
+
+
+
+
 
 
 

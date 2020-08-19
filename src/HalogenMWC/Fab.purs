@@ -40,27 +40,23 @@ config =
 
 
 
-setMini :: Boolean -> Config r i -> Config r i
-setMini mini (Config config_) =
-    Config { config_ | mini = mini }
 
 
 
-setExited :: Boolean -> Config r i -> Config r i
-setExited exited (Config config_) =
-    Config { config_ | exited = exited }
 
 
 
-setAttributes :: Array (IProp r i) -> Config r i -> Config r i
-setAttributes additionalAttributes (Config config_) =
-    Config { config_ | additionalAttributes = additionalAttributes }
 
 
 
-setOnClick :: r i -> Config r i -> Config r i
-setOnClick onClick (Config config_) =
-    Config { config_ | onClick = Just onClick }
+
+
+
+
+
+
+
+
 
 
 

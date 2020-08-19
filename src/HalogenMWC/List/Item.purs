@@ -44,9 +44,8 @@ config =
 
 
 
-setDisabled :: Boolean -> Config r i -> Config r i
-setDisabled disabled (Config config_) =
-    Config { config_ | disabled = disabled }
+
+
 
 
 
@@ -67,15 +66,13 @@ activated =
 
 
 
-setSelected :: Maybe Selection -> Config r i -> Config r i
-setSelected selection (Config config_) =
-    Config { config_ | selection = selection }
 
 
 
-setHref :: Maybe String -> Config r i -> Config r i
-setHref href (Config config_) =
-    Config { config_ | href = href }
+
+
+
+
 
 
 {-| Specify a link list item's HTML5 target attribute
@@ -83,22 +80,19 @@ setHref href (Config config_) =
 Note that non-link list items ignore this configuration option.
 
 -}
-setTarget :: Maybe String -> Config r i -> Config r i
-setTarget target (Config config_) =
-    Config { config_ | target = target }
 
 
 
-setAttributes :: Array (IProp r i) -> Config r i -> Config r i
-setAttributes additionalAttributes (Config config_) =
-    Config
+
+
+
+
         { config_ | additionalAttributes = additionalAttributes }
 
 
 
-setOnClick :: r i -> Config r i -> Config r i
-setOnClick onClick (Config config_) =
-    Config
+
+
         { config_ | onClick = Just onClick }
 
 

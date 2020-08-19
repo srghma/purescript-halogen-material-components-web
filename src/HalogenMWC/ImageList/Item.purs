@@ -32,21 +32,18 @@ config =
 
 
 
-setLabel :: Maybe String -> Config r i -> Config r i
-setLabel label (Config config_) =
-    Config { config_ | label = label }
 
 
 
-setHref :: Maybe String -> Config r i -> Config r i
-setHref href (Config config_) =
-    Config { config_ | href = href }
 
 
 
-setAttributes :: Array (IProp r i) -> Config r i -> Config r i
-setAttributes additionalAttributes (Config config_) =
-    Config { config_ | additionalAttributes = additionalAttributes }
+
+
+
+
+
+
 
 
 {-| Image list item type

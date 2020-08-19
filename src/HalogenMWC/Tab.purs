@@ -32,21 +32,18 @@ config =
 
 
 
-setOnClick :: r i -> Config r i -> Config r i
-setOnClick onClick (Config config_) =
-    Config { config_ | onClick = Just onClick }
 
 
 
-setActive :: Boolean -> Config r i -> Config r i
-setActive active (Config config_) =
-    Config { config_ | active = active }
 
 
 
-setAttributes :: Array (IProp r i) -> Config r i -> Config r i
-setAttributes additionalAttributes (Config config_) =
-    Config { config_ | additionalAttributes = additionalAttributes }
+
+
+
+
+
+
 
 
 

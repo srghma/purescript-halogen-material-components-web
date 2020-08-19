@@ -36,28 +36,24 @@ config =
 
 
 
-setDisabled :: Boolean -> Config r i -> Config r i
-setDisabled disabled (Config config_) =
-    Config { config_ | disabled = disabled }
+
+
 
 
 {-| Specify an icon button's HTML5 arial-label attribute
 -}
-setLabel :: Maybe String -> Config r i -> Config r i
-setLabel label (Config config_) =
-    Config { config_ | label = label }
 
 
 
-setAttributes :: Array (IProp r i) -> Config r i -> Config r i
-setAttributes additionalAttributes (Config config_) =
-    Config { config_ | additionalAttributes = additionalAttributes }
 
 
 
-setOnClick :: r i -> Config r i -> Config r i
-setOnClick onClick (Config config_) =
-    Config { config_ | onClick = Just onClick }
+
+
+
+
+
+
 
 
 

@@ -30,15 +30,13 @@ config { value } =
 
 
 
-setDisabled :: Boolean -> Config a r i -> Config a r i
-setDisabled disabled (Config config_) =
-    Config { config_ | disabled = disabled }
 
 
 
-setAttributes :: Array (IProp r i) -> Config a r i -> Config a r i
-setAttributes additionalAttributes (Config config_) =
-    Config { config_ | additionalAttributes = additionalAttributes }
+
+
+
+
 
 
 

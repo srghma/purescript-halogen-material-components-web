@@ -46,33 +46,28 @@ config =
 
 
 
-setStacked :: Boolean -> Config r i -> Config r i
-setStacked stacked (Config config_) =
-    Config { config_ | stacked = stacked }
 
 
 
-setMinWidth :: Boolean -> Config r i -> Config r i
-setMinWidth minWidth (Config config_) =
-    Config { config_ | minWidth = minWidth }
 
 
 
-setIndicatorSpansContent :: Boolean -> Config r i -> Config r i
-setIndicatorSpansContent indicatorSpansContent (Config config_) =
-    Config { config_ | indicatorSpansContent = indicatorSpansContent }
 
 
 
-setAlign :: Maybe Align -> Config r i -> Config r i
-setAlign align (Config config_) =
-    Config { config_ | align = align }
 
 
 
-setAttributes :: Array (IProp r i) -> Config r i -> Config r i
-setAttributes additionalAttributes (Config config_) =
-    Config { config_ | additionalAttributes = additionalAttributes }
+
+
+
+
+
+
+
+
+
+
 
 
 

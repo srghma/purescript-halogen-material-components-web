@@ -72,87 +72,73 @@ config =
 
 
 
-setLabel :: Maybe String -> Config r i -> Config r i
-setLabel label (Config config_) =
-    Config { config_ | label = label }
 
 
 
-setFullwidth :: Boolean -> Config r i -> Config r i
-setFullwidth fullwidth (Config config_) =
-    Config { config_ | fullwidth = fullwidth }
 
 
 
-setValue :: Maybe String -> Config r i -> Config r i
-setValue value (Config config_) =
-    Config { config_ | value = value }
 
 
 
-setPlaceholder :: Maybe String -> Config r i -> Config r i
-setPlaceholder placeholder (Config config_) =
-    Config { config_ | placeholder = placeholder }
 
 
 
-setRows :: Maybe Int -> Config r i -> Config r i
-setRows rows (Config config_) =
-    Config { config_ | rows = rows }
 
 
 
-setCols :: Maybe Int -> Config r i -> Config r i
-setCols cols (Config config_) =
-    Config { config_ | cols = cols }
 
 
 
-setDisabled :: Boolean -> Config r i -> Config r i
-setDisabled disabled (Config config_) =
-    Config { config_ | disabled = disabled }
 
 
 
-setRequired :: Boolean -> Config r i -> Config r i
-setRequired required (Config config_) =
-    Config { config_ | required = required }
 
 
 
-setValid :: Boolean -> Config r i -> Config r i
-setValid valid (Config config_) =
-    Config { config_ | valid = valid }
 
 
 
-setMinLength :: Maybe Int -> Config r i -> Config r i
-setMinLength minLength (Config config_) =
-    Config { config_ | minLength = minLength }
 
 
 
-setMaxLength :: Maybe Int -> Config r i -> Config r i
-setMaxLength maxLength (Config config_) =
-    Config { config_ | maxLength = maxLength }
 
 
 
-setAttributes :: Array (IProp r i) -> Config r i -> Config r i
-setAttributes additionalAttributes (Config config_) =
-    Config { config_ | additionalAttributes = additionalAttributes }
 
 
 
-setOnInput :: (String -> r i) -> Config r i -> Config r i
-setOnInput onInput (Config config_) =
-    Config { config_ | onInput = Just onInput }
 
 
 
-setOnChange :: (String -> r i) -> Config r i -> Config r i
-setOnChange onChange (Config config_) =
-    Config { config_ | onChange = Just onChange }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

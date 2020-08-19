@@ -40,21 +40,18 @@ config =
 
 
 
-setOpen :: Boolean -> Config r i -> Config r i
-setOpen open (Config config_) =
-    Config { config_ | open = open }
 
 
 
-setOnClose :: r i -> Config r i -> Config r i
-setOnClose onClose (Config config_) =
-    Config { config_ | onClose = Just onClose }
 
 
 
-setAttributes :: Array (IProp r i) -> Config r i -> Config r i
-setAttributes additionalAttributes (Config config_) =
-    Config { config_ | additionalAttributes = additionalAttributes }
+
+
+
+
+
+
 
 
 

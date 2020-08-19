@@ -44,21 +44,18 @@ config =
 
 
 
-setClosed :: Boolean -> Config r i -> Config r i
-setClosed closed (Config config_) =
-    Config { config_ | closed = closed }
 
 
 
-setReverse :: Boolean -> Config r i -> Config r i
-setReverse reverse (Config config_) =
-    Config { config_ | reverse = reverse }
 
 
 
-setAttributes :: Array (IProp r i) -> Config r i -> Config r i
-setAttributes additionalAttributes (Config config_) =
-    Config { config_ | additionalAttributes = additionalAttributes }
+
+
+
+
+
+
 
 
 linearProgress :: Variant -> Config r i -> Html r i

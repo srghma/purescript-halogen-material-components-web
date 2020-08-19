@@ -95,117 +95,98 @@ config =
 
 
 
-setLabel :: Maybe String -> Config r i -> Config r i
-setLabel label (Config config_) =
-    Config { config_ | label = label }
 
 
 
-setFullwidth :: Boolean -> Config r i -> Config r i
-setFullwidth fullwidth (Config config_) =
-    Config { config_ | fullwidth = fullwidth }
 
 
 
-setValue :: Maybe String -> Config r i -> Config r i
-setValue value (Config config_) =
-    Config { config_ | value = value }
 
 
 
-setPlaceholder :: Maybe String -> Config r i -> Config r i
-setPlaceholder placeholder (Config config_) =
-    Config { config_ | placeholder = placeholder }
 
 
 
-setDisabled :: Boolean -> Config r i -> Config r i
-setDisabled disabled (Config config_) =
-    Config { config_ | disabled = disabled }
 
 
 
-setRequired :: Boolean -> Config r i -> Config r i
-setRequired required (Config config_) =
-    Config { config_ | required = required }
 
 
 
-setValid :: Boolean -> Config r i -> Config r i
-setValid valid (Config config_) =
-    Config { config_ | valid = valid }
 
 
 
-setMinLength :: Maybe Int -> Config r i -> Config r i
-setMinLength minLength (Config config_) =
-    Config { config_ | minLength = minLength }
 
 
 
-setMaxLength :: Maybe Int -> Config r i -> Config r i
-setMaxLength maxLength (Config config_) =
-    Config { config_ | maxLength = maxLength }
 
 
 
-setPattern :: Maybe String -> Config r i -> Config r i
-setPattern pattern (Config config_) =
-    Config { config_ | pattern = pattern }
 
 
 
-setType :: Maybe String -> Config r i -> Config r i
-setType type_ (Config config_) =
-    Config { config_ | type_ = type_ }
 
 
 
-setMin :: Maybe Int -> Config r i -> Config r i
-setMin min (Config config_) =
-    Config { config_ | min = min }
 
 
 
-setMax :: Maybe Int -> Config r i -> Config r i
-setMax max (Config config_) =
-    Config { config_ | max = max }
 
 
 
-setStep :: Maybe Int -> Config r i -> Config r i
-setStep step (Config config_) =
-    Config { config_ | step = step }
 
 
 
-setLeadingIcon :: Maybe (Icon r i) -> Config r i -> Config r i
-setLeadingIcon leadingIcon (Config config_) =
-    Config { config_ | leadingIcon = leadingIcon }
 
 
 
-setTrailingIcon :: Maybe (Icon r i) -> Config r i -> Config r i
-setTrailingIcon trailingIcon (Config config_) =
-    Config { config_ | trailingIcon = trailingIcon }
 
 
 
-setAttributes :: Array (IProp r i) -> Config r i -> Config r i
-setAttributes additionalAttributes (Config config_) =
-    Config { config_ | additionalAttributes = additionalAttributes }
 
 
 
-setOnInput :: (String -> r i) -> Config r i -> Config r i
-setOnInput onInput (Config config_) =
-    Config { config_ | onInput = Just onInput }
 
 
 
-setOnChange :: (String -> r i) -> Config r i -> Config r i
-setOnChange onChange (Config config_) =
-    Config { config_ | onChange = Just onChange }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

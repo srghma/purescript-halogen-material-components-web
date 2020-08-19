@@ -53,21 +53,18 @@ config =
 
 
 
-setDense :: Boolean -> Config r i -> Config r i
-setDense dense (Config config_) =
-    Config { config_ | dense = dense }
 
 
 
-setFixed :: Boolean -> Config r i -> Config r i
-setFixed fixed (Config config_) =
-    Config { config_ | fixed = fixed }
 
 
 
-setAttributes :: Array (IProp r i) -> Config r i -> Config r i
-setAttributes additionalAttributes (Config config_) =
-    Config { config_ | additionalAttributes = additionalAttributes }
+
+
+
+
+
+
 
 
 genericTopAppBar :: Variant -> Config r i -> Array (Html r i) -> Html r i

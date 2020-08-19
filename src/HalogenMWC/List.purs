@@ -57,39 +57,33 @@ Non-interactive lists do not feature keyboard interaction and list items have
 no visual interaction effect.
 
 -}
-setNonInteractive :: Boolean -> Config r i -> Config r i
-setNonInteractive nonInteractive (Config config_) =
-    Config { config_ | nonInteractive = nonInteractive }
 
 
 
-setDense :: Boolean -> Config r i -> Config r i
-setDense dense (Config config_) =
-    Config { config_ | dense = dense }
 
 
 
-setAvatarArray :: Boolean -> Config r i -> Config r i
-setAvatarArray avatarArray (Config config_) =
-    Config { config_ | avatarArray = avatarArray }
 
 
 
-setTwoLine :: Boolean -> Config r i -> Config r i
-setTwoLine twoLine (Config config_) =
-    Config { config_ | twoLine = twoLine }
 
 
 
-setWrapFocus :: Boolean -> Config r i -> Config r i
-setWrapFocus wrapFocus (Config config_) =
-    Config { config_ | wrapFocus = wrapFocus }
 
 
 
-setAttributes :: Array (IProp r i) -> Config r i -> Config r i
-setAttributes additionalAttributes (Config config_) =
-    Config { config_ | additionalAttributes = additionalAttributes }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 {-| Array view function
