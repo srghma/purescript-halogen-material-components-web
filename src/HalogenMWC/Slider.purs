@@ -1,6 +1,7 @@
 module HalogenMWC.Slider where
 
 import Protolude
+
 import Data.Array as Array
 import Data.Maybe as Maybe
 import Halogen (AttrName(..))
@@ -8,8 +9,9 @@ import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
-import Halogen.SVG.Elements as Halogen.SVG.Elements
 import Halogen.SVG.Attributes as Halogen.SVG.Attributes
+import Halogen.SVG.Elements as Halogen.SVG.Elements
+import Material.Classes.Slider
 
 -- TODO: Prevent FOUC
 type Config r i

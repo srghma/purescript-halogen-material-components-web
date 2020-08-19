@@ -1,6 +1,7 @@
 module HalogenMWC.Radio where
 
 import Protolude
+
 import Data.Array as Array
 import Data.Maybe as Maybe
 import Halogen (AttrName(..))
@@ -8,6 +9,7 @@ import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import Material.Classes.Radio
 
 type Config r i
   = { checked :: Boolean

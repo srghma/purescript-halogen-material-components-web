@@ -1,6 +1,7 @@
 module HalogenMWC.Array where
 
 import Protolude
+
 import Data.Array as Array
 import Data.Maybe as Maybe
 import Halogen (AttrName(..))
@@ -10,6 +11,7 @@ import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Array.Item (Config, ArrayItem)
 import HalogenMWC.Array.Item as ArrayItem
+import Material.Classes.List
 
 type Config r i
   = { nonInteractive :: Boolean
