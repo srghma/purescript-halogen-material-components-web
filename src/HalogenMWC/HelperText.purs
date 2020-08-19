@@ -1,6 +1,8 @@
 module HalogenMWC.HelperText where
 
 import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
 import Halogen (AttrName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH

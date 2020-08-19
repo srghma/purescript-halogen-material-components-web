@@ -1,6 +1,8 @@
 module HalogenMWC.Snackbar where
 
 import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
 
 import Data.List (List(..), (:))
 import Data.List as List

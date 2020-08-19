@@ -1,6 +1,8 @@
 module HalogenMWC.Switch where
 
 import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
 
 import Halogen (AttrName(..))
 import Halogen.HTML (IProp)
