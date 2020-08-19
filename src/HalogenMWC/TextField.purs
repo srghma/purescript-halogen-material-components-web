@@ -143,14 +143,14 @@ disabledCs { disabled } =
 withLeadingIconCs :: Config r i -> Maybe (IProp r i)
 withLeadingIconCs { leadingIcon } =
   if leadingIcon /= Nothing then
-    Just (HP.class_ "mdc-text-field--with-leading-icon")
+    Just (HP.class_ mdc_text_field____with_leading_icon)
   else
     Nothing
 
 withTrailingIconCs :: Config r i -> Maybe (IProp r i)
 withTrailingIconCs { trailingIcon } =
   if trailingIcon /= Nothing then
-    Just (HP.class_ "mdc-text-field--with-trailing-icon")
+    Just (HP.class_ mdc_text_field____with_trailing_icon)
   else
     Nothing
 
@@ -287,7 +287,7 @@ labelElt { label, value } =
 noLabelCs :: Config r i -> Maybe (IProp r i)
 noLabelCs { label } =
   if label == Nothing then
-    Just (HP.class_ "mdc-text-field--no-label")
+    Just (HP.class_ mdc_text_field____no_label)
   else
     Nothing
 

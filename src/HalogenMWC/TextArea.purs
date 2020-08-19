@@ -187,7 +187,7 @@ labelElt { label, value } =
 noLabelCs :: Config r i -> Maybe (IProp r i)
 noLabelCs { label } =
   if label == Nothing then
-    Just (HP.class_ "mdc-text-field--no-label")
+    Just (HP.class_ mdc_text_field____no_label)
   else
     Nothing
 

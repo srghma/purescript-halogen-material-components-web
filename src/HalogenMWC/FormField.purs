@@ -41,7 +41,7 @@ rootCs = Just (HP.class_ mdc_form_field)
 alignEndCs :: Config r i -> Maybe (IProp r i)
 alignEndCs { alignEnd } =
   if alignEnd then
-    Just (HP.class_ "mdc-form-field--align-end")
+    Just (HP.class_ mdc_form_field____align_end)
   else
     Nothing
 

@@ -44,7 +44,7 @@ masonryCs { masonry } =
 withTextProtectionCs :: Config r i -> Maybe (IProp r i)
 withTextProtectionCs { withTextProtection } =
   if withTextProtection then
-    Just (HP.class_ "mdc-image-list--with-text-protection")
+    Just (HP.class_ mdc_image_list____with_text_protection)
   else
     Nothing
 

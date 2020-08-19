@@ -125,7 +125,7 @@ tabIconElt { icon } =
   map
     ( \iconName ->
         HH.span
-          [ HP.class_ "mdc-tab__icon material-icons" ]
+          [ HP.class_ mdc_tab__icon material_icons ]
           [ text iconName ]
     )
     icon
@@ -167,9 +167,9 @@ tabScrollerCs = Just (HP.class_ mdc_tab_scroller)
 
 tabScrollerAlignCs :: Maybe Align -> Maybe (IProp r i)
 tabScrollerAlignCs align = case align of
-  Just Start -> Just (HP.class_ "mdc-tab-scroller--align-start")
-  Just End -> Just (HP.class_ "mdc-tab-scroller--align-end")
-  Just Center -> Just (HP.class_ "mdc-tab-scroller--align-center")
+  Just Start -> Just (HP.class_ mdc_tab_scroller____align_start)
+  Just End -> Just (HP.class_ mdc_tab_scroller____align_end)
+  Just Center -> Just (HP.class_ mdc_tab_scroller____align_center)
   Nothing -> Nothing
 
 tabScrollerScrollAreaElt :: Config r i -> Array (Tab r i) -> Html r i
