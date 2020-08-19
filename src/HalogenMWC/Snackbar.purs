@@ -1,13 +1,16 @@
 module HalogenMWC.Snackbar where
 
 import Protolude
+
+import Data.List (List(..), (:))
+import Data.List as List
 import Halogen (AttrName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
-import Data.List (List(..), (:))
-import Data.List as List
+import Material.Classes.Button
+import Material.Classes.Snackbar
 
 type Queue r i
   = { messages :: Array (Tuple MessageId (Message r i))
@@ -196,7 +199,7 @@ actionButtonElt messageId (message_@(Message { actionButton })) =
     actionButton
 
 actionButtonCs :: Maybe (IProp r i)
-actionButtonCs = Just (HP.class_ "mdc-button mdc-snackbar__action")
+actionButtonCs = Just (HP.classes [mdc_button, mdc_snackbar__action])
 
 actionButtonClickHandler :: MessageId -> Message r i -> Maybe (IProp r i)
 actionButtonClickHandler messageId (Message { onActionButtonClick }) = map (HH.Events.onClick << (#) messageId) onActionButtonClick
@@ -216,7 +219,7 @@ actionIconElt messageId (message_@(Message { actionIcon })) =
     actionIcon
 
 actionIconCs :: Maybe (IProp r i)
-actionIconCs = Just (HP.class_ "mdc-icon-button mdc-snackbar__dismiss material-icons")
+actionIconCs = Just (HP.classes [mdc_icon_button, mdc_snackbar__dismiss material_icons])
 
 actionIconClickHandler :: MessageId -> Message r i -> Maybe (IProp r i)
-actionIconClickHandler messageId (Message { onActionIconClick }) = map (HH.Events.onClick << (#) messageId) onActionIconClick
+actionIconClickHandler messageId (Message { onActionIconClick }) = map (HH.Events.onClick <<< (#) messageId) onActionIconClick

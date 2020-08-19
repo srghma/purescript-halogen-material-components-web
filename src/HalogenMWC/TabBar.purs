@@ -1,6 +1,7 @@
 module HalogenMWC.TabBar where
 
 import Protolude
+
 import Halogen (AttrName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
@@ -8,6 +9,8 @@ import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Tab (Tab(..))
 import HalogenMWC.Tab as Tab
+import Material.Classes.Tab
+import Material.Classes.TabBar
 
 type Config r i
   = { stacked :: Boolean
