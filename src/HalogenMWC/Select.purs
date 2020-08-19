@@ -2,7 +2,7 @@ module HalogenMWC.Select where
 
 import Protolude
 import Halogen (AttrName(..))
-import Halogen.HTML IProp
+import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
@@ -10,7 +10,7 @@ import HalogenMWC.Icon as Icon
 import HalogenMWC.Array as Array
 import HalogenMWC.Array.Item as ArrayItem
 import HalogenMWC.Menu as Menu
-import HalogenMWC.Select.Item SelectItem
+import HalogenMWC.Select.Item (SelectItem)
 import HalogenMWC.Select.Item as SelectItem
 
 type Config a r i
