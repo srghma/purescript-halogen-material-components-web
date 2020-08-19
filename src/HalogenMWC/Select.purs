@@ -104,7 +104,7 @@ data Variant
 
 
 select :: Variant -> Config a r i -> SelectItem a r i -> Array (SelectItem a r i) -> Html r i
-select variant (({ leadingIcon, selected, additionalAttributes, onChange }) as config_) firstSelectItem remainingSelectItems =
+select variant ({ leadingIcon, selected, additionalAttributes, onChange } as config_) firstSelectItem remainingSelectItems =
     let
         selectedIndex =
             Array.indexedMap
@@ -188,17 +188,17 @@ outlinedCs variant =
 
 
 leadingIconCs :: Config a r i -> Maybe (HH.Attribute r i)
-leadingIconCs ({ leadingIcon }) =
+leadingIconCs { leadingIcon } =
     Maybe.map (\_ -> HP.class_ "mdc-select--with-leading-icon") leadingIcon
 
 
 disabledProp :: Config a r i -> Maybe (HH.Attribute r i)
-disabledProp ({ disabled }) =
+disabledProp { disabled } =
     Just (HH.Attributes.property "disabled" (Encode.bool disabled))
 
 
 validProp :: Config a r i -> Maybe (HH.Attribute r i)
-validProp ({ valid }) =
+validProp { valid } =
     Just (HH.Attributes.property "valid" (Encode.bool valid))
 
 
@@ -211,7 +211,7 @@ selectedIndexProp selectedIndex =
 
 
 requiredProp :: Config a r i -> Maybe (HH.Attribute r i)
-requiredProp ({ required }) =
+requiredProp { required } =
     Just (HH.Attributes.property "required" (Encode.bool required))
 
 
@@ -221,7 +221,7 @@ anchorElt additionalAttributes nodes =
 
 
 leadingIconElt :: Config a r i -> Html r i
-leadingIconElt ({ leadingIcon }) =
+leadingIconElt { leadingIcon } =
     case leadingIcon of
         Just (Icon icon_) ->
             icon_
@@ -236,7 +236,7 @@ dropdownIconElt =
 
 
 floatingLabelElt :: Config a r i -> Html r i
-floatingLabelElt ({ label }) =
+floatingLabelElt { label } =
     HH.div [ HP.class_ mdc_floating_label ] [ text (Maybe.withDefault "" label) ]
 
 
@@ -246,7 +246,7 @@ lineRippleElt =
 
 
 notchedOutlineElt :: Config a r i -> Html r i
-notchedOutlineElt ({ label }) =
+notchedOutlineElt { label } =
     HH.div [ HP.class_ mdc_notched_outline ]
         [ HH.div [ HP.class_ mdc_notched_outline__leading ] []
         , HH.div [ HP.class_ mdc_notched_outline__notch ]

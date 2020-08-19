@@ -65,4 +65,4 @@ data Tab r i =
 
 tab :: Config r i -> Content -> Tab r i
 tab (Config config_) content =
-    Tab ({ config_ | content = content })
+    Tab { config_ | content = content }

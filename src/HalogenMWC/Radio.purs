@@ -79,7 +79,7 @@ prevent potentially overlapping touch targets on adjacent elements.
 
 
 radio :: Config r i -> Html r i
-radio (({ touch, additionalAttributes }) as config_) =
+radio ({ touch, additionalAttributes } as config_) =
     let
         wrapTouch node =
             if touch then
@@ -110,7 +110,7 @@ rootCs =
 
 
 touchCs :: Config r i -> Maybe (HH.Attribute r i)
-touchCs ({ touch }) =
+touchCs { touch } =
     if touch then
         Just (HP.class_ mdc_radio____touch)
 
@@ -119,17 +119,17 @@ touchCs ({ touch }) =
 
 
 checkedProp :: Config r i -> Maybe (HH.Attribute r i)
-checkedProp ({ checked }) =
+checkedProp { checked } =
     Just (HH.Attributes.property "checked" (Encode.bool checked))
 
 
 disabledProp :: Config r i -> Maybe (HH.Attribute r i)
-disabledProp ({ disabled }) =
+disabledProp { disabled } =
     Just (HH.Attributes.property "disabled" (Encode.bool disabled))
 
 
 changeHandler :: Config r i -> Maybe (HH.Attribute r i)
-changeHandler ({ checked, onChange }) =
+changeHandler { checked, onChange } =
     -- Note: MDCArray choses to send a change event to all checkboxes, thus we
     -- have to check here if the state actually changed.
     Maybe.map

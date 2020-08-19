@@ -94,7 +94,7 @@ remaining list items. This way we guarantee lists to be non-empty.
 
 -}
 list :: Config r i -> ArrayItem r i -> Array (ArrayItem r i) -> Html r i
-list (({ additionalAttributes }) as config_) firstArrayItem remainingArrayItems =
+list ({ additionalAttributes } as config_) firstArrayItem remainingArrayItems =
     let
         listItems =
             firstArrayItem :: remainingArrayItems
@@ -134,7 +134,7 @@ rootCs =
 
 
 nonInteractiveCs :: Config r i -> Maybe (HH.Attribute r i)
-nonInteractiveCs ({ nonInteractive }) =
+nonInteractiveCs { nonInteractive } =
     if nonInteractive then
         Just (HP.class_ "mdc-list--non-interactive")
 
@@ -143,7 +143,7 @@ nonInteractiveCs ({ nonInteractive }) =
 
 
 denseCs :: Config r i -> Maybe (HH.Attribute r i)
-denseCs ({ dense }) =
+denseCs { dense } =
     if dense then
         Just (HP.class_ mdc_list____dense)
 
@@ -152,7 +152,7 @@ denseCs ({ dense }) =
 
 
 avatarArrayCs :: Config r i -> Maybe (HH.Attribute r i)
-avatarArrayCs ({ avatarArray }) =
+avatarArrayCs { avatarArray } =
     if avatarArray then
         Just (HP.class_ "mdc-list--avatar-list")
 
@@ -161,7 +161,7 @@ avatarArrayCs ({ avatarArray }) =
 
 
 twoLineCs :: Config r i -> Maybe (HH.Attribute r i)
-twoLineCs ({ twoLine }) =
+twoLineCs { twoLine } =
     if twoLine then
         Just (HP.class_ "mdc-list--two-line")
 
@@ -267,5 +267,5 @@ listGroupSubheaderCs =
 
 
 wrapFocusProp :: Config r i -> Maybe (HH.Attribute r i)
-wrapFocusProp ({ wrapFocus }) =
+wrapFocusProp { wrapFocus } =
     Just (HH.Attributes.property "wrapFocus" (Encode.bool wrapFocus))

@@ -68,7 +68,7 @@ config =
 
 
 genericTopAppBar :: Variant -> Config r i -> Array (Html r i) -> Html r i
-genericTopAppBar variant (({ additionalAttributes }) as config_) nodes =
+genericTopAppBar variant ({ additionalAttributes } as config_) nodes =
     HH.node "mdc-top-app-bar"
         (Array.filterMap identity
             [ rootCs
@@ -174,7 +174,7 @@ variantCs variant =
 
 
 denseCs :: Config r i -> Maybe (HH.Attribute r i)
-denseCs ({ dense }) =
+denseCs { dense } =
     if dense then
         Just (HP.class_ mdc_top_app_bar____dense)
 
@@ -183,7 +183,7 @@ denseCs ({ dense }) =
 
 
 fixedCs :: Config r i -> Maybe (HH.Attribute r i)
-fixedCs ({ fixed }) =
+fixedCs { fixed } =
     if fixed then
         Just (HP.class_ mdc_top_app_bar____fixed)
 

@@ -114,7 +114,7 @@ config { onClosed } =
 
 
 snackbar :: Config r i -> Queue r i -> Html r i
-snackbar (({ additionalAttributes }) as config_) ((Queue { messages, nextMessageId }) as queue) =
+snackbar ({ additionalAttributes } as config_) ((Queue { messages, nextMessageId }) as queue) =
     let
         ( currentMessageId, currentMessage ) =
             Array.head messages
@@ -207,7 +207,7 @@ rootCs =
 
 
 closeOnEscapeProp :: Config r i -> Maybe (HH.Attribute r i)
-closeOnEscapeProp ({ closeOnEscape }) =
+closeOnEscapeProp { closeOnEscape } =
     Just (HH.Attributes.property "closeOnEscape" (Encode.bool closeOnEscape))
 
 
@@ -258,7 +258,7 @@ timeoutMsProp message_ =
 
 
 closedHandler :: MessageId -> Config r i -> Maybe (HH.Attribute r i)
-closedHandler messageId ({ onClosed }) =
+closedHandler messageId { onClosed } =
     Just (HH.Events.on "MDCSnackbar:closed" (Decode.succeed (onClosed messageId)))
 
 

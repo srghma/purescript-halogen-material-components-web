@@ -71,7 +71,7 @@ config =
 
 
 iconToggle :: Config r i -> { onIcon :: String, offIcon :: String } -> Html r i
-iconToggle (({ additionalAttributes }) as config_) { onIcon, offIcon } =
+iconToggle ({ additionalAttributes } as config_) { onIcon, offIcon } =
     HH.node "mdc-icon-button"
         (Array.filterMap identity
             [ rootCs
@@ -96,7 +96,7 @@ rootCs =
 
 
 onProp :: Config r i -> Maybe (HH.Attribute r i)
-onProp ({ on }) =
+onProp { on } =
     Just (HH.Attributes.property "on" (Encode.bool on))
 
 
@@ -126,7 +126,7 @@ ariaHiddenAttr =
 
 
 ariaPressedAttr :: Config r i -> Maybe (HH.Attribute r i)
-ariaPressedAttr ({ on }) =
+ariaPressedAttr { on } =
     Just
         (HH.Attributes.attribute "aria-pressed"
             (if on then
@@ -139,16 +139,16 @@ ariaPressedAttr ({ on }) =
 
 
 ariaLabelAttr :: Config r i -> Maybe (HH.Attribute r i)
-ariaLabelAttr ({ label }) =
+ariaLabelAttr { label } =
     Maybe.map (HH.Attributes.attribute "aria-label") label
 
 
 changeHandler :: Config r i -> Maybe (HH.Attribute r i)
-changeHandler ({ onChange }) =
+changeHandler { onChange } =
     Maybe.map (HH.Events.on "MDCIconButtonToggle:change" << Decode.succeed)
         onChange
 
 
 disabledAttr :: Config r i -> Maybe (HH.Attribute r i)
-disabledAttr ({ disabled }) =
+disabledAttr { disabled } =
     Just (HH.Attributes.disabled disabled)

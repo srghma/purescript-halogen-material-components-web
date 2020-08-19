@@ -44,7 +44,7 @@ config =
 
 
 helperText :: Config r i -> String -> Html r i
-helperText (({ additionalAttributes }) as config_) string =
+helperText ({ additionalAttributes } as config_) string =
     HH.div
         (Array.filterMap identity
             [ helperTextCs

@@ -53,7 +53,7 @@ config =
 
 
 imageArray :: Config r i -> Array (ImageArrayItem r i) -> Html r i
-imageArray (({ additionalAttributes }) as config_) listItems =
+imageArray ({ additionalAttributes } as config_) listItems =
     HH.node "mdc-image-list"
         (Array.filterMap identity
             [ rootCs
@@ -71,7 +71,7 @@ rootCs =
 
 
 masonryCs :: Config r i -> Maybe (HH.Attribute r i)
-masonryCs ({ masonry }) =
+masonryCs { masonry } =
     if masonry then
         Just (HP.class_ mdc_image_list____masonry)
 
@@ -80,7 +80,7 @@ masonryCs ({ masonry }) =
 
 
 withTextProtectionCs :: Config r i -> Maybe (HH.Attribute r i)
-withTextProtectionCs ({ withTextProtection }) =
+withTextProtectionCs { withTextProtection } =
     if withTextProtection then
         Just (HP.class_ "mdc-image-list--with-text-protection")
 
@@ -89,7 +89,7 @@ withTextProtectionCs ({ withTextProtection }) =
 
 
 listItemElt :: Config r i -> ImageArrayItem r i -> Html r i
-listItemElt (({ masonry }) as config_) ((ImageArrayItem.ImageArrayItem { href, additionalAttributes }) as listItem) =
+listItemElt ({ masonry } as config_) ((ImageArrayItem.ImageArrayItem { href, additionalAttributes }) as listItem) =
     let
         inner =
             [ if masonry then

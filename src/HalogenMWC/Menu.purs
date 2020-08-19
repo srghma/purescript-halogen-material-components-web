@@ -62,7 +62,7 @@ config =
 
 
 menu :: Config r i -> Array (Html r i) -> Html r i
-menu (({ additionalAttributes }) as config_) nodes =
+menu ({ additionalAttributes } as config_) nodes =
     HH.node "mdc-menu"
         (Array.filterMap identity
             [ rootCs
@@ -87,15 +87,15 @@ rootCs =
 
 
 openProp :: Config r i -> Maybe (HH.Attribute r i)
-openProp ({ open }) =
+openProp { open } =
     Just (HH.Attributes.property "open" (Encode.bool open))
 
 
 quickOpenProp :: Config r i -> Maybe (HH.Attribute r i)
-quickOpenProp ({ quickOpen }) =
+quickOpenProp { quickOpen } =
     Just (HH.Attributes.property "quickOpen" (Encode.bool quickOpen))
 
 
 closeHandler :: Config r i -> Maybe (HH.Attribute r i)
-closeHandler ({ onClose }) =
+closeHandler { onClose } =
     Maybe.map (HH.Events.on "MDCMenu:close" << Decode.succeed) onClose

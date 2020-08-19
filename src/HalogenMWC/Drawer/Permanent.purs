@@ -32,7 +32,7 @@ config =
 
 
 drawer :: Config r i -> Array (Html r i) -> Html r i
-drawer ({ additionalAttributes }) nodes =
+drawer { additionalAttributes } nodes =
     HH.div
         (Array.filterMap identity [ rootCs ] <> additionalAttributes)
         nodes
