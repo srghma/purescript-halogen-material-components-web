@@ -7,13 +7,11 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
-import HH.Keyed
+import HalogenMWC.Chip.Input as Chip
 
-import HalogenMWC.Chip.Input.Internal as Chip
-
-chipSet :: Array (IProp r i) -> Array ( String, Chip r i ) -> Html r i
+chipSet :: Array (IProp r i) -> Array (Tuple String (Chip r i)) -> Html r i
 chipSet additionalAttributes keyedChips =
-    HH.Keyed.node "mdc-chip-set"
+    HH.keyed "mdc-chip-set"
         ([ chipSetCs, chipSetInputCs, gridRole] <> additionalAttributes)
         (Array.map (Tuple.mapSecond chip) keyedChips)
 

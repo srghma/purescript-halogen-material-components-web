@@ -11,7 +11,7 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
-import HalogenMWC.Chip.Choice.Internal as Chip
+import HalogenMWC.Chip.Choice as Chip
 
 data Config a r i
     =

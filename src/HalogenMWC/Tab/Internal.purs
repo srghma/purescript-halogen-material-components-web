@@ -1,4 +1,4 @@
-module HalogenMWC.Tab.Internal
+module HalogenMWC.Tab
     ( Config(..)
     , Content
     , Tab(..)

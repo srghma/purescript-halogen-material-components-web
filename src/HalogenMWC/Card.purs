@@ -25,9 +25,9 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Button as Button
-import HalogenMWC.Button.Internal
+import HalogenMWC.Button
 import HalogenMWC.IconButton as IconButton
-import HalogenMWC.IconButton.Internal
+import HalogenMWC.IconButton
 
 type Config r i
   = { outlined :: Boolean

@@ -12,7 +12,7 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
-import HalogenMWC.Tab.Internal as Tab
+import HalogenMWC.Tab as Tab
 
 type Config r i
     =

@@ -12,7 +12,7 @@ import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 import HalogenMWC.ImageArray.Item (ImageArrayItem)
-import HalogenMWC.ImageArray.Item.Internal as ImageArrayItem
+import HalogenMWC.ImageArray.Item as ImageArrayItem
 
 type Config r i
     =

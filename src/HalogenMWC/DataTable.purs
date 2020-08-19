@@ -18,7 +18,7 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Checkbox as Checkbox
-import HalogenMWC.Checkbox.Internal
+import HalogenMWC.Checkbox
 
 type Config r i
   = { label :: Maybe String

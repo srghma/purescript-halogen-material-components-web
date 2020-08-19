@@ -18,7 +18,7 @@ import HalogenMWC.Array as Array
 import HalogenMWC.Array.Item as ArrayItem
 import HalogenMWC.Menu as Menu
 import HalogenMWC.Select.Item (SelectItem)
-import HalogenMWC.Select.Item.Internal as SelectItem
+import HalogenMWC.Select.Item as SelectItem
 
 data Config a r i
     =

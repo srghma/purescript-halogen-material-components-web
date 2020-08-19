@@ -16,10 +16,10 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
-import HalogenMWC.Array.Item.Internal (Config(..), ArrayItem(..), Selection(..))
+import HalogenMWC.Array.Item (Config(..), ArrayItem(..), Selection(..))
 
 type Config r i =
-    Material.Array.Item.Internal.Config r i
+    Material.Array.Item.Config r i
 
 defaultConfig :: Config r i
 defaultConfig =
@@ -33,7 +33,7 @@ defaultConfig =
         }
 
 data Selection =
-    Material.Array.Item.Internal.Selection
+    Material.Array.Item.Selection
 
 selected :: Selection
 selected =
@@ -44,7 +44,7 @@ activated =
     Activated
 
 data ArrayItem r i =
-    Material.Array.Item.Internal.ArrayItem r i
+    Material.Array.Item.ArrayItem r i
 
 listItem :: Config r i -> Array (Html r i) -> ArrayItem r i
 listItem (config_@Config ({ additionalAttributes, href })) nodes =

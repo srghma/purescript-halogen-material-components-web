@@ -1,4 +1,4 @@
-module HalogenMWC.Array.Item.Internal
+module HalogenMWC.Array.Item
   ( Config(..)
   , ArrayItem(..)
   , Selection(..)
