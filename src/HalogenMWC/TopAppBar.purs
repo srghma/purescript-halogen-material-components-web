@@ -61,7 +61,7 @@ variantCs :: Variant -> Maybe (IProp r i)
 variantCs variant = case variant of
   Regular -> Nothing
   Short -> Just (HP.class_ mdc_top_app_bar____short)
-  ShortCollapsed -> Just (HP.classes [mdc_top_app_bar____short mdc_top_app_bar____short_collapsed])
+  ShortCollapsed -> Just (HP.classes [ mdc_top_app_bar____short mdc_top_app_bar____short_collapsed ])
   Prominent -> Just (HP.class_ mdc_top_app_bar____prominent)
 
 denseCs :: Config r i -> Maybe (IProp r i)

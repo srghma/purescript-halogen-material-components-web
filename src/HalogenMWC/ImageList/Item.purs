@@ -1,4 +1,4 @@
-module HalogenMWC.ImageArray.Item where
+module HalogenMWC.ImageList.Item where
 
 import Protolude
 import Halogen (AttrName(..))

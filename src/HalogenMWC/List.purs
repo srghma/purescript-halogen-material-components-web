@@ -46,7 +46,7 @@ remaining list items. This way we guarantee lists to be non-empty.
 list :: Config r i -> ArrayItem r i -> Array (ArrayItem r i) -> Html r i
 list (config_@{ additionalAttributes }) firstArrayItem remainingArrayItems =
   let
-    listItems = [firstArrayItem] <> remainingArrayItems
+    listItems = [ firstArrayItem ] <> remainingArrayItems
   in
     HH.element "mdc-list"
       ( Array.filterMap identity

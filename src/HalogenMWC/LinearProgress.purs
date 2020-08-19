@@ -8,142 +8,117 @@ import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 type Config r i
-    =
-        { reverse :: Boolean
-        , closed :: Boolean
-        , additionalAttributes :: Array (IProp r i)
-        }
+  = { reverse :: Boolean
+    , closed :: Boolean
+    , additionalAttributes :: Array (IProp r i)
+    }
 
 data Variant
-    = Indeterminate
-    | Determinate Float
-    | Buffered Float Float
+  = Indeterminate
+  | Determinate Float
+  | Buffered Float Float
 
 defaultConfig :: Config r i
 defaultConfig =
-        { reverse: false
-        , closed: false
-        , additionalAttributes: []
-        }
+  { reverse: false
+  , closed: false
+  , additionalAttributes: []
+  }
 
 linearProgress :: Variant -> Config r i -> Html r i
 linearProgress variant (config_@{ additionalAttributes }) =
-    HH.element "mdc-linear-progress"
-        (Array.filterMap identity
-            [ rootCs
-            , displayCss
-            , roleAttr
-            , variantCs variant
-            , determinateProp variant
-            , progressProp variant
-            , bufferProp variant
-            , reverseProp config_
-            , closedProp config_
-            ]
-            <> additionalAttributes
-        )
-        [ bufferingDotsElt
-        , bufferElt
-        , primaryBarElt
-        , secondaryBarElt
+  HH.element "mdc-linear-progress"
+    ( Array.filterMap identity
+        [ rootCs
+        , displayCss
+        , roleAttr
+        , variantCs variant
+        , determinateProp variant
+        , progressProp variant
+        , bufferProp variant
+        , reverseProp config_
+        , closedProp config_
         ]
+        <> additionalAttributes
+    )
+    [ bufferingDotsElt
+    , bufferElt
+    , primaryBarElt
+    , secondaryBarElt
+    ]
 
 indeterminate :: Config r i -> Html r i
-indeterminate config_ =
-    linearProgress Indeterminate config_
+indeterminate config_ = linearProgress Indeterminate config_
 
 determinate :: Config r i -> { progress :: Float } -> Html r i
-determinate config_ { progress } =
-    linearProgress (Determinate progress) config_
+determinate config_ { progress } = linearProgress (Determinate progress) config_
 
 buffered :: Config r i -> { progress :: Float, buffered :: Float } -> Html r i
-buffered config_ data =
-    linearProgress (Buffered data.progress data.buffered) config_
+buffered config_ data_ = linearProgress (Buffered data_.progress data_.buffered) config_
 
 rootCs :: Maybe (IProp r i)
-rootCs =
-    Just (HP.class_ mdc_linear_progress)
+rootCs = Just (HP.class_ mdc_linear_progress)
 
 displayCss :: Maybe (IProp r i)
-displayCss =
-    Just (style "display" "block")
+displayCss = Just (style "display" "block")
 
 roleAttr :: Maybe (IProp r i)
-roleAttr =
-    Just (HH.Attributes.attribute "role" "progressbar")
+roleAttr = Just (HH.Attributes.attribute "role" "progressbar")
 
 variantCs :: Variant -> Maybe (IProp r i)
-variantCs variant =
-    case variant of
-        Indeterminate ->
-            Just (HP.class_ mdc_linear_progress____indeterminate)
-
-        _ ->
-            Nothing
+variantCs variant = case variant of
+  Indeterminate -> Just (HP.class_ mdc_linear_progress____indeterminate)
+  _ -> Nothing
 
 determinateProp :: Variant -> Maybe (IProp r i)
-determinateProp variant =
-    Just (HH.Attributes.property "determinate" (Encode.bool (variant /= Indeterminate)))
+determinateProp variant = Just (HH.Attributes.property "determinate" (Encode.bool (variant /= Indeterminate)))
 
 progressProp :: Variant -> Maybe (IProp r i)
 progressProp variant =
-    Just
-        (HH.Attributes.property "progress"
-            (Encode.float
-                (case variant of
-                    Determinate progress ->
-                        progress
-
-                    Buffered progress _ ->
-                        progress
-
-                    _ ->
-                        0
-                )
+  Just
+    ( HH.Attributes.property "progress"
+        ( Encode.float
+            ( case variant of
+                Determinate progress -> progress
+                Buffered progress _ -> progress
+                _ -> 0
             )
         )
+    )
 
 bufferProp :: Variant -> Maybe (IProp r i)
 bufferProp variant =
-    Just
-        (HH.Attributes.property "buffer"
-            (Encode.float
-                (case variant of
-                    Buffered _ buffer ->
-                        buffer
-
-                    _ ->
-                        0
-                )
+  Just
+    ( HH.Attributes.property "buffer"
+        ( Encode.float
+            ( case variant of
+                Buffered _ buffer -> buffer
+                _ -> 0
             )
         )
+    )
 
 reverseProp :: Config r i -> Maybe (IProp r i)
-reverseProp { reverse } =
-    Just (HH.Attributes.property "reverse" (Encode.bool reverse))
+reverseProp { reverse } = Just (HH.Attributes.property "reverse" (Encode.bool reverse))
 
 closedProp :: Config r i -> Maybe (IProp r i)
-closedProp { closed } =
-    Just (HH.Attributes.property "closed" (Encode.bool closed))
+closedProp { closed } = Just (HH.Attributes.property "closed" (Encode.bool closed))
 
 bufferingDotsElt :: Html r i
-bufferingDotsElt =
-    HH.div [ HP.class_ mdc_linear_progress__buffering_dots ] []
+bufferingDotsElt = HH.div [ HP.class_ mdc_linear_progress__buffering_dots ] []
 
 bufferElt :: Html r i
-bufferElt =
-    HH.div [ HP.class_ mdc_linear_progress__buffer ] []
+bufferElt = HH.div [ HP.class_ mdc_linear_progress__buffer ] []
 
 primaryBarElt :: Html r i
 primaryBarElt =
-    HH.div [ HP.class_ "mdc-linear-progress__bar mdc-linear-progress__primary-bar" ]
-        [ barInnerElt ]
+  HH.div [ HP.class_ "mdc-linear-progress__bar mdc-linear-progress__primary-bar" ]
+    [ barInnerElt ]
 
 secondaryBarElt :: Html r i
 secondaryBarElt =
-    HH.div [ HP.class_ "mdc-linear-progress__bar mdc-linear-progress__secondary-bar" ]
-        [ barInnerElt ]
+  HH.div [ HP.class_ "mdc-linear-progress__bar mdc-linear-progress__secondary-bar" ]
+    [ barInnerElt ]
 
 barInnerElt :: Html r i
-barInnerElt =
-    HH.div [ HP.class_ mdc_linear_progress__bar_inner ] []
+barInnerElt = HH.div [ HP.class_ mdc_linear_progress__bar_inner ] []
