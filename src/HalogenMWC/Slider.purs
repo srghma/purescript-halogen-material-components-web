@@ -1,8 +1,4 @@
-module HalogenMWC.Slider
-  ( Config
-  , config
-  , slider
-  ) where
+module HalogenMWC.Slider where
 
 import Protolude
 import Halogen (AttrName(..))

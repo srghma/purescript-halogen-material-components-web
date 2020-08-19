@@ -1,12 +1,4 @@
-module HalogenMWC.LayoutGrid
-    ( layoutGrid, cell, inner
-    , span1, span2, span3, span4, span5, span6, span7, span8, span9, span10, span11, span12
-    , alignTop, alignMiddle, alignBottom
-    , alignLeft, alignRight
-    , span1Desktop, span2Desktop, span3Desktop, span4Desktop, span5Desktop, span6Desktop, span7Desktop, span8Desktop, span9Desktop, span10Desktop, span11Desktop, span12Desktop
-    , span1Tablet, span2Tablet, span3Tablet, span4Tablet, span5Tablet, span6Tablet, span7Tablet, span8Tablet
-    , span1Phone, span2Phone, span3Phone, span4Phone
-    ) where
+module HalogenMWC.LayoutGrid where
 
 import Protolude
 import Halogen (AttrName(..))

@@ -1,10 +1,4 @@
-module HalogenMWC.Select
-    ( Config, config
-
-    , filled
-    , outlined
-    , Icon, icon
-    ) where
+module HalogenMWC.Select where
 
 import Protolude
 import Halogen (AttrName(..))

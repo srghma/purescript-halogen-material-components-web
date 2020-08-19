@@ -1,8 +1,4 @@
-module HalogenMWC.Tab
-    ( Config(..)
-    , Content
-    , Tab(..)
-    ) where
+module HalogenMWC.Tab where
 
 import Protolude
 import Halogen (AttrName(..))

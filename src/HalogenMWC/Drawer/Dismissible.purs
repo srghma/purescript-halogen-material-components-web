@@ -1,13 +1,4 @@
-module HalogenMWC.Drawer.Dismissible
-  ( Config
-  , config
-  , drawer
-  , content
-  , appContent
-  , header
-  , title
-  , subtitle
-  ) where
+module HalogenMWC.Drawer.Dismissible where
 
 import Protolude
 import Halogen (AttrName(..))

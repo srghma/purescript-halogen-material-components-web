@@ -1,8 +1,4 @@
-module HalogenMWC.Switch
-  ( switch
-  , Config
-  , config
-  ) where
+module HalogenMWC.Switch where
 
 import Protolude
 import Halogen (AttrName(..))

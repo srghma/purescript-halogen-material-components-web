@@ -1,10 +1,4 @@
-module HalogenMWC.Array
-  ( Config
-  , config
-  , list
-  , group
-  , subheader
-  ) where
+module HalogenMWC.Array where
 
 import Protolude
 import Halogen (AttrName(..))

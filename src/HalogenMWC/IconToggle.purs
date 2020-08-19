@@ -1,8 +1,4 @@
-module HalogenMWC.IconToggle
-  ( Config
-  , config
-  , iconToggle
-  ) where
+module HalogenMWC.IconToggle where
 
 import Protolude
 import Halogen (AttrName(..))

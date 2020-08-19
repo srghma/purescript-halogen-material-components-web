@@ -1,8 +1,4 @@
-module HalogenMWC.FormField
-  ( Config
-  , config
-  , formField
-  ) where
+module HalogenMWC.FormField where
 
 import Protolude
 import Halogen (AttrName(..))

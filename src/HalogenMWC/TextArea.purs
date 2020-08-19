@@ -1,9 +1,4 @@
-module HalogenMWC.TextArea
-  ( Config
-  , config
-  , filled
-  , outlined
-  ) where
+module HalogenMWC.TextArea where
 
 import Protolude
 import Halogen (AttrName(..))

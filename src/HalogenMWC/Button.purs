@@ -1,11 +1,4 @@
-module HalogenMWC.Button
-  ( Config
-  , config
-  , text
-  , outlined
-  , raised
-  , unelevated
-  ) where
+module HalogenMWC.Button where
 
 import Protolude
 import Halogen (AttrName(..))

@@ -1,12 +1,4 @@
-module HalogenMWC.Drawer.Permanent
-  ( Config
-  , config
-  , drawer
-  , content
-  , header
-  , title
-  , subtitle
-  ) where
+module HalogenMWC.Drawer.Permanent where
 
 import Protolude
 import Halogen (AttrName(..))

@@ -1,11 +1,4 @@
-module HalogenMWC.TextField
-  ( Config
-  , config
-  , filled
-  , outlined
-  , Icon
-  , icon
-  ) where
+module HalogenMWC.TextField where
 
 import Protolude
 import Halogen (AttrName(..))

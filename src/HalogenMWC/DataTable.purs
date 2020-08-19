@@ -1,15 +1,4 @@
-module HalogenMWC.DataTable
-  ( Config
-  , config
-  , dataTable
-  , Row
-  , row
-  , selected
-  , Cell
-  , cell
-  , numericCell
-  , checkboxCell
-  ) where
+module HalogenMWC.DataTable where
 
 import Protolude
 import Halogen (AttrName(..))

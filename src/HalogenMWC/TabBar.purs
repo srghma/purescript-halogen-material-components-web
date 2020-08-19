@@ -1,9 +1,4 @@
-module HalogenMWC.TabBar
-    ( Config, config
-
-    , tabBar
-    , Align(..)
-    ) where
+module HalogenMWC.TabBar where
 
 import Protolude
 import Halogen (AttrName(..))

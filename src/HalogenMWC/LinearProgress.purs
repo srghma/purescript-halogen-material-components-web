@@ -1,10 +1,4 @@
-module HalogenMWC.LinearProgress
-    ( Config, config
-
-    , indeterminate
-    , determinate
-    , buffered
-    ) where
+module HalogenMWC.LinearProgress where
 
 import Protolude
 import Halogen (AttrName(..))

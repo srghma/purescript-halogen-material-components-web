@@ -1,9 +1,4 @@
-module HalogenMWC.IconButton
-  ( Config
-  , config
-  , iconButton
-  , custom
-  ) where
+module HalogenMWC.IconButton where
 
 import Protolude
 import Halogen (AttrName(..))

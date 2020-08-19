@@ -1,12 +1,4 @@
-module HalogenMWC.Snackbar
-    ( Config, config
-
-    , snackbar
-    , Queue, initialQueue, MessageId, close
-    , addMessage
-    , message, Message
-
-    ) where
+module HalogenMWC.Snackbar where
 
 import Protolude
 import Halogen (AttrName(..))

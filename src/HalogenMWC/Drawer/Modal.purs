@@ -1,13 +1,4 @@
-module HalogenMWC.Drawer.Modal
-  ( Config
-  , config
-  , drawer
-  , content
-  , scrim
-  , header
-  , title
-  , subtitle
-  ) where
+module HalogenMWC.Drawer.Modal where
 
 import Protolude
 import Halogen (AttrName(..))

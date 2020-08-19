@@ -1,22 +1,4 @@
-module HalogenMWC.Card
-  ( Config
-  , config
-  , card
-  , Content
-  , Block
-  , block
-  , squareMedia
-  , sixteenToNineMedia
-  , media
-  , primaryAction
-  , Actions
-  , actions
-  , Button
-  , button
-  , Icon
-  , icon
-  , fullBleedActions
-  ) where
+module HalogenMWC.Card where
 
 import Protolude
 import Halogen (AttrName(..))

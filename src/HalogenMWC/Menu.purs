@@ -1,9 +1,4 @@
-module HalogenMWC.Menu
-  ( Config
-  , config
-  , menu
-  , surfaceAnchor
-  ) where
+module HalogenMWC.Menu where
 
 import Protolude
 import Halogen (AttrName(..))

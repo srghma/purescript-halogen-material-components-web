@@ -1,4 +1,4 @@
-module HalogenMWC.ChipSet.Action (chipSet) where
+module HalogenMWC.ChipSet.Action where
 
 import Protolude
 import Halogen (AttrName(..))

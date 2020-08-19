@@ -1,9 +1,4 @@
-module HalogenMWC.Dialog
-  ( Config
-  , config
-  , dialog
-  , Content
-  ) where
+module HalogenMWC.Dialog where
 
 import Protolude
 import Halogen (AttrName(..))

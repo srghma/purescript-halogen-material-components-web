@@ -1,23 +1,4 @@
-module HalogenMWC.TopAppBar
-  ( Config
-  , config
-  , regular
-  , row
-  , section
-  , alignEnd
-  , alignStart
-  , navigationIcon
-  , title
-  , actionItem
-  , fixedAdjust
-  , denseFixedAdjust
-  , denseProminentFixedAdjust
-  , prominentFixedAdjust
-  , shortFixedAdjust
-  , short
-  , shortCollapsed
-  , prominent
-  ) where
+module HalogenMWC.TopAppBar where
 
 import Protolude
 import Halogen (AttrName(..))

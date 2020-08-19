@@ -1,29 +1,4 @@
-module HalogenMWC.Theme
-  ( primary
-  , secondary
-  , background
-  , onPrimary
-  , onSecondary
-  , onSurface
-  , primaryBg
-  , secondaryBg
-  , surface
-  , textPrimaryOnBackground
-  , textSecondaryOnBackground
-  , textHintOnBackground
-  , textDisabledOnBackground
-  , textIconOnBackground
-  , textPrimaryOnLight
-  , textSecondaryOnLight
-  , textHintOnLight
-  , textDisabledOnLight
-  , textIconOnLight
-  , textPrimaryOnDark
-  , textSecondaryOnDark
-  , textHintOnDark
-  , textDisabledOnDark
-  , textIconOnDark
-  ) where
+module HalogenMWC.Theme where
 
 import Protolude
 import Halogen (AttrName(..))

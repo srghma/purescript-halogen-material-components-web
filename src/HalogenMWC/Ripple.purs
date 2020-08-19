@@ -1,12 +1,4 @@
-module HalogenMWC.Ripple
-  ( Config
-  , config
-  , bounded
-  , unbounded
-  , Color
-  , primary
-  , accent
-  ) where
+module HalogenMWC.Ripple where
 
 import Protolude
 import Halogen (AttrName(..))

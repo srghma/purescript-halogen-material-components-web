@@ -1,9 +1,4 @@
-module HalogenMWC.Array.Divider
-    ( Config, config
-
-    , listItem
-    , group
-    ) where
+module HalogenMWC.Array.Divider where
 
 import Protolude
 import Halogen (AttrName(..))

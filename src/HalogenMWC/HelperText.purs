@@ -1,10 +1,4 @@
-module HalogenMWC.HelperText
-  ( Config
-  , config
-  , helperText
-  , helperLine
-  , characterCounter
-  ) where
+module HalogenMWC.HelperText where
 
 import Protolude
 import Halogen (AttrName(..))

@@ -1,4 +1,4 @@
-module HalogenMWC.Icon (icon) where
+module HalogenMWC.Icon where
 
 import Protolude
 import Halogen (AttrName(..))

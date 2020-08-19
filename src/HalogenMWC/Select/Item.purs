@@ -1,8 +1,4 @@
-module HalogenMWC.Select.Item
-    ( Config, config
-
-    , SelectItem, selectItem
-    ) where
+module HalogenMWC.Select.Item where
 
 import Protolude
 import Halogen (AttrName(..))

@@ -1,8 +1,4 @@
-module HalogenMWC.ImageArray
-    ( Config, config
-
-    , imageArray
-    ) where
+module HalogenMWC.ImageArray where
 
 import Protolude
 import Halogen (AttrName(..))

@@ -1,8 +1,4 @@
-module HalogenMWC.Fab.Extended
-    ( Config, config
-
-    , fab
-    ) where
+module HalogenMWC.Fab.Extended where
 
 import Protolude
 import Halogen (AttrName(..))

@@ -1,8 +1,4 @@
-module HalogenMWC.Radio
-  ( Config
-  , config
-  , radio
-  ) where
+module HalogenMWC.Radio where
 
 import Protolude
 import Halogen (AttrName(..))
