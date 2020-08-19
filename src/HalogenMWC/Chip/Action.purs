@@ -35,7 +35,7 @@ appear persistently and consistently.
     import Material.Chip.Action as ActionChip
     import Material.ChipSet.Action as ActionChipSet
 
-    type Msg
+    data Msg
         = Clicked String
 
     main =
@@ -73,13 +73,13 @@ import Material.Chip.Action.Internal exposing (Chip(..), Config(..))
 
 {-| Configuration of an action chip
 -}
-type alias Config msg =
+data Config msg =
     Material.Chip.Action.Internal.Config msg
 
 
 {-| Default configuration of an action chip
 -}
-config : Config msg
+config :: Config msg
 config =
     Config
         { icon = Nothing
@@ -90,33 +90,33 @@ config =
 
 {-| Specify whether the chip displays an icon
 -}
-setIcon : Maybe String -> Config msg -> Config msg
+setIcon :: Maybe String -> Config msg -> Config msg
 setIcon icon (Config config_) =
     Config { config_ | icon = icon }
 
 
 {-| Specify additional attributes
 -}
-setAttributes : List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Specify a message when the user clicks on a chip
 -}
-setOnClick : msg -> Config msg -> Config msg
+setOnClick :: msg -> Config msg -> Config msg
 setOnClick onClick (Config config_) =
     Config { config_ | onClick = Just onClick }
 
 
 {-| Action chip type
 -}
-type alias Chip msg =
+data Chip msg =
     Material.Chip.Action.Internal.Chip msg
 
 
 {-| Action chip view function
 -}
-chip : Config msg -> String -> Chip msg
+chip :: Config msg -> String -> Chip msg
 chip =
     Chip

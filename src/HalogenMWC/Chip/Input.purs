@@ -37,7 +37,7 @@ into chips.
     import Material.Chip.Input as InputChip
     import Material.ChipSet.Input as InputChipSet
 
-    type Msg
+    data Msg
         = ChipSelected String
 
     main =
@@ -73,13 +73,13 @@ import Material.Chip.Input.Internal exposing (Chip(..), Config(..))
 
 {-| Configuration of an input chip
 -}
-type alias Config msg =
+data Config msg =
     Material.Chip.Input.Internal.Config msg
 
 
 {-| Default configuration of an input chip
 -}
-config : Config msg
+config :: Config msg
 config =
     Config
         { leadingIcon = Nothing
@@ -92,47 +92,47 @@ config =
 
 {-| Specify whether an input chip displays a leading icon
 -}
-setLeadingIcon : Maybe String -> Config msg -> Config msg
+setLeadingIcon :: Maybe String -> Config msg -> Config msg
 setLeadingIcon leadingIcon (Config config_) =
     Config { config_ | leadingIcon = leadingIcon }
 
 
 {-| Specify whether an input chip displays a trailing icon
 -}
-setTrailingIcon : Maybe String -> Config msg -> Config msg
+setTrailingIcon :: Maybe String -> Config msg -> Config msg
 setTrailingIcon trailingIcon (Config config_) =
     Config { config_ | trailingIcon = trailingIcon }
 
 
 {-| Specify additonal attributes
 -}
-setAttributes : List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Specify a message when the user clicks on a chip's trailing icon
 -}
-setOnDelete : msg -> Config msg -> Config msg
+setOnDelete :: msg -> Config msg -> Config msg
 setOnDelete onDelete (Config config_) =
     Config { config_ | onDelete = Just onDelete }
 
 
 {-| Specify a message when the user clicks on a chip
 -}
-setOnClick : msg -> Config msg -> Config msg
+setOnClick :: msg -> Config msg -> Config msg
 setOnClick onClick (Config config_) =
     Config { config_ | onClick = Just onClick }
 
 
 {-| Input chip type
 -}
-type alias Chip msg =
+data Chip msg =
     Material.Chip.Input.Internal.Chip msg
 
 
 {-| Input chip view function
 -}
-chip : Config msg -> String -> Chip msg
+chip :: Config msg -> String -> Chip msg
 chip =
     Chip

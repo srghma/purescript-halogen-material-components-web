@@ -41,7 +41,7 @@ positioning, wrap the button and the menu within an element that sets the
     import Material.ListItem as ListItem
     import Material.Menu as Menu
 
-    type Msg
+    data Msg
         = MenuOpened
         | MenuClosed
 
@@ -103,18 +103,18 @@ import Json.Encode as Encode
 
 {-| Configuration of a menu
 -}
-type Config msg
+data Config msg
     = Config
-        { open : Bool
-        , quickOpen : Bool
-        , additionalAttributes : List (Html.Attribute msg)
-        , onClose : Maybe msg
+        { open :: Bool
+        , quickOpen :: Bool
+        , additionalAttributes :: List (Html.Attribute msg)
+        , onClose :: Maybe msg
         }
 
 
 {-| Default configuration of a menu
 -}
-config : Config msg
+config :: Config msg
 config =
     Config
         { open = False
@@ -126,7 +126,7 @@ config =
 
 {-| Specify whether a menu is open
 -}
-setOpen : Bool -> Config msg -> Config msg
+setOpen :: Bool -> Config msg -> Config msg
 setOpen open (Config config_) =
     Config { config_ | open = open }
 
@@ -136,28 +136,28 @@ setOpen open (Config config_) =
 A quickly opening menu opens without showing an animation.
 
 -}
-setQuickOpen : Bool -> Config msg -> Config msg
+setQuickOpen :: Bool -> Config msg -> Config msg
 setQuickOpen quickOpen (Config config_) =
     Config { config_ | quickOpen = quickOpen }
 
 
 {-| Specify a message when the user closes the menu
 -}
-setOnClose : msg -> Config msg -> Config msg
+setOnClose :: msg -> Config msg -> Config msg
 setOnClose onClose (Config config_) =
     Config { config_ | onClose = Just onClose }
 
 
 {-| Specify additional attributes
 -}
-setAttributes : List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Menu view function
 -}
-menu : Config msg -> List (Html msg) -> Html msg
+menu :: Config msg -> List (Html msg) -> Html msg
 menu ((Config { additionalAttributes }) as config_) nodes =
     Html.node "mdc-menu"
         (List.filterMap identity
@@ -177,26 +177,26 @@ Use this on a HTML element that contains both the triggering element and the
 menu itself.
 
 -}
-surfaceAnchor : Html.Attribute msg
+surfaceAnchor :: Html.Attribute msg
 surfaceAnchor =
     class "mdc-menu-surface--anchor"
 
 
-rootCs : Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute msg)
 rootCs =
     Just (class "mdc-menu mdc-menu-surface")
 
 
-openProp : Config msg -> Maybe (Html.Attribute msg)
+openProp :: Config msg -> Maybe (Html.Attribute msg)
 openProp (Config { open }) =
     Just (Html.Attributes.property "open" (Encode.bool open))
 
 
-quickOpenProp : Config msg -> Maybe (Html.Attribute msg)
+quickOpenProp :: Config msg -> Maybe (Html.Attribute msg)
 quickOpenProp (Config { quickOpen }) =
     Just (Html.Attributes.property "quickOpen" (Encode.bool quickOpen))
 
 
-closeHandler : Config msg -> Maybe (Html.Attribute msg)
+closeHandler :: Config msg -> Maybe (Html.Attribute msg)
 closeHandler (Config { onClose }) =
     Maybe.map (Html.Events.on "MDCMenu:close" << Decode.succeed) onClose

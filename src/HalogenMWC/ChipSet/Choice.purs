@@ -35,11 +35,11 @@ options.
     import Material.Chip.Choice as ChoiceChip
     import Material.ChipSet.Choice as ChoiceChipSet
 
-    type Color
+    data Color
         = Red
         | Blue
 
-    type Msg
+    data Msg
         = ColorChanged Color
 
     main =
@@ -90,18 +90,18 @@ import Material.Chip.Choice.Internal as Chip exposing (Chip(..))
 
 {-| Configuration of a choice chip set
 -}
-type Config a msg
+data Config a msg
     = Config
-        { selected : Maybe a
-        , onChange : Maybe (a -> msg)
-        , toLabel : a -> String
-        , additionalAttributes : List (Html.Attribute msg)
+        { selected :: Maybe a
+        , onChange :: Maybe (a -> msg)
+        , toLabel :: a -> String
+        , additionalAttributes :: List (Html.Attribute msg)
         }
 
 
 {-| Default configuration of a choice chip set
 -}
-config : { toLabel : a -> String } -> Config a msg
+config :: { toLabel :: a -> String } -> Config a msg
 config { toLabel } =
     Config
         { selected = Nothing
@@ -113,35 +113,35 @@ config { toLabel } =
 
 {-| Specify which chip is selected
 -}
-setSelected : Maybe a -> Config a msg -> Config a msg
+setSelected :: Maybe a -> Config a msg -> Config a msg
 setSelected selected (Config config_) =
     Config { config_ | selected = selected }
 
 
 {-| Specify a message when the user clicks on a chip
 -}
-setOnChange : (a -> msg) -> Config a msg -> Config a msg
+setOnChange :: (a -> msg) -> Config a msg -> Config a msg
 setOnChange onChange (Config config_) =
     Config { config_ | onChange = Just onChange }
 
 
 {-| Specify additional attributes
 -}
-setAttributes : List (Html.Attribute msg) -> Config a msg -> Config a msg
+setAttributes :: List (Html.Attribute msg) -> Config a msg -> Config a msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Choice chip set view function
 -}
-chipSet : Config a msg -> List (Chip a msg) -> Html msg
+chipSet :: Config a msg -> List (Chip a msg) -> Html msg
 chipSet ((Config { selected, onChange, toLabel, additionalAttributes }) as config_) chips =
     Html.node "mdc-chip-set"
         (chipSetCs :: chipSetChoiceCs :: gridRole :: additionalAttributes)
         (List.map (chip selected onChange toLabel) chips)
 
 
-chip : Maybe a -> Maybe (a -> msg) -> (a -> String) -> Chip a msg -> Html msg
+chip :: Maybe a -> Maybe (a -> msg) -> (a -> String) -> Chip a msg -> Html msg
 chip selected onChange toLabel (Chip ((Chip.Config { additionalAttributes }) as config_) value) =
     Html.div [ class "mdc-touch-target-wrapper" ]
         [ Html.node "mdc-chip"
@@ -163,72 +163,72 @@ chip selected onChange toLabel (Chip ((Chip.Config { additionalAttributes }) as 
         ]
 
 
-chipSetCs : Html.Attribute msg
+chipSetCs :: Html.Attribute msg
 chipSetCs =
     class "mdc-chip-set"
 
 
-chipSetChoiceCs : Html.Attribute msg
+chipSetChoiceCs :: Html.Attribute msg
 chipSetChoiceCs =
     class "mdc-chip-set--choice"
 
 
-gridRole : Html.Attribute msg
+gridRole :: Html.Attribute msg
 gridRole =
     Html.Attributes.attribute "role" "grid"
 
 
-chipCs : Maybe (Html.Attribute msg)
+chipCs :: Maybe (Html.Attribute msg)
 chipCs =
     Just (class "mdc-chip")
 
 
-chipTextCs : Html.Attribute msg
+chipTextCs :: Html.Attribute msg
 chipTextCs =
     class "mdc-chip__text"
 
 
-chipTouchCs : Maybe (Html.Attribute msg)
+chipTouchCs :: Maybe (Html.Attribute msg)
 chipTouchCs =
     Just (class "mdc-chip--touch")
 
 
-chipPrimaryActionCs : Html.Attribute msg
+chipPrimaryActionCs :: Html.Attribute msg
 chipPrimaryActionCs =
     class "mdc-chip__primary-action"
 
 
-selectedProp : Bool -> Maybe (Html.Attribute msg)
+selectedProp :: Bool -> Maybe (Html.Attribute msg)
 selectedProp selected =
     Just (Html.Attributes.property "selected" (Encode.bool selected))
 
 
-buttonRole : Html.Attribute msg
+buttonRole :: Html.Attribute msg
 buttonRole =
     Html.Attributes.attribute "role" "button"
 
 
-rowRole : Maybe (Html.Attribute msg)
+rowRole :: Maybe (Html.Attribute msg)
 rowRole =
     Just (Html.Attributes.attribute "role" "row")
 
 
-gridcellRole : Html.Attribute msg
+gridcellRole :: Html.Attribute msg
 gridcellRole =
     Html.Attributes.attribute "role" "gridcell"
 
 
-interactionHandler : Maybe msg -> Maybe (Html.Attribute msg)
+interactionHandler :: Maybe msg -> Maybe (Html.Attribute msg)
 interactionHandler msg =
     Maybe.map (Html.Events.on "MDCChip:interaction" << Decode.succeed) msg
 
 
-rippleElt : Maybe (Html msg)
+rippleElt :: Maybe (Html msg)
 rippleElt =
     Just (Html.div [ class "mdc-chip__ripple" ] [])
 
 
-leadingIconElt : Chip.Config msg -> Maybe (Html msg)
+leadingIconElt :: Chip.Config msg -> Maybe (Html msg)
 leadingIconElt (Chip.Config { icon }) =
     Maybe.map
         (\iconName ->
@@ -238,18 +238,18 @@ leadingIconElt (Chip.Config { icon }) =
         icon
 
 
-primaryActionElt : String -> Maybe (Html msg)
+primaryActionElt :: String -> Maybe (Html msg)
 primaryActionElt label =
     Just <|
         Html.span [ chipPrimaryActionCs, gridcellRole ]
             (List.filterMap identity [ textElt label, touchElt ])
 
 
-textElt : String -> Maybe (Html msg)
+textElt :: String -> Maybe (Html msg)
 textElt label =
     Just (Html.span [ chipTextCs, buttonRole ] [ text label ])
 
 
-touchElt : Maybe (Html msg)
+touchElt :: Maybe (Html msg)
 touchElt =
     Just (Html.div [ class "mdc-chip__touch" ] [])

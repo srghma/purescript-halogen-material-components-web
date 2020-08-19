@@ -99,17 +99,17 @@ import Json.Encode as Encode
 
 {-| Configuration of a dismissible drawer
 -}
-type Config msg
+data Config msg
     = Config
-        { open : Bool
-        , additionalAttributes : List (Html.Attribute msg)
-        , onClose : Maybe msg
+        { open :: Bool
+        , additionalAttributes :: List (Html.Attribute msg)
+        , onClose :: Maybe msg
         }
 
 
 {-| Default configuration of a dismissible drawer
 -}
-config : Config msg
+config :: Config msg
 config =
     Config
         { open = False
@@ -120,28 +120,28 @@ config =
 
 {-| Specify whether the drawer is open
 -}
-setOpen : Bool -> Config msg -> Config msg
+setOpen :: Bool -> Config msg -> Config msg
 setOpen open (Config config_) =
     Config { config_ | open = open }
 
 
 {-| Specify message when the user closes the drawer
 -}
-setOnClose : msg -> Config msg -> Config msg
+setOnClose :: msg -> Config msg -> Config msg
 setOnClose onClose (Config config_) =
     Config { config_ | onClose = Just onClose }
 
 
 {-| Specify additional attributes
 -}
-setAttributes : List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Dismissible drawer view function
 -}
-drawer : Config msg -> List (Html msg) -> Html msg
+drawer :: Config msg -> List (Html msg) -> Html msg
 drawer ((Config { additionalAttributes }) as config_) nodes =
     Html.node "mdc-drawer"
         (List.filterMap identity
@@ -157,7 +157,7 @@ drawer ((Config { additionalAttributes }) as config_) nodes =
 
 {-| Drawer content
 -}
-content : List (Html.Attribute msg) -> List (Html msg) -> Html msg
+content :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
 content attributes nodes =
     Html.div (class "mdc-drawer__content" :: attributes) nodes
 
@@ -175,41 +175,41 @@ content attributes nodes =
         ]
 
 -}
-header : List (Html.Attribute msg) -> List (Html msg) -> Html msg
+header :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
 header additionalAttributes nodes =
     Html.div (class "mdc-drawer__header" :: additionalAttributes) nodes
 
 
 {-| Attribute to mark the title text element of the drawer header
 -}
-title : Html.Attribute msg
+title :: Html.Attribute msg
 title =
     class "mdc-drawer__title"
 
 
 {-| Attribute to mark the subtitle text element of the drawer header
 -}
-subtitle : Html.Attribute msg
+subtitle :: Html.Attribute msg
 subtitle =
     class "mdc-drawer__subtitle"
 
 
-rootCs : Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute msg)
 rootCs =
     Just (class "mdc-drawer")
 
 
-dismissibleCs : Maybe (Html.Attribute msg)
+dismissibleCs :: Maybe (Html.Attribute msg)
 dismissibleCs =
     Just (class "mdc-drawer--dismissible")
 
 
-openProp : Config msg -> Maybe (Html.Attribute msg)
+openProp :: Config msg -> Maybe (Html.Attribute msg)
 openProp (Config { open }) =
     Just (Html.Attributes.property "open" (Encode.bool open))
 
 
-closeHandler : Config msg -> Maybe (Html.Attribute msg)
+closeHandler :: Config msg -> Maybe (Html.Attribute msg)
 closeHandler (Config { onClose }) =
     Maybe.map (Html.Events.on "MDCDrawer:close" << Decode.succeed) onClose
 
@@ -220,6 +220,6 @@ Apply this attribute to the page's content for the open/close animation to
 work. The page content has to be the next sibling of the dismissible drawer.
 
 -}
-appContent : Html.Attribute msg
+appContent :: Html.Attribute msg
 appContent =
     class "mdc-drawer-app-content"

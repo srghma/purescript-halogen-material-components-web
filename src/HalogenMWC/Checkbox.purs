@@ -42,7 +42,7 @@ Note that checkboxes are usually used in conjunction with form fields. Refer to
 
     import Material.Checkbox as Checkbox
 
-    type Msg
+    data Msg
         = Changed
 
     main =
@@ -139,13 +139,13 @@ import Svg.Attributes
 
 {-| Configuration of a checkbox
 -}
-type alias Config msg =
+data Config msg =
     Material.Checkbox.Internal.Config msg
 
 
 {-| Default configuration of a checkbox
 -}
-config : Config msg
+config :: Config msg
 config =
     Config
         { state = Nothing
@@ -161,7 +161,7 @@ config =
 A checkbox may be in `checked`, `unchecked` or `indeterminate` state.
 
 -}
-setState : Maybe State -> Config msg -> Config msg
+setState :: Maybe State -> Config msg -> Config msg
 setState state (Config config_) =
     Config { config_ | state = state }
 
@@ -172,21 +172,21 @@ Disabled checkboxes cannot be interacted with and have no visual interaction
 effect.
 
 -}
-setDisabled : Bool -> Config msg -> Config msg
+setDisabled :: Bool -> Config msg -> Config msg
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 
 
 {-| Specify additional attributes
 -}
-setAttributes : List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Specify a message when the user changes a checkbox
 -}
-setOnChange : msg -> Config msg -> Config msg
+setOnChange :: msg -> Config msg -> Config msg
 setOnChange onChange (Config config_) =
     Config { config_ | onChange = Just onChange }
 
@@ -201,41 +201,41 @@ disable increased touch target size.
 to prevent potentially overlapping touch targets on adjacent elements.
 
 -}
-setTouch : Bool -> Config msg -> Config msg
+setTouch :: Bool -> Config msg -> Config msg
 setTouch touch (Config config_) =
     Config { config_ | touch = touch }
 
 
 {-| State of a checkbox
 -}
-type alias State =
+data State =
     Material.Checkbox.Internal.State
 
 
 {-| Unchecked state
 -}
-unchecked : State
+unchecked :: State
 unchecked =
     Unchecked
 
 
 {-| Checked state
 -}
-checked : State
+checked :: State
 checked =
     Checked
 
 
 {-| Indeterminate state
 -}
-indeterminate : State
+indeterminate :: State
 indeterminate =
     Indeterminate
 
 
 {-| Checkbox view function
 -}
-checkbox : Config msg -> Html msg
+checkbox :: Config msg -> Html msg
 checkbox ((Config { touch, additionalAttributes }) as config_) =
     let
         wrapTouch node =
@@ -261,12 +261,12 @@ checkbox ((Config { touch, additionalAttributes }) as config_) =
             ]
 
 
-rootCs : Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute msg)
 rootCs =
     Just (class "mdc-checkbox")
 
 
-touchCs : Config msg -> Maybe (Html.Attribute msg)
+touchCs :: Config msg -> Maybe (Html.Attribute msg)
 touchCs (Config { touch }) =
     if touch then
         Just (class "mdc-checkbox--touch")
@@ -275,22 +275,22 @@ touchCs (Config { touch }) =
         Nothing
 
 
-checkedProp : Config msg -> Maybe (Html.Attribute msg)
+checkedProp :: Config msg -> Maybe (Html.Attribute msg)
 checkedProp (Config { state }) =
     Just (Html.Attributes.property "checked" (Encode.bool (state == Just Checked)))
 
 
-indeterminateProp : Config msg -> Maybe (Html.Attribute msg)
+indeterminateProp :: Config msg -> Maybe (Html.Attribute msg)
 indeterminateProp (Config { state }) =
     Just (Html.Attributes.property "indeterminate" (Encode.bool (state == Just Indeterminate)))
 
 
-disabledProp : Config msg -> Maybe (Html.Attribute msg)
+disabledProp :: Config msg -> Maybe (Html.Attribute msg)
 disabledProp (Config { disabled }) =
     Just (Html.Attributes.property "disabled" (Encode.bool disabled))
 
 
-changeHandler : Config msg -> Maybe (Html.Attribute msg)
+changeHandler :: Config msg -> Maybe (Html.Attribute msg)
 changeHandler (Config { state, onChange }) =
     -- Note: MDCList choses to send a change event to all checkboxes, thus we
     -- have to check here if the state actually changed.
@@ -314,7 +314,7 @@ changeHandler (Config { state, onChange }) =
         onChange
 
 
-nativeControlElt : Config msg -> Html msg
+nativeControlElt :: Config msg -> Html msg
 nativeControlElt config_ =
     Html.input
         (List.filterMap identity
@@ -328,7 +328,7 @@ nativeControlElt config_ =
         []
 
 
-backgroundElt : Html msg
+backgroundElt :: Html msg
 backgroundElt =
     Html.div
         [ class "mdc-checkbox__background" ]

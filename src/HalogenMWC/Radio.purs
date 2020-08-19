@@ -40,7 +40,7 @@ fields](Material-FormField).
 
     import Material.Radio as Radio
 
-    type Msg
+    data Msg
         = Changed
 
     main =
@@ -118,19 +118,19 @@ import Json.Encode as Encode
 
 {-| Radio button configuration
 -}
-type Config msg
+data Config msg
     = Config
-        { checked : Bool
-        , disabled : Bool
-        , additionalAttributes : List (Html.Attribute msg)
-        , onChange : Maybe msg
-        , touch : Bool
+        { checked :: Bool
+        , disabled :: Bool
+        , additionalAttributes :: List (Html.Attribute msg)
+        , onChange :: Maybe msg
+        , touch :: Bool
         }
 
 
 {-| Default radio button configuration
 -}
-config : Config msg
+config :: Config msg
 config =
     Config
         { checked = False
@@ -143,7 +143,7 @@ config =
 
 {-| Specify whether a radio button is checked
 -}
-setChecked : Bool -> Config msg -> Config msg
+setChecked :: Bool -> Config msg -> Config msg
 setChecked checked (Config config_) =
     Config { config_ | checked = checked }
 
@@ -154,21 +154,21 @@ Disabled radio buttons cannot be interacted with and have no visual interaction
 effect.
 
 -}
-setDisabled : Bool -> Config msg -> Config msg
+setDisabled :: Bool -> Config msg -> Config msg
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 
 
 {-| Specify additional attributes
 -}
-setAttributes : List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Specify a message when the user changes a radio
 -}
-setOnChange : msg -> Config msg -> Config msg
+setOnChange :: msg -> Config msg -> Config msg
 setOnChange onChange (Config config_) =
     Config { config_ | onChange = Just onChange }
 
@@ -183,14 +183,14 @@ disable increased touch target size.
 prevent potentially overlapping touch targets on adjacent elements.
 
 -}
-setTouch : Bool -> Config msg -> Config msg
+setTouch :: Bool -> Config msg -> Config msg
 setTouch touch (Config config_) =
     Config { config_ | touch = touch }
 
 
 {-| Radio button view function
 -}
-radio : Config msg -> Html msg
+radio :: Config msg -> Html msg
 radio ((Config { touch, additionalAttributes }) as config_) =
     let
         wrapTouch node =
@@ -216,12 +216,12 @@ radio ((Config { touch, additionalAttributes }) as config_) =
             ]
 
 
-rootCs : Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute msg)
 rootCs =
     Just (class "mdc-radio")
 
 
-touchCs : Config msg -> Maybe (Html.Attribute msg)
+touchCs :: Config msg -> Maybe (Html.Attribute msg)
 touchCs (Config { touch }) =
     if touch then
         Just (class "mdc-radio--touch")
@@ -230,17 +230,17 @@ touchCs (Config { touch }) =
         Nothing
 
 
-checkedProp : Config msg -> Maybe (Html.Attribute msg)
+checkedProp :: Config msg -> Maybe (Html.Attribute msg)
 checkedProp (Config { checked }) =
     Just (Html.Attributes.property "checked" (Encode.bool checked))
 
 
-disabledProp : Config msg -> Maybe (Html.Attribute msg)
+disabledProp :: Config msg -> Maybe (Html.Attribute msg)
 disabledProp (Config { disabled }) =
     Just (Html.Attributes.property "disabled" (Encode.bool disabled))
 
 
-changeHandler : Config msg -> Maybe (Html.Attribute msg)
+changeHandler :: Config msg -> Maybe (Html.Attribute msg)
 changeHandler (Config { checked, onChange }) =
     -- Note: MDCList choses to send a change event to all checkboxes, thus we
     -- have to check here if the state actually changed.
@@ -261,7 +261,7 @@ changeHandler (Config { checked, onChange }) =
         onChange
 
 
-nativeControlElt : Config msg -> Html msg
+nativeControlElt :: Config msg -> Html msg
 nativeControlElt config_ =
     Html.input
         (List.filterMap identity
@@ -274,31 +274,31 @@ nativeControlElt config_ =
         []
 
 
-nativeControlCs : Maybe (Html.Attribute msg)
+nativeControlCs :: Maybe (Html.Attribute msg)
 nativeControlCs =
     Just (class "mdc-radio__native-control")
 
 
-radioTypeAttr : Maybe (Html.Attribute msg)
+radioTypeAttr :: Maybe (Html.Attribute msg)
 radioTypeAttr =
     Just (Html.Attributes.type_ "radio")
 
 
-backgroundElt : Html msg
+backgroundElt :: Html msg
 backgroundElt =
     Html.div [ class "mdc-radio__background" ] [ outerCircleElt, innerCircleElt ]
 
 
-outerCircleElt : Html msg
+outerCircleElt :: Html msg
 outerCircleElt =
     Html.div [ class "mdc-radio__outer-circle" ] []
 
 
-innerCircleElt : Html msg
+innerCircleElt :: Html msg
 innerCircleElt =
     Html.div [ class "mdc-radio__inner-circle" ] []
 
 
-rippleElt : Html msg
+rippleElt :: Html msg
 rippleElt =
     Html.div [ class "mdc-radio__ripple" ] []

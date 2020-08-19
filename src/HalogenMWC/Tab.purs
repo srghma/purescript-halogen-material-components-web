@@ -43,7 +43,7 @@ the tab bar container, refer to [Material.TabBar](Material-TabBar).
     import Material.Tab as Tab
     import Material.TabBar as TabBar
 
-    type Msg
+    data Msg
         = TabClicked Int
 
     main =
@@ -91,13 +91,13 @@ import Material.Tab.Internal exposing (Config(..), Tab(..))
 
 {-| Configuration of a tab
 -}
-type alias Config msg =
+data Config msg =
     Material.Tab.Internal.Config msg
 
 
 {-| Default configuration of a tab
 -}
-config : Config msg
+config :: Config msg
 config =
     Config
         { active = False
@@ -109,30 +109,30 @@ config =
 
 {-| Specify a message when the user clicks a tab
 -}
-setOnClick : msg -> Config msg -> Config msg
+setOnClick :: msg -> Config msg -> Config msg
 setOnClick onClick (Config config_) =
     Config { config_ | onClick = Just onClick }
 
 
 {-| Specify whether the tab is active
 -}
-setActive : Bool -> Config msg -> Config msg
+setActive :: Bool -> Config msg -> Config msg
 setActive active (Config config_) =
     Config { config_ | active = active }
 
 
 {-| Specify additional attributes
 -}
-setAttributes : List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Content of a tab
 -}
-type alias Content =
-    { label : String
-    , icon : Maybe String
+data Content =
+    { label :: String
+    , icon :: Maybe String
     }
 
 
@@ -141,12 +141,12 @@ type alias Content =
 Tabs can only be rendered within a [tab bar](Material-TabBar).
 
 -}
-type alias Tab msg =
+data Tab msg =
     Material.Tab.Internal.Tab msg
 
 
 {-| Tab constructor
 -}
-tab : Config msg -> Content -> Tab msg
+tab :: Config msg -> Content -> Tab msg
 tab (Config config_) content =
     Tab (Config { config_ | content = content })

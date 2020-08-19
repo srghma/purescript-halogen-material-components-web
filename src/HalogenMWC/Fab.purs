@@ -42,7 +42,7 @@ their page layout, for instance by setting a fixed position via CSS.
     import Html.Attributes exposing (style)
     import Material.Fab as Fab
 
-    type Msg
+    data Msg
         = FabClicked
 
     main =
@@ -114,18 +114,18 @@ import Json.Encode as Encode
 
 {-| Floating action button configuration
 -}
-type Config msg
+data Config msg
     = Config
-        { mini : Bool
-        , exited : Bool
-        , additionalAttributes : List (Html.Attribute msg)
-        , onClick : Maybe msg
+        { mini :: Bool
+        , exited :: Bool
+        , additionalAttributes :: List (Html.Attribute msg)
+        , onClick :: Maybe msg
         }
 
 
 {-| Default floating action button configuration
 -}
-config : Config msg
+config :: Config msg
 config =
     Config
         { mini = False
@@ -137,35 +137,35 @@ config =
 
 {-| Specify whether the floating actions button should be smaller than normally
 -}
-setMini : Bool -> Config msg -> Config msg
+setMini :: Bool -> Config msg -> Config msg
 setMini mini (Config config_) =
     Config { config_ | mini = mini }
 
 
 {-| Specify whether a floating action button should transition off the screen
 -}
-setExited : Bool -> Config msg -> Config msg
+setExited :: Bool -> Config msg -> Config msg
 setExited exited (Config config_) =
     Config { config_ | exited = exited }
 
 
 {-| Specify additional attributes
 -}
-setAttributes : List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Specify a message when the user clicks the floating action button
 -}
-setOnClick : msg -> Config msg -> Config msg
+setOnClick :: msg -> Config msg -> Config msg
 setOnClick onClick (Config config_) =
     Config { config_ | onClick = Just onClick }
 
 
 {-| Floating action button view function
 -}
-fab : Config msg -> String -> Html msg
+fab :: Config msg -> String -> Html msg
 fab ((Config { additionalAttributes }) as config_) iconName =
     Html.node "mdc-fab"
         (List.filterMap identity
@@ -182,17 +182,17 @@ fab ((Config { additionalAttributes }) as config_) iconName =
         ]
 
 
-tabIndexProp : Int -> Maybe (Html.Attribute msg)
+tabIndexProp :: Int -> Maybe (Html.Attribute msg)
 tabIndexProp tabIndex =
     Just (Html.Attributes.property "tabIndex" (Encode.int tabIndex))
 
 
-rootCs : Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute msg)
 rootCs =
     Just (class "mdc-fab")
 
 
-miniCs : Config msg -> Maybe (Html.Attribute msg)
+miniCs :: Config msg -> Maybe (Html.Attribute msg)
 miniCs (Config { mini }) =
     if mini then
         Just (class "mdc-fab--mini")
@@ -201,7 +201,7 @@ miniCs (Config { mini }) =
         Nothing
 
 
-exitedCs : Config msg -> Maybe (Html.Attribute msg)
+exitedCs :: Config msg -> Maybe (Html.Attribute msg)
 exitedCs (Config { exited }) =
     if exited then
         Just (class "mdc-fab--exited")
@@ -210,16 +210,16 @@ exitedCs (Config { exited }) =
         Nothing
 
 
-rippleElt : Html msg
+rippleElt :: Html msg
 rippleElt =
     Html.div [ class "mdc-fab__ripple" ] []
 
 
-iconElt : String -> Html msg
+iconElt :: String -> Html msg
 iconElt iconName =
     Html.span [ class "material-icons", class "mdc-fab__icon" ] [ text iconName ]
 
 
-clickHandler : Config msg -> Maybe (Html.Attribute msg)
+clickHandler :: Config msg -> Maybe (Html.Attribute msg)
 clickHandler (Config { onClick }) =
     Maybe.map Html.Events.onClick onClick

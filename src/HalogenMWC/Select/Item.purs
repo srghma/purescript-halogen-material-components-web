@@ -34,7 +34,7 @@ refer to [Material.Select](Material-Select).
     import Material.Select as Select
     import Material.Select.Item as SelectItem
 
-    type Msg
+    data Msg
         = ValueChanged String
 
     main =
@@ -89,13 +89,13 @@ import Material.Select.Item.Internal exposing (Config(..), SelectItem(..))
 
 {-| Configuration of a select item
 -}
-type alias Config a msg =
+data Config a msg =
     Material.Select.Item.Internal.Config a msg
 
 
 {-| Default configuration of a select item
 -}
-config : { value : a } -> Config a msg
+config :: { value :: a } -> Config a msg
 config { value } =
     Config
         { value = value
@@ -110,26 +110,26 @@ Disabled select items cannot be interacted with and have not visual interaction
 effect.
 
 -}
-setDisabled : Bool -> Config a msg -> Config a msg
+setDisabled :: Bool -> Config a msg -> Config a msg
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 
 
 {-| Specify additional attributes
 -}
-setAttributes : List (Html.Attribute msg) -> Config a msg -> Config a msg
+setAttributes :: List (Html.Attribute msg) -> Config a msg -> Config a msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Select item type
 -}
-type alias SelectItem a msg =
+data SelectItem a msg =
     Material.Select.Item.Internal.SelectItem a msg
 
 
 {-| Select item constructor
 -}
-selectItem : Config a msg -> List (Html msg) -> SelectItem a msg
+selectItem :: Config a msg -> List (Html msg) -> SelectItem a msg
 selectItem =
     SelectItem

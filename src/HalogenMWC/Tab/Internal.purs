@@ -7,20 +7,20 @@ module Material.Tab.Internal exposing
 import Html
 
 
-type Config msg
+data Config msg
     = Config
-        { active : Bool
-        , additionalAttributes : List (Html.Attribute msg)
-        , onClick : Maybe msg
-        , content : Content
+        { active :: Bool
+        , additionalAttributes :: List (Html.Attribute msg)
+        , onClick :: Maybe msg
+        , content :: Content
         }
 
 
-type alias Content =
-    { label : String
-    , icon : Maybe String
+data Content =
+    { label :: String
+    , icon :: Maybe String
     }
 
 
-type Tab msg
+data Tab msg
     = Tab (Config msg)

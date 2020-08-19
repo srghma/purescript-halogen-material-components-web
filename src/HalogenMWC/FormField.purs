@@ -90,26 +90,26 @@ import Html.Events
 
 {-| Configuration of a form field
 -}
-type Config msg
+data Config msg
     = Config
-        { label : Maybe String
-        , for : Maybe String
-        , alignEnd : Bool
-        , additionalAttributes : List (Html.Attribute msg)
-        , onClick : Maybe msg
+        { label :: Maybe String
+        , for :: Maybe String
+        , alignEnd :: Bool
+        , additionalAttributes :: List (Html.Attribute msg)
+        , onClick :: Maybe msg
         }
 
 
 {-| Specify a form field's label
 -}
-setLabel : Maybe String -> Config msg -> Config msg
+setLabel :: Maybe String -> Config msg -> Config msg
 setLabel label (Config config_) =
     Config { config_ | label = label }
 
 
 {-| Specify a form field label's HTML5 for attribute
 -}
-setFor : Maybe String -> Config msg -> Config msg
+setFor :: Maybe String -> Config msg -> Config msg
 setFor for (Config config_) =
     Config { config_ | for = for }
 
@@ -119,28 +119,28 @@ setFor for (Config config_) =
 This is usefile for, say, checkboxes.
 
 -}
-setAlignEnd : Bool -> Config msg -> Config msg
+setAlignEnd :: Bool -> Config msg -> Config msg
 setAlignEnd alignEnd (Config config_) =
     Config { config_ | alignEnd = alignEnd }
 
 
 {-| Specify additional attributes
 -}
-setAttributes : List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Specify a message when the user clicks on the label
 -}
-setOnClick : msg -> Config msg -> Config msg
+setOnClick :: msg -> Config msg -> Config msg
 setOnClick onClick (Config config_) =
     Config { config_ | onClick = Just onClick }
 
 
 {-| Default configuration of a form field
 -}
-config : Config msg
+config :: Config msg
 config =
     Config
         { label = Nothing
@@ -153,7 +153,7 @@ config =
 
 {-| Form field view function
 -}
-formField : Config msg -> List (Html msg) -> Html msg
+formField :: Config msg -> List (Html msg) -> Html msg
 formField ((Config { additionalAttributes }) as config_) nodes =
     Html.node "mdc-form-field"
         (List.filterMap identity
@@ -165,12 +165,12 @@ formField ((Config { additionalAttributes }) as config_) nodes =
         (nodes ++ [ labelElt config_ ])
 
 
-rootCs : Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute msg)
 rootCs =
     Just (class "mdc-form-field")
 
 
-alignEndCs : Config msg -> Maybe (Html.Attribute msg)
+alignEndCs :: Config msg -> Maybe (Html.Attribute msg)
 alignEndCs (Config { alignEnd }) =
     if alignEnd then
         Just (class "mdc-form-field--align-end")
@@ -179,17 +179,17 @@ alignEndCs (Config { alignEnd }) =
         Nothing
 
 
-forAttr : Config msg -> Maybe (Html.Attribute msg)
+forAttr :: Config msg -> Maybe (Html.Attribute msg)
 forAttr (Config { for }) =
     Maybe.map Html.Attributes.for for
 
 
-clickHandler : Config msg -> Maybe (Html.Attribute msg)
+clickHandler :: Config msg -> Maybe (Html.Attribute msg)
 clickHandler (Config { onClick }) =
     Maybe.map Html.Events.onClick onClick
 
 
-labelElt : Config msg -> Html msg
+labelElt :: Config msg -> Html msg
 labelElt ((Config { label }) as config_) =
     Html.label
         (List.filterMap identity

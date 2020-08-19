@@ -178,21 +178,21 @@ import Material.List.Item.Internal as ListItem
 
 {-| Configuration of a list
 -}
-type Config msg
+data Config msg
     = Config
-        { nonInteractive : Bool
-        , dense : Bool
-        , avatarList : Bool
-        , twoLine : Bool
-        , vertical : Bool
-        , wrapFocus : Bool
-        , additionalAttributes : List (Html.Attribute msg)
+        { nonInteractive :: Bool
+        , dense :: Bool
+        , avatarList :: Bool
+        , twoLine :: Bool
+        , vertical :: Bool
+        , wrapFocus :: Bool
+        , additionalAttributes :: List (Html.Attribute msg)
         }
 
 
 {-| Default configuration of a list
 -}
-config : Config msg
+config :: Config msg
 config =
     Config
         { nonInteractive = False
@@ -211,7 +211,7 @@ Non-interactive lists do not feature keyboard interaction and list items have
 no visual interaction effect.
 
 -}
-setNonInteractive : Bool -> Config msg -> Config msg
+setNonInteractive :: Bool -> Config msg -> Config msg
 setNonInteractive nonInteractive (Config config_) =
     Config { config_ | nonInteractive = nonInteractive }
 
@@ -221,7 +221,7 @@ setNonInteractive nonInteractive (Config config_) =
 Dense lists are more compact and feature smaller than normal margins
 
 -}
-setDense : Bool -> Config msg -> Config msg
+setDense :: Bool -> Config msg -> Config msg
 setDense dense (Config config_) =
     Config { config_ | dense = dense }
 
@@ -231,7 +231,7 @@ setDense dense (Config config_) =
 An avatar list features a larger than usual list item _graphic_.
 
 -}
-setAvatarList : Bool -> Config msg -> Config msg
+setAvatarList :: Bool -> Config msg -> Config msg
 setAvatarList avatarList (Config config_) =
     Config { config_ | avatarList = avatarList }
 
@@ -241,7 +241,7 @@ setAvatarList avatarList (Config config_) =
 Two line lists feature list items with a primary and a secondary text line.
 
 -}
-setTwoLine : Bool -> Config msg -> Config msg
+setTwoLine :: Bool -> Config msg -> Config msg
 setTwoLine twoLine (Config config_) =
     Config { config_ | twoLine = twoLine }
 
@@ -253,14 +253,14 @@ last list item. By default, a list in that case passes focus to the next
 focusable control.
 
 -}
-setWrapFocus : Bool -> Config msg -> Config msg
+setWrapFocus :: Bool -> Config msg -> Config msg
 setWrapFocus wrapFocus (Config config_) =
     Config { config_ | wrapFocus = wrapFocus }
 
 
 {-| Specify additional attributes
 -}
-setAttributes : List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
@@ -272,7 +272,7 @@ argument represents the first list item, and the second argument reresents the
 remaining list items. This way we guarantee lists to be non-empty.
 
 -}
-list : Config msg -> ListItem msg -> List (ListItem msg) -> Html msg
+list :: Config msg -> ListItem msg -> List (ListItem msg) -> Html msg
 list ((Config { additionalAttributes }) as config_) firstListItem remainingListItems =
     let
         listItems =
@@ -307,12 +307,12 @@ list ((Config { additionalAttributes }) as config_) firstListItem remainingListI
         )
 
 
-rootCs : Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute msg)
 rootCs =
     Just (class "mdc-list")
 
 
-nonInteractiveCs : Config msg -> Maybe (Html.Attribute msg)
+nonInteractiveCs :: Config msg -> Maybe (Html.Attribute msg)
 nonInteractiveCs (Config { nonInteractive }) =
     if nonInteractive then
         Just (class "mdc-list--non-interactive")
@@ -321,7 +321,7 @@ nonInteractiveCs (Config { nonInteractive }) =
         Nothing
 
 
-denseCs : Config msg -> Maybe (Html.Attribute msg)
+denseCs :: Config msg -> Maybe (Html.Attribute msg)
 denseCs (Config { dense }) =
     if dense then
         Just (class "mdc-list--dense")
@@ -330,7 +330,7 @@ denseCs (Config { dense }) =
         Nothing
 
 
-avatarListCs : Config msg -> Maybe (Html.Attribute msg)
+avatarListCs :: Config msg -> Maybe (Html.Attribute msg)
 avatarListCs (Config { avatarList }) =
     if avatarList then
         Just (class "mdc-list--avatar-list")
@@ -339,7 +339,7 @@ avatarListCs (Config { avatarList }) =
         Nothing
 
 
-twoLineCs : Config msg -> Maybe (Html.Attribute msg)
+twoLineCs :: Config msg -> Maybe (Html.Attribute msg)
 twoLineCs (Config { twoLine }) =
     if twoLine then
         Just (class "mdc-list--two-line")
@@ -348,7 +348,7 @@ twoLineCs (Config { twoLine }) =
         Nothing
 
 
-clickHandler : List (ListItem msg) -> Maybe (Html.Attribute msg)
+clickHandler :: List (ListItem msg) -> Maybe (Html.Attribute msg)
 clickHandler listItems =
     let
         getOnClick listItem_ =
@@ -385,7 +385,7 @@ clickHandler listItems =
     Just (Html.Events.on "MDCList:action" mergedClickHandler)
 
 
-selectedIndexProp : List (ListItem msg) -> Maybe (Html.Attribute msg)
+selectedIndexProp :: List (ListItem msg) -> Maybe (Html.Attribute msg)
 selectedIndexProp listItems =
     let
         selectedIndex =
@@ -425,28 +425,28 @@ selectedIndexProp listItems =
 
 {-| List group view function
 -}
-group : List (Html.Attribute msg) -> List (Html msg) -> Html msg
+group :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
 group additionalAttributes nodes =
     Html.div (listGroupCs :: additionalAttributes) nodes
 
 
-listGroupCs : Html.Attribute msg
+listGroupCs :: Html.Attribute msg
 listGroupCs =
     class "mdc-list-group"
 
 
 {-| List group subheader view function
 -}
-subheader : List (Html.Attribute msg) -> List (Html msg) -> Html msg
+subheader :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
 subheader additionalAttributes nodes =
     Html.span (listGroupSubheaderCs :: additionalAttributes) nodes
 
 
-listGroupSubheaderCs : Html.Attribute msg
+listGroupSubheaderCs :: Html.Attribute msg
 listGroupSubheaderCs =
     class "mdc-list-group__subheader"
 
 
-wrapFocusProp : Config msg -> Maybe (Html.Attribute msg)
+wrapFocusProp :: Config msg -> Maybe (Html.Attribute msg)
 wrapFocusProp (Config { wrapFocus }) =
     Just (Html.Attributes.property "wrapFocus" (Encode.bool wrapFocus))

@@ -77,13 +77,13 @@ import Material.ImageList.Item.Internal exposing (Config(..), ImageListItem(..))
 
 {-| Configuration of an image list item
 -}
-type alias Config msg =
+data Config msg =
     Material.ImageList.Item.Internal.Config msg
 
 
 {-| Default configuration of an image list item
 -}
-config : Config msg
+config :: Config msg
 config =
     Config
         { label = Nothing
@@ -95,7 +95,7 @@ config =
 
 {-| Specify an image list item's label
 -}
-setLabel : Maybe String -> Config msg -> Config msg
+setLabel :: Maybe String -> Config msg -> Config msg
 setLabel label (Config config_) =
     Config { config_ | label = label }
 
@@ -105,14 +105,14 @@ setLabel label (Config config_) =
 A link image list items behaves essentially like a HTML5 anchor element.
 
 -}
-setHref : Maybe String -> Config msg -> Config msg
+setHref :: Maybe String -> Config msg -> Config msg
 setHref href (Config config_) =
     Config { config_ | href = href }
 
 
 {-| Specify additional attributes
 -}
-setAttributes : List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
@@ -123,12 +123,12 @@ Image list items can only be rendered within a [image list
 container](Material-ImageList)
 
 -}
-type alias ImageListItem msg =
+data ImageListItem msg =
     Material.ImageList.Item.Internal.ImageListItem msg
 
 
 {-| Image list item constructor
 -}
-imageListItem : Config msg -> String -> ImageListItem msg
+imageListItem :: Config msg -> String -> ImageListItem msg
 imageListItem (Config config_) image =
     ImageListItem (Config { config_ | image = image })

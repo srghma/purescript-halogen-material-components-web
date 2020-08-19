@@ -49,7 +49,7 @@ module Material.TextArea exposing
 
     import Material.TextArea as TextArea
 
-    type Msg
+    data Msg
         = ValueChanged String
 
     main =
@@ -180,28 +180,28 @@ import Json.Encode as Encode
 
 {-| Configuration of a text area
 -}
-type Config msg
+data Config msg
     = Config
-        { label : Maybe String
-        , fullwidth : Bool
-        , value : Maybe String
-        , placeholder : Maybe String
-        , rows : Maybe Int
-        , cols : Maybe Int
-        , disabled : Bool
-        , required : Bool
-        , valid : Bool
-        , minLength : Maybe Int
-        , maxLength : Maybe Int
-        , additionalAttributes : List (Html.Attribute msg)
-        , onInput : Maybe (String -> msg)
-        , onChange : Maybe (String -> msg)
+        { label :: Maybe String
+        , fullwidth :: Bool
+        , value :: Maybe String
+        , placeholder :: Maybe String
+        , rows :: Maybe Int
+        , cols :: Maybe Int
+        , disabled :: Bool
+        , required :: Bool
+        , valid :: Bool
+        , minLength :: Maybe Int
+        , maxLength :: Maybe Int
+        , additionalAttributes :: List (Html.Attribute msg)
+        , onInput :: Maybe (String -> msg)
+        , onChange :: Maybe (String -> msg)
         }
 
 
 {-| Default configuration of a text area
 -}
-config : Config msg
+config :: Config msg
 config =
     Config
         { label = Nothing
@@ -223,42 +223,42 @@ config =
 
 {-| Specify a text area's label
 -}
-setLabel : Maybe String -> Config msg -> Config msg
+setLabel :: Maybe String -> Config msg -> Config msg
 setLabel label (Config config_) =
     Config { config_ | label = label }
 
 
 {-| Specify a text area to be fullwidth
 -}
-setFullwidth : Bool -> Config msg -> Config msg
+setFullwidth :: Bool -> Config msg -> Config msg
 setFullwidth fullwidth (Config config_) =
     Config { config_ | fullwidth = fullwidth }
 
 
 {-| Specify a text area's value
 -}
-setValue : Maybe String -> Config msg -> Config msg
+setValue :: Maybe String -> Config msg -> Config msg
 setValue value (Config config_) =
     Config { config_ | value = value }
 
 
 {-| Specify a text area's placeholder
 -}
-setPlaceholder : Maybe String -> Config msg -> Config msg
+setPlaceholder :: Maybe String -> Config msg -> Config msg
 setPlaceholder placeholder (Config config_) =
     Config { config_ | placeholder = placeholder }
 
 
 {-| Specify a text area's number of rows
 -}
-setRows : Maybe Int -> Config msg -> Config msg
+setRows :: Maybe Int -> Config msg -> Config msg
 setRows rows (Config config_) =
     Config { config_ | rows = rows }
 
 
 {-| Specify a text area's number of columns
 -}
-setCols : Maybe Int -> Config msg -> Config msg
+setCols :: Maybe Int -> Config msg -> Config msg
 setCols cols (Config config_) =
     Config { config_ | cols = cols }
 
@@ -269,49 +269,49 @@ Disabled text areas cannot be interacted with and have no visual interaction
 effect.
 
 -}
-setDisabled : Bool -> Config msg -> Config msg
+setDisabled :: Bool -> Config msg -> Config msg
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 
 
 {-| Specify a text area to be required
 -}
-setRequired : Bool -> Config msg -> Config msg
+setRequired :: Bool -> Config msg -> Config msg
 setRequired required (Config config_) =
     Config { config_ | required = required }
 
 
 {-| Specify a text area to be valid
 -}
-setValid : Bool -> Config msg -> Config msg
+setValid :: Bool -> Config msg -> Config msg
 setValid valid (Config config_) =
     Config { config_ | valid = valid }
 
 
 {-| Specify a text area's minimum length
 -}
-setMinLength : Maybe Int -> Config msg -> Config msg
+setMinLength :: Maybe Int -> Config msg -> Config msg
 setMinLength minLength (Config config_) =
     Config { config_ | minLength = minLength }
 
 
 {-| Specify a text area's maximum length
 -}
-setMaxLength : Maybe Int -> Config msg -> Config msg
+setMaxLength :: Maybe Int -> Config msg -> Config msg
 setMaxLength maxLength (Config config_) =
     Config { config_ | maxLength = maxLength }
 
 
 {-| Specify additional attributes
 -}
-setAttributes : List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Specify a message when the user changes the value inside the text area
 -}
-setOnInput : (String -> msg) -> Config msg -> Config msg
+setOnInput :: (String -> msg) -> Config msg -> Config msg
 setOnInput onInput (Config config_) =
     Config { config_ | onInput = Just onInput }
 
@@ -319,26 +319,26 @@ setOnInput onInput (Config config_) =
 {-| Specify a message when the user confirms a changed value inside the text
 area
 -}
-setOnChange : (String -> msg) -> Config msg -> Config msg
+setOnChange :: (String -> msg) -> Config msg -> Config msg
 setOnChange onChange (Config config_) =
     Config { config_ | onChange = Just onChange }
 
 
 {-| Filled text area view function
 -}
-filled : Config msg -> Html msg
+filled :: Config msg -> Html msg
 filled config_ =
     textArea False config_
 
 
 {-| Outlined text area view function
 -}
-outlined : Config msg -> Html msg
+outlined :: Config msg -> Html msg
 outlined config_ =
     textArea True config_
 
 
-textArea : Bool -> Config msg -> Html msg
+textArea :: Bool -> Config msg -> Html msg
 textArea outlined_ ((Config { additionalAttributes, fullwidth }) as config_) =
     Html.node "mdc-text-field"
         (List.filterMap identity
@@ -370,12 +370,12 @@ textArea outlined_ ((Config { additionalAttributes, fullwidth }) as config_) =
         )
 
 
-rootCs : Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute msg)
 rootCs =
     Just (class "mdc-text-field mdc-text-field--textarea")
 
 
-outlinedCs : Bool -> Maybe (Html.Attribute msg)
+outlinedCs :: Bool -> Maybe (Html.Attribute msg)
 outlinedCs outlined_ =
     if outlined_ then
         Just (class "mdc-text-field--outlined")
@@ -384,7 +384,7 @@ outlinedCs outlined_ =
         Nothing
 
 
-fullwidthCs : Config msg -> Maybe (Html.Attribute msg)
+fullwidthCs :: Config msg -> Maybe (Html.Attribute msg)
 fullwidthCs (Config { fullwidth }) =
     if fullwidth then
         Just (class "mdc-text-field--fullwidth")
@@ -393,7 +393,7 @@ fullwidthCs (Config { fullwidth }) =
         Nothing
 
 
-disabledCs : Config msg -> Maybe (Html.Attribute msg)
+disabledCs :: Config msg -> Maybe (Html.Attribute msg)
 disabledCs (Config { disabled }) =
     if disabled then
         Just (class "mdc-text-field--disabled")
@@ -402,48 +402,48 @@ disabledCs (Config { disabled }) =
         Nothing
 
 
-requiredProp : Config msg -> Maybe (Html.Attribute msg)
+requiredProp :: Config msg -> Maybe (Html.Attribute msg)
 requiredProp (Config { required }) =
     Just (Html.Attributes.property "required" (Encode.bool required))
 
 
-validProp : Config msg -> Maybe (Html.Attribute msg)
+validProp :: Config msg -> Maybe (Html.Attribute msg)
 validProp (Config { valid }) =
     Just (Html.Attributes.property "valid" (Encode.bool valid))
 
 
-minLengthAttr : Config msg -> Maybe (Html.Attribute msg)
+minLengthAttr :: Config msg -> Maybe (Html.Attribute msg)
 minLengthAttr (Config { minLength }) =
     Maybe.map (Html.Attributes.attribute "minLength" << String.fromInt) minLength
 
 
-maxLengthAttr : Config msg -> Maybe (Html.Attribute msg)
+maxLengthAttr :: Config msg -> Maybe (Html.Attribute msg)
 maxLengthAttr (Config { maxLength }) =
     Maybe.map (Html.Attributes.attribute "maxLength" << String.fromInt) maxLength
 
 
-valueProp : Config msg -> Maybe (Html.Attribute msg)
+valueProp :: Config msg -> Maybe (Html.Attribute msg)
 valueProp (Config { value }) =
     Maybe.map (Html.Attributes.property "value" << Encode.string) value
 
 
-placeholderAttr : Config msg -> Maybe (Html.Attribute msg)
+placeholderAttr :: Config msg -> Maybe (Html.Attribute msg)
 placeholderAttr (Config { placeholder }) =
     Maybe.map Html.Attributes.placeholder placeholder
 
 
-inputHandler : Config msg -> Maybe (Html.Attribute msg)
+inputHandler :: Config msg -> Maybe (Html.Attribute msg)
 inputHandler (Config { onInput }) =
     Maybe.map Html.Events.onInput onInput
 
 
-changeHandler : Config msg -> Maybe (Html.Attribute msg)
+changeHandler :: Config msg -> Maybe (Html.Attribute msg)
 changeHandler (Config { onChange }) =
     Maybe.map (\f -> Html.Events.on "change" (Decode.map f Html.Events.targetValue))
         onChange
 
 
-inputElt : Config msg -> Html msg
+inputElt :: Config msg -> Html msg
 inputElt config_ =
     Html.textarea
         (List.filterMap identity
@@ -461,22 +461,22 @@ inputElt config_ =
         []
 
 
-inputCs : Maybe (Html.Attribute msg)
+inputCs :: Maybe (Html.Attribute msg)
 inputCs =
     Just (class "mdc-text-field__input")
 
 
-rowsAttr : Config msg -> Maybe (Html.Attribute msg)
+rowsAttr :: Config msg -> Maybe (Html.Attribute msg)
 rowsAttr (Config { rows }) =
     Maybe.map Html.Attributes.rows rows
 
 
-colsAttr : Config msg -> Maybe (Html.Attribute msg)
+colsAttr :: Config msg -> Maybe (Html.Attribute msg)
 colsAttr (Config { cols }) =
     Maybe.map Html.Attributes.cols cols
 
 
-ariaLabelAttr : Config msg -> Maybe (Html.Attribute msg)
+ariaLabelAttr :: Config msg -> Maybe (Html.Attribute msg)
 ariaLabelAttr (Config { fullwidth, placeholder, label }) =
     if fullwidth then
         Maybe.map (Html.Attributes.attribute "aria-label") label
@@ -485,12 +485,12 @@ ariaLabelAttr (Config { fullwidth, placeholder, label }) =
         Nothing
 
 
-disabledProp : Config msg -> Maybe (Html.Attribute msg)
+disabledProp :: Config msg -> Maybe (Html.Attribute msg)
 disabledProp (Config { disabled }) =
     Just (Html.Attributes.property "disabled" (Encode.bool disabled))
 
 
-labelElt : Config msg -> Html msg
+labelElt :: Config msg -> Html msg
 labelElt (Config { label, value }) =
     let
         floatingLabelCs =
@@ -516,7 +516,7 @@ labelElt (Config { label, value }) =
             text ""
 
 
-noLabelCs : Config msg -> Maybe (Html.Attribute msg)
+noLabelCs :: Config msg -> Maybe (Html.Attribute msg)
 noLabelCs (Config { label }) =
     if label == Nothing then
         Just (class "mdc-text-field--no-label")
@@ -525,7 +525,7 @@ noLabelCs (Config { label }) =
         Nothing
 
 
-notchedOutlineElt : Config msg -> Html msg
+notchedOutlineElt :: Config msg -> Html msg
 notchedOutlineElt config_ =
     Html.div [ class "mdc-notched-outline" ]
         [ notchedOutlineLeadingElt
@@ -534,16 +534,16 @@ notchedOutlineElt config_ =
         ]
 
 
-notchedOutlineLeadingElt : Html msg
+notchedOutlineLeadingElt :: Html msg
 notchedOutlineLeadingElt =
     Html.div [ class "mdc-notched-outline__leading" ] []
 
 
-notchedOutlineTrailingElt : Html msg
+notchedOutlineTrailingElt :: Html msg
 notchedOutlineTrailingElt =
     Html.div [ class "mdc-notched-outline__trailing" ] []
 
 
-notchedOutlineNotchElt : Config msg -> Html msg
+notchedOutlineNotchElt :: Config msg -> Html msg
 notchedOutlineNotchElt config_ =
     Html.div [ class "mdc-notched-outline__notch" ] [ labelElt config_ ]

@@ -89,16 +89,16 @@ import Json.Encode as Encode
 
 {-| Ripple configuration
 -}
-type Config msg
+data Config msg
     = Config
-        { color : Maybe Color
-        , additionalAttributes : List (Html.Attribute msg)
+        { color :: Maybe Color
+        , additionalAttributes :: List (Html.Attribute msg)
         }
 
 
 {-| Default ripple configuration
 -}
-config : Config msg
+config :: Config msg
 config =
     Config
         { color = Nothing
@@ -108,40 +108,40 @@ config =
 
 {-| Specify a ripple effect's color
 -}
-setColor : Maybe Color -> Config msg -> Config msg
+setColor :: Maybe Color -> Config msg -> Config msg
 setColor color (Config config_) =
     Config { config_ | color = color }
 
 
 {-| Specify additional attributes
 -}
-setAttributes : List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Ripple effect's color
 -}
-type Color
+data Color
     = Primary
     | Accent
 
 
 {-| Primary variant of a ripple effect's color
 -}
-primary : Color
+primary :: Color
 primary =
     Primary
 
 
 {-| Accent variant of a ripple effect's color
 -}
-accent : Color
+accent :: Color
 accent =
     Accent
 
 
-ripple : Bool -> Config msg -> Html msg
+ripple :: Bool -> Config msg -> Html msg
 ripple isUnbounded ((Config { additionalAttributes }) as config_) =
     Html.node "mdc-ripple"
         (List.filterMap identity
@@ -162,24 +162,24 @@ ripple isUnbounded ((Config { additionalAttributes }) as config_) =
 
 {-| Bounded ripple view function
 -}
-bounded : Config msg -> Html msg
+bounded :: Config msg -> Html msg
 bounded =
     ripple False
 
 
 {-| Unbounded ripple view function
 -}
-unbounded : Config msg -> Html msg
+unbounded :: Config msg -> Html msg
 unbounded =
     ripple True
 
 
-rippleSurface : Maybe (Html.Attribute msg)
+rippleSurface :: Maybe (Html.Attribute msg)
 rippleSurface =
     Just (class "mdc-ripple-surface")
 
 
-colorCs : Config msg -> Maybe (Html.Attribute msg)
+colorCs :: Config msg -> Maybe (Html.Attribute msg)
 colorCs (Config { color }) =
     case color of
         Just Primary ->
@@ -192,12 +192,12 @@ colorCs (Config { color }) =
             Nothing
 
 
-unboundedProp : Bool -> Maybe (Html.Attribute msg)
+unboundedProp :: Bool -> Maybe (Html.Attribute msg)
 unboundedProp isUnbounded =
     Just (Html.Attributes.property "unbounded" (Encode.bool isUnbounded))
 
 
-unboundedData : Bool -> Maybe (Html.Attribute msg)
+unboundedData :: Bool -> Maybe (Html.Attribute msg)
 unboundedData isUnbounded =
     if isUnbounded then
         Just (Html.Attributes.attribute "data-mdc-ripple-is-unbounded" "")

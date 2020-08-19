@@ -36,7 +36,7 @@ tap.
 
     import Material.IconButton as IconButton
 
-    type Msg
+    data Msg
         = Clicked
 
     main =
@@ -113,13 +113,13 @@ import Material.IconButton.Internal exposing (Config(..))
 
 {-| Icon button configuration
 -}
-type alias Config msg =
+data Config msg =
     Material.IconButton.Internal.Config msg
 
 
 {-| Default icon button configuration
 -}
-config : Config msg
+config :: Config msg
 config =
     Config
         { disabled = False
@@ -135,35 +135,35 @@ Disabled icon buttons cannot be interacted with and have no visual interaction
 effect.
 
 -}
-setDisabled : Bool -> Config msg -> Config msg
+setDisabled :: Bool -> Config msg -> Config msg
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 
 
 {-| Specify an icon button's HTML5 arial-label attribute
 -}
-setLabel : Maybe String -> Config msg -> Config msg
+setLabel :: Maybe String -> Config msg -> Config msg
 setLabel label (Config config_) =
     Config { config_ | label = label }
 
 
 {-| Specify additional attributes
 -}
-setAttributes : List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Specify a message when the user clicks on an icon button
 -}
-setOnClick : msg -> Config msg -> Config msg
+setOnClick :: msg -> Config msg -> Config msg
 setOnClick onClick (Config config_) =
     Config { config_ | onClick = Just onClick }
 
 
 {-| Icon button view function
 -}
-iconButton : Config msg -> String -> Html msg
+iconButton :: Config msg -> String -> Html msg
 iconButton ((Config { additionalAttributes }) as config_) iconName =
     Html.node "mdc-icon-button"
         (List.filterMap identity
@@ -179,7 +179,7 @@ iconButton ((Config { additionalAttributes }) as config_) iconName =
 
 {-| TODO
 -}
-custom : Config msg -> List (Html msg) -> Html msg
+custom :: Config msg -> List (Html msg) -> Html msg
 custom ((Config { additionalAttributes }) as config_) nodes =
     Html.node "mdc-icon-button"
         (List.filterMap identity
@@ -192,21 +192,21 @@ custom ((Config { additionalAttributes }) as config_) nodes =
         nodes
 
 
-rootCs : Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute msg)
 rootCs =
     Just (class "mdc-icon-button")
 
 
-materialIconsCs : Maybe (Html.Attribute msg)
+materialIconsCs :: Maybe (Html.Attribute msg)
 materialIconsCs =
     Just (class "material-icons")
 
 
-tabIndexProp : Maybe (Html.Attribute msg)
+tabIndexProp :: Maybe (Html.Attribute msg)
 tabIndexProp =
     Just (Html.Attributes.tabindex 0)
 
 
-clickHandler : Config msg -> Maybe (Html.Attribute msg)
+clickHandler :: Config msg -> Maybe (Html.Attribute msg)
 clickHandler (Config { onClick }) =
     Maybe.map Html.Events.onClick onClick

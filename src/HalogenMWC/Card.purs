@@ -209,16 +209,16 @@ import Material.IconButton.Internal
 
 {-| Configuration of a card
 -}
-type Config msg
+data Config msg
     = Config
-        { outlined : Bool
-        , additionalAttributes : List (Html.Attribute msg)
+        { outlined :: Bool
+        , additionalAttributes :: List (Html.Attribute msg)
         }
 
 
 {-| Default configuration of a card
 -}
-config : Config msg
+config :: Config msg
 config =
     Config
         { outlined = False
@@ -228,21 +228,21 @@ config =
 
 {-| Specify whether a card should have a visual outline
 -}
-setOutlined : Bool -> Config msg -> Config msg
+setOutlined :: Bool -> Config msg -> Config msg
 setOutlined outlined (Config config_) =
     Config { config_ | outlined = outlined }
 
 
 {-| Specify additional attributes
 -}
-setAttributes : List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Card view function
 -}
-card : Config msg -> Content msg -> Html msg
+card :: Config msg -> Content msg -> Html msg
 card ((Config { additionalAttributes }) as config_) content =
     Html.node "mdc-card"
         (List.filterMap identity
@@ -258,12 +258,12 @@ card ((Config { additionalAttributes }) as config_) content =
         )
 
 
-blocksElt : Content msg -> List (Html msg)
+blocksElt :: Content msg -> List (Html msg)
 blocksElt { blocks } =
     List.map (\(Block html) -> html) blocks
 
 
-actionsElt : Content msg -> List (Html msg)
+actionsElt :: Content msg -> List (Html msg)
 actionsElt content =
     case content.actions of
         Just (Actions { buttons, icons, fullBleed }) ->
@@ -300,12 +300,12 @@ actionsElt content =
             []
 
 
-rootCs : Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute msg)
 rootCs =
     Just (class "mdc-card")
 
 
-outlinedCs : Config msg -> Maybe (Html.Attribute msg)
+outlinedCs :: Config msg -> Maybe (Html.Attribute msg)
 outlinedCs (Config { outlined }) =
     if outlined then
         Just (class "mdc-card--outlined")
@@ -316,15 +316,15 @@ outlinedCs (Config { outlined }) =
 
 {-| The content of a card is comprised of _blocks_ and _actions_.
 -}
-type alias Content msg =
-    { blocks : List (Block msg)
-    , actions : Maybe (Actions msg)
+data Content msg =
+    { blocks :: List (Block msg)
+    , actions :: Maybe (Actions msg)
     }
 
 
 {-| A card's content block
 -}
-type Block msg
+data Block msg
     = Block (Html msg)
 
 
@@ -334,17 +334,17 @@ type Block msg
         Html.div [] [ text "Lorem ipsum…" ]
 
 -}
-block : Html msg -> Block msg
+block :: Html msg -> Block msg
 block =
     Block
 
 
-type Aspect
+data Aspect
     = Square
     | SixteenToNine
 
 
-mediaView : Maybe Aspect -> List (Html.Attribute msg) -> String -> Block msg
+mediaView :: Maybe Aspect -> List (Html.Attribute msg) -> String -> Block msg
 mediaView aspect additionalAttributes backgroundImage =
     Block <|
         Html.div
@@ -360,36 +360,36 @@ mediaView aspect additionalAttributes backgroundImage =
 
 {-| Card media block with a square aspect ratio
 -}
-squareMedia : List (Html.Attribute msg) -> String -> Block msg
+squareMedia :: List (Html.Attribute msg) -> String -> Block msg
 squareMedia additionalAttributes backgroundImage =
     mediaView (Just Square) additionalAttributes backgroundImage
 
 
 {-| Card media block with a 16:9 aspect ratio
 -}
-sixteenToNineMedia : List (Html.Attribute msg) -> String -> Block msg
+sixteenToNineMedia :: List (Html.Attribute msg) -> String -> Block msg
 sixteenToNineMedia additionalAttributes backgroundImage =
     mediaView (Just SixteenToNine) additionalAttributes backgroundImage
 
 
 {-| Card media block of unspecified aspect ratio
 -}
-media : List (Html.Attribute msg) -> String -> Block msg
+media :: List (Html.Attribute msg) -> String -> Block msg
 media additionalAttributes backgroundImage =
     mediaView Nothing additionalAttributes backgroundImage
 
 
-mediaCs : Maybe (Html.Attribute msg)
+mediaCs :: Maybe (Html.Attribute msg)
 mediaCs =
     Just (class "mdc-card__media")
 
 
-backgroundImageAttr : String -> Maybe (Html.Attribute msg)
+backgroundImageAttr :: String -> Maybe (Html.Attribute msg)
 backgroundImageAttr url =
     Just (style "background-image" ("url(\"" ++ url ++ "\")"))
 
 
-aspectCs : Maybe Aspect -> Maybe (Html.Attribute msg)
+aspectCs :: Maybe Aspect -> Maybe (Html.Attribute msg)
 aspectCs aspect =
     case aspect of
         Just Square ->
@@ -404,7 +404,7 @@ aspectCs aspect =
 
 {-| A card's primary action block
 -}
-primaryAction : List (Html.Attribute msg) -> List (Block msg) -> List (Block msg)
+primaryAction :: List (Html.Attribute msg) -> List (Block msg) -> List (Block msg)
 primaryAction additionalAttributes blocks =
     [ Block <|
         Html.div
@@ -417,23 +417,23 @@ primaryAction additionalAttributes blocks =
     ]
 
 
-primaryActionCs : Html.Attribute msg
+primaryActionCs :: Html.Attribute msg
 primaryActionCs =
     class "mdc-card__primary-action"
 
 
-tabIndexProp : Int -> Html.Attribute msg
+tabIndexProp :: Int -> Html.Attribute msg
 tabIndexProp tabIndex =
     Html.Attributes.property "tabIndex" (Encode.int tabIndex)
 
 
 {-| Card actions type
 -}
-type Actions msg
+data Actions msg
     = Actions
-        { buttons : List (Button msg)
-        , icons : List (Icon msg)
-        , fullBleed : Bool
+        { buttons :: List (Button msg)
+        , icons :: List (Icon msg)
+        , fullBleed :: Bool
         }
 
 
@@ -442,7 +442,7 @@ type Actions msg
 A card may contain as actions buttons as well as icons.
 
 -}
-actions : { buttons : List (Button msg), icons : List (Icon msg) } -> Actions msg
+actions :: { buttons :: List (Button msg), icons :: List (Icon msg) } -> Actions msg
 actions { buttons, icons } =
     Actions { buttons = buttons, icons = icons, fullBleed = False }
 
@@ -456,14 +456,14 @@ full width by using `cardFullBleedActions`.
         (Card.button Button.config "Visit")
 
 -}
-fullBleedActions : Button msg -> Actions msg
+fullBleedActions :: Button msg -> Actions msg
 fullBleedActions button_ =
     Actions { buttons = [ button_ ], icons = [], fullBleed = True }
 
 
 {-| Card action's button type
 -}
-type Button msg
+data Button msg
     = Button (Html msg)
 
 
@@ -472,7 +472,7 @@ type Button msg
     Card.button Button.config "Visit"
 
 -}
-button : Button.Config msg -> String -> Button msg
+button :: Button.Config msg -> String -> Button msg
 button (Material.Button.Internal.Config buttonConfig) label =
     Button <|
         Button.text
@@ -489,7 +489,7 @@ button (Material.Button.Internal.Config buttonConfig) label =
 
 {-| Card action's icon type
 -}
-type Icon msg
+data Icon msg
     = Icon (Html msg)
 
 
@@ -498,7 +498,7 @@ type Icon msg
     Card.icon IconButton.config "favorite"
 
 -}
-icon : IconButton.Config msg -> String -> Icon msg
+icon :: IconButton.Config msg -> String -> Icon msg
 icon (Material.IconButton.Internal.Config iconButtonConfig) iconName =
     Icon <|
         IconButton.iconButton

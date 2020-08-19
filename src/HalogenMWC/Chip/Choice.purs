@@ -34,11 +34,11 @@ options.
     import Material.Chip.Choice as ChoiceChip
     import Material.ChipSet.Choice as ChoiceChipSet
 
-    type Color
+    data Color
         = Red
         | Blue
 
-    type Msg
+    data Msg
         = ColorChanged Color
 
     main =
@@ -84,13 +84,13 @@ import Material.Chip.Choice.Internal exposing (Chip(..), Config(..))
 
 {-| Configuration of a choice chip
 -}
-type alias Config msg =
+data Config msg =
     Material.Chip.Choice.Internal.Config msg
 
 
 {-| Default configuration of a choice chip
 -}
-config : Config msg
+config :: Config msg
 config =
     Config
         { icon = Nothing
@@ -100,26 +100,26 @@ config =
 
 {-| Specify whether the chip displays an icon
 -}
-setIcon : Maybe String -> Config msg -> Config msg
+setIcon :: Maybe String -> Config msg -> Config msg
 setIcon icon (Config config_) =
     Config { config_ | icon = icon }
 
 
 {-| Specify additional attributes
 -}
-setAttributes : List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Choice chip type
 -}
-type alias Chip a msg =
+data Chip a msg =
     Material.Chip.Choice.Internal.Chip a msg
 
 
 {-| Choice chip view function
 -}
-chip : Config msg -> a -> Chip a msg
+chip :: Config msg -> a -> Chip a msg
 chip =
     Chip

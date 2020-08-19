@@ -27,7 +27,7 @@ into chips.
     import Material.Chip.Input as InputChip
     import Material.ChipSet.Input as InputChipSet
 
-    type Msg
+    data Msg
         = ChipSelected String
 
     main =
@@ -54,14 +54,14 @@ import Material.Chip.Input.Internal as Chip exposing (Chip(..))
 
 {-| Input chip set view function
 -}
-chipSet : List (Html.Attribute msg) -> List ( String, Chip msg ) -> Html msg
+chipSet :: List (Html.Attribute msg) -> List ( String, Chip msg ) -> Html msg
 chipSet additionalAttributes keyedChips =
     Html.Keyed.node "mdc-chip-set"
         (chipSetCs :: chipSetInputCs :: gridRole :: additionalAttributes)
         (List.map (Tuple.mapSecond chip) keyedChips)
 
 
-chip : Chip msg -> Html msg
+chip :: Chip msg -> Html msg
 chip (Chip ((Chip.Config { additionalAttributes }) as config_) label) =
     Html.div [ class "mdc-touch-target-wrapper" ]
         [ Html.node "mdc-chip"
@@ -83,72 +83,72 @@ chip (Chip ((Chip.Config { additionalAttributes }) as config_) label) =
         ]
 
 
-chipSetCs : Html.Attribute msg
+chipSetCs :: Html.Attribute msg
 chipSetCs =
     class "mdc-chip-set"
 
 
-chipSetInputCs : Html.Attribute msg
+chipSetInputCs :: Html.Attribute msg
 chipSetInputCs =
     class "mdc-chip-set--input"
 
 
-gridRole : Html.Attribute msg
+gridRole :: Html.Attribute msg
 gridRole =
     Html.Attributes.attribute "role" "grid"
 
 
-chipCs : Maybe (Html.Attribute msg)
+chipCs :: Maybe (Html.Attribute msg)
 chipCs =
     Just (class "mdc-chip")
 
 
-chipTextCs : Html.Attribute msg
+chipTextCs :: Html.Attribute msg
 chipTextCs =
     class "mdc-chip__text"
 
 
-chipTouchCs : Maybe (Html.Attribute msg)
+chipTouchCs :: Maybe (Html.Attribute msg)
 chipTouchCs =
     Just (class "mdc-chip--touch")
 
 
-chipPrimaryActionCs : Html.Attribute msg
+chipPrimaryActionCs :: Html.Attribute msg
 chipPrimaryActionCs =
     class "mdc-chip__primary-action"
 
 
-tabIndexProp : Int -> Html.Attribute msg
+tabIndexProp :: Int -> Html.Attribute msg
 tabIndexProp tabIndex =
     Html.Attributes.property "tabIndex" (Encode.int tabIndex)
 
 
-buttonRole : Html.Attribute msg
+buttonRole :: Html.Attribute msg
 buttonRole =
     Html.Attributes.attribute "role" "button"
 
 
-rowRole : Maybe (Html.Attribute msg)
+rowRole :: Maybe (Html.Attribute msg)
 rowRole =
     Just (Html.Attributes.attribute "role" "row")
 
 
-gridcellRole : Html.Attribute msg
+gridcellRole :: Html.Attribute msg
 gridcellRole =
     Html.Attributes.attribute "role" "gridcell"
 
 
-removalHandler : Chip.Config msg -> Maybe (Html.Attribute msg)
+removalHandler :: Chip.Config msg -> Maybe (Html.Attribute msg)
 removalHandler (Chip.Config { onDelete }) =
     Maybe.map (Html.Events.on "MDCChip:removal" << Decode.succeed) onDelete
 
 
-rippleElt : Maybe (Html msg)
+rippleElt :: Maybe (Html msg)
 rippleElt =
     Just (Html.div [ class "mdc-chip__ripple" ] [])
 
 
-leadingIconElt : Chip.Config msg -> Maybe (Html msg)
+leadingIconElt :: Chip.Config msg -> Maybe (Html msg)
 leadingIconElt (Chip.Config { leadingIcon }) =
     Maybe.map
         (\iconName ->
@@ -158,24 +158,24 @@ leadingIconElt (Chip.Config { leadingIcon }) =
         leadingIcon
 
 
-primaryActionElt : String -> Maybe (Html msg)
+primaryActionElt :: String -> Maybe (Html msg)
 primaryActionElt label =
     Just <|
         Html.span [ chipPrimaryActionCs, gridcellRole, tabIndexProp -1 ]
             (List.filterMap identity [ textElt label, touchElt ])
 
 
-textElt : String -> Maybe (Html msg)
+textElt :: String -> Maybe (Html msg)
 textElt label =
     Just (Html.span [ chipTextCs, buttonRole ] [ text label ])
 
 
-touchElt : Maybe (Html msg)
+touchElt :: Maybe (Html msg)
 touchElt =
     Just (Html.div [ class "mdc-chip__touch" ] [])
 
 
-trailingIconElt : Chip.Config msg -> Maybe (Html msg)
+trailingIconElt :: Chip.Config msg -> Maybe (Html msg)
 trailingIconElt (Chip.Config { trailingIcon, onDelete }) =
     if onDelete /= Nothing then
         Just <|

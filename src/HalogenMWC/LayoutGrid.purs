@@ -139,7 +139,7 @@ import Html.Attributes exposing (class, style)
 
 {-| Layout grid view function
 -}
-layoutGrid : List (Html.Attribute msg) -> List (Html msg) -> Html msg
+layoutGrid :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
 layoutGrid attributes nodes =
     Html.node "mdc-layout-grid"
         (class "mdc-layout-grid" :: style "display" "block" :: attributes)
@@ -148,7 +148,7 @@ layoutGrid attributes nodes =
 
 {-| Layout grid cell view function
 -}
-cell : List (Html.Attribute msg) -> List (Html msg) -> Html msg
+cell :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
 cell attributes nodes =
     Html.div (class "mdc-layout-grid__cell" :: attributes) nodes
 
@@ -159,313 +159,313 @@ It is mandatory to wrap `cell`s within `inner`. This has to do with nesting
 layout grids, but it is mandatory for flat layout grids as well.
 
 -}
-inner : List (Html.Attribute msg) -> List (Html msg) -> Html msg
+inner :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
 inner attributes nodes =
     Html.div (class "mdc-layout-grid__inner" :: attributes) nodes
 
 
 {-| Aligns a cell to the bottom
 -}
-alignBottom : Html.Attribute msg
+alignBottom :: Html.Attribute msg
 alignBottom =
     class "mdc-layout-grid__cell--align-bottom"
 
 
 {-| Aligns the layout grid to the left
 -}
-alignLeft : Html.Attribute msg
+alignLeft :: Html.Attribute msg
 alignLeft =
     class "mdc-layout-grid--align-left"
 
 
 {-| Aligns the layout grid to the right
 -}
-alignRight : Html.Attribute msg
+alignRight :: Html.Attribute msg
 alignRight =
     class "mdc-layout-grid--align-right"
 
 
 {-| Aligns a cell to the middle
 -}
-alignMiddle : Html.Attribute msg
+alignMiddle :: Html.Attribute msg
 alignMiddle =
     class "mdc-layout-grid__cell--align-middle"
 
 
 {-| Aligns a cell to the top
 -}
-alignTop : Html.Attribute msg
+alignTop :: Html.Attribute msg
 alignTop =
     class "mdc-layout-grid__cell--align-top"
 
 
-span : Int -> Html.Attribute msg
+span :: Int -> Html.Attribute msg
 span n =
     class ("mdc-layout-grid__cell--span-" ++ String.fromInt n)
 
 
-spanDesktop : Int -> Html.Attribute msg
+spanDesktop :: Int -> Html.Attribute msg
 spanDesktop n =
     class ("mdc-layout-grid__cell--span-" ++ String.fromInt n ++ "-desktop")
 
 
-spanTablet : Int -> Html.Attribute msg
+spanTablet :: Int -> Html.Attribute msg
 spanTablet n =
     class ("mdc-layout-grid__cell--span-" ++ String.fromInt n ++ "-tablet")
 
 
-spanPhone : Int -> Html.Attribute msg
+spanPhone :: Int -> Html.Attribute msg
 spanPhone n =
     class ("mdc-layout-grid__cell--span-" ++ String.fromInt n ++ "-phone")
 
 
 {-| Change a cell to span one column
 -}
-span1 : Html.Attribute msg
+span1 :: Html.Attribute msg
 span1 =
     span 1
 
 
 {-| Change a cell to span two columns
 -}
-span2 : Html.Attribute msg
+span2 :: Html.Attribute msg
 span2 =
     span 2
 
 
 {-| Change a cell to span three columns
 -}
-span3 : Html.Attribute msg
+span3 :: Html.Attribute msg
 span3 =
     span 3
 
 
 {-| Change a cell to span four columns
 -}
-span4 : Html.Attribute msg
+span4 :: Html.Attribute msg
 span4 =
     span 4
 
 
 {-| Change a cell to span five columns
 -}
-span5 : Html.Attribute msg
+span5 :: Html.Attribute msg
 span5 =
     span 5
 
 
 {-| Change a cell to span six columns
 -}
-span6 : Html.Attribute msg
+span6 :: Html.Attribute msg
 span6 =
     span 6
 
 
 {-| Change a cell to span seven columns
 -}
-span7 : Html.Attribute msg
+span7 :: Html.Attribute msg
 span7 =
     span 7
 
 
 {-| Change a cell to span eight columns
 -}
-span8 : Html.Attribute msg
+span8 :: Html.Attribute msg
 span8 =
     span 8
 
 
 {-| Change a cell to span nine columns
 -}
-span9 : Html.Attribute msg
+span9 :: Html.Attribute msg
 span9 =
     span 9
 
 
 {-| Change a cell to span ten columns
 -}
-span10 : Html.Attribute msg
+span10 :: Html.Attribute msg
 span10 =
     span 10
 
 
 {-| Change a cell to span eleven columns
 -}
-span11 : Html.Attribute msg
+span11 :: Html.Attribute msg
 span11 =
     span 11
 
 
 {-| Change a cell to span twelve columns
 -}
-span12 : Html.Attribute msg
+span12 :: Html.Attribute msg
 span12 =
     span 12
 
 
 {-| Change a cell to span one column (desktop only)
 -}
-span1Desktop : Html.Attribute msg
+span1Desktop :: Html.Attribute msg
 span1Desktop =
     spanDesktop 1
 
 
 {-| Change a cell to span two columns (desktop only)
 -}
-span2Desktop : Html.Attribute msg
+span2Desktop :: Html.Attribute msg
 span2Desktop =
     spanDesktop 2
 
 
 {-| Change a cell to span three columns (desktop only)
 -}
-span3Desktop : Html.Attribute msg
+span3Desktop :: Html.Attribute msg
 span3Desktop =
     spanDesktop 3
 
 
 {-| Change a cell to span four columns (desktop only)
 -}
-span4Desktop : Html.Attribute msg
+span4Desktop :: Html.Attribute msg
 span4Desktop =
     spanDesktop 4
 
 
 {-| Change a cell to span five columns (desktop only)
 -}
-span5Desktop : Html.Attribute msg
+span5Desktop :: Html.Attribute msg
 span5Desktop =
     spanDesktop 5
 
 
 {-| Change a cell to span six columns (desktop only)
 -}
-span6Desktop : Html.Attribute msg
+span6Desktop :: Html.Attribute msg
 span6Desktop =
     spanDesktop 6
 
 
 {-| Change a cell to span seven columns (desktop only)
 -}
-span7Desktop : Html.Attribute msg
+span7Desktop :: Html.Attribute msg
 span7Desktop =
     spanDesktop 7
 
 
 {-| Change a cell to span eight columns (desktop only)
 -}
-span8Desktop : Html.Attribute msg
+span8Desktop :: Html.Attribute msg
 span8Desktop =
     spanDesktop 8
 
 
 {-| Change a cell to span nine columns (desktop only)
 -}
-span9Desktop : Html.Attribute msg
+span9Desktop :: Html.Attribute msg
 span9Desktop =
     spanDesktop 9
 
 
 {-| Change a cell to span ten columns (desktop only)
 -}
-span10Desktop : Html.Attribute msg
+span10Desktop :: Html.Attribute msg
 span10Desktop =
     spanDesktop 10
 
 
 {-| Change a cell to span eleven columns (desktop only)
 -}
-span11Desktop : Html.Attribute msg
+span11Desktop :: Html.Attribute msg
 span11Desktop =
     spanDesktop 11
 
 
 {-| Change a cell to span twelve columns (desktop only)
 -}
-span12Desktop : Html.Attribute msg
+span12Desktop :: Html.Attribute msg
 span12Desktop =
     spanDesktop 12
 
 
 {-| Change a cell to span one column (tablet only)
 -}
-span1Tablet : Html.Attribute msg
+span1Tablet :: Html.Attribute msg
 span1Tablet =
     spanTablet 1
 
 
 {-| Change a cell to span two columns (tablet only)
 -}
-span2Tablet : Html.Attribute msg
+span2Tablet :: Html.Attribute msg
 span2Tablet =
     spanTablet 2
 
 
 {-| Change a cell to span three columns (tablet only)
 -}
-span3Tablet : Html.Attribute msg
+span3Tablet :: Html.Attribute msg
 span3Tablet =
     spanTablet 3
 
 
 {-| Change a cell to span four columns (tablet only)
 -}
-span4Tablet : Html.Attribute msg
+span4Tablet :: Html.Attribute msg
 span4Tablet =
     spanTablet 4
 
 
 {-| Change a cell to span five columns (tablet only)
 -}
-span5Tablet : Html.Attribute msg
+span5Tablet :: Html.Attribute msg
 span5Tablet =
     spanTablet 5
 
 
 {-| Change a cell to span six columns (tablet only)
 -}
-span6Tablet : Html.Attribute msg
+span6Tablet :: Html.Attribute msg
 span6Tablet =
     spanTablet 6
 
 
 {-| Change a cell to span seven columns (tablet only)
 -}
-span7Tablet : Html.Attribute msg
+span7Tablet :: Html.Attribute msg
 span7Tablet =
     spanTablet 7
 
 
 {-| Change a cell to span eight columns (tablet only)
 -}
-span8Tablet : Html.Attribute msg
+span8Tablet :: Html.Attribute msg
 span8Tablet =
     spanTablet 8
 
 
 {-| Change a cell to span one column (phone only)
 -}
-span1Phone : Html.Attribute msg
+span1Phone :: Html.Attribute msg
 span1Phone =
     spanPhone 1
 
 
 {-| Change a cell to span two columns (phone only)
 -}
-span2Phone : Html.Attribute msg
+span2Phone :: Html.Attribute msg
 span2Phone =
     spanPhone 2
 
 
 {-| Change a cell to span three columns (phone only)
 -}
-span3Phone : Html.Attribute msg
+span3Phone :: Html.Attribute msg
 span3Phone =
     spanPhone 3
 
 
 {-| Change a cell to span four columns (phone only)
 -}
-span4Phone : Html.Attribute msg
+span4Phone :: Html.Attribute msg
 span4Phone =
     spanPhone 4

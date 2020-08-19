@@ -187,15 +187,15 @@ import Html.Attributes exposing (class)
 
 {-| Configuration of a top app bar
 -}
-type Config msg
+data Config msg
     = Config
-        { dense : Bool
-        , fixed : Bool
-        , additionalAttributes : List (Html.Attribute msg)
+        { dense :: Bool
+        , fixed :: Bool
+        , additionalAttributes :: List (Html.Attribute msg)
         }
 
 
-type Variant
+data Variant
     = Regular
     | Short
     | ShortCollapsed
@@ -204,7 +204,7 @@ type Variant
 
 {-| Default configuration of a top app bar
 -}
-config : Config msg
+config :: Config msg
 config =
     Config
         { dense = False
@@ -218,7 +218,7 @@ config =
 A dense top app bar is more compact, featuring smaller than usual margins.
 
 -}
-setDense : Bool -> Config msg -> Config msg
+setDense :: Bool -> Config msg -> Config msg
 setDense dense (Config config_) =
     Config { config_ | dense = dense }
 
@@ -228,19 +228,19 @@ setDense dense (Config config_) =
 A fixed top app bar does not scroll away when the user is scrolling the page.
 
 -}
-setFixed : Bool -> Config msg -> Config msg
+setFixed :: Bool -> Config msg -> Config msg
 setFixed fixed (Config config_) =
     Config { config_ | fixed = fixed }
 
 
 {-| Specify additional attributes
 -}
-setAttributes : List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-genericTopAppBar : Variant -> Config msg -> List (Html msg) -> Html msg
+genericTopAppBar :: Variant -> Config msg -> List (Html msg) -> Html msg
 genericTopAppBar variant ((Config { additionalAttributes }) as config_) nodes =
     Html.node "mdc-top-app-bar"
         (List.filterMap identity
@@ -256,28 +256,28 @@ genericTopAppBar variant ((Config { additionalAttributes }) as config_) nodes =
 
 {-| Regular top app bar view function
 -}
-regular : Config msg -> List (Html msg) -> Html msg
+regular :: Config msg -> List (Html msg) -> Html msg
 regular config_ nodes =
     genericTopAppBar Regular config_ nodes
 
 
 {-| Short top app bar view function
 -}
-short : Config msg -> List (Html msg) -> Html msg
+short :: Config msg -> List (Html msg) -> Html msg
 short config_ nodes =
     genericTopAppBar Short config_ nodes
 
 
 {-| Short always closed top app bar view function
 -}
-shortCollapsed : Config msg -> List (Html msg) -> Html msg
+shortCollapsed :: Config msg -> List (Html msg) -> Html msg
 shortCollapsed config_ nodes =
     genericTopAppBar ShortCollapsed config_ nodes
 
 
 {-| Prominent top app bar view function
 -}
-prominent : Config msg -> List (Html msg) -> Html msg
+prominent :: Config msg -> List (Html msg) -> Html msg
 prominent config_ nodes =
     genericTopAppBar Prominent config_ nodes
 
@@ -285,7 +285,7 @@ prominent config_ nodes =
 {-| A row is the first child of a top app bar. It contains the top app bar's
 `section`s.
 -}
-row : List (Html.Attribute msg) -> List (Html msg) -> Html msg
+row :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
 row attributes nodes =
     Html.section ([ class "mdc-top-app-bar__row" ] ++ attributes) nodes
 
@@ -294,21 +294,21 @@ row attributes nodes =
 end-aligned. Usually, the first section is start-aligned and contains the top
 app bar's navigation icon and title.
 -}
-section : List (Html.Attribute msg) -> List (Html msg) -> Html msg
+section :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
 section attributes nodes =
     Html.section ([ class "mdc-top-app-bar__section" ] ++ attributes) nodes
 
 
 {-| Start-align a top app bar's `section`
 -}
-alignStart : Html.Attribute msg
+alignStart :: Html.Attribute msg
 alignStart =
     class "mdc-top-app-bar__section--align-start"
 
 
 {-| End-align a top app bar's `section`
 -}
-alignEnd : Html.Attribute msg
+alignEnd :: Html.Attribute msg
 alignEnd =
     class "mdc-top-app-bar__section--align-end"
 
@@ -316,14 +316,14 @@ alignEnd =
 {-| Apply this attribute to an icon button to mark it as a top app bar's
 navigation icon
 -}
-navigationIcon : Html.Attribute msg
+navigationIcon :: Html.Attribute msg
 navigationIcon =
     class "mdc-top-app-bar__navigation-icon"
 
 
 {-| Apply this attribute to a element to mark it as the top app bar's title
 -}
-title : Html.Attribute msg
+title :: Html.Attribute msg
 title =
     class "mdc-top-app-bar__title"
 
@@ -331,17 +331,17 @@ title =
 {-| Apply this attribute to a icon button to mark it as a top app bar's action
 item
 -}
-actionItem : Html.Attribute msg
+actionItem :: Html.Attribute msg
 actionItem =
     class "mdc-top-app-bar__action-item"
 
 
-rootCs : Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute msg)
 rootCs =
     Just (class "mdc-top-app-bar")
 
 
-variantCs : Variant -> Maybe (Html.Attribute msg)
+variantCs :: Variant -> Maybe (Html.Attribute msg)
 variantCs variant =
     case variant of
         Regular ->
@@ -357,7 +357,7 @@ variantCs variant =
             Just (class "mdc-top-app-bar--prominent")
 
 
-denseCs : Config msg -> Maybe (Html.Attribute msg)
+denseCs :: Config msg -> Maybe (Html.Attribute msg)
 denseCs (Config { dense }) =
     if dense then
         Just (class "mdc-top-app-bar--dense")
@@ -366,7 +366,7 @@ denseCs (Config { dense }) =
         Nothing
 
 
-fixedCs : Config msg -> Maybe (Html.Attribute msg)
+fixedCs :: Config msg -> Maybe (Html.Attribute msg)
 fixedCs (Config { fixed }) =
     if fixed then
         Just (class "mdc-top-app-bar--fixed")
@@ -381,7 +381,7 @@ Apply this to the page's content so that a fixed top app bar does not overlay
 the content.
 
 -}
-fixedAdjust : Html.Attribute msg
+fixedAdjust :: Html.Attribute msg
 fixedAdjust =
     class "mdc-top-app-bar--fixed-adjust"
 
@@ -392,7 +392,7 @@ Apply this to the page's content so that a fixed top app bar does not overlay
 the content.
 
 -}
-denseFixedAdjust : Html.Attribute msg
+denseFixedAdjust :: Html.Attribute msg
 denseFixedAdjust =
     class "mdc-top-app-bar--dense-fixed-adjust"
 
@@ -403,7 +403,7 @@ Apply this to the page's content so that a fixed top app bar does not overlay
 the content.
 
 -}
-shortFixedAdjust : Html.Attribute msg
+shortFixedAdjust :: Html.Attribute msg
 shortFixedAdjust =
     class "mdc-top-app-bar--short-fixed-adjust"
 
@@ -414,7 +414,7 @@ Apply this to the page's content so that a fixed top app bar does not overlay
 the content.
 
 -}
-prominentFixedAdjust : Html.Attribute msg
+prominentFixedAdjust :: Html.Attribute msg
 prominentFixedAdjust =
     class "mdc-top-app-bar--prominent-fixed-adjust"
 
@@ -425,6 +425,6 @@ Apply this to the page's content so that a fixed top app bar does not overlay
 the content.
 
 -}
-denseProminentFixedAdjust : Html.Attribute msg
+denseProminentFixedAdjust :: Html.Attribute msg
 denseProminentFixedAdjust =
     class "mdc-top-app-bar--dense-prominent-fixed-adjust"

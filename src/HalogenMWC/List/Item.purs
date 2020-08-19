@@ -195,13 +195,13 @@ import Material.List.Item.Internal exposing (Config(..), ListItem(..), Selection
 
 {-| Configuration of a list item
 -}
-type alias Config msg =
+data Config msg =
     Material.List.Item.Internal.Config msg
 
 
 {-| Default configuration of a list item
 -}
-config : Config msg
+config :: Config msg
 config =
     Config
         { disabled = False
@@ -220,7 +220,7 @@ Disabled list items cannot be interacted with and have not visual interaction
 effect.
 
 -}
-setDisabled : Bool -> Config msg -> Config msg
+setDisabled :: Bool -> Config msg -> Config msg
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 
@@ -230,20 +230,20 @@ setDisabled disabled (Config config_) =
 A list item may be either in selected or in activated selection state.
 
 -}
-type alias Selection =
+data Selection =
     Material.List.Item.Internal.Selection
 
 
 {-| Selected selection state
 -}
-selected : Selection
+selected :: Selection
 selected =
     Selected
 
 
 {-| Activated selection state
 -}
-activated : Selection
+activated :: Selection
 activated =
     Activated
 
@@ -259,7 +259,7 @@ As a rule of thumb, a navigation list item should be activated, while any other
 list item should be selected.
 
 -}
-setSelected : Maybe Selection -> Config msg -> Config msg
+setSelected :: Maybe Selection -> Config msg -> Config msg
 setSelected selection (Config config_) =
     Config { config_ | selection = selection }
 
@@ -269,7 +269,7 @@ setSelected selection (Config config_) =
 Link list items essentially behave like a HTML5 anchor element.
 
 -}
-setHref : Maybe String -> Config msg -> Config msg
+setHref :: Maybe String -> Config msg -> Config msg
 setHref href (Config config_) =
     Config { config_ | href = href }
 
@@ -279,14 +279,14 @@ setHref href (Config config_) =
 Note that non-link list items ignore this configuration option.
 
 -}
-setTarget : Maybe String -> Config msg -> Config msg
+setTarget :: Maybe String -> Config msg -> Config msg
 setTarget target (Config config_) =
     Config { config_ | target = target }
 
 
 {-| Specify additional attributes
 -}
-setAttributes : List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config
         { config_ | additionalAttributes = additionalAttributes }
@@ -294,7 +294,7 @@ setAttributes additionalAttributes (Config config_) =
 
 {-| Specify a message when the user interacts with the list item
 -}
-setOnClick : msg -> Config msg -> Config msg
+setOnClick :: msg -> Config msg -> Config msg
 setOnClick onClick (Config config_) =
     Config
         { config_ | onClick = Just onClick }
@@ -305,18 +305,18 @@ setOnClick onClick (Config config_) =
 List items can only be rendered within a [list container](Material-List).
 
 -}
-type alias ListItem msg =
+data ListItem msg =
     Material.List.Item.Internal.ListItem msg
 
 
 {-| List item constructor
 -}
-listItem : Config msg -> List (Html msg) -> ListItem msg
+listItem :: Config msg -> List (Html msg) -> ListItem msg
 listItem (Config ({ additionalAttributes, href } as config_)) nodes =
     ListItem (Config { config_ | node = listItemView (Config config_) nodes })
 
 
-listItemView : Config msg -> List (Html msg) -> Html msg
+listItemView :: Config msg -> List (Html msg) -> Html msg
 listItemView ((Config { additionalAttributes, href }) as config_) nodes =
     (\attributes ->
         if href /= Nothing then
@@ -338,12 +338,12 @@ listItemView ((Config { additionalAttributes, href }) as config_) nodes =
         )
 
 
-listItemCs : Maybe (Html.Attribute msg)
+listItemCs :: Maybe (Html.Attribute msg)
 listItemCs =
     Just (class "mdc-list-item")
 
 
-disabledCs : Config msg -> Maybe (Html.Attribute msg)
+disabledCs :: Config msg -> Maybe (Html.Attribute msg)
 disabledCs (Config { disabled }) =
     if disabled then
         Just (class "mdc-list-item--disabled")
@@ -352,7 +352,7 @@ disabledCs (Config { disabled }) =
         Nothing
 
 
-selectedCs : Config msg -> Maybe (Html.Attribute msg)
+selectedCs :: Config msg -> Maybe (Html.Attribute msg)
 selectedCs (Config { selection }) =
     if selection == Just Selected then
         Just (class "mdc-list-item--selected")
@@ -361,7 +361,7 @@ selectedCs (Config { selection }) =
         Nothing
 
 
-activatedCs : Config msg -> Maybe (Html.Attribute msg)
+activatedCs :: Config msg -> Maybe (Html.Attribute msg)
 activatedCs (Config { selection }) =
     if selection == Just Activated then
         Just (class "mdc-list-item--activated")
@@ -370,7 +370,7 @@ activatedCs (Config { selection }) =
         Nothing
 
 
-ariaSelectedAttr : Config msg -> Maybe (Html.Attribute msg)
+ariaSelectedAttr :: Config msg -> Maybe (Html.Attribute msg)
 ariaSelectedAttr (Config { selection }) =
     if selection /= Nothing then
         Just (Html.Attributes.attribute "aria-selected" "true")
@@ -379,12 +379,12 @@ ariaSelectedAttr (Config { selection }) =
         Nothing
 
 
-hrefAttr : Config msg -> Maybe (Html.Attribute msg)
+hrefAttr :: Config msg -> Maybe (Html.Attribute msg)
 hrefAttr (Config { href }) =
     Maybe.map Html.Attributes.href href
 
 
-targetAttr : Config msg -> Maybe (Html.Attribute msg)
+targetAttr :: Config msg -> Maybe (Html.Attribute msg)
 targetAttr (Config { href, target }) =
     if href /= Nothing then
         Maybe.map Html.Attributes.target target
@@ -398,8 +398,8 @@ targetAttr (Config { href, target }) =
 text :
     List (Html.Attribute msg)
     ->
-        { primary : List (Html msg)
-        , secondary : List (Html msg)
+        { primary :: List (Html msg)
+        , secondary :: List (Html msg)
         }
     -> Html msg
 text additionalAttributes { primary, secondary } =
@@ -409,25 +409,25 @@ text additionalAttributes { primary, secondary } =
         ]
 
 
-primaryText : List (Html.Attribute msg) -> List (Html msg) -> Html msg
+primaryText :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
 primaryText additionalAttributes nodes =
     Html.div (class "mdc-list-item__primary-text" :: additionalAttributes) nodes
 
 
-secondaryText : List (Html.Attribute msg) -> List (Html msg) -> Html msg
+secondaryText :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
 secondaryText additionalAttributes nodes =
     Html.div (class "mdc-list-item__secondary-text" :: additionalAttributes) nodes
 
 
 {-| A list item's graphic tile
 -}
-graphic : List (Html.Attribute msg) -> List (Html msg) -> Html msg
+graphic :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
 graphic additionalAttributes nodes =
     Html.div (class "mdc-list-item__graphic" :: additionalAttributes) nodes
 
 
 {-| A list item's meta tile
 -}
-meta : List (Html.Attribute msg) -> List (Html msg) -> Html msg
+meta :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
 meta additionalAttributes nodes =
     Html.div (class "mdc-list-item__meta" :: additionalAttributes) nodes

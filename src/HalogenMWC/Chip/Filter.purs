@@ -37,7 +37,7 @@ icon. If the chip already has a leading icon, the checkmark replaces it.
     import Material.Chip.Filter as FilterChip
     import Material.ChipSet.Filter as FilterChipSet
 
-    type Msg
+    data Msg
         = ChipClicked String
 
     main =
@@ -83,13 +83,13 @@ import Material.Chip.Filter.Internal exposing (Chip(..), Config(..))
 
 {-| Configuration of a filter chip
 -}
-type alias Config msg =
+data Config msg =
     Material.Chip.Filter.Internal.Config msg
 
 
 {-| Default configuration of a filter chip
 -}
-config : Config msg
+config :: Config msg
 config =
     Config
         { selected = False
@@ -101,40 +101,40 @@ config =
 
 {-| Specify whether a filter chip is selected
 -}
-setSelected : Bool -> Config msg -> Config msg
+setSelected :: Bool -> Config msg -> Config msg
 setSelected selected (Config config_) =
     Config { config_ | selected = selected }
 
 
 {-| Specify whether a chip displays an icon
 -}
-setIcon : Maybe String -> Config msg -> Config msg
+setIcon :: Maybe String -> Config msg -> Config msg
 setIcon icon (Config config_) =
     Config { config_ | icon = icon }
 
 
 {-| Specify additional attributes
 -}
-setAttributes : List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Specify a message when the user clicks on a chip
 -}
-setOnChange : msg -> Config msg -> Config msg
+setOnChange :: msg -> Config msg -> Config msg
 setOnChange onChange (Config config_) =
     Config { config_ | onChange = Just onChange }
 
 
 {-| Filter chip type
 -}
-type alias Chip msg =
+data Chip msg =
     Material.Chip.Filter.Internal.Chip msg
 
 
 {-| Filter chip view function
 -}
-chip : Config msg -> String -> Chip msg
+chip :: Config msg -> String -> Chip msg
 chip =
     Chip

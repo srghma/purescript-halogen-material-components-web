@@ -45,7 +45,7 @@ their page layout, for instance by setting a fixed position via CSS.
     import Html.Attributes exposing (style)
     import Material.Fab.Extended as ExtendedFab
 
-    type Msg
+    data Msg
         = Clicked
 
     main =
@@ -139,19 +139,19 @@ import Json.Encode as Encode
 
 {-| Extended floating action button configuration
 -}
-type Config msg
+data Config msg
     = Config
-        { icon : Maybe String
-        , trailingIcon : Bool
-        , exited : Bool
-        , onClick : Maybe msg
-        , additionalAttributes : List (Html.Attribute msg)
+        { icon :: Maybe String
+        , trailingIcon :: Bool
+        , exited :: Bool
+        , onClick :: Maybe msg
+        , additionalAttributes :: List (Html.Attribute msg)
         }
 
 
 {-| Default extended floating action button configuration
 -}
-config : Config msg
+config :: Config msg
 config =
     Config
         { icon = Nothing
@@ -164,7 +164,7 @@ config =
 
 {-| Specify whether a floating action button displays an icon
 -}
-setIcon : Maybe String -> Config msg -> Config msg
+setIcon :: Maybe String -> Config msg -> Config msg
 setIcon icon (Config config_) =
     Config { config_ | icon = icon }
 
@@ -174,35 +174,35 @@ setIcon icon (Config config_) =
 Trailing icons are displyed after the label rather than before.
 
 -}
-setTrailingIcon : Bool -> Config msg -> Config msg
+setTrailingIcon :: Bool -> Config msg -> Config msg
 setTrailingIcon trailingIcon (Config config_) =
     Config { config_ | trailingIcon = trailingIcon }
 
 
 {-| Specify whether a floating action button transitions off the screen
 -}
-setExited : Bool -> Config msg -> Config msg
+setExited :: Bool -> Config msg -> Config msg
 setExited exited (Config config_) =
     Config { config_ | exited = exited }
 
 
 {-| Specify additional attributes
 -}
-setAttributes : List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Specify a message when the user clicks the floating action button
 -}
-setOnClick : msg -> Config msg -> Config msg
+setOnClick :: msg -> Config msg -> Config msg
 setOnClick onClick (Config config_) =
     Config { config_ | onClick = Just onClick }
 
 
 {-| Extended floating action button view function
 -}
-fab : Config msg -> String -> Html msg
+fab :: Config msg -> String -> Html msg
 fab ((Config { additionalAttributes }) as config_) label =
     Html.node "mdc-fab"
         (List.filterMap identity
@@ -223,22 +223,22 @@ fab ((Config { additionalAttributes }) as config_) label =
         )
 
 
-tabIndexProp : Int -> Maybe (Html.Attribute msg)
+tabIndexProp :: Int -> Maybe (Html.Attribute msg)
 tabIndexProp tabIndex =
     Just (Html.Attributes.property "tabIndex" (Encode.int tabIndex))
 
 
-extendedFabCs : Maybe (Html.Attribute msg)
+extendedFabCs :: Maybe (Html.Attribute msg)
 extendedFabCs =
     Just (class "mdc-fab mdc-fab--extended")
 
 
-rippleElt : Maybe (Html msg)
+rippleElt :: Maybe (Html msg)
 rippleElt =
     Just (Html.div [ class "mdc-fab__ripple" ] [])
 
 
-leadingIconElt : Config msg -> Maybe (Html msg)
+leadingIconElt :: Config msg -> Maybe (Html msg)
 leadingIconElt (Config { icon, trailingIcon }) =
     case ( icon, trailingIcon ) of
         ( Just iconName, False ) ->
@@ -251,12 +251,12 @@ leadingIconElt (Config { icon, trailingIcon }) =
             Nothing
 
 
-labelElt : String -> Maybe (Html msg)
+labelElt :: String -> Maybe (Html msg)
 labelElt label =
     Just (Html.span [ class "mdc-fab__label" ] [ text label ])
 
 
-trailingIconElt : Config msg -> Maybe (Html msg)
+trailingIconElt :: Config msg -> Maybe (Html msg)
 trailingIconElt (Config { icon, trailingIcon }) =
     case ( icon, trailingIcon ) of
         ( Just iconName, True ) ->
@@ -269,12 +269,12 @@ trailingIconElt (Config { icon, trailingIcon }) =
             Nothing
 
 
-rootCs : Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute msg)
 rootCs =
     Just (class "mdc-fab")
 
 
-exitedCs : Config msg -> Maybe (Html.Attribute msg)
+exitedCs :: Config msg -> Maybe (Html.Attribute msg)
 exitedCs (Config { exited }) =
     if exited then
         Just (class "mdc-fab--exited")
@@ -283,6 +283,6 @@ exitedCs (Config { exited }) =
         Nothing
 
 
-clickHandler : Config msg -> Maybe (Html.Attribute msg)
+clickHandler :: Config msg -> Maybe (Html.Attribute msg)
 clickHandler (Config { onClick }) =
     Maybe.map Html.Events.onClick onClick

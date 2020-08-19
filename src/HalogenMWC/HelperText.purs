@@ -93,16 +93,16 @@ import Html.Attributes exposing (class)
 
 {-| Configuration of a helper text
 -}
-type Config msg
+data Config msg
     = Config
-        { persistent : Bool
-        , additionalAttributes : List (Html.Attribute msg)
+        { persistent :: Bool
+        , additionalAttributes :: List (Html.Attribute msg)
         }
 
 
 {-| Default configuration of a helper text
 -}
-config : Config msg
+config :: Config msg
 config =
     Config
         { persistent = False
@@ -116,14 +116,14 @@ Persistent helper texts always display regardless of whether the input has
 focus or not.
 
 -}
-setPersistent : Bool -> Config msg -> Config msg
+setPersistent :: Bool -> Config msg -> Config msg
 setPersistent persistent (Config config_) =
     Config { config_ | persistent = persistent }
 
 
 {-| Specify additional attributes
 -}
-setAttributes : List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
@@ -133,7 +133,7 @@ setAttributes additionalAttributes (Config config_) =
 The helper text is expected to be a direct child of the helper line.
 
 -}
-helperText : Config msg -> String -> Html msg
+helperText :: Config msg -> String -> Html msg
 helperText ((Config { additionalAttributes }) as config_) string =
     Html.div
         (List.filterMap identity
@@ -152,22 +152,22 @@ The helper line is expected to be the wrapping element of the helper text. It
 is expected to be a direct sibling of the text field that it belongs to.
 
 -}
-helperLine : List (Html.Attribute msg) -> List (Html msg) -> Html msg
+helperLine :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
 helperLine additionalAttributes nodes =
     Html.div (helperLineCs :: additionalAttributes) nodes
 
 
-helperTextCs : Maybe (Html.Attribute msg)
+helperTextCs :: Maybe (Html.Attribute msg)
 helperTextCs =
     Just (class "mdc-text-field-helper-text")
 
 
-helperLineCs : Html.Attribute msg
+helperLineCs :: Html.Attribute msg
 helperLineCs =
     class "mdc-text-field-helper-line"
 
 
-persistentCs : Config msg -> Maybe (Html.Attribute msg)
+persistentCs :: Config msg -> Maybe (Html.Attribute msg)
 persistentCs (Config config_) =
     if config_.persistent then
         Just (class "mdc-text-field-helper-text--persistent")
@@ -176,18 +176,18 @@ persistentCs (Config config_) =
         Nothing
 
 
-ariaHiddenAttr : Maybe (Html.Attribute msg)
+ariaHiddenAttr :: Maybe (Html.Attribute msg)
 ariaHiddenAttr =
     Just (Html.Attributes.attribute "aria-hidden" "true")
 
 
 {-| Character counter view function
 -}
-characterCounter : List (Html.Attribute msg) -> Html msg
+characterCounter :: List (Html.Attribute msg) -> Html msg
 characterCounter additionalAttributes =
     Html.div (characterCounterCs :: additionalAttributes) []
 
 
-characterCounterCs : Html.Attribute msg
+characterCounterCs :: Html.Attribute msg
 characterCounterCs =
     class "mdc-text-field-character-counter"

@@ -110,17 +110,17 @@ import Material.ImageList.Item.Internal as ImageListItem
 
 {-| Configuration of an image list
 -}
-type Config msg
+data Config msg
     = Config
-        { masonry : Bool
-        , withTextProtection : Bool
-        , additionalAttributes : List (Html.Attribute msg)
+        { masonry :: Bool
+        , withTextProtection :: Bool
+        , additionalAttributes :: List (Html.Attribute msg)
         }
 
 
 {-| Default configuration of an image list
 -}
-config : Config msg
+config :: Config msg
 config =
     Config
         { masonry = False
@@ -135,7 +135,7 @@ The masonry image list variant presents images vertically arranged into several
 columns. In this layout, images may be any combination of aspect ratios.
 
 -}
-setMasonry : Bool -> Config msg -> Config msg
+setMasonry :: Bool -> Config msg -> Config msg
 setMasonry masonry (Config config_) =
     Config { config_ | masonry = masonry }
 
@@ -146,21 +146,21 @@ of the image
 By default, image list item's labels display below the image.
 
 -}
-setWithTextProtection : Bool -> Config msg -> Config msg
+setWithTextProtection :: Bool -> Config msg -> Config msg
 setWithTextProtection withTextProtection (Config config_) =
     Config { config_ | withTextProtection = withTextProtection }
 
 
 {-| Specify additional attributes
 -}
-setAttributes : List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Image list view function
 -}
-imageList : Config msg -> List (ImageListItem msg) -> Html msg
+imageList :: Config msg -> List (ImageListItem msg) -> Html msg
 imageList ((Config { additionalAttributes }) as config_) listItems =
     Html.node "mdc-image-list"
         (List.filterMap identity
@@ -173,12 +173,12 @@ imageList ((Config { additionalAttributes }) as config_) listItems =
         (List.map (listItemElt config_) listItems)
 
 
-rootCs : Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute msg)
 rootCs =
     Just (class "mdc-image-list")
 
 
-masonryCs : Config msg -> Maybe (Html.Attribute msg)
+masonryCs :: Config msg -> Maybe (Html.Attribute msg)
 masonryCs (Config { masonry }) =
     if masonry then
         Just (class "mdc-image-list--masonry")
@@ -187,7 +187,7 @@ masonryCs (Config { masonry }) =
         Nothing
 
 
-withTextProtectionCs : Config msg -> Maybe (Html.Attribute msg)
+withTextProtectionCs :: Config msg -> Maybe (Html.Attribute msg)
 withTextProtectionCs (Config { withTextProtection }) =
     if withTextProtection then
         Just (class "mdc-image-list--with-text-protection")
@@ -196,7 +196,7 @@ withTextProtectionCs (Config { withTextProtection }) =
         Nothing
 
 
-listItemElt : Config msg -> ImageListItem msg -> Html msg
+listItemElt :: Config msg -> ImageListItem msg -> Html msg
 listItemElt ((Config { masonry }) as config_) ((ImageListItem.ImageListItem (ImageListItem.Config { href, additionalAttributes })) as listItem) =
     let
         inner =
@@ -216,7 +216,7 @@ listItemElt ((Config { masonry }) as config_) ((ImageListItem.ImageListItem (Ima
         )
 
 
-imageAspectContainerElt : Bool -> ImageListItem msg -> Html msg
+imageAspectContainerElt :: Bool -> ImageListItem msg -> Html msg
 imageAspectContainerElt masonry ((ImageListItem.ImageListItem (ImageListItem.Config { href })) as listItem) =
     Html.div
         (List.filterMap identity
@@ -227,7 +227,7 @@ imageAspectContainerElt masonry ((ImageListItem.ImageListItem (ImageListItem.Con
         [ imageElt masonry listItem ]
 
 
-imageElt : Bool -> ImageListItem msg -> Html msg
+imageElt :: Bool -> ImageListItem msg -> Html msg
 imageElt masonry (ImageListItem.ImageListItem (ImageListItem.Config { href, image })) =
     let
         img =
@@ -252,7 +252,7 @@ imageElt masonry (ImageListItem.ImageListItem (ImageListItem.Config { href, imag
             []
 
 
-supportingElt : ImageListItem msg -> Html msg
+supportingElt :: ImageListItem msg -> Html msg
 supportingElt (ImageListItem.ImageListItem (ImageListItem.Config { label })) =
     case label of
         Just string ->

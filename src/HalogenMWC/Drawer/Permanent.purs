@@ -85,27 +85,27 @@ import Html.Attributes exposing (class)
 
 {-| Configuration of a permanent drawer
 -}
-type Config msg
-    = Config { additionalAttributes : List (Html.Attribute msg) }
+data Config msg
+    = Config { additionalAttributes :: List (Html.Attribute msg) }
 
 
 {-| Default configuration of a permanent drawer
 -}
-config : Config msg
+config :: Config msg
 config =
     Config { additionalAttributes = [] }
 
 
 {-| Specify additional attributes
 -}
-setAttributes : List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Permanent drawer view function
 -}
-drawer : Config msg -> List (Html msg) -> Html msg
+drawer :: Config msg -> List (Html msg) -> Html msg
 drawer (Config { additionalAttributes }) nodes =
     Html.div
         (List.filterMap identity [ rootCs ] ++ additionalAttributes)
@@ -114,7 +114,7 @@ drawer (Config { additionalAttributes }) nodes =
 
 {-| Drawer content
 -}
-content : List (Html.Attribute msg) -> List (Html msg) -> Html msg
+content :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
 content attributes nodes =
     Html.div (class "mdc-drawer__content" :: attributes) nodes
 
@@ -132,25 +132,25 @@ content attributes nodes =
         ]
 
 -}
-header : List (Html.Attribute msg) -> List (Html msg) -> Html msg
+header :: List (Html.Attribute msg) -> List (Html msg) -> Html msg
 header additionalAttributes nodes =
     Html.div (class "mdc-drawer__header" :: additionalAttributes) nodes
 
 
 {-| Attribute to mark the title text element of the drawer header
 -}
-title : Html.Attribute msg
+title :: Html.Attribute msg
 title =
     class "mdc-drawer__title"
 
 
 {-| Attribute to mark the subtitle text element of the drawer header
 -}
-subtitle : Html.Attribute msg
+subtitle :: Html.Attribute msg
 subtitle =
     class "mdc-drawer__subtitle"
 
 
-rootCs : Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute msg)
 rootCs =
     Just (class "mdc-drawer")

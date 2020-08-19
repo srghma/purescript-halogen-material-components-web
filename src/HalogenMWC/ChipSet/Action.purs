@@ -27,7 +27,7 @@ appear persistently and consistently.
     import Material.Chip.Action as ActionChip
     import Material.ChipSet.Action as ActionChipSet
 
-    type Msg
+    data Msg
         = Clicked String
 
     main =
@@ -56,29 +56,29 @@ import Material.Chip.Action.Internal as Chip exposing (Chip(..))
 
 {-| Chip set view function
 -}
-chipSet : List (Html.Attribute msg) -> List (Chip msg) -> Html msg
+chipSet :: List (Html.Attribute msg) -> List (Chip msg) -> Html msg
 chipSet additionalAttributes chips =
     Html.node "mdc-chip-set"
         (chipSetCs :: chipSetActionCs :: gridRole :: additionalAttributes)
         (List.map chip chips)
 
 
-chipSetCs : Html.Attribute msg
+chipSetCs :: Html.Attribute msg
 chipSetCs =
     class "mdc-chip-set"
 
 
-chipSetActionCs : Html.Attribute msg
+chipSetActionCs :: Html.Attribute msg
 chipSetActionCs =
     class "mdc-chip-set--action"
 
 
-gridRole : Html.Attribute msg
+gridRole :: Html.Attribute msg
 gridRole =
     Html.Attributes.attribute "role" "grid"
 
 
-chip : Chip msg -> Html msg
+chip :: Chip msg -> Html msg
 chip (Chip ((Chip.Config { additionalAttributes }) as config_) label) =
     Html.div [ class "mdc-touch-target-wrapper" ]
         [ Html.node "mdc-chip"
@@ -99,52 +99,52 @@ chip (Chip ((Chip.Config { additionalAttributes }) as config_) label) =
         ]
 
 
-chipCs : Maybe (Html.Attribute msg)
+chipCs :: Maybe (Html.Attribute msg)
 chipCs =
     Just (class "mdc-chip")
 
 
-chipTextCs : Html.Attribute msg
+chipTextCs :: Html.Attribute msg
 chipTextCs =
     class "mdc-chip__text"
 
 
-chipTouchCs : Maybe (Html.Attribute msg)
+chipTouchCs :: Maybe (Html.Attribute msg)
 chipTouchCs =
     Just (class "mdc-chip--touch")
 
 
-chipPrimaryActionCs : Html.Attribute msg
+chipPrimaryActionCs :: Html.Attribute msg
 chipPrimaryActionCs =
     class "mdc-chip__primary-action"
 
 
-buttonRole : Html.Attribute msg
+buttonRole :: Html.Attribute msg
 buttonRole =
     Html.Attributes.attribute "role" "button"
 
 
-rowRole : Maybe (Html.Attribute msg)
+rowRole :: Maybe (Html.Attribute msg)
 rowRole =
     Just (Html.Attributes.attribute "role" "row")
 
 
-gridcellRole : Html.Attribute msg
+gridcellRole :: Html.Attribute msg
 gridcellRole =
     Html.Attributes.attribute "role" "gridcell"
 
 
-interactionHandler : Chip.Config msg -> Maybe (Html.Attribute msg)
+interactionHandler :: Chip.Config msg -> Maybe (Html.Attribute msg)
 interactionHandler (Chip.Config { onClick }) =
     Maybe.map (Html.Events.on "MDCChip:interaction" << Decode.succeed) onClick
 
 
-rippleElt : Maybe (Html msg)
+rippleElt :: Maybe (Html msg)
 rippleElt =
     Just (Html.div [ class "mdc-chip__ripple" ] [])
 
 
-leadingIconElt : Chip.Config msg -> Maybe (Html msg)
+leadingIconElt :: Chip.Config msg -> Maybe (Html msg)
 leadingIconElt (Chip.Config { icon }) =
     Maybe.map
         (\iconName ->
@@ -154,18 +154,18 @@ leadingIconElt (Chip.Config { icon }) =
         icon
 
 
-primaryActionElt : String -> Maybe (Html msg)
+primaryActionElt :: String -> Maybe (Html msg)
 primaryActionElt label =
     Just <|
         Html.span [ chipPrimaryActionCs, gridcellRole ]
             (List.filterMap identity [ textElt label, touchElt ])
 
 
-textElt : String -> Maybe (Html msg)
+textElt :: String -> Maybe (Html msg)
 textElt label =
     Just (Html.span [ chipTextCs, buttonRole ] [ text label ])
 
 
-touchElt : Maybe (Html msg)
+touchElt :: Maybe (Html msg)
 touchElt =
     Just (Html.div [ class "mdc-chip__touch" ] [])

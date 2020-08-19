@@ -105,17 +105,17 @@ import Material.List.Item.Internal as ListItem
 
 {-| Configuration of a list item divider
 -}
-type Config msg
+data Config msg
     = Config
-        { inset : Bool
-        , padded : Bool
-        , additionalAttributes : List (Html.Attribute msg)
+        { inset :: Bool
+        , padded :: Bool
+        , additionalAttributes :: List (Html.Attribute msg)
         }
 
 
 {-| Default configuration of a list item divider
 -}
-config : Config msg
+config :: Config msg
 config =
     Config
         { inset = False
@@ -129,7 +129,7 @@ config =
 Insert list item dividers to not intersect a list item's meta.
 
 -}
-setInset : Bool -> Config msg -> Config msg
+setInset :: Bool -> Config msg -> Config msg
 setInset inset (Config config_) =
     Config { config_ | inset = inset }
 
@@ -139,21 +139,21 @@ setInset inset (Config config_) =
 Padded list item dividers do not intersect a list item's avatar.
 
 -}
-setPadded : Bool -> Config msg -> Config msg
+setPadded :: Bool -> Config msg -> Config msg
 setPadded padded (Config config_) =
     Config { config_ | padded = padded }
 
 
 {-| Specify additional attributes
 -}
-setAttributes : List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| List item divider view function
 -}
-listItem : Config msg -> ListItem msg
+listItem :: Config msg -> ListItem msg
 listItem ((Config { additionalAttributes }) as config_) =
     ListItem.ListItemDivider <|
         Html.li
@@ -168,17 +168,17 @@ listItem ((Config { additionalAttributes }) as config_) =
             []
 
 
-listDividerCs : Maybe (Html.Attribute msg)
+listDividerCs :: Maybe (Html.Attribute msg)
 listDividerCs =
     Just (class "mdc-list-divider")
 
 
-separatorRoleAttr : Maybe (Html.Attribute msg)
+separatorRoleAttr :: Maybe (Html.Attribute msg)
 separatorRoleAttr =
     Just (Html.Attributes.attribute "role" "separator")
 
 
-insetCs : Config msg -> Maybe (Html.Attribute msg)
+insetCs :: Config msg -> Maybe (Html.Attribute msg)
 insetCs (Config { inset }) =
     if inset then
         Just (class "mdc-list-divider--inset")
@@ -187,7 +187,7 @@ insetCs (Config { inset }) =
         Nothing
 
 
-paddedCs : Config msg -> Maybe (Html.Attribute msg)
+paddedCs :: Config msg -> Maybe (Html.Attribute msg)
 paddedCs (Config { padded }) =
     if padded then
         Just (class "mdc-list-divider--padded")
@@ -198,6 +198,6 @@ paddedCs (Config { padded }) =
 
 {-| List group divider view function
 -}
-group : List (Html.Attribute msg) -> Html msg
+group :: List (Html.Attribute msg) -> Html msg
 group additionalAttributes =
     Html.hr (List.filterMap identity [ listDividerCs ] ++ additionalAttributes) []

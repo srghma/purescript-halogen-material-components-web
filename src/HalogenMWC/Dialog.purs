@@ -32,7 +32,7 @@ require decisions, or involve multiple tasks.
     import Material.Button as Button
     import Material.Dialog as Dialog
 
-    type Msg
+    data Msg
         = Closed
 
     main =
@@ -81,17 +81,17 @@ import Json.Encode as Encode
 
 {-| Configuration of a dialog
 -}
-type Config msg
+data Config msg
     = Config
-        { open : Bool
-        , additionalAttributes : List (Html.Attribute msg)
-        , onClose : Maybe msg
+        { open :: Bool
+        , additionalAttributes :: List (Html.Attribute msg)
+        , onClose :: Maybe msg
         }
 
 
 {-| Default configuration of a dialog
 -}
-config : Config msg
+config :: Config msg
 config =
     Config
         { open = False
@@ -102,37 +102,37 @@ config =
 
 {-| Specify whether a dialog is open
 -}
-setOpen : Bool -> Config msg -> Config msg
+setOpen :: Bool -> Config msg -> Config msg
 setOpen open (Config config_) =
     Config { config_ | open = open }
 
 
 {-| Specify additional attributes
 -}
-setAttributes : List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Specify a message when the user closes the dialog
 -}
-setOnClose : msg -> Config msg -> Config msg
+setOnClose :: msg -> Config msg -> Config msg
 setOnClose onClose (Config config_) =
     Config { config_ | onClose = Just onClose }
 
 
 {-| Dialog content
 -}
-type alias Content msg =
-    { title : Maybe String
-    , content : List (Html msg)
-    , actions : List (Html msg)
+data Content msg =
+    { title :: Maybe String
+    , content :: List (Html msg)
+    , actions :: List (Html msg)
     }
 
 
 {-| Dialog view function
 -}
-dialog : Config msg -> Content msg -> Html msg
+dialog :: Config msg -> Content msg -> Html msg
 dialog ((Config { additionalAttributes }) as config_) content =
     Html.node "mdc-dialog"
         (List.filterMap identity
@@ -149,37 +149,37 @@ dialog ((Config { additionalAttributes }) as config_) content =
         ]
 
 
-rootCs : Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute msg)
 rootCs =
     Just (class "mdc-dialog")
 
 
-openProp : Config msg -> Maybe (Html.Attribute msg)
+openProp :: Config msg -> Maybe (Html.Attribute msg)
 openProp (Config { open }) =
     Just (Html.Attributes.property "open" (Encode.bool open))
 
 
-roleAttr : Maybe (Html.Attribute msg)
+roleAttr :: Maybe (Html.Attribute msg)
 roleAttr =
     Just (Html.Attributes.attribute "role" "alertdialog")
 
 
-ariaModalAttr : Maybe (Html.Attribute msg)
+ariaModalAttr :: Maybe (Html.Attribute msg)
 ariaModalAttr =
     Just (Html.Attributes.attribute "aria-modal" "true")
 
 
-closeHandler : Config msg -> Maybe (Html.Attribute msg)
+closeHandler :: Config msg -> Maybe (Html.Attribute msg)
 closeHandler (Config { onClose }) =
     Maybe.map (Html.Events.on "MDCDialog:close" << Decode.succeed) onClose
 
 
-containerElt : Content msg -> Html msg
+containerElt :: Content msg -> Html msg
 containerElt content =
     Html.div [ class "mdc-dialog__container" ] [ surfaceElt content ]
 
 
-surfaceElt : Content msg -> Html msg
+surfaceElt :: Content msg -> Html msg
 surfaceElt content =
     Html.div
         [ class "mdc-dialog__surface" ]
@@ -191,7 +191,7 @@ surfaceElt content =
         )
 
 
-titleElt : Content msg -> Maybe (Html msg)
+titleElt :: Content msg -> Maybe (Html msg)
 titleElt { title } =
     case title of
         Just title_ ->
@@ -201,12 +201,12 @@ titleElt { title } =
             Nothing
 
 
-contentElt : Content msg -> Maybe (Html msg)
+contentElt :: Content msg -> Maybe (Html msg)
 contentElt { content } =
     Just (Html.div [ class "mdc-dialog__content" ] content)
 
 
-actionsElt : Content msg -> Maybe (Html msg)
+actionsElt :: Content msg -> Maybe (Html msg)
 actionsElt { actions } =
     if List.isEmpty actions then
         Nothing
@@ -215,6 +215,6 @@ actionsElt { actions } =
         Just (Html.div [ class "mdc-dialog__actions" ] actions)
 
 
-scrimElt : Html msg
+scrimElt :: Html msg
 scrimElt =
     Html.div [ class "mdc-dialog__scrim" ] []

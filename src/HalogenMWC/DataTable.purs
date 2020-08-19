@@ -112,16 +112,16 @@ import Material.Checkbox.Internal
 
 {-| Configuration of a data table
 -}
-type Config msg
+data Config msg
     = Config
-        { label : Maybe String
-        , additionalAttributes : List (Html.Attribute msg)
+        { label :: Maybe String
+        , additionalAttributes :: List (Html.Attribute msg)
         }
 
 
 {-| Default configuration of a data table
 -}
-config : Config msg
+config :: Config msg
 config =
     Config
         { label = Nothing
@@ -131,14 +131,14 @@ config =
 
 {-| Specify the data table's HTML5 aria-label attribute
 -}
-setLabel : Maybe String -> Config msg -> Config msg
+setLabel :: Maybe String -> Config msg -> Config msg
 setLabel label (Config config_) =
     Config { config_ | label = label }
 
 
 {-| Specify additional attributes
 -}
-setAttributes : List (Html.Attribute msg) -> Config msg -> Config msg
+setAttributes :: List (Html.Attribute msg) -> Config msg -> Config msg
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
@@ -148,8 +148,8 @@ setAttributes additionalAttributes (Config config_) =
 dataTable :
     Config msg
     ->
-        { thead : List (Row msg)
-        , tbody : List (Row msg)
+        { thead :: List (Row msg)
+        , tbody :: List (Row msg)
         }
     -> Html msg
 dataTable ((Config { additionalAttributes }) as config_) { thead, tbody } =
@@ -167,35 +167,35 @@ dataTable ((Config { additionalAttributes }) as config_) { thead, tbody } =
         ]
 
 
-dataTableCs : Html.Attribute msg
+dataTableCs :: Html.Attribute msg
 dataTableCs =
     class "mdc-data-table"
 
 
-dataTableTableCs : Maybe (Html.Attribute msg)
+dataTableTableCs :: Maybe (Html.Attribute msg)
 dataTableTableCs =
     Just (class "mdc-data-table__table")
 
 
-dataTableContentCs : Html.Attribute msg
+dataTableContentCs :: Html.Attribute msg
 dataTableContentCs =
     class "mdc-data-table__content"
 
 
-ariaLabelAttr : Config msg -> Maybe (Html.Attribute msg)
+ariaLabelAttr :: Config msg -> Maybe (Html.Attribute msg)
 ariaLabelAttr (Config { label }) =
     Maybe.map (Html.Attributes.attribute "aria-label") label
 
 
 {-| Row type
 -}
-type Row msg
-    = Row { attributes : List (Html.Attribute msg), nodes : List (Cell msg) }
+data Row msg
+    = Row { attributes :: List (Html.Attribute msg), nodes :: List (Cell msg) }
 
 
 {-| Row view function
 -}
-row : List (Html.Attribute msg) -> List (Cell msg) -> Row msg
+row :: List (Html.Attribute msg) -> List (Cell msg) -> Row msg
 row attributes nodes =
     Row { attributes = attributes, nodes = nodes }
 
@@ -208,39 +208,39 @@ Note that this is a list of attributes because it actually sets two HTML
 attributes at once.
 
 -}
-selected : List (Html.Attribute msg)
+selected :: List (Html.Attribute msg)
 selected =
     [ dataTableRowSelectedCs
     , Html.Attributes.attribute "aria-selected" "true"
     ]
 
 
-dataTableRowSelectedCs : Html.Attribute msg
+dataTableRowSelectedCs :: Html.Attribute msg
 dataTableRowSelectedCs =
     class "mdc-data-table__row--selected"
 
 
-headerRow : Row msg -> Html msg
+headerRow :: Row msg -> Html msg
 headerRow (Row { attributes, nodes }) =
     Html.tr (dataTableHeaderRowCs :: attributes) (List.map headerCell nodes)
 
 
-dataTableHeaderRowCs : Html.Attribute msg
+dataTableHeaderRowCs :: Html.Attribute msg
 dataTableHeaderRowCs =
     class "mdc-data-table__header-row"
 
 
-bodyRow : Row msg -> Html msg
+bodyRow :: Row msg -> Html msg
 bodyRow (Row { attributes, nodes }) =
     Html.tr (dataTableRowCs :: attributes) (List.map bodyCell nodes)
 
 
-dataTableRowCs : Html.Attribute msg
+dataTableRowCs :: Html.Attribute msg
 dataTableRowCs =
     class "mdc-data-table__row"
 
 
-headerCell : Cell msg -> Html msg
+headerCell :: Cell msg -> Html msg
 headerCell cell_ =
     case cell_ of
         Cell { numeric, attributes, nodes } ->
@@ -278,22 +278,22 @@ headerCell cell_ =
                 ]
 
 
-dataTableHeaderCellCs : Maybe (Html.Attribute msg)
+dataTableHeaderCellCs :: Maybe (Html.Attribute msg)
 dataTableHeaderCellCs =
     Just (class "mdc-data-table__header-cell")
 
 
-columnHeaderRoleAttr : Maybe (Html.Attribute msg)
+columnHeaderRoleAttr :: Maybe (Html.Attribute msg)
 columnHeaderRoleAttr =
     Just (Html.Attributes.attribute "role" "columnheader")
 
 
-colScopeAttr : Maybe (Html.Attribute msg)
+colScopeAttr :: Maybe (Html.Attribute msg)
 colScopeAttr =
     Just (Html.Attributes.attribute "scope" "col")
 
 
-dataTableHeaderCellNumericCs : Bool -> Maybe (Html.Attribute msg)
+dataTableHeaderCellNumericCs :: Bool -> Maybe (Html.Attribute msg)
 dataTableHeaderCellNumericCs numeric =
     if numeric then
         Just (class "mdc-data-table__header-cell--numeric")
@@ -302,12 +302,12 @@ dataTableHeaderCellNumericCs numeric =
         Nothing
 
 
-dataTableHeaderCellCheckboxCs : Maybe (Html.Attribute msg)
+dataTableHeaderCellCheckboxCs :: Maybe (Html.Attribute msg)
 dataTableHeaderCellCheckboxCs =
     Just (class "mdc-data-table__header-cell--checkbox")
 
 
-bodyCell : Cell msg -> Html msg
+bodyCell :: Cell msg -> Html msg
 bodyCell cell_ =
     case cell_ of
         Cell { numeric, attributes, nodes } ->
@@ -343,45 +343,45 @@ bodyCell cell_ =
 
 {-| Cell type
 -}
-type Cell msg
+data Cell msg
     = Cell
-        { numeric : Bool
-        , attributes : List (Html.Attribute msg)
-        , nodes : List (Html msg)
+        { numeric :: Bool
+        , attributes :: List (Html.Attribute msg)
+        , nodes :: List (Html msg)
         }
     | CheckboxCell
-        { config_ : Checkbox.Config msg
-        , attributes : List (Html.Attribute msg)
+        { config_ :: Checkbox.Config msg
+        , attributes :: List (Html.Attribute msg)
         }
 
 
 {-| Data table cell
 -}
-cell : List (Html.Attribute msg) -> List (Html msg) -> Cell msg
+cell :: List (Html.Attribute msg) -> List (Html msg) -> Cell msg
 cell attributes nodes =
     Cell { numeric = False, attributes = attributes, nodes = nodes }
 
 
 {-| Numeric data table cell (right-aligned contents)
 -}
-numericCell : List (Html.Attribute msg) -> List (Html msg) -> Cell msg
+numericCell :: List (Html.Attribute msg) -> List (Html msg) -> Cell msg
 numericCell attributes nodes =
     Cell { numeric = True, attributes = attributes, nodes = nodes }
 
 
 {-| Data table cell that contians a checkbox
 -}
-checkboxCell : List (Html.Attribute msg) -> Checkbox.Config msg -> Cell msg
+checkboxCell :: List (Html.Attribute msg) -> Checkbox.Config msg -> Cell msg
 checkboxCell attributes config_ =
     CheckboxCell { attributes = attributes, config_ = config_ }
 
 
-dataTableCellCs : Maybe (Html.Attribute msg)
+dataTableCellCs :: Maybe (Html.Attribute msg)
 dataTableCellCs =
     Just (class "mdc-data-table__cell")
 
 
-dataTableCellNumericCs : Bool -> Maybe (Html.Attribute msg)
+dataTableCellNumericCs :: Bool -> Maybe (Html.Attribute msg)
 dataTableCellNumericCs numeric =
     if numeric then
         Just (class "mdc-data-table__cell--numeric")
@@ -390,6 +390,6 @@ dataTableCellNumericCs numeric =
         Nothing
 
 
-dataTableCellCheckboxCs : Maybe (Html.Attribute msg)
+dataTableCellCheckboxCs :: Maybe (Html.Attribute msg)
 dataTableCellCheckboxCs =
     Just (class "mdc-data-table__cell--checkbox")
