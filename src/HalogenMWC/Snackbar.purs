@@ -290,7 +290,7 @@ addMessage message_ (Queue queue) =
 data Config msg
     = Config
         { closeOnEscape :: Bool
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         , onClosed :: MessageId -> msg
         }
 

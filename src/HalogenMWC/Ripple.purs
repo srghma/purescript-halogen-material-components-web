@@ -92,7 +92,7 @@ import Json.Encode as Encode
 data Config msg
     = Config
         { color :: Maybe Color
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         }
 
 

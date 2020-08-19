@@ -109,7 +109,7 @@ data Config msg
     = Config
         { inset :: Bool
         , padded :: Bool
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         }
 
 

@@ -7,7 +7,7 @@ data Config msg
     = Config
         { label :: Maybe String
         , href :: Maybe String
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         , image :: String
         }
 

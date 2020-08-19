@@ -145,7 +145,7 @@ data Config msg
         , trailingIcon :: Bool
         , exited :: Bool
         , onClick :: Maybe msg
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         }
 
 

@@ -104,7 +104,7 @@ data Config msg
     = Config
         { reverse :: Bool
         , closed :: Bool
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         }
 
 

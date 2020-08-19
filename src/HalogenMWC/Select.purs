@@ -220,7 +220,7 @@ data Config a msg
         , valid :: Bool
         , selected :: Maybe a
         , leadingIcon :: Maybe (Icon msg)
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         , onChange :: Maybe (a -> msg)
         }
 

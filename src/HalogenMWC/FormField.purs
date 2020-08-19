@@ -95,7 +95,7 @@ data Config msg
         { label :: Maybe String
         , for :: Maybe String
         , alignEnd :: Bool
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         , onClick :: Maybe msg
         }
 

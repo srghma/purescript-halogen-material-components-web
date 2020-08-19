@@ -186,7 +186,7 @@ data Config msg
         , twoLine :: Bool
         , vertical :: Bool
         , wrapFocus :: Bool
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         }
 
 

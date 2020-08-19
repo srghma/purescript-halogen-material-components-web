@@ -7,6 +7,6 @@ data Config msg
     = Config
         { disabled :: Bool
         , label :: Maybe String
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         , onClick :: Maybe msg
         }

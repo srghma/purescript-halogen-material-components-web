@@ -102,7 +102,7 @@ import Json.Encode as Encode
 data Config msg
     = Config
         { open :: Bool
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         , onClose :: Maybe msg
         }
 

@@ -7,7 +7,7 @@ data Config msg
     = Config
         { state :: Maybe State
         , disabled :: Bool
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         , onChange :: Maybe msg
         , touch :: Bool
         }

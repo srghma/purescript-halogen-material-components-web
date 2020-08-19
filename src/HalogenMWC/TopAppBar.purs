@@ -191,7 +191,7 @@ data Config msg
     = Config
         { dense :: Bool
         , fixed :: Bool
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         }
 
 

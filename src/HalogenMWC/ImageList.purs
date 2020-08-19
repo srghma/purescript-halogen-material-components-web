@@ -114,7 +114,7 @@ data Config msg
     = Config
         { masonry :: Bool
         , withTextProtection :: Bool
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         }
 
 

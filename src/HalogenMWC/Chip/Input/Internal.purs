@@ -7,7 +7,7 @@ data Config msg
     = Config
         { leadingIcon :: Maybe String
         , trailingIcon :: Maybe String
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         , onClick :: Maybe msg
         , onDelete :: Maybe msg
         }

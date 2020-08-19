@@ -6,7 +6,7 @@ import Html
 data Config msg
     = Config
         { icon :: Maybe String
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         }
 
 

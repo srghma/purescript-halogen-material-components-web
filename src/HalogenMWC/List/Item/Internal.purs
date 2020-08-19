@@ -13,7 +13,7 @@ data Config msg
         , selection :: Maybe Selection
         , href :: Maybe String
         , target :: Maybe String
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         , onClick :: Maybe msg
         , node :: Html msg
         }

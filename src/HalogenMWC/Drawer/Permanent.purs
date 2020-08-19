@@ -86,7 +86,7 @@ import Html.Attributes (class)
 {-| Configuration of a permanent drawer
 -}
 data Config msg
-    = Config { additionalAttributes :: List (Html.Attribute msg) }
+    = Config { additionalAttributes :: Array (IProp r i) }
 
 
 {-| Default configuration of a permanent drawer

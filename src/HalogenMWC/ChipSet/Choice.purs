@@ -95,7 +95,7 @@ data Config a msg
         { selected :: Maybe a
         , onChange :: Maybe (a -> msg)
         , toLabel :: a -> String
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         }
 
 

@@ -162,7 +162,7 @@ data Config msg
         { stacked :: Bool
         , minWidth :: Bool
         , indicatorSpansContent :: Bool
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         , align :: Maybe Align
         }
 

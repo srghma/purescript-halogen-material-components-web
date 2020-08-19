@@ -118,7 +118,7 @@ data Config msg
     = Config
         { mini :: Bool
         , exited :: Bool
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         , onClick :: Maybe msg
         }
 

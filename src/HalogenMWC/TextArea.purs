@@ -193,7 +193,7 @@ data Config msg
         , valid :: Bool
         , minLength :: Maybe Int
         , maxLength :: Maybe Int
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         , onInput :: Maybe (String -> msg)
         , onChange :: Maybe (String -> msg)
         }

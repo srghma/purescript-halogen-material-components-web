@@ -11,7 +11,7 @@ data Config msg
         , dense :: Bool
         , href :: Maybe String
         , target :: Maybe String
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         , onClick :: Maybe msg
         , touch :: Bool
         }

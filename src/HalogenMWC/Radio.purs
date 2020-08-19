@@ -122,7 +122,7 @@ data Config msg
     = Config
         { checked :: Bool
         , disabled :: Bool
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         , onChange :: Maybe msg
         , touch :: Bool
         }

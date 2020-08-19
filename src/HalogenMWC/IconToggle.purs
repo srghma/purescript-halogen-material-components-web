@@ -149,7 +149,7 @@ data Config msg
         { on :: Bool
         , disabled :: Bool
         , label :: Maybe String
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         , onChange :: Maybe msg
         }
 

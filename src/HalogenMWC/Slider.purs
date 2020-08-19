@@ -162,7 +162,7 @@ data Config msg
         , step :: Maybe Float
         , value :: Maybe Float
         , disabled :: Bool
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         , onInput :: Maybe (Float -> msg)
         }
 

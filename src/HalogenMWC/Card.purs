@@ -212,7 +212,7 @@ import Material.IconButton.Internal
 data Config msg
     = Config
         { outlined :: Bool
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         }
 
 

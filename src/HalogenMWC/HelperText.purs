@@ -96,7 +96,7 @@ import Html.Attributes (class)
 data Config msg
     = Config
         { persistent :: Bool
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         }
 
 

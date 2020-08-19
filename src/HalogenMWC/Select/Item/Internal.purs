@@ -7,7 +7,7 @@ data Config a msg
     = Config
         { value :: a
         , disabled :: Bool
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         }
 
 

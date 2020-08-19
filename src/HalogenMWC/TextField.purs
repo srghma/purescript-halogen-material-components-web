@@ -253,7 +253,7 @@ data Config msg
         , step :: Maybe Int
         , leadingIcon :: Maybe (Icon msg)
         , trailingIcon :: Maybe (Icon msg)
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         , onInput :: Maybe (String -> msg)
         , onChange :: Maybe (String -> msg)
         }

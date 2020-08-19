@@ -7,7 +7,7 @@ data Config msg
     = Config
         { icon :: Maybe String
         , selected :: Bool
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         , onChange :: Maybe msg
         }
 

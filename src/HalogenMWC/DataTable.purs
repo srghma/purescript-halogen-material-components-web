@@ -115,7 +115,7 @@ import Material.Checkbox.Internal
 data Config msg
     = Config
         { label :: Maybe String
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         }
 
 

@@ -10,7 +10,7 @@ import Html
 data Config msg
     = Config
         { active :: Bool
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         , onClick :: Maybe msg
         , content :: Content
         }

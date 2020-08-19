@@ -107,7 +107,7 @@ data Config msg
     = Config
         { open :: Bool
         , quickOpen :: Bool
-        , additionalAttributes :: List (Html.Attribute msg)
+        , additionalAttributes :: Array (IProp r i)
         , onClose :: Maybe msg
         }
 
