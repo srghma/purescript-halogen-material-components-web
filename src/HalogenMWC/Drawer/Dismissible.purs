@@ -39,23 +39,23 @@ content attributes nodes = HH.div ([ HP.class_ mdc_drawer__content ] <> attribut
 header :: Array (IProp r i) -> Array (Html r i) -> Html r i
 header additionalAttributes nodes = HH.div ([ HP.class_ mdc_drawer__header ] <> additionalAttributes) nodes
 
-title :: HH.Attribute r i
+title :: IProp r i
 title = HP.class_ mdc_drawer__title
 
-subtitle :: HH.Attribute r i
+subtitle :: IProp r i
 subtitle = HP.class_ mdc_drawer__subtitle
 
-rootCs :: Maybe (HH.Attribute r i)
+rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_drawer)
 
-dismissibleCs :: Maybe (HH.Attribute r i)
+dismissibleCs :: Maybe (IProp r i)
 dismissibleCs = Just (HP.class_ mdc_drawer____dismissible)
 
-openProp :: Config r i -> Maybe (HH.Attribute r i)
+openProp :: Config r i -> Maybe (IProp r i)
 openProp { open } = Just (HH.Attributes.property "open" (Encode.bool open))
 
-closeHandler :: Config r i -> Maybe (HH.Attribute r i)
+closeHandler :: Config r i -> Maybe (IProp r i)
 closeHandler { onClose } = map (HH.Events.on "MDCDrawer:close" << Decode.succeed) onClose
 
-appContent :: HH.Attribute r i
+appContent :: IProp r i
 appContent = HP.class_ mdc_drawer_app_content

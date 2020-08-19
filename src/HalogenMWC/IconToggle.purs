@@ -45,28 +45,28 @@ iconToggle (config_@{ additionalAttributes }) { onIcon, offIcon } =
     , HH.i (Array.filterMap identity [ materialIconsCs, iconCs ]) [ text offIcon ]
     ]
 
-rootCs :: Maybe (HH.Attribute r i)
+rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_icon_button)
 
-onProp :: Config r i -> Maybe (HH.Attribute r i)
+onProp :: Config r i -> Maybe (IProp r i)
 onProp { on } = Just (HH.Attributes.property "on" (Encode.bool on))
 
-materialIconsCs :: Maybe (HH.Attribute r i)
+materialIconsCs :: Maybe (IProp r i)
 materialIconsCs = Just (HP.class_ material_icons)
 
-iconCs :: Maybe (HH.Attribute r i)
+iconCs :: Maybe (IProp r i)
 iconCs = Just (HP.class_ mdc_icon_button__icon)
 
-onIconCs :: Maybe (HH.Attribute r i)
+onIconCs :: Maybe (IProp r i)
 onIconCs = Just (HP.class_ "mdc-icon-button__icon mdc-icon-button__icon--on")
 
-tabIndexProp :: Maybe (HH.Attribute r i)
+tabIndexProp :: Maybe (IProp r i)
 tabIndexProp = Just (HH.Attributes.tabindex 0)
 
-ariaHiddenAttr :: Maybe (HH.Attribute r i)
+ariaHiddenAttr :: Maybe (IProp r i)
 ariaHiddenAttr = Just (HH.Attributes.attribute "aria-hidden" "true")
 
-ariaPressedAttr :: Config r i -> Maybe (HH.Attribute r i)
+ariaPressedAttr :: Config r i -> Maybe (IProp r i)
 ariaPressedAttr { on } =
   Just
     ( HH.Attributes.attribute "aria-pressed"
@@ -77,13 +77,13 @@ ariaPressedAttr { on } =
         )
     )
 
-ariaLabelAttr :: Config r i -> Maybe (HH.Attribute r i)
+ariaLabelAttr :: Config r i -> Maybe (IProp r i)
 ariaLabelAttr { label } = map (HH.Attributes.attribute "aria-label") label
 
-changeHandler :: Config r i -> Maybe (HH.Attribute r i)
+changeHandler :: Config r i -> Maybe (IProp r i)
 changeHandler { onChange } =
   map (HH.Events.on "MDCIconButtonToggle:change" << Decode.succeed)
     onChange
 
-disabledAttr :: Config r i -> Maybe (HH.Attribute r i)
+disabledAttr :: Config r i -> Maybe (IProp r i)
 disabledAttr { disabled } = Just (HH.Attributes.disabled disabled)

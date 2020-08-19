@@ -37,7 +37,7 @@ chip (Chip config_ label) =
         )
     ]
 
-interactionHandler :: Chip.Config r i -> Maybe (HH.Attribute r i)
+interactionHandler :: Chip.Config r i -> Maybe (IProp r i)
 interactionHandler { onClick } = map (HH.Events.on "MDCChip:interaction" << Decode.succeed) onClick
 
 rippleElt :: Maybe (Html r i)

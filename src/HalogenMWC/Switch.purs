@@ -36,25 +36,25 @@ switch (config_@{ additionalAttributes }) =
     , thumbUnderlayElt config_
     ]
 
-rootCs :: Maybe (HH.Attribute r i)
+rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_switch)
 
-checkedProp :: Config r i -> Maybe (HH.Attribute r i)
+checkedProp :: Config r i -> Maybe (IProp r i)
 checkedProp { checked } = Just (HH.Attributes.property "checked" (Encode.bool checked))
 
-disabledProp :: Config r i -> Maybe (HH.Attribute r i)
+disabledProp :: Config r i -> Maybe (IProp r i)
 disabledProp { disabled } = Just (HH.Attributes.property "disabled" (Encode.bool disabled))
 
-nativeControlCs :: Maybe (HH.Attribute r i)
+nativeControlCs :: Maybe (IProp r i)
 nativeControlCs = Just (HP.class_ mdc_switch__native_control)
 
-switchRoleAttr :: Maybe (HH.Attribute r i)
+switchRoleAttr :: Maybe (IProp r i)
 switchRoleAttr = Just (HH.Attributes.attribute "role" "switch")
 
-checkboxTypeAttr :: Maybe (HH.Attribute r i)
+checkboxTypeAttr :: Maybe (IProp r i)
 checkboxTypeAttr = Just (HH.Attributes.type_ "checkbox")
 
-changeHandler :: Config r i -> Maybe (HH.Attribute r i)
+changeHandler :: Config r i -> Maybe (IProp r i)
 changeHandler { onChange } = map (HH.Events.on "change" << Decode.succeed) onChange
 
 trackElt :: Html r i

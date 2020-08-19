@@ -52,19 +52,19 @@ bounded = ripple False
 unbounded :: Config r i -> Html r i
 unbounded = ripple True
 
-rippleSurface :: Maybe (HH.Attribute r i)
+rippleSurface :: Maybe (IProp r i)
 rippleSurface = Just (HP.class_ mdc_ripple_surface)
 
-colorCs :: Config r i -> Maybe (HH.Attribute r i)
+colorCs :: Config r i -> Maybe (IProp r i)
 colorCs { color } = case color of
   Just Primary -> Just (HP.class_ mdc_ripple_surface____primary)
   Just Accent -> Just (HP.class_ mdc_ripple_surface____accent)
   Nothing -> Nothing
 
-unboundedProp :: Boolean -> Maybe (HH.Attribute r i)
+unboundedProp :: Boolean -> Maybe (IProp r i)
 unboundedProp isUnbounded = Just (HH.Attributes.property "unbounded" (Encode.bool isUnbounded))
 
-unboundedData :: Boolean -> Maybe (HH.Attribute r i)
+unboundedData :: Boolean -> Maybe (IProp r i)
 unboundedData isUnbounded =
   if isUnbounded then
     Just (HH.Attributes.attribute "data-mdc-ripple-is-unbounded" "")

@@ -38,20 +38,20 @@ fab (config_@{ additionalAttributes }) iconName =
     , iconElt iconName
     ]
 
-tabIndexProp :: Int -> Maybe (HH.Attribute r i)
+tabIndexProp :: Int -> Maybe (IProp r i)
 tabIndexProp tabIndex = Just (HH.Attributes.property "tabIndex" (Encode.int tabIndex))
 
-rootCs :: Maybe (HH.Attribute r i)
+rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_fab)
 
-miniCs :: Config r i -> Maybe (HH.Attribute r i)
+miniCs :: Config r i -> Maybe (IProp r i)
 miniCs { mini } =
   if mini then
     Just (HP.class_ mdc_fab____mini)
   else
     Nothing
 
-exitedCs :: Config r i -> Maybe (HH.Attribute r i)
+exitedCs :: Config r i -> Maybe (IProp r i)
 exitedCs { exited } =
   if exited then
     Just (HP.class_ mdc_fab____exited)
@@ -64,5 +64,5 @@ rippleElt = HH.div [ HP.class_ mdc_fab__ripple ] []
 iconElt :: String -> Html r i
 iconElt iconName = HH.span [ HP.class_ material_icons, HP.class_ mdc_fab__icon ] [ text iconName ]
 
-clickHandler :: Config r i -> Maybe (HH.Attribute r i)
+clickHandler :: Config r i -> Maybe (IProp r i)
 clickHandler { onClick } = map HH.Events.onClick onClick

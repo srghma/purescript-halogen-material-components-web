@@ -42,19 +42,19 @@ dialog (config_@{ additionalAttributes }) content =
     , scrimElt
     ]
 
-rootCs :: Maybe (HH.Attribute r i)
+rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_dialog)
 
-openProp :: Config r i -> Maybe (HH.Attribute r i)
+openProp :: Config r i -> Maybe (IProp r i)
 openProp { open } = Just (HH.Attributes.property "open" (Encode.bool open))
 
-roleAttr :: Maybe (HH.Attribute r i)
+roleAttr :: Maybe (IProp r i)
 roleAttr = Just (HH.Attributes.attribute "role" "alertdialog")
 
-ariaModalAttr :: Maybe (HH.Attribute r i)
+ariaModalAttr :: Maybe (IProp r i)
 ariaModalAttr = Just (HH.Attributes.attribute "aria-modal" "true")
 
-closeHandler :: Config r i -> Maybe (HH.Attribute r i)
+closeHandler :: Config r i -> Maybe (IProp r i)
 closeHandler { onClose } = map (HH.Events.on "MDCDialog:close" << Decode.succeed) onClose
 
 containerElt :: Content r i -> Html r i

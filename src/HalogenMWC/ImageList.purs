@@ -36,11 +36,11 @@ imageArray (config_@{ additionalAttributes }) listItems =
         )
         (map (listItemElt config_) listItems)
 
-rootCs :: Maybe (HH.Attribute r i)
+rootCs :: Maybe (IProp r i)
 rootCs =
     Just (HP.class_ mdc_image_list)
 
-masonryCs :: Config r i -> Maybe (HH.Attribute r i)
+masonryCs :: Config r i -> Maybe (IProp r i)
 masonryCs { masonry } =
     if masonry then
         Just (HP.class_ mdc_image_list____masonry)
@@ -48,7 +48,7 @@ masonryCs { masonry } =
     else
         Nothing
 
-withTextProtectionCs :: Config r i -> Maybe (HH.Attribute r i)
+withTextProtectionCs :: Config r i -> Maybe (IProp r i)
 withTextProtectionCs { withTextProtection } =
     if withTextProtection then
         Just (HP.class_ "mdc-image-list--with-text-protection")

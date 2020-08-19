@@ -98,50 +98,50 @@ raised config_ label = button Raised config_ label
 unelevated :: Config r i -> String -> Html r i
 unelevated config_ label = button Unelevated config_ label
 
-rootCs :: Maybe (HH.Attribute r i)
+rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_button)
 
-disabledProp :: Config r i -> Maybe (HH.Attribute r i)
+disabledProp :: Config r i -> Maybe (IProp r i)
 disabledProp { disabled } = Just (HH.Attributes.property "disabled" (Encode.bool disabled))
 
-disabledAttr :: Config r i -> Maybe (HH.Attribute r i)
+disabledAttr :: Config r i -> Maybe (IProp r i)
 disabledAttr { disabled } = Just (HH.Attributes.disabled disabled)
 
-tabIndexProp :: Config r i -> Maybe (HH.Attribute r i)
+tabIndexProp :: Config r i -> Maybe (IProp r i)
 tabIndexProp { disabled } =
   if disabled then
     Just (HH.Attributes.property "tabIndex" (Encode.int - 1))
   else
     Just (HH.Attributes.property "tabIndex" (Encode.int 0))
 
-hrefAttr :: Config r i -> Maybe (HH.Attribute r i)
+hrefAttr :: Config r i -> Maybe (IProp r i)
 hrefAttr { href } = map HH.Attributes.href href
 
-targetAttr :: Config r i -> Maybe (HH.Attribute r i)
+targetAttr :: Config r i -> Maybe (IProp r i)
 targetAttr { href, target } =
   if href /= Nothing then
     map HH.Attributes.target target
   else
     Nothing
 
-clickHandler :: Config r i -> Maybe (HH.Attribute r i)
+clickHandler :: Config r i -> Maybe (IProp r i)
 clickHandler { onClick } = map HH.Events.onClick onClick
 
-variantCs :: Variant -> Maybe (HH.Attribute r i)
+variantCs :: Variant -> Maybe (IProp r i)
 variantCs variant = case variant of
   Text -> Nothing
   Raised -> Just (HP.class_ mdc_button____raised)
   Unelevated -> Just (HP.class_ mdc_button____unelevated)
   Outlined -> Just (HP.class_ mdc_button____outlined)
 
-denseCs :: Config r i -> Maybe (HH.Attribute r i)
+denseCs :: Config r i -> Maybe (IProp r i)
 denseCs { dense } =
   if dense then
     Just (HP.class_ mdc_button____dense)
   else
     Nothing
 
-touchCs :: Config r i -> Maybe (HH.Attribute r i)
+touchCs :: Config r i -> Maybe (IProp r i)
 touchCs { touch } =
   if touch then
     Just (HP.class_ mdc_button____touch)

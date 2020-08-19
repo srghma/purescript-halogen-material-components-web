@@ -105,15 +105,15 @@ message label =
         , timeoutMs: Just 5000
         }
 
-rootCs :: Maybe (HH.Attribute r i)
+rootCs :: Maybe (IProp r i)
 rootCs =
     Just (HP.class_ mdc_snackbar)
 
-closeOnEscapeProp :: Config r i -> Maybe (HH.Attribute r i)
+closeOnEscapeProp :: Config r i -> Maybe (IProp r i)
 closeOnEscapeProp { closeOnEscape } =
     Just (HH.Attributes.property "closeOnEscape" (Encode.bool closeOnEscape))
 
-leadingCs :: Maybe (Message r i) -> Maybe (HH.Attribute r i)
+leadingCs :: Maybe (Message r i) -> Maybe (IProp r i)
 leadingCs message_ =
     Maybe.andThen
         (\(Message { leading }) ->
@@ -125,7 +125,7 @@ leadingCs message_ =
         )
         message_
 
-stackedCs :: Maybe (Message r i) -> Maybe (HH.Attribute r i)
+stackedCs :: Maybe (Message r i) -> Maybe (IProp r i)
 stackedCs message_ =
     Maybe.andThen
         (\(Message { stacked }) ->
@@ -137,11 +137,11 @@ stackedCs message_ =
         )
         message_
 
-messageIdProp :: MessageId -> Maybe (HH.Attribute r i)
+messageIdProp :: MessageId -> Maybe (IProp r i)
 messageIdProp (MessageId messageId) =
     Just (HH.Attributes.property "messageId" (Encode.int messageId))
 
-timeoutMsProp :: Maybe (Message r i) -> Maybe (HH.Attribute r i)
+timeoutMsProp :: Maybe (Message r i) -> Maybe (IProp r i)
 timeoutMsProp message_ =
     let
         normalizedTimeoutMs =
@@ -155,15 +155,15 @@ timeoutMsProp message_ =
     in
     Just (HH.Attributes.property "timeoutMs" (Encode.int normalizedTimeoutMs))
 
-closedHandler :: MessageId -> Config r i -> Maybe (HH.Attribute r i)
+closedHandler :: MessageId -> Config r i -> Maybe (IProp r i)
 closedHandler messageId { onClosed } =
     Just (HH.Events.on "MDCSnackbar:closed" (Decode.succeed (onClosed messageId)))
 
-ariaStatusRoleAttr :: HH.Attribute r i
+ariaStatusRoleAttr :: IProp r i
 ariaStatusRoleAttr =
     HH.Attributes.attribute "aria-role" "status"
 
-ariaPoliteLiveAttr :: HH.Attribute r i
+ariaPoliteLiveAttr :: IProp r i
 ariaPoliteLiveAttr =
     HH.Attributes.attribute "aria-live" "polite"
 
@@ -202,11 +202,11 @@ actionButtonElt messageId (message_@(Message { actionButton })) =
         )
         actionButton
 
-actionButtonCs :: Maybe (HH.Attribute r i)
+actionButtonCs :: Maybe (IProp r i)
 actionButtonCs =
     Just (HP.class_ "mdc-button mdc-snackbar__action")
 
-actionButtonClickHandler :: MessageId -> Message r i -> Maybe (HH.Attribute r i)
+actionButtonClickHandler :: MessageId -> Message r i -> Maybe (IProp r i)
 actionButtonClickHandler messageId (Message { onActionButtonClick }) =
     map (HH.Events.onClick << (#) messageId) onActionButtonClick
 
@@ -224,10 +224,10 @@ actionIconElt messageId (message_@(Message { actionIcon })) =
         )
         actionIcon
 
-actionIconCs :: Maybe (HH.Attribute r i)
+actionIconCs :: Maybe (IProp r i)
 actionIconCs =
     Just (HP.class_ "mdc-icon-button mdc-snackbar__dismiss material-icons")
 
-actionIconClickHandler :: MessageId -> Message r i -> Maybe (HH.Attribute r i)
+actionIconClickHandler :: MessageId -> Message r i -> Maybe (IProp r i)
 actionIconClickHandler messageId (Message { onActionIconClick }) =
     map (HH.Events.onClick << (#) messageId) onActionIconClick

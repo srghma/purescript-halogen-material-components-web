@@ -38,11 +38,11 @@ listItem (config_@{ additionalAttributes }) =
             )
             []
 
-listDividerCs :: Maybe (HH.Attribute r i)
+listDividerCs :: Maybe (IProp r i)
 listDividerCs =
     Just (HP.class_ mdc_list_divider)
 
-separatorRoleAttr :: Maybe (HH.Attribute r i)
+separatorRoleAttr :: Maybe (IProp r i)
 separatorRoleAttr =
     Just (HH.Attributes.attribute "role" "separator")
 
@@ -54,7 +54,7 @@ insetCs { inset } =
     else
         Nothing
 
-paddedCs :: Config r i -> Maybe (HH.Attribute r i)
+paddedCs :: Config r i -> Maybe (IProp r i)
 paddedCs { padded } =
     if padded then
         Just (HP.class_ mdc_list_divider____padded)

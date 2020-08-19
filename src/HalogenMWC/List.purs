@@ -70,38 +70,38 @@ list (config_@{ additionalAttributes }) firstArrayItem remainingArrayItems =
           listItems
       )
 
-rootCs :: Maybe (HH.Attribute r i)
+rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_list)
 
-nonInteractiveCs :: Config r i -> Maybe (HH.Attribute r i)
+nonInteractiveCs :: Config r i -> Maybe (IProp r i)
 nonInteractiveCs { nonInteractive } =
   if nonInteractive then
     Just (HP.class_ "mdc-list--non-interactive")
   else
     Nothing
 
-denseCs :: Config r i -> Maybe (HH.Attribute r i)
+denseCs :: Config r i -> Maybe (IProp r i)
 denseCs { dense } =
   if dense then
     Just (HP.class_ mdc_list____dense)
   else
     Nothing
 
-avatarArrayCs :: Config r i -> Maybe (HH.Attribute r i)
+avatarArrayCs :: Config r i -> Maybe (IProp r i)
 avatarArrayCs { avatarArray } =
   if avatarArray then
     Just (HP.class_ "mdc-list--avatar-list")
   else
     Nothing
 
-twoLineCs :: Config r i -> Maybe (HH.Attribute r i)
+twoLineCs :: Config r i -> Maybe (IProp r i)
 twoLineCs { twoLine } =
   if twoLine then
     Just (HP.class_ "mdc-list--two-line")
   else
     Nothing
 
-clickHandler :: Array (ArrayItem r i) -> Maybe (HH.Attribute r i)
+clickHandler :: Array (ArrayItem r i) -> Maybe (IProp r i)
 clickHandler listItems =
   let
     getOnClick listItem_ = case listItem_ of
@@ -127,7 +127,7 @@ clickHandler listItems =
   in
     Just (HH.Events.on "MDCArray:action" mergedClickHandler)
 
-selectedIndexProp :: Array (ArrayItem r i) -> Maybe (HH.Attribute r i)
+selectedIndexProp :: Array (ArrayItem r i) -> Maybe (IProp r i)
 selectedIndexProp listItems =
   let
     selectedIndex =
@@ -155,14 +155,14 @@ selectedIndexProp listItems =
 group :: Array (IProp r i) -> Array (Html r i) -> Html r i
 group additionalAttributes nodes = HH.div ([ listGroupCs ] <> additionalAttributes) nodes
 
-listGroupCs :: HH.Attribute r i
+listGroupCs :: IProp r i
 listGroupCs = HP.class_ mdc_list_group
 
 subheader :: Array (IProp r i) -> Array (Html r i) -> Html r i
 subheader additionalAttributes nodes = HH.span ([ listGroupSubheaderCs ] <> additionalAttributes) nodes
 
-listGroupSubheaderCs :: HH.Attribute r i
+listGroupSubheaderCs :: IProp r i
 listGroupSubheaderCs = HP.class_ mdc_list_group__subheader
 
-wrapFocusProp :: Config r i -> Maybe (HH.Attribute r i)
+wrapFocusProp :: Config r i -> Maybe (IProp r i)
 wrapFocusProp { wrapFocus } = Just (HH.Attributes.property "wrapFocus" (Encode.bool wrapFocus))

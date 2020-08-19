@@ -45,7 +45,7 @@ fab (config_@{ additionalAttributes }) label =
             ]
         )
 
-tabIndexProp :: Int -> Maybe (HH.Attribute r i)
+tabIndexProp :: Int -> Maybe (IProp r i)
 tabIndexProp tabIndex =
     Just (HH.Attributes.property "tabIndex" (Encode.int tabIndex))
 
@@ -81,11 +81,11 @@ trailingIconElt { icon, trailingIcon } =
         _ ->
             Nothing
 
-rootCs :: Maybe (HH.Attribute r i)
+rootCs :: Maybe (IProp r i)
 rootCs =
     Just (HP.class_ mdc_fab)
 
-exitedCs :: Config r i -> Maybe (HH.Attribute r i)
+exitedCs :: Config r i -> Maybe (IProp r i)
 exitedCs { exited } =
     if exited then
         Just (HP.class_ mdc_fab____exited)
@@ -93,6 +93,6 @@ exitedCs { exited } =
     else
         Nothing
 
-clickHandler :: Config r i -> Maybe (HH.Attribute r i)
+clickHandler :: Config r i -> Maybe (IProp r i)
 clickHandler { onClick } =
     map HH.Events.onClick onClick

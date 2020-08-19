@@ -42,16 +42,16 @@ dataTable (config_@{ additionalAttributes }) { thead, tbody } =
         ]
     ]
 
-dataTableCs :: HH.Attribute r i
+dataTableCs :: IProp r i
 dataTableCs = HP.class_ mdc_data_table
 
-dataTableTableCs :: Maybe (HH.Attribute r i)
+dataTableTableCs :: Maybe (IProp r i)
 dataTableTableCs = Just (HP.class_ mdc_data_table__table)
 
-dataTableContentCs :: HH.Attribute r i
+dataTableContentCs :: IProp r i
 dataTableContentCs = HP.class_ mdc_data_table__content
 
-ariaLabelAttr :: Config r i -> Maybe (HH.Attribute r i)
+ariaLabelAttr :: Config r i -> Maybe (IProp r i)
 ariaLabelAttr { label } = map (HH.Attributes.attribute "aria-label") label
 
 data Row r i
@@ -66,19 +66,19 @@ selected =
   , HH.Attributes.attribute "aria-selected" "true"
   ]
 
-dataTableRowSelectedCs :: HH.Attribute r i
+dataTableRowSelectedCs :: IProp r i
 dataTableRowSelectedCs = HP.class_ mdc_data_table__row____selected
 
 headerRow :: Row r i -> Html r i
 headerRow (Row { attributes, nodes }) = HH.tr ([ dataTableHeaderRowCs, attributes ] <> (map headerCell nodes))
 
-dataTableHeaderRowCs :: HH.Attribute r i
+dataTableHeaderRowCs :: IProp r i
 dataTableHeaderRowCs = HP.class_ mdc_data_table__header_row
 
 bodyRow :: Row r i -> Html r i
 bodyRow (Row { attributes, nodes }) = HH.tr ([ dataTableRowCs, attributes ] <> (map bodyCell nodes))
 
-dataTableRowCs :: HH.Attribute r i
+dataTableRowCs :: IProp r i
 dataTableRowCs = HP.class_ mdc_data_table__row
 
 headerCell :: Cell r i -> Html r i
@@ -107,23 +107,23 @@ headerCell cell_ = case cell_ of
       [ Checkbox.checkbox (config_ { additionalAttributes = [ HP.class_ mdc_data_table__row_checkbox ] <> config__.additionalAttributes })
       ]
 
-dataTableHeaderCellCs :: Maybe (HH.Attribute r i)
+dataTableHeaderCellCs :: Maybe (IProp r i)
 dataTableHeaderCellCs = Just (HP.class_ mdc_data_table__header_cell)
 
-columnHeaderRoleAttr :: Maybe (HH.Attribute r i)
+columnHeaderRoleAttr :: Maybe (IProp r i)
 columnHeaderRoleAttr = Just (HH.Attributes.attribute "role" "columnheader")
 
-colScopeAttr :: Maybe (HH.Attribute r i)
+colScopeAttr :: Maybe (IProp r i)
 colScopeAttr = Just (HH.Attributes.attribute "scope" "col")
 
-dataTableHeaderCellNumericCs :: Boolean -> Maybe (HH.Attribute r i)
+dataTableHeaderCellNumericCs :: Boolean -> Maybe (IProp r i)
 dataTableHeaderCellNumericCs numeric =
   if numeric then
     Just (HP.class_ mdc_data_table__header_cell____numeric)
   else
     Nothing
 
-dataTableHeaderCellCheckboxCs :: Maybe (HH.Attribute r i)
+dataTableHeaderCellCheckboxCs :: Maybe (IProp r i)
 dataTableHeaderCellCheckboxCs = Just (HP.class_ mdc_data_table__header_cell____checkbox)
 
 bodyCell :: Cell r i -> Html r i
@@ -170,15 +170,15 @@ numericCell attributes nodes = Cell { numeric = True, attributes = attributes, n
 checkboxCell :: Array (IProp r i) -> Checkbox.Config r i -> Cell r i
 checkboxCell attributes config_ = CheckboxCell { attributes = attributes, config_ = config_ }
 
-dataTableCellCs :: Maybe (HH.Attribute r i)
+dataTableCellCs :: Maybe (IProp r i)
 dataTableCellCs = Just (HP.class_ mdc_data_table__cell)
 
-dataTableCellNumericCs :: Boolean -> Maybe (HH.Attribute r i)
+dataTableCellNumericCs :: Boolean -> Maybe (IProp r i)
 dataTableCellNumericCs numeric =
   if numeric then
     Just (HP.class_ mdc_data_table__cell____numeric)
   else
     Nothing
 
-dataTableCellCheckboxCs :: Maybe (HH.Attribute r i)
+dataTableCellCheckboxCs :: Maybe (IProp r i)
 dataTableCellCheckboxCs = Just (HP.class_ mdc_data_table__cell____checkbox)

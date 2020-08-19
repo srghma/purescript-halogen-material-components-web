@@ -60,19 +60,19 @@ buffered :: Config r i -> { progress :: Float, buffered :: Float } -> Html r i
 buffered config_ data =
     linearProgress (Buffered data.progress data.buffered) config_
 
-rootCs :: Maybe (HH.Attribute r i)
+rootCs :: Maybe (IProp r i)
 rootCs =
     Just (HP.class_ mdc_linear_progress)
 
-displayCss :: Maybe (HH.Attribute r i)
+displayCss :: Maybe (IProp r i)
 displayCss =
     Just (style "display" "block")
 
-roleAttr :: Maybe (HH.Attribute r i)
+roleAttr :: Maybe (IProp r i)
 roleAttr =
     Just (HH.Attributes.attribute "role" "progressbar")
 
-variantCs :: Variant -> Maybe (HH.Attribute r i)
+variantCs :: Variant -> Maybe (IProp r i)
 variantCs variant =
     case variant of
         Indeterminate ->
@@ -81,11 +81,11 @@ variantCs variant =
         _ ->
             Nothing
 
-determinateProp :: Variant -> Maybe (HH.Attribute r i)
+determinateProp :: Variant -> Maybe (IProp r i)
 determinateProp variant =
     Just (HH.Attributes.property "determinate" (Encode.bool (variant /= Indeterminate)))
 
-progressProp :: Variant -> Maybe (HH.Attribute r i)
+progressProp :: Variant -> Maybe (IProp r i)
 progressProp variant =
     Just
         (HH.Attributes.property "progress"
@@ -103,7 +103,7 @@ progressProp variant =
             )
         )
 
-bufferProp :: Variant -> Maybe (HH.Attribute r i)
+bufferProp :: Variant -> Maybe (IProp r i)
 bufferProp variant =
     Just
         (HH.Attributes.property "buffer"
@@ -118,11 +118,11 @@ bufferProp variant =
             )
         )
 
-reverseProp :: Config r i -> Maybe (HH.Attribute r i)
+reverseProp :: Config r i -> Maybe (IProp r i)
 reverseProp { reverse } =
     Just (HH.Attributes.property "reverse" (Encode.bool reverse))
 
-closedProp :: Config r i -> Maybe (HH.Attribute r i)
+closedProp :: Config r i -> Maybe (IProp r i)
 closedProp { closed } =
     Just (HH.Attributes.property "closed" (Encode.bool closed))
 

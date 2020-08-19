@@ -35,17 +35,17 @@ menu (config_@{ additionalAttributes }) nodes =
     )
     nodes
 
-surfaceAnchor :: HH.Attribute r i
+surfaceAnchor :: IProp r i
 surfaceAnchor = HP.class_ mdc_menu_surface____anchor
 
-rootCs :: Maybe (HH.Attribute r i)
+rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ "mdc-menu mdc-menu-surface")
 
-openProp :: Config r i -> Maybe (HH.Attribute r i)
+openProp :: Config r i -> Maybe (IProp r i)
 openProp { open } = Just (HH.Attributes.property "open" (Encode.bool open))
 
-quickOpenProp :: Config r i -> Maybe (HH.Attribute r i)
+quickOpenProp :: Config r i -> Maybe (IProp r i)
 quickOpenProp { quickOpen } = Just (HH.Attributes.property "quickOpen" (Encode.bool quickOpen))
 
-closeHandler :: Config r i -> Maybe (HH.Attribute r i)
+closeHandler :: Config r i -> Maybe (IProp r i)
 closeHandler { onClose } = map (HH.Events.on "MDCMenu:close" << Decode.succeed) onClose

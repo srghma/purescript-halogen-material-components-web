@@ -70,7 +70,7 @@ actionsElt content = case content.actions of
     ]
   Nothing -> []
 
-outlinedCs :: Config r i -> Maybe (HH.Attribute r i)
+outlinedCs :: Config r i -> Maybe (IProp r i)
 outlinedCs config =
   if config.outlined then
     Just (HP.class_ mdc_card____outlined)
@@ -107,13 +107,13 @@ sixteenToNineMedia additionalAttributes backgroundImage = mediaView (Just Sixtee
 media :: Array (IProp r i) -> String -> Html r i
 media additionalAttributes backgroundImage = mediaView Nothing additionalAttributes backgroundImage
 
-mediaCs :: Maybe (HH.Attribute r i)
+mediaCs :: Maybe (IProp r i)
 mediaCs = Just (HP.class_ mdc_card__media)
 
-backgroundImageAttr :: String -> Maybe (HH.Attribute r i)
+backgroundImageAttr :: String -> Maybe (IProp r i)
 backgroundImageAttr url = Just (style "background-image" ("url(\"" <> url <> "\")"))
 
-aspectCs :: Maybe Aspect -> Maybe (HH.Attribute r i)
+aspectCs :: Maybe Aspect -> Maybe (IProp r i)
 aspectCs aspect = case aspect of
   Just Square -> Just (HP.class_ mdc_card__media____square)
   Just SixteenToNine -> Just (HP.class_ "mdc-card__media--16-9")
@@ -130,7 +130,7 @@ primaryAction additionalAttributes blocks =
       blocks
   ]
 
-tabIndexProp :: Int -> HH.Attribute r i
+tabIndexProp :: Int -> IProp r i
 tabIndexProp tabIndex = HH.Attributes.property "tabIndex" (Encode.int tabIndex)
 
 newtype Actions r i

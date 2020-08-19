@@ -39,10 +39,10 @@ chip (Chip (config_@{ additionalAttributes }) label) =
         )
     ]
 
-selectedProp :: Chip.Config r i -> Maybe (HH.Attribute r i)
+selectedProp :: Chip.Config r i -> Maybe (IProp r i)
 selectedProp { selected } = Just (HH.Attributes.property "selected" (Encode.bool selected))
 
-interactionHandler :: Chip.Config r i -> Maybe (HH.Attribute r i)
+interactionHandler :: Chip.Config r i -> Maybe (IProp r i)
 interactionHandler { onChange } = map (HH.Events.on "MDCChip:interaction" << Decode.succeed) onChange
 
 rippleElt :: Maybe (Html r i)

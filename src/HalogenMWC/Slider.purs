@@ -74,57 +74,57 @@ slider (config_@{ additionalAttributes }) =
     , thumbContainerElt config_
     ]
 
-rootCs :: Maybe (HH.Attribute r i)
+rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_slider)
 
-displayCss :: Maybe (HH.Attribute r i)
+displayCss :: Maybe (IProp r i)
 displayCss = Just (style "display" "block")
 
-discreteCs :: Config r i -> Maybe (HH.Attribute r i)
+discreteCs :: Config r i -> Maybe (IProp r i)
 discreteCs { discrete } =
   if discrete then
     Just (HP.class_ mdc_slider____discrete)
   else
     Nothing
 
-displayMarkersCs :: Config r i -> Maybe (HH.Attribute r i)
+displayMarkersCs :: Config r i -> Maybe (IProp r i)
 displayMarkersCs { discrete, displayMarkers } =
   if discrete && displayMarkers then
     Just (HP.class_ "mdc-slider--display-markers")
   else
     Nothing
 
-tabIndexProp :: Maybe (HH.Attribute r i)
+tabIndexProp :: Maybe (IProp r i)
 tabIndexProp = Just (HH.Attributes.tabindex 0)
 
-sliderRoleAttr :: Maybe (HH.Attribute r i)
+sliderRoleAttr :: Maybe (IProp r i)
 sliderRoleAttr = Just (HH.Attributes.attribute "role" "slider")
 
-valueProp :: Config r i -> Maybe (HH.Attribute r i)
+valueProp :: Config r i -> Maybe (IProp r i)
 valueProp { value } = map (HH.Attributes.property "value" << Encode.float) value
 
-minProp :: Config r i -> Maybe (HH.Attribute r i)
+minProp :: Config r i -> Maybe (IProp r i)
 minProp { min } = map (HH.Attributes.property "min" << Encode.float) min
 
-maxProp :: Config r i -> Maybe (HH.Attribute r i)
+maxProp :: Config r i -> Maybe (IProp r i)
 maxProp { max } = map (HH.Attributes.property "max" << Encode.float) max
 
-stepProp :: Config r i -> Maybe (HH.Attribute r i)
+stepProp :: Config r i -> Maybe (IProp r i)
 stepProp { step } = map (HH.Attributes.property "step" << Encode.float) step
 
-disabledProp :: Config r i -> Maybe (HH.Attribute r i)
+disabledProp :: Config r i -> Maybe (IProp r i)
 disabledProp { disabled } = Just (HH.Attributes.property "disabled" (Encode.bool disabled))
 
-ariaValueMinAttr :: Config r i -> Maybe (HH.Attribute r i)
+ariaValueMinAttr :: Config r i -> Maybe (IProp r i)
 ariaValueMinAttr { min } = map (HH.Attributes.attribute "aria-valuemin" << String.fromFloat) min
 
-ariaValueMaxAttr :: Config r i -> Maybe (HH.Attribute r i)
+ariaValueMaxAttr :: Config r i -> Maybe (IProp r i)
 ariaValueMaxAttr { max } = map (HH.Attributes.attribute "aria-valuemax" << String.fromFloat) max
 
-ariaValuenowAttr :: Config r i -> Maybe (HH.Attribute r i)
+ariaValuenowAttr :: Config r i -> Maybe (IProp r i)
 ariaValuenowAttr { value } = map (HH.Attributes.attribute "aria-valuenow" << String.fromFloat) value
 
-changeHandler :: Config r i -> Maybe (HH.Attribute r i)
+changeHandler :: Config r i -> Maybe (IProp r i)
 changeHandler { onInput } =
   map
     ( \handler ->

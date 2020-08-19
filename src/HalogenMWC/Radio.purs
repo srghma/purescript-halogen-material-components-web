@@ -58,23 +58,23 @@ radio (config_@{ touch, additionalAttributes }) =
           , rippleElt
           ]
 
-rootCs :: Maybe (HH.Attribute r i)
+rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_radio)
 
-touchCs :: Config r i -> Maybe (HH.Attribute r i)
+touchCs :: Config r i -> Maybe (IProp r i)
 touchCs { touch } =
   if touch then
     Just (HP.class_ mdc_radio____touch)
   else
     Nothing
 
-checkedProp :: Config r i -> Maybe (HH.Attribute r i)
+checkedProp :: Config r i -> Maybe (IProp r i)
 checkedProp { checked } = Just (HH.Attributes.property "checked" (Encode.bool checked))
 
-disabledProp :: Config r i -> Maybe (HH.Attribute r i)
+disabledProp :: Config r i -> Maybe (IProp r i)
 disabledProp { disabled } = Just (HH.Attributes.property "disabled" (Encode.bool disabled))
 
-changeHandler :: Config r i -> Maybe (HH.Attribute r i)
+changeHandler :: Config r i -> Maybe (IProp r i)
 changeHandler { checked, onChange } =
   -- Note: MDCArray choses to send a change event to all checkboxes, thus we
   -- have to check here if the state actually changed.
@@ -105,10 +105,10 @@ nativeControlElt config_ =
     )
     []
 
-nativeControlCs :: Maybe (HH.Attribute r i)
+nativeControlCs :: Maybe (IProp r i)
 nativeControlCs = Just (HP.class_ mdc_radio__native_control)
 
-radioTypeAttr :: Maybe (HH.Attribute r i)
+radioTypeAttr :: Maybe (IProp r i)
 radioTypeAttr = Just (HH.Attributes.type_ "radio")
 
 backgroundElt :: Html r i

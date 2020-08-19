@@ -103,11 +103,11 @@ icon :: Array (IProp r i) -> String -> Icon r i
 icon additionalAttributes iconName =
     Icon (Icon.icon (HP.class_ mdc_select__icon] <> additionalAttributes) iconName)
 
-rootCs :: Maybe (HH.Attribute r i)
+rootCs :: Maybe (IProp r i)
 rootCs =
     Just (HP.class_ mdc_select)
 
-outlinedCs :: Variant -> Maybe (HH.Attribute r i)
+outlinedCs :: Variant -> Maybe (IProp r i)
 outlinedCs variant =
     if variant == Outlined then
         Just (HP.class_ mdc_select____outlined)
@@ -115,26 +115,26 @@ outlinedCs variant =
     else
         Nothing
 
-leadingIconCs :: Config a r i -> Maybe (HH.Attribute r i)
+leadingIconCs :: Config a r i -> Maybe (IProp r i)
 leadingIconCs { leadingIcon } =
     map (\_ -> HP.class_ "mdc-select--with-leading-icon") leadingIcon
 
-disabledProp :: Config a r i -> Maybe (HH.Attribute r i)
+disabledProp :: Config a r i -> Maybe (IProp r i)
 disabledProp { disabled } =
     Just (HH.Attributes.property "disabled" (Encode.bool disabled))
 
-validProp :: Config a r i -> Maybe (HH.Attribute r i)
+validProp :: Config a r i -> Maybe (IProp r i)
 validProp { valid } =
     Just (HH.Attributes.property "valid" (Encode.bool valid))
 
-selectedIndexProp :: Maybe Int -> Maybe (HH.Attribute r i)
+selectedIndexProp :: Maybe Int -> Maybe (IProp r i)
 selectedIndexProp selectedIndex =
     Just
         (HH.Attributes.property "selectedIndex"
             (Encode.int (Maybe.withDefault -1 selectedIndex))
         )
 
-requiredProp :: Config a r i -> Maybe (HH.Attribute r i)
+requiredProp :: Config a r i -> Maybe (IProp r i)
 requiredProp { required } =
     Just (HH.Attributes.property "required" (Encode.bool required))
 

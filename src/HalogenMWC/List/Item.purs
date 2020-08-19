@@ -70,7 +70,7 @@ listItemView config_ nodes =
         <> config_.additionalAttributes
     )
 
-disabledCs :: Config r i -> Maybe (HH.Attribute r i)
+disabledCs :: Config r i -> Maybe (IProp r i)
 disabledCs { disabled } =
     if disabled then
         Just (HP.class_ mdc_list_item____disabled)
@@ -78,7 +78,7 @@ disabledCs { disabled } =
     else
         Nothing
 
-selectedCs :: Config r i -> Maybe (HH.Attribute r i)
+selectedCs :: Config r i -> Maybe (IProp r i)
 selectedCs { selection } =
     if selection == Just Selected then
         Just (HP.class_ mdc_list_item____selected)
@@ -86,25 +86,25 @@ selectedCs { selection } =
     else
         Nothing
 
-activatedCs :: Config r i -> Maybe (HH.Attribute r i)
+activatedCs :: Config r i -> Maybe (IProp r i)
 activatedCs { selection } =
     if selection == Just Activated then
         Just (HP.class_ mdc_list_item____activated)
     else
         Nothing
 
-ariaSelectedAttr :: Config r i -> Maybe (HH.Attribute r i)
+ariaSelectedAttr :: Config r i -> Maybe (IProp r i)
 ariaSelectedAttr { selection } =
     if selection /= Nothing then
         Just (HH.Attributes.attribute "aria-selected" "true")
     else
         Nothing
 
-hrefAttr :: Config r i -> Maybe (HH.Attribute r i)
+hrefAttr :: Config r i -> Maybe (IProp r i)
 hrefAttr { href } =
     map HH.Attributes.href href
 
-targetAttr :: Config r i -> Maybe (HH.Attribute r i)
+targetAttr :: Config r i -> Maybe (IProp r i)
 targetAttr { href, target } =
     if href /= Nothing then
         map HH.Attributes.target target

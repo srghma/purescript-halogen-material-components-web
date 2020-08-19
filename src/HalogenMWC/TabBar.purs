@@ -39,15 +39,15 @@ tabBar (config_@{ additionalAttributes, align }) tabs =
         )
         [ tabScroller config_ align tabs ]
 
-rootCs :: Maybe (HH.Attribute r i)
+rootCs :: Maybe (IProp r i)
 rootCs =
     Just (HP.class_ mdc_tab_bar)
 
-tablistRoleAttr :: Maybe (HH.Attribute r i)
+tablistRoleAttr :: Maybe (IProp r i)
 tablistRoleAttr =
     Just (HH.Attributes.attribute "role" "tablist")
 
-activeTabIndexProp :: Array (Tab r i) -> Maybe (HH.Attribute r i)
+activeTabIndexProp :: Array (Tab r i) -> Maybe (IProp r i)
 activeTabIndexProp tabs =
     let
         activeTabIndex =
@@ -83,11 +83,11 @@ viewTab (barConfig@{ indicatorSpansContent }) (tabConfig@(Tab ({ additionalAttri
                 ]
         )
 
-tabCs :: Maybe (HH.Attribute r i)
+tabCs :: Maybe (IProp r i)
 tabCs =
     Just (HP.class_ mdc_tab)
 
-tabStackedCs :: Config r i -> Maybe (HH.Attribute r i)
+tabStackedCs :: Config r i -> Maybe (IProp r i)
 tabStackedCs { stacked } =
     if stacked then
         Just (HP.class_ mdc_tab____stacked)
@@ -95,7 +95,7 @@ tabStackedCs { stacked } =
     else
         Nothing
 
-tabMinWidthCs :: Config r i -> Maybe (HH.Attribute r i)
+tabMinWidthCs :: Config r i -> Maybe (IProp r i)
 tabMinWidthCs { minWidth } =
     if minWidth then
         Just (HP.class_ "mdc-tab--min-width")
@@ -103,11 +103,11 @@ tabMinWidthCs { minWidth } =
     else
         Nothing
 
-tabRoleAttr :: Maybe (HH.Attribute r i)
+tabRoleAttr :: Maybe (IProp r i)
 tabRoleAttr =
     Just (HH.Attributes.attribute "role" "tab")
 
-tabClickHandler :: Tab.Config r i -> Maybe (HH.Attribute r i)
+tabClickHandler :: Tab.Config r i -> Maybe (IProp r i)
 tabClickHandler { onClick } =
     map (HH.Events.on "MDCTab:interacted" << Decode.succeed) onClick
 
@@ -175,11 +175,11 @@ tabScroller config_ align tabs =
         )
         [ tabScrollerScrollAreaElt config_ tabs ]
 
-tabScrollerCs :: Maybe (HH.Attribute r i)
+tabScrollerCs :: Maybe (IProp r i)
 tabScrollerCs =
     Just (HP.class_ mdc_tab_scroller)
 
-tabScrollerAlignCs :: Maybe Align -> Maybe (HH.Attribute r i)
+tabScrollerAlignCs :: Maybe Align -> Maybe (IProp r i)
 tabScrollerAlignCs align =
     case align of
         Just Start ->

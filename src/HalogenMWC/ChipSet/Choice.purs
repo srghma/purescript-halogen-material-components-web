@@ -50,51 +50,51 @@ chip selected onChange toLabel (Chip config_ value) =
             )
         ]
 
-chipSetCs :: HH.Attribute r i
+chipSetCs :: IProp r i
 chipSetCs =
     HP.class_ mdc_chip_set
 
-chipSetChoiceCs :: HH.Attribute r i
+chipSetChoiceCs :: IProp r i
 chipSetChoiceCs =
     HP.class_ mdc_chip_set____choice
 
-gridRole :: HH.Attribute r i
+gridRole :: IProp r i
 gridRole =
     HH.Attributes.attribute "role" "grid"
 
-chipCs :: Maybe (HH.Attribute r i)
+chipCs :: Maybe (IProp r i)
 chipCs =
     Just (HP.class_ mdc_chip)
 
-chipTextCs :: HH.Attribute r i
+chipTextCs :: IProp r i
 chipTextCs =
     HP.class_ mdc_chip__text
 
-chipTouchCs :: Maybe (HH.Attribute r i)
+chipTouchCs :: Maybe (IProp r i)
 chipTouchCs =
     Just (HP.class_ mdc_chip____touch)
 
-chipPrimaryActionCs :: HH.Attribute r i
+chipPrimaryActionCs :: IProp r i
 chipPrimaryActionCs =
     HP.class_ mdc_chip__primary_action
 
-selectedProp :: Boolean -> Maybe (HH.Attribute r i)
+selectedProp :: Boolean -> Maybe (IProp r i)
 selectedProp selected =
     Just (HH.Attributes.property "selected" (Encode.bool selected))
 
-buttonRole :: HH.Attribute r i
+buttonRole :: IProp r i
 buttonRole =
     HH.Attributes.attribute "role" "button"
 
-rowRole :: Maybe (HH.Attribute r i)
+rowRole :: Maybe (IProp r i)
 rowRole =
     Just (HH.Attributes.attribute "role" "row")
 
-gridcellRole :: HH.Attribute r i
+gridcellRole :: IProp r i
 gridcellRole =
     HH.Attributes.attribute "role" "gridcell"
 
-interactionHandler :: Maybe r i -> Maybe (HH.Attribute r i)
+interactionHandler :: Maybe r i -> Maybe (IProp r i)
 interactionHandler r i =
     map (HH.Events.on "MDCChip:interaction" << Decode.succeed) r i
 

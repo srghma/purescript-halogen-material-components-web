@@ -55,26 +55,26 @@ checkbox (config_@{ touch, additionalAttributes }) =
           , backgroundElt
           ]
 
-rootCs :: Maybe (HH.Attribute r i)
+rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_checkbox)
 
-touchCs :: Config r i -> Maybe (HH.Attribute r i)
+touchCs :: Config r i -> Maybe (IProp r i)
 touchCs { touch } =
   if touch then
     Just (HP.class_ mdc_checkbox____touch)
   else
     Nothing
 
-checkedProp :: Config r i -> Maybe (HH.Attribute r i)
+checkedProp :: Config r i -> Maybe (IProp r i)
 checkedProp { state } = Just (HH.Attributes.property "checked" (Encode.bool (state == Just Checked)))
 
-indeterminateProp :: Config r i -> Maybe (HH.Attribute r i)
+indeterminateProp :: Config r i -> Maybe (IProp r i)
 indeterminateProp { state } = Just (HH.Attributes.property "indeterminate" (Encode.bool (state == Just Indeterminate)))
 
-disabledProp :: Config r i -> Maybe (HH.Attribute r i)
+disabledProp :: Config r i -> Maybe (IProp r i)
 disabledProp { disabled } = Just (HH.Attributes.property "disabled" (Encode.bool disabled))
 
-changeHandler :: Config r i -> Maybe (HH.Attribute r i)
+changeHandler :: Config r i -> Maybe (IProp r i)
 changeHandler { state, onChange } =
   -- Note: MDCArray choses to send a change event to all checkboxes, thus we
   -- have to check here if the state actually changed.
