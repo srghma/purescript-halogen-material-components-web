@@ -62,7 +62,7 @@ config =
 
 
 switch :: Config r i -> Html r i
-switch ((Config { additionalAttributes }) as config_) =
+switch (({ additionalAttributes }) as config_) =
     HH.node "mdc-switch"
         (Array.filterMap identity
             [ rootCs
@@ -82,12 +82,12 @@ rootCs =
 
 
 checkedProp :: Config r i -> Maybe (HH.Attribute r i)
-checkedProp (Config { checked }) =
+checkedProp ({ checked }) =
     Just (HH.Attributes.property "checked" (Encode.bool checked))
 
 
 disabledProp :: Config r i -> Maybe (HH.Attribute r i)
-disabledProp (Config { disabled }) =
+disabledProp ({ disabled }) =
     Just (HH.Attributes.property "disabled" (Encode.bool disabled))
 
 
@@ -107,7 +107,7 @@ checkboxTypeAttr =
 
 
 changeHandler :: Config r i -> Maybe (HH.Attribute r i)
-changeHandler (Config { onChange }) =
+changeHandler ({ onChange }) =
     Maybe.map (HH.Events.on "change" << Decode.succeed) onChange
 
 

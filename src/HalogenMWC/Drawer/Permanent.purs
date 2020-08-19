@@ -22,7 +22,7 @@ type Config r i
 
 config :: Config r i
 config =
-    Config { additionalAttributes = [] }
+    { additionalAttributes = [] }
 
 
 
@@ -32,7 +32,7 @@ config =
 
 
 drawer :: Config r i -> Array (Html r i) -> Html r i
-drawer (Config { additionalAttributes }) nodes =
+drawer ({ additionalAttributes }) nodes =
     HH.div
         (Array.filterMap identity [ rootCs ] <> additionalAttributes)
         nodes

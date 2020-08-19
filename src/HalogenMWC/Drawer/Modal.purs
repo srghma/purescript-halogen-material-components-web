@@ -56,7 +56,7 @@ config =
 
 
 drawer :: Config r i -> Array (Html r i) -> Html r i
-drawer ((Config { additionalAttributes }) as config_) nodes =
+drawer (({ additionalAttributes }) as config_) nodes =
     HH.node "mdc-drawer"
         (Array.filterMap identity
             [ rootCs
@@ -104,12 +104,12 @@ modalCs =
 
 
 openProp :: Config r i -> Maybe (HH.Attribute r i)
-openProp (Config { open }) =
+openProp ({ open }) =
     Just (HH.Attributes.property "open" (Encode.bool open))
 
 
 closeHandler :: Config r i -> Maybe (HH.Attribute r i)
-closeHandler (Config { onClose }) =
+closeHandler ({ onClose }) =
     Maybe.map (HH.Events.on "MDCDrawer:close" << Decode.succeed) onClose
 
 

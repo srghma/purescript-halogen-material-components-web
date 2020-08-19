@@ -54,7 +54,7 @@ config =
 
 
 listItem :: Config r i -> ArrayItem r i
-listItem ((Config { additionalAttributes }) as config_) =
+listItem (({ additionalAttributes }) as config_) =
     ArrayItem.ArrayItemDivider $
         HH.li
             (Array.filterMap identity
@@ -79,7 +79,7 @@ separatorRoleAttr =
 
 
 in
-insetCs (Config { inset }) =
+insetCs ({ inset }) =
     if inset then
         Just (HP.class_ mdc_list_divider____inset)
 
@@ -88,7 +88,7 @@ insetCs (Config { inset }) =
 
 
 paddedCs :: Config r i -> Maybe (HH.Attribute r i)
-paddedCs (Config { padded }) =
+paddedCs ({ padded }) =
     if padded then
         Just (HP.class_ mdc_list_divider____padded)
 

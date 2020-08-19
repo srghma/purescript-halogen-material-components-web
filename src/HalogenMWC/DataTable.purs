@@ -57,7 +57,7 @@ dataTable ::
         , tbody :: Array (Row r i)
         }
     -> Html r i
-dataTable (config_@(Config { additionalAttributes })) { thead, tbody } =
+dataTable (config_@({ additionalAttributes })) { thead, tbody } =
     HH.node "mdc-data-table"
         ([dataTableCs] <> additionalAttributes)
         [ HH.table
@@ -88,7 +88,7 @@ dataTableContentCs =
 
 
 ariaLabelAttr :: Config r i -> Maybe (HH.Attribute r i)
-ariaLabelAttr (Config { label }) =
+ariaLabelAttr ({ label }) =
     Maybe.map (HH.Attributes.attribute "aria-label") label
 
 

@@ -56,7 +56,7 @@ config =
 
 
 card :: Config r i -> Content r i -> Html r i
-card ((Config { additionalAttributes }) as config_) content =
+card (({ additionalAttributes }) as config_) content =
     HH.node "mdc-card"
         (Array.filterMap identity
             [ rootCs
@@ -119,7 +119,7 @@ rootCs =
 
 
 outlinedCs :: Config r i -> Maybe (HH.Attribute r i)
-outlinedCs (Config { outlined }) =
+outlinedCs ({ outlined }) =
     if outlined then
         Just (HP.class_ mdc_card____outlined)
 

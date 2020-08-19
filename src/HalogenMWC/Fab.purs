@@ -61,7 +61,7 @@ config =
 
 
 fab :: Config r i -> String -> Html r i
-fab ((Config { additionalAttributes }) as config_) iconName =
+fab (({ additionalAttributes }) as config_) iconName =
     HH.node "mdc-fab"
         (Array.filterMap identity
             [ rootCs
@@ -88,7 +88,7 @@ rootCs =
 
 
 miniCs :: Config r i -> Maybe (HH.Attribute r i)
-miniCs (Config { mini }) =
+miniCs ({ mini }) =
     if mini then
         Just (HP.class_ mdc_fab____mini)
 
@@ -97,7 +97,7 @@ miniCs (Config { mini }) =
 
 
 exitedCs :: Config r i -> Maybe (HH.Attribute r i)
-exitedCs (Config { exited }) =
+exitedCs ({ exited }) =
     if exited then
         Just (HP.class_ mdc_fab____exited)
 
@@ -116,5 +116,5 @@ iconElt iconName =
 
 
 clickHandler :: Config r i -> Maybe (HH.Attribute r i)
-clickHandler (Config { onClick }) =
+clickHandler ({ onClick }) =
     Maybe.map HH.Events.onClick onClick

@@ -62,7 +62,7 @@ type Content r i =
 
 
 dialog :: Config r i -> Content r i -> Html r i
-dialog (config_@(Config { additionalAttributes })) content =
+dialog (config_@({ additionalAttributes })) content =
     HH.node "mdc-dialog"
         (Array.filterMap identity
             [ rootCs
@@ -84,7 +84,7 @@ rootCs =
 
 
 openProp :: Config r i -> Maybe (HH.Attribute r i)
-openProp (Config { open }) =
+openProp ({ open }) =
     Just (HH.Attributes.property "open" (Encode.bool open))
 
 
@@ -99,7 +99,7 @@ ariaModalAttr =
 
 
 closeHandler :: Config r i -> Maybe (HH.Attribute r i)
-closeHandler (Config { onClose }) =
+closeHandler ({ onClose }) =
     Maybe.map (HH.Events.on "MDCDialog:close" << Decode.succeed) onClose
 
 

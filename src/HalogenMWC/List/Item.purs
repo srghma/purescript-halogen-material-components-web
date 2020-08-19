@@ -71,11 +71,11 @@ data ArrayItem r i =
 
 listItem :: Config r i -> Array (Html r i) -> ArrayItem r i
 listItem (Config ({ additionalAttributes, href } as config_)) nodes =
-    ArrayItem (Config { config_ | node = listItemView (Config config_) nodes })
+    ArrayItem ({ config_ | node = listItemView (Config config_) nodes })
 
 
 listItemView :: Config r i -> Array (Html r i) -> Html r i
-listItemView ((Config { additionalAttributes, href }) as config_) nodes =
+listItemView (({ additionalAttributes, href }) as config_) nodes =
     (\attributes ->
         if href /= Nothing then
             HH.node "mdc-list-item" [] [ HH.a attributes nodes ]
@@ -102,7 +102,7 @@ listItemCs =
 
 
 disabledCs :: Config r i -> Maybe (HH.Attribute r i)
-disabledCs (Config { disabled }) =
+disabledCs ({ disabled }) =
     if disabled then
         Just (HP.class_ mdc_list_item____disabled)
 
@@ -111,7 +111,7 @@ disabledCs (Config { disabled }) =
 
 
 selectedCs :: Config r i -> Maybe (HH.Attribute r i)
-selectedCs (Config { selection }) =
+selectedCs ({ selection }) =
     if selection == Just Selected then
         Just (HP.class_ mdc_list_item____selected)
 
@@ -120,7 +120,7 @@ selectedCs (Config { selection }) =
 
 
 activatedCs :: Config r i -> Maybe (HH.Attribute r i)
-activatedCs (Config { selection }) =
+activatedCs ({ selection }) =
     if selection == Just Activated then
         Just (HP.class_ mdc_list_item____activated)
 
@@ -129,7 +129,7 @@ activatedCs (Config { selection }) =
 
 
 ariaSelectedAttr :: Config r i -> Maybe (HH.Attribute r i)
-ariaSelectedAttr (Config { selection }) =
+ariaSelectedAttr ({ selection }) =
     if selection /= Nothing then
         Just (HH.Attributes.attribute "aria-selected" "true")
     else
@@ -137,12 +137,12 @@ ariaSelectedAttr (Config { selection }) =
 
 
 hrefAttr :: Config r i -> Maybe (HH.Attribute r i)
-hrefAttr (Config { href }) =
+hrefAttr ({ href }) =
     Maybe.map HH.Attributes.href href
 
 
 targetAttr :: Config r i -> Maybe (HH.Attribute r i)
-targetAttr (Config { href, target }) =
+targetAttr ({ href, target }) =
     if href /= Nothing then
         Maybe.map HH.Attributes.target target
 

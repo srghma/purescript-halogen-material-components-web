@@ -57,7 +57,7 @@ config { toLabel } =
 
 
 chipSet :: Config a r i -> Array (Chip a r i) -> Html r i
-chipSet ((Config { selected, onChange, toLabel, additionalAttributes }) as config_) chips =
+chipSet (({ selected, onChange, toLabel, additionalAttributes }) as config_) chips =
     HH.node "mdc-chip-set"
         ([ chipSetCs, chipSetChoiceCs, gridRole] <> additionalAttributes)
         (Array.map (chip selected onChange toLabel) chips)

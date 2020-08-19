@@ -127,17 +127,17 @@ rootCs =
 
 
 disabledProp :: Config r i -> Maybe (HH.Attribute r i)
-disabledProp (Config { disabled }) =
+disabledProp ({ disabled }) =
     Just (HH.Attributes.property "disabled" (Encode.bool disabled))
 
 
 disabledAttr :: Config r i -> Maybe (HH.Attribute r i)
-disabledAttr (Config { disabled }) =
+disabledAttr ({ disabled }) =
     Just (HH.Attributes.disabled disabled)
 
 
 tabIndexProp :: Config r i -> Maybe (HH.Attribute r i)
-tabIndexProp (Config { disabled }) =
+tabIndexProp ({ disabled }) =
     if disabled then
         Just (HH.Attributes.property "tabIndex" (Encode.int -1))
 
@@ -146,12 +146,12 @@ tabIndexProp (Config { disabled }) =
 
 
 hrefAttr :: Config r i -> Maybe (HH.Attribute r i)
-hrefAttr (Config { href }) =
+hrefAttr ({ href }) =
     Maybe.map HH.Attributes.href href
 
 
 targetAttr :: Config r i -> Maybe (HH.Attribute r i)
-targetAttr (Config { href, target }) =
+targetAttr ({ href, target }) =
     if href /= Nothing then
         Maybe.map HH.Attributes.target target
 
@@ -160,7 +160,7 @@ targetAttr (Config { href, target }) =
 
 
 clickHandler :: Config r i -> Maybe (HH.Attribute r i)
-clickHandler (Config { onClick }) =
+clickHandler ({ onClick }) =
     Maybe.map HH.Events.onClick onClick
 
 
@@ -181,7 +181,7 @@ variantCs variant =
 
 
 denseCs :: Config r i -> Maybe (HH.Attribute r i)
-denseCs (Config { dense }) =
+denseCs ({ dense }) =
     if dense then
         Just (HP.class_ mdc_button____dense)
 
@@ -190,7 +190,7 @@ denseCs (Config { dense }) =
 
 
 touchCs :: Config r i -> Maybe (HH.Attribute r i)
-touchCs (Config { touch }) =
+touchCs ({ touch }) =
     if touch then
         Just (HP.class_ mdc_button____touch)
 
@@ -199,7 +199,7 @@ touchCs (Config { touch }) =
 
 
 iconElt :: Config r i -> Maybe (Html r i)
-iconElt (Config { icon }) =
+iconElt ({ icon }) =
     Maybe.map
         (\iconName ->
             HH.i
@@ -217,7 +217,7 @@ rippleElt =
 
 
 leadingIconElt :: Config r i -> Maybe (Html r i)
-leadingIconElt ((Config { trailingIcon }) as config_) =
+leadingIconElt (({ trailingIcon }) as config_) =
     if not trailingIcon then
         iconElt config_
 
@@ -226,7 +226,7 @@ leadingIconElt ((Config { trailingIcon }) as config_) =
 
 
 trailingIconElt :: Config r i -> Maybe (Html r i)
-trailingIconElt ((Config { trailingIcon }) as config_) =
+trailingIconElt (({ trailingIcon }) as config_) =
     if trailingIcon then
         iconElt config_
 
@@ -235,7 +235,7 @@ trailingIconElt ((Config { trailingIcon }) as config_) =
 
 
 touchElt :: Config r i -> Maybe (Html r i)
-touchElt (Config { touch }) =
+touchElt ({ touch }) =
     if touch then
         Just (HH.div [ HP.class_ mdc_button__touch ] [])
 

@@ -101,7 +101,7 @@ indeterminate =
 
 
 checkbox :: Config r i -> Html r i
-checkbox ((Config { touch, additionalAttributes }) as config_) =
+checkbox (({ touch, additionalAttributes }) as config_) =
     let
         wrapTouch node =
             if touch then
@@ -132,7 +132,7 @@ rootCs =
 
 
 touchCs :: Config r i -> Maybe (HH.Attribute r i)
-touchCs (Config { touch }) =
+touchCs ({ touch }) =
     if touch then
         Just (HP.class_ mdc_checkbox____touch)
 
@@ -141,22 +141,22 @@ touchCs (Config { touch }) =
 
 
 checkedProp :: Config r i -> Maybe (HH.Attribute r i)
-checkedProp (Config { state }) =
+checkedProp ({ state }) =
     Just (HH.Attributes.property "checked" (Encode.bool (state == Just Checked)))
 
 
 indeterminateProp :: Config r i -> Maybe (HH.Attribute r i)
-indeterminateProp (Config { state }) =
+indeterminateProp ({ state }) =
     Just (HH.Attributes.property "indeterminate" (Encode.bool (state == Just Indeterminate)))
 
 
 disabledProp :: Config r i -> Maybe (HH.Attribute r i)
-disabledProp (Config { disabled }) =
+disabledProp ({ disabled }) =
     Just (HH.Attributes.property "disabled" (Encode.bool disabled))
 
 
 changeHandler :: Config r i -> Maybe (HH.Attribute r i)
-changeHandler (Config { state, onChange }) =
+changeHandler ({ state, onChange }) =
     -- Note: MDCArray choses to send a change event to all checkboxes, thus we
     -- have to check here if the state actually changed.
     Maybe.map

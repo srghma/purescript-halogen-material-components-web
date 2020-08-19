@@ -68,7 +68,7 @@ config =
 
 
 fab :: Config r i -> String -> Html r i
-fab ((Config { additionalAttributes }) as config_) label =
+fab (({ additionalAttributes }) as config_) label =
     HH.node "mdc-fab"
         (Array.filterMap identity
             [ rootCs
@@ -104,7 +104,7 @@ rippleElt =
 
 
 leadingIconElt :: Config r i -> Maybe (Html r i)
-leadingIconElt (Config { icon, trailingIcon }) =
+leadingIconElt ({ icon, trailingIcon }) =
     case ( icon, trailingIcon ) of
         ( Just iconName, False ) ->
             Just
@@ -122,7 +122,7 @@ labelElt label =
 
 
 trailingIconElt :: Config r i -> Maybe (Html r i)
-trailingIconElt (Config { icon, trailingIcon }) =
+trailingIconElt ({ icon, trailingIcon }) =
     case ( icon, trailingIcon ) of
         ( Just iconName, True ) ->
             Just
@@ -140,7 +140,7 @@ rootCs =
 
 
 exitedCs :: Config r i -> Maybe (HH.Attribute r i)
-exitedCs (Config { exited }) =
+exitedCs ({ exited }) =
     if exited then
         Just (HP.class_ mdc_fab____exited)
 
@@ -149,5 +149,5 @@ exitedCs (Config { exited }) =
 
 
 clickHandler :: Config r i -> Maybe (HH.Attribute r i)
-clickHandler (Config { onClick }) =
+clickHandler ({ onClick }) =
     Maybe.map HH.Events.onClick onClick

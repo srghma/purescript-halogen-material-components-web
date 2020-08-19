@@ -119,7 +119,7 @@ Note that this option is ignored by non-discrete sliders.
 
 
 slider :: Config r i -> Html r i
-slider ((Config { additionalAttributes }) as config_) =
+slider (({ additionalAttributes }) as config_) =
     HH.node "mdc-slider"
         (Array.filterMap identity
             [ rootCs
@@ -156,7 +156,7 @@ displayCss =
 
 
 discreteCs :: Config r i -> Maybe (HH.Attribute r i)
-discreteCs (Config { discrete }) =
+discreteCs ({ discrete }) =
     if discrete then
         Just (HP.class_ mdc_slider____discrete)
 
@@ -165,7 +165,7 @@ discreteCs (Config { discrete }) =
 
 
 displayMarkersCs :: Config r i -> Maybe (HH.Attribute r i)
-displayMarkersCs (Config { discrete, displayMarkers }) =
+displayMarkersCs ({ discrete, displayMarkers }) =
     if discrete && displayMarkers then
         Just (HP.class_ "mdc-slider--display-markers")
 
@@ -184,47 +184,47 @@ sliderRoleAttr =
 
 
 valueProp :: Config r i -> Maybe (HH.Attribute r i)
-valueProp (Config { value }) =
+valueProp ({ value }) =
     Maybe.map (HH.Attributes.property "value" << Encode.float) value
 
 
 minProp :: Config r i -> Maybe (HH.Attribute r i)
-minProp (Config { min }) =
+minProp ({ min }) =
     Maybe.map (HH.Attributes.property "min" << Encode.float) min
 
 
 maxProp :: Config r i -> Maybe (HH.Attribute r i)
-maxProp (Config { max }) =
+maxProp ({ max }) =
     Maybe.map (HH.Attributes.property "max" << Encode.float) max
 
 
 stepProp :: Config r i -> Maybe (HH.Attribute r i)
-stepProp (Config { step }) =
+stepProp ({ step }) =
     Maybe.map (HH.Attributes.property "step" << Encode.float) step
 
 
 disabledProp :: Config r i -> Maybe (HH.Attribute r i)
-disabledProp (Config { disabled }) =
+disabledProp ({ disabled }) =
     Just (HH.Attributes.property "disabled" (Encode.bool disabled))
 
 
 ariaValueMinAttr :: Config r i -> Maybe (HH.Attribute r i)
-ariaValueMinAttr (Config { min }) =
+ariaValueMinAttr ({ min }) =
     Maybe.map (HH.Attributes.attribute "aria-valuemin" << String.fromFloat) min
 
 
 ariaValueMaxAttr :: Config r i -> Maybe (HH.Attribute r i)
-ariaValueMaxAttr (Config { max }) =
+ariaValueMaxAttr ({ max }) =
     Maybe.map (HH.Attributes.attribute "aria-valuemax" << String.fromFloat) max
 
 
 ariaValuenowAttr :: Config r i -> Maybe (HH.Attribute r i)
-ariaValuenowAttr (Config { value }) =
+ariaValuenowAttr ({ value }) =
     Maybe.map (HH.Attributes.attribute "aria-valuenow" << String.fromFloat) value
 
 
 changeHandler :: Config r i -> Maybe (HH.Attribute r i)
-changeHandler (Config { onInput }) =
+changeHandler ({ onInput }) =
     Maybe.map
         (\handler ->
             HH.Events.on "MDCSlider:input"
@@ -249,7 +249,7 @@ trackMarkerContainerElt =
 
 
 thumbContainerElt :: Config r i -> Html r i
-thumbContainerElt (Config { discrete }) =
+thumbContainerElt ({ discrete }) =
     HH.div [ HP.class_ mdc_slider__thumb_container ]
         (if discrete then
             [ pinElt, thumbElt, focusRingElt ]

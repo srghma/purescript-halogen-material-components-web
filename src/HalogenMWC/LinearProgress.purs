@@ -59,7 +59,7 @@ config =
 
 
 linearProgress :: Variant -> Config r i -> Html r i
-linearProgress variant ((Config { additionalAttributes }) as config_) =
+linearProgress variant (({ additionalAttributes }) as config_) =
     HH.node "mdc-linear-progress"
         (Array.filterMap identity
             [ rootCs
@@ -165,12 +165,12 @@ bufferProp variant =
 
 
 reverseProp :: Config r i -> Maybe (HH.Attribute r i)
-reverseProp (Config { reverse }) =
+reverseProp ({ reverse }) =
     Just (HH.Attributes.property "reverse" (Encode.bool reverse))
 
 
 closedProp :: Config r i -> Maybe (HH.Attribute r i)
-closedProp (Config { closed }) =
+closedProp ({ closed }) =
     Just (HH.Attributes.property "closed" (Encode.bool closed))
 
 

@@ -63,7 +63,7 @@ accent =
 
 
 ripple :: Boolean -> Config r i -> Html r i
-ripple isUnbounded ((Config { additionalAttributes }) as config_) =
+ripple isUnbounded (({ additionalAttributes }) as config_) =
     HH.node "mdc-ripple"
         (Array.filterMap identity
             [ unboundedProp isUnbounded
@@ -99,7 +99,7 @@ rippleSurface =
 
 
 colorCs :: Config r i -> Maybe (HH.Attribute r i)
-colorCs (Config { color }) =
+colorCs ({ color }) =
     case color of
         Just Primary ->
             Just (HP.class_ mdc_ripple_surface____primary)
