@@ -71,3 +71,4 @@ rmwc_data_table__row____selected = ClassName "rmwc-data-table__row--selected"
 
 rmwc_data_table__sort_icon :: ClassName
 rmwc_data_table__sort_icon = ClassName "rmwc-data-table__sort-icon"
+

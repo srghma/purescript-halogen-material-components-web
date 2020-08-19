@@ -65,3 +65,4 @@ rmwc_tooltip_zoom_enter = ClassName "rmwc-tooltip-zoom-enter"
 
 rmwc_tooltip_zoom_leave :: ClassName
 rmwc_tooltip_zoom_leave = ClassName "rmwc-tooltip-zoom-leave"
+

@@ -11,3 +11,4 @@ mdc_ripple_surface____accent = ClassName "mdc-ripple-surface--accent"
 
 mdc_ripple_surface____primary :: ClassName
 mdc_ripple_surface____primary = ClassName "mdc-ripple-surface--primary"
+

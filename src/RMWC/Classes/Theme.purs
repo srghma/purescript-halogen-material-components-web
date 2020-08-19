@@ -56,3 +56,4 @@ mdc_text_field = ClassName "mdc-text-field"
 
 mdc_top_app_bar :: ClassName
 mdc_top_app_bar = ClassName "mdc-top-app-bar"
+

@@ -113,3 +113,4 @@ mdc_text_field__input = ClassName "mdc-text-field__input"
 
 mdc_text_field__ripple :: ClassName
 mdc_text_field__ripple = ClassName "mdc-text-field__ripple"
+

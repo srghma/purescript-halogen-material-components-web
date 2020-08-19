@@ -35,3 +35,4 @@ rmwc_circular_progress__path = ClassName "rmwc-circular-progress__path"
 
 rmwc_icon :: ClassName
 rmwc_icon = ClassName "rmwc-icon"
+

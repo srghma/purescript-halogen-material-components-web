@@ -26,3 +26,4 @@ rmwc_icon____size_xsmall = ClassName "rmwc-icon--size-xsmall"
 
 rmwc_icon____url :: ClassName
 rmwc_icon____url = ClassName "rmwc-icon--url"
+

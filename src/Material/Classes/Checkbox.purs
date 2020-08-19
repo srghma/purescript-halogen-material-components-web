@@ -56,3 +56,4 @@ mdc_ripple_upgraded____background_focused = ClassName "mdc-ripple-upgraded--back
 
 mdc_touch_target_wrapper :: ClassName
 mdc_touch_target_wrapper = ClassName "mdc-touch-target-wrapper"
+

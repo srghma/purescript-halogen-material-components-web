@@ -50,3 +50,4 @@ mdc_elevation_overlay = ClassName "mdc-elevation-overlay"
 
 mdc_list :: ClassName
 mdc_list = ClassName "mdc-list"
+

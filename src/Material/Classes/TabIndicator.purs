@@ -23,3 +23,4 @@ mdc_tab_indicator__content____icon = ClassName "mdc-tab-indicator__content--icon
 
 mdc_tab_indicator__content____underline :: ClassName
 mdc_tab_indicator__content____underline = ClassName "mdc-tab-indicator__content--underline"
+

@@ -101,3 +101,4 @@ mdc_select__menu = ClassName "mdc-select__menu"
 
 mdc_select__selected_text :: ClassName
 mdc_select__selected_text = ClassName "mdc-select__selected-text"
+

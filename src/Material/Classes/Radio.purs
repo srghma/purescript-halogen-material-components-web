@@ -29,3 +29,4 @@ mdc_radio__ripple = ClassName "mdc-radio__ripple"
 
 mdc_touch_target_wrapper :: ClassName
 mdc_touch_target_wrapper = ClassName "mdc-touch-target-wrapper"
+
