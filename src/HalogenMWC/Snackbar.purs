@@ -118,7 +118,7 @@ closeOnEscapeProp { closeOnEscape } = Just (HP.prop "closeOnEscape" closeOnEscap
 
 leadingCs :: Maybe (Message r i) -> Maybe (IProp r i)
 leadingCs message_ =
-  Maybe.andThen
+  bindFlipped
     ( \(Message { leading }) ->
         if leading then
           Just (HP.class_ mdc_snackbar____leading)
@@ -129,7 +129,7 @@ leadingCs message_ =
 
 stackedCs :: Maybe (Message r i) -> Maybe (IProp r i)
 stackedCs message_ =
-  Maybe.andThen
+  bindFlipped
     ( \(Message { stacked }) ->
         if stacked then
           Just (HP.class_ mdc_snackbar____stacked)
@@ -146,7 +146,7 @@ timeoutMsProp message_ =
   let
     normalizedTimeoutMs =
       message_
-        # Maybe.andThen
+        # bindFlipped
             (\(Message { timeoutMs }) -> map (clamp 4000 10000) timeoutMs)
         # Maybe.withDefault indefiniteTimeout
 

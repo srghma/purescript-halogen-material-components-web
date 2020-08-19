@@ -115,7 +115,7 @@ clickHandler listItems =
         # Array.filterMap identity
         # Array.drop index
         # Array.head
-        # Maybe.andThen identity
+        # bindFlipped identity
 
     mergedClickHandler =
       Decode.at [ "detail", "index" ] Decode.int
