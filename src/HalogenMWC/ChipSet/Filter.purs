@@ -69,14 +69,14 @@ import Svg.Attributes
 
 {-| Filter chip set view function
 -}
-chipSet :: Array (IProp r i) -> Array (Chip msg) -> Html msg
+chipSet :: Array (IProp r i) -> Array (Chip r i) -> Html r i
 chipSet additionalAttributes chips =
     Html.node "mdc-chip-set"
         (chipSetCs :: chipSetFilterCs :: gridRole :: additionalAttributes)
         (Array.map chip chips)
 
 
-chip :: Chip msg -> Html msg
+chip :: Chip r i -> Html r i
 chip (Chip ((Chip.Config { additionalAttributes }) as config_) label) =
     Html.div [ class "mdc-touch-target-wrapper" ]
         [ Html.node "mdc-chip"
@@ -99,72 +99,72 @@ chip (Chip ((Chip.Config { additionalAttributes }) as config_) label) =
         ]
 
 
-chipSetCs :: Html.Attribute msg
+chipSetCs :: Html.Attribute r i
 chipSetCs =
     class "mdc-chip-set"
 
 
-chipSetFilterCs :: Html.Attribute msg
+chipSetFilterCs :: Html.Attribute r i
 chipSetFilterCs =
     class "mdc-chip-set--filter"
 
 
-gridRole :: Html.Attribute msg
+gridRole :: Html.Attribute r i
 gridRole =
     Html.Attributes.attribute "role" "grid"
 
 
-chipCs :: Maybe (Html.Attribute msg)
+chipCs :: Maybe (Html.Attribute r i)
 chipCs =
     Just (class "mdc-chip")
 
 
-chipTextCs :: Html.Attribute msg
+chipTextCs :: Html.Attribute r i
 chipTextCs =
     class "mdc-chip__text"
 
 
-chipTouchCs :: Maybe (Html.Attribute msg)
+chipTouchCs :: Maybe (Html.Attribute r i)
 chipTouchCs =
     Just (class "mdc-chip--touch")
 
 
-chipPrimaryActionCs :: Html.Attribute msg
+chipPrimaryActionCs :: Html.Attribute r i
 chipPrimaryActionCs =
     class "mdc-chip__primary-action"
 
 
-selectedProp :: Chip.Config msg -> Maybe (Html.Attribute msg)
+selectedProp :: Chip.Config r i -> Maybe (Html.Attribute r i)
 selectedProp (Chip.Config { selected }) =
     Just (Html.Attributes.property "selected" (Encode.bool selected))
 
 
-buttonRole :: Html.Attribute msg
+buttonRole :: Html.Attribute r i
 buttonRole =
     Html.Attributes.attribute "role" "button"
 
 
-rowRole :: Maybe (Html.Attribute msg)
+rowRole :: Maybe (Html.Attribute r i)
 rowRole =
     Just (Html.Attributes.attribute "role" "row")
 
 
-gridcellRole :: Html.Attribute msg
+gridcellRole :: Html.Attribute r i
 gridcellRole =
     Html.Attributes.attribute "role" "gridcell"
 
 
-interactionHandler :: Chip.Config msg -> Maybe (Html.Attribute msg)
+interactionHandler :: Chip.Config r i -> Maybe (Html.Attribute r i)
 interactionHandler (Chip.Config { onChange }) =
     Maybe.map (Html.Events.on "MDCChip:interaction" << Decode.succeed) onChange
 
 
-rippleElt :: Maybe (Html msg)
+rippleElt :: Maybe (Html r i)
 rippleElt =
     Just (Html.div [ class "mdc-chip__ripple" ] [])
 
 
-leadingIconElt :: Chip.Config msg -> Maybe (Html msg)
+leadingIconElt :: Chip.Config r i -> Maybe (Html r i)
 leadingIconElt (Chip.Config { icon, selected }) =
     Maybe.map
         (\iconName ->
@@ -177,7 +177,7 @@ leadingIconElt (Chip.Config { icon, selected }) =
         icon
 
 
-checkmarkElt :: Maybe (Html msg)
+checkmarkElt :: Maybe (Html r i)
 checkmarkElt =
     Just
         (Html.div [ class "mdc-chip__checkmark" ]
@@ -197,18 +197,18 @@ checkmarkElt =
         )
 
 
-primaryActionElt :: String -> Maybe (Html msg)
+primaryActionElt :: String -> Maybe (Html r i)
 primaryActionElt label =
     Just <|
         Html.span [ chipPrimaryActionCs, gridcellRole ]
             (Array.filterMap identity [ textElt label, touchElt ])
 
 
-textElt :: String -> Maybe (Html msg)
+textElt :: String -> Maybe (Html r i)
 textElt label =
     Just (Html.span [ chipTextCs, buttonRole ] [ text label ])
 
 
-touchElt :: Maybe (Html msg)
+touchElt :: Maybe (Html r i)
 touchElt =
     Just (Html.div [ class "mdc-chip__touch" ] [])

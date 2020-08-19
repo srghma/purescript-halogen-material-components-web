@@ -78,12 +78,12 @@ import Material.ImageArray.Item.Internal (Config(..), ImageArrayItem(..))
 {-| Configuration of an image list item
 -}
 type Config r i =
-    Material.ImageArray.Item.Internal.Config msg
+    Material.ImageArray.Item.Internal.Config r i
 
 
 {-| Default configuration of an image list item
 -}
-config :: Config msg
+config :: Config r i
 config =
     Config
         { label = Nothing
@@ -95,7 +95,7 @@ config =
 
 {-| Specify an image list item's label
 -}
-setLabel :: Maybe String -> Config msg -> Config msg
+setLabel :: Maybe String -> Config r i -> Config r i
 setLabel label (Config config_) =
     Config { config_ | label = label }
 
@@ -105,14 +105,14 @@ setLabel label (Config config_) =
 A link image list items behaves essentially like a HTML5 anchor element.
 
 -}
-setHref :: Maybe String -> Config msg -> Config msg
+setHref :: Maybe String -> Config r i -> Config r i
 setHref href (Config config_) =
     Config { config_ | href = href }
 
 
 {-| Specify additional attributes
 -}
-setAttributes :: Array (IProp r i) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
@@ -123,12 +123,12 @@ Image list items can only be rendered within a [image list
 container](Material-ImageArray)
 
 -}
-data ImageArrayItem msg =
-    Material.ImageArray.Item.Internal.ImageArrayItem msg
+data ImageArrayItem r i =
+    Material.ImageArray.Item.Internal.ImageArrayItem r i
 
 
 {-| Image list item constructor
 -}
-imageArrayItem :: Config msg -> String -> ImageArrayItem msg
+imageArrayItem :: Config r i -> String -> ImageArrayItem r i
 imageArrayItem (Config config_) image =
     ImageArrayItem (Config { config_ | image = image })

@@ -108,13 +108,13 @@ type Config r i
         { open :: Boolean
         , quickOpen :: Boolean
         , additionalAttributes :: Array (IProp r i)
-        , onClose :: Maybe msg
+        , onClose :: Maybe r i
         }
 
 
 {-| Default configuration of a menu
 -}
-config :: Config msg
+config :: Config r i
 config =
     Config
         { open = False
@@ -126,7 +126,7 @@ config =
 
 {-| Specify whether a menu is open
 -}
-setOpen :: Boolean -> Config msg -> Config msg
+setOpen :: Boolean -> Config r i -> Config r i
 setOpen open (Config config_) =
     Config { config_ | open = open }
 
@@ -136,28 +136,28 @@ setOpen open (Config config_) =
 A quickly opening menu opens without showing an animation.
 
 -}
-setQuickOpen :: Boolean -> Config msg -> Config msg
+setQuickOpen :: Boolean -> Config r i -> Config r i
 setQuickOpen quickOpen (Config config_) =
     Config { config_ | quickOpen = quickOpen }
 
 
 {-| Specify a message when the user closes the menu
 -}
-setOnClose :: msg -> Config msg -> Config msg
+setOnClose :: r i -> Config r i -> Config r i
 setOnClose onClose (Config config_) =
     Config { config_ | onClose = Just onClose }
 
 
 {-| Specify additional attributes
 -}
-setAttributes :: Array (IProp r i) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Menu view function
 -}
-menu :: Config msg -> Array (Html msg) -> Html msg
+menu :: Config r i -> Array (Html r i) -> Html r i
 menu ((Config { additionalAttributes }) as config_) nodes =
     Html.node "mdc-menu"
         (Array.filterMap identity
@@ -177,26 +177,26 @@ Use this on a HTML element that contains both the triggering element and the
 menu itself.
 
 -}
-surfaceAnchor :: Html.Attribute msg
+surfaceAnchor :: Html.Attribute r i
 surfaceAnchor =
     class "mdc-menu-surface--anchor"
 
 
-rootCs :: Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute r i)
 rootCs =
     Just (class "mdc-menu mdc-menu-surface")
 
 
-openProp :: Config msg -> Maybe (Html.Attribute msg)
+openProp :: Config r i -> Maybe (Html.Attribute r i)
 openProp (Config { open }) =
     Just (Html.Attributes.property "open" (Encode.bool open))
 
 
-quickOpenProp :: Config msg -> Maybe (Html.Attribute msg)
+quickOpenProp :: Config r i -> Maybe (Html.Attribute r i)
 quickOpenProp (Config { quickOpen }) =
     Just (Html.Attributes.property "quickOpen" (Encode.bool quickOpen))
 
 
-closeHandler :: Config msg -> Maybe (Html.Attribute msg)
+closeHandler :: Config r i -> Maybe (Html.Attribute r i)
 closeHandler (Config { onClose }) =
     Maybe.map (Html.Events.on "MDCMenu:close" << Decode.succeed) onClose

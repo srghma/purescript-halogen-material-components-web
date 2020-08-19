@@ -7,9 +7,9 @@ type Config r i
     = Config
         { icon :: Maybe String
         , additionalAttributes :: Array (IProp r i)
-        , onClick :: Maybe msg
+        , onClick :: Maybe r i
         }
 
 
-data Chip msg
-    = Chip (Config msg) String
+data Chip r i
+    = Chip (Config r i) String

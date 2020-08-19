@@ -85,13 +85,13 @@ type Config r i
     = Config
         { open :: Boolean
         , additionalAttributes :: Array (IProp r i)
-        , onClose :: Maybe msg
+        , onClose :: Maybe r i
         }
 
 
 {-| Default configuration of a dialog
 -}
-config :: Config msg
+config :: Config r i
 config =
     Config
         { open = False
@@ -102,37 +102,37 @@ config =
 
 {-| Specify whether a dialog is open
 -}
-setOpen :: Boolean -> Config msg -> Config msg
+setOpen :: Boolean -> Config r i -> Config r i
 setOpen open (Config config_) =
     Config { config_ | open = open }
 
 
 {-| Specify additional attributes
 -}
-setAttributes :: Array (IProp r i) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Specify a message when the user closes the dialog
 -}
-setOnClose :: msg -> Config msg -> Config msg
+setOnClose :: r i -> Config r i -> Config r i
 setOnClose onClose (Config config_) =
     Config { config_ | onClose = Just onClose }
 
 
 {-| Dialog content
 -}
-data Content msg =
+data Content r i =
     { title :: Maybe String
-    , content :: Array (Html msg)
-    , actions :: Array (Html msg)
+    , content :: Array (Html r i)
+    , actions :: Array (Html r i)
     }
 
 
 {-| Dialog view function
 -}
-dialog :: Config msg -> Content msg -> Html msg
+dialog :: Config r i -> Content r i -> Html r i
 dialog ((Config { additionalAttributes }) as config_) content =
     Html.node "mdc-dialog"
         (Array.filterMap identity
@@ -149,37 +149,37 @@ dialog ((Config { additionalAttributes }) as config_) content =
         ]
 
 
-rootCs :: Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute r i)
 rootCs =
     Just (class "mdc-dialog")
 
 
-openProp :: Config msg -> Maybe (Html.Attribute msg)
+openProp :: Config r i -> Maybe (Html.Attribute r i)
 openProp (Config { open }) =
     Just (Html.Attributes.property "open" (Encode.bool open))
 
 
-roleAttr :: Maybe (Html.Attribute msg)
+roleAttr :: Maybe (Html.Attribute r i)
 roleAttr =
     Just (Html.Attributes.attribute "role" "alertdialog")
 
 
-ariaModalAttr :: Maybe (Html.Attribute msg)
+ariaModalAttr :: Maybe (Html.Attribute r i)
 ariaModalAttr =
     Just (Html.Attributes.attribute "aria-modal" "true")
 
 
-closeHandler :: Config msg -> Maybe (Html.Attribute msg)
+closeHandler :: Config r i -> Maybe (Html.Attribute r i)
 closeHandler (Config { onClose }) =
     Maybe.map (Html.Events.on "MDCDialog:close" << Decode.succeed) onClose
 
 
-containerElt :: Content msg -> Html msg
+containerElt :: Content r i -> Html r i
 containerElt content =
     Html.div [ class "mdc-dialog__container" ] [ surfaceElt content ]
 
 
-surfaceElt :: Content msg -> Html msg
+surfaceElt :: Content r i -> Html r i
 surfaceElt content =
     Html.div
         [ class "mdc-dialog__surface" ]
@@ -191,7 +191,7 @@ surfaceElt content =
         )
 
 
-titleElt :: Content msg -> Maybe (Html msg)
+titleElt :: Content r i -> Maybe (Html r i)
 titleElt { title } =
     case title of
         Just title_ ->
@@ -201,12 +201,12 @@ titleElt { title } =
             Nothing
 
 
-contentElt :: Content msg -> Maybe (Html msg)
+contentElt :: Content r i -> Maybe (Html r i)
 contentElt { content } =
     Just (Html.div [ class "mdc-dialog__content" ] content)
 
 
-actionsElt :: Content msg -> Maybe (Html msg)
+actionsElt :: Content r i -> Maybe (Html r i)
 actionsElt { actions } =
     if Array.isEmpty actions then
         Nothing
@@ -215,6 +215,6 @@ actionsElt { actions } =
         Just (Html.div [ class "mdc-dialog__actions" ] actions)
 
 
-scrimElt :: Html msg
+scrimElt :: Html r i
 scrimElt =
     Html.div [ class "mdc-dialog__scrim" ] []

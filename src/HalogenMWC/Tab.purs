@@ -92,12 +92,12 @@ import Material.Tab.Internal (Config(..), Tab(..))
 {-| Configuration of a tab
 -}
 type Config r i =
-    Material.Tab.Internal.Config msg
+    Material.Tab.Internal.Config r i
 
 
 {-| Default configuration of a tab
 -}
-config :: Config msg
+config :: Config r i
 config =
     Config
         { active = False
@@ -109,21 +109,21 @@ config =
 
 {-| Specify a message when the user clicks a tab
 -}
-setOnClick :: msg -> Config msg -> Config msg
+setOnClick :: r i -> Config r i -> Config r i
 setOnClick onClick (Config config_) =
     Config { config_ | onClick = Just onClick }
 
 
 {-| Specify whether the tab is active
 -}
-setActive :: Boolean -> Config msg -> Config msg
+setActive :: Boolean -> Config r i -> Config r i
 setActive active (Config config_) =
     Config { config_ | active = active }
 
 
 {-| Specify additional attributes
 -}
-setAttributes :: Array (IProp r i) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
@@ -141,12 +141,12 @@ data Content =
 Tabs can only be rendered within a [tab bar](Material-TabBar).
 
 -}
-data Tab msg =
-    Material.Tab.Internal.Tab msg
+data Tab r i =
+    Material.Tab.Internal.Tab r i
 
 
 {-| Tab constructor
 -}
-tab :: Config msg -> Content -> Tab msg
+tab :: Config r i -> Content -> Tab r i
 tab (Config config_) content =
     Tab (Config { config_ | content = content })

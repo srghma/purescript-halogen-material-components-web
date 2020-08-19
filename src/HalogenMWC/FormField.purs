@@ -96,20 +96,20 @@ type Config r i
         , for :: Maybe String
         , alignEnd :: Boolean
         , additionalAttributes :: Array (IProp r i)
-        , onClick :: Maybe msg
+        , onClick :: Maybe r i
         }
 
 
 {-| Specify a form field's label
 -}
-setLabel :: Maybe String -> Config msg -> Config msg
+setLabel :: Maybe String -> Config r i -> Config r i
 setLabel label (Config config_) =
     Config { config_ | label = label }
 
 
 {-| Specify a form field label's HTML5 for attribute
 -}
-setFor :: Maybe String -> Config msg -> Config msg
+setFor :: Maybe String -> Config r i -> Config r i
 setFor for (Config config_) =
     Config { config_ | for = for }
 
@@ -119,28 +119,28 @@ setFor for (Config config_) =
 This is usefile for, say, checkboxes.
 
 -}
-setAlignEnd :: Boolean -> Config msg -> Config msg
+setAlignEnd :: Boolean -> Config r i -> Config r i
 setAlignEnd alignEnd (Config config_) =
     Config { config_ | alignEnd = alignEnd }
 
 
 {-| Specify additional attributes
 -}
-setAttributes :: Array (IProp r i) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Specify a message when the user clicks on the label
 -}
-setOnClick :: msg -> Config msg -> Config msg
+setOnClick :: r i -> Config r i -> Config r i
 setOnClick onClick (Config config_) =
     Config { config_ | onClick = Just onClick }
 
 
 {-| Default configuration of a form field
 -}
-config :: Config msg
+config :: Config r i
 config =
     Config
         { label = Nothing
@@ -153,7 +153,7 @@ config =
 
 {-| Form field view function
 -}
-formField :: Config msg -> Array (Html msg) -> Html msg
+formField :: Config r i -> Array (Html r i) -> Html r i
 formField ((Config { additionalAttributes }) as config_) nodes =
     Html.node "mdc-form-field"
         (Array.filterMap identity
@@ -165,12 +165,12 @@ formField ((Config { additionalAttributes }) as config_) nodes =
         (nodes ++ [ labelElt config_ ])
 
 
-rootCs :: Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute r i)
 rootCs =
     Just (class "mdc-form-field")
 
 
-alignEndCs :: Config msg -> Maybe (Html.Attribute msg)
+alignEndCs :: Config r i -> Maybe (Html.Attribute r i)
 alignEndCs (Config { alignEnd }) =
     if alignEnd then
         Just (class "mdc-form-field--align-end")
@@ -179,17 +179,17 @@ alignEndCs (Config { alignEnd }) =
         Nothing
 
 
-forAttr :: Config msg -> Maybe (Html.Attribute msg)
+forAttr :: Config r i -> Maybe (Html.Attribute r i)
 forAttr (Config { for }) =
     Maybe.map Html.Attributes.for for
 
 
-clickHandler :: Config msg -> Maybe (Html.Attribute msg)
+clickHandler :: Config r i -> Maybe (Html.Attribute r i)
 clickHandler (Config { onClick }) =
     Maybe.map Html.Events.onClick onClick
 
 
-labelElt :: Config msg -> Html msg
+labelElt :: Config r i -> Html r i
 labelElt ((Config { label }) as config_) =
     Html.label
         (Array.filterMap identity

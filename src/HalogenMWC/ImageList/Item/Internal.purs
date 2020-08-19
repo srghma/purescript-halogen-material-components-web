@@ -12,5 +12,5 @@ type Config r i
         }
 
 
-data ImageArrayItem msg
-    = ImageArrayItem (Config msg)
+data ImageArrayItem r i
+    = ImageArrayItem (Config r i)

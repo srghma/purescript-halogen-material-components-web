@@ -89,13 +89,13 @@ import Material.Select.Item.Internal (Config(..), SelectItem(..))
 
 {-| Configuration of a select item
 -}
-data Config a msg =
-    Material.Select.Item.Internal.Config a msg
+data Config a r i =
+    Material.Select.Item.Internal.Config a r i
 
 
 {-| Default configuration of a select item
 -}
-config :: { value :: a } -> Config a msg
+config :: { value :: a } -> Config a r i
 config { value } =
     Config
         { value = value
@@ -110,26 +110,26 @@ Disabled select items cannot be interacted with and have not visual interaction
 effect.
 
 -}
-setDisabled :: Boolean -> Config a msg -> Config a msg
+setDisabled :: Boolean -> Config a r i -> Config a r i
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 
 
 {-| Specify additional attributes
 -}
-setAttributes :: Array (IProp r i) -> Config a msg -> Config a msg
+setAttributes :: Array (IProp r i) -> Config a r i -> Config a r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Select item type
 -}
-data SelectItem a msg =
-    Material.Select.Item.Internal.SelectItem a msg
+data SelectItem a r i =
+    Material.Select.Item.Internal.SelectItem a r i
 
 
 {-| Select item constructor
 -}
-selectItem :: Config a msg -> Array (Html msg) -> SelectItem a msg
+selectItem :: Config a r i -> Array (Html r i) -> SelectItem a r i
 selectItem =
     SelectItem

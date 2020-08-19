@@ -91,21 +91,21 @@ type Config r i
 
 {-| Default configuration of a permanent drawer
 -}
-config :: Config msg
+config :: Config r i
 config =
     Config { additionalAttributes = [] }
 
 
 {-| Specify additional attributes
 -}
-setAttributes :: Array (IProp r i) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Permanent drawer view function
 -}
-drawer :: Config msg -> Array (Html msg) -> Html msg
+drawer :: Config r i -> Array (Html r i) -> Html r i
 drawer (Config { additionalAttributes }) nodes =
     Html.div
         (Array.filterMap identity [ rootCs ] ++ additionalAttributes)
@@ -114,7 +114,7 @@ drawer (Config { additionalAttributes }) nodes =
 
 {-| Drawer content
 -}
-content :: Array (IProp r i) -> Array (Html msg) -> Html msg
+content :: Array (IProp r i) -> Array (Html r i) -> Html r i
 content attributes nodes =
     Html.div (class "mdc-drawer__content" :: attributes) nodes
 
@@ -132,25 +132,25 @@ content attributes nodes =
         ]
 
 -}
-header :: Array (IProp r i) -> Array (Html msg) -> Html msg
+header :: Array (IProp r i) -> Array (Html r i) -> Html r i
 header additionalAttributes nodes =
     Html.div (class "mdc-drawer__header" :: additionalAttributes) nodes
 
 
 {-| Attribute to mark the title text element of the drawer header
 -}
-title :: Html.Attribute msg
+title :: Html.Attribute r i
 title =
     class "mdc-drawer__title"
 
 
 {-| Attribute to mark the subtitle text element of the drawer header
 -}
-subtitle :: Html.Attribute msg
+subtitle :: Html.Attribute r i
 subtitle =
     class "mdc-drawer__subtitle"
 
 
-rootCs :: Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute r i)
 rootCs =
     Just (class "mdc-drawer")

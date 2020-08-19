@@ -125,28 +125,28 @@ import Html.Attributes (class)
 
 {-| Sets the text color to the theme primary color
 -}
-primary :: Html.Attribute msg
+primary :: Html.Attribute r i
 primary =
     class "mdc-theme--primary"
 
 
 {-| Sets the text color to the theme secondary color
 -}
-secondary :: Html.Attribute msg
+secondary :: Html.Attribute r i
 secondary =
     class "mdc-theme--secondary"
 
 
 {-| Sets the background color to the theme background color
 -}
-background :: Html.Attribute msg
+background :: Html.Attribute r i
 background =
     class "mdc-theme--background"
 
 
 {-| Sets the surface color to the theme surface color
 -}
-surface :: Html.Attribute msg
+surface :: Html.Attribute r i
 surface =
     class "mdc-theme--surface"
 
@@ -157,7 +157,7 @@ The theme's on-primary color is a text color that works best on a primary color
 background.
 
 -}
-onPrimary :: Html.Attribute msg
+onPrimary :: Html.Attribute r i
 onPrimary =
     class "mdc-theme--on-primary"
 
@@ -168,7 +168,7 @@ The theme's on-secondary color is a text color that works best on a secondary
 color background.
 
 -}
-onSecondary :: Html.Attribute msg
+onSecondary :: Html.Attribute r i
 onSecondary =
     class "mdc-theme--on-secondary"
 
@@ -179,21 +179,21 @@ The theme's on-surface color is a text color that works best on a surface
 color background.
 
 -}
-onSurface :: Html.Attribute msg
+onSurface :: Html.Attribute r i
 onSurface =
     class "mdc-theme--on-surface"
 
 
 {-| Sets the background color to the theme primary color
 -}
-primaryBg :: Html.Attribute msg
+primaryBg :: Html.Attribute r i
 primaryBg =
     class "mdc-theme--primary-bg"
 
 
 {-| Sets the background color to the theme secondary color
 -}
-secondaryBg :: Html.Attribute msg
+secondaryBg :: Html.Attribute r i
 secondaryBg =
     class "mdc-theme--secondary-bg"
 
@@ -201,7 +201,7 @@ secondaryBg =
 {-| Sets text to a suitable color for the primary text style on top of light
 background
 -}
-textPrimaryOnLight :: Html.Attribute msg
+textPrimaryOnLight :: Html.Attribute r i
 textPrimaryOnLight =
     class "mdc-theme--text-primary-on-light"
 
@@ -209,7 +209,7 @@ textPrimaryOnLight =
 {-| Sets text to a suitable color for the secondary text style on top of light
 background
 -}
-textSecondaryOnLight :: Html.Attribute msg
+textSecondaryOnLight :: Html.Attribute r i
 textSecondaryOnLight =
     class "mdc-theme--text-secondary-on-light"
 
@@ -217,7 +217,7 @@ textSecondaryOnLight =
 {-| Sets text to a suitable color for the hint text style on top of light
 background
 -}
-textHintOnLight :: Html.Attribute msg
+textHintOnLight :: Html.Attribute r i
 textHintOnLight =
     class "mdc-theme--text-hint-on-light"
 
@@ -225,7 +225,7 @@ textHintOnLight =
 {-| Sets text to a suitable color for the disabled text style on top of light
 background
 -}
-textDisabledOnLight :: Html.Attribute msg
+textDisabledOnLight :: Html.Attribute r i
 textDisabledOnLight =
     class "mdc-theme--text-disabled-on-light"
 
@@ -233,7 +233,7 @@ textDisabledOnLight =
 {-| Sets text to a suitable color for the icon text style on top of light
 background
 -}
-textIconOnLight :: Html.Attribute msg
+textIconOnLight :: Html.Attribute r i
 textIconOnLight =
     class "mdc-theme--text-icon-on-light"
 
@@ -241,7 +241,7 @@ textIconOnLight =
 {-| Sets text to a suitable color for the primary text style on top of dark
 background
 -}
-textPrimaryOnDark :: Html.Attribute msg
+textPrimaryOnDark :: Html.Attribute r i
 textPrimaryOnDark =
     class "mdc-theme--text-primary-on-dark"
 
@@ -249,7 +249,7 @@ textPrimaryOnDark =
 {-| Sets text to a suitable color for the secondary text style on top of dark
 background
 -}
-textSecondaryOnDark :: Html.Attribute msg
+textSecondaryOnDark :: Html.Attribute r i
 textSecondaryOnDark =
     class "mdc-theme--text-secondary-on-dark"
 
@@ -257,7 +257,7 @@ textSecondaryOnDark =
 {-| Sets text to a suitable color for the hint text style on top of dark
 background
 -}
-textHintOnDark :: Html.Attribute msg
+textHintOnDark :: Html.Attribute r i
 textHintOnDark =
     class "mdc-theme--text-hint-on-dark"
 
@@ -265,7 +265,7 @@ textHintOnDark =
 {-| Sets text to a suitable color for the disabled text style on top of dark
 background
 -}
-textDisabledOnDark :: Html.Attribute msg
+textDisabledOnDark :: Html.Attribute r i
 textDisabledOnDark =
     class "mdc-theme--text-disabled-on-dark"
 
@@ -273,7 +273,7 @@ textDisabledOnDark =
 {-| Sets text to a suitable color for the icon text style on top of dark
 background
 -}
-textIconOnDark :: Html.Attribute msg
+textIconOnDark :: Html.Attribute r i
 textIconOnDark =
     class "mdc-theme--text-icon-on-dark"
 
@@ -281,7 +281,7 @@ textIconOnDark =
 {-| Sets text to a suitable color for the primary text style on top of the
 background color
 -}
-textPrimaryOnBackground :: Html.Attribute msg
+textPrimaryOnBackground :: Html.Attribute r i
 textPrimaryOnBackground =
     class "mdc-theme--text-primary-on-background"
 
@@ -289,7 +289,7 @@ textPrimaryOnBackground =
 {-| Sets text to a suitable color for the secondary text style on top of the
 background color
 -}
-textSecondaryOnBackground :: Html.Attribute msg
+textSecondaryOnBackground :: Html.Attribute r i
 textSecondaryOnBackground =
     class "mdc-theme--text-secondary-on-background"
 
@@ -297,7 +297,7 @@ textSecondaryOnBackground =
 {-| Sets text to a suitable color for the hint text style on top of the
 background color
 -}
-textHintOnBackground :: Html.Attribute msg
+textHintOnBackground :: Html.Attribute r i
 textHintOnBackground =
     class "mdc-theme--text-hint-on-background"
 
@@ -305,7 +305,7 @@ textHintOnBackground =
 {-| Sets text to a suitable color for the disabled text style on top of the
 background color
 -}
-textDisabledOnBackground :: Html.Attribute msg
+textDisabledOnBackground :: Html.Attribute r i
 textDisabledOnBackground =
     class "mdc-theme--text-disabled-on-background"
 
@@ -313,6 +313,6 @@ textDisabledOnBackground =
 {-| Sets text to a suitable color for the icon text style on top of the
 background color
 -}
-textIconOnBackground :: Html.Attribute msg
+textIconOnBackground :: Html.Attribute r i
 textIconOnBackground =
     class "mdc-theme--text-icon-on-background"

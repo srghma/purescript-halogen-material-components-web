@@ -14,8 +14,8 @@ type Config r i
         , href :: Maybe String
         , target :: Maybe String
         , additionalAttributes :: Array (IProp r i)
-        , onClick :: Maybe msg
-        , node :: Html msg
+        , onClick :: Maybe r i
+        , node :: Html r i
         }
 
 
@@ -24,7 +24,7 @@ data Selection
     | Activated
 
 
-data ArrayItem msg
-    = ArrayItem (Config msg)
-    | ArrayItemDivider (Html msg)
-    | ArrayGroupSubheader (Html msg)
+data ArrayItem r i
+    = ArrayItem (Config r i)
+    | ArrayItemDivider (Html r i)
+    | ArrayGroupSubheader (Html r i)

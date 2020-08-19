@@ -120,7 +120,7 @@ type Config r i
 
 {-| Default configuration of an image list
 -}
-config :: Config msg
+config :: Config r i
 config =
     Config
         { masonry = False
@@ -135,7 +135,7 @@ The masonry image list variant presents images vertically arranged into several
 columns. In this layout, images may be any combination of aspect ratios.
 
 -}
-setMasonry :: Boolean -> Config msg -> Config msg
+setMasonry :: Boolean -> Config r i -> Config r i
 setMasonry masonry (Config config_) =
     Config { config_ | masonry = masonry }
 
@@ -146,21 +146,21 @@ of the image
 By default, image list item's labels display below the image.
 
 -}
-setWithTextProtection :: Boolean -> Config msg -> Config msg
+setWithTextProtection :: Boolean -> Config r i -> Config r i
 setWithTextProtection withTextProtection (Config config_) =
     Config { config_ | withTextProtection = withTextProtection }
 
 
 {-| Specify additional attributes
 -}
-setAttributes :: Array (IProp r i) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Image list view function
 -}
-imageArray :: Config msg -> Array (ImageArrayItem msg) -> Html msg
+imageArray :: Config r i -> Array (ImageArrayItem r i) -> Html r i
 imageArray ((Config { additionalAttributes }) as config_) listItems =
     Html.node "mdc-image-list"
         (Array.filterMap identity
@@ -173,12 +173,12 @@ imageArray ((Config { additionalAttributes }) as config_) listItems =
         (Array.map (listItemElt config_) listItems)
 
 
-rootCs :: Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute r i)
 rootCs =
     Just (class "mdc-image-list")
 
 
-masonryCs :: Config msg -> Maybe (Html.Attribute msg)
+masonryCs :: Config r i -> Maybe (Html.Attribute r i)
 masonryCs (Config { masonry }) =
     if masonry then
         Just (class "mdc-image-list--masonry")
@@ -187,7 +187,7 @@ masonryCs (Config { masonry }) =
         Nothing
 
 
-withTextProtectionCs :: Config msg -> Maybe (Html.Attribute msg)
+withTextProtectionCs :: Config r i -> Maybe (Html.Attribute r i)
 withTextProtectionCs (Config { withTextProtection }) =
     if withTextProtection then
         Just (class "mdc-image-list--with-text-protection")
@@ -196,7 +196,7 @@ withTextProtectionCs (Config { withTextProtection }) =
         Nothing
 
 
-listItemElt :: Config msg -> ImageArrayItem msg -> Html msg
+listItemElt :: Config r i -> ImageArrayItem r i -> Html r i
 listItemElt ((Config { masonry }) as config_) ((ImageArrayItem.ImageArrayItem (ImageArrayItem.Config { href, additionalAttributes })) as listItem) =
     let
         inner =
@@ -216,7 +216,7 @@ listItemElt ((Config { masonry }) as config_) ((ImageArrayItem.ImageArrayItem (I
         )
 
 
-imageAspectContainerElt :: Boolean -> ImageArrayItem msg -> Html msg
+imageAspectContainerElt :: Boolean -> ImageArrayItem r i -> Html r i
 imageAspectContainerElt masonry ((ImageArrayItem.ImageArrayItem (ImageArrayItem.Config { href })) as listItem) =
     Html.div
         (Array.filterMap identity
@@ -227,7 +227,7 @@ imageAspectContainerElt masonry ((ImageArrayItem.ImageArrayItem (ImageArrayItem.
         [ imageElt masonry listItem ]
 
 
-imageElt :: Boolean -> ImageArrayItem msg -> Html msg
+imageElt :: Boolean -> ImageArrayItem r i -> Html r i
 imageElt masonry (ImageArrayItem.ImageArrayItem (ImageArrayItem.Config { href, image })) =
     let
         img =
@@ -252,7 +252,7 @@ imageElt masonry (ImageArrayItem.ImageArrayItem (ImageArrayItem.Config { href, i
             []
 
 
-supportingElt :: ImageArrayItem msg -> Html msg
+supportingElt :: ImageArrayItem r i -> Html r i
 supportingElt (ImageArrayItem.ImageArrayItem (ImageArrayItem.Config { label })) =
     case label of
         Just string ->

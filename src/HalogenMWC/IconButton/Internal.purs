@@ -8,5 +8,5 @@ type Config r i
         { disabled :: Boolean
         , label :: Maybe String
         , additionalAttributes :: Array (IProp r i)
-        , onClick :: Maybe msg
+        , onClick :: Maybe r i
         }

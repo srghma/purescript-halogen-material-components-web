@@ -8,10 +8,10 @@ type Config r i
         { leadingIcon :: Maybe String
         , trailingIcon :: Maybe String
         , additionalAttributes :: Array (IProp r i)
-        , onClick :: Maybe msg
-        , onDelete :: Maybe msg
+        , onClick :: Maybe r i
+        , onDelete :: Maybe r i
         }
 
 
-data Chip msg
-    = Chip (Config msg) String
+data Chip r i
+    = Chip (Config r i) String

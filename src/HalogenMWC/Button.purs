@@ -172,12 +172,12 @@ import Material.Button.Internal (Config(..))
 {-| Configuration of a button
 -}
 type Config r i =
-    Material.Button.Internal.Config msg
+    Material.Button.Internal.Config r i
 
 
 {-| Default configuration of a button
 -}
-config :: Config msg
+config :: Config r i
 config =
     Config
         { icon = Nothing
@@ -194,7 +194,7 @@ config =
 
 {-| Specify whether the button features an icon
 -}
-setIcon :: Maybe String -> Config msg -> Config msg
+setIcon :: Maybe String -> Config r i -> Config r i
 setIcon icon (Config config_) =
     Config { config_ | icon = icon }
 
@@ -204,7 +204,7 @@ setIcon icon (Config config_) =
 Trailing icons are displayed after the button's label rather than before.
 
 -}
-setTrailingIcon :: Boolean -> Config msg -> Config msg
+setTrailingIcon :: Boolean -> Config r i -> Config r i
 setTrailingIcon trailingIcon (Config config_) =
     Config { config_ | trailingIcon = trailingIcon }
 
@@ -215,7 +215,7 @@ Disabled buttons cannot be interacted with and do not have no visual
 interaction effect.
 
 -}
-setDisabled :: Boolean -> Config msg -> Config msg
+setDisabled :: Boolean -> Config r i -> Config r i
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 
@@ -225,7 +225,7 @@ setDisabled disabled (Config config_) =
 Dense buttons feature smaller than normal padding.
 
 -}
-setDense :: Boolean -> Config msg -> Config msg
+setDense :: Boolean -> Config r i -> Config r i
 setDense dense (Config config_) =
     Config { config_ | dense = dense }
 
@@ -236,7 +236,7 @@ Link buttons behave like normal HTML5 anchor tags. Note that link buttons
 cannot be disabled and ignore that configuration option.
 
 -}
-setHref :: Maybe String -> Config msg -> Config msg
+setHref :: Maybe String -> Config r i -> Config r i
 setHref href (Config config_) =
     Config { config_ | href = href }
 
@@ -247,21 +247,21 @@ Note that this configuration option will be ignored by buttons that do not also
 set `setHref`.
 
 -}
-setTarget :: Maybe String -> Config msg -> Config msg
+setTarget :: Maybe String -> Config r i -> Config r i
 setTarget target (Config config_) =
     Config { config_ | target = target }
 
 
 {-| Specify additional attributes
 -}
-setAttributes :: Array (IProp r i) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Specify a message when the user clicks a button
 -}
-setOnClick :: msg -> Config msg -> Config msg
+setOnClick :: r i -> Config r i -> Config r i
 setOnClick onClick (Config config_) =
     Config { config_ | onClick = Just onClick }
 
@@ -276,7 +276,7 @@ disable increased touch target size.
 prevent potentially overlapping touch targets on adjacent elements.
 
 -}
-setTouch :: Boolean -> Config msg -> Config msg
+setTouch :: Boolean -> Config r i -> Config r i
 setTouch touch (Config config_) =
     Config { config_ | touch = touch }
 
@@ -288,7 +288,7 @@ data Variant
     | Outlined
 
 
-button :: Variant -> Config msg -> String -> Html msg
+button :: Variant -> Config r i -> String -> Html r i
 button variant ((Config { additionalAttributes, touch, href }) as config_) label =
     let
         wrapTouch node =
@@ -333,48 +333,48 @@ button variant ((Config { additionalAttributes, touch, href }) as config_) label
 
 {-| Text button variant (flush without outline)
 -}
-text :: Config msg -> String -> Html msg
+text :: Config r i -> String -> Html r i
 text config_ label =
     button Text config_ label
 
 
 {-| Outlined button variant (flush with outline)
 -}
-outlined :: Config msg -> String -> Html msg
+outlined :: Config r i -> String -> Html r i
 outlined config_ label =
     button Outlined config_ label
 
 
 {-| Raised button variant (contained with elevation)
 -}
-raised :: Config msg -> String -> Html msg
+raised :: Config r i -> String -> Html r i
 raised config_ label =
     button Raised config_ label
 
 
 {-| Unelevated button variant (contained without elevation)
 -}
-unelevated :: Config msg -> String -> Html msg
+unelevated :: Config r i -> String -> Html r i
 unelevated config_ label =
     button Unelevated config_ label
 
 
-rootCs :: Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute r i)
 rootCs =
     Just (class "mdc-button")
 
 
-disabledProp :: Config msg -> Maybe (Html.Attribute msg)
+disabledProp :: Config r i -> Maybe (Html.Attribute r i)
 disabledProp (Config { disabled }) =
     Just (Html.Attributes.property "disabled" (Encode.bool disabled))
 
 
-disabledAttr :: Config msg -> Maybe (Html.Attribute msg)
+disabledAttr :: Config r i -> Maybe (Html.Attribute r i)
 disabledAttr (Config { disabled }) =
     Just (Html.Attributes.disabled disabled)
 
 
-tabIndexProp :: Config msg -> Maybe (Html.Attribute msg)
+tabIndexProp :: Config r i -> Maybe (Html.Attribute r i)
 tabIndexProp (Config { disabled }) =
     if disabled then
         Just (Html.Attributes.property "tabIndex" (Encode.int -1))
@@ -383,12 +383,12 @@ tabIndexProp (Config { disabled }) =
         Just (Html.Attributes.property "tabIndex" (Encode.int 0))
 
 
-hrefAttr :: Config msg -> Maybe (Html.Attribute msg)
+hrefAttr :: Config r i -> Maybe (Html.Attribute r i)
 hrefAttr (Config { href }) =
     Maybe.map Html.Attributes.href href
 
 
-targetAttr :: Config msg -> Maybe (Html.Attribute msg)
+targetAttr :: Config r i -> Maybe (Html.Attribute r i)
 targetAttr (Config { href, target }) =
     if href /= Nothing then
         Maybe.map Html.Attributes.target target
@@ -397,12 +397,12 @@ targetAttr (Config { href, target }) =
         Nothing
 
 
-clickHandler :: Config msg -> Maybe (Html.Attribute msg)
+clickHandler :: Config r i -> Maybe (Html.Attribute r i)
 clickHandler (Config { onClick }) =
     Maybe.map Html.Events.onClick onClick
 
 
-variantCs :: Variant -> Maybe (Html.Attribute msg)
+variantCs :: Variant -> Maybe (Html.Attribute r i)
 variantCs variant =
     case variant of
         Text ->
@@ -418,7 +418,7 @@ variantCs variant =
             Just (class "mdc-button--outlined")
 
 
-denseCs :: Config msg -> Maybe (Html.Attribute msg)
+denseCs :: Config r i -> Maybe (Html.Attribute r i)
 denseCs (Config { dense }) =
     if dense then
         Just (class "mdc-button--dense")
@@ -427,7 +427,7 @@ denseCs (Config { dense }) =
         Nothing
 
 
-touchCs :: Config msg -> Maybe (Html.Attribute msg)
+touchCs :: Config r i -> Maybe (Html.Attribute r i)
 touchCs (Config { touch }) =
     if touch then
         Just (class "mdc-button--touch")
@@ -436,7 +436,7 @@ touchCs (Config { touch }) =
         Nothing
 
 
-iconElt :: Config msg -> Maybe (Html msg)
+iconElt :: Config r i -> Maybe (Html r i)
 iconElt (Config { icon }) =
     Maybe.map
         (\iconName ->
@@ -449,12 +449,12 @@ iconElt (Config { icon }) =
         icon
 
 
-rippleElt :: Maybe (Html msg)
+rippleElt :: Maybe (Html r i)
 rippleElt =
     Just (Html.div [ class "mdc-button__ripple" ] [])
 
 
-leadingIconElt :: Config msg -> Maybe (Html msg)
+leadingIconElt :: Config r i -> Maybe (Html r i)
 leadingIconElt ((Config { trailingIcon }) as config_) =
     if not trailingIcon then
         iconElt config_
@@ -463,7 +463,7 @@ leadingIconElt ((Config { trailingIcon }) as config_) =
         Nothing
 
 
-trailingIconElt :: Config msg -> Maybe (Html msg)
+trailingIconElt :: Config r i -> Maybe (Html r i)
 trailingIconElt ((Config { trailingIcon }) as config_) =
     if trailingIcon then
         iconElt config_
@@ -472,7 +472,7 @@ trailingIconElt ((Config { trailingIcon }) as config_) =
         Nothing
 
 
-touchElt :: Config msg -> Maybe (Html msg)
+touchElt :: Config r i -> Maybe (Html r i)
 touchElt (Config { touch }) =
     if touch then
         Just (Html.div [ class "mdc-button__touch" ] [])
@@ -481,6 +481,6 @@ touchElt (Config { touch }) =
         Nothing
 
 
-labelElt :: String -> Maybe (Html msg)
+labelElt :: String -> Maybe (Html r i)
 labelElt label =
     Just (Html.span [ class "mdc-button__label" ] [ Html.text label ])

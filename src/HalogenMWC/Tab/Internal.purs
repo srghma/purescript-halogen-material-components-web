@@ -11,7 +11,7 @@ type Config r i
     = Config
         { active :: Boolean
         , additionalAttributes :: Array (IProp r i)
-        , onClick :: Maybe msg
+        , onClick :: Maybe r i
         , content :: Content
         }
 
@@ -22,5 +22,5 @@ data Content =
     }
 
 
-data Tab msg
-    = Tab (Config msg)
+data Tab r i
+    = Tab (Config r i)

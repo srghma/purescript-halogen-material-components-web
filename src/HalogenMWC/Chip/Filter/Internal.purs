@@ -8,9 +8,9 @@ type Config r i
         { icon :: Maybe String
         , selected :: Boolean
         , additionalAttributes :: Array (IProp r i)
-        , onChange :: Maybe msg
+        , onChange :: Maybe r i
         }
 
 
-data Chip msg
-    = Chip (Config msg) String
+data Chip r i
+    = Chip (Config r i) String

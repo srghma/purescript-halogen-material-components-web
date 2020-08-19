@@ -144,14 +144,14 @@ type Config r i
         { icon :: Maybe String
         , trailingIcon :: Boolean
         , exited :: Boolean
-        , onClick :: Maybe msg
+        , onClick :: Maybe r i
         , additionalAttributes :: Array (IProp r i)
         }
 
 
 {-| Default extended floating action button configuration
 -}
-config :: Config msg
+config :: Config r i
 config =
     Config
         { icon = Nothing
@@ -164,7 +164,7 @@ config =
 
 {-| Specify whether a floating action button displays an icon
 -}
-setIcon :: Maybe String -> Config msg -> Config msg
+setIcon :: Maybe String -> Config r i -> Config r i
 setIcon icon (Config config_) =
     Config { config_ | icon = icon }
 
@@ -174,35 +174,35 @@ setIcon icon (Config config_) =
 Trailing icons are displyed after the label rather than before.
 
 -}
-setTrailingIcon :: Boolean -> Config msg -> Config msg
+setTrailingIcon :: Boolean -> Config r i -> Config r i
 setTrailingIcon trailingIcon (Config config_) =
     Config { config_ | trailingIcon = trailingIcon }
 
 
 {-| Specify whether a floating action button transitions off the screen
 -}
-setExited :: Boolean -> Config msg -> Config msg
+setExited :: Boolean -> Config r i -> Config r i
 setExited exited (Config config_) =
     Config { config_ | exited = exited }
 
 
 {-| Specify additional attributes
 -}
-setAttributes :: Array (IProp r i) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Specify a message when the user clicks the floating action button
 -}
-setOnClick :: msg -> Config msg -> Config msg
+setOnClick :: r i -> Config r i -> Config r i
 setOnClick onClick (Config config_) =
     Config { config_ | onClick = Just onClick }
 
 
 {-| Extended floating action button view function
 -}
-fab :: Config msg -> String -> Html msg
+fab :: Config r i -> String -> Html r i
 fab ((Config { additionalAttributes }) as config_) label =
     Html.node "mdc-fab"
         (Array.filterMap identity
@@ -223,22 +223,22 @@ fab ((Config { additionalAttributes }) as config_) label =
         )
 
 
-tabIndexProp :: Int -> Maybe (Html.Attribute msg)
+tabIndexProp :: Int -> Maybe (Html.Attribute r i)
 tabIndexProp tabIndex =
     Just (Html.Attributes.property "tabIndex" (Encode.int tabIndex))
 
 
-extendedFabCs :: Maybe (Html.Attribute msg)
+extendedFabCs :: Maybe (Html.Attribute r i)
 extendedFabCs =
     Just (class "mdc-fab mdc-fab--extended")
 
 
-rippleElt :: Maybe (Html msg)
+rippleElt :: Maybe (Html r i)
 rippleElt =
     Just (Html.div [ class "mdc-fab__ripple" ] [])
 
 
-leadingIconElt :: Config msg -> Maybe (Html msg)
+leadingIconElt :: Config r i -> Maybe (Html r i)
 leadingIconElt (Config { icon, trailingIcon }) =
     case ( icon, trailingIcon ) of
         ( Just iconName, False ) ->
@@ -251,12 +251,12 @@ leadingIconElt (Config { icon, trailingIcon }) =
             Nothing
 
 
-labelElt :: String -> Maybe (Html msg)
+labelElt :: String -> Maybe (Html r i)
 labelElt label =
     Just (Html.span [ class "mdc-fab__label" ] [ text label ])
 
 
-trailingIconElt :: Config msg -> Maybe (Html msg)
+trailingIconElt :: Config r i -> Maybe (Html r i)
 trailingIconElt (Config { icon, trailingIcon }) =
     case ( icon, trailingIcon ) of
         ( Just iconName, True ) ->
@@ -269,12 +269,12 @@ trailingIconElt (Config { icon, trailingIcon }) =
             Nothing
 
 
-rootCs :: Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute r i)
 rootCs =
     Just (class "mdc-fab")
 
 
-exitedCs :: Config msg -> Maybe (Html.Attribute msg)
+exitedCs :: Config r i -> Maybe (Html.Attribute r i)
 exitedCs (Config { exited }) =
     if exited then
         Just (class "mdc-fab--exited")
@@ -283,6 +283,6 @@ exitedCs (Config { exited }) =
         Nothing
 
 
-clickHandler :: Config msg -> Maybe (Html.Attribute msg)
+clickHandler :: Config r i -> Maybe (Html.Attribute r i)
 clickHandler (Config { onClick }) =
     Maybe.map Html.Events.onClick onClick

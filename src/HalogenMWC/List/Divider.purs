@@ -115,7 +115,7 @@ type Config r i
 
 {-| Default configuration of a list item divider
 -}
-config :: Config msg
+config :: Config r i
 config =
     Config
         { inset = False
@@ -129,7 +129,7 @@ config =
 Insert list item dividers to not intersect a list item's meta.
 
 -}
-setInset :: Boolean -> Config msg -> Config msg
+setInset :: Boolean -> Config r i -> Config r i
 setInset inset (Config config_) =
     Config { config_ | inset = inset }
 
@@ -139,21 +139,21 @@ setInset inset (Config config_) =
 Padded list item dividers do not intersect a list item's avatar.
 
 -}
-setPadded :: Boolean -> Config msg -> Config msg
+setPadded :: Boolean -> Config r i -> Config r i
 setPadded padded (Config config_) =
     Config { config_ | padded = padded }
 
 
 {-| Specify additional attributes
 -}
-setAttributes :: Array (IProp r i) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Array item divider view function
 -}
-listItem :: Config msg -> ArrayItem msg
+listItem :: Config r i -> ArrayItem r i
 listItem ((Config { additionalAttributes }) as config_) =
     ArrayItem.ArrayItemDivider <|
         Html.li
@@ -168,17 +168,17 @@ listItem ((Config { additionalAttributes }) as config_) =
             []
 
 
-listDividerCs :: Maybe (Html.Attribute msg)
+listDividerCs :: Maybe (Html.Attribute r i)
 listDividerCs =
     Just (class "mdc-list-divider")
 
 
-separatorRoleAttr :: Maybe (Html.Attribute msg)
+separatorRoleAttr :: Maybe (Html.Attribute r i)
 separatorRoleAttr =
     Just (Html.Attributes.attribute "role" "separator")
 
 
-insetCs :: Config msg -> Maybe (Html.Attribute msg)
+insetCs :: Config r i -> Maybe (Html.Attribute r i)
 insetCs (Config { inset }) =
     if inset then
         Just (class "mdc-list-divider--inset")
@@ -187,7 +187,7 @@ insetCs (Config { inset }) =
         Nothing
 
 
-paddedCs :: Config msg -> Maybe (Html.Attribute msg)
+paddedCs :: Config r i -> Maybe (Html.Attribute r i)
 paddedCs (Config { padded }) =
     if padded then
         Just (class "mdc-list-divider--padded")
@@ -198,6 +198,6 @@ paddedCs (Config { padded }) =
 
 {-| Array group divider view function
 -}
-group :: Array (IProp r i) -> Html msg
+group :: Array (IProp r i) -> Html r i
 group additionalAttributes =
     Html.hr (Array.filterMap identity [ listDividerCs ] ++ additionalAttributes) []

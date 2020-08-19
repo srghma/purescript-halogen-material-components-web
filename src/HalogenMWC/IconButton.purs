@@ -114,12 +114,12 @@ import Material.IconButton.Internal (Config(..))
 {-| Icon button configuration
 -}
 type Config r i =
-    Material.IconButton.Internal.Config msg
+    Material.IconButton.Internal.Config r i
 
 
 {-| Default icon button configuration
 -}
-config :: Config msg
+config :: Config r i
 config =
     Config
         { disabled = False
@@ -135,35 +135,35 @@ Disabled icon buttons cannot be interacted with and have no visual interaction
 effect.
 
 -}
-setDisabled :: Boolean -> Config msg -> Config msg
+setDisabled :: Boolean -> Config r i -> Config r i
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 
 
 {-| Specify an icon button's HTML5 arial-label attribute
 -}
-setLabel :: Maybe String -> Config msg -> Config msg
+setLabel :: Maybe String -> Config r i -> Config r i
 setLabel label (Config config_) =
     Config { config_ | label = label }
 
 
 {-| Specify additional attributes
 -}
-setAttributes :: Array (IProp r i) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Specify a message when the user clicks on an icon button
 -}
-setOnClick :: msg -> Config msg -> Config msg
+setOnClick :: r i -> Config r i -> Config r i
 setOnClick onClick (Config config_) =
     Config { config_ | onClick = Just onClick }
 
 
 {-| Icon button view function
 -}
-iconButton :: Config msg -> String -> Html msg
+iconButton :: Config r i -> String -> Html r i
 iconButton ((Config { additionalAttributes }) as config_) iconName =
     Html.node "mdc-icon-button"
         (Array.filterMap identity
@@ -179,7 +179,7 @@ iconButton ((Config { additionalAttributes }) as config_) iconName =
 
 {-| TODO
 -}
-custom :: Config msg -> Array (Html msg) -> Html msg
+custom :: Config r i -> Array (Html r i) -> Html r i
 custom ((Config { additionalAttributes }) as config_) nodes =
     Html.node "mdc-icon-button"
         (Array.filterMap identity
@@ -192,21 +192,21 @@ custom ((Config { additionalAttributes }) as config_) nodes =
         nodes
 
 
-rootCs :: Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute r i)
 rootCs =
     Just (class "mdc-icon-button")
 
 
-materialIconsCs :: Maybe (Html.Attribute msg)
+materialIconsCs :: Maybe (Html.Attribute r i)
 materialIconsCs =
     Just (class "material-icons")
 
 
-tabIndexProp :: Maybe (Html.Attribute msg)
+tabIndexProp :: Maybe (Html.Attribute r i)
 tabIndexProp =
     Just (Html.Attributes.tabindex 0)
 
 
-clickHandler :: Config msg -> Maybe (Html.Attribute msg)
+clickHandler :: Config r i -> Maybe (Html.Attribute r i)
 clickHandler (Config { onClick }) =
     Maybe.map Html.Events.onClick onClick

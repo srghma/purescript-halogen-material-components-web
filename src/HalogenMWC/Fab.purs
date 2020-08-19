@@ -119,13 +119,13 @@ type Config r i
         { mini :: Boolean
         , exited :: Boolean
         , additionalAttributes :: Array (IProp r i)
-        , onClick :: Maybe msg
+        , onClick :: Maybe r i
         }
 
 
 {-| Default floating action button configuration
 -}
-config :: Config msg
+config :: Config r i
 config =
     Config
         { mini = False
@@ -137,35 +137,35 @@ config =
 
 {-| Specify whether the floating actions button should be smaller than normally
 -}
-setMini :: Boolean -> Config msg -> Config msg
+setMini :: Boolean -> Config r i -> Config r i
 setMini mini (Config config_) =
     Config { config_ | mini = mini }
 
 
 {-| Specify whether a floating action button should transition off the screen
 -}
-setExited :: Boolean -> Config msg -> Config msg
+setExited :: Boolean -> Config r i -> Config r i
 setExited exited (Config config_) =
     Config { config_ | exited = exited }
 
 
 {-| Specify additional attributes
 -}
-setAttributes :: Array (IProp r i) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Specify a message when the user clicks the floating action button
 -}
-setOnClick :: msg -> Config msg -> Config msg
+setOnClick :: r i -> Config r i -> Config r i
 setOnClick onClick (Config config_) =
     Config { config_ | onClick = Just onClick }
 
 
 {-| Floating action button view function
 -}
-fab :: Config msg -> String -> Html msg
+fab :: Config r i -> String -> Html r i
 fab ((Config { additionalAttributes }) as config_) iconName =
     Html.node "mdc-fab"
         (Array.filterMap identity
@@ -182,17 +182,17 @@ fab ((Config { additionalAttributes }) as config_) iconName =
         ]
 
 
-tabIndexProp :: Int -> Maybe (Html.Attribute msg)
+tabIndexProp :: Int -> Maybe (Html.Attribute r i)
 tabIndexProp tabIndex =
     Just (Html.Attributes.property "tabIndex" (Encode.int tabIndex))
 
 
-rootCs :: Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute r i)
 rootCs =
     Just (class "mdc-fab")
 
 
-miniCs :: Config msg -> Maybe (Html.Attribute msg)
+miniCs :: Config r i -> Maybe (Html.Attribute r i)
 miniCs (Config { mini }) =
     if mini then
         Just (class "mdc-fab--mini")
@@ -201,7 +201,7 @@ miniCs (Config { mini }) =
         Nothing
 
 
-exitedCs :: Config msg -> Maybe (Html.Attribute msg)
+exitedCs :: Config r i -> Maybe (Html.Attribute r i)
 exitedCs (Config { exited }) =
     if exited then
         Just (class "mdc-fab--exited")
@@ -210,16 +210,16 @@ exitedCs (Config { exited }) =
         Nothing
 
 
-rippleElt :: Html msg
+rippleElt :: Html r i
 rippleElt =
     Html.div [ class "mdc-fab__ripple" ] []
 
 
-iconElt :: String -> Html msg
+iconElt :: String -> Html r i
 iconElt iconName =
     Html.span [ class "material-icons", class "mdc-fab__icon" ] [ text iconName ]
 
 
-clickHandler :: Config msg -> Maybe (Html.Attribute msg)
+clickHandler :: Config r i -> Maybe (Html.Attribute r i)
 clickHandler (Config { onClick }) =
     Maybe.map Html.Events.onClick onClick

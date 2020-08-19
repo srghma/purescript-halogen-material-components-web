@@ -53,8 +53,8 @@ bottom of the screen.
     init =
         { queue = Snackbar.initialQueue }
 
-    update msg model =
-        case msg of
+    update r i model =
+        case r i of
             SnackbarClosed messageId ->
                 { model | queue = Snackbar.close messageId model.queue }
 
@@ -87,7 +87,7 @@ bottom of the screen.
 # Queue
 
 You will have to maintain a queue of snackbar messages inside your
-application's model. To do so, add a field `queue :: Queue msg` and initialize
+application's model. To do so, add a field `queue :: Queue r i` and initialize
 it to `initialQueue`.
 
     data Model =
@@ -105,8 +105,8 @@ Then from your application's update function, call `update` to handle
     data Msg
         = SnackbarClosed Snackbar.MessageId
 
-    update msg model =
-        case msg of
+    update r i model =
+        case r i of
             SnackbarClosed messageId ->
                 { model | queue = Snackbar.close messageId model.queue }
 
@@ -121,8 +121,8 @@ Now you are ready to add messages from your application's update function.
         = SnackbarClosed Snackbar.MessageId
         | SomethingHappened
 
-    update msg model =
-        case msg of
+    update r i model =
+        case r i of
             SomethingHappened ->
                 let
                     message =
@@ -226,9 +226,9 @@ import Json.Encode as Encode
 
 {-| Queue of messages
 -}
-data Queue msg
+data Queue r i
     = Queue
-        { messages :: Array ( MessageId, Message msg )
+        { messages :: Array ( MessageId, Message r i )
         , nextMessageId :: MessageId
         }
 
@@ -246,7 +246,7 @@ inc (MessageId messageId) =
 
 {-| Initial empty queue
 -}
-initialQueue :: Queue msg
+initialQueue :: Queue r i
 initialQueue =
     Queue
         { messages = []
@@ -256,7 +256,7 @@ initialQueue =
 
 {-| Hide the currently showing message
 -}
-close :: MessageId -> Queue msg -> Queue msg
+close :: MessageId -> Queue r i -> Queue r i
 close messageId (Queue queue) =
     Queue <|
         { queue
@@ -276,7 +276,7 @@ close messageId (Queue queue) =
 
 {-| Adds a message to the queue
 -}
-addMessage :: Message msg -> Queue msg -> Queue msg
+addMessage :: Message r i -> Queue r i -> Queue r i
 addMessage message_ (Queue queue) =
     Queue
         { queue
@@ -291,13 +291,13 @@ type Config r i
     = Config
         { closeOnEscape :: Boolean
         , additionalAttributes :: Array (IProp r i)
-        , onClosed :: MessageId -> msg
+        , onClosed :: MessageId -> r i
         }
 
 
 {-| Default configuration of a snackbar
 -}
-config :: { onClosed :: MessageId -> msg } -> Config msg
+config :: { onClosed :: MessageId -> r i } -> Config r i
 config { onClosed } =
     Config
         { closeOnEscape = False
@@ -309,21 +309,21 @@ config { onClosed } =
 {-| Specify whether the snackbar's messages should close when the user presses
 escape
 -}
-setCloseOnEscape :: Boolean -> Config msg -> Config msg
+setCloseOnEscape :: Boolean -> Config r i -> Config r i
 setCloseOnEscape closeOnEscape (Config config_) =
     Config { config_ | closeOnEscape = closeOnEscape }
 
 
 {-| Specify additional attributes
 -}
-setAttributes :: Array (IProp r i) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Snackbar view function
 -}
-snackbar :: Config msg -> Queue msg -> Html msg
+snackbar :: Config r i -> Queue r i -> Html r i
 snackbar ((Config { additionalAttributes }) as config_) ((Queue { messages, nextMessageId }) as queue) =
     let
         ( currentMessageId, currentMessage ) =
@@ -348,13 +348,13 @@ snackbar ((Config { additionalAttributes }) as config_) ((Queue { messages, next
 
 {-| Snackbar message
 -}
-data Message msg
+data Message r i
     = Message
         { label :: String
         , actionButton :: Maybe String
-        , onActionButtonClick :: Maybe (MessageId -> msg)
+        , onActionButtonClick :: Maybe (MessageId -> r i)
         , actionIcon :: Maybe String
-        , onActionIconClick :: Maybe (MessageId -> msg)
+        , onActionIconClick :: Maybe (MessageId -> r i)
         , leading :: Boolean
         , stacked :: Boolean
         , timeoutMs :: Maybe Int
@@ -363,28 +363,28 @@ data Message msg
 
 {-| Specify a message's action button label
 -}
-setActionButton :: Maybe String -> Message msg -> Message msg
+setActionButton :: Maybe String -> Message r i -> Message r i
 setActionButton actionButton (Message message_) =
     Message { message_ | actionButton = actionButton }
 
 
 {-| Specify a message when the user clicks on a message's action button
 -}
-setOnActionButtonClick :: (MessageId -> msg) -> Message msg -> Message msg
+setOnActionButtonClick :: (MessageId -> r i) -> Message r i -> Message r i
 setOnActionButtonClick onActionButtonClick (Message message_) =
     Message { message_ | onActionButtonClick = Just onActionButtonClick }
 
 
 {-| Specify a message's action icon
 -}
-setActionIcon :: Maybe String -> Message msg -> Message msg
+setActionIcon :: Maybe String -> Message r i -> Message r i
 setActionIcon actionIcon (Message message_) =
     Message { message_ | actionIcon = actionIcon }
 
 
 {-| Specify a message when the user clicks on a message's action icon
 -}
-setOnActionIconClick :: (MessageId -> msg) -> Message msg -> Message msg
+setOnActionIconClick :: (MessageId -> r i) -> Message r i -> Message r i
 setOnActionIconClick onActionIconClick (Message message_) =
     Message { message_ | onActionIconClick = Just onActionIconClick }
 
@@ -396,7 +396,7 @@ can optionally be displyed on the _leading_ edge of the screen. To display a
 message as leading, set its `setLeading` configuration option to `True`.
 
 -}
-setLeading :: Boolean -> Message msg -> Message msg
+setLeading :: Boolean -> Message r i -> Message r i
 setLeading leading (Message message_) =
     Message { message_ | leading = leading }
 
@@ -407,21 +407,21 @@ Stacked messages display their label above their action button or icon. This
 works best for messages with a long label.
 
 -}
-setStacked :: Boolean -> Message msg -> Message msg
+setStacked :: Boolean -> Message r i -> Message r i
 setStacked stacked (Message message_) =
     Message { message_ | stacked = stacked }
 
 
 {-| Specify a message's timeout in milliseconds
 -}
-setTimeoutMs :: Maybe Int -> Message msg -> Message msg
+setTimeoutMs :: Maybe Int -> Message r i -> Message r i
 setTimeoutMs timeoutMs (Message message_) =
     Message { message_ | timeoutMs = timeoutMs }
 
 
 {-| Default snackbar message (empty label)
 -}
-message :: String -> Message msg
+message :: String -> Message r i
 message label =
     Message
         { label = label
@@ -435,17 +435,17 @@ message label =
         }
 
 
-rootCs :: Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute r i)
 rootCs =
     Just (class "mdc-snackbar")
 
 
-closeOnEscapeProp :: Config msg -> Maybe (Html.Attribute msg)
+closeOnEscapeProp :: Config r i -> Maybe (Html.Attribute r i)
 closeOnEscapeProp (Config { closeOnEscape }) =
     Just (Html.Attributes.property "closeOnEscape" (Encode.bool closeOnEscape))
 
 
-leadingCs :: Maybe (Message msg) -> Maybe (Html.Attribute msg)
+leadingCs :: Maybe (Message r i) -> Maybe (Html.Attribute r i)
 leadingCs message_ =
     Maybe.andThen
         (\(Message { leading }) ->
@@ -458,7 +458,7 @@ leadingCs message_ =
         message_
 
 
-stackedCs :: Maybe (Message msg) -> Maybe (Html.Attribute msg)
+stackedCs :: Maybe (Message r i) -> Maybe (Html.Attribute r i)
 stackedCs message_ =
     Maybe.andThen
         (\(Message { stacked }) ->
@@ -471,12 +471,12 @@ stackedCs message_ =
         message_
 
 
-messageIdProp :: MessageId -> Maybe (Html.Attribute msg)
+messageIdProp :: MessageId -> Maybe (Html.Attribute r i)
 messageIdProp (MessageId messageId) =
     Just (Html.Attributes.property "messageId" (Encode.int messageId))
 
 
-timeoutMsProp :: Maybe (Message msg) -> Maybe (Html.Attribute msg)
+timeoutMsProp :: Maybe (Message r i) -> Maybe (Html.Attribute r i)
 timeoutMsProp message_ =
     let
         normalizedTimeoutMs =
@@ -491,22 +491,22 @@ timeoutMsProp message_ =
     Just (Html.Attributes.property "timeoutMs" (Encode.int normalizedTimeoutMs))
 
 
-closedHandler :: MessageId -> Config msg -> Maybe (Html.Attribute msg)
+closedHandler :: MessageId -> Config r i -> Maybe (Html.Attribute r i)
 closedHandler messageId (Config { onClosed }) =
     Just (Html.Events.on "MDCSnackbar:closed" (Decode.succeed (onClosed messageId)))
 
 
-ariaStatusRoleAttr :: Html.Attribute msg
+ariaStatusRoleAttr :: Html.Attribute r i
 ariaStatusRoleAttr =
     Html.Attributes.attribute "aria-role" "status"
 
 
-ariaPoliteLiveAttr :: Html.Attribute msg
+ariaPoliteLiveAttr :: Html.Attribute r i
 ariaPoliteLiveAttr =
     Html.Attributes.attribute "aria-live" "polite"
 
 
-surfaceElt :: MessageId -> Message msg -> Html msg
+surfaceElt :: MessageId -> Message r i -> Html r i
 surfaceElt messageId message_ =
     Html.div [ class "mdc-snackbar__surface" ]
         [ labelElt message_
@@ -514,13 +514,13 @@ surfaceElt messageId message_ =
         ]
 
 
-labelElt :: Message msg -> Html msg
+labelElt :: Message r i -> Html r i
 labelElt (Message { label }) =
     Html.div [ class "mdc-snackbar__label", ariaStatusRoleAttr, ariaPoliteLiveAttr ]
         [ text label ]
 
 
-actionsElt :: MessageId -> Message msg -> Html msg
+actionsElt :: MessageId -> Message r i -> Html r i
 actionsElt messageId message_ =
     Html.div [ class "mdc-snackbar__actions" ]
         (Array.filterMap identity
@@ -530,7 +530,7 @@ actionsElt messageId message_ =
         )
 
 
-actionButtonElt :: MessageId -> Message msg -> Maybe (Html msg)
+actionButtonElt :: MessageId -> Message r i -> Maybe (Html r i)
 actionButtonElt messageId ((Message { actionButton }) as message_) =
     Maybe.map
         (\actionButtonLabel ->
@@ -545,17 +545,17 @@ actionButtonElt messageId ((Message { actionButton }) as message_) =
         actionButton
 
 
-actionButtonCs :: Maybe (Html.Attribute msg)
+actionButtonCs :: Maybe (Html.Attribute r i)
 actionButtonCs =
     Just (class "mdc-button mdc-snackbar__action")
 
 
-actionButtonClickHandler :: MessageId -> Message msg -> Maybe (Html.Attribute msg)
+actionButtonClickHandler :: MessageId -> Message r i -> Maybe (Html.Attribute r i)
 actionButtonClickHandler messageId (Message { onActionButtonClick }) =
     Maybe.map (Html.Events.onClick << (|>) messageId) onActionButtonClick
 
 
-actionIconElt :: MessageId -> Message msg -> Maybe (Html msg)
+actionIconElt :: MessageId -> Message r i -> Maybe (Html r i)
 actionIconElt messageId ((Message { actionIcon }) as message_) =
     Maybe.map
         (\actionIconLabel ->
@@ -570,11 +570,11 @@ actionIconElt messageId ((Message { actionIcon }) as message_) =
         actionIcon
 
 
-actionIconCs :: Maybe (Html.Attribute msg)
+actionIconCs :: Maybe (Html.Attribute r i)
 actionIconCs =
     Just (class "mdc-icon-button mdc-snackbar__dismiss material-icons")
 
 
-actionIconClickHandler :: MessageId -> Message msg -> Maybe (Html.Attribute msg)
+actionIconClickHandler :: MessageId -> Message r i -> Maybe (Html.Attribute r i)
 actionIconClickHandler messageId (Message { onActionIconClick }) =
     Maybe.map (Html.Events.onClick << (|>) messageId) onActionIconClick

@@ -10,5 +10,5 @@ type Config r i
         }
 
 
-data Chip a msg
-    = Chip (Config msg) a
+data Chip a r i
+    = Chip (Config r i) a

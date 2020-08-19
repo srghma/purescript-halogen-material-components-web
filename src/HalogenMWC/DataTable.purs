@@ -121,7 +121,7 @@ type Config r i
 
 {-| Default configuration of a data table
 -}
-config :: Config msg
+config :: Config r i
 config =
     Config
         { label = Nothing
@@ -131,14 +131,14 @@ config =
 
 {-| Specify the data table's HTML5 aria-label attribute
 -}
-setLabel :: Maybe String -> Config msg -> Config msg
+setLabel :: Maybe String -> Config r i -> Config r i
 setLabel label (Config config_) =
     Config { config_ | label = label }
 
 
 {-| Specify additional attributes
 -}
-setAttributes :: Array (IProp r i) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
@@ -146,12 +146,12 @@ setAttributes additionalAttributes (Config config_) =
 {-| Data table view function
 -}
 dataTable :
-    Config msg
+    Config r i
     ->
-        { thead :: Array (Row msg)
-        , tbody :: Array (Row msg)
+        { thead :: Array (Row r i)
+        , tbody :: Array (Row r i)
         }
-    -> Html msg
+    -> Html r i
 dataTable ((Config { additionalAttributes }) as config_) { thead, tbody } =
     Html.node "mdc-data-table"
         (dataTableCs :: additionalAttributes)
@@ -167,35 +167,35 @@ dataTable ((Config { additionalAttributes }) as config_) { thead, tbody } =
         ]
 
 
-dataTableCs :: Html.Attribute msg
+dataTableCs :: Html.Attribute r i
 dataTableCs =
     class "mdc-data-table"
 
 
-dataTableTableCs :: Maybe (Html.Attribute msg)
+dataTableTableCs :: Maybe (Html.Attribute r i)
 dataTableTableCs =
     Just (class "mdc-data-table__table")
 
 
-dataTableContentCs :: Html.Attribute msg
+dataTableContentCs :: Html.Attribute r i
 dataTableContentCs =
     class "mdc-data-table__content"
 
 
-ariaLabelAttr :: Config msg -> Maybe (Html.Attribute msg)
+ariaLabelAttr :: Config r i -> Maybe (Html.Attribute r i)
 ariaLabelAttr (Config { label }) =
     Maybe.map (Html.Attributes.attribute "aria-label") label
 
 
 {-| Row type
 -}
-data Row msg
-    = Row { attributes :: Array (IProp r i), nodes :: Array (Cell msg) }
+data Row r i
+    = Row { attributes :: Array (IProp r i), nodes :: Array (Cell r i) }
 
 
 {-| Row view function
 -}
-row :: Array (IProp r i) -> Array (Cell msg) -> Row msg
+row :: Array (IProp r i) -> Array (Cell r i) -> Row r i
 row attributes nodes =
     Row { attributes = attributes, nodes = nodes }
 
@@ -215,32 +215,32 @@ selected =
     ]
 
 
-dataTableRowSelectedCs :: Html.Attribute msg
+dataTableRowSelectedCs :: Html.Attribute r i
 dataTableRowSelectedCs =
     class "mdc-data-table__row--selected"
 
 
-headerRow :: Row msg -> Html msg
+headerRow :: Row r i -> Html r i
 headerRow (Row { attributes, nodes }) =
     Html.tr (dataTableHeaderRowCs :: attributes) (Array.map headerCell nodes)
 
 
-dataTableHeaderRowCs :: Html.Attribute msg
+dataTableHeaderRowCs :: Html.Attribute r i
 dataTableHeaderRowCs =
     class "mdc-data-table__header-row"
 
 
-bodyRow :: Row msg -> Html msg
+bodyRow :: Row r i -> Html r i
 bodyRow (Row { attributes, nodes }) =
     Html.tr (dataTableRowCs :: attributes) (Array.map bodyCell nodes)
 
 
-dataTableRowCs :: Html.Attribute msg
+dataTableRowCs :: Html.Attribute r i
 dataTableRowCs =
     class "mdc-data-table__row"
 
 
-headerCell :: Cell msg -> Html msg
+headerCell :: Cell r i -> Html r i
 headerCell cell_ =
     case cell_ of
         Cell { numeric, attributes, nodes } ->
@@ -278,22 +278,22 @@ headerCell cell_ =
                 ]
 
 
-dataTableHeaderCellCs :: Maybe (Html.Attribute msg)
+dataTableHeaderCellCs :: Maybe (Html.Attribute r i)
 dataTableHeaderCellCs =
     Just (class "mdc-data-table__header-cell")
 
 
-columnHeaderRoleAttr :: Maybe (Html.Attribute msg)
+columnHeaderRoleAttr :: Maybe (Html.Attribute r i)
 columnHeaderRoleAttr =
     Just (Html.Attributes.attribute "role" "columnheader")
 
 
-colScopeAttr :: Maybe (Html.Attribute msg)
+colScopeAttr :: Maybe (Html.Attribute r i)
 colScopeAttr =
     Just (Html.Attributes.attribute "scope" "col")
 
 
-dataTableHeaderCellNumericCs :: Boolean -> Maybe (Html.Attribute msg)
+dataTableHeaderCellNumericCs :: Boolean -> Maybe (Html.Attribute r i)
 dataTableHeaderCellNumericCs numeric =
     if numeric then
         Just (class "mdc-data-table__header-cell--numeric")
@@ -302,12 +302,12 @@ dataTableHeaderCellNumericCs numeric =
         Nothing
 
 
-dataTableHeaderCellCheckboxCs :: Maybe (Html.Attribute msg)
+dataTableHeaderCellCheckboxCs :: Maybe (Html.Attribute r i)
 dataTableHeaderCellCheckboxCs =
     Just (class "mdc-data-table__header-cell--checkbox")
 
 
-bodyCell :: Cell msg -> Html msg
+bodyCell :: Cell r i -> Html r i
 bodyCell cell_ =
     case cell_ of
         Cell { numeric, attributes, nodes } ->
@@ -343,45 +343,45 @@ bodyCell cell_ =
 
 {-| Cell type
 -}
-data Cell msg
+data Cell r i
     = Cell
         { numeric :: Boolean
         , attributes :: Array (IProp r i)
-        , nodes :: Array (Html msg)
+        , nodes :: Array (Html r i)
         }
     | CheckboxCell
-        { config_ :: Checkbox.Config msg
+        { config_ :: Checkbox.Config r i
         , attributes :: Array (IProp r i)
         }
 
 
 {-| Data table cell
 -}
-cell :: Array (IProp r i) -> Array (Html msg) -> Cell msg
+cell :: Array (IProp r i) -> Array (Html r i) -> Cell r i
 cell attributes nodes =
     Cell { numeric = False, attributes = attributes, nodes = nodes }
 
 
 {-| Numeric data table cell (right-aligned contents)
 -}
-numericCell :: Array (IProp r i) -> Array (Html msg) -> Cell msg
+numericCell :: Array (IProp r i) -> Array (Html r i) -> Cell r i
 numericCell attributes nodes =
     Cell { numeric = True, attributes = attributes, nodes = nodes }
 
 
 {-| Data table cell that contians a checkbox
 -}
-checkboxCell :: Array (IProp r i) -> Checkbox.Config msg -> Cell msg
+checkboxCell :: Array (IProp r i) -> Checkbox.Config r i -> Cell r i
 checkboxCell attributes config_ =
     CheckboxCell { attributes = attributes, config_ = config_ }
 
 
-dataTableCellCs :: Maybe (Html.Attribute msg)
+dataTableCellCs :: Maybe (Html.Attribute r i)
 dataTableCellCs =
     Just (class "mdc-data-table__cell")
 
 
-dataTableCellNumericCs :: Boolean -> Maybe (Html.Attribute msg)
+dataTableCellNumericCs :: Boolean -> Maybe (Html.Attribute r i)
 dataTableCellNumericCs numeric =
     if numeric then
         Just (class "mdc-data-table__cell--numeric")
@@ -390,6 +390,6 @@ dataTableCellNumericCs numeric =
         Nothing
 
 
-dataTableCellCheckboxCs :: Maybe (Html.Attribute msg)
+dataTableCellCheckboxCs :: Maybe (Html.Attribute r i)
 dataTableCellCheckboxCs =
     Just (class "mdc-data-table__cell--checkbox")

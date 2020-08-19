@@ -116,7 +116,7 @@ data Variant
 
 {-| Default linear progress configuration
 -}
-config :: Config msg
+config :: Config r i
 config =
     Config
         { reverse = False
@@ -127,26 +127,26 @@ config =
 
 {-| Specify whether a linear progress indicator should be hidden
 -}
-setClosed :: Boolean -> Config msg -> Config msg
+setClosed :: Boolean -> Config r i -> Config r i
 setClosed closed (Config config_) =
     Config { config_ | closed = closed }
 
 
 {-| Specify whether the direction of a linear progress indicator should be reversed
 -}
-setReverse :: Boolean -> Config msg -> Config msg
+setReverse :: Boolean -> Config r i -> Config r i
 setReverse reverse (Config config_) =
     Config { config_ | reverse = reverse }
 
 
 {-| Specify additional attributes
 -}
-setAttributes :: Array (IProp r i) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-linearProgress :: Variant -> Config msg -> Html msg
+linearProgress :: Variant -> Config r i -> Html r i
 linearProgress variant ((Config { additionalAttributes }) as config_) =
     Html.node "mdc-linear-progress"
         (Array.filterMap identity
@@ -171,41 +171,41 @@ linearProgress variant ((Config { additionalAttributes }) as config_) =
 
 {-| Indeterminate linear progress variant
 -}
-indeterminate :: Config msg -> Html msg
+indeterminate :: Config r i -> Html r i
 indeterminate config_ =
     linearProgress Indeterminate config_
 
 
 {-| Determinate linear progress variant
 -}
-determinate :: Config msg -> { progress :: Float } -> Html msg
+determinate :: Config r i -> { progress :: Float } -> Html r i
 determinate config_ { progress } =
     linearProgress (Determinate progress) config_
 
 
 {-| Buffered linear progress variant
 -}
-buffered :: Config msg -> { progress :: Float, buffered :: Float } -> Html msg
+buffered :: Config r i -> { progress :: Float, buffered :: Float } -> Html r i
 buffered config_ data =
     linearProgress (Buffered data.progress data.buffered) config_
 
 
-rootCs :: Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute r i)
 rootCs =
     Just (class "mdc-linear-progress")
 
 
-displayCss :: Maybe (Html.Attribute msg)
+displayCss :: Maybe (Html.Attribute r i)
 displayCss =
     Just (style "display" "block")
 
 
-roleAttr :: Maybe (Html.Attribute msg)
+roleAttr :: Maybe (Html.Attribute r i)
 roleAttr =
     Just (Html.Attributes.attribute "role" "progressbar")
 
 
-variantCs :: Variant -> Maybe (Html.Attribute msg)
+variantCs :: Variant -> Maybe (Html.Attribute r i)
 variantCs variant =
     case variant of
         Indeterminate ->
@@ -215,12 +215,12 @@ variantCs variant =
             Nothing
 
 
-determinateProp :: Variant -> Maybe (Html.Attribute msg)
+determinateProp :: Variant -> Maybe (Html.Attribute r i)
 determinateProp variant =
     Just (Html.Attributes.property "determinate" (Encode.bool (variant /= Indeterminate)))
 
 
-progressProp :: Variant -> Maybe (Html.Attribute msg)
+progressProp :: Variant -> Maybe (Html.Attribute r i)
 progressProp variant =
     Just
         (Html.Attributes.property "progress"
@@ -239,7 +239,7 @@ progressProp variant =
         )
 
 
-bufferProp :: Variant -> Maybe (Html.Attribute msg)
+bufferProp :: Variant -> Maybe (Html.Attribute r i)
 bufferProp variant =
     Just
         (Html.Attributes.property "buffer"
@@ -255,38 +255,38 @@ bufferProp variant =
         )
 
 
-reverseProp :: Config msg -> Maybe (Html.Attribute msg)
+reverseProp :: Config r i -> Maybe (Html.Attribute r i)
 reverseProp (Config { reverse }) =
     Just (Html.Attributes.property "reverse" (Encode.bool reverse))
 
 
-closedProp :: Config msg -> Maybe (Html.Attribute msg)
+closedProp :: Config r i -> Maybe (Html.Attribute r i)
 closedProp (Config { closed }) =
     Just (Html.Attributes.property "closed" (Encode.bool closed))
 
 
-bufferingDotsElt :: Html msg
+bufferingDotsElt :: Html r i
 bufferingDotsElt =
     Html.div [ class "mdc-linear-progress__buffering-dots" ] []
 
 
-bufferElt :: Html msg
+bufferElt :: Html r i
 bufferElt =
     Html.div [ class "mdc-linear-progress__buffer" ] []
 
 
-primaryBarElt :: Html msg
+primaryBarElt :: Html r i
 primaryBarElt =
     Html.div [ class "mdc-linear-progress__bar mdc-linear-progress__primary-bar" ]
         [ barInnerElt ]
 
 
-secondaryBarElt :: Html msg
+secondaryBarElt :: Html r i
 secondaryBarElt =
     Html.div [ class "mdc-linear-progress__bar mdc-linear-progress__secondary-bar" ]
         [ barInnerElt ]
 
 
-barInnerElt :: Html msg
+barInnerElt :: Html r i
 barInnerElt =
     Html.div [ class "mdc-linear-progress__bar-inner" ] []

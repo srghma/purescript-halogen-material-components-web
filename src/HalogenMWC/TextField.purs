@@ -251,23 +251,23 @@ type Config r i
         , min :: Maybe Int
         , max :: Maybe Int
         , step :: Maybe Int
-        , leadingIcon :: Maybe (Icon msg)
-        , trailingIcon :: Maybe (Icon msg)
+        , leadingIcon :: Maybe (Icon r i)
+        , trailingIcon :: Maybe (Icon r i)
         , additionalAttributes :: Array (IProp r i)
-        , onInput :: Maybe (String -> msg)
-        , onChange :: Maybe (String -> msg)
+        , onInput :: Maybe (String -> r i)
+        , onChange :: Maybe (String -> r i)
         }
 
 
 {-| Text field trailing or leading icon -
 -}
-data Icon msg
-    = Icon (Html msg)
+data Icon r i
+    = Icon (Html r i)
 
 
 {-| Default configuration of a text field
 -}
-config :: Config msg
+config :: Config r i
 config =
     Config
         { label = Nothing
@@ -294,28 +294,28 @@ config =
 
 {-| Specify a text field's label
 -}
-setLabel :: Maybe String -> Config msg -> Config msg
+setLabel :: Maybe String -> Config r i -> Config r i
 setLabel label (Config config_) =
     Config { config_ | label = label }
 
 
 {-| Specify a text field to be fullwidth
 -}
-setFullwidth :: Boolean -> Config msg -> Config msg
+setFullwidth :: Boolean -> Config r i -> Config r i
 setFullwidth fullwidth (Config config_) =
     Config { config_ | fullwidth = fullwidth }
 
 
 {-| Specify a text field's value
 -}
-setValue :: Maybe String -> Config msg -> Config msg
+setValue :: Maybe String -> Config r i -> Config r i
 setValue value (Config config_) =
     Config { config_ | value = value }
 
 
 {-| Specify a text field's placeholder
 -}
-setPlaceholder :: Maybe String -> Config msg -> Config msg
+setPlaceholder :: Maybe String -> Config r i -> Config r i
 setPlaceholder placeholder (Config config_) =
     Config { config_ | placeholder = placeholder }
 
@@ -326,98 +326,98 @@ Disabled text fields cannot be interacted with and have no visual interaction
 effect.
 
 -}
-setDisabled :: Boolean -> Config msg -> Config msg
+setDisabled :: Boolean -> Config r i -> Config r i
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 
 
 {-| Specify a text field to be required
 -}
-setRequired :: Boolean -> Config msg -> Config msg
+setRequired :: Boolean -> Config r i -> Config r i
 setRequired required (Config config_) =
     Config { config_ | required = required }
 
 
 {-| Specify a text field to be valid
 -}
-setValid :: Boolean -> Config msg -> Config msg
+setValid :: Boolean -> Config r i -> Config r i
 setValid valid (Config config_) =
     Config { config_ | valid = valid }
 
 
 {-| Specify a text field's minimum length
 -}
-setMinLength :: Maybe Int -> Config msg -> Config msg
+setMinLength :: Maybe Int -> Config r i -> Config r i
 setMinLength minLength (Config config_) =
     Config { config_ | minLength = minLength }
 
 
 {-| Specify a text field's maximum length
 -}
-setMaxLength :: Maybe Int -> Config msg -> Config msg
+setMaxLength :: Maybe Int -> Config r i -> Config r i
 setMaxLength maxLength (Config config_) =
     Config { config_ | maxLength = maxLength }
 
 
 {-| Specify a text field's pattern
 -}
-setPattern :: Maybe String -> Config msg -> Config msg
+setPattern :: Maybe String -> Config r i -> Config r i
 setPattern pattern (Config config_) =
     Config { config_ | pattern = pattern }
 
 
 {-| Specify a text field's type
 -}
-setType :: Maybe String -> Config msg -> Config msg
+setType :: Maybe String -> Config r i -> Config r i
 setType type_ (Config config_) =
     Config { config_ | type_ = type_ }
 
 
 {-| Specify a text field's minimum value
 -}
-setMin :: Maybe Int -> Config msg -> Config msg
+setMin :: Maybe Int -> Config r i -> Config r i
 setMin min (Config config_) =
     Config { config_ | min = min }
 
 
 {-| Specify a text field's maximum value
 -}
-setMax :: Maybe Int -> Config msg -> Config msg
+setMax :: Maybe Int -> Config r i -> Config r i
 setMax max (Config config_) =
     Config { config_ | max = max }
 
 
 {-| Specify a text field's step value
 -}
-setStep :: Maybe Int -> Config msg -> Config msg
+setStep :: Maybe Int -> Config r i -> Config r i
 setStep step (Config config_) =
     Config { config_ | step = step }
 
 
 {-| Specify a text field's leading icon
 -}
-setLeadingIcon :: Maybe (Icon msg) -> Config msg -> Config msg
+setLeadingIcon :: Maybe (Icon r i) -> Config r i -> Config r i
 setLeadingIcon leadingIcon (Config config_) =
     Config { config_ | leadingIcon = leadingIcon }
 
 
 {-| Specify a text field's trailing icon
 -}
-setTrailingIcon :: Maybe (Icon msg) -> Config msg -> Config msg
+setTrailingIcon :: Maybe (Icon r i) -> Config r i -> Config r i
 setTrailingIcon trailingIcon (Config config_) =
     Config { config_ | trailingIcon = trailingIcon }
 
 
 {-| Specify additional attributes
 -}
-setAttributes :: Array (IProp r i) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Specify a message when the user changes the value inside the text field
 -}
-setOnInput :: (String -> msg) -> Config msg -> Config msg
+setOnInput :: (String -> r i) -> Config r i -> Config r i
 setOnInput onInput (Config config_) =
     Config { config_ | onInput = Just onInput }
 
@@ -425,26 +425,26 @@ setOnInput onInput (Config config_) =
 {-| Specify a message when the user confirms a changed value inside the text
 field
 -}
-setOnChange :: (String -> msg) -> Config msg -> Config msg
+setOnChange :: (String -> r i) -> Config r i -> Config r i
 setOnChange onChange (Config config_) =
     Config { config_ | onChange = Just onChange }
 
 
 {-| Filled text field view function
 -}
-filled :: Config msg -> Html msg
+filled :: Config r i -> Html r i
 filled config_ =
     textField False config_
 
 
 {-| Outlined text field view function
 -}
-outlined :: Config msg -> Html msg
+outlined :: Config r i -> Html r i
 outlined config_ =
     textField True config_
 
 
-textField :: Boolean -> Config msg -> Html msg
+textField :: Boolean -> Config r i -> Html r i
 textField outlined_ ((Config { additionalAttributes, fullwidth }) as config_) =
     Html.node "mdc-text-field"
         (Array.filterMap identity
@@ -498,17 +498,17 @@ textField outlined_ ((Config { additionalAttributes, fullwidth }) as config_) =
 
 {-| A text field's icon, either leading or trailing
 -}
-icon :: Array (IProp r i) -> String -> Icon msg
+icon :: Array (IProp r i) -> String -> Icon r i
 icon additionalAttributes iconName =
     Icon (Icon.icon (class "mdc-text-field__icon" :: additionalAttributes) iconName)
 
 
-rootCs :: Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute r i)
 rootCs =
     Just (class "mdc-text-field")
 
 
-outlinedCs :: Boolean -> Maybe (Html.Attribute msg)
+outlinedCs :: Boolean -> Maybe (Html.Attribute r i)
 outlinedCs outlined_ =
     if outlined_ then
         Just (class "mdc-text-field--outlined")
@@ -517,7 +517,7 @@ outlinedCs outlined_ =
         Nothing
 
 
-fullwidthCs :: Config msg -> Maybe (Html.Attribute msg)
+fullwidthCs :: Config r i -> Maybe (Html.Attribute r i)
 fullwidthCs (Config { fullwidth }) =
     if fullwidth then
         Just (class "mdc-text-field--fullwidth")
@@ -526,7 +526,7 @@ fullwidthCs (Config { fullwidth }) =
         Nothing
 
 
-disabledCs :: Config msg -> Maybe (Html.Attribute msg)
+disabledCs :: Config r i -> Maybe (Html.Attribute r i)
 disabledCs (Config { disabled }) =
     if disabled then
         Just (class "mdc-text-field--disabled")
@@ -535,7 +535,7 @@ disabledCs (Config { disabled }) =
         Nothing
 
 
-withLeadingIconCs :: Config msg -> Maybe (Html.Attribute msg)
+withLeadingIconCs :: Config r i -> Maybe (Html.Attribute r i)
 withLeadingIconCs (Config { leadingIcon }) =
     if leadingIcon /= Nothing then
         Just (class "mdc-text-field--with-leading-icon")
@@ -544,7 +544,7 @@ withLeadingIconCs (Config { leadingIcon }) =
         Nothing
 
 
-withTrailingIconCs :: Config msg -> Maybe (Html.Attribute msg)
+withTrailingIconCs :: Config r i -> Maybe (Html.Attribute r i)
 withTrailingIconCs (Config { trailingIcon }) =
     if trailingIcon /= Nothing then
         Just (class "mdc-text-field--with-trailing-icon")
@@ -553,17 +553,17 @@ withTrailingIconCs (Config { trailingIcon }) =
         Nothing
 
 
-requiredProp :: Config msg -> Maybe (Html.Attribute msg)
+requiredProp :: Config r i -> Maybe (Html.Attribute r i)
 requiredProp (Config { required }) =
     Just (Html.Attributes.property "required" (Encode.bool required))
 
 
-validProp :: Config msg -> Maybe (Html.Attribute msg)
+validProp :: Config r i -> Maybe (Html.Attribute r i)
 validProp (Config { valid }) =
     Just (Html.Attributes.property "valid" (Encode.bool valid))
 
 
-minLengthProp :: Config msg -> Maybe (Html.Attribute msg)
+minLengthProp :: Config r i -> Maybe (Html.Attribute r i)
 minLengthProp (Config { minLength }) =
     Just
         (Html.Attributes.property "minLength"
@@ -571,7 +571,7 @@ minLengthProp (Config { minLength }) =
         )
 
 
-maxLengthProp :: Config msg -> Maybe (Html.Attribute msg)
+maxLengthProp :: Config r i -> Maybe (Html.Attribute r i)
 maxLengthProp (Config { maxLength }) =
     Just
         (Html.Attributes.property "maxLength"
@@ -579,17 +579,17 @@ maxLengthProp (Config { maxLength }) =
         )
 
 
-minLengthAttr :: Config msg -> Maybe (Html.Attribute msg)
+minLengthAttr :: Config r i -> Maybe (Html.Attribute r i)
 minLengthAttr (Config { minLength }) =
     Maybe.map (Html.Attributes.attribute "minLength" << String.fromInt) minLength
 
 
-maxLengthAttr :: Config msg -> Maybe (Html.Attribute msg)
+maxLengthAttr :: Config r i -> Maybe (Html.Attribute r i)
 maxLengthAttr (Config { maxLength }) =
     Maybe.map (Html.Attributes.attribute "maxLength" << String.fromInt) maxLength
 
 
-minProp :: Config msg -> Maybe (Html.Attribute msg)
+minProp :: Config r i -> Maybe (Html.Attribute r i)
 minProp (Config { min }) =
     Just
         (Html.Attributes.property "min"
@@ -597,7 +597,7 @@ minProp (Config { min }) =
         )
 
 
-maxProp :: Config msg -> Maybe (Html.Attribute msg)
+maxProp :: Config r i -> Maybe (Html.Attribute r i)
 maxProp (Config { max }) =
     Just
         (Html.Attributes.property "max"
@@ -605,7 +605,7 @@ maxProp (Config { max }) =
         )
 
 
-stepProp :: Config msg -> Maybe (Html.Attribute msg)
+stepProp :: Config r i -> Maybe (Html.Attribute r i)
 stepProp (Config { step }) =
     Just
         (Html.Attributes.property "step"
@@ -613,17 +613,17 @@ stepProp (Config { step }) =
         )
 
 
-valueProp :: Config msg -> Maybe (Html.Attribute msg)
+valueProp :: Config r i -> Maybe (Html.Attribute r i)
 valueProp (Config { value }) =
     Maybe.map (Html.Attributes.property "value" << Encode.string) value
 
 
-placeholderAttr :: Config msg -> Maybe (Html.Attribute msg)
+placeholderAttr :: Config r i -> Maybe (Html.Attribute r i)
 placeholderAttr (Config { placeholder }) =
     Maybe.map Html.Attributes.placeholder placeholder
 
 
-leadingIconElt :: Config msg -> Array (Html msg)
+leadingIconElt :: Config r i -> Array (Html r i)
 leadingIconElt (Config { leadingIcon }) =
     case leadingIcon of
         Nothing ->
@@ -633,7 +633,7 @@ leadingIconElt (Config { leadingIcon }) =
             [ html ]
 
 
-trailingIconElt :: Config msg -> Array (Html msg)
+trailingIconElt :: Config r i -> Array (Html r i)
 trailingIconElt (Config { trailingIcon }) =
     case trailingIcon of
         Nothing ->
@@ -643,18 +643,18 @@ trailingIconElt (Config { trailingIcon }) =
             [ html ]
 
 
-inputHandler :: Config msg -> Maybe (Html.Attribute msg)
+inputHandler :: Config r i -> Maybe (Html.Attribute r i)
 inputHandler (Config { onInput }) =
     Maybe.map Html.Events.onInput onInput
 
 
-changeHandler :: Config msg -> Maybe (Html.Attribute msg)
+changeHandler :: Config r i -> Maybe (Html.Attribute r i)
 changeHandler (Config { onChange }) =
     Maybe.map (\f -> Html.Events.on "change" (Decode.map f Html.Events.targetValue))
         onChange
 
 
-inputElt :: Config msg -> Html msg
+inputElt :: Config r i -> Html r i
 inputElt config_ =
     Html.input
         (Array.filterMap identity
@@ -671,12 +671,12 @@ inputElt config_ =
         []
 
 
-inputCs :: Maybe (Html.Attribute msg)
+inputCs :: Maybe (Html.Attribute r i)
 inputCs =
     Just (class "mdc-text-field__input")
 
 
-patternProp :: Config msg -> Maybe (Html.Attribute msg)
+patternProp :: Config r i -> Maybe (Html.Attribute r i)
 patternProp (Config { pattern }) =
     Just
         (Html.Attributes.property "pattern"
@@ -684,12 +684,12 @@ patternProp (Config { pattern }) =
         )
 
 
-typeAttr :: Config msg -> Maybe (Html.Attribute msg)
+typeAttr :: Config r i -> Maybe (Html.Attribute r i)
 typeAttr (Config { type_ }) =
     Maybe.map Html.Attributes.type_ type_
 
 
-ariaLabelAttr :: Config msg -> Maybe (Html.Attribute msg)
+ariaLabelAttr :: Config r i -> Maybe (Html.Attribute r i)
 ariaLabelAttr (Config { fullwidth, placeholder, label }) =
     if fullwidth then
         Maybe.map (Html.Attributes.attribute "aria-label") label
@@ -698,12 +698,12 @@ ariaLabelAttr (Config { fullwidth, placeholder, label }) =
         Nothing
 
 
-disabledProp :: Config msg -> Maybe (Html.Attribute msg)
+disabledProp :: Config r i -> Maybe (Html.Attribute r i)
 disabledProp (Config { disabled }) =
     Just (Html.Attributes.property "disabled" (Encode.bool disabled))
 
 
-labelElt :: Config msg -> Html msg
+labelElt :: Config r i -> Html r i
 labelElt (Config { label, value }) =
     let
         floatingLabelCs =
@@ -729,7 +729,7 @@ labelElt (Config { label, value }) =
             text ""
 
 
-noLabelCs :: Config msg -> Maybe (Html.Attribute msg)
+noLabelCs :: Config r i -> Maybe (Html.Attribute r i)
 noLabelCs (Config { label }) =
     if label == Nothing then
         Just (class "mdc-text-field--no-label")
@@ -738,12 +738,12 @@ noLabelCs (Config { label }) =
         Nothing
 
 
-lineRippleElt :: Html msg
+lineRippleElt :: Html r i
 lineRippleElt =
     Html.div [ class "mdc-line-ripple" ] []
 
 
-notchedOutlineElt :: Config msg -> Html msg
+notchedOutlineElt :: Config r i -> Html r i
 notchedOutlineElt config_ =
     Html.div [ class "mdc-notched-outline" ]
         [ notchedOutlineLeadingElt
@@ -752,16 +752,16 @@ notchedOutlineElt config_ =
         ]
 
 
-notchedOutlineLeadingElt :: Html msg
+notchedOutlineLeadingElt :: Html r i
 notchedOutlineLeadingElt =
     Html.div [ class "mdc-notched-outline__leading" ] []
 
 
-notchedOutlineTrailingElt :: Html msg
+notchedOutlineTrailingElt :: Html r i
 notchedOutlineTrailingElt =
     Html.div [ class "mdc-notched-outline__trailing" ] []
 
 
-notchedOutlineNotchElt :: Config msg -> Html msg
+notchedOutlineNotchElt :: Config r i -> Html r i
 notchedOutlineNotchElt config_ =
     Html.div [ class "mdc-notched-outline__notch" ] [ labelElt config_ ]

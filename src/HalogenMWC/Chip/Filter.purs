@@ -84,12 +84,12 @@ import Material.Chip.Filter.Internal (Chip(..), Config(..))
 {-| Configuration of a filter chip
 -}
 type Config r i =
-    Material.Chip.Filter.Internal.Config msg
+    Material.Chip.Filter.Internal.Config r i
 
 
 {-| Default configuration of a filter chip
 -}
-config :: Config msg
+config :: Config r i
 config =
     Config
         { selected = False
@@ -101,40 +101,40 @@ config =
 
 {-| Specify whether a filter chip is selected
 -}
-setSelected :: Boolean -> Config msg -> Config msg
+setSelected :: Boolean -> Config r i -> Config r i
 setSelected selected (Config config_) =
     Config { config_ | selected = selected }
 
 
 {-| Specify whether a chip displays an icon
 -}
-setIcon :: Maybe String -> Config msg -> Config msg
+setIcon :: Maybe String -> Config r i -> Config r i
 setIcon icon (Config config_) =
     Config { config_ | icon = icon }
 
 
 {-| Specify additional attributes
 -}
-setAttributes :: Array (IProp r i) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Specify a message when the user clicks on a chip
 -}
-setOnChange :: msg -> Config msg -> Config msg
+setOnChange :: r i -> Config r i -> Config r i
 setOnChange onChange (Config config_) =
     Config { config_ | onChange = Just onChange }
 
 
 {-| Filter chip type
 -}
-data Chip msg =
-    Material.Chip.Filter.Internal.Chip msg
+data Chip r i =
+    Material.Chip.Filter.Internal.Chip r i
 
 
 {-| Filter chip view function
 -}
-chip :: Config msg -> String -> Chip msg
+chip :: Config r i -> String -> Chip r i
 chip =
     Chip

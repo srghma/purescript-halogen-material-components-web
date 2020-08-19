@@ -98,7 +98,7 @@ type Config r i
 
 {-| Default ripple configuration
 -}
-config :: Config msg
+config :: Config r i
 config =
     Config
         { color = Nothing
@@ -108,14 +108,14 @@ config =
 
 {-| Specify a ripple effect's color
 -}
-setColor :: Maybe Color -> Config msg -> Config msg
+setColor :: Maybe Color -> Config r i -> Config r i
 setColor color (Config config_) =
     Config { config_ | color = color }
 
 
 {-| Specify additional attributes
 -}
-setAttributes :: Array (IProp r i) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
@@ -141,7 +141,7 @@ accent =
     Accent
 
 
-ripple :: Boolean -> Config msg -> Html msg
+ripple :: Boolean -> Config r i -> Html r i
 ripple isUnbounded ((Config { additionalAttributes }) as config_) =
     Html.node "mdc-ripple"
         (Array.filterMap identity
@@ -162,24 +162,24 @@ ripple isUnbounded ((Config { additionalAttributes }) as config_) =
 
 {-| Bounded ripple view function
 -}
-bounded :: Config msg -> Html msg
+bounded :: Config r i -> Html r i
 bounded =
     ripple False
 
 
 {-| Unbounded ripple view function
 -}
-unbounded :: Config msg -> Html msg
+unbounded :: Config r i -> Html r i
 unbounded =
     ripple True
 
 
-rippleSurface :: Maybe (Html.Attribute msg)
+rippleSurface :: Maybe (Html.Attribute r i)
 rippleSurface =
     Just (class "mdc-ripple-surface")
 
 
-colorCs :: Config msg -> Maybe (Html.Attribute msg)
+colorCs :: Config r i -> Maybe (Html.Attribute r i)
 colorCs (Config { color }) =
     case color of
         Just Primary ->
@@ -192,12 +192,12 @@ colorCs (Config { color }) =
             Nothing
 
 
-unboundedProp :: Boolean -> Maybe (Html.Attribute msg)
+unboundedProp :: Boolean -> Maybe (Html.Attribute r i)
 unboundedProp isUnbounded =
     Just (Html.Attributes.property "unbounded" (Encode.bool isUnbounded))
 
 
-unboundedData :: Boolean -> Maybe (Html.Attribute msg)
+unboundedData :: Boolean -> Maybe (Html.Attribute r i)
 unboundedData isUnbounded =
     if isUnbounded then
         Just (Html.Attributes.attribute "data-mdc-ripple-is-unbounded" "")

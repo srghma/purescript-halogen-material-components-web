@@ -74,12 +74,12 @@ import Material.Chip.Input.Internal (Chip(..), Config(..))
 {-| Configuration of an input chip
 -}
 type Config r i =
-    Material.Chip.Input.Internal.Config msg
+    Material.Chip.Input.Internal.Config r i
 
 
 {-| Default configuration of an input chip
 -}
-config :: Config msg
+config :: Config r i
 config =
     Config
         { leadingIcon = Nothing
@@ -92,47 +92,47 @@ config =
 
 {-| Specify whether an input chip displays a leading icon
 -}
-setLeadingIcon :: Maybe String -> Config msg -> Config msg
+setLeadingIcon :: Maybe String -> Config r i -> Config r i
 setLeadingIcon leadingIcon (Config config_) =
     Config { config_ | leadingIcon = leadingIcon }
 
 
 {-| Specify whether an input chip displays a trailing icon
 -}
-setTrailingIcon :: Maybe String -> Config msg -> Config msg
+setTrailingIcon :: Maybe String -> Config r i -> Config r i
 setTrailingIcon trailingIcon (Config config_) =
     Config { config_ | trailingIcon = trailingIcon }
 
 
 {-| Specify additonal attributes
 -}
-setAttributes :: Array (IProp r i) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Specify a message when the user clicks on a chip's trailing icon
 -}
-setOnDelete :: msg -> Config msg -> Config msg
+setOnDelete :: r i -> Config r i -> Config r i
 setOnDelete onDelete (Config config_) =
     Config { config_ | onDelete = Just onDelete }
 
 
 {-| Specify a message when the user clicks on a chip
 -}
-setOnClick :: msg -> Config msg -> Config msg
+setOnClick :: r i -> Config r i -> Config r i
 setOnClick onClick (Config config_) =
     Config { config_ | onClick = Just onClick }
 
 
 {-| Input chip type
 -}
-data Chip msg =
-    Material.Chip.Input.Internal.Chip msg
+data Chip r i =
+    Material.Chip.Input.Internal.Chip r i
 
 
 {-| Input chip view function
 -}
-chip :: Config msg -> String -> Chip msg
+chip :: Config r i -> String -> Chip r i
 chip =
     Chip

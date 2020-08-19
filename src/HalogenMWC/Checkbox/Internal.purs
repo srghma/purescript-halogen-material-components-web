@@ -8,7 +8,7 @@ type Config r i
         { state :: Maybe State
         , disabled :: Boolean
         , additionalAttributes :: Array (IProp r i)
-        , onChange :: Maybe msg
+        , onChange :: Maybe r i
         , touch :: Boolean
         }
 

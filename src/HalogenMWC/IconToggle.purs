@@ -150,13 +150,13 @@ type Config r i
         , disabled :: Boolean
         , label :: Maybe String
         , additionalAttributes :: Array (IProp r i)
-        , onChange :: Maybe msg
+        , onChange :: Maybe r i
         }
 
 
 {-| Default icon toggle configuration
 -}
-config :: Config msg
+config :: Config r i
 config =
     Config
         { on = False
@@ -169,7 +169,7 @@ config =
 
 {-| Specify whether an icon toggle is on
 -}
-setOn :: Boolean -> Config msg -> Config msg
+setOn :: Boolean -> Config r i -> Config r i
 setOn on (Config config_) =
     Config { config_ | on = on }
 
@@ -180,35 +180,35 @@ Disabled icon buttons cannot be interacted with and have no visual interaction
 effect.
 
 -}
-setDisabled :: Boolean -> Config msg -> Config msg
+setDisabled :: Boolean -> Config r i -> Config r i
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 
 
 {-| Specify the HTML5 aria-label attribute of an icon toggle
 -}
-setLabel :: Maybe String -> Config msg -> Config msg
+setLabel :: Maybe String -> Config r i -> Config r i
 setLabel label (Config config_) =
     Config { config_ | label = label }
 
 
 {-| Specify additional attributes
 -}
-setAttributes :: Array (IProp r i) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Specify a message when the user changes the icon toggle
 -}
-setOnChange :: msg -> Config msg -> Config msg
+setOnChange :: r i -> Config r i -> Config r i
 setOnChange onChange (Config config_) =
     Config { config_ | onChange = Just onChange }
 
 
 {-| Icon toggle view function
 -}
-iconToggle :: Config msg -> { onIcon :: String, offIcon :: String } -> Html msg
+iconToggle :: Config r i -> { onIcon :: String, offIcon :: String } -> Html r i
 iconToggle ((Config { additionalAttributes }) as config_) { onIcon, offIcon } =
     Html.node "mdc-icon-button"
         (Array.filterMap identity
@@ -228,42 +228,42 @@ iconToggle ((Config { additionalAttributes }) as config_) { onIcon, offIcon } =
         ]
 
 
-rootCs :: Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute r i)
 rootCs =
     Just (class "mdc-icon-button")
 
 
-onProp :: Config msg -> Maybe (Html.Attribute msg)
+onProp :: Config r i -> Maybe (Html.Attribute r i)
 onProp (Config { on }) =
     Just (Html.Attributes.property "on" (Encode.bool on))
 
 
-materialIconsCs :: Maybe (Html.Attribute msg)
+materialIconsCs :: Maybe (Html.Attribute r i)
 materialIconsCs =
     Just (class "material-icons")
 
 
-iconCs :: Maybe (Html.Attribute msg)
+iconCs :: Maybe (Html.Attribute r i)
 iconCs =
     Just (class "mdc-icon-button__icon")
 
 
-onIconCs :: Maybe (Html.Attribute msg)
+onIconCs :: Maybe (Html.Attribute r i)
 onIconCs =
     Just (class "mdc-icon-button__icon mdc-icon-button__icon--on")
 
 
-tabIndexProp :: Maybe (Html.Attribute msg)
+tabIndexProp :: Maybe (Html.Attribute r i)
 tabIndexProp =
     Just (Html.Attributes.tabindex 0)
 
 
-ariaHiddenAttr :: Maybe (Html.Attribute msg)
+ariaHiddenAttr :: Maybe (Html.Attribute r i)
 ariaHiddenAttr =
     Just (Html.Attributes.attribute "aria-hidden" "true")
 
 
-ariaPressedAttr :: Config msg -> Maybe (Html.Attribute msg)
+ariaPressedAttr :: Config r i -> Maybe (Html.Attribute r i)
 ariaPressedAttr (Config { on }) =
     Just
         (Html.Attributes.attribute "aria-pressed"
@@ -276,17 +276,17 @@ ariaPressedAttr (Config { on }) =
         )
 
 
-ariaLabelAttr :: Config msg -> Maybe (Html.Attribute msg)
+ariaLabelAttr :: Config r i -> Maybe (Html.Attribute r i)
 ariaLabelAttr (Config { label }) =
     Maybe.map (Html.Attributes.attribute "aria-label") label
 
 
-changeHandler :: Config msg -> Maybe (Html.Attribute msg)
+changeHandler :: Config r i -> Maybe (Html.Attribute r i)
 changeHandler (Config { onChange }) =
     Maybe.map (Html.Events.on "MDCIconButtonToggle:change" << Decode.succeed)
         onChange
 
 
-disabledAttr :: Config msg -> Maybe (Html.Attribute msg)
+disabledAttr :: Config r i -> Maybe (Html.Attribute r i)
 disabledAttr (Config { disabled }) =
     Just (Html.Attributes.disabled disabled)

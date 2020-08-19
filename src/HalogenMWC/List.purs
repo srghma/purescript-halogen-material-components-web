@@ -192,7 +192,7 @@ type Config r i
 
 {-| Default configuration of a list
 -}
-config :: Config msg
+config :: Config r i
 config =
     Config
         { nonInteractive = False
@@ -211,7 +211,7 @@ Non-interactive lists do not feature keyboard interaction and list items have
 no visual interaction effect.
 
 -}
-setNonInteractive :: Boolean -> Config msg -> Config msg
+setNonInteractive :: Boolean -> Config r i -> Config r i
 setNonInteractive nonInteractive (Config config_) =
     Config { config_ | nonInteractive = nonInteractive }
 
@@ -221,7 +221,7 @@ setNonInteractive nonInteractive (Config config_) =
 Dense lists are more compact and feature smaller than normal margins
 
 -}
-setDense :: Boolean -> Config msg -> Config msg
+setDense :: Boolean -> Config r i -> Config r i
 setDense dense (Config config_) =
     Config { config_ | dense = dense }
 
@@ -231,7 +231,7 @@ setDense dense (Config config_) =
 An avatar list features a larger than usual list item _graphic_.
 
 -}
-setAvatarArray :: Boolean -> Config msg -> Config msg
+setAvatarArray :: Boolean -> Config r i -> Config r i
 setAvatarArray avatarArray (Config config_) =
     Config { config_ | avatarArray = avatarArray }
 
@@ -241,7 +241,7 @@ setAvatarArray avatarArray (Config config_) =
 Two line lists feature list items with a primary and a secondary text line.
 
 -}
-setTwoLine :: Boolean -> Config msg -> Config msg
+setTwoLine :: Boolean -> Config r i -> Config r i
 setTwoLine twoLine (Config config_) =
     Config { config_ | twoLine = twoLine }
 
@@ -253,14 +253,14 @@ last list item. By default, a list in that case passes focus to the next
 focusable control.
 
 -}
-setWrapFocus :: Boolean -> Config msg -> Config msg
+setWrapFocus :: Boolean -> Config r i -> Config r i
 setWrapFocus wrapFocus (Config config_) =
     Config { config_ | wrapFocus = wrapFocus }
 
 
 {-| Specify additional attributes
 -}
-setAttributes :: Array (IProp r i) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
@@ -272,7 +272,7 @@ argument represents the first list item, and the second argument reresents the
 remaining list items. This way we guarantee lists to be non-empty.
 
 -}
-list :: Config msg -> ArrayItem msg -> Array (ArrayItem msg) -> Html msg
+list :: Config r i -> ArrayItem r i -> Array (ArrayItem r i) -> Html r i
 list ((Config { additionalAttributes }) as config_) firstArrayItem remainingArrayItems =
     let
         listItems =
@@ -307,12 +307,12 @@ list ((Config { additionalAttributes }) as config_) firstArrayItem remainingArra
         )
 
 
-rootCs :: Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute r i)
 rootCs =
     Just (class "mdc-list")
 
 
-nonInteractiveCs :: Config msg -> Maybe (Html.Attribute msg)
+nonInteractiveCs :: Config r i -> Maybe (Html.Attribute r i)
 nonInteractiveCs (Config { nonInteractive }) =
     if nonInteractive then
         Just (class "mdc-list--non-interactive")
@@ -321,7 +321,7 @@ nonInteractiveCs (Config { nonInteractive }) =
         Nothing
 
 
-denseCs :: Config msg -> Maybe (Html.Attribute msg)
+denseCs :: Config r i -> Maybe (Html.Attribute r i)
 denseCs (Config { dense }) =
     if dense then
         Just (class "mdc-list--dense")
@@ -330,7 +330,7 @@ denseCs (Config { dense }) =
         Nothing
 
 
-avatarArrayCs :: Config msg -> Maybe (Html.Attribute msg)
+avatarArrayCs :: Config r i -> Maybe (Html.Attribute r i)
 avatarArrayCs (Config { avatarArray }) =
     if avatarArray then
         Just (class "mdc-list--avatar-list")
@@ -339,7 +339,7 @@ avatarArrayCs (Config { avatarArray }) =
         Nothing
 
 
-twoLineCs :: Config msg -> Maybe (Html.Attribute msg)
+twoLineCs :: Config r i -> Maybe (Html.Attribute r i)
 twoLineCs (Config { twoLine }) =
     if twoLine then
         Just (class "mdc-list--two-line")
@@ -348,7 +348,7 @@ twoLineCs (Config { twoLine }) =
         Nothing
 
 
-clickHandler :: Array (ArrayItem msg) -> Maybe (Html.Attribute msg)
+clickHandler :: Array (ArrayItem r i) -> Maybe (Html.Attribute r i)
 clickHandler listItems =
     let
         getOnClick listItem_ =
@@ -385,7 +385,7 @@ clickHandler listItems =
     Just (Html.Events.on "MDCArray:action" mergedClickHandler)
 
 
-selectedIndexProp :: Array (ArrayItem msg) -> Maybe (Html.Attribute msg)
+selectedIndexProp :: Array (ArrayItem r i) -> Maybe (Html.Attribute r i)
 selectedIndexProp listItems =
     let
         selectedIndex =
@@ -425,28 +425,28 @@ selectedIndexProp listItems =
 
 {-| Array group view function
 -}
-group :: Array (IProp r i) -> Array (Html msg) -> Html msg
+group :: Array (IProp r i) -> Array (Html r i) -> Html r i
 group additionalAttributes nodes =
     Html.div (listGroupCs :: additionalAttributes) nodes
 
 
-listGroupCs :: Html.Attribute msg
+listGroupCs :: Html.Attribute r i
 listGroupCs =
     class "mdc-list-group"
 
 
 {-| Array group subheader view function
 -}
-subheader :: Array (IProp r i) -> Array (Html msg) -> Html msg
+subheader :: Array (IProp r i) -> Array (Html r i) -> Html r i
 subheader additionalAttributes nodes =
     Html.span (listGroupSubheaderCs :: additionalAttributes) nodes
 
 
-listGroupSubheaderCs :: Html.Attribute msg
+listGroupSubheaderCs :: Html.Attribute r i
 listGroupSubheaderCs =
     class "mdc-list-group__subheader"
 
 
-wrapFocusProp :: Config msg -> Maybe (Html.Attribute msg)
+wrapFocusProp :: Config r i -> Maybe (Html.Attribute r i)
 wrapFocusProp (Config { wrapFocus }) =
     Just (Html.Attributes.property "wrapFocus" (Encode.bool wrapFocus))

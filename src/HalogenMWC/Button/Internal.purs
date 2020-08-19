@@ -12,6 +12,6 @@ type Config r i
         , href :: Maybe String
         , target :: Maybe String
         , additionalAttributes :: Array (IProp r i)
-        , onClick :: Maybe msg
+        , onClick :: Maybe r i
         , touch :: Boolean
         }

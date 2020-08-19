@@ -140,12 +140,12 @@ import Svg.Attributes
 {-| Configuration of a checkbox
 -}
 type Config r i =
-    Material.Checkbox.Internal.Config msg
+    Material.Checkbox.Internal.Config r i
 
 
 {-| Default configuration of a checkbox
 -}
-config :: Config msg
+config :: Config r i
 config =
     Config
         { state = Nothing
@@ -161,7 +161,7 @@ config =
 A checkbox may be in `checked`, `unchecked` or `indeterminate` state.
 
 -}
-setState :: Maybe State -> Config msg -> Config msg
+setState :: Maybe State -> Config r i -> Config r i
 setState state (Config config_) =
     Config { config_ | state = state }
 
@@ -172,21 +172,21 @@ Disabled checkboxes cannot be interacted with and have no visual interaction
 effect.
 
 -}
-setDisabled :: Boolean -> Config msg -> Config msg
+setDisabled :: Boolean -> Config r i -> Config r i
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 
 
 {-| Specify additional attributes
 -}
-setAttributes :: Array (IProp r i) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Specify a message when the user changes a checkbox
 -}
-setOnChange :: msg -> Config msg -> Config msg
+setOnChange :: r i -> Config r i -> Config r i
 setOnChange onChange (Config config_) =
     Config { config_ | onChange = Just onChange }
 
@@ -201,7 +201,7 @@ disable increased touch target size.
 to prevent potentially overlapping touch targets on adjacent elements.
 
 -}
-setTouch :: Boolean -> Config msg -> Config msg
+setTouch :: Boolean -> Config r i -> Config r i
 setTouch touch (Config config_) =
     Config { config_ | touch = touch }
 
@@ -235,7 +235,7 @@ indeterminate =
 
 {-| Checkbox view function
 -}
-checkbox :: Config msg -> Html msg
+checkbox :: Config r i -> Html r i
 checkbox ((Config { touch, additionalAttributes }) as config_) =
     let
         wrapTouch node =
@@ -261,12 +261,12 @@ checkbox ((Config { touch, additionalAttributes }) as config_) =
             ]
 
 
-rootCs :: Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute r i)
 rootCs =
     Just (class "mdc-checkbox")
 
 
-touchCs :: Config msg -> Maybe (Html.Attribute msg)
+touchCs :: Config r i -> Maybe (Html.Attribute r i)
 touchCs (Config { touch }) =
     if touch then
         Just (class "mdc-checkbox--touch")
@@ -275,27 +275,27 @@ touchCs (Config { touch }) =
         Nothing
 
 
-checkedProp :: Config msg -> Maybe (Html.Attribute msg)
+checkedProp :: Config r i -> Maybe (Html.Attribute r i)
 checkedProp (Config { state }) =
     Just (Html.Attributes.property "checked" (Encode.bool (state == Just Checked)))
 
 
-indeterminateProp :: Config msg -> Maybe (Html.Attribute msg)
+indeterminateProp :: Config r i -> Maybe (Html.Attribute r i)
 indeterminateProp (Config { state }) =
     Just (Html.Attributes.property "indeterminate" (Encode.bool (state == Just Indeterminate)))
 
 
-disabledProp :: Config msg -> Maybe (Html.Attribute msg)
+disabledProp :: Config r i -> Maybe (Html.Attribute r i)
 disabledProp (Config { disabled }) =
     Just (Html.Attributes.property "disabled" (Encode.bool disabled))
 
 
-changeHandler :: Config msg -> Maybe (Html.Attribute msg)
+changeHandler :: Config r i -> Maybe (Html.Attribute r i)
 changeHandler (Config { state, onChange }) =
     -- Note: MDCArray choses to send a change event to all checkboxes, thus we
     -- have to check here if the state actually changed.
     Maybe.map
-        (\msg ->
+        (\r i ->
             Html.Events.on "change"
                 (Decode.at [ "target", "checked" ] Decode.bool
                     |> Decode.andThen
@@ -304,7 +304,7 @@ changeHandler (Config { state, onChange }) =
                                 (isChecked && state /= Just Checked)
                                     || (not isChecked && state /= Just Unchecked)
                             then
-                                Decode.succeed msg
+                                Decode.succeed r i
 
                             else
                                 Decode.fail ""
@@ -314,7 +314,7 @@ changeHandler (Config { state, onChange }) =
         onChange
 
 
-nativeControlElt :: Config msg -> Html msg
+nativeControlElt :: Config r i -> Html r i
 nativeControlElt config_ =
     Html.input
         (Array.filterMap identity
@@ -328,7 +328,7 @@ nativeControlElt config_ =
         []
 
 
-backgroundElt :: Html msg
+backgroundElt :: Html r i
 backgroundElt =
     Html.div
         [ class "mdc-checkbox__background" ]

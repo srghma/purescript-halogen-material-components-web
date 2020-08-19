@@ -3,7 +3,7 @@ module HalogenMWC.Select.Item.Internal (Config(..), SelectItem(..))
 import Html (Html)
 
 
-data Config a msg
+data Config a r i
     = Config
         { value :: a
         , disabled :: Boolean
@@ -11,5 +11,5 @@ data Config a msg
         }
 
 
-data SelectItem a msg
-    = SelectItem (Config a msg) (Array (Html msg))
+data SelectItem a r i
+    = SelectItem (Config a r i) (Array (Html r i))

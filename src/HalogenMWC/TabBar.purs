@@ -169,7 +169,7 @@ type Config r i
 
 {-| Default configuration of a tab bar
 -}
-config :: Config msg
+config :: Config r i
 config =
     Config
         { stacked = False
@@ -185,7 +185,7 @@ config =
 Stacked tabs display their icon below the their label.
 
 -}
-setStacked :: Boolean -> Config msg -> Config msg
+setStacked :: Boolean -> Config r i -> Config r i
 setStacked stacked (Config config_) =
     Config { config_ | stacked = stacked }
 
@@ -196,7 +196,7 @@ Usually, a tab bar's tabs have a minimum with. Using this option, tabs are as
 narrow as possible.
 
 -}
-setMinWidth :: Boolean -> Config msg -> Config msg
+setMinWidth :: Boolean -> Config r i -> Config r i
 setMinWidth minWidth (Config config_) =
     Config { config_ | minWidth = minWidth }
 
@@ -207,28 +207,28 @@ Usually, a tab bar's tab indicator spans the entire tab. Use this option to
 make it span only it's label instead.
 
 -}
-setIndicatorSpansContent :: Boolean -> Config msg -> Config msg
+setIndicatorSpansContent :: Boolean -> Config r i -> Config r i
 setIndicatorSpansContent indicatorSpansContent (Config config_) =
     Config { config_ | indicatorSpansContent = indicatorSpansContent }
 
 
 {-| Specify tab bar's alignment of tabs in case they overflow horizontally
 -}
-setAlign :: Maybe Align -> Config msg -> Config msg
+setAlign :: Maybe Align -> Config r i -> Config r i
 setAlign align (Config config_) =
     Config { config_ | align = align }
 
 
 {-| Specify additional attribtues
 -}
-setAttributes :: Array (IProp r i) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Tab bar view function
 -}
-tabBar :: Config msg -> Array (Tab msg) -> Html msg
+tabBar :: Config r i -> Array (Tab r i) -> Html r i
 tabBar ((Config { additionalAttributes, align }) as config_) tabs =
     Html.node "mdc-tab-bar"
         (Array.filterMap identity
@@ -241,17 +241,17 @@ tabBar ((Config { additionalAttributes, align }) as config_) tabs =
         [ tabScroller config_ align tabs ]
 
 
-rootCs :: Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute r i)
 rootCs =
     Just (class "mdc-tab-bar")
 
 
-tablistRoleAttr :: Maybe (Html.Attribute msg)
+tablistRoleAttr :: Maybe (Html.Attribute r i)
 tablistRoleAttr =
     Just (Html.Attributes.attribute "role" "tablist")
 
 
-activeTabIndexProp :: Array (Tab msg) -> Maybe (Html.Attribute msg)
+activeTabIndexProp :: Array (Tab r i) -> Maybe (Html.Attribute r i)
 activeTabIndexProp tabs =
     let
         activeTabIndex =
@@ -263,7 +263,7 @@ activeTabIndexProp tabs =
     Maybe.map (Html.Attributes.property "activeTabIndex" << Encode.int) activeTabIndex
 
 
-viewTab :: Config msg -> Tab msg -> Html msg
+viewTab :: Config r i -> Tab r i -> Html r i
 viewTab ((Config { indicatorSpansContent }) as barConfig) ((Tab ((Tab.Config { additionalAttributes, content }) as tabConfig)) as tab) =
     Html.button
         (Array.filterMap identity
@@ -289,12 +289,12 @@ viewTab ((Config { indicatorSpansContent }) as barConfig) ((Tab ((Tab.Config { a
         )
 
 
-tabCs :: Maybe (Html.Attribute msg)
+tabCs :: Maybe (Html.Attribute r i)
 tabCs =
     Just (class "mdc-tab")
 
 
-tabStackedCs :: Config msg -> Maybe (Html.Attribute msg)
+tabStackedCs :: Config r i -> Maybe (Html.Attribute r i)
 tabStackedCs (Config { stacked }) =
     if stacked then
         Just (class "mdc-tab--stacked")
@@ -303,7 +303,7 @@ tabStackedCs (Config { stacked }) =
         Nothing
 
 
-tabMinWidthCs :: Config msg -> Maybe (Html.Attribute msg)
+tabMinWidthCs :: Config r i -> Maybe (Html.Attribute r i)
 tabMinWidthCs (Config { minWidth }) =
     if minWidth then
         Just (class "mdc-tab--min-width")
@@ -312,17 +312,17 @@ tabMinWidthCs (Config { minWidth }) =
         Nothing
 
 
-tabRoleAttr :: Maybe (Html.Attribute msg)
+tabRoleAttr :: Maybe (Html.Attribute r i)
 tabRoleAttr =
     Just (Html.Attributes.attribute "role" "tab")
 
 
-tabClickHandler :: Tab.Config msg -> Maybe (Html.Attribute msg)
+tabClickHandler :: Tab.Config r i -> Maybe (Html.Attribute r i)
 tabClickHandler (Tab.Config { onClick }) =
     Maybe.map (Html.Events.on "MDCTab:interacted" << Decode.succeed) onClick
 
 
-tabContentElt :: Config msg -> Tab.Config msg -> Tab.Content -> Maybe (Html msg)
+tabContentElt :: Config r i -> Tab.Config r i -> Tab.Content -> Maybe (Html r i)
 tabContentElt ((Config { indicatorSpansContent }) as barConfig) config_ content =
     Just
         (Html.div [ class "mdc-tab__content" ]
@@ -342,7 +342,7 @@ tabContentElt ((Config { indicatorSpansContent }) as barConfig) config_ content 
         )
 
 
-tabIconElt :: Tab.Content -> Maybe (Html msg)
+tabIconElt :: Tab.Content -> Maybe (Html r i)
 tabIconElt { icon } =
     Maybe.map
         (\iconName ->
@@ -353,17 +353,17 @@ tabIconElt { icon } =
         icon
 
 
-tabTextLabelElt :: Tab.Content -> Maybe (Html msg)
+tabTextLabelElt :: Tab.Content -> Maybe (Html r i)
 tabTextLabelElt { label } =
     Just (Html.span [ class "mdc-tab__text-label" ] [ text label ])
 
 
-tabIndicatorElt :: Tab.Config msg -> Maybe (Html msg)
+tabIndicatorElt :: Tab.Config r i -> Maybe (Html r i)
 tabIndicatorElt config_ =
     Just (Html.span [ class "mdc-tab-indicator" ] [ tabIndicatorContentElt ])
 
 
-tabIndicatorContentElt :: Html msg
+tabIndicatorContentElt :: Html r i
 tabIndicatorContentElt =
     Html.span
         [ class "mdc-tab-indicator__content"
@@ -372,7 +372,7 @@ tabIndicatorContentElt =
         []
 
 
-tabRippleElt :: Maybe (Html msg)
+tabRippleElt :: Maybe (Html r i)
 tabRippleElt =
     Just (Html.span [ class "mdc-tab__ripple" ] [])
 
@@ -385,7 +385,7 @@ data Align
     | Center
 
 
-tabScroller :: Config msg -> Maybe Align -> Array (Tab msg) -> Html msg
+tabScroller :: Config r i -> Maybe Align -> Array (Tab r i) -> Html r i
 tabScroller config_ align tabs =
     Html.div
         (Array.filterMap identity
@@ -396,12 +396,12 @@ tabScroller config_ align tabs =
         [ tabScrollerScrollAreaElt config_ tabs ]
 
 
-tabScrollerCs :: Maybe (Html.Attribute msg)
+tabScrollerCs :: Maybe (Html.Attribute r i)
 tabScrollerCs =
     Just (class "mdc-tab-scroller")
 
 
-tabScrollerAlignCs :: Maybe Align -> Maybe (Html.Attribute msg)
+tabScrollerAlignCs :: Maybe Align -> Maybe (Html.Attribute r i)
 tabScrollerAlignCs align =
     case align of
         Just Start ->
@@ -417,13 +417,13 @@ tabScrollerAlignCs align =
             Nothing
 
 
-tabScrollerScrollAreaElt :: Config msg -> Array (Tab msg) -> Html msg
+tabScrollerScrollAreaElt :: Config r i -> Array (Tab r i) -> Html r i
 tabScrollerScrollAreaElt barConfig tabs =
     Html.div [ class "mdc-tab-scroller__scroll-area" ]
         [ tabScrollerScrollContentElt barConfig tabs ]
 
 
-tabScrollerScrollContentElt :: Config msg -> Array (Tab msg) -> Html msg
+tabScrollerScrollContentElt :: Config r i -> Array (Tab r i) -> Html r i
 tabScrollerScrollContentElt barConfig tabs =
     Html.div [ class "mdc-tab-scroller__scroll-content" ]
         (Array.map (viewTab barConfig) tabs)

@@ -112,13 +112,13 @@ type Config r i
         { checked :: Boolean
         , disabled :: Boolean
         , additionalAttributes :: Array (IProp r i)
-        , onChange :: Maybe msg
+        , onChange :: Maybe r i
         }
 
 
 {-| Default configuration of a switch
 -}
-config :: Config msg
+config :: Config r i
 config =
     Config
         { checked = False
@@ -130,7 +130,7 @@ config =
 
 {-| Specify whether a switch is checked
 -}
-setChecked :: Boolean -> Config msg -> Config msg
+setChecked :: Boolean -> Config r i -> Config r i
 setChecked checked (Config config_) =
     Config { config_ | checked = checked }
 
@@ -141,28 +141,28 @@ Disabled switches cannot be interacted with and have no visual interaction
 effect.
 
 -}
-setDisabled :: Boolean -> Config msg -> Config msg
+setDisabled :: Boolean -> Config r i -> Config r i
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 
 
 {-| Specify additional attributes
 -}
-setAttributes :: Array (IProp r i) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Specify a message when the user changes a switch
 -}
-setOnChange :: msg -> Config msg -> Config msg
+setOnChange :: r i -> Config r i -> Config r i
 setOnChange onChange (Config config_) =
     Config { config_ | onChange = Just onChange }
 
 
 {-| Switch view function
 -}
-switch :: Config msg -> Html msg
+switch :: Config r i -> Html r i
 switch ((Config { additionalAttributes }) as config_) =
     Html.node "mdc-switch"
         (Array.filterMap identity
@@ -177,57 +177,57 @@ switch ((Config { additionalAttributes }) as config_) =
         ]
 
 
-rootCs :: Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute r i)
 rootCs =
     Just (class "mdc-switch")
 
 
-checkedProp :: Config msg -> Maybe (Html.Attribute msg)
+checkedProp :: Config r i -> Maybe (Html.Attribute r i)
 checkedProp (Config { checked }) =
     Just (Html.Attributes.property "checked" (Encode.bool checked))
 
 
-disabledProp :: Config msg -> Maybe (Html.Attribute msg)
+disabledProp :: Config r i -> Maybe (Html.Attribute r i)
 disabledProp (Config { disabled }) =
     Just (Html.Attributes.property "disabled" (Encode.bool disabled))
 
 
-nativeControlCs :: Maybe (Html.Attribute msg)
+nativeControlCs :: Maybe (Html.Attribute r i)
 nativeControlCs =
     Just (class "mdc-switch__native-control")
 
 
-switchRoleAttr :: Maybe (Html.Attribute msg)
+switchRoleAttr :: Maybe (Html.Attribute r i)
 switchRoleAttr =
     Just (Html.Attributes.attribute "role" "switch")
 
 
-checkboxTypeAttr :: Maybe (Html.Attribute msg)
+checkboxTypeAttr :: Maybe (Html.Attribute r i)
 checkboxTypeAttr =
     Just (Html.Attributes.type_ "checkbox")
 
 
-changeHandler :: Config msg -> Maybe (Html.Attribute msg)
+changeHandler :: Config r i -> Maybe (Html.Attribute r i)
 changeHandler (Config { onChange }) =
     Maybe.map (Html.Events.on "change" << Decode.succeed) onChange
 
 
-trackElt :: Html msg
+trackElt :: Html r i
 trackElt =
     Html.div [ class "mdc-switch__track" ] []
 
 
-thumbUnderlayElt :: Config msg -> Html msg
+thumbUnderlayElt :: Config r i -> Html r i
 thumbUnderlayElt config_ =
     Html.div [ class "mdc-switch__thumb-underlay" ] [ thumbElt config_ ]
 
 
-thumbElt :: Config msg -> Html msg
+thumbElt :: Config r i -> Html r i
 thumbElt config_ =
     Html.div [ class "mdc-switch__thumb" ] [ nativeControlElt config_ ]
 
 
-nativeControlElt :: Config msg -> Html msg
+nativeControlElt :: Config r i -> Html r i
 nativeControlElt config_ =
     Html.input
         (Array.filterMap identity

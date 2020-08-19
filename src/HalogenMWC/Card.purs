@@ -218,7 +218,7 @@ type Config r i
 
 {-| Default configuration of a card
 -}
-config :: Config msg
+config :: Config r i
 config =
     Config
         { outlined = False
@@ -228,21 +228,21 @@ config =
 
 {-| Specify whether a card should have a visual outline
 -}
-setOutlined :: Boolean -> Config msg -> Config msg
+setOutlined :: Boolean -> Config r i -> Config r i
 setOutlined outlined (Config config_) =
     Config { config_ | outlined = outlined }
 
 
 {-| Specify additional attributes
 -}
-setAttributes :: Array (IProp r i) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Card view function
 -}
-card :: Config msg -> Content msg -> Html msg
+card :: Config r i -> Content r i -> Html r i
 card ((Config { additionalAttributes }) as config_) content =
     Html.node "mdc-card"
         (Array.filterMap identity
@@ -258,12 +258,12 @@ card ((Config { additionalAttributes }) as config_) content =
         )
 
 
-blocksElt :: Content msg -> Array (Html msg)
+blocksElt :: Content r i -> Array (Html r i)
 blocksElt { blocks } =
     Array.map (\(Block html) -> html) blocks
 
 
-actionsElt :: Content msg -> Array (Html msg)
+actionsElt :: Content r i -> Array (Html r i)
 actionsElt content =
     case content.actions of
         Just (Actions { buttons, icons, fullBleed }) ->
@@ -300,12 +300,12 @@ actionsElt content =
             []
 
 
-rootCs :: Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute r i)
 rootCs =
     Just (class "mdc-card")
 
 
-outlinedCs :: Config msg -> Maybe (Html.Attribute msg)
+outlinedCs :: Config r i -> Maybe (Html.Attribute r i)
 outlinedCs (Config { outlined }) =
     if outlined then
         Just (class "mdc-card--outlined")
@@ -316,16 +316,16 @@ outlinedCs (Config { outlined }) =
 
 {-| The content of a card is comprised of _blocks_ and _actions_.
 -}
-data Content msg =
-    { blocks :: Array (Block msg)
-    , actions :: Maybe (Actions msg)
+data Content r i =
+    { blocks :: Array (Block r i)
+    , actions :: Maybe (Actions r i)
     }
 
 
 {-| A card's content block
 -}
-data Block msg
-    = Block (Html msg)
+data Block r i
+    = Block (Html r i)
 
 
 {-| Card block containing arbitrary HTML
@@ -334,7 +334,7 @@ data Block msg
         Html.div [] [ text "Lorem ipsum…" ]
 
 -}
-block :: Html msg -> Block msg
+block :: Html r i -> Block r i
 block =
     Block
 
@@ -344,7 +344,7 @@ data Aspect
     | SixteenToNine
 
 
-mediaView :: Maybe Aspect -> Array (IProp r i) -> String -> Block msg
+mediaView :: Maybe Aspect -> Array (IProp r i) -> String -> Block r i
 mediaView aspect additionalAttributes backgroundImage =
     Block <|
         Html.div
@@ -360,36 +360,36 @@ mediaView aspect additionalAttributes backgroundImage =
 
 {-| Card media block with a square aspect ratio
 -}
-squareMedia :: Array (IProp r i) -> String -> Block msg
+squareMedia :: Array (IProp r i) -> String -> Block r i
 squareMedia additionalAttributes backgroundImage =
     mediaView (Just Square) additionalAttributes backgroundImage
 
 
 {-| Card media block with a 16:9 aspect ratio
 -}
-sixteenToNineMedia :: Array (IProp r i) -> String -> Block msg
+sixteenToNineMedia :: Array (IProp r i) -> String -> Block r i
 sixteenToNineMedia additionalAttributes backgroundImage =
     mediaView (Just SixteenToNine) additionalAttributes backgroundImage
 
 
 {-| Card media block of unspecified aspect ratio
 -}
-media :: Array (IProp r i) -> String -> Block msg
+media :: Array (IProp r i) -> String -> Block r i
 media additionalAttributes backgroundImage =
     mediaView Nothing additionalAttributes backgroundImage
 
 
-mediaCs :: Maybe (Html.Attribute msg)
+mediaCs :: Maybe (Html.Attribute r i)
 mediaCs =
     Just (class "mdc-card__media")
 
 
-backgroundImageAttr :: String -> Maybe (Html.Attribute msg)
+backgroundImageAttr :: String -> Maybe (Html.Attribute r i)
 backgroundImageAttr url =
     Just (style "background-image" ("url(\"" ++ url ++ "\")"))
 
 
-aspectCs :: Maybe Aspect -> Maybe (Html.Attribute msg)
+aspectCs :: Maybe Aspect -> Maybe (Html.Attribute r i)
 aspectCs aspect =
     case aspect of
         Just Square ->
@@ -404,7 +404,7 @@ aspectCs aspect =
 
 {-| A card's primary action block
 -}
-primaryAction :: Array (IProp r i) -> Array (Block msg) -> Array (Block msg)
+primaryAction :: Array (IProp r i) -> Array (Block r i) -> Array (Block r i)
 primaryAction additionalAttributes blocks =
     [ Block <|
         Html.div
@@ -417,22 +417,22 @@ primaryAction additionalAttributes blocks =
     ]
 
 
-primaryActionCs :: Html.Attribute msg
+primaryActionCs :: Html.Attribute r i
 primaryActionCs =
     class "mdc-card__primary-action"
 
 
-tabIndexProp :: Int -> Html.Attribute msg
+tabIndexProp :: Int -> Html.Attribute r i
 tabIndexProp tabIndex =
     Html.Attributes.property "tabIndex" (Encode.int tabIndex)
 
 
 {-| Card actions type
 -}
-data Actions msg
+data Actions r i
     = Actions
-        { buttons :: Array (Button msg)
-        , icons :: Array (Icon msg)
+        { buttons :: Array (Button r i)
+        , icons :: Array (Icon r i)
         , fullBleed :: Boolean
         }
 
@@ -442,7 +442,7 @@ data Actions msg
 A card may contain as actions buttons as well as icons.
 
 -}
-actions :: { buttons :: Array (Button msg), icons :: Array (Icon msg) } -> Actions msg
+actions :: { buttons :: Array (Button r i), icons :: Array (Icon r i) } -> Actions r i
 actions { buttons, icons } =
     Actions { buttons = buttons, icons = icons, fullBleed = False }
 
@@ -456,15 +456,15 @@ full width by using `cardFullBleedActions`.
         (Card.button Button.config "Visit")
 
 -}
-fullBleedActions :: Button msg -> Actions msg
+fullBleedActions :: Button r i -> Actions r i
 fullBleedActions button_ =
     Actions { buttons = [ button_ ], icons = [], fullBleed = True }
 
 
 {-| Card action's button type
 -}
-data Button msg
-    = Button (Html msg)
+data Button r i
+    = Button (Html r i)
 
 
 {-| A card action button
@@ -472,7 +472,7 @@ data Button msg
     Card.button Button.config "Visit"
 
 -}
-button :: Button.Config msg -> String -> Button msg
+button :: Button.Config r i -> String -> Button r i
 button (Material.Button.Internal.Config buttonConfig) label =
     Button <|
         Button.text
@@ -489,8 +489,8 @@ button (Material.Button.Internal.Config buttonConfig) label =
 
 {-| Card action's icon type
 -}
-data Icon msg
-    = Icon (Html msg)
+data Icon r i
+    = Icon (Html r i)
 
 
 {-| Card action icon
@@ -498,7 +498,7 @@ data Icon msg
     Card.icon IconButton.config "favorite"
 
 -}
-icon :: IconButton.Config msg -> String -> Icon msg
+icon :: IconButton.Config r i -> String -> Icon r i
 icon (Material.IconButton.Internal.Config iconButtonConfig) iconName =
     Icon <|
         IconButton.iconButton

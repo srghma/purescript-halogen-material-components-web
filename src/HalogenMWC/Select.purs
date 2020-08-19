@@ -212,22 +212,22 @@ import Material.Select.Item.Internal as SelectItem
 
 {-| Configuration of a select
 -}
-data Config a msg
+data Config a r i
     = Config
         { label :: Maybe String
         , disabled :: Boolean
         , required :: Boolean
         , valid :: Boolean
         , selected :: Maybe a
-        , leadingIcon :: Maybe (Icon msg)
+        , leadingIcon :: Maybe (Icon r i)
         , additionalAttributes :: Array (IProp r i)
-        , onChange :: Maybe (a -> msg)
+        , onChange :: Maybe (a -> r i)
         }
 
 
 {-| Default configuration of a select
 -}
-config :: Config a msg
+config :: Config a r i
 config =
     Config
         { label = Nothing
@@ -243,14 +243,14 @@ config =
 
 {-| Specify a select's label
 -}
-setLabel :: Maybe String -> Config a msg -> Config a msg
+setLabel :: Maybe String -> Config a r i -> Config a r i
 setLabel label (Config config_) =
     Config { config_ | label = label }
 
 
 {-| Specify a select's selected value
 -}
-setSelected :: Maybe a -> Config a msg -> Config a msg
+setSelected :: Maybe a -> Config a r i -> Config a r i
 setSelected selected (Config config_) =
     Config { config_ | selected = selected }
 
@@ -261,42 +261,42 @@ Disabled selects cannot be interacted with an have no visual interaction
 effect.
 
 -}
-setDisabled :: Boolean -> Config a msg -> Config a msg
+setDisabled :: Boolean -> Config a r i -> Config a r i
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 
 
 {-| Specify whether a select is required
 -}
-setRequired :: Boolean -> Config a msg -> Config a msg
+setRequired :: Boolean -> Config a r i -> Config a r i
 setRequired required (Config config_) =
     Config { config_ | required = required }
 
 
 {-| Specify whether a select is valid
 -}
-setValid :: Boolean -> Config a msg -> Config a msg
+setValid :: Boolean -> Config a r i -> Config a r i
 setValid valid (Config config_) =
     Config { config_ | valid = valid }
 
 
 {-| Specify a select's leading icon
 -}
-setLeadingIcon :: Maybe (Icon msg) -> Config a msg -> Config a msg
+setLeadingIcon :: Maybe (Icon r i) -> Config a r i -> Config a r i
 setLeadingIcon leadingIcon (Config config_) =
     Config { config_ | leadingIcon = leadingIcon }
 
 
 {-| Specify additional attributes
 -}
-setAttributes :: Array (IProp r i) -> Config a msg -> Config a msg
+setAttributes :: Array (IProp r i) -> Config a r i -> Config a r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Specify a message when the user changes the select
 -}
-setOnChange :: (a -> msg) -> Config a msg -> Config a msg
+setOnChange :: (a -> r i) -> Config a r i -> Config a r i
 setOnChange onChange (Config config_) =
     Config { config_ | onChange = Just onChange }
 
@@ -306,7 +306,7 @@ data Variant
     | Outlined
 
 
-select :: Variant -> Config a msg -> SelectItem a msg -> Array (SelectItem a msg) -> Html msg
+select :: Variant -> Config a r i -> SelectItem a r i -> Array (SelectItem a r i) -> Html r i
 select variant ((Config { leadingIcon, selected, additionalAttributes, onChange }) as config_) firstSelectItem remainingSelectItems =
     let
         selectedIndex =
@@ -355,37 +355,37 @@ select variant ((Config { leadingIcon, selected, additionalAttributes, onChange 
 
 {-| Filled select view function
 -}
-filled :: Config a msg -> SelectItem a msg -> Array (SelectItem a msg) -> Html msg
+filled :: Config a r i -> SelectItem a r i -> Array (SelectItem a r i) -> Html r i
 filled config_ firstSelectItem remainingSelectItems =
     select Filled config_ firstSelectItem remainingSelectItems
 
 
 {-| Outlined select view function
 -}
-outlined :: Config a msg -> SelectItem a msg -> Array (SelectItem a msg) -> Html msg
+outlined :: Config a r i -> SelectItem a r i -> Array (SelectItem a r i) -> Html r i
 outlined config_ firstSelectItem remainingSelectItems =
     select Outlined config_ firstSelectItem remainingSelectItems
 
 
 {-| Select leading icon type
 -}
-data Icon msg
-    = Icon (Html msg)
+data Icon r i
+    = Icon (Html r i)
 
 
 {-| Select leading icon
 -}
-icon :: Array (IProp r i) -> String -> Icon msg
+icon :: Array (IProp r i) -> String -> Icon r i
 icon additionalAttributes iconName =
     Icon (Icon.icon (class "mdc-select__icon" :: additionalAttributes) iconName)
 
 
-rootCs :: Maybe (Html.Attribute msg)
+rootCs :: Maybe (Html.Attribute r i)
 rootCs =
     Just (class "mdc-select")
 
 
-outlinedCs :: Variant -> Maybe (Html.Attribute msg)
+outlinedCs :: Variant -> Maybe (Html.Attribute r i)
 outlinedCs variant =
     if variant == Outlined then
         Just (class "mdc-select--outlined")
@@ -394,22 +394,22 @@ outlinedCs variant =
         Nothing
 
 
-leadingIconCs :: Config a msg -> Maybe (Html.Attribute msg)
+leadingIconCs :: Config a r i -> Maybe (Html.Attribute r i)
 leadingIconCs (Config { leadingIcon }) =
     Maybe.map (\_ -> class "mdc-select--with-leading-icon") leadingIcon
 
 
-disabledProp :: Config a msg -> Maybe (Html.Attribute msg)
+disabledProp :: Config a r i -> Maybe (Html.Attribute r i)
 disabledProp (Config { disabled }) =
     Just (Html.Attributes.property "disabled" (Encode.bool disabled))
 
 
-validProp :: Config a msg -> Maybe (Html.Attribute msg)
+validProp :: Config a r i -> Maybe (Html.Attribute r i)
 validProp (Config { valid }) =
     Just (Html.Attributes.property "valid" (Encode.bool valid))
 
 
-selectedIndexProp :: Maybe Int -> Maybe (Html.Attribute msg)
+selectedIndexProp :: Maybe Int -> Maybe (Html.Attribute r i)
 selectedIndexProp selectedIndex =
     Just
         (Html.Attributes.property "selectedIndex"
@@ -417,17 +417,17 @@ selectedIndexProp selectedIndex =
         )
 
 
-requiredProp :: Config a msg -> Maybe (Html.Attribute msg)
+requiredProp :: Config a r i -> Maybe (Html.Attribute r i)
 requiredProp (Config { required }) =
     Just (Html.Attributes.property "required" (Encode.bool required))
 
 
-anchorElt :: Array (IProp r i) -> Array (Html msg) -> Html msg
+anchorElt :: Array (IProp r i) -> Array (Html r i) -> Html r i
 anchorElt additionalAttributes nodes =
     Html.div (class "mdc-select__anchor" :: additionalAttributes) nodes
 
 
-leadingIconElt :: Config a msg -> Html msg
+leadingIconElt :: Config a r i -> Html r i
 leadingIconElt (Config { leadingIcon }) =
     case leadingIcon of
         Just (Icon icon_) ->
@@ -437,22 +437,22 @@ leadingIconElt (Config { leadingIcon }) =
             text ""
 
 
-dropdownIconElt :: Html msg
+dropdownIconElt :: Html r i
 dropdownIconElt =
     Html.i [ class "mdc-select__dropdown-icon" ] []
 
 
-floatingLabelElt :: Config a msg -> Html msg
+floatingLabelElt :: Config a r i -> Html r i
 floatingLabelElt (Config { label }) =
     Html.div [ class "mdc-floating-label" ] [ text (Maybe.withDefault "" label) ]
 
 
-lineRippleElt :: Html msg
+lineRippleElt :: Html r i
 lineRippleElt =
     Html.label [ class "mdc-line-ripple" ] []
 
 
-notchedOutlineElt :: Config a msg -> Html msg
+notchedOutlineElt :: Config a r i -> Html r i
 notchedOutlineElt (Config { label }) =
     Html.div [ class "mdc-notched-outline" ]
         [ Html.div [ class "mdc-notched-outline__leading" ] []
@@ -464,7 +464,7 @@ notchedOutlineElt (Config { label }) =
         ]
 
 
-menuElt :: Maybe (Icon msg) -> Maybe a -> Maybe (a -> msg) -> SelectItem a msg -> Array (SelectItem a msg) -> Html msg
+menuElt :: Maybe (Icon r i) -> Maybe a -> Maybe (a -> r i) -> SelectItem a r i -> Array (SelectItem a r i) -> Html r i
 menuElt leadingIcon selected onChange firstSelectItem remainingSelectItems =
     Menu.menu
         (Menu.config
@@ -479,7 +479,7 @@ menuElt leadingIcon selected onChange firstSelectItem remainingSelectItems =
         ]
 
 
-listItem :: Maybe (Icon msg) -> Maybe a -> Maybe (a -> msg) -> SelectItem a msg -> ArrayItem msg
+listItem :: Maybe (Icon r i) -> Maybe a -> Maybe (a -> r i) -> SelectItem a r i -> ArrayItem r i
 listItem leadingIcon selected onChange (SelectItem.SelectItem config_ nodes) =
     ArrayItem.listItem (listItemConfig selected onChange config_)
         (if leadingIcon /= Nothing then
@@ -490,7 +490,7 @@ listItem leadingIcon selected onChange (SelectItem.SelectItem config_ nodes) =
         )
 
 
-listItemConfig :: Maybe a -> Maybe (a -> msg) -> SelectItem.Config a msg -> ArrayItem.Config msg
+listItemConfig :: Maybe a -> Maybe (a -> r i) -> SelectItem.Config a r i -> ArrayItem.Config r i
 listItemConfig selectedValue onChange (SelectItem.Config { value, disabled, additionalAttributes }) =
     ArrayItem.config
         |> ArrayItem.setDisabled disabled
@@ -504,6 +504,6 @@ listItemConfig selectedValue onChange (SelectItem.Config { value, disabled, addi
            )
 
 
-selectedTextElt :: Html msg
+selectedTextElt :: Html r i
 selectedTextElt =
     Html.div [ class "mdc-select__selected-text" ] []

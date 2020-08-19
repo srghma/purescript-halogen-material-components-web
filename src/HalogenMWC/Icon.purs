@@ -35,6 +35,6 @@ import Html.Attributes (class)
 
 {-| Icon view function
 -}
-icon :: Array (IProp r i) -> String -> Html msg
+icon :: Array (IProp r i) -> String -> Html r i
 icon additionalAttributes iconName =
     Html.i (class "material-icons" :: additionalAttributes) [ text iconName ]

@@ -74,12 +74,12 @@ import Material.Chip.Action.Internal (Chip(..), Config(..))
 {-| Configuration of an action chip
 -}
 type Config r i =
-    Material.Chip.Action.Internal.Config msg
+    Material.Chip.Action.Internal.Config r i
 
 
 {-| Default configuration of an action chip
 -}
-config :: Config msg
+config :: Config r i
 config =
     Config
         { icon = Nothing
@@ -90,33 +90,33 @@ config =
 
 {-| Specify whether the chip displays an icon
 -}
-setIcon :: Maybe String -> Config msg -> Config msg
+setIcon :: Maybe String -> Config r i -> Config r i
 setIcon icon (Config config_) =
     Config { config_ | icon = icon }
 
 
 {-| Specify additional attributes
 -}
-setAttributes :: Array (IProp r i) -> Config msg -> Config msg
+setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
 {-| Specify a message when the user clicks on a chip
 -}
-setOnClick :: msg -> Config msg -> Config msg
+setOnClick :: r i -> Config r i -> Config r i
 setOnClick onClick (Config config_) =
     Config { config_ | onClick = Just onClick }
 
 
 {-| Action chip type
 -}
-data Chip msg =
-    Material.Chip.Action.Internal.Chip msg
+data Chip r i =
+    Material.Chip.Action.Internal.Chip r i
 
 
 {-| Action chip view function
 -}
-chip :: Config msg -> String -> Chip msg
+chip :: Config r i -> String -> Chip r i
 chip =
     Chip
