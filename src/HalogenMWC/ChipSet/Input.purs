@@ -23,7 +23,7 @@ chipSet additionalAttributes keyedChips =
 
 
 chip :: Chip r i -> Html r i
-chip (Chip (config_@(Chip.Config { additionalAttributes })) label) =
+chip (Chip (config_@({ additionalAttributes })) label) =
     HH.div [ HP.class_ mdc_touch_target_wrapper ]
         [ HH.node "mdc-chip"
             (Array.filterMap identity
@@ -100,7 +100,7 @@ gridcellRole =
 
 
 removalHandler :: Chip.Config r i -> Maybe (HH.Attribute r i)
-removalHandler (Chip.Config { onDelete }) =
+removalHandler ({ onDelete }) =
     Maybe.map (HH.Events.on "MDCChip:removal" << Decode.succeed) onDelete
 
 
@@ -110,7 +110,7 @@ rippleElt =
 
 
 leadingIconElt :: Chip.Config r i -> Maybe (Html r i)
-leadingIconElt (Chip.Config { leadingIcon }) =
+leadingIconElt ({ leadingIcon }) =
     Maybe.map
         (\iconName ->
             HH.i [ HP.class_ "material-icons mdc-chip__icon mdc-chip__icon--leading" ]
@@ -137,7 +137,7 @@ touchElt =
 
 
 trailingIconElt :: Chip.Config r i -> Maybe (Html r i)
-trailingIconElt (Chip.Config { trailingIcon, onDelete }) =
+trailingIconElt ({ trailingIcon, onDelete }) =
     if onDelete /= Nothing then
         Just $
             HH.i

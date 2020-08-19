@@ -64,7 +64,7 @@ chipSet ((Config { selected, onChange, toLabel, additionalAttributes }) as confi
 
 
 chip :: Maybe a -> Maybe (a -> r i) -> (a -> String) -> Chip a r i -> Html r i
-chip selected onChange toLabel (Chip ((Chip.Config { additionalAttributes }) as config_) value) =
+chip selected onChange toLabel (Chip (({ additionalAttributes }) as config_) value) =
     HH.div [ HP.class_ mdc_touch_target_wrapper ]
         [ HH.node "mdc-chip"
             (Array.filterMap identity
@@ -151,7 +151,7 @@ rippleElt =
 
 
 leadingIconElt :: Chip.Config r i -> Maybe (Html r i)
-leadingIconElt (Chip.Config { icon }) =
+leadingIconElt ({ icon }) =
     Maybe.map
         (\iconName ->
             HH.i [ HP.class_ "material-icons mdc-chip__icon mdc-chip__icon--leading" ]

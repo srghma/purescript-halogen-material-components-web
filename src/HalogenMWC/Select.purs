@@ -108,7 +108,7 @@ select variant ((Config { leadingIcon, selected, additionalAttributes, onChange 
     let
         selectedIndex =
             Array.indexedMap
-                (\index (SelectItem.SelectItem (SelectItem.Config { value }) _) ->
+                (\index (SelectItem.SelectItem ({ value }) _) ->
                     if Just value == selected then
                         Just index
 
@@ -284,7 +284,7 @@ listItem leadingIcon selected onChange (SelectItem.SelectItem config_ nodes) =
 
 
 listItemConfig :: Maybe a -> Maybe (a -> r i) -> SelectItem.Config a r i -> ArrayItem.Config r i
-listItemConfig selectedValue onChange (SelectItem.Config { value, disabled, additionalAttributes }) =
+listItemConfig selectedValue onChange ({ value, disabled, additionalAttributes }) =
     ArrayItem.config
         # ArrayItem.setDisabled disabled
         # ArrayItem.setAttributes additionalAttributes
