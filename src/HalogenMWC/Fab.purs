@@ -1,9 +1,6 @@
 module HalogenMWC.Fab
     ( Config, config
 
-
-
-
     , fab
     ) where
 
@@ -14,11 +11,6 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
-
-
-
-
-
 type Config r i
     =
         { mini :: Boolean
@@ -26,8 +18,6 @@ type Config r i
         , additionalAttributes :: Array (IProp r i)
         , onClick :: Maybe r i
         }
-
-
 
 config :: Config r i
 config =
@@ -37,28 +27,6 @@ config =
         , onClick = Nothing
         , additionalAttributes = []
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 fab :: Config r i -> String -> Html r i
 fab (config_@{ additionalAttributes }) iconName =
@@ -76,16 +44,13 @@ fab (config_@{ additionalAttributes }) iconName =
         , iconElt iconName
         ]
 
-
 tabIndexProp :: Int -> Maybe (HH.Attribute r i)
 tabIndexProp tabIndex =
     Just (HH.Attributes.property "tabIndex" (Encode.int tabIndex))
 
-
 rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ mdc_fab)
-
 
 miniCs :: Config r i -> Maybe (HH.Attribute r i)
 miniCs { mini } =
@@ -95,7 +60,6 @@ miniCs { mini } =
     else
         Nothing
 
-
 exitedCs :: Config r i -> Maybe (HH.Attribute r i)
 exitedCs { exited } =
     if exited then
@@ -104,16 +68,13 @@ exitedCs { exited } =
     else
         Nothing
 
-
 rippleElt :: Html r i
 rippleElt =
     HH.div [ HP.class_ mdc_fab__ripple ] []
 
-
 iconElt :: String -> Html r i
 iconElt iconName =
     HH.span [ HP.class_ material_icons, HP.class_ mdc_fab__icon ] [ text iconName ]
-
 
 clickHandler :: Config r i -> Maybe (HH.Attribute r i)
 clickHandler { onClick } =

@@ -1,8 +1,6 @@
 module HalogenMWC.TopAppBar
     ( Config, config
 
-
-
     , regular
     , row, section, alignEnd, alignStart
     , navigationIcon, title
@@ -24,9 +22,6 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
-
-
-
 type Config r i
     =
         { dense :: Boolean
@@ -34,14 +29,11 @@ type Config r i
         , additionalAttributes :: Array (IProp r i)
         }
 
-
 data Variant
     = Regular
     | Short
     | ShortCollapsed
     | Prominent
-
-
 
 config :: Config r i
 config =
@@ -50,22 +42,6 @@ config =
         , fixed = False
         , additionalAttributes = []
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 genericTopAppBar :: Variant -> Config r i -> Array (Html r i) -> Html r i
 genericTopAppBar variant (config_@{ additionalAttributes }) nodes =
@@ -80,36 +56,25 @@ genericTopAppBar variant (config_@{ additionalAttributes }) nodes =
         )
         nodes
 
-
-
 regular :: Config r i -> Array (Html r i) -> Html r i
 regular config_ nodes =
     genericTopAppBar Regular config_ nodes
-
-
 
 short :: Config r i -> Array (Html r i) -> Html r i
 short config_ nodes =
     genericTopAppBar Short config_ nodes
 
-
-
 shortCollapsed :: Config r i -> Array (Html r i) -> Html r i
 shortCollapsed config_ nodes =
     genericTopAppBar ShortCollapsed config_ nodes
-
-
 
 prominent :: Config r i -> Array (Html r i) -> Html r i
 prominent config_ nodes =
     genericTopAppBar Prominent config_ nodes
 
-
-
 row :: Array (IProp r i) -> Array (Html r i) -> Html r i
 row attributes nodes =
     HH.section ([ HP.class_ mdc_top_app_bar__row ] <> attributes) nodes
-
 
 {-| Sections subdivide the top app bar's rows. A section may be start- or
 end-aligned. Usually, the first section is start-aligned and contains the top
@@ -119,13 +84,11 @@ section :: Array (IProp r i) -> Array (Html r i) -> Html r i
 section attributes nodes =
     HH.section ([ HP.class_ mdc_top_app_bar__section ] <> attributes) nodes
 
-
 {-| Start-align a top app bar's `section`
 -}
 alignStart :: HH.Attribute r i
 alignStart =
     HP.class_ "mdc-top-app-bar__section--align-start"
-
 
 {-| End-align a top app bar's `section`
 -}
@@ -133,29 +96,21 @@ alignEnd :: HH.Attribute r i
 alignEnd =
     HP.class_ "mdc-top-app-bar__section--align-end"
 
-
-
 navigationIcon :: HH.Attribute r i
 navigationIcon =
     HP.class_ mdc_top_app_bar__navigation_icon
-
-
 
 title :: HH.Attribute r i
 title =
     HP.class_ mdc_top_app_bar__title
 
-
-
 actionItem :: HH.Attribute r i
 actionItem =
     HP.class_ mdc_top_app_bar__action_item
 
-
 rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ mdc_top_app_bar)
-
 
 variantCs :: Variant -> Maybe (HH.Attribute r i)
 variantCs variant =
@@ -172,7 +127,6 @@ variantCs variant =
         Prominent ->
             Just (HP.class_ mdc_top_app_bar____prominent)
 
-
 denseCs :: Config r i -> Maybe (HH.Attribute r i)
 denseCs { dense } =
     if dense then
@@ -180,7 +134,6 @@ denseCs { dense } =
 
     else
         Nothing
-
 
 fixedCs :: Config r i -> Maybe (HH.Attribute r i)
 fixedCs { fixed } =
@@ -190,31 +143,21 @@ fixedCs { fixed } =
     else
         Nothing
 
-
-
 fixedAdjust :: HH.Attribute r i
 fixedAdjust =
     HP.class_ "mdc-top-app-bar--fixed-adjust"
-
-
 
 denseFixedAdjust :: HH.Attribute r i
 denseFixedAdjust =
     HP.class_ "mdc-top-app-bar--dense-fixed-adjust"
 
-
-
 shortFixedAdjust :: HH.Attribute r i
 shortFixedAdjust =
     HP.class_ "mdc-top-app-bar--short-fixed-adjust"
 
-
-
 prominentFixedAdjust :: HH.Attribute r i
 prominentFixedAdjust =
     HP.class_ "mdc-top-app-bar--prominent-fixed-adjust"
-
-
 
 denseProminentFixedAdjust :: HH.Attribute r i
 denseProminentFixedAdjust =

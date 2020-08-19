@@ -1,9 +1,6 @@
 module HalogenMWC.Fab.Extended
     ( Config, config
 
-
-
-
     , fab
     ) where
 
@@ -14,11 +11,6 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
-
-
-
-
-
 type Config r i
     =
         { icon :: Maybe String
@@ -27,8 +19,6 @@ type Config r i
         , onClick :: Maybe r i
         , additionalAttributes :: Array (IProp r i)
         }
-
-
 
 config :: Config r i
 config =
@@ -39,33 +29,6 @@ config =
         , onClick = Nothing
         , additionalAttributes = []
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 fab :: Config r i -> String -> Html r i
 fab (config_@{ additionalAttributes }) label =
@@ -87,21 +50,17 @@ fab (config_@{ additionalAttributes }) label =
             ]
         )
 
-
 tabIndexProp :: Int -> Maybe (HH.Attribute r i)
 tabIndexProp tabIndex =
     Just (HH.Attributes.property "tabIndex" (Encode.int tabIndex))
-
 
 extendedFabCs :: Maybe (HH.Attribute r i)
 extendedFabCs =
     Just (HP.class_ "mdc-fab mdc-fab--extended")
 
-
 rippleElt :: Maybe (Html r i)
 rippleElt =
     Just (HH.div [ HP.class_ mdc_fab__ripple ] [])
-
 
 leadingIconElt :: Config r i -> Maybe (Html r i)
 leadingIconElt { icon, trailingIcon } =
@@ -115,11 +74,9 @@ leadingIconElt { icon, trailingIcon } =
         _ ->
             Nothing
 
-
 labelElt :: String -> Maybe (Html r i)
 labelElt label =
     Just (HH.span [ HP.class_ mdc_fab__label ] [ text label ])
-
 
 trailingIconElt :: Config r i -> Maybe (Html r i)
 trailingIconElt { icon, trailingIcon } =
@@ -133,11 +90,9 @@ trailingIconElt { icon, trailingIcon } =
         _ ->
             Nothing
 
-
 rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ mdc_fab)
-
 
 exitedCs :: Config r i -> Maybe (HH.Attribute r i)
 exitedCs { exited } =
@@ -146,7 +101,6 @@ exitedCs { exited } =
 
     else
         Nothing
-
 
 clickHandler :: Config r i -> Maybe (HH.Attribute r i)
 clickHandler { onClick } =

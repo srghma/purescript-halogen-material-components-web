@@ -1,14 +1,6 @@
 module HalogenMWC.Slider
     ( Config, config
 
-
-
-
-
-
-
-
-
     , slider
     ) where
 
@@ -19,17 +11,10 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
-
-
-
 import Halogen.SVG.Elements as Halogen.SVG.Elements
 import Halogen.SVG.Attributes as Halogen.SVG.Attributes
 
-
-
 -- TODO: Prevent FOUC
-
-
 
 type Config r i
     =
@@ -43,8 +28,6 @@ type Config r i
         , additionalAttributes :: Array (IProp r i)
         , onInput :: Maybe (Float -> r i)
         }
-
-
 
 config :: Config r i
 config =
@@ -60,7 +43,6 @@ config =
         , onInput = Nothing
         }
 
-
 {-| Specify whether a slider is _discrete_
 
 Discrete sliders feature a pin that indicates the current value while
@@ -70,53 +52,11 @@ This works best for integer-valued sliders, but this is not a requirement.
 
 -}
 
-
-
-
 {-| Specify whether a slider should display markers
 
 Note that this option is ignored by non-discrete sliders.
 
 -}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 slider :: Config r i -> Html r i
 slider (config_@{ additionalAttributes }) =
@@ -144,16 +84,13 @@ slider (config_@{ additionalAttributes }) =
         , thumbContainerElt config_
         ]
 
-
 rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ mdc_slider)
 
-
 displayCss :: Maybe (HH.Attribute r i)
 displayCss =
     Just (style "display" "block")
-
 
 discreteCs :: Config r i -> Maybe (HH.Attribute r i)
 discreteCs { discrete } =
@@ -163,7 +100,6 @@ discreteCs { discrete } =
     else
         Nothing
 
-
 displayMarkersCs :: Config r i -> Maybe (HH.Attribute r i)
 displayMarkersCs { discrete, displayMarkers } =
     if discrete && displayMarkers then
@@ -172,56 +108,45 @@ displayMarkersCs { discrete, displayMarkers } =
     else
         Nothing
 
-
 tabIndexProp :: Maybe (HH.Attribute r i)
 tabIndexProp =
     Just (HH.Attributes.tabindex 0)
-
 
 sliderRoleAttr :: Maybe (HH.Attribute r i)
 sliderRoleAttr =
     Just (HH.Attributes.attribute "role" "slider")
 
-
 valueProp :: Config r i -> Maybe (HH.Attribute r i)
 valueProp { value } =
     Maybe.map (HH.Attributes.property "value" << Encode.float) value
-
 
 minProp :: Config r i -> Maybe (HH.Attribute r i)
 minProp { min } =
     Maybe.map (HH.Attributes.property "min" << Encode.float) min
 
-
 maxProp :: Config r i -> Maybe (HH.Attribute r i)
 maxProp { max } =
     Maybe.map (HH.Attributes.property "max" << Encode.float) max
-
 
 stepProp :: Config r i -> Maybe (HH.Attribute r i)
 stepProp { step } =
     Maybe.map (HH.Attributes.property "step" << Encode.float) step
 
-
 disabledProp :: Config r i -> Maybe (HH.Attribute r i)
 disabledProp { disabled } =
     Just (HH.Attributes.property "disabled" (Encode.bool disabled))
-
 
 ariaValueMinAttr :: Config r i -> Maybe (HH.Attribute r i)
 ariaValueMinAttr { min } =
     Maybe.map (HH.Attributes.attribute "aria-valuemin" << String.fromFloat) min
 
-
 ariaValueMaxAttr :: Config r i -> Maybe (HH.Attribute r i)
 ariaValueMaxAttr { max } =
     Maybe.map (HH.Attributes.attribute "aria-valuemax" << String.fromFloat) max
 
-
 ariaValuenowAttr :: Config r i -> Maybe (HH.Attribute r i)
 ariaValuenowAttr { value } =
     Maybe.map (HH.Attributes.attribute "aria-valuenow" << String.fromFloat) value
-
 
 changeHandler :: Config r i -> Maybe (HH.Attribute r i)
 changeHandler { onInput } =
@@ -232,21 +157,17 @@ changeHandler { onInput } =
         )
         onInput
 
-
 trackContainerElt :: Html r i
 trackContainerElt =
     HH.div [ HP.class_ mdc_slider__track_container ] [ trackElt, trackMarkerContainerElt ]
-
 
 trackElt :: Html r i
 trackElt =
     HH.div [ HP.class_ mdc_slider__track ] []
 
-
 trackMarkerContainerElt :: Html r i
 trackMarkerContainerElt =
     HH.div [ HP.class_ mdc_slider__track_marker_container ] []
-
 
 thumbContainerElt :: Config r i -> Html r i
 thumbContainerElt { discrete } =
@@ -258,16 +179,13 @@ thumbContainerElt { discrete } =
             [ thumbElt, focusRingElt ]
         )
 
-
 pinElt :: Html r i
 pinElt =
     HH.div [ HP.class_ mdc_slider__pin ] [ pinValueMarkerElt ]
 
-
 pinValueMarkerElt :: Html r i
 pinValueMarkerElt =
     HH.div [ HP.class_ mdc_slider__pin_value_marker ] []
-
 
 thumbElt :: Html r i
 thumbElt =
@@ -283,7 +201,6 @@ thumbElt =
             ]
             []
         ]
-
 
 focusRingElt :: Html r i
 focusRingElt =

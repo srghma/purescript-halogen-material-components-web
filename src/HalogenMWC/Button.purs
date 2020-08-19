@@ -1,12 +1,6 @@
 module HalogenMWC.Button
     ( Config, config
 
-
-
-
-
-
-
     , text, outlined, raised, unelevated
     ) where
 
@@ -16,8 +10,6 @@ import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
-
-
 
 type Config r i
   = { icon :: Maybe String
@@ -30,7 +22,6 @@ type Config r i
     , onClick :: Maybe r i
     , touch :: Boolean
     }
-
 
 config :: Config r i
 config =
@@ -46,14 +37,11 @@ config =
         , touch = True
         }
 
-
-
 data Variant
     = Text
     | Raised
     | Unelevated
     | Outlined
-
 
 button :: Variant -> Config r i -> String -> Html r i
 button variant (config_@{ additionalAttributes, touch, href }) label =
@@ -96,13 +84,11 @@ button variant (config_@{ additionalAttributes, touch, href }) label =
                 )
             ]
 
-
 {-| Text button variant (flush without outline)
 -}
 text :: Config r i -> String -> Html r i
 text config_ label =
     button Text config_ label
-
 
 {-| Outlined button variant (flush with outline)
 -}
@@ -110,13 +96,11 @@ outlined :: Config r i -> String -> Html r i
 outlined config_ label =
     button Outlined config_ label
 
-
 {-| Raised button variant (contained with elevation)
 -}
 raised :: Config r i -> String -> Html r i
 raised config_ label =
     button Raised config_ label
-
 
 {-| Unelevated button variant (contained without elevation)
 -}
@@ -124,21 +108,17 @@ unelevated :: Config r i -> String -> Html r i
 unelevated config_ label =
     button Unelevated config_ label
 
-
 rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ mdc_button)
-
 
 disabledProp :: Config r i -> Maybe (HH.Attribute r i)
 disabledProp { disabled } =
     Just (HH.Attributes.property "disabled" (Encode.bool disabled))
 
-
 disabledAttr :: Config r i -> Maybe (HH.Attribute r i)
 disabledAttr { disabled } =
     Just (HH.Attributes.disabled disabled)
-
 
 tabIndexProp :: Config r i -> Maybe (HH.Attribute r i)
 tabIndexProp { disabled } =
@@ -148,11 +128,9 @@ tabIndexProp { disabled } =
     else
         Just (HH.Attributes.property "tabIndex" (Encode.int 0))
 
-
 hrefAttr :: Config r i -> Maybe (HH.Attribute r i)
 hrefAttr { href } =
     Maybe.map HH.Attributes.href href
-
 
 targetAttr :: Config r i -> Maybe (HH.Attribute r i)
 targetAttr { href, target } =
@@ -162,11 +140,9 @@ targetAttr { href, target } =
     else
         Nothing
 
-
 clickHandler :: Config r i -> Maybe (HH.Attribute r i)
 clickHandler { onClick } =
     Maybe.map HH.Events.onClick onClick
-
 
 variantCs :: Variant -> Maybe (HH.Attribute r i)
 variantCs variant =
@@ -183,7 +159,6 @@ variantCs variant =
         Outlined ->
             Just (HP.class_ mdc_button____outlined)
 
-
 denseCs :: Config r i -> Maybe (HH.Attribute r i)
 denseCs { dense } =
     if dense then
@@ -192,7 +167,6 @@ denseCs { dense } =
     else
         Nothing
 
-
 touchCs :: Config r i -> Maybe (HH.Attribute r i)
 touchCs { touch } =
     if touch then
@@ -200,7 +174,6 @@ touchCs { touch } =
 
     else
         Nothing
-
 
 iconElt :: Config r i -> Maybe (Html r i)
 iconElt { icon } =
@@ -214,11 +187,9 @@ iconElt { icon } =
         )
         icon
 
-
 rippleElt :: Maybe (Html r i)
 rippleElt =
     Just (HH.div [ HP.class_ mdc_button__ripple ] [])
-
 
 leadingIconElt :: Config r i -> Maybe (Html r i)
 leadingIconElt (config_@{ trailingIcon }) =
@@ -228,7 +199,6 @@ leadingIconElt (config_@{ trailingIcon }) =
     else
         Nothing
 
-
 trailingIconElt :: Config r i -> Maybe (Html r i)
 trailingIconElt (config_@{ trailingIcon }) =
     if trailingIcon then
@@ -237,7 +207,6 @@ trailingIconElt (config_@{ trailingIcon }) =
     else
         Nothing
 
-
 touchElt :: Config r i -> Maybe (Html r i)
 touchElt { touch } =
     if touch then
@@ -245,7 +214,6 @@ touchElt { touch } =
 
     else
         Nothing
-
 
 labelElt :: String -> Maybe (Html r i)
 labelElt label =

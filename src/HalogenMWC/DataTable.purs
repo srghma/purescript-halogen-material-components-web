@@ -1,7 +1,6 @@
 module HalogenMWC.DataTable
     ( Config, config
 
-
     , dataTable
     , Row, row
     , selected
@@ -20,15 +19,11 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Checkbox as Checkbox
 import HalogenMWC.Checkbox.Internal
 
-
-
 type Config r i
     =
         { label :: Maybe String
         , additionalAttributes :: Array (IProp r i)
         }
-
-
 
 config :: Config r i
 config =
@@ -37,18 +32,8 @@ config =
         , additionalAttributes = []
         }
 
-
 {-| Specify the data table's HTML5 aria-label attribute
 -}
-
-
-
-
-
-
-
-
-
 
 dataTable ::
     Config r i
@@ -71,38 +56,28 @@ dataTable (config_@{ additionalAttributes }) { thead, tbody } =
             ]
         ]
 
-
 dataTableCs :: HH.Attribute r i
 dataTableCs =
     HP.class_ mdc_data_table
-
 
 dataTableTableCs :: Maybe (HH.Attribute r i)
 dataTableTableCs =
     Just (HP.class_ mdc_data_table__table)
 
-
 dataTableContentCs :: HH.Attribute r i
 dataTableContentCs =
     HP.class_ mdc_data_table__content
-
 
 ariaLabelAttr :: Config r i -> Maybe (HH.Attribute r i)
 ariaLabelAttr { label } =
     Maybe.map (HH.Attributes.attribute "aria-label") label
 
-
-
 data Row r i
     = Row { attributes :: Array (IProp r i), nodes :: Array (Cell r i) }
-
-
 
 row :: Array (IProp r i) -> Array (Cell r i) -> Row r i
 row attributes nodes =
     Row { attributes = attributes, nodes = nodes }
-
-
 
 selected :: Array (IProp r i)
 selected =
@@ -110,31 +85,25 @@ selected =
     , HH.Attributes.attribute "aria-selected" "true"
     ]
 
-
 dataTableRowSelectedCs :: HH.Attribute r i
 dataTableRowSelectedCs =
     HP.class_ mdc_data_table__row____selected
-
 
 headerRow :: Row r i -> Html r i
 headerRow (Row { attributes, nodes }) =
     HH.tr ([dataTableHeaderRowCs, attributes] <> (Array.map headerCell nodes))
 
-
 dataTableHeaderRowCs :: HH.Attribute r i
 dataTableHeaderRowCs =
     HP.class_ mdc_data_table__header_row
-
 
 bodyRow :: Row r i -> Html r i
 bodyRow (Row { attributes, nodes }) =
     HH.tr ([ dataTableRowCs, attributes] <> (Array.map bodyCell nodes))
 
-
 dataTableRowCs :: HH.Attribute r i
 dataTableRowCs =
     HP.class_ mdc_data_table__row
-
 
 headerCell :: Cell r i -> Html r i
 headerCell cell_ =
@@ -168,21 +137,17 @@ headerCell cell_ =
                     )
                 ]
 
-
 dataTableHeaderCellCs :: Maybe (HH.Attribute r i)
 dataTableHeaderCellCs =
     Just (HP.class_ mdc_data_table__header_cell)
-
 
 columnHeaderRoleAttr :: Maybe (HH.Attribute r i)
 columnHeaderRoleAttr =
     Just (HH.Attributes.attribute "role" "columnheader")
 
-
 colScopeAttr :: Maybe (HH.Attribute r i)
 colScopeAttr =
     Just (HH.Attributes.attribute "scope" "col")
-
 
 dataTableHeaderCellNumericCs :: Boolean -> Maybe (HH.Attribute r i)
 dataTableHeaderCellNumericCs numeric =
@@ -192,11 +157,9 @@ dataTableHeaderCellNumericCs numeric =
     else
         Nothing
 
-
 dataTableHeaderCellCheckboxCs :: Maybe (HH.Attribute r i)
 dataTableHeaderCellCheckboxCs =
     Just (HP.class_ mdc_data_table__header_cell____checkbox)
-
 
 bodyCell :: Cell r i -> Html r i
 bodyCell cell_ =
@@ -226,8 +189,6 @@ bodyCell cell_ =
                     )
                 ]
 
-
-
 data Cell r i
     = Cell
         { numeric :: Boolean
@@ -239,12 +200,9 @@ data Cell r i
         , attributes :: Array (IProp r i)
         }
 
-
-
 cell :: Array (IProp r i) -> Array (Html r i) -> Cell r i
 cell attributes nodes =
     Cell { numeric = False, attributes = attributes, nodes = nodes }
-
 
 {-| Numeric data table cell (right-aligned contents)
 -}
@@ -252,17 +210,13 @@ numericCell :: Array (IProp r i) -> Array (Html r i) -> Cell r i
 numericCell attributes nodes =
     Cell { numeric = True, attributes = attributes, nodes = nodes }
 
-
-
 checkboxCell :: Array (IProp r i) -> Checkbox.Config r i -> Cell r i
 checkboxCell attributes config_ =
     CheckboxCell { attributes = attributes, config_ = config_ }
 
-
 dataTableCellCs :: Maybe (HH.Attribute r i)
 dataTableCellCs =
     Just (HP.class_ mdc_data_table__cell)
-
 
 dataTableCellNumericCs :: Boolean -> Maybe (HH.Attribute r i)
 dataTableCellNumericCs numeric =
@@ -271,7 +225,6 @@ dataTableCellNumericCs numeric =
 
     else
         Nothing
-
 
 dataTableCellCheckboxCs :: Maybe (HH.Attribute r i)
 dataTableCellCheckboxCs =

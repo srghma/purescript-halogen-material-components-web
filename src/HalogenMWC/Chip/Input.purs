@@ -1,10 +1,6 @@
 module HalogenMWC.Chip.Input
     ( Config, config
 
-
-
-
-
     , chip, Chip
     ) where
 
@@ -16,12 +12,8 @@ import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Chip.Input.Internal (Chip(..), Config(..))
 
-
-
 type Config r i =
     Material.Chip.Input.Internal.Config r i
-
-
 
 config :: Config r i
 config =
@@ -33,37 +25,8 @@ config =
         , onClick = Nothing
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 data Chip r i =
     Material.Chip.Input.Internal.Chip r i
-
-
 
 chip :: Config r i -> String -> Chip r i
 chip =

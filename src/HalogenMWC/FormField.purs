@@ -1,9 +1,6 @@
 module HalogenMWC.FormField
     ( Config, config
 
-
-
-
     , formField
     ) where
 
@@ -14,10 +11,6 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
-
-
-
-
 type Config r i
     =
         { label :: Maybe String
@@ -26,33 +19,6 @@ type Config r i
         , additionalAttributes :: Array (IProp r i)
         , onClick :: Maybe r i
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 config :: Config r i
 config =
@@ -63,8 +29,6 @@ config =
         , additionalAttributes = []
         , onClick = Nothing
         }
-
-
 
 formField :: Config r i -> Array (Html r i) -> Html r i
 formField (config_@{ additionalAttributes }) nodes =
@@ -77,11 +41,9 @@ formField (config_@{ additionalAttributes }) nodes =
         )
         (nodes <> [ labelElt config_ ])
 
-
 rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ mdc_form_field)
-
 
 alignEndCs :: Config r i -> Maybe (HH.Attribute r i)
 alignEndCs { alignEnd } =
@@ -91,16 +53,13 @@ alignEndCs { alignEnd } =
     else
         Nothing
 
-
 forAttr :: Config r i -> Maybe (HH.Attribute r i)
 forAttr { for } =
     Maybe.map HH.Attributes.for for
 
-
 clickHandler :: Config r i -> Maybe (HH.Attribute r i)
 clickHandler { onClick } =
     Maybe.map HH.Events.onClick onClick
-
 
 labelElt :: Config r i -> Html r i
 labelElt (config_@{ label }) =

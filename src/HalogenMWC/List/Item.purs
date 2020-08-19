@@ -1,11 +1,6 @@
 module HalogenMWC.Array.Item
     ( Config, config
 
-
-
-
-
-
     , ArrayItem, listItem
     , graphic
     , meta
@@ -23,12 +18,8 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 import HalogenMWC.Array.Item.Internal (Config(..), ArrayItem(..), Selection(..))
 
-
-
 type Config r i =
     Material.Array.Item.Internal.Config r i
-
-
 
 config :: Config r i
 config =
@@ -42,29 +33,16 @@ config =
         , node = HH.text ""
         }
 
-
-
-
-
-
-
-
 data Selection =
     Material.Array.Item.Internal.Selection
-
-
 
 selected :: Selection
 selected =
     Selected
 
-
-
 activated :: Selection
 activated =
     Activated
-
-
 
 data ArrayItem r i =
     Material.Array.Item.Internal.ArrayItem r i
@@ -72,7 +50,6 @@ data ArrayItem r i =
 listItem :: Config r i -> Array (Html r i) -> ArrayItem r i
 listItem (config_@Config ({ additionalAttributes, href })) nodes =
     ArrayItem { config_ | node = listItemView (Config config_) nodes }
-
 
 listItemView :: Config r i -> Array (Html r i) -> Html r i
 listItemView (config_@{ additionalAttributes, href }) nodes =
@@ -95,11 +72,9 @@ listItemView (config_@{ additionalAttributes, href }) nodes =
             <> additionalAttributes
         )
 
-
 listItemCs :: Maybe (HH.Attribute r i)
 listItemCs =
     Just (HP.class_ mdc_list_item)
-
 
 disabledCs :: Config r i -> Maybe (HH.Attribute r i)
 disabledCs { disabled } =
@@ -109,7 +84,6 @@ disabledCs { disabled } =
     else
         Nothing
 
-
 selectedCs :: Config r i -> Maybe (HH.Attribute r i)
 selectedCs { selection } =
     if selection == Just Selected then
@@ -117,7 +91,6 @@ selectedCs { selection } =
 
     else
         Nothing
-
 
 activatedCs :: Config r i -> Maybe (HH.Attribute r i)
 activatedCs { selection } =
@@ -127,7 +100,6 @@ activatedCs { selection } =
     else
         Nothing
 
-
 ariaSelectedAttr :: Config r i -> Maybe (HH.Attribute r i)
 ariaSelectedAttr { selection } =
     if selection /= Nothing then
@@ -135,11 +107,9 @@ ariaSelectedAttr { selection } =
     else
         Nothing
 
-
 hrefAttr :: Config r i -> Maybe (HH.Attribute r i)
 hrefAttr { href } =
     Maybe.map HH.Attributes.href href
-
 
 targetAttr :: Config r i -> Maybe (HH.Attribute r i)
 targetAttr { href, target } =
@@ -148,7 +118,6 @@ targetAttr { href, target } =
 
     else
         Nothing
-
 
 {-| Two-line list item's text
 -}
@@ -165,23 +134,17 @@ text additionalAttributes { primary, secondary } =
         , secondaryText [] secondary
         ]
 
-
 primaryText :: Array (IProp r i) -> Array (Html r i) -> Html r i
 primaryText additionalAttributes nodes =
     HH.div ([HP.class_ mdc_list_item__primary_text] <> additionalAttributes) nodes
-
 
 secondaryText :: Array (IProp r i) -> Array (Html r i) -> Html r i
 secondaryText additionalAttributes nodes =
     HH.div ([HP.class_ mdc_list_item__secondary_text] <> additionalAttributes) nodes
 
-
-
 graphic :: Array (IProp r i) -> Array (Html r i) -> Html r i
 graphic additionalAttributes nodes =
     HH.div ([HP.class_ mdc_list_item__graphic] <> additionalAttributes) nodes
-
-
 
 meta :: Array (IProp r i) -> Array (Html r i) -> Html r i
 meta additionalAttributes nodes =

@@ -1,10 +1,6 @@
 module HalogenMWC.Radio
     ( Config, config
 
-
-
-
-
     , radio
     ) where
 
@@ -15,12 +11,6 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
-
-
-
-
-
-
 type Config r i
     =
         { checked :: Boolean
@@ -29,8 +19,6 @@ type Config r i
         , onChange :: Maybe r i
         , touch :: Boolean
         }
-
-
 
 config :: Config r i
 config =
@@ -42,27 +30,6 @@ config =
         , touch = True
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 {-| Specify whether touch support is enabled (enabled by default)
 
 Touch support is an accessibility guideline that states that touch targets
@@ -73,10 +40,6 @@ disable increased touch target size.
 prevent potentially overlapping touch targets on adjacent elements.
 
 -}
-
-
-
-
 
 radio :: Config r i -> Html r i
 radio (config_@{ touch, additionalAttributes }) =
@@ -103,11 +66,9 @@ radio (config_@{ touch, additionalAttributes }) =
             , rippleElt
             ]
 
-
 rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ mdc_radio)
-
 
 touchCs :: Config r i -> Maybe (HH.Attribute r i)
 touchCs { touch } =
@@ -117,16 +78,13 @@ touchCs { touch } =
     else
         Nothing
 
-
 checkedProp :: Config r i -> Maybe (HH.Attribute r i)
 checkedProp { checked } =
     Just (HH.Attributes.property "checked" (Encode.bool checked))
 
-
 disabledProp :: Config r i -> Maybe (HH.Attribute r i)
 disabledProp { disabled } =
     Just (HH.Attributes.property "disabled" (Encode.bool disabled))
-
 
 changeHandler :: Config r i -> Maybe (HH.Attribute r i)
 changeHandler { checked, onChange } =
@@ -148,7 +106,6 @@ changeHandler { checked, onChange } =
         )
         onChange
 
-
 nativeControlElt :: Config r i -> Html r i
 nativeControlElt config_ =
     HH.input
@@ -161,31 +118,25 @@ nativeControlElt config_ =
         )
         []
 
-
 nativeControlCs :: Maybe (HH.Attribute r i)
 nativeControlCs =
     Just (HP.class_ mdc_radio__native_control)
-
 
 radioTypeAttr :: Maybe (HH.Attribute r i)
 radioTypeAttr =
     Just (HH.Attributes.type_ "radio")
 
-
 backgroundElt :: Html r i
 backgroundElt =
     HH.div [ HP.class_ mdc_radio__background ] [ outerCircleElt, innerCircleElt ]
-
 
 outerCircleElt :: Html r i
 outerCircleElt =
     HH.div [ HP.class_ mdc_radio__outer_circle ] []
 
-
 innerCircleElt :: Html r i
 innerCircleElt =
     HH.div [ HP.class_ mdc_radio__inner_circle ] []
-
 
 rippleElt :: Html r i
 rippleElt =

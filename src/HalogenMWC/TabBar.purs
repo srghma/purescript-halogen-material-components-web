@@ -1,10 +1,6 @@
 module HalogenMWC.TabBar
     ( Config, config
 
-
-
-
-
     , tabBar
     , Align(..)
     ) where
@@ -16,12 +12,7 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
-
-
-
 import HalogenMWC.Tab.Internal as Tab
-
-
 
 type Config r i
     =
@@ -32,8 +23,6 @@ type Config r i
         , align :: Maybe Align
         }
 
-
-
 config :: Config r i
 config =
     Config
@@ -43,33 +32,6 @@ config =
         , align = Nothing
         , additionalAttributes = []
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 tabBar :: Config r i -> Array (Tab r i) -> Html r i
 tabBar (config_@{ additionalAttributes, align }) tabs =
@@ -83,16 +45,13 @@ tabBar (config_@{ additionalAttributes, align }) tabs =
         )
         [ tabScroller config_ align tabs ]
 
-
 rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ mdc_tab_bar)
 
-
 tablistRoleAttr :: Maybe (HH.Attribute r i)
 tablistRoleAttr =
     Just (HH.Attributes.attribute "role" "tablist")
-
 
 activeTabIndexProp :: Array (Tab r i) -> Maybe (HH.Attribute r i)
 activeTabIndexProp tabs =
@@ -104,7 +63,6 @@ activeTabIndexProp tabs =
                 # Maybe.map Tuple.first
     in
     Maybe.map (HH.Attributes.property "activeTabIndex" << Encode.int) activeTabIndex
-
 
 viewTab :: Config r i -> Tab r i -> Html r i
 viewTab (barConfig@{ indicatorSpansContent }) (tabConfig@(Tab ({ additionalAttributes, content })) as tab) =
@@ -131,11 +89,9 @@ viewTab (barConfig@{ indicatorSpansContent }) (tabConfig@(Tab ({ additionalAttri
                 ]
         )
 
-
 tabCs :: Maybe (HH.Attribute r i)
 tabCs =
     Just (HP.class_ mdc_tab)
-
 
 tabStackedCs :: Config r i -> Maybe (HH.Attribute r i)
 tabStackedCs { stacked } =
@@ -145,7 +101,6 @@ tabStackedCs { stacked } =
     else
         Nothing
 
-
 tabMinWidthCs :: Config r i -> Maybe (HH.Attribute r i)
 tabMinWidthCs { minWidth } =
     if minWidth then
@@ -154,16 +109,13 @@ tabMinWidthCs { minWidth } =
     else
         Nothing
 
-
 tabRoleAttr :: Maybe (HH.Attribute r i)
 tabRoleAttr =
     Just (HH.Attributes.attribute "role" "tab")
 
-
 tabClickHandler :: Tab.Config r i -> Maybe (HH.Attribute r i)
 tabClickHandler { onClick } =
     Maybe.map (HH.Events.on "MDCTab:interacted" << Decode.succeed) onClick
-
 
 tabContentElt :: Config r i -> Tab.Config r i -> Tab.Content -> Maybe (Html r i)
 tabContentElt (barConfig@{ indicatorSpansContent }) config_ content =
@@ -184,7 +136,6 @@ tabContentElt (barConfig@{ indicatorSpansContent }) config_ content =
             )
         )
 
-
 tabIconElt :: Tab.Content -> Maybe (Html r i)
 tabIconElt { icon } =
     Maybe.map
@@ -195,16 +146,13 @@ tabIconElt { icon } =
         )
         icon
 
-
 tabTextLabelElt :: Tab.Content -> Maybe (Html r i)
 tabTextLabelElt { label } =
     Just (HH.span [ HP.class_ mdc_tab__text_label ] [ text label ])
 
-
 tabIndicatorElt :: Tab.Config r i -> Maybe (Html r i)
 tabIndicatorElt config_ =
     Just (HH.span [ HP.class_ mdc_tab_indicator ] [ tabIndicatorContentElt ])
-
 
 tabIndicatorContentElt :: Html r i
 tabIndicatorContentElt =
@@ -214,18 +162,14 @@ tabIndicatorContentElt =
         ]
         []
 
-
 tabRippleElt :: Maybe (Html r i)
 tabRippleElt =
     Just (HH.span [ HP.class_ mdc_tab__ripple ] [])
-
-
 
 data Align
     = Start
     | End
     | Center
-
 
 tabScroller :: Config r i -> Maybe Align -> Array (Tab r i) -> Html r i
 tabScroller config_ align tabs =
@@ -237,11 +181,9 @@ tabScroller config_ align tabs =
         )
         [ tabScrollerScrollAreaElt config_ tabs ]
 
-
 tabScrollerCs :: Maybe (HH.Attribute r i)
 tabScrollerCs =
     Just (HP.class_ mdc_tab_scroller)
-
 
 tabScrollerAlignCs :: Maybe Align -> Maybe (HH.Attribute r i)
 tabScrollerAlignCs align =
@@ -258,12 +200,10 @@ tabScrollerAlignCs align =
         Nothing ->
             Nothing
 
-
 tabScrollerScrollAreaElt :: Config r i -> Array (Tab r i) -> Html r i
 tabScrollerScrollAreaElt barConfig tabs =
     HH.div [ HP.class_ mdc_tab_scroller__scroll_area ]
         [ tabScrollerScrollContentElt barConfig tabs ]
-
 
 tabScrollerScrollContentElt :: Config r i -> Array (Tab r i) -> Html r i
 tabScrollerScrollContentElt barConfig tabs =

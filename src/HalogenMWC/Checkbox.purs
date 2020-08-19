@@ -10,8 +10,6 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Halogen.SVG.Elements as Halogen.SVG.Elements
 import Halogen.SVG.Attributes as Halogen.SVG.Attributes
 
-
-
 type Config r i
   = { state :: Maybe State
     , disabled :: Boolean
@@ -25,8 +23,6 @@ data State
   | Checked
   | Indeterminate
 
-
-
 config :: Config r i
 config =
     Config
@@ -36,27 +32,6 @@ config =
         , onChange = Nothing
         , touch = True
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 checkbox :: Config r i -> Html r i
 checkbox (config_@{ touch, additionalAttributes }) =
@@ -83,11 +58,9 @@ checkbox (config_@{ touch, additionalAttributes }) =
             , backgroundElt
             ]
 
-
 rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ mdc_checkbox)
-
 
 touchCs :: Config r i -> Maybe (HH.Attribute r i)
 touchCs { touch } =
@@ -97,21 +70,17 @@ touchCs { touch } =
     else
         Nothing
 
-
 checkedProp :: Config r i -> Maybe (HH.Attribute r i)
 checkedProp { state } =
     Just (HH.Attributes.property "checked" (Encode.bool (state == Just Checked)))
-
 
 indeterminateProp :: Config r i -> Maybe (HH.Attribute r i)
 indeterminateProp { state } =
     Just (HH.Attributes.property "indeterminate" (Encode.bool (state == Just Indeterminate)))
 
-
 disabledProp :: Config r i -> Maybe (HH.Attribute r i)
 disabledProp { disabled } =
     Just (HH.Attributes.property "disabled" (Encode.bool disabled))
-
 
 changeHandler :: Config r i -> Maybe (HH.Attribute r i)
 changeHandler { state, onChange } =
@@ -136,7 +105,6 @@ changeHandler { state, onChange } =
         )
         onChange
 
-
 nativeControlElt :: Config r i -> Html r i
 nativeControlElt config_ =
     HH.input
@@ -149,7 +117,6 @@ nativeControlElt config_ =
             ]
         )
         []
-
 
 backgroundElt :: Html r i
 backgroundElt =

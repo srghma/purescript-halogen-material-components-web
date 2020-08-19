@@ -1,10 +1,6 @@
 module HalogenMWC.IconToggle
     ( Config, config
 
-
-
-
-
     , iconToggle
     ) where
 
@@ -15,12 +11,6 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
-
-
-
-
-
-
 type Config r i
     =
         { on :: Boolean
@@ -29,8 +19,6 @@ type Config r i
         , additionalAttributes :: Array (IProp r i)
         , onChange :: Maybe r i
         }
-
-
 
 config :: Config r i
 config =
@@ -42,33 +30,8 @@ config =
         , onChange = Nothing
         }
 
-
-
-
-
-
-
-
-
-
-
-
 {-| Specify the HTML5 aria-label attribute of an icon toggle
 -}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 iconToggle :: Config r i -> { onIcon :: String, offIcon :: String } -> Html r i
 iconToggle (config_@{ additionalAttributes }) { onIcon, offIcon } =
@@ -89,41 +52,33 @@ iconToggle (config_@{ additionalAttributes }) { onIcon, offIcon } =
         , HH.i (Array.filterMap identity [ materialIconsCs, iconCs ]) [ text offIcon ]
         ]
 
-
 rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ mdc_icon_button)
-
 
 onProp :: Config r i -> Maybe (HH.Attribute r i)
 onProp { on } =
     Just (HH.Attributes.property "on" (Encode.bool on))
 
-
 materialIconsCs :: Maybe (HH.Attribute r i)
 materialIconsCs =
     Just (HP.class_ material_icons)
-
 
 iconCs :: Maybe (HH.Attribute r i)
 iconCs =
     Just (HP.class_ mdc_icon_button__icon)
 
-
 onIconCs :: Maybe (HH.Attribute r i)
 onIconCs =
     Just (HP.class_ "mdc-icon-button__icon mdc-icon-button__icon--on")
-
 
 tabIndexProp :: Maybe (HH.Attribute r i)
 tabIndexProp =
     Just (HH.Attributes.tabindex 0)
 
-
 ariaHiddenAttr :: Maybe (HH.Attribute r i)
 ariaHiddenAttr =
     Just (HH.Attributes.attribute "aria-hidden" "true")
-
 
 ariaPressedAttr :: Config r i -> Maybe (HH.Attribute r i)
 ariaPressedAttr { on } =
@@ -137,17 +92,14 @@ ariaPressedAttr { on } =
             )
         )
 
-
 ariaLabelAttr :: Config r i -> Maybe (HH.Attribute r i)
 ariaLabelAttr { label } =
     Maybe.map (HH.Attributes.attribute "aria-label") label
-
 
 changeHandler :: Config r i -> Maybe (HH.Attribute r i)
 changeHandler { onChange } =
     Maybe.map (HH.Events.on "MDCIconButtonToggle:change" << Decode.succeed)
         onChange
-
 
 disabledAttr :: Config r i -> Maybe (HH.Attribute r i)
 disabledAttr { disabled } =

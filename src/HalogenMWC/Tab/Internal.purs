@@ -11,7 +11,6 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
-
 type Config r i
     =
         { active :: Boolean
@@ -20,12 +19,10 @@ type Config r i
         , content :: Content
         }
 
-
 data Content =
     { label :: String
     , icon :: Maybe String
     }
-
 
 data Tab r i
     = Tab (Config r i)

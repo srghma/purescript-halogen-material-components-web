@@ -1,9 +1,6 @@
 module HalogenMWC.IconButton
     ( Config, config
 
-
-
-
     , iconButton
     , custom
     ) where
@@ -14,7 +11,6 @@ import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
-
 
 type Config r i
   = { disabled :: Boolean
@@ -32,8 +28,6 @@ config =
         , onClick = Nothing
         }
 
-
-
 iconButton :: Config r i -> String -> Html r i
 iconButton config_ iconName =
     HH.node "mdc-icon-button"
@@ -47,8 +41,6 @@ iconButton config_ iconName =
         )
         [ text iconName ]
 
-
-
 custom :: Config r i -> Array (Html r i) -> Html r i
 custom config_ nodes =
     HH.node "mdc-icon-button"
@@ -61,21 +53,17 @@ custom config_ nodes =
         )
         nodes
 
-
 rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ mdc_icon_button)
-
 
 materialIconsCs :: Maybe (HH.Attribute r i)
 materialIconsCs =
     Just (HP.class_ material_icons)
 
-
 tabIndexProp :: Maybe (HH.Attribute r i)
 tabIndexProp =
     Just (HH.Attributes.tabindex 0)
-
 
 clickHandler :: Config r i -> Maybe (HH.Attribute r i)
 clickHandler config_ =

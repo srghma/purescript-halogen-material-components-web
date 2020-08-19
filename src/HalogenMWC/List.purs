@@ -1,11 +1,6 @@
 module HalogenMWC.Array
     ( Config, config
 
-
-
-
-
-
     , list
     , group, subheader
     ) where
@@ -17,13 +12,8 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
-
-
-
 import HalogenMWC.Array.Item (Config, ArrayItem)
 import HalogenMWC.Array.Item.Internal as ArrayItem
-
-
 
 type Config r i
     =
@@ -35,8 +25,6 @@ type Config r i
         , wrapFocus :: Boolean
         , additionalAttributes :: Array (IProp r i)
         }
-
-
 
 config :: Config r i
 config =
@@ -50,41 +38,12 @@ config =
         , additionalAttributes = []
         }
 
-
 {-| Specify whether a list should be non-interactive
 
 Non-interactive lists do not feature keyboard interaction and list items have
 no visual interaction effect.
 
 -}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 {-| Array view function
 
@@ -127,11 +86,9 @@ list (config_@{ additionalAttributes }) firstArrayItem remainingArrayItems =
             listItems
         )
 
-
 rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ mdc_list)
-
 
 nonInteractiveCs :: Config r i -> Maybe (HH.Attribute r i)
 nonInteractiveCs { nonInteractive } =
@@ -141,7 +98,6 @@ nonInteractiveCs { nonInteractive } =
     else
         Nothing
 
-
 denseCs :: Config r i -> Maybe (HH.Attribute r i)
 denseCs { dense } =
     if dense then
@@ -149,7 +105,6 @@ denseCs { dense } =
 
     else
         Nothing
-
 
 avatarArrayCs :: Config r i -> Maybe (HH.Attribute r i)
 avatarArrayCs { avatarArray } =
@@ -159,7 +114,6 @@ avatarArrayCs { avatarArray } =
     else
         Nothing
 
-
 twoLineCs :: Config r i -> Maybe (HH.Attribute r i)
 twoLineCs { twoLine } =
     if twoLine then
@@ -167,7 +121,6 @@ twoLineCs { twoLine } =
 
     else
         Nothing
-
 
 clickHandler :: Array (ArrayItem r i) -> Maybe (HH.Attribute r i)
 clickHandler listItems =
@@ -204,7 +157,6 @@ clickHandler listItems =
                     )
     in
     Just (HH.Events.on "MDCArray:action" mergedClickHandler)
-
 
 selectedIndexProp :: Array (ArrayItem r i) -> Maybe (HH.Attribute r i)
 selectedIndexProp listItems =
@@ -243,28 +195,21 @@ selectedIndexProp listItems =
     in
     Just (HH.Attributes.property "selectedIndex" (Encode.list Encode.int selectedIndex))
 
-
-
 group :: Array (IProp r i) -> Array (Html r i) -> Html r i
 group additionalAttributes nodes =
     HH.div ([listGroupCs] <> additionalAttributes) nodes
-
 
 listGroupCs :: HH.Attribute r i
 listGroupCs =
     HP.class_ mdc_list_group
 
-
-
 subheader :: Array (IProp r i) -> Array (Html r i) -> Html r i
 subheader additionalAttributes nodes =
     HH.span ([listGroupSubheaderCs] <> additionalAttributes) nodes
 
-
 listGroupSubheaderCs :: HH.Attribute r i
 listGroupSubheaderCs =
     HP.class_ mdc_list_group__subheader
-
 
 wrapFocusProp :: Config r i -> Maybe (HH.Attribute r i)
 wrapFocusProp { wrapFocus } =

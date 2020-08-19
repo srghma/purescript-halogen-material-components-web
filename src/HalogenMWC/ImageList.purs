@@ -1,8 +1,6 @@
 module HalogenMWC.ImageArray
     ( Config, config
 
-
-
     , imageArray
     ) where
 
@@ -16,16 +14,12 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.ImageArray.Item (ImageArrayItem)
 import HalogenMWC.ImageArray.Item.Internal as ImageArrayItem
 
-
-
 type Config r i
     =
         { masonry :: Boolean
         , withTextProtection :: Boolean
         , additionalAttributes :: Array (IProp r i)
         }
-
-
 
 config :: Config r i
 config =
@@ -34,23 +28,6 @@ config =
         , withTextProtection = False
         , additionalAttributes = []
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 imageArray :: Config r i -> Array (ImageArrayItem r i) -> Html r i
 imageArray (config_@{ additionalAttributes }) listItems =
@@ -64,11 +41,9 @@ imageArray (config_@{ additionalAttributes }) listItems =
         )
         (Array.map (listItemElt config_) listItems)
 
-
 rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ mdc_image_list)
-
 
 masonryCs :: Config r i -> Maybe (HH.Attribute r i)
 masonryCs { masonry } =
@@ -78,7 +53,6 @@ masonryCs { masonry } =
     else
         Nothing
 
-
 withTextProtectionCs :: Config r i -> Maybe (HH.Attribute r i)
 withTextProtectionCs { withTextProtection } =
     if withTextProtection then
@@ -86,7 +60,6 @@ withTextProtectionCs { withTextProtection } =
 
     else
         Nothing
-
 
 listItemElt :: Config r i -> ImageArrayItem r i -> Html r i
 listItemElt (config_@{ masonry }) ((ImageArrayItem.ImageArrayItem { href, additionalAttributes }) as listItem) =
@@ -107,7 +80,6 @@ listItemElt (config_@{ masonry }) ((ImageArrayItem.ImageArrayItem { href, additi
             # Maybe.withDefault inner
         )
 
-
 imageAspectContainerElt :: Boolean -> ImageArrayItem r i -> Html r i
 imageAspectContainerElt masonry ((ImageArrayItem.ImageArrayItem { href }) as listItem) =
     HH.div
@@ -117,7 +89,6 @@ imageAspectContainerElt masonry ((ImageArrayItem.ImageArrayItem { href }) as lis
             ]
         )
         [ imageElt masonry listItem ]
-
 
 imageElt :: Boolean -> ImageArrayItem r i -> Html r i
 imageElt masonry (ImageArrayItem.ImageArrayItem { href, image }) =
@@ -142,7 +113,6 @@ imageElt masonry (ImageArrayItem.ImageArrayItem { href, image }) =
             , style "background-image" ("url('" <> image <> "')")
             ]
             []
-
 
 supportingElt :: ImageArrayItem r i -> Html r i
 supportingElt (ImageArrayItem.ImageArrayItem { label }) =

@@ -1,7 +1,6 @@
 module HalogenMWC.Ripple
     ( Config, config
 
-
     , bounded
     , unbounded
     , Color, primary, accent
@@ -14,17 +13,11 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
-
-
-
-
 type Config r i
     =
         { color :: Maybe Color
         , additionalAttributes :: Array (IProp r i)
         }
-
-
 
 config :: Config r i
 config =
@@ -33,34 +26,17 @@ config =
         , additionalAttributes = []
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
 data Color
     = Primary
     | Accent
-
-
 
 primary :: Color
 primary =
     Primary
 
-
-
 accent :: Color
 accent =
     Accent
-
 
 ripple :: Boolean -> Config r i -> Html r i
 ripple isUnbounded (config_@{ additionalAttributes }) =
@@ -80,23 +56,17 @@ ripple isUnbounded (config_@{ additionalAttributes }) =
         )
         []
 
-
-
 bounded :: Config r i -> Html r i
 bounded =
     ripple False
-
-
 
 unbounded :: Config r i -> Html r i
 unbounded =
     ripple True
 
-
 rippleSurface :: Maybe (HH.Attribute r i)
 rippleSurface =
     Just (HP.class_ mdc_ripple_surface)
-
 
 colorCs :: Config r i -> Maybe (HH.Attribute r i)
 colorCs { color } =
@@ -110,11 +80,9 @@ colorCs { color } =
         Nothing ->
             Nothing
 
-
 unboundedProp :: Boolean -> Maybe (HH.Attribute r i)
 unboundedProp isUnbounded =
     Just (HH.Attributes.property "unbounded" (Encode.bool isUnbounded))
-
 
 unboundedData :: Boolean -> Maybe (HH.Attribute r i)
 unboundedData isUnbounded =

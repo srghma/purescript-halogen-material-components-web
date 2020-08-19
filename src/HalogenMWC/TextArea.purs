@@ -1,19 +1,6 @@
 module HalogenMWC.TextArea
     ( Config, config
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     , filled
     , outlined
     ) where
@@ -24,12 +11,6 @@ import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
-
-
-
-
-
-
 
 type Config r i
     =
@@ -48,8 +29,6 @@ type Config r i
         , onInput :: Maybe (String -> r i)
         , onChange :: Maybe (String -> r i)
         }
-
-
 
 config :: Config r i
 config =
@@ -70,88 +49,13 @@ config =
         , onChange = Nothing
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 filled :: Config r i -> Html r i
 filled config_ =
     textArea False config_
 
-
-
 outlined :: Config r i -> Html r i
 outlined config_ =
     textArea True config_
-
 
 textArea :: Boolean -> Config r i -> Html r i
 textArea outlined_ (config_@{ additionalAttributes, fullwidth }) =
@@ -184,11 +88,9 @@ textArea outlined_ (config_@{ additionalAttributes, fullwidth }) =
             ]
         )
 
-
 rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ "mdc-text-field mdc-text-field--textarea")
-
 
 outlinedCs :: Boolean -> Maybe (HH.Attribute r i)
 outlinedCs outlined_ =
@@ -198,7 +100,6 @@ outlinedCs outlined_ =
     else
         Nothing
 
-
 fullwidthCs :: Config r i -> Maybe (HH.Attribute r i)
 fullwidthCs { fullwidth } =
     if fullwidth then
@@ -206,7 +107,6 @@ fullwidthCs { fullwidth } =
 
     else
         Nothing
-
 
 disabledCs :: Config r i -> Maybe (HH.Attribute r i)
 disabledCs { disabled } =
@@ -216,47 +116,38 @@ disabledCs { disabled } =
     else
         Nothing
 
-
 requiredProp :: Config r i -> Maybe (HH.Attribute r i)
 requiredProp { required } =
     Just (HH.Attributes.property "required" (Encode.bool required))
-
 
 validProp :: Config r i -> Maybe (HH.Attribute r i)
 validProp { valid } =
     Just (HH.Attributes.property "valid" (Encode.bool valid))
 
-
 minLengthAttr :: Config r i -> Maybe (HH.Attribute r i)
 minLengthAttr { minLength } =
     Maybe.map (HH.Attributes.attribute "minLength" << String.fromInt) minLength
-
 
 maxLengthAttr :: Config r i -> Maybe (HH.Attribute r i)
 maxLengthAttr { maxLength } =
     Maybe.map (HH.Attributes.attribute "maxLength" << String.fromInt) maxLength
 
-
 valueProp :: Config r i -> Maybe (HH.Attribute r i)
 valueProp { value } =
     Maybe.map (HH.Attributes.property "value" << Encode.string) value
-
 
 placeholderAttr :: Config r i -> Maybe (HH.Attribute r i)
 placeholderAttr { placeholder } =
     Maybe.map HH.Attributes.placeholder placeholder
 
-
 inputHandler :: Config r i -> Maybe (HH.Attribute r i)
 inputHandler { onInput } =
     Maybe.map HH.Events.onInput onInput
-
 
 changeHandler :: Config r i -> Maybe (HH.Attribute r i)
 changeHandler { onChange } =
     Maybe.map (\f -> HH.Events.on "change" (Decode.map f HH.Events.targetValue))
         onChange
-
 
 inputElt :: Config r i -> Html r i
 inputElt config_ =
@@ -275,21 +166,17 @@ inputElt config_ =
         )
         []
 
-
 inputCs :: Maybe (HH.Attribute r i)
 inputCs =
     Just (HP.class_ mdc_text_field__input)
-
 
 rowsAttr :: Config r i -> Maybe (HH.Attribute r i)
 rowsAttr { rows } =
     Maybe.map HH.Attributes.rows rows
 
-
 colsAttr :: Config r i -> Maybe (HH.Attribute r i)
 colsAttr { cols } =
     Maybe.map HH.Attributes.cols cols
-
 
 ariaLabelAttr :: Config r i -> Maybe (HH.Attribute r i)
 ariaLabelAttr { fullwidth, placeholder, label } =
@@ -299,11 +186,9 @@ ariaLabelAttr { fullwidth, placeholder, label } =
     else
         Nothing
 
-
 disabledProp :: Config r i -> Maybe (HH.Attribute r i)
 disabledProp { disabled } =
     Just (HH.Attributes.property "disabled" (Encode.bool disabled))
-
 
 labelElt :: Config r i -> Html r i
 labelElt { label, value } =
@@ -330,7 +215,6 @@ labelElt { label, value } =
         Nothing ->
             text ""
 
-
 noLabelCs :: Config r i -> Maybe (HH.Attribute r i)
 noLabelCs { label } =
     if label == Nothing then
@@ -338,7 +222,6 @@ noLabelCs { label } =
 
     else
         Nothing
-
 
 notchedOutlineElt :: Config r i -> Html r i
 notchedOutlineElt config_ =
@@ -348,16 +231,13 @@ notchedOutlineElt config_ =
         , notchedOutlineTrailingElt
         ]
 
-
 notchedOutlineLeadingElt :: Html r i
 notchedOutlineLeadingElt =
     HH.div [ HP.class_ mdc_notched_outline__leading ] []
 
-
 notchedOutlineTrailingElt :: Html r i
 notchedOutlineTrailingElt =
     HH.div [ HP.class_ mdc_notched_outline__trailing ] []
-
 
 notchedOutlineNotchElt :: Config r i -> Html r i
 notchedOutlineNotchElt config_ =

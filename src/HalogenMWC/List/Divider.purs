@@ -1,8 +1,6 @@
 module HalogenMWC.Array.Divider
     ( Config, config
 
-
-
     , listItem
     , group
     ) where
@@ -17,16 +15,12 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Array.Item (ArrayItem)
 import HalogenMWC.Array.Item.Internal as ArrayItem
 
-
-
 type Config r i
     =
         { inset :: Boolean
         , padded :: Boolean
         , additionalAttributes :: Array (IProp r i)
         }
-
-
 
 config :: Config r i
 config =
@@ -35,23 +29,6 @@ config =
         , padded = False
         , additionalAttributes = []
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 listItem :: Config r i -> ArrayItem r i
 listItem (config_@{ additionalAttributes }) =
@@ -67,16 +44,13 @@ listItem (config_@{ additionalAttributes }) =
             )
             []
 
-
 listDividerCs :: Maybe (HH.Attribute r i)
 listDividerCs =
     Just (HP.class_ mdc_list_divider)
 
-
 separatorRoleAttr :: Maybe (HH.Attribute r i)
 separatorRoleAttr =
     Just (HH.Attributes.attribute "role" "separator")
-
 
 in
 insetCs { inset } =
@@ -86,7 +60,6 @@ insetCs { inset } =
     else
         Nothing
 
-
 paddedCs :: Config r i -> Maybe (HH.Attribute r i)
 paddedCs { padded } =
     if padded then
@@ -94,8 +67,6 @@ paddedCs { padded } =
 
     else
         Nothing
-
-
 
 group :: Array (IProp r i) -> Html r i
 group additionalAttributes =
