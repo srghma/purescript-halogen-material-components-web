@@ -56,7 +56,7 @@ activeTabIndexProp tabs =
         # Array.head
         # map Tuple.first
   in
-    map (HH.Attributes.property "activeTabIndex" << Encode.int) activeTabIndex
+    map (HP.prop "activeTabIndex" << Encode.int) activeTabIndex
 
 viewTab :: Config r i -> Tab r i -> HH.HTML w i
 viewTab (barConfig@{ indicatorSpansContent }) (tabConfig@(Tab ({ additionalAttributes, content }))) =

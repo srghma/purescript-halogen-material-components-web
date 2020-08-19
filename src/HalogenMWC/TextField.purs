@@ -158,22 +158,22 @@ withTrailingIconCs { trailingIcon } =
     Nothing
 
 requiredProp :: Config r i -> Maybe (IProp r i)
-requiredProp { required } = Just (HH.Attributes.property "required" (Encode.bool required))
+requiredProp { required } = Just (HP.prop "required" (Encode.bool required))
 
 validProp :: Config r i -> Maybe (IProp r i)
-validProp { valid } = Just (HH.Attributes.property "valid" (Encode.bool valid))
+validProp { valid } = Just (HP.prop "valid" (Encode.bool valid))
 
 minLengthProp :: Config r i -> Maybe (IProp r i)
 minLengthProp { minLength } =
   Just
-    ( HH.Attributes.property "minLength"
+    ( HP.prop "minLength"
         (Encode.int (Maybe.withDefault - 1 minLength))
     )
 
 maxLengthProp :: Config r i -> Maybe (IProp r i)
 maxLengthProp { maxLength } =
   Just
-    ( HH.Attributes.property "maxLength"
+    ( HP.prop "maxLength"
         (Encode.int (Maybe.withDefault - 1 maxLength))
     )
 
@@ -186,26 +186,26 @@ maxLengthAttr { maxLength } = map (HH.Attributes.attribute "maxLength" << String
 minProp :: Config r i -> Maybe (IProp r i)
 minProp { min } =
   Just
-    ( HH.Attributes.property "min"
+    ( HP.prop "min"
         (Encode.string (Maybe.withDefault "" (map String.fromInt min)))
     )
 
 maxProp :: Config r i -> Maybe (IProp r i)
 maxProp { max } =
   Just
-    ( HH.Attributes.property "max"
+    ( HP.prop "max"
         (Encode.string (Maybe.withDefault "" (map String.fromInt max)))
     )
 
 stepProp :: Config r i -> Maybe (IProp r i)
 stepProp { step } =
   Just
-    ( HH.Attributes.property "step"
+    ( HP.prop "step"
         (Encode.string (Maybe.withDefault "" (map String.fromInt step)))
     )
 
 valueProp :: Config r i -> Maybe (IProp r i)
-valueProp { value } = map (HH.Attributes.property "value" << Encode.string) value
+valueProp { value } = map (HP.prop "value" << Encode.string) value
 
 placeholderAttr :: Config r i -> Maybe (IProp r i)
 placeholderAttr { placeholder } = map HH.Attributes.placeholder placeholder
@@ -250,7 +250,7 @@ inputCs = Just (HP.class_ mdc_text_field__input)
 patternProp :: Config r i -> Maybe (IProp r i)
 patternProp { pattern } =
   Just
-    ( HH.Attributes.property "pattern"
+    ( HP.prop "pattern"
         (Maybe.withDefault Encode.null (map Encode.string pattern))
     )
 
@@ -265,7 +265,7 @@ ariaLabelAttr { fullwidth, placeholder, label } =
     Nothing
 
 disabledProp :: Config r i -> Maybe (IProp r i)
-disabledProp { disabled } = Just (HH.Attributes.property "disabled" (Encode.bool disabled))
+disabledProp { disabled } = Just (HP.prop "disabled" (Encode.bool disabled))
 
 labelElt :: Config r i -> HH.HTML w i
 labelElt { label, value } =
@@ -281,7 +281,7 @@ labelElt { label, value } =
               HP.class_ (floatingLabelCs <> " " <> floatingLabelFloatAboveCs)
             else
               HP.class_ floatingLabelCs
-          , HH.Attributes.property "foucClassNames"
+          , HP.prop "foucClassNames"
               (Encode.list Encode.string [ floatingLabelFloatAboveCs ])
           ]
           [ text str ]

@@ -71,12 +71,12 @@ variantCs variant = case variant of
   _ -> Nothing
 
 determinateProp :: Variant -> Maybe (IProp r i)
-determinateProp variant = Just (HH.Attributes.property "determinate" (Encode.bool (variant /= Indeterminate)))
+determinateProp variant = Just (HP.prop "determinate" (Encode.bool (variant /= Indeterminate)))
 
 progressProp :: Variant -> Maybe (IProp r i)
 progressProp variant =
   Just
-    ( HH.Attributes.property "progress"
+    ( HP.prop "progress"
         ( Encode.float
             ( case variant of
                 Determinate progress -> progress
@@ -89,7 +89,7 @@ progressProp variant =
 bufferProp :: Variant -> Maybe (IProp r i)
 bufferProp variant =
   Just
-    ( HH.Attributes.property "buffer"
+    ( HP.prop "buffer"
         ( Encode.float
             ( case variant of
                 Buffered _ buffer -> buffer
@@ -99,10 +99,10 @@ bufferProp variant =
     )
 
 reverseProp :: Config r i -> Maybe (IProp r i)
-reverseProp { reverse } = Just (HH.Attributes.property "reverse" (Encode.bool reverse))
+reverseProp { reverse } = Just (HP.prop "reverse" (Encode.bool reverse))
 
 closedProp :: Config r i -> Maybe (IProp r i)
-closedProp { closed } = Just (HH.Attributes.property "closed" (Encode.bool closed))
+closedProp { closed } = Just (HP.prop "closed" (Encode.bool closed))
 
 bufferingDotsElt :: HH.HTML w i
 bufferingDotsElt = HH.div [ HP.class_ mdc_linear_progress__buffering_dots ] []

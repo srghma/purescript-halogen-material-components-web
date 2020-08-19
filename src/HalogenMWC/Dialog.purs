@@ -46,7 +46,7 @@ rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_dialog)
 
 openProp :: Config r i -> Maybe (IProp r i)
-openProp { open } = Just (HH.Attributes.property "open" (Encode.bool open))
+openProp { open } = Just (HP.prop "open" (Encode.bool open))
 
 roleAttr :: Maybe (IProp r i)
 roleAttr = Just (HH.Attributes.attribute "role" "alertdialog")

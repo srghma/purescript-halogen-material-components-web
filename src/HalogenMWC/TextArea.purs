@@ -105,10 +105,10 @@ disabledCs { disabled } =
     Nothing
 
 requiredProp :: Config r i -> Maybe (IProp r i)
-requiredProp { required } = Just (HH.Attributes.property "required" (Encode.bool required))
+requiredProp { required } = Just (HP.prop "required" (Encode.bool required))
 
 validProp :: Config r i -> Maybe (IProp r i)
-validProp { valid } = Just (HH.Attributes.property "valid" (Encode.bool valid))
+validProp { valid } = Just (HP.prop "valid" (Encode.bool valid))
 
 minLengthAttr :: Config r i -> Maybe (IProp r i)
 minLengthAttr { minLength } = map (HH.Attributes.attribute "minLength" << String.fromInt) minLength
@@ -117,7 +117,7 @@ maxLengthAttr :: Config r i -> Maybe (IProp r i)
 maxLengthAttr { maxLength } = map (HH.Attributes.attribute "maxLength" << String.fromInt) maxLength
 
 valueProp :: Config r i -> Maybe (IProp r i)
-valueProp { value } = map (HH.Attributes.property "value" << Encode.string) value
+valueProp { value } = map (HP.prop "value" << Encode.string) value
 
 placeholderAttr :: Config r i -> Maybe (IProp r i)
 placeholderAttr { placeholder } = map HH.Attributes.placeholder placeholder
@@ -164,7 +164,7 @@ ariaLabelAttr { fullwidth, placeholder, label } =
     Nothing
 
 disabledProp :: Config r i -> Maybe (IProp r i)
-disabledProp { disabled } = Just (HH.Attributes.property "disabled" (Encode.bool disabled))
+disabledProp { disabled } = Just (HP.prop "disabled" (Encode.bool disabled))
 
 labelElt :: Config r i -> HH.HTML w i
 labelElt { label, value } =
@@ -180,7 +180,7 @@ labelElt { label, value } =
               HP.class_ (floatingLabelCs <> " " <> floatingLabelFloatAboveCs)
             else
               HP.class_ floatingLabelCs
-          , HH.Attributes.property "foucClassNames"
+          , HP.prop "foucClassNames"
               (Encode.list Encode.string [ floatingLabelFloatAboveCs ])
           ]
           [ text str ]

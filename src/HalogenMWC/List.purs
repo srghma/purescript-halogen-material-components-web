@@ -150,7 +150,7 @@ selectedIndexProp listItems =
             )
         # Array.filterMap identity
   in
-    Just (HH.Attributes.property "selectedIndex" (Encode.list Encode.int selectedIndex))
+    Just (HP.prop "selectedIndex" (Encode.list Encode.int selectedIndex))
 
 group :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
 group additionalAttributes nodes = HH.div ([ listGroupCs ] <> additionalAttributes) nodes
@@ -165,4 +165,4 @@ listGroupSubheaderCs :: IProp r i
 listGroupSubheaderCs = HP.class_ mdc_list_group__subheader
 
 wrapFocusProp :: Config r i -> Maybe (IProp r i)
-wrapFocusProp { wrapFocus } = Just (HH.Attributes.property "wrapFocus" (Encode.bool wrapFocus))
+wrapFocusProp { wrapFocus } = Just (HP.prop "wrapFocus" (Encode.bool wrapFocus))

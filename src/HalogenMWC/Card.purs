@@ -131,7 +131,7 @@ primaryAction additionalAttributes blocks =
   ]
 
 tabIndexProp :: Int -> IProp r i
-tabIndexProp tabIndex = HH.Attributes.property "tabIndex" (Encode.int tabIndex)
+tabIndexProp tabIndex = HP.prop "tabIndex" (Encode.int tabIndex)
 
 newtype Actions r i
   = Actions

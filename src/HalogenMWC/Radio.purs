@@ -69,10 +69,10 @@ touchCs { touch } =
     Nothing
 
 checkedProp :: Config r i -> Maybe (IProp r i)
-checkedProp { checked } = Just (HH.Attributes.property "checked" (Encode.bool checked))
+checkedProp { checked } = Just (HP.prop "checked" (Encode.bool checked))
 
 disabledProp :: Config r i -> Maybe (IProp r i)
-disabledProp { disabled } = Just (HH.Attributes.property "disabled" (Encode.bool disabled))
+disabledProp { disabled } = Just (HP.prop "disabled" (Encode.bool disabled))
 
 changeHandler :: Config r i -> Maybe (IProp r i)
 changeHandler { checked, onChange } =

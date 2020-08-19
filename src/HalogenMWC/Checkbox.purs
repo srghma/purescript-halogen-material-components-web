@@ -66,13 +66,13 @@ touchCs { touch } =
     Nothing
 
 checkedProp :: Config r i -> Maybe (IProp r i)
-checkedProp { state } = Just (HH.Attributes.property "checked" (Encode.bool (state == Just Checked)))
+checkedProp { state } = Just (HP.prop "checked" (Encode.bool (state == Just Checked)))
 
 indeterminateProp :: Config r i -> Maybe (IProp r i)
-indeterminateProp { state } = Just (HH.Attributes.property "indeterminate" (Encode.bool (state == Just Indeterminate)))
+indeterminateProp { state } = Just (HP.prop "indeterminate" (Encode.bool (state == Just Indeterminate)))
 
 disabledProp :: Config r i -> Maybe (IProp r i)
-disabledProp { disabled } = Just (HH.Attributes.property "disabled" (Encode.bool disabled))
+disabledProp { disabled } = Just (HP.prop "disabled" (Encode.bool disabled))
 
 changeHandler :: Config r i -> Maybe (IProp r i)
 changeHandler { state, onChange } =

@@ -102,7 +102,7 @@ rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_button)
 
 disabledProp :: Config r i -> Maybe (IProp r i)
-disabledProp { disabled } = Just (HH.Attributes.property "disabled" (Encode.bool disabled))
+disabledProp { disabled } = Just (HP.prop "disabled" (Encode.bool disabled))
 
 disabledAttr :: Config r i -> Maybe (IProp r i)
 disabledAttr { disabled } = Just (HH.Attributes.disabled disabled)
@@ -110,9 +110,9 @@ disabledAttr { disabled } = Just (HH.Attributes.disabled disabled)
 tabIndexProp :: Config r i -> Maybe (IProp r i)
 tabIndexProp { disabled } =
   if disabled then
-    Just (HH.Attributes.property "tabIndex" (Encode.int - 1))
+    Just (HP.prop "tabIndex" (Encode.int - 1))
   else
-    Just (HH.Attributes.property "tabIndex" (Encode.int 0))
+    Just (HP.prop "tabIndex" (Encode.int 0))
 
 hrefAttr :: Config r i -> Maybe (IProp r i)
 hrefAttr { href } = map HH.Attributes.href href

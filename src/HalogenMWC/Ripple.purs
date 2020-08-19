@@ -62,7 +62,7 @@ colorCs { color } = case color of
   Nothing -> Nothing
 
 unboundedProp :: Boolean -> Maybe (IProp r i)
-unboundedProp isUnbounded = Just (HH.Attributes.property "unbounded" (Encode.bool isUnbounded))
+unboundedProp isUnbounded = Just (HP.prop "unbounded" (Encode.bool isUnbounded))
 
 unboundedData :: Boolean -> Maybe (IProp r i)
 unboundedData isUnbounded =

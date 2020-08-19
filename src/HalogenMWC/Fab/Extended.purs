@@ -45,7 +45,7 @@ fab (config_@{ additionalAttributes }) label =
     )
 
 tabIndexProp :: Int -> Maybe (IProp r i)
-tabIndexProp tabIndex = Just (HH.Attributes.property "tabIndex" (Encode.int tabIndex))
+tabIndexProp tabIndex = Just (HP.prop "tabIndex" (Encode.int tabIndex))
 
 rippleElt :: Maybe (HH.HTML w i)
 rippleElt = Just (HH.div [ HP.class_ mdc_fab__ripple ] [])

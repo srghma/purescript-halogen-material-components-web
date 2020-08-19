@@ -37,7 +37,7 @@ chip (Chip config_ label) =
     ]
 
 tabIndexProp :: Int -> IProp r i
-tabIndexProp tabIndex = HH.Attributes.property "tabIndex" (Encode.int tabIndex)
+tabIndexProp tabIndex = HP.prop "tabIndex" (Encode.int tabIndex)
 
 removalHandler :: Chip.Config r i -> Maybe (IProp r i)
 removalHandler { onDelete } = map (HH.Events.on "MDCChip:removal" << Decode.succeed) onDelete

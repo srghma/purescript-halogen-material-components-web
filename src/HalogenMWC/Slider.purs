@@ -101,19 +101,19 @@ sliderRoleAttr :: Maybe (IProp r i)
 sliderRoleAttr = Just (HH.Attributes.attribute "role" "slider")
 
 valueProp :: Config r i -> Maybe (IProp r i)
-valueProp { value } = map (HH.Attributes.property "value" << Encode.float) value
+valueProp { value } = map (HP.prop "value" << Encode.float) value
 
 minProp :: Config r i -> Maybe (IProp r i)
-minProp { min } = map (HH.Attributes.property "min" << Encode.float) min
+minProp { min } = map (HP.prop "min" << Encode.float) min
 
 maxProp :: Config r i -> Maybe (IProp r i)
-maxProp { max } = map (HH.Attributes.property "max" << Encode.float) max
+maxProp { max } = map (HP.prop "max" << Encode.float) max
 
 stepProp :: Config r i -> Maybe (IProp r i)
-stepProp { step } = map (HH.Attributes.property "step" << Encode.float) step
+stepProp { step } = map (HP.prop "step" << Encode.float) step
 
 disabledProp :: Config r i -> Maybe (IProp r i)
-disabledProp { disabled } = Just (HH.Attributes.property "disabled" (Encode.bool disabled))
+disabledProp { disabled } = Just (HP.prop "disabled" (Encode.bool disabled))
 
 ariaValueMinAttr :: Config r i -> Maybe (IProp r i)
 ariaValueMinAttr { min } = map (HH.Attributes.attribute "aria-valuemin" << String.fromFloat) min

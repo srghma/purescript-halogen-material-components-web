@@ -52,7 +52,7 @@ dismissibleCs :: Maybe (IProp r i)
 dismissibleCs = Just (HP.class_ mdc_drawer____dismissible)
 
 openProp :: Config r i -> Maybe (IProp r i)
-openProp { open } = Just (HH.Attributes.property "open" (Encode.bool open))
+openProp { open } = Just (HP.prop "open" (Encode.bool open))
 
 closeHandler :: Config r i -> Maybe (IProp r i)
 closeHandler { onClose } = map (HH.Events.on "MDCDrawer:close" << Decode.succeed) onClose

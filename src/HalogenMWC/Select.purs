@@ -110,20 +110,20 @@ leadingIconCs :: Config a r i -> Maybe (IProp r i)
 leadingIconCs { leadingIcon } = map (\_ -> HP.class_ mdc_select____with_leading_icon) leadingIcon
 
 disabledProp :: Config a r i -> Maybe (IProp r i)
-disabledProp { disabled } = Just (HH.Attributes.property "disabled" (Encode.bool disabled))
+disabledProp { disabled } = Just (HP.prop "disabled" (Encode.bool disabled))
 
 validProp :: Config a r i -> Maybe (IProp r i)
-validProp { valid } = Just (HH.Attributes.property "valid" (Encode.bool valid))
+validProp { valid } = Just (HP.prop "valid" (Encode.bool valid))
 
 selectedIndexProp :: Maybe Int -> Maybe (IProp r i)
 selectedIndexProp selectedIndex =
   Just
-    ( HH.Attributes.property "selectedIndex"
+    ( HP.prop "selectedIndex"
         (Encode.int (Maybe.withDefault - 1 selectedIndex))
     )
 
 requiredProp :: Config a r i -> Maybe (IProp r i)
-requiredProp { required } = Just (HH.Attributes.property "required" (Encode.bool required))
+requiredProp { required } = Just (HP.prop "required" (Encode.bool required))
 
 anchorElt :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
 anchorElt additionalAttributes nodes = HH.div ([ HP.class_ mdc_select__anchor ] <> additionalAttributes) nodes

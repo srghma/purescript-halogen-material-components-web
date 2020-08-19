@@ -114,7 +114,7 @@ rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_snackbar)
 
 closeOnEscapeProp :: Config r i -> Maybe (IProp r i)
-closeOnEscapeProp { closeOnEscape } = Just (HH.Attributes.property "closeOnEscape" (Encode.bool closeOnEscape))
+closeOnEscapeProp { closeOnEscape } = Just (HP.prop "closeOnEscape" (Encode.bool closeOnEscape))
 
 leadingCs :: Maybe (Message r i) -> Maybe (IProp r i)
 leadingCs message_ =
@@ -139,7 +139,7 @@ stackedCs message_ =
     message_
 
 messageIdProp :: MessageId -> Maybe (IProp r i)
-messageIdProp (MessageId messageId) = Just (HH.Attributes.property "messageId" (Encode.int messageId))
+messageIdProp (MessageId messageId) = Just (HP.prop "messageId" (Encode.int messageId))
 
 timeoutMsProp :: Maybe (Message r i) -> Maybe (IProp r i)
 timeoutMsProp message_ =
@@ -152,7 +152,7 @@ timeoutMsProp message_ =
 
     indefiniteTimeout = -1
   in
-    Just (HH.Attributes.property "timeoutMs" (Encode.int normalizedTimeoutMs))
+    Just (HP.prop "timeoutMs" (Encode.int normalizedTimeoutMs))
 
 closedHandler :: MessageId -> Config r i -> Maybe (IProp r i)
 closedHandler messageId { onClosed } = Just (HH.Events.on "MDCSnackbar:closed" (Decode.succeed (onClosed messageId)))

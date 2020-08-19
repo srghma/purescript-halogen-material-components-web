@@ -49,7 +49,7 @@ rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_icon_button)
 
 onProp :: Config r i -> Maybe (IProp r i)
-onProp { on } = Just (HH.Attributes.property "on" (Encode.bool on))
+onProp { on } = Just (HP.prop "on" (Encode.bool on))
 
 materialIconsCs :: Maybe (IProp r i)
 materialIconsCs = Just (HP.class_ material_icons)

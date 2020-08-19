@@ -42,10 +42,10 @@ rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_switch)
 
 checkedProp :: Config r i -> Maybe (IProp r i)
-checkedProp { checked } = Just (HH.Attributes.property "checked" (Encode.bool checked))
+checkedProp { checked } = Just (HP.prop "checked" (Encode.bool checked))
 
 disabledProp :: Config r i -> Maybe (IProp r i)
-disabledProp { disabled } = Just (HH.Attributes.property "disabled" (Encode.bool disabled))
+disabledProp { disabled } = Just (HP.prop "disabled" (Encode.bool disabled))
 
 nativeControlCs :: Maybe (IProp r i)
 nativeControlCs = Just (HP.class_ mdc_switch__native_control)
