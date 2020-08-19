@@ -130,6 +130,7 @@ clickHandler listItems =
 selectedIndexProp :: Array (ArrayItem r i) -> Maybe (IProp r i)
 selectedIndexProp listItems =
   let
+    selectedIndex :: Array Int
     selectedIndex =
       listItems
         # Array.filter
