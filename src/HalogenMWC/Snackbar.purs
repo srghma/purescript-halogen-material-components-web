@@ -69,7 +69,7 @@ snackbar config_ queue =
     (Tuple currentMessageId currentMessage) =
       Array.head queue.messages
         # map (Tuple.mapSecond Just)
-        # Maybe.withDefault (Tuple (MessageId - 1) Nothing)
+        # Maybe.fromMaybe (Tuple (MessageId - 1) Nothing)
   in
     HH.element "mdc-snackbar"
       ( Array.catMaybes
@@ -83,7 +83,7 @@ snackbar config_ queue =
           ]
           <> config_.additionalAttributes
       )
-      [ surfaceElt currentMessageId (Maybe.withDefault (message "") currentMessage) ]
+      [ surfaceElt currentMessageId (Maybe.fromMaybe (message "") currentMessage) ]
 
 data Message r i
   = Message
@@ -150,7 +150,7 @@ timeoutMsProp message_ =
       message_
         # bindFlipped
             (\(Message { timeoutMs }) -> map (clamp 4000 10000) timeoutMs)
-        # Maybe.withDefault indefiniteTimeout
+        # Maybe.fromMaybe indefiniteTimeout
 
     indefiniteTimeout = -1
   in

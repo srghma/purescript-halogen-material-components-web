@@ -121,7 +121,7 @@ selectedIndexProp :: Maybe Int -> Maybe (IProp r i)
 selectedIndexProp selectedIndex =
   Just
     ( HP.prop "selectedIndex"
-        (Encode.int (Maybe.withDefault - 1 selectedIndex))
+        (Encode.int (Maybe.fromMaybe - 1 selectedIndex))
     )
 
 requiredProp :: Config a r i -> Maybe (IProp r i)
@@ -139,7 +139,7 @@ dropdownIconElt :: HH.HTML w i
 dropdownIconElt = HH.i [ HP.class_ mdc_select__dropdown_icon ] []
 
 floatingLabelElt :: Config a r i -> HH.HTML w i
-floatingLabelElt { label } = HH.div [ HP.class_ mdc_floating_label ] [ text (Maybe.withDefault "" label) ]
+floatingLabelElt { label } = HH.div [ HP.class_ mdc_floating_label ] [ text (Maybe.fromMaybe "" label) ]
 
 lineRippleElt :: HH.HTML w i
 lineRippleElt = HH.label [ HP.class_ mdc_line_ripple ] []
@@ -150,7 +150,7 @@ notchedOutlineElt { label } =
     [ HH.div [ HP.class_ mdc_notched_outline__leading ] []
     , HH.div [ HP.class_ mdc_notched_outline__notch ]
         [ HH.label [ HP.class_ mdc_floating_label ]
-            [ text (Maybe.withDefault "" label) ]
+            [ text (Maybe.fromMaybe "" label) ]
         ]
     , HH.div [ HP.class_ mdc_notched_outline__trailing ] []
     ]

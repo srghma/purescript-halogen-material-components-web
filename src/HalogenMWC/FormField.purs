@@ -61,4 +61,4 @@ labelElt (config_@{ label }) =
         , clickHandler config_
         ]
     )
-    [ text (Maybe.withDefault "" label) ]
+    [ text (Maybe.fromMaybe "" label) ]

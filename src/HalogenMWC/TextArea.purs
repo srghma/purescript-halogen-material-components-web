@@ -178,7 +178,7 @@ labelElt { label, value } =
     case label of
       Just str ->
         HH.div
-          [ if Maybe.withDefault "" value /= "" then
+          [ if Maybe.fromMaybe "" value /= "" then
               HP.class_ (floatingLabelCs <> " " <> floatingLabelFloatAboveCs)
             else
               HP.class_ floatingLabelCs

@@ -77,6 +77,6 @@ trailingIconElt { trailingIcon, onDelete } =
           , tabIndexProp - 1
           , HH.Attributes.attribute "role" "button"
           ]
-          [ text (Maybe.withDefault "cancel" trailingIcon) ]
+          [ text (Maybe.fromMaybe "cancel" trailingIcon) ]
   else
     Nothing

@@ -169,14 +169,14 @@ minLengthProp :: Config r i -> Maybe (IProp r i)
 minLengthProp { minLength } =
   Just
     ( HP.prop "minLength"
-        (Encode.int (Maybe.withDefault - 1 minLength))
+        (Encode.int (Maybe.fromMaybe - 1 minLength))
     )
 
 maxLengthProp :: Config r i -> Maybe (IProp r i)
 maxLengthProp { maxLength } =
   Just
     ( HP.prop "maxLength"
-        (Encode.int (Maybe.withDefault - 1 maxLength))
+        (Encode.int (Maybe.fromMaybe - 1 maxLength))
     )
 
 minLengthAttr :: Config r i -> Maybe (IProp r i)
@@ -189,21 +189,21 @@ minProp :: Config r i -> Maybe (IProp r i)
 minProp { min } =
   Just
     ( HP.prop "min"
-        (Encode.string (Maybe.withDefault "" (map String.fromInt min)))
+        (Encode.string (Maybe.fromMaybe "" (map String.fromInt min)))
     )
 
 maxProp :: Config r i -> Maybe (IProp r i)
 maxProp { max } =
   Just
     ( HP.prop "max"
-        (Encode.string (Maybe.withDefault "" (map String.fromInt max)))
+        (Encode.string (Maybe.fromMaybe "" (map String.fromInt max)))
     )
 
 stepProp :: Config r i -> Maybe (IProp r i)
 stepProp { step } =
   Just
     ( HP.prop "step"
-        (Encode.string (Maybe.withDefault "" (map String.fromInt step)))
+        (Encode.string (Maybe.fromMaybe "" (map String.fromInt step)))
     )
 
 valueProp :: Config r i -> Maybe (IProp r i)
@@ -253,7 +253,7 @@ patternProp :: Config r i -> Maybe (IProp r i)
 patternProp { pattern } =
   Just
     ( HP.prop "pattern"
-        (Maybe.withDefault Encode.null (map Encode.string pattern))
+        (Maybe.fromMaybe Encode.null (map Encode.string pattern))
     )
 
 typeAttr :: Config r i -> Maybe (IProp r i)
@@ -279,7 +279,7 @@ labelElt { label, value } =
     case label of
       Just str ->
         HH.div
-          [ if Maybe.withDefault "" value /= "" then
+          [ if Maybe.fromMaybe "" value /= "" then
               HP.class_ (floatingLabelCs <> " " <> floatingLabelFloatAboveCs)
             else
               HP.class_ floatingLabelCs

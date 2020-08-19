@@ -65,7 +65,7 @@ listItemElt (config_@{ masonry }) (listItem@(ImageArrayItem.ImageArrayItem { hre
       ([ HP.class_ mdc_image_list__item ] <> additionalAttributes)
       ( href
           # map (\href_ -> [ HH.a [ HH.Attributes.href href_ ] inner ])
-          # Maybe.withDefault inner
+          # Maybe.fromMaybe inner
       )
 
 imageAspectContainerElt :: Boolean -> ImageArrayItem r i -> HH.HTML w i
