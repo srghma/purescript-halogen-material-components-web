@@ -238,8 +238,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Icon as Icon
 
 
-{-| Configuration of a text field
--}
+
 type Config r i
     =
         { label :: Maybe String
@@ -270,8 +269,7 @@ data Icon r i
     = Icon (Html r i)
 
 
-{-| Default configuration of a text field
--}
+
 config :: Config r i
 config =
     Config
@@ -297,153 +295,127 @@ config =
         }
 
 
-{-| Specify a text field's label
--}
+
 setLabel :: Maybe String -> Config r i -> Config r i
 setLabel label (Config config_) =
     Config { config_ | label = label }
 
 
-{-| Specify a text field to be fullwidth
--}
+
 setFullwidth :: Boolean -> Config r i -> Config r i
 setFullwidth fullwidth (Config config_) =
     Config { config_ | fullwidth = fullwidth }
 
 
-{-| Specify a text field's value
--}
+
 setValue :: Maybe String -> Config r i -> Config r i
 setValue value (Config config_) =
     Config { config_ | value = value }
 
 
-{-| Specify a text field's placeholder
--}
+
 setPlaceholder :: Maybe String -> Config r i -> Config r i
 setPlaceholder placeholder (Config config_) =
     Config { config_ | placeholder = placeholder }
 
 
-{-| Specify a text field to be disabled
 
-Disabled text fields cannot be interacted with and have no visual interaction
-effect.
-
--}
 setDisabled :: Boolean -> Config r i -> Config r i
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 
 
-{-| Specify a text field to be required
--}
+
 setRequired :: Boolean -> Config r i -> Config r i
 setRequired required (Config config_) =
     Config { config_ | required = required }
 
 
-{-| Specify a text field to be valid
--}
+
 setValid :: Boolean -> Config r i -> Config r i
 setValid valid (Config config_) =
     Config { config_ | valid = valid }
 
 
-{-| Specify a text field's minimum length
--}
+
 setMinLength :: Maybe Int -> Config r i -> Config r i
 setMinLength minLength (Config config_) =
     Config { config_ | minLength = minLength }
 
 
-{-| Specify a text field's maximum length
--}
+
 setMaxLength :: Maybe Int -> Config r i -> Config r i
 setMaxLength maxLength (Config config_) =
     Config { config_ | maxLength = maxLength }
 
 
-{-| Specify a text field's pattern
--}
+
 setPattern :: Maybe String -> Config r i -> Config r i
 setPattern pattern (Config config_) =
     Config { config_ | pattern = pattern }
 
 
-{-| Specify a text field's type
--}
+
 setType :: Maybe String -> Config r i -> Config r i
 setType type_ (Config config_) =
     Config { config_ | type_ = type_ }
 
 
-{-| Specify a text field's minimum value
--}
+
 setMin :: Maybe Int -> Config r i -> Config r i
 setMin min (Config config_) =
     Config { config_ | min = min }
 
 
-{-| Specify a text field's maximum value
--}
+
 setMax :: Maybe Int -> Config r i -> Config r i
 setMax max (Config config_) =
     Config { config_ | max = max }
 
 
-{-| Specify a text field's step value
--}
+
 setStep :: Maybe Int -> Config r i -> Config r i
 setStep step (Config config_) =
     Config { config_ | step = step }
 
 
-{-| Specify a text field's leading icon
--}
+
 setLeadingIcon :: Maybe (Icon r i) -> Config r i -> Config r i
 setLeadingIcon leadingIcon (Config config_) =
     Config { config_ | leadingIcon = leadingIcon }
 
 
-{-| Specify a text field's trailing icon
--}
+
 setTrailingIcon :: Maybe (Icon r i) -> Config r i -> Config r i
 setTrailingIcon trailingIcon (Config config_) =
     Config { config_ | trailingIcon = trailingIcon }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Specify a message when the user changes the value inside the text field
--}
+
 setOnInput :: (String -> r i) -> Config r i -> Config r i
 setOnInput onInput (Config config_) =
     Config { config_ | onInput = Just onInput }
 
 
-{-| Specify a message when the user confirms a changed value inside the text
-field
--}
+
 setOnChange :: (String -> r i) -> Config r i -> Config r i
 setOnChange onChange (Config config_) =
     Config { config_ | onChange = Just onChange }
 
 
-{-| Filled text field view function
--}
+
 filled :: Config r i -> Html r i
 filled config_ =
     textField False config_
 
 
-{-| Outlined text field view function
--}
+
 outlined :: Config r i -> Html r i
 outlined config_ =
     textField True config_
@@ -501,8 +473,7 @@ textField outlined_ ((Config { additionalAttributes, fullwidth }) as config_) =
         )
 
 
-{-| A text field's icon, either leading or trailing
--}
+
 icon :: Array (IProp r i) -> String -> Icon r i
 icon additionalAttributes iconName =
     Icon (Icon.icon (class "mdc-text-field__icon" :: additionalAttributes) iconName)

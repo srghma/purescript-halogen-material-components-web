@@ -93,8 +93,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 
 
-{-| Configuration of a form field
--}
+
 type Config r i
     =
         { label :: Maybe String
@@ -105,46 +104,37 @@ type Config r i
         }
 
 
-{-| Specify a form field's label
--}
+
 setLabel :: Maybe String -> Config r i -> Config r i
 setLabel label (Config config_) =
     Config { config_ | label = label }
 
 
-{-| Specify a form field label's HTML5 for attribute
--}
+
 setFor :: Maybe String -> Config r i -> Config r i
 setFor for (Config config_) =
     Config { config_ | for = for }
 
 
-{-| Specify whether the form field's label is positioned after its control
 
-This is usefile for, say, checkboxes.
-
--}
 setAlignEnd :: Boolean -> Config r i -> Config r i
 setAlignEnd alignEnd (Config config_) =
     Config { config_ | alignEnd = alignEnd }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Specify a message when the user clicks on the label
--}
+
 setOnClick :: r i -> Config r i -> Config r i
 setOnClick onClick (Config config_) =
     Config { config_ | onClick = Just onClick }
 
 
-{-| Default configuration of a form field
--}
+
 config :: Config r i
 config =
     Config
@@ -156,8 +146,7 @@ config =
         }
 
 
-{-| Form field view function
--}
+
 formField :: Config r i -> Array (Html r i) -> Html r i
 formField ((Config { additionalAttributes }) as config_) nodes =
     Html.node "mdc-form-field"

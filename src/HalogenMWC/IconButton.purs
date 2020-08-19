@@ -116,14 +116,12 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.IconButton.Internal (Config(..))
 
 
-{-| Icon button configuration
--}
+
 type Config r i =
     Material.IconButton.Internal.Config r i
 
 
-{-| Default icon button configuration
--}
+
 config :: Config r i
 config =
     Config
@@ -134,12 +132,7 @@ config =
         }
 
 
-{-| Specify whether an icon button is disabled
 
-Disabled icon buttons cannot be interacted with and have no visual interaction
-effect.
-
--}
 setDisabled :: Boolean -> Config r i -> Config r i
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
@@ -152,22 +145,19 @@ setLabel label (Config config_) =
     Config { config_ | label = label }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Specify a message when the user clicks on an icon button
--}
+
 setOnClick :: r i -> Config r i -> Config r i
 setOnClick onClick (Config config_) =
     Config { config_ | onClick = Just onClick }
 
 
-{-| Icon button view function
--}
+
 iconButton :: Config r i -> String -> Html r i
 iconButton ((Config { additionalAttributes }) as config_) iconName =
     Html.node "mdc-icon-button"
@@ -182,8 +172,7 @@ iconButton ((Config { additionalAttributes }) as config_) iconName =
         [ text iconName ]
 
 
-{-| TODO
--}
+
 custom :: Config r i -> Array (Html r i) -> Html r i
 custom ((Config { additionalAttributes }) as config_) nodes =
     Html.node "mdc-icon-button"

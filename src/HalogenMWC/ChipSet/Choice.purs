@@ -93,8 +93,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Chip.Choice.Internal as Chip
 
 
-{-| Configuration of a choice chip set
--}
+
 data Config a r i
     =
         { selected :: Maybe a
@@ -104,8 +103,7 @@ data Config a r i
         }
 
 
-{-| Default configuration of a choice chip set
--}
+
 config :: { toLabel :: a -> String } -> Config a r i
 config { toLabel } =
     Config
@@ -116,29 +114,25 @@ config { toLabel } =
         }
 
 
-{-| Specify which chip is selected
--}
+
 setSelected :: Maybe a -> Config a r i -> Config a r i
 setSelected selected (Config config_) =
     Config { config_ | selected = selected }
 
 
-{-| Specify a message when the user clicks on a chip
--}
+
 setOnChange :: (a -> r i) -> Config a r i -> Config a r i
 setOnChange onChange (Config config_) =
     Config { config_ | onChange = Just onChange }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config a r i -> Config a r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Choice chip set view function
--}
+
 chipSet :: Config a r i -> Array (Chip a r i) -> Html r i
 chipSet ((Config { selected, onChange, toLabel, additionalAttributes }) as config_) chips =
     Html.node "mdc-chip-set"

@@ -115,8 +115,7 @@ import HalogenMWC.Checkbox as Checkbox
 import HalogenMWC.Checkbox.Internal
 
 
-{-| Configuration of a data table
--}
+
 type Config r i
     =
         { label :: Maybe String
@@ -124,8 +123,7 @@ type Config r i
         }
 
 
-{-| Default configuration of a data table
--}
+
 config :: Config r i
 config =
     Config
@@ -141,15 +139,13 @@ setLabel label (Config config_) =
     Config { config_ | label = label }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Data table view function
--}
+
 dataTable :
     Config r i
     ->
@@ -192,27 +188,18 @@ ariaLabelAttr (Config { label }) =
     Maybe.map (Html.Attributes.attribute "aria-label") label
 
 
-{-| Row type
--}
+
 data Row r i
     = Row { attributes :: Array (IProp r i), nodes :: Array (Cell r i) }
 
 
-{-| Row view function
--}
+
 row :: Array (IProp r i) -> Array (Cell r i) -> Row r i
 row attributes nodes =
     Row { attributes = attributes, nodes = nodes }
 
 
-{-| Attribute to mark a row as selected
 
-This has no effect on a header row.
-
-Note that this is a list of attributes because it actually sets two HTML
-attributes at once.
-
--}
 selected :: Array (IProp r i)
 selected =
     [ dataTableRowSelectedCs
@@ -346,8 +333,7 @@ bodyCell cell_ =
                 ]
 
 
-{-| Cell type
--}
+
 data Cell r i
     = Cell
         { numeric :: Boolean
@@ -360,8 +346,7 @@ data Cell r i
         }
 
 
-{-| Data table cell
--}
+
 cell :: Array (IProp r i) -> Array (Html r i) -> Cell r i
 cell attributes nodes =
     Cell { numeric = False, attributes = attributes, nodes = nodes }
@@ -374,8 +359,7 @@ numericCell attributes nodes =
     Cell { numeric = True, attributes = attributes, nodes = nodes }
 
 
-{-| Data table cell that contians a checkbox
--}
+
 checkboxCell :: Array (IProp r i) -> Checkbox.Config r i -> Cell r i
 checkboxCell attributes config_ =
     CheckboxCell { attributes = attributes, config_ = config_ }

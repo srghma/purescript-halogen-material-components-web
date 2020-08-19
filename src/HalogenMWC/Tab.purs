@@ -94,14 +94,12 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Tab.Internal (Config(..), Tab(..))
 
 
-{-| Configuration of a tab
--}
+
 type Config r i =
     Material.Tab.Internal.Config r i
 
 
-{-| Default configuration of a tab
--}
+
 config :: Config r i
 config =
     Config
@@ -112,29 +110,25 @@ config =
         }
 
 
-{-| Specify a message when the user clicks a tab
--}
+
 setOnClick :: r i -> Config r i -> Config r i
 setOnClick onClick (Config config_) =
     Config { config_ | onClick = Just onClick }
 
 
-{-| Specify whether the tab is active
--}
+
 setActive :: Boolean -> Config r i -> Config r i
 setActive active (Config config_) =
     Config { config_ | active = active }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Content of a tab
--}
+
 data Content =
     { label :: String
     , icon :: Maybe String
@@ -150,8 +144,7 @@ data Tab r i =
     Material.Tab.Internal.Tab r i
 
 
-{-| Tab constructor
--}
+
 tab :: Config r i -> Content -> Tab r i
 tab (Config config_) content =
     Tab (Config { config_ | content = content })

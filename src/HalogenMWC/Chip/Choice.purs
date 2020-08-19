@@ -87,14 +87,12 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Chip.Choice.Internal (Chip(..), Config(..))
 
 
-{-| Configuration of a choice chip
--}
+
 type Config r i =
     Material.Chip.Choice.Internal.Config r i
 
 
-{-| Default configuration of a choice chip
--}
+
 config :: Config r i
 config =
     Config
@@ -103,28 +101,24 @@ config =
         }
 
 
-{-| Specify whether the chip displays an icon
--}
+
 setIcon :: Maybe String -> Config r i -> Config r i
 setIcon icon (Config config_) =
     Config { config_ | icon = icon }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Choice chip type
--}
+
 data Chip a r i =
     Material.Chip.Choice.Internal.Chip a r i
 
 
-{-| Choice chip view function
--}
+
 chip :: Config r i -> a -> Chip a r i
 chip =
     Chip

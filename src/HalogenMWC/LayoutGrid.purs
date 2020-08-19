@@ -142,8 +142,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 
 
-{-| Layout grid view function
--}
+
 layoutGrid :: Array (IProp r i) -> Array (Html r i) -> Html r i
 layoutGrid attributes nodes =
     Html.node "mdc-layout-grid"
@@ -151,54 +150,43 @@ layoutGrid attributes nodes =
         nodes
 
 
-{-| Layout grid cell view function
--}
+
 cell :: Array (IProp r i) -> Array (Html r i) -> Html r i
 cell attributes nodes =
     Html.div (class "mdc-layout-grid__cell" :: attributes) nodes
 
 
-{-| Layout grid inner view function
 
-It is mandatory to wrap `cell`s within `inner`. This has to do with nesting
-layout grids, but it is mandatory for flat layout grids as well.
-
--}
 inner :: Array (IProp r i) -> Array (Html r i) -> Html r i
 inner attributes nodes =
     Html.div (class "mdc-layout-grid__inner" :: attributes) nodes
 
 
-{-| Aligns a cell to the bottom
--}
+
 alignBottom :: Html.Attribute r i
 alignBottom =
     class "mdc-layout-grid__cell--align-bottom"
 
 
-{-| Aligns the layout grid to the left
--}
+
 alignLeft :: Html.Attribute r i
 alignLeft =
     class "mdc-layout-grid--align-left"
 
 
-{-| Aligns the layout grid to the right
--}
+
 alignRight :: Html.Attribute r i
 alignRight =
     class "mdc-layout-grid--align-right"
 
 
-{-| Aligns a cell to the middle
--}
+
 alignMiddle :: Html.Attribute r i
 alignMiddle =
     class "mdc-layout-grid__cell--align-middle"
 
 
-{-| Aligns a cell to the top
--}
+
 alignTop :: Html.Attribute r i
 alignTop =
     class "mdc-layout-grid__cell--align-top"
@@ -224,85 +212,73 @@ spanPhone n =
     class ("mdc-layout-grid__cell--span-" ++ String.fromInt n ++ "-phone")
 
 
-{-| Change a cell to span one column
--}
+
 span1 :: Html.Attribute r i
 span1 =
     span 1
 
 
-{-| Change a cell to span two columns
--}
+
 span2 :: Html.Attribute r i
 span2 =
     span 2
 
 
-{-| Change a cell to span three columns
--}
+
 span3 :: Html.Attribute r i
 span3 =
     span 3
 
 
-{-| Change a cell to span four columns
--}
+
 span4 :: Html.Attribute r i
 span4 =
     span 4
 
 
-{-| Change a cell to span five columns
--}
+
 span5 :: Html.Attribute r i
 span5 =
     span 5
 
 
-{-| Change a cell to span six columns
--}
+
 span6 :: Html.Attribute r i
 span6 =
     span 6
 
 
-{-| Change a cell to span seven columns
--}
+
 span7 :: Html.Attribute r i
 span7 =
     span 7
 
 
-{-| Change a cell to span eight columns
--}
+
 span8 :: Html.Attribute r i
 span8 =
     span 8
 
 
-{-| Change a cell to span nine columns
--}
+
 span9 :: Html.Attribute r i
 span9 =
     span 9
 
 
-{-| Change a cell to span ten columns
--}
+
 span10 :: Html.Attribute r i
 span10 =
     span 10
 
 
-{-| Change a cell to span eleven columns
--}
+
 span11 :: Html.Attribute r i
 span11 =
     span 11
 
 
-{-| Change a cell to span twelve columns
--}
+
 span12 :: Html.Attribute r i
 span12 =
     span 12

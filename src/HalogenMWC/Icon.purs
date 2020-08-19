@@ -38,8 +38,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 
 
-{-| Icon view function
--}
+
 icon :: Array (IProp r i) -> String -> Html r i
 icon additionalAttributes iconName =
     Html.i (class "material-icons" :: additionalAttributes) [ text iconName ]

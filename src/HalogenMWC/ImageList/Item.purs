@@ -80,14 +80,12 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.ImageArray.Item.Internal (Config(..), ImageArrayItem(..))
 
 
-{-| Configuration of an image list item
--}
+
 type Config r i =
     Material.ImageArray.Item.Internal.Config r i
 
 
-{-| Default configuration of an image list item
--}
+
 config :: Config r i
 config =
     Config
@@ -98,25 +96,19 @@ config =
         }
 
 
-{-| Specify an image list item's label
--}
+
 setLabel :: Maybe String -> Config r i -> Config r i
 setLabel label (Config config_) =
     Config { config_ | label = label }
 
 
-{-| Specify whether an image list item is supposed to be a _link image list item_
 
-A link image list items behaves essentially like a HTML5 anchor element.
-
--}
 setHref :: Maybe String -> Config r i -> Config r i
 setHref href (Config config_) =
     Config { config_ | href = href }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
@@ -132,8 +124,7 @@ data ImageArrayItem r i =
     Material.ImageArray.Item.Internal.ImageArrayItem r i
 
 
-{-| Image list item constructor
--}
+
 imageArrayItem :: Config r i -> String -> ImageArrayItem r i
 imageArrayItem (Config config_) image =
     ImageArrayItem (Config { config_ | image = image })

@@ -92,14 +92,12 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Select.Item.Internal (Config(..), SelectItem(..))
 
 
-{-| Configuration of a select item
--}
+
 data Config a r i =
     Material.Select.Item.Internal.Config a r i
 
 
-{-| Default configuration of a select item
--}
+
 config :: { value :: a } -> Config a r i
 config { value } =
     Config
@@ -109,32 +107,24 @@ config { value } =
         }
 
 
-{-| Specify whether a select item should be disabled
 
-Disabled select items cannot be interacted with and have not visual interaction
-effect.
-
--}
 setDisabled :: Boolean -> Config a r i -> Config a r i
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config a r i -> Config a r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Select item type
--}
+
 data SelectItem a r i =
     Material.Select.Item.Internal.SelectItem a r i
 
 
-{-| Select item constructor
--}
+
 selectItem :: Config a r i -> Array (Html r i) -> SelectItem a r i
 selectItem =
     SelectItem

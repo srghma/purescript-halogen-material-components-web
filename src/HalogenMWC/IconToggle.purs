@@ -147,8 +147,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 
 
-{-| Icon toggle configuration
--}
+
 type Config r i
     =
         { on :: Boolean
@@ -159,8 +158,7 @@ type Config r i
         }
 
 
-{-| Default icon toggle configuration
--}
+
 config :: Config r i
 config =
     Config
@@ -172,19 +170,13 @@ config =
         }
 
 
-{-| Specify whether an icon toggle is on
--}
+
 setOn :: Boolean -> Config r i -> Config r i
 setOn on (Config config_) =
     Config { config_ | on = on }
 
 
-{-| Specify whether an icon toggle is disabled
 
-Disabled icon buttons cannot be interacted with and have no visual interaction
-effect.
-
--}
 setDisabled :: Boolean -> Config r i -> Config r i
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
@@ -197,22 +189,19 @@ setLabel label (Config config_) =
     Config { config_ | label = label }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Specify a message when the user changes the icon toggle
--}
+
 setOnChange :: r i -> Config r i -> Config r i
 setOnChange onChange (Config config_) =
     Config { config_ | onChange = Just onChange }
 
 
-{-| Icon toggle view function
--}
+
 iconToggle :: Config r i -> { onIcon :: String, offIcon :: String } -> Html r i
 iconToggle ((Config { additionalAttributes }) as config_) { onIcon, offIcon } =
     Html.node "mdc-icon-button"

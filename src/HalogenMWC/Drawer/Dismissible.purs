@@ -107,8 +107,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 
 
-{-| Configuration of a dismissible drawer
--}
+
 type Config r i
     =
         { open :: Boolean
@@ -117,8 +116,7 @@ type Config r i
         }
 
 
-{-| Default configuration of a dismissible drawer
--}
+
 config :: Config r i
 config =
     Config
@@ -128,29 +126,25 @@ config =
         }
 
 
-{-| Specify whether the drawer is open
--}
+
 setOpen :: Boolean -> Config r i -> Config r i
 setOpen open (Config config_) =
     Config { config_ | open = open }
 
 
-{-| Specify message when the user closes the drawer
--}
+
 setOnClose :: r i -> Config r i -> Config r i
 setOnClose onClose (Config config_) =
     Config { config_ | onClose = Just onClose }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Dismissible drawer view function
--}
+
 drawer :: Config r i -> Array (Html r i) -> Html r i
 drawer ((Config { additionalAttributes }) as config_) nodes =
     Html.node "mdc-drawer"
@@ -165,40 +159,25 @@ drawer ((Config { additionalAttributes }) as config_) nodes =
         nodes
 
 
-{-| Drawer content
--}
+
 content :: Array (IProp r i) -> Array (Html r i) -> Html r i
 content attributes nodes =
     Html.div (class "mdc-drawer__content" :: attributes) nodes
 
 
-{-| Drawer header view function
 
-    DismissibleDrawer.drawer DismissibleDrawer.config
-        [ DismissibleDrawer.header []
-            [ Html.h3 [ DismissibleDrawer.title ]
-                [ text "Title" ]
-            , Html.h6 [ DismissibleDrawer.subtitle ]
-                [ text "Subtitle" ]
-            ]
-        , DismissibleDrawer.content [] []
-        ]
-
--}
 header :: Array (IProp r i) -> Array (Html r i) -> Html r i
 header additionalAttributes nodes =
     Html.div (class "mdc-drawer__header" :: additionalAttributes) nodes
 
 
-{-| Attribute to mark the title text element of the drawer header
--}
+
 title :: Html.Attribute r i
 title =
     class "mdc-drawer__title"
 
 
-{-| Attribute to mark the subtitle text element of the drawer header
--}
+
 subtitle :: Html.Attribute r i
 subtitle =
     class "mdc-drawer__subtitle"
@@ -224,12 +203,7 @@ closeHandler (Config { onClose }) =
     Maybe.map (Html.Events.on "MDCDrawer:close" << Decode.succeed) onClose
 
 
-{-| Dismissible drawer's app content marker
 
-Apply this attribute to the page's content for the open/close animation to
-work. The page content has to be the next sibling of the dismissible drawer.
-
--}
 appContent :: Html.Attribute r i
 appContent =
     class "mdc-drawer-app-content"

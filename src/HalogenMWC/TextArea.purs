@@ -183,8 +183,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 
 
-{-| Configuration of a text area
--}
+
 type Config r i
     =
         { label :: Maybe String
@@ -204,8 +203,7 @@ type Config r i
         }
 
 
-{-| Default configuration of a text area
--}
+
 config :: Config r i
 config =
     Config
@@ -226,118 +224,97 @@ config =
         }
 
 
-{-| Specify a text area's label
--}
+
 setLabel :: Maybe String -> Config r i -> Config r i
 setLabel label (Config config_) =
     Config { config_ | label = label }
 
 
-{-| Specify a text area to be fullwidth
--}
+
 setFullwidth :: Boolean -> Config r i -> Config r i
 setFullwidth fullwidth (Config config_) =
     Config { config_ | fullwidth = fullwidth }
 
 
-{-| Specify a text area's value
--}
+
 setValue :: Maybe String -> Config r i -> Config r i
 setValue value (Config config_) =
     Config { config_ | value = value }
 
 
-{-| Specify a text area's placeholder
--}
+
 setPlaceholder :: Maybe String -> Config r i -> Config r i
 setPlaceholder placeholder (Config config_) =
     Config { config_ | placeholder = placeholder }
 
 
-{-| Specify a text area's number of rows
--}
+
 setRows :: Maybe Int -> Config r i -> Config r i
 setRows rows (Config config_) =
     Config { config_ | rows = rows }
 
 
-{-| Specify a text area's number of columns
--}
+
 setCols :: Maybe Int -> Config r i -> Config r i
 setCols cols (Config config_) =
     Config { config_ | cols = cols }
 
 
-{-| Specify a text area to be disabled
 
-Disabled text areas cannot be interacted with and have no visual interaction
-effect.
-
--}
 setDisabled :: Boolean -> Config r i -> Config r i
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 
 
-{-| Specify a text area to be required
--}
+
 setRequired :: Boolean -> Config r i -> Config r i
 setRequired required (Config config_) =
     Config { config_ | required = required }
 
 
-{-| Specify a text area to be valid
--}
+
 setValid :: Boolean -> Config r i -> Config r i
 setValid valid (Config config_) =
     Config { config_ | valid = valid }
 
 
-{-| Specify a text area's minimum length
--}
+
 setMinLength :: Maybe Int -> Config r i -> Config r i
 setMinLength minLength (Config config_) =
     Config { config_ | minLength = minLength }
 
 
-{-| Specify a text area's maximum length
--}
+
 setMaxLength :: Maybe Int -> Config r i -> Config r i
 setMaxLength maxLength (Config config_) =
     Config { config_ | maxLength = maxLength }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Specify a message when the user changes the value inside the text area
--}
+
 setOnInput :: (String -> r i) -> Config r i -> Config r i
 setOnInput onInput (Config config_) =
     Config { config_ | onInput = Just onInput }
 
 
-{-| Specify a message when the user confirms a changed value inside the text
-area
--}
+
 setOnChange :: (String -> r i) -> Config r i -> Config r i
 setOnChange onChange (Config config_) =
     Config { config_ | onChange = Just onChange }
 
 
-{-| Filled text area view function
--}
+
 filled :: Config r i -> Html r i
 filled config_ =
     textArea False config_
 
 
-{-| Outlined text area view function
--}
+
 outlined :: Config r i -> Html r i
 outlined config_ =
     textArea True config_

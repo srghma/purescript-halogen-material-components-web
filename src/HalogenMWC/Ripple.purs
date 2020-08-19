@@ -92,8 +92,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 
 
-{-| Ripple configuration
--}
+
 type Config r i
     =
         { color :: Maybe Color
@@ -101,8 +100,7 @@ type Config r i
         }
 
 
-{-| Default ripple configuration
--}
+
 config :: Config r i
 config =
     Config
@@ -111,36 +109,31 @@ config =
         }
 
 
-{-| Specify a ripple effect's color
--}
+
 setColor :: Maybe Color -> Config r i -> Config r i
 setColor color (Config config_) =
     Config { config_ | color = color }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Ripple effect's color
--}
+
 data Color
     = Primary
     | Accent
 
 
-{-| Primary variant of a ripple effect's color
--}
+
 primary :: Color
 primary =
     Primary
 
 
-{-| Accent variant of a ripple effect's color
--}
+
 accent :: Color
 accent =
     Accent
@@ -165,15 +158,13 @@ ripple isUnbounded ((Config { additionalAttributes }) as config_) =
         []
 
 
-{-| Bounded ripple view function
--}
+
 bounded :: Config r i -> Html r i
 bounded =
     ripple False
 
 
-{-| Unbounded ripple view function
--}
+
 unbounded :: Config r i -> Html r i
 unbounded =
     ripple True

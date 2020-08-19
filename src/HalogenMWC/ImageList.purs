@@ -113,8 +113,7 @@ import HalogenMWC.ImageArray.Item (ImageArrayItem)
 import HalogenMWC.ImageArray.Item.Internal as ImageArrayItem
 
 
-{-| Configuration of an image list
--}
+
 type Config r i
     =
         { masonry :: Boolean
@@ -123,8 +122,7 @@ type Config r i
         }
 
 
-{-| Default configuration of an image list
--}
+
 config :: Config r i
 config =
     Config
@@ -134,37 +132,25 @@ config =
         }
 
 
-{-| Specify whether an image list is a _masonry image list_
 
-The masonry image list variant presents images vertically arranged into several
-columns. In this layout, images may be any combination of aspect ratios.
-
--}
 setMasonry :: Boolean -> Config r i -> Config r i
 setMasonry masonry (Config config_) =
     Config { config_ | masonry = masonry }
 
 
-{-| Specify whether an image list item's label should display in a scrim on top
-of the image
 
-By default, image list item's labels display below the image.
-
--}
 setWithTextProtection :: Boolean -> Config r i -> Config r i
 setWithTextProtection withTextProtection (Config config_) =
     Config { config_ | withTextProtection = withTextProtection }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Image list view function
--}
+
 imageArray :: Config r i -> Array (ImageArrayItem r i) -> Html r i
 imageArray ((Config { additionalAttributes }) as config_) listItems =
     Html.node "mdc-image-list"

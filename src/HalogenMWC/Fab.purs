@@ -117,8 +117,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 
 
-{-| Floating action button configuration
--}
+
 type Config r i
     =
         { mini :: Boolean
@@ -128,8 +127,7 @@ type Config r i
         }
 
 
-{-| Default floating action button configuration
--}
+
 config :: Config r i
 config =
     Config
@@ -140,36 +138,31 @@ config =
         }
 
 
-{-| Specify whether the floating actions button should be smaller than normally
--}
+
 setMini :: Boolean -> Config r i -> Config r i
 setMini mini (Config config_) =
     Config { config_ | mini = mini }
 
 
-{-| Specify whether a floating action button should transition off the screen
--}
+
 setExited :: Boolean -> Config r i -> Config r i
 setExited exited (Config config_) =
     Config { config_ | exited = exited }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Specify a message when the user clicks the floating action button
--}
+
 setOnClick :: r i -> Config r i -> Config r i
 setOnClick onClick (Config config_) =
     Config { config_ | onClick = Just onClick }
 
 
-{-| Floating action button view function
--}
+
 fab :: Config r i -> String -> Html r i
 fab ((Config { additionalAttributes }) as config_) iconName =
     Html.node "mdc-fab"

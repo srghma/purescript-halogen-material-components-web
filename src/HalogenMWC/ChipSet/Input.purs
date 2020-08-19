@@ -57,8 +57,7 @@ import Html.Keyed
 import HalogenMWC.Chip.Input.Internal as Chip
 
 
-{-| Input chip set view function
--}
+
 chipSet :: Array (IProp r i) -> Array ( String, Chip r i ) -> Html r i
 chipSet additionalAttributes keyedChips =
     Html.Keyed.node "mdc-chip-set"

@@ -142,14 +142,12 @@ import Svg
 import Svg.Attributes
 
 
-{-| Configuration of a checkbox
--}
+
 type Config r i =
     Material.Checkbox.Internal.Config r i
 
 
-{-| Default configuration of a checkbox
--}
+
 config :: Config r i
 config =
     Config
@@ -161,36 +159,25 @@ config =
         }
 
 
-{-| Specify a checkbox' state
 
-A checkbox may be in `checked`, `unchecked` or `indeterminate` state.
-
--}
 setState :: Maybe State -> Config r i -> Config r i
 setState state (Config config_) =
     Config { config_ | state = state }
 
 
-{-| Specify whether a checkbox is disabled
 
-Disabled checkboxes cannot be interacted with and have no visual interaction
-effect.
-
--}
 setDisabled :: Boolean -> Config r i -> Config r i
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Specify a message when the user changes a checkbox
--}
+
 setOnChange :: r i -> Config r i -> Config r i
 setOnChange onChange (Config config_) =
     Config { config_ | onChange = Just onChange }
@@ -211,35 +198,30 @@ setTouch touch (Config config_) =
     Config { config_ | touch = touch }
 
 
-{-| State of a checkbox
--}
+
 data State =
     Material.Checkbox.Internal.State
 
 
-{-| Unchecked state
--}
+
 unchecked :: State
 unchecked =
     Unchecked
 
 
-{-| Checked state
--}
+
 checked :: State
 checked =
     Checked
 
 
-{-| Indeterminate state
--}
+
 indeterminate :: State
 indeterminate =
     Indeterminate
 
 
-{-| Checkbox view function
--}
+
 checkbox :: Config r i -> Html r i
 checkbox ((Config { touch, additionalAttributes }) as config_) =
     let

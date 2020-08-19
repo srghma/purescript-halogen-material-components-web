@@ -156,8 +156,7 @@ import Svg.Attributes
 -- TODO: Prevent FOUC
 
 
-{-| Configuration of a slider
--}
+
 type Config r i
     =
         { discrete :: Boolean
@@ -172,8 +171,7 @@ type Config r i
         }
 
 
-{-| Default configuration of a slider
--}
+
 config :: Config r i
 config =
     Config
@@ -212,61 +210,49 @@ setDisplayMarkers displayMarkers (Config config_) =
     Config { config_ | displayMarkers = displayMarkers }
 
 
-{-| Specify a slider's minimum value
--}
+
 setMin :: Maybe Float -> Config r i -> Config r i
 setMin min (Config config_) =
     Config { config_ | min = min }
 
 
-{-| Specify a slider's maximum value
--}
+
 setMax :: Maybe Float -> Config r i -> Config r i
 setMax max (Config config_) =
     Config { config_ | max = max }
 
 
-{-| Specify a slider's step value
--}
+
 setStep :: Maybe Float -> Config r i -> Config r i
 setStep step (Config config_) =
     Config { config_ | step = step }
 
 
-{-| Specify a slider's value
--}
+
 setValue :: Maybe Float -> Config r i -> Config r i
 setValue value (Config config_) =
     Config { config_ | value = value }
 
 
-{-| Specify whether a slider is disabled
 
-Disabled sliders canot be interacted with and have no visual interaction
-effect.
-
--}
 setDisabled :: Boolean -> Config r i -> Config r i
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Specify a message when the user interacts with the slider
--}
+
 setOnInput :: (Float -> r i) -> Config r i -> Config r i
 setOnInput onInput (Config config_) =
     Config { config_ | onInput = Just onInput }
 
 
-{-| Slider view function
--}
+
 slider :: Config r i -> Html r i
 slider ((Config { additionalAttributes }) as config_) =
     Html.node "mdc-slider"

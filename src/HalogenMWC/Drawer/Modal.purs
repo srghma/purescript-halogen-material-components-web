@@ -106,8 +106,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 
 
-{-| Configuration of a model drawer
--}
+
 type Config r i
     =
         { open :: Boolean
@@ -116,8 +115,7 @@ type Config r i
         }
 
 
-{-| Default configuration of a modal drawer
--}
+
 config :: Config r i
 config =
     Config
@@ -127,29 +125,25 @@ config =
         }
 
 
-{-| Specify whether the drawer is open
--}
+
 setOpen :: Boolean -> Config r i -> Config r i
 setOpen open (Config config_) =
     Config { config_ | open = open }
 
 
-{-| Specify message when the user closes the drawer
--}
+
 setOnClose :: r i -> Config r i -> Config r i
 setOnClose onClose (Config config_) =
     Config { config_ | onClose = Just onClose }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Modal drawer view function
--}
+
 drawer :: Config r i -> Array (Html r i) -> Html r i
 drawer ((Config { additionalAttributes }) as config_) nodes =
     Html.node "mdc-drawer"
@@ -164,39 +158,25 @@ drawer ((Config { additionalAttributes }) as config_) nodes =
         nodes
 
 
-{-| Drawer content
--}
+
 content :: Array (IProp r i) -> Array (Html r i) -> Html r i
 content attributes nodes =
     Html.div (class "mdc-drawer__content" :: attributes) nodes
 
 
-{-| Drawer header view function
 
-    ModalDrawer.drawer ModalDrawer.config
-        [ ModalDrawer.header []
-            [ Html.h3 [ ModalDrawer.title ] [ text "Title" ]
-            , Html.h6 [ ModalDrawer.subtitle ]
-                [ text "Subtitle" ]
-            ]
-        , ModalDrawer.content [] []
-        ]
-
--}
 header :: Array (IProp r i) -> Array (Html r i) -> Html r i
 header additionalAttributes nodes =
     Html.div (class "mdc-drawer__header" :: additionalAttributes) nodes
 
 
-{-| Attribute to mark the title text element of the drawer header
--}
+
 title :: Html.Attribute r i
 title =
     class "mdc-drawer__title"
 
 
-{-| Attribute to mark the subtitle text element of the drawer header
--}
+
 subtitle :: Html.Attribute r i
 subtitle =
     class "mdc-drawer__subtitle"
@@ -222,12 +202,7 @@ closeHandler (Config { onClose }) =
     Maybe.map (Html.Events.on "MDCDrawer:close" << Decode.succeed) onClose
 
 
-{-| Modal drawer's scrim element
 
-Prevents the application from interaction while the modal drawer is open. Has
-to be the next sibling after the `modalDrawer` and before the page's content.
-
--}
 scrim :: Array (IProp r i) -> Array (Html r i) -> Html r i
 scrim additionalAttributes nodes =
     Html.div (class "mdc-drawer-scrim" :: additionalAttributes) nodes

@@ -76,14 +76,12 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Chip.Action.Internal (Chip(..), Config(..))
 
 
-{-| Configuration of an action chip
--}
+
 type Config r i =
     Material.Chip.Action.Internal.Config r i
 
 
-{-| Default configuration of an action chip
--}
+
 config :: Config r i
 config =
     Config
@@ -93,35 +91,30 @@ config =
         }
 
 
-{-| Specify whether the chip displays an icon
--}
+
 setIcon :: Maybe String -> Config r i -> Config r i
 setIcon icon (Config config_) =
     Config { config_ | icon = icon }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Specify a message when the user clicks on a chip
--}
+
 setOnClick :: r i -> Config r i -> Config r i
 setOnClick onClick (Config config_) =
     Config { config_ | onClick = Just onClick }
 
 
-{-| Action chip type
--}
+
 data Chip r i =
     Material.Chip.Action.Internal.Chip r i
 
 
-{-| Action chip view function
--}
+
 chip :: Config r i -> String -> Chip r i
 chip =
     Chip

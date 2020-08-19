@@ -72,8 +72,7 @@ import Svg
 import Svg.Attributes
 
 
-{-| Filter chip set view function
--}
+
 chipSet :: Array (IProp r i) -> Array (Chip r i) -> Html r i
 chipSet additionalAttributes chips =
     Html.node "mdc-chip-set"

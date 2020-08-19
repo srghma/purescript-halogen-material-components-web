@@ -84,8 +84,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 
 
-{-| Configuration of a dialog
--}
+
 type Config r i
     =
         { open :: Boolean
@@ -94,8 +93,7 @@ type Config r i
         }
 
 
-{-| Default configuration of a dialog
--}
+
 config :: Config r i
 config =
     Config
@@ -105,29 +103,25 @@ config =
         }
 
 
-{-| Specify whether a dialog is open
--}
+
 setOpen :: Boolean -> Config r i -> Config r i
 setOpen open (Config config_) =
     Config { config_ | open = open }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Specify a message when the user closes the dialog
--}
+
 setOnClose :: r i -> Config r i -> Config r i
 setOnClose onClose (Config config_) =
     Config { config_ | onClose = Just onClose }
 
 
-{-| Dialog content
--}
+
 data Content r i =
     { title :: Maybe String
     , content :: Array (Html r i)
@@ -135,8 +129,7 @@ data Content r i =
     }
 
 
-{-| Dialog view function
--}
+
 dialog :: Config r i -> Content r i -> Html r i
 dialog ((Config { additionalAttributes }) as config_) content =
     Html.node "mdc-dialog"

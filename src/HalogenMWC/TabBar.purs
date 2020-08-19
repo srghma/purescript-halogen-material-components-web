@@ -160,8 +160,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Tab.Internal as Tab
 
 
-{-| Configuration of a tab bar
--}
+
 type Config r i
     =
         { stacked :: Boolean
@@ -172,8 +171,7 @@ type Config r i
         }
 
 
-{-| Default configuration of a tab bar
--}
+
 config :: Config r i
 config =
     Config
@@ -185,54 +183,37 @@ config =
         }
 
 
-{-| Specify a tab bar's tabs to be stacked
 
-Stacked tabs display their icon below the their label.
-
--}
 setStacked :: Boolean -> Config r i -> Config r i
 setStacked stacked (Config config_) =
     Config { config_ | stacked = stacked }
 
 
-{-| Specify whether a tab bar's tabs should be of minimum width
 
-Usually, a tab bar's tabs have a minimum with. Using this option, tabs are as
-narrow as possible.
-
--}
 setMinWidth :: Boolean -> Config r i -> Config r i
 setMinWidth minWidth (Config config_) =
     Config { config_ | minWidth = minWidth }
 
 
-{-| Specify whether a tab bar's tab indicator spans its content
 
-Usually, a tab bar's tab indicator spans the entire tab. Use this option to
-make it span only it's label instead.
-
--}
 setIndicatorSpansContent :: Boolean -> Config r i -> Config r i
 setIndicatorSpansContent indicatorSpansContent (Config config_) =
     Config { config_ | indicatorSpansContent = indicatorSpansContent }
 
 
-{-| Specify tab bar's alignment of tabs in case they overflow horizontally
--}
+
 setAlign :: Maybe Align -> Config r i -> Config r i
 setAlign align (Config config_) =
     Config { config_ | align = align }
 
 
-{-| Specify additional attribtues
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Tab bar view function
--}
+
 tabBar :: Config r i -> Array (Tab r i) -> Html r i
 tabBar ((Config { additionalAttributes, align }) as config_) tabs =
     Html.node "mdc-tab-bar"
@@ -382,8 +363,7 @@ tabRippleElt =
     Just (Html.span [ class "mdc-tab__ripple" ] [])
 
 
-{-| Alignment of a tab scroller
--}
+
 data Align
     = Start
     | End

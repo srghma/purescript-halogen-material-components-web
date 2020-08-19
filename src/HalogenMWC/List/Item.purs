@@ -198,14 +198,12 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Array.Item.Internal (Config(..), ArrayItem(..), Selection(..))
 
 
-{-| Configuration of a list item
--}
+
 type Config r i =
     Material.Array.Item.Internal.Config r i
 
 
-{-| Default configuration of a list item
--}
+
 config :: Config r i
 config =
     Config
@@ -219,61 +217,36 @@ config =
         }
 
 
-{-| Specify whether a list item should be disabled
 
-Disabled list items cannot be interacted with and have not visual interaction
-effect.
-
--}
 setDisabled :: Boolean -> Config r i -> Config r i
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 
 
-{-| Selection of a list item
 
-A list item may be either in selected or in activated selection state.
-
--}
 data Selection =
     Material.Array.Item.Internal.Selection
 
 
-{-| Selected selection state
--}
+
 selected :: Selection
 selected =
     Selected
 
 
-{-| Activated selection state
--}
+
 activated :: Selection
 activated =
     Activated
 
 
-{-| Specify whether a list item is selected
 
-A selected list item may be either _selected_ or _activated_. A list item that
-may change its selection state within the current page, should be selected. A
-list item that may not change its state within the current page should be
-activated.
-
-As a rule of thumb, a navigation list item should be activated, while any other
-list item should be selected.
-
--}
 setSelected :: Maybe Selection -> Config r i -> Config r i
 setSelected selection (Config config_) =
     Config { config_ | selection = selection }
 
 
-{-| Specify whether a list item is a _link list item_
 
-Link list items essentially behave like a HTML5 anchor element.
-
--}
 setHref :: Maybe String -> Config r i -> Config r i
 setHref href (Config config_) =
     Config { config_ | href = href }
@@ -289,16 +262,14 @@ setTarget target (Config config_) =
     Config { config_ | target = target }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config
         { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Specify a message when the user interacts with the list item
--}
+
 setOnClick :: r i -> Config r i -> Config r i
 setOnClick onClick (Config config_) =
     Config
@@ -314,8 +285,7 @@ data ArrayItem r i =
     Material.Array.Item.Internal.ArrayItem r i
 
 
-{-| Array item constructor
--}
+
 listItem :: Config r i -> Array (Html r i) -> ArrayItem r i
 listItem (Config ({ additionalAttributes, href } as config_)) nodes =
     ArrayItem (Config { config_ | node = listItemView (Config config_) nodes })
@@ -424,15 +394,13 @@ secondaryText additionalAttributes nodes =
     Html.div (class "mdc-list-item__secondary-text" :: additionalAttributes) nodes
 
 
-{-| A list item's graphic tile
--}
+
 graphic :: Array (IProp r i) -> Array (Html r i) -> Html r i
 graphic additionalAttributes nodes =
     Html.div (class "mdc-list-item__graphic" :: additionalAttributes) nodes
 
 
-{-| A list item's meta tile
--}
+
 meta :: Array (IProp r i) -> Array (Html r i) -> Html r i
 meta additionalAttributes nodes =
     Html.div (class "mdc-list-item__meta" :: additionalAttributes) nodes

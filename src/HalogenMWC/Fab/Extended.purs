@@ -142,8 +142,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 
 
-{-| Extended floating action button configuration
--}
+
 type Config r i
     =
         { icon :: Maybe String
@@ -154,8 +153,7 @@ type Config r i
         }
 
 
-{-| Default extended floating action button configuration
--}
+
 config :: Config r i
 config =
     Config
@@ -167,46 +165,37 @@ config =
         }
 
 
-{-| Specify whether a floating action button displays an icon
--}
+
 setIcon :: Maybe String -> Config r i -> Config r i
 setIcon icon (Config config_) =
     Config { config_ | icon = icon }
 
 
-{-| Specify whether a floating action button's icon is a _trailing icon_
 
-Trailing icons are displyed after the label rather than before.
-
--}
 setTrailingIcon :: Boolean -> Config r i -> Config r i
 setTrailingIcon trailingIcon (Config config_) =
     Config { config_ | trailingIcon = trailingIcon }
 
 
-{-| Specify whether a floating action button transitions off the screen
--}
+
 setExited :: Boolean -> Config r i -> Config r i
 setExited exited (Config config_) =
     Config { config_ | exited = exited }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Specify a message when the user clicks the floating action button
--}
+
 setOnClick :: r i -> Config r i -> Config r i
 setOnClick onClick (Config config_) =
     Config { config_ | onClick = Just onClick }
 
 
-{-| Extended floating action button view function
--}
+
 fab :: Config r i -> String -> Html r i
 fab ((Config { additionalAttributes }) as config_) label =
     Html.node "mdc-fab"

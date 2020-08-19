@@ -110,8 +110,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 
 
-{-| Configuration of a switch
--}
+
 type Config r i
     =
         { checked :: Boolean
@@ -121,8 +120,7 @@ type Config r i
         }
 
 
-{-| Default configuration of a switch
--}
+
 config :: Config r i
 config =
     Config
@@ -133,40 +131,31 @@ config =
         }
 
 
-{-| Specify whether a switch is checked
--}
+
 setChecked :: Boolean -> Config r i -> Config r i
 setChecked checked (Config config_) =
     Config { config_ | checked = checked }
 
 
-{-| Specify whether a switch is disabled
 
-Disabled switches cannot be interacted with and have no visual interaction
-effect.
-
--}
 setDisabled :: Boolean -> Config r i -> Config r i
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Specify a message when the user changes a switch
--}
+
 setOnChange :: r i -> Config r i -> Config r i
 setOnChange onChange (Config config_) =
     Config { config_ | onChange = Just onChange }
 
 
-{-| Switch view function
--}
+
 switch :: Config r i -> Html r i
 switch ((Config { additionalAttributes }) as config_) =
     Html.node "mdc-switch"

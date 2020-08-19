@@ -121,8 +121,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 
 
-{-| Radio button configuration
--}
+
 type Config r i
     =
         { checked :: Boolean
@@ -133,8 +132,7 @@ type Config r i
         }
 
 
-{-| Default radio button configuration
--}
+
 config :: Config r i
 config =
     Config
@@ -146,33 +144,25 @@ config =
         }
 
 
-{-| Specify whether a radio button is checked
--}
+
 setChecked :: Boolean -> Config r i -> Config r i
 setChecked checked (Config config_) =
     Config { config_ | checked = checked }
 
 
-{-| Specify whether a radio button is disabled
 
-Disabled radio buttons cannot be interacted with and have no visual interaction
-effect.
-
--}
 setDisabled :: Boolean -> Config r i -> Config r i
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Specify a message when the user changes a radio
--}
+
 setOnChange :: r i -> Config r i -> Config r i
 setOnChange onChange (Config config_) =
     Config { config_ | onChange = Just onChange }
@@ -193,8 +183,7 @@ setTouch touch (Config config_) =
     Config { config_ | touch = touch }
 
 
-{-| Radio button view function
--}
+
 radio :: Config r i -> Html r i
 radio ((Config { touch, additionalAttributes }) as config_) =
     let

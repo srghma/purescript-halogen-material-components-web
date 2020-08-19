@@ -76,14 +76,12 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Chip.Input.Internal (Chip(..), Config(..))
 
 
-{-| Configuration of an input chip
--}
+
 type Config r i =
     Material.Chip.Input.Internal.Config r i
 
 
-{-| Default configuration of an input chip
--}
+
 config :: Config r i
 config =
     Config
@@ -95,49 +93,42 @@ config =
         }
 
 
-{-| Specify whether an input chip displays a leading icon
--}
+
 setLeadingIcon :: Maybe String -> Config r i -> Config r i
 setLeadingIcon leadingIcon (Config config_) =
     Config { config_ | leadingIcon = leadingIcon }
 
 
-{-| Specify whether an input chip displays a trailing icon
--}
+
 setTrailingIcon :: Maybe String -> Config r i -> Config r i
 setTrailingIcon trailingIcon (Config config_) =
     Config { config_ | trailingIcon = trailingIcon }
 
 
-{-| Specify additonal attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Specify a message when the user clicks on a chip's trailing icon
--}
+
 setOnDelete :: r i -> Config r i -> Config r i
 setOnDelete onDelete (Config config_) =
     Config { config_ | onDelete = Just onDelete }
 
 
-{-| Specify a message when the user clicks on a chip
--}
+
 setOnClick :: r i -> Config r i -> Config r i
 setOnClick onClick (Config config_) =
     Config { config_ | onClick = Just onClick }
 
 
-{-| Input chip type
--}
+
 data Chip r i =
     Material.Chip.Input.Internal.Chip r i
 
 
-{-| Input chip view function
--}
+
 chip :: Config r i -> String -> Chip r i
 chip =
     Chip

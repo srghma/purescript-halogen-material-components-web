@@ -174,14 +174,12 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Button.Internal (Config(..))
 
 
-{-| Configuration of a button
--}
+
 type Config r i =
     Material.Button.Internal.Config r i
 
 
-{-| Default configuration of a button
--}
+
 config :: Config r i
 config =
     Config
@@ -197,75 +195,49 @@ config =
         }
 
 
-{-| Specify whether the button features an icon
--}
+
 setIcon :: Maybe String -> Config r i -> Config r i
 setIcon icon (Config config_) =
     Config { config_ | icon = icon }
 
 
-{-| Specify whether a button's icon is a _trailing icon_.
 
-Trailing icons are displayed after the button's label rather than before.
-
--}
 setTrailingIcon :: Boolean -> Config r i -> Config r i
 setTrailingIcon trailingIcon (Config config_) =
     Config { config_ | trailingIcon = trailingIcon }
 
 
-{-| Specify whether the button is disabled
 
-Disabled buttons cannot be interacted with and do not have no visual
-interaction effect.
-
--}
 setDisabled :: Boolean -> Config r i -> Config r i
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 
 
-{-| Specify whether a button is _dense_
 
-Dense buttons feature smaller than normal padding.
-
--}
 setDense :: Boolean -> Config r i -> Config r i
 setDense dense (Config config_) =
     Config { config_ | dense = dense }
 
 
-{-| Specify whether a button is a _link button_.
 
-Link buttons behave like normal HTML5 anchor tags. Note that link buttons
-cannot be disabled and ignore that configuration option.
-
--}
 setHref :: Maybe String -> Config r i -> Config r i
 setHref href (Config config_) =
     Config { config_ | href = href }
 
 
-{-| Specify the target for a link button.
 
-Note that this configuration option will be ignored by buttons that do not also
-set `setHref`.
-
--}
 setTarget :: Maybe String -> Config r i -> Config r i
 setTarget target (Config config_) =
     Config { config_ | target = target }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Specify a message when the user clicks a button
--}
+
 setOnClick :: r i -> Config r i -> Config r i
 setOnClick onClick (Config config_) =
     Config { config_ | onClick = Just onClick }

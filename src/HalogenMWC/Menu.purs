@@ -106,8 +106,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 
 
-{-| Configuration of a menu
--}
+
 type Config r i
     =
         { open :: Boolean
@@ -117,8 +116,7 @@ type Config r i
         }
 
 
-{-| Default configuration of a menu
--}
+
 config :: Config r i
 config =
     Config
@@ -129,39 +127,31 @@ config =
         }
 
 
-{-| Specify whether a menu is open
--}
+
 setOpen :: Boolean -> Config r i -> Config r i
 setOpen open (Config config_) =
     Config { config_ | open = open }
 
 
-{-| Specify whether a menu is _opening quickly_
 
-A quickly opening menu opens without showing an animation.
-
--}
 setQuickOpen :: Boolean -> Config r i -> Config r i
 setQuickOpen quickOpen (Config config_) =
     Config { config_ | quickOpen = quickOpen }
 
 
-{-| Specify a message when the user closes the menu
--}
+
 setOnClose :: r i -> Config r i -> Config r i
 setOnClose onClose (Config config_) =
     Config { config_ | onClose = Just onClose }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Menu view function
--}
+
 menu :: Config r i -> Array (Html r i) -> Html r i
 menu ((Config { additionalAttributes }) as config_) nodes =
     Html.node "mdc-menu"
@@ -176,12 +166,7 @@ menu ((Config { additionalAttributes }) as config_) nodes =
         nodes
 
 
-{-| Menu surface anchor attribute
 
-Use this on a HTML element that contains both the triggering element and the
-menu itself.
-
--}
 surfaceAnchor :: Html.Attribute r i
 surfaceAnchor =
     class "mdc-menu-surface--anchor"

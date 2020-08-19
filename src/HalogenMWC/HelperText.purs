@@ -96,8 +96,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 
 
-{-| Configuration of a helper text
--}
+
 type Config r i
     =
         { persistent :: Boolean
@@ -105,8 +104,7 @@ type Config r i
         }
 
 
-{-| Default configuration of a helper text
--}
+
 config :: Config r i
 config =
     Config
@@ -115,29 +113,19 @@ config =
         }
 
 
-{-| Specify whether a helper text should be persistent
 
-Persistent helper texts always display regardless of whether the input has
-focus or not.
-
--}
 setPersistent :: Boolean -> Config r i -> Config r i
 setPersistent persistent (Config config_) =
     Config { config_ | persistent = persistent }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Helper text view function
 
-The helper text is expected to be a direct child of the helper line.
-
--}
 helperText :: Config r i -> String -> Html r i
 helperText ((Config { additionalAttributes }) as config_) string =
     Html.div
@@ -151,12 +139,7 @@ helperText ((Config { additionalAttributes }) as config_) string =
         [ text string ]
 
 
-{-| Helper text line view function
 
-The helper line is expected to be the wrapping element of the helper text. It
-is expected to be a direct sibling of the text field that it belongs to.
-
--}
 helperLine :: Array (IProp r i) -> Array (Html r i) -> Html r i
 helperLine additionalAttributes nodes =
     Html.div (helperLineCs :: additionalAttributes) nodes
@@ -186,8 +169,7 @@ ariaHiddenAttr =
     Just (Html.Attributes.attribute "aria-hidden" "true")
 
 
-{-| Character counter view function
--}
+
 characterCounter :: Array (IProp r i) -> Html r i
 characterCounter additionalAttributes =
     Html.div (characterCounterCs :: additionalAttributes) []

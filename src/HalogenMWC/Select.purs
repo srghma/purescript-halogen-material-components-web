@@ -215,8 +215,7 @@ import HalogenMWC.Select.Item (SelectItem)
 import HalogenMWC.Select.Item.Internal as SelectItem
 
 
-{-| Configuration of a select
--}
+
 data Config a r i
     =
         { label :: Maybe String
@@ -230,8 +229,7 @@ data Config a r i
         }
 
 
-{-| Default configuration of a select
--}
+
 config :: Config a r i
 config =
     Config
@@ -246,61 +244,49 @@ config =
         }
 
 
-{-| Specify a select's label
--}
+
 setLabel :: Maybe String -> Config a r i -> Config a r i
 setLabel label (Config config_) =
     Config { config_ | label = label }
 
 
-{-| Specify a select's selected value
--}
+
 setSelected :: Maybe a -> Config a r i -> Config a r i
 setSelected selected (Config config_) =
     Config { config_ | selected = selected }
 
 
-{-| Specify whether a select is disabled
 
-Disabled selects cannot be interacted with an have no visual interaction
-effect.
-
--}
 setDisabled :: Boolean -> Config a r i -> Config a r i
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 
 
-{-| Specify whether a select is required
--}
+
 setRequired :: Boolean -> Config a r i -> Config a r i
 setRequired required (Config config_) =
     Config { config_ | required = required }
 
 
-{-| Specify whether a select is valid
--}
+
 setValid :: Boolean -> Config a r i -> Config a r i
 setValid valid (Config config_) =
     Config { config_ | valid = valid }
 
 
-{-| Specify a select's leading icon
--}
+
 setLeadingIcon :: Maybe (Icon r i) -> Config a r i -> Config a r i
 setLeadingIcon leadingIcon (Config config_) =
     Config { config_ | leadingIcon = leadingIcon }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config a r i -> Config a r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Specify a message when the user changes the select
--}
+
 setOnChange :: (a -> r i) -> Config a r i -> Config a r i
 setOnChange onChange (Config config_) =
     Config { config_ | onChange = Just onChange }
@@ -358,28 +344,24 @@ select variant ((Config { leadingIcon, selected, additionalAttributes, onChange 
         ]
 
 
-{-| Filled select view function
--}
+
 filled :: Config a r i -> SelectItem a r i -> Array (SelectItem a r i) -> Html r i
 filled config_ firstSelectItem remainingSelectItems =
     select Filled config_ firstSelectItem remainingSelectItems
 
 
-{-| Outlined select view function
--}
+
 outlined :: Config a r i -> SelectItem a r i -> Array (SelectItem a r i) -> Html r i
 outlined config_ firstSelectItem remainingSelectItems =
     select Outlined config_ firstSelectItem remainingSelectItems
 
 
-{-| Select leading icon type
--}
+
 data Icon r i
     = Icon (Html r i)
 
 
-{-| Select leading icon
--}
+
 icon :: Array (IProp r i) -> String -> Icon r i
 icon additionalAttributes iconName =
     Icon (Icon.icon (class "mdc-select__icon" :: additionalAttributes) iconName)

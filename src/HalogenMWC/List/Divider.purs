@@ -108,8 +108,7 @@ import HalogenMWC.Array.Item (ArrayItem)
 import HalogenMWC.Array.Item.Internal as ArrayItem
 
 
-{-| Configuration of a list item divider
--}
+
 type Config r i
     =
         { inset :: Boolean
@@ -118,8 +117,7 @@ type Config r i
         }
 
 
-{-| Default configuration of a list item divider
--}
+
 config :: Config r i
 config =
     Config
@@ -129,35 +127,25 @@ config =
         }
 
 
-{-| Specify whether a list divider should be _inset_
 
-Insert list item dividers to not intersect a list item's meta.
-
--}
 setInset :: Boolean -> Config r i -> Config r i
 setInset inset (Config config_) =
     Config { config_ | inset = inset }
 
 
-{-| Specify whether a list divider should be _padded_
 
-Padded list item dividers do not intersect a list item's avatar.
-
--}
 setPadded :: Boolean -> Config r i -> Config r i
 setPadded padded (Config config_) =
     Config { config_ | padded = padded }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Array item divider view function
--}
+
 listItem :: Config r i -> ArrayItem r i
 listItem ((Config { additionalAttributes }) as config_) =
     ArrayItem.ArrayItemDivider <|
@@ -201,8 +189,7 @@ paddedCs (Config { padded }) =
         Nothing
 
 
-{-| Array group divider view function
--}
+
 group :: Array (IProp r i) -> Html r i
 group additionalAttributes =
     Html.hr (Array.filterMap identity [ listDividerCs ] ++ additionalAttributes) []

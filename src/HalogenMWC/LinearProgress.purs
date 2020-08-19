@@ -103,8 +103,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 
 
-{-| Linear progress configuration
--}
+
 type Config r i
     =
         { reverse :: Boolean
@@ -119,8 +118,7 @@ data Variant
     | Buffered Float Float
 
 
-{-| Default linear progress configuration
--}
+
 config :: Config r i
 config =
     Config
@@ -130,22 +128,19 @@ config =
         }
 
 
-{-| Specify whether a linear progress indicator should be hidden
--}
+
 setClosed :: Boolean -> Config r i -> Config r i
 setClosed closed (Config config_) =
     Config { config_ | closed = closed }
 
 
-{-| Specify whether the direction of a linear progress indicator should be reversed
--}
+
 setReverse :: Boolean -> Config r i -> Config r i
 setReverse reverse (Config config_) =
     Config { config_ | reverse = reverse }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
@@ -174,22 +169,19 @@ linearProgress variant ((Config { additionalAttributes }) as config_) =
         ]
 
 
-{-| Indeterminate linear progress variant
--}
+
 indeterminate :: Config r i -> Html r i
 indeterminate config_ =
     linearProgress Indeterminate config_
 
 
-{-| Determinate linear progress variant
--}
+
 determinate :: Config r i -> { progress :: Float } -> Html r i
 determinate config_ { progress } =
     linearProgress (Determinate progress) config_
 
 
-{-| Buffered linear progress variant
--}
+
 buffered :: Config r i -> { progress :: Float, buffered :: Float } -> Html r i
 buffered config_ data =
     linearProgress (Buffered data.progress data.buffered) config_

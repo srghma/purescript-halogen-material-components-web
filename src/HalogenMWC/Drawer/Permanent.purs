@@ -93,28 +93,24 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 
 
-{-| Configuration of a permanent drawer
--}
+
 type Config r i
     = { additionalAttributes :: Array (IProp r i) }
 
 
-{-| Default configuration of a permanent drawer
--}
+
 config :: Config r i
 config =
     Config { additionalAttributes = [] }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Permanent drawer view function
--}
+
 drawer :: Config r i -> Array (Html r i) -> Html r i
 drawer (Config { additionalAttributes }) nodes =
     Html.div
@@ -122,40 +118,25 @@ drawer (Config { additionalAttributes }) nodes =
         nodes
 
 
-{-| Drawer content
--}
+
 content :: Array (IProp r i) -> Array (Html r i) -> Html r i
 content attributes nodes =
     Html.div (class "mdc-drawer__content" :: attributes) nodes
 
 
-{-| Drawer header view function
 
-    PermanentDrawer.drawer PermanentDrawer.config
-        [ PermanentDrawer.header []
-            [ Html.h3 [ PermanentDrawer.title ]
-                [ text "Title" ]
-            , Html.h6 [ PermanentDrawer.subtitle ]
-                [ text "Subtitle" ]
-            ]
-        , PermanentDrawer.content [] []
-        ]
-
--}
 header :: Array (IProp r i) -> Array (Html r i) -> Html r i
 header additionalAttributes nodes =
     Html.div (class "mdc-drawer__header" :: additionalAttributes) nodes
 
 
-{-| Attribute to mark the title text element of the drawer header
--}
+
 title :: Html.Attribute r i
 title =
     class "mdc-drawer__title"
 
 
-{-| Attribute to mark the subtitle text element of the drawer header
--}
+
 subtitle :: Html.Attribute r i
 subtitle =
     class "mdc-drawer__subtitle"

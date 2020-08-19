@@ -181,8 +181,7 @@ import HalogenMWC.Array.Item (Config, ArrayItem)
 import HalogenMWC.Array.Item.Internal as ArrayItem
 
 
-{-| Configuration of a list
--}
+
 type Config r i
     =
         { nonInteractive :: Boolean
@@ -195,8 +194,7 @@ type Config r i
         }
 
 
-{-| Default configuration of a list
--}
+
 config :: Config r i
 config =
     Config
@@ -221,50 +219,31 @@ setNonInteractive nonInteractive (Config config_) =
     Config { config_ | nonInteractive = nonInteractive }
 
 
-{-| Specify whether a list should be _dense_
 
-Dense lists are more compact and feature smaller than normal margins
-
--}
 setDense :: Boolean -> Config r i -> Config r i
 setDense dense (Config config_) =
     Config { config_ | dense = dense }
 
 
-{-| Specify whether a list should be an _avatar_ list
 
-An avatar list features a larger than usual list item _graphic_.
-
--}
 setAvatarArray :: Boolean -> Config r i -> Config r i
 setAvatarArray avatarArray (Config config_) =
     Config { config_ | avatarArray = avatarArray }
 
 
-{-| Specify whether a list should be a _two line_ list
 
-Two line lists feature list items with a primary and a secondary text line.
-
--}
 setTwoLine :: Boolean -> Config r i -> Config r i
 setTwoLine twoLine (Config config_) =
     Config { config_ | twoLine = twoLine }
 
 
-{-| Specify whether a list should wrap focus
 
-A list that wraps focus focuses the first list item after pressing tab on the
-last list item. By default, a list in that case passes focus to the next
-focusable control.
-
--}
 setWrapFocus :: Boolean -> Config r i -> Config r i
 setWrapFocus wrapFocus (Config config_) =
     Config { config_ | wrapFocus = wrapFocus }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
@@ -428,8 +407,7 @@ selectedIndexProp listItems =
     Just (Html.Attributes.property "selectedIndex" (Encode.list Encode.int selectedIndex))
 
 
-{-| Array group view function
--}
+
 group :: Array (IProp r i) -> Array (Html r i) -> Html r i
 group additionalAttributes nodes =
     Html.div (listGroupCs :: additionalAttributes) nodes
@@ -440,8 +418,7 @@ listGroupCs =
     class "mdc-list-group"
 
 
-{-| Array group subheader view function
--}
+
 subheader :: Array (IProp r i) -> Array (Html r i) -> Html r i
 subheader additionalAttributes nodes =
     Html.span (listGroupSubheaderCs :: additionalAttributes) nodes

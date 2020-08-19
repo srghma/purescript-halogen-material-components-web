@@ -217,8 +217,7 @@ import HalogenMWC.IconButton as IconButton
 import HalogenMWC.IconButton.Internal
 
 
-{-| Configuration of a card
--}
+
 type Config r i
     =
         { outlined :: Boolean
@@ -226,8 +225,7 @@ type Config r i
         }
 
 
-{-| Default configuration of a card
--}
+
 config :: Config r i
 config =
     Config
@@ -236,22 +234,19 @@ config =
         }
 
 
-{-| Specify whether a card should have a visual outline
--}
+
 setOutlined :: Boolean -> Config r i -> Config r i
 setOutlined outlined (Config config_) =
     Config { config_ | outlined = outlined }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Card view function
--}
+
 card :: Config r i -> Content r i -> Html r i
 card ((Config { additionalAttributes }) as config_) content =
     Html.node "mdc-card"
@@ -324,26 +319,19 @@ outlinedCs (Config { outlined }) =
         Nothing
 
 
-{-| The content of a card is comprised of _blocks_ and _actions_.
--}
+
 data Content r i =
     { blocks :: Array (Block r i)
     , actions :: Maybe (Actions r i)
     }
 
 
-{-| A card's content block
--}
+
 data Block r i
     = Block (Html r i)
 
 
-{-| Card block containing arbitrary HTML
 
-    Card.block <|
-        Html.div [] [ text "Lorem ipsum…" ]
-
--}
 block :: Html r i -> Block r i
 block =
     Block
@@ -368,22 +356,19 @@ mediaView aspect additionalAttributes backgroundImage =
             []
 
 
-{-| Card media block with a square aspect ratio
--}
+
 squareMedia :: Array (IProp r i) -> String -> Block r i
 squareMedia additionalAttributes backgroundImage =
     mediaView (Just Square) additionalAttributes backgroundImage
 
 
-{-| Card media block with a 16:9 aspect ratio
--}
+
 sixteenToNineMedia :: Array (IProp r i) -> String -> Block r i
 sixteenToNineMedia additionalAttributes backgroundImage =
     mediaView (Just SixteenToNine) additionalAttributes backgroundImage
 
 
-{-| Card media block of unspecified aspect ratio
--}
+
 media :: Array (IProp r i) -> String -> Block r i
 media additionalAttributes backgroundImage =
     mediaView Nothing additionalAttributes backgroundImage
@@ -412,8 +397,7 @@ aspectCs aspect =
             Nothing
 
 
-{-| A card's primary action block
--}
+
 primaryAction :: Array (IProp r i) -> Array (Block r i) -> Array (Block r i)
 primaryAction additionalAttributes blocks =
     [ Block <|
@@ -437,8 +421,7 @@ tabIndexProp tabIndex =
     Html.Attributes.property "tabIndex" (Encode.int tabIndex)
 
 
-{-| Card actions type
--}
+
 data Actions r i
     = Actions
         { buttons :: Array (Button r i)
@@ -447,11 +430,7 @@ data Actions r i
         }
 
 
-{-| Card actions
 
-A card may contain as actions buttons as well as icons.
-
--}
 actions :: { buttons :: Array (Button r i), icons :: Array (Icon r i) } -> Actions r i
 actions { buttons, icons } =
     Actions { buttons = buttons, icons = icons, fullBleed = False }
@@ -471,17 +450,12 @@ fullBleedActions button_ =
     Actions { buttons = [ button_ ], icons = [], fullBleed = True }
 
 
-{-| Card action's button type
--}
+
 data Button r i
     = Button (Html r i)
 
 
-{-| A card action button
 
-    Card.button Button.config "Visit"
-
--}
 button :: Button.Config r i -> String -> Button r i
 button (Material.Button.Internal.Config buttonConfig) label =
     Button <|
@@ -497,17 +471,12 @@ button (Material.Button.Internal.Config buttonConfig) label =
             label
 
 
-{-| Card action's icon type
--}
+
 data Icon r i
     = Icon (Html r i)
 
 
-{-| Card action icon
 
-    Card.icon IconButton.config "favorite"
-
--}
 icon :: IconButton.Config r i -> String -> Icon r i
 icon (Material.IconButton.Internal.Config iconButtonConfig) iconName =
     Icon <|

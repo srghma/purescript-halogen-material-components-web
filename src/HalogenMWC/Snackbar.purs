@@ -229,8 +229,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 
 
-{-| Queue of messages
--}
+
 data Queue r i
     = Queue
         { messages :: Array ( MessageId, Message r i )
@@ -238,8 +237,7 @@ data Queue r i
         }
 
 
-{-| Message identifier type
--}
+
 data MessageId
     = MessageId Int
 
@@ -249,8 +247,7 @@ inc (MessageId messageId) =
     MessageId (messageId + 1)
 
 
-{-| Initial empty queue
--}
+
 initialQueue :: Queue r i
 initialQueue =
     Queue
@@ -259,8 +256,7 @@ initialQueue =
         }
 
 
-{-| Hide the currently showing message
--}
+
 close :: MessageId -> Queue r i -> Queue r i
 close messageId (Queue queue) =
     Queue <|
@@ -279,8 +275,7 @@ close messageId (Queue queue) =
         }
 
 
-{-| Adds a message to the queue
--}
+
 addMessage :: Message r i -> Queue r i -> Queue r i
 addMessage message_ (Queue queue) =
     Queue
@@ -290,8 +285,7 @@ addMessage message_ (Queue queue) =
         }
 
 
-{-| Configuration of a snackbar
--}
+
 type Config r i
     =
         { closeOnEscape :: Boolean
@@ -300,8 +294,7 @@ type Config r i
         }
 
 
-{-| Default configuration of a snackbar
--}
+
 config :: { onClosed :: MessageId -> r i } -> Config r i
 config { onClosed } =
     Config
@@ -311,23 +304,19 @@ config { onClosed } =
         }
 
 
-{-| Specify whether the snackbar's messages should close when the user presses
-escape
--}
+
 setCloseOnEscape :: Boolean -> Config r i -> Config r i
 setCloseOnEscape closeOnEscape (Config config_) =
     Config { config_ | closeOnEscape = closeOnEscape }
 
 
-{-| Specify additional attributes
--}
+
 setAttributes :: Array (IProp r i) -> Config r i -> Config r i
 setAttributes additionalAttributes (Config config_) =
     Config { config_ | additionalAttributes = additionalAttributes }
 
 
-{-| Snackbar view function
--}
+
 snackbar :: Config r i -> Queue r i -> Html r i
 snackbar ((Config { additionalAttributes }) as config_) ((Queue { messages, nextMessageId }) as queue) =
     let
@@ -351,8 +340,7 @@ snackbar ((Config { additionalAttributes }) as config_) ((Queue { messages, next
         [ surfaceElt currentMessageId (Maybe.withDefault (message "") currentMessage) ]
 
 
-{-| Snackbar message
--}
+
 data Message r i
     = Message
         { label :: String
@@ -366,59 +354,43 @@ data Message r i
         }
 
 
-{-| Specify a message's action button label
--}
+
 setActionButton :: Maybe String -> Message r i -> Message r i
 setActionButton actionButton (Message message_) =
     Message { message_ | actionButton = actionButton }
 
 
-{-| Specify a message when the user clicks on a message's action button
--}
+
 setOnActionButtonClick :: (MessageId -> r i) -> Message r i -> Message r i
 setOnActionButtonClick onActionButtonClick (Message message_) =
     Message { message_ | onActionButtonClick = Just onActionButtonClick }
 
 
-{-| Specify a message's action icon
--}
+
 setActionIcon :: Maybe String -> Message r i -> Message r i
 setActionIcon actionIcon (Message message_) =
     Message { message_ | actionIcon = actionIcon }
 
 
-{-| Specify a message when the user clicks on a message's action icon
--}
+
 setOnActionIconClick :: (MessageId -> r i) -> Message r i -> Message r i
 setOnActionIconClick onActionIconClick (Message message_) =
     Message { message_ | onActionIconClick = Just onActionIconClick }
 
 
-{-| Specify whether a message should display _leading_
 
-Messages are by default centered within the viewport. On larger screens, they
-can optionally be displyed on the _leading_ edge of the screen. To display a
-message as leading its `setLeading` configuration option to `True`.
-
--}
 setLeading :: Boolean -> Message r i -> Message r i
 setLeading leading (Message message_) =
     Message { message_ | leading = leading }
 
 
-{-| Specify whether a message should be stacked
 
-Stacked messages display their label above their action button or icon. This
-works best for messages with a long label.
-
--}
 setStacked :: Boolean -> Message r i -> Message r i
 setStacked stacked (Message message_) =
     Message { message_ | stacked = stacked }
 
 
-{-| Specify a message's timeout in milliseconds
--}
+
 setTimeoutMs :: Maybe Int -> Message r i -> Message r i
 setTimeoutMs timeoutMs (Message message_) =
     Message { message_ | timeoutMs = timeoutMs }
