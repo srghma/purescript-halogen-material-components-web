@@ -188,7 +188,12 @@ Note that link list items cannot be disabled.
 
 -}
 
-import Html (Html)
+import Protolude
+import Halogen (AttrName(..))
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Html.Attributes (class)
 import Material.Array.Item.Internal (Config(..), ArrayItem(..), Selection(..))
 

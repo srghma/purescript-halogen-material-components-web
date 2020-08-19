@@ -97,7 +97,12 @@ Multiple lists within a group may be visually seperated by a list group divider.
 
 -}
 
-import Html (Html)
+import Protolude
+import Halogen (AttrName(..))
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Html.Attributes (class)
 import Material.Array.Item (ArrayItem)
 import Material.Array.Item.Internal as ArrayItem
