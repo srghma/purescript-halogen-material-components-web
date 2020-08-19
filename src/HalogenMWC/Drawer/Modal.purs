@@ -71,7 +71,7 @@ openProp { open } =
 
 closeHandler :: Config r i -> Maybe (HH.Attribute r i)
 closeHandler { onClose } =
-    Maybe.map (HH.Events.on "MDCDrawer:close" << Decode.succeed) onClose
+    map (HH.Events.on "MDCDrawer:close" << Decode.succeed) onClose
 
 scrim :: Array (IProp r i) -> Array (Html r i) -> Html r i
 scrim additionalAttributes nodes =

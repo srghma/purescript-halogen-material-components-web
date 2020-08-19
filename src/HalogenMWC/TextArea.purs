@@ -126,27 +126,27 @@ validProp { valid } =
 
 minLengthAttr :: Config r i -> Maybe (HH.Attribute r i)
 minLengthAttr { minLength } =
-    Maybe.map (HH.Attributes.attribute "minLength" << String.fromInt) minLength
+    map (HH.Attributes.attribute "minLength" << String.fromInt) minLength
 
 maxLengthAttr :: Config r i -> Maybe (HH.Attribute r i)
 maxLengthAttr { maxLength } =
-    Maybe.map (HH.Attributes.attribute "maxLength" << String.fromInt) maxLength
+    map (HH.Attributes.attribute "maxLength" << String.fromInt) maxLength
 
 valueProp :: Config r i -> Maybe (HH.Attribute r i)
 valueProp { value } =
-    Maybe.map (HH.Attributes.property "value" << Encode.string) value
+    map (HH.Attributes.property "value" << Encode.string) value
 
 placeholderAttr :: Config r i -> Maybe (HH.Attribute r i)
 placeholderAttr { placeholder } =
-    Maybe.map HH.Attributes.placeholder placeholder
+    map HH.Attributes.placeholder placeholder
 
 inputHandler :: Config r i -> Maybe (HH.Attribute r i)
 inputHandler { onInput } =
-    Maybe.map HH.Events.onInput onInput
+    map HH.Events.onInput onInput
 
 changeHandler :: Config r i -> Maybe (HH.Attribute r i)
 changeHandler { onChange } =
-    Maybe.map (\f -> HH.Events.on "change" (Decode.map f HH.Events.targetValue))
+    map (\f -> HH.Events.on "change" (Decode.map f HH.Events.targetValue))
         onChange
 
 inputElt :: Config r i -> Html r i
@@ -172,16 +172,16 @@ inputCs =
 
 rowsAttr :: Config r i -> Maybe (HH.Attribute r i)
 rowsAttr { rows } =
-    Maybe.map HH.Attributes.rows rows
+    map HH.Attributes.rows rows
 
 colsAttr :: Config r i -> Maybe (HH.Attribute r i)
 colsAttr { cols } =
-    Maybe.map HH.Attributes.cols cols
+    map HH.Attributes.cols cols
 
 ariaLabelAttr :: Config r i -> Maybe (HH.Attribute r i)
 ariaLabelAttr { fullwidth, placeholder, label } =
     if fullwidth then
-        Maybe.map (HH.Attributes.attribute "aria-label") label
+        map (HH.Attributes.attribute "aria-label") label
 
     else
         Nothing

@@ -60,9 +60,9 @@ activeTabIndexProp tabs =
             Array.indexedMap Tuple.pair tabs
                 # Array.filter (\( _, Tab { active } ) -> active)
                 # Array.head
-                # Maybe.map Tuple.first
+                # map Tuple.first
     in
-    Maybe.map (HH.Attributes.property "activeTabIndex" << Encode.int) activeTabIndex
+    map (HH.Attributes.property "activeTabIndex" << Encode.int) activeTabIndex
 
 viewTab :: Config r i -> Tab r i -> Html r i
 viewTab (barConfig@{ indicatorSpansContent }) (tabConfig@(Tab ({ additionalAttributes, content })) as tab) =
@@ -115,7 +115,7 @@ tabRoleAttr =
 
 tabClickHandler :: Tab.Config r i -> Maybe (HH.Attribute r i)
 tabClickHandler { onClick } =
-    Maybe.map (HH.Events.on "MDCTab:interacted" << Decode.succeed) onClick
+    map (HH.Events.on "MDCTab:interacted" << Decode.succeed) onClick
 
 tabContentElt :: Config r i -> Tab.Config r i -> Tab.Content -> Maybe (Html r i)
 tabContentElt (barConfig@{ indicatorSpansContent }) config_ content =
@@ -138,7 +138,7 @@ tabContentElt (barConfig@{ indicatorSpansContent }) config_ content =
 
 tabIconElt :: Tab.Content -> Maybe (Html r i)
 tabIconElt { icon } =
-    Maybe.map
+    map
         (\iconName ->
             HH.span
                 [ HP.class_ "mdc-tab__icon material-icons" ]

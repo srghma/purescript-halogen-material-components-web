@@ -66,7 +66,7 @@ ariaModalAttr =
 
 closeHandler :: Config r i -> Maybe (HH.Attribute r i)
 closeHandler { onClose } =
-    Maybe.map (HH.Events.on "MDCDialog:close" << Decode.succeed) onClose
+    map (HH.Events.on "MDCDialog:close" << Decode.succeed) onClose
 
 containerElt :: Content r i -> Html r i
 containerElt content =

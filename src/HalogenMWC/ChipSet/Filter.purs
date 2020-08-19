@@ -85,7 +85,7 @@ gridcellRole =
 
 interactionHandler :: Chip.Config r i -> Maybe (HH.Attribute r i)
 interactionHandler { onChange } =
-    Maybe.map (HH.Events.on "MDCChip:interaction" << Decode.succeed) onChange
+    map (HH.Events.on "MDCChip:interaction" << Decode.succeed) onChange
 
 rippleElt :: Maybe (Html r i)
 rippleElt =
@@ -93,7 +93,7 @@ rippleElt =
 
 leadingIconElt :: Chip.Config r i -> Maybe (Html r i)
 leadingIconElt { icon, selected } =
-    Maybe.map
+    map
         (\iconName ->
             HH.i
                 [ HP.class_ material_icons

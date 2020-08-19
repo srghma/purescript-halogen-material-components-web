@@ -90,7 +90,7 @@ changeHandler :: Config r i -> Maybe (HH.Attribute r i)
 changeHandler { checked, onChange } =
     -- Note: MDCArray choses to send a change event to all checkboxes, thus we
     -- have to check here if the state actually changed.
-    Maybe.map
+    map
         (\r i ->
             HH.Events.on "change"
                 (Decode.at [ "target", "checked" ] Decode.bool

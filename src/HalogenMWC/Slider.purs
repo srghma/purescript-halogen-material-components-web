@@ -118,19 +118,19 @@ sliderRoleAttr =
 
 valueProp :: Config r i -> Maybe (HH.Attribute r i)
 valueProp { value } =
-    Maybe.map (HH.Attributes.property "value" << Encode.float) value
+    map (HH.Attributes.property "value" << Encode.float) value
 
 minProp :: Config r i -> Maybe (HH.Attribute r i)
 minProp { min } =
-    Maybe.map (HH.Attributes.property "min" << Encode.float) min
+    map (HH.Attributes.property "min" << Encode.float) min
 
 maxProp :: Config r i -> Maybe (HH.Attribute r i)
 maxProp { max } =
-    Maybe.map (HH.Attributes.property "max" << Encode.float) max
+    map (HH.Attributes.property "max" << Encode.float) max
 
 stepProp :: Config r i -> Maybe (HH.Attribute r i)
 stepProp { step } =
-    Maybe.map (HH.Attributes.property "step" << Encode.float) step
+    map (HH.Attributes.property "step" << Encode.float) step
 
 disabledProp :: Config r i -> Maybe (HH.Attribute r i)
 disabledProp { disabled } =
@@ -138,19 +138,19 @@ disabledProp { disabled } =
 
 ariaValueMinAttr :: Config r i -> Maybe (HH.Attribute r i)
 ariaValueMinAttr { min } =
-    Maybe.map (HH.Attributes.attribute "aria-valuemin" << String.fromFloat) min
+    map (HH.Attributes.attribute "aria-valuemin" << String.fromFloat) min
 
 ariaValueMaxAttr :: Config r i -> Maybe (HH.Attribute r i)
 ariaValueMaxAttr { max } =
-    Maybe.map (HH.Attributes.attribute "aria-valuemax" << String.fromFloat) max
+    map (HH.Attributes.attribute "aria-valuemax" << String.fromFloat) max
 
 ariaValuenowAttr :: Config r i -> Maybe (HH.Attribute r i)
 ariaValuenowAttr { value } =
-    Maybe.map (HH.Attributes.attribute "aria-valuenow" << String.fromFloat) value
+    map (HH.Attributes.attribute "aria-valuenow" << String.fromFloat) value
 
 changeHandler :: Config r i -> Maybe (HH.Attribute r i)
 changeHandler { onInput } =
-    Maybe.map
+    map
         (\handler ->
             HH.Events.on "MDCSlider:input"
                 (Decode.map handler (Decode.at [ "target", "value" ] Decode.float))

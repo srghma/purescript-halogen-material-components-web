@@ -59,4 +59,4 @@ quickOpenProp { quickOpen } =
 
 closeHandler :: Config r i -> Maybe (HH.Attribute r i)
 closeHandler { onClose } =
-    Maybe.map (HH.Events.on "MDCMenu:close" << Decode.succeed) onClose
+    map (HH.Events.on "MDCMenu:close" << Decode.succeed) onClose

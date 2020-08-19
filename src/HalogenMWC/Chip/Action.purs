@@ -12,20 +12,18 @@ import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Chip.Action.Internal (Chip(..), Config(..))
 
-type Config r i =
-    Material.Chip.Action.Internal.Config r i
+type Config r i
+  = { icon :: Maybe String
+    , additionalAttributes :: Array (IProp r i)
+    , onClick :: Maybe r i
+    }
+
+data Chip r i
+  = Chip (Config r i) String
 
 config :: Config r i
 config =
-    Config
-        { icon = Nothing
-        , additionalAttributes = []
-        , onClick = Nothing
-        }
-
-data Chip r i =
-    Material.Chip.Action.Internal.Chip r i
-
-chip :: Config r i -> String -> Chip r i
-chip =
-    Chip
+  { icon = Nothing
+  , additionalAttributes = []
+  , onClick = Nothing
+  }

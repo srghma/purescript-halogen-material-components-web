@@ -198,40 +198,40 @@ maxLengthProp { maxLength } =
 
 minLengthAttr :: Config r i -> Maybe (HH.Attribute r i)
 minLengthAttr { minLength } =
-    Maybe.map (HH.Attributes.attribute "minLength" << String.fromInt) minLength
+    map (HH.Attributes.attribute "minLength" << String.fromInt) minLength
 
 maxLengthAttr :: Config r i -> Maybe (HH.Attribute r i)
 maxLengthAttr { maxLength } =
-    Maybe.map (HH.Attributes.attribute "maxLength" << String.fromInt) maxLength
+    map (HH.Attributes.attribute "maxLength" << String.fromInt) maxLength
 
 minProp :: Config r i -> Maybe (HH.Attribute r i)
 minProp { min } =
     Just
         (HH.Attributes.property "min"
-            (Encode.string (Maybe.withDefault "" (Maybe.map String.fromInt min)))
+            (Encode.string (Maybe.withDefault "" (map String.fromInt min)))
         )
 
 maxProp :: Config r i -> Maybe (HH.Attribute r i)
 maxProp { max } =
     Just
         (HH.Attributes.property "max"
-            (Encode.string (Maybe.withDefault "" (Maybe.map String.fromInt max)))
+            (Encode.string (Maybe.withDefault "" (map String.fromInt max)))
         )
 
 stepProp :: Config r i -> Maybe (HH.Attribute r i)
 stepProp { step } =
     Just
         (HH.Attributes.property "step"
-            (Encode.string (Maybe.withDefault "" (Maybe.map String.fromInt step)))
+            (Encode.string (Maybe.withDefault "" (map String.fromInt step)))
         )
 
 valueProp :: Config r i -> Maybe (HH.Attribute r i)
 valueProp { value } =
-    Maybe.map (HH.Attributes.property "value" << Encode.string) value
+    map (HH.Attributes.property "value" << Encode.string) value
 
 placeholderAttr :: Config r i -> Maybe (HH.Attribute r i)
 placeholderAttr { placeholder } =
-    Maybe.map HH.Attributes.placeholder placeholder
+    map HH.Attributes.placeholder placeholder
 
 leadingIconElt :: Config r i -> Array (Html r i)
 leadingIconElt { leadingIcon } =
@@ -253,11 +253,11 @@ trailingIconElt { trailingIcon } =
 
 inputHandler :: Config r i -> Maybe (HH.Attribute r i)
 inputHandler { onInput } =
-    Maybe.map HH.Events.onInput onInput
+    map HH.Events.onInput onInput
 
 changeHandler :: Config r i -> Maybe (HH.Attribute r i)
 changeHandler { onChange } =
-    Maybe.map (\f -> HH.Events.on "change" (Decode.map f HH.Events.targetValue))
+    map (\f -> HH.Events.on "change" (Decode.map f HH.Events.targetValue))
         onChange
 
 inputElt :: Config r i -> Html r i
@@ -284,17 +284,17 @@ patternProp :: Config r i -> Maybe (HH.Attribute r i)
 patternProp { pattern } =
     Just
         (HH.Attributes.property "pattern"
-            (Maybe.withDefault Encode.null (Maybe.map Encode.string pattern))
+            (Maybe.withDefault Encode.null (map Encode.string pattern))
         )
 
 typeAttr :: Config r i -> Maybe (HH.Attribute r i)
 typeAttr { type_ } =
-    Maybe.map HH.Attributes.type_ type_
+    map HH.Attributes.type_ type_
 
 ariaLabelAttr :: Config r i -> Maybe (HH.Attribute r i)
 ariaLabelAttr { fullwidth, placeholder, label } =
     if fullwidth then
-        Maybe.map (HH.Attributes.attribute "aria-label") label
+        map (HH.Attributes.attribute "aria-label") label
 
     else
         Nothing

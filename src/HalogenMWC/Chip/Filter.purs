@@ -12,8 +12,15 @@ import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Chip.Filter.Internal (Chip(..), Config(..))
 
-type Config r i =
-    Material.Chip.Filter.Internal.Config r i
+type Config r i
+  = { icon :: Maybe String
+    , selected :: Boolean
+    , additionalAttributes :: Array (IProp r i)
+    , onChange :: Maybe r i
+    }
+
+data Chip r i
+  = Chip (Config r i) String
 
 config :: Config r i
 config =
@@ -23,10 +30,3 @@ config =
         , onChange = Nothing
         , additionalAttributes = []
         }
-
-data Chip r i =
-    Material.Chip.Filter.Internal.Chip r i
-
-chip :: Config r i -> String -> Chip r i
-chip =
-    Chip

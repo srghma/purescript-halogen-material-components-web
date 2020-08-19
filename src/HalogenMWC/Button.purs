@@ -130,19 +130,19 @@ tabIndexProp { disabled } =
 
 hrefAttr :: Config r i -> Maybe (HH.Attribute r i)
 hrefAttr { href } =
-    Maybe.map HH.Attributes.href href
+    map HH.Attributes.href href
 
 targetAttr :: Config r i -> Maybe (HH.Attribute r i)
 targetAttr { href, target } =
     if href /= Nothing then
-        Maybe.map HH.Attributes.target target
+        map HH.Attributes.target target
 
     else
         Nothing
 
 clickHandler :: Config r i -> Maybe (HH.Attribute r i)
 clickHandler { onClick } =
-    Maybe.map HH.Events.onClick onClick
+    map HH.Events.onClick onClick
 
 variantCs :: Variant -> Maybe (HH.Attribute r i)
 variantCs variant =
@@ -177,7 +177,7 @@ touchCs { touch } =
 
 iconElt :: Config r i -> Maybe (Html r i)
 iconElt { icon } =
-    Maybe.map
+    map
         (\iconName ->
             HH.i
                 [ HP.class_ "mdc-button__icon material-icons"

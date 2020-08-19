@@ -68,7 +68,7 @@ checkboxTypeAttr =
 
 changeHandler :: Config r i -> Maybe (HH.Attribute r i)
 changeHandler { onChange } =
-    Maybe.map (HH.Events.on "change" << Decode.succeed) onChange
+    map (HH.Events.on "change" << Decode.succeed) onChange
 
 trackElt :: Html r i
 trackElt =

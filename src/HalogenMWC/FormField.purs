@@ -55,11 +55,11 @@ alignEndCs { alignEnd } =
 
 forAttr :: Config r i -> Maybe (HH.Attribute r i)
 forAttr { for } =
-    Maybe.map HH.Attributes.for for
+    map HH.Attributes.for for
 
 clickHandler :: Config r i -> Maybe (HH.Attribute r i)
 clickHandler { onClick } =
-    Maybe.map HH.Events.onClick onClick
+    map HH.Events.onClick onClick
 
 labelElt :: Config r i -> Html r i
 labelElt (config_@{ label }) =

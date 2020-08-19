@@ -76,7 +76,7 @@ listItemElt (config_@{ masonry }) ((ImageArrayItem.ImageArrayItem { href, additi
     HH.node "mdc-image-list-item"
         ([HP.class_ mdc_image_list__item] <> additionalAttributes)
         (href
-            # Maybe.map (\href_ -> [ HH.a [ HH.Attributes.href href_ ] inner ])
+            # map (\href_ -> [ HH.a [ HH.Attributes.href href_ ] inner ])
             # Maybe.withDefault inner
         )
 
@@ -85,7 +85,7 @@ imageAspectContainerElt masonry ((ImageArrayItem.ImageArrayItem { href }) as lis
     HH.div
         (Array.filterMap identity
             [ Just (HP.class_ mdc_image_list__image_aspect_container)
-            , Maybe.map (\_ -> HP.class_ mdc_ripple_surface) href
+            , map (\_ -> HP.class_ mdc_ripple_surface) href
             ]
         )
         [ imageElt masonry listItem ]

@@ -78,4 +78,4 @@ iconElt iconName =
 
 clickHandler :: Config r i -> Maybe (HH.Attribute r i)
 clickHandler { onClick } =
-    Maybe.map HH.Events.onClick onClick
+    map HH.Events.onClick onClick

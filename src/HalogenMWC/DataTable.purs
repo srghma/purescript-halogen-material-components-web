@@ -70,7 +70,7 @@ dataTableContentCs =
 
 ariaLabelAttr :: Config r i -> Maybe (HH.Attribute r i)
 ariaLabelAttr { label } =
-    Maybe.map (HH.Attributes.attribute "aria-label") label
+    map (HH.Attributes.attribute "aria-label") label
 
 data Row r i
     = Row { attributes :: Array (IProp r i), nodes :: Array (Cell r i) }

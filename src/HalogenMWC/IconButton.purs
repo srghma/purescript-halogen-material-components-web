@@ -67,4 +67,4 @@ tabIndexProp =
 
 clickHandler :: Config r i -> Maybe (HH.Attribute r i)
 clickHandler config_ =
-    Maybe.map HH.Events.onClick config_.onClick
+    map HH.Events.onClick config_.onClick

@@ -124,7 +124,7 @@ outlinedCs variant =
 
 leadingIconCs :: Config a r i -> Maybe (HH.Attribute r i)
 leadingIconCs { leadingIcon } =
-    Maybe.map (\_ -> HP.class_ "mdc-select--with-leading-icon") leadingIcon
+    map (\_ -> HP.class_ "mdc-select--with-leading-icon") leadingIcon
 
 disabledProp :: Config a r i -> Maybe (HH.Attribute r i)
 disabledProp { disabled } =

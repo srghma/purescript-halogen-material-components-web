@@ -84,7 +84,7 @@ gridcellRole =
 
 removalHandler :: Chip.Config r i -> Maybe (HH.Attribute r i)
 removalHandler { onDelete } =
-    Maybe.map (HH.Events.on "MDCChip:removal" << Decode.succeed) onDelete
+    map (HH.Events.on "MDCChip:removal" << Decode.succeed) onDelete
 
 rippleElt :: Maybe (Html r i)
 rippleElt =
@@ -92,7 +92,7 @@ rippleElt =
 
 leadingIconElt :: Chip.Config r i -> Maybe (Html r i)
 leadingIconElt { leadingIcon } =
-    Maybe.map
+    map
         (\iconName ->
             HH.i [ HP.class_ "material-icons mdc-chip__icon mdc-chip__icon--leading" ]
                 [ text iconName ]

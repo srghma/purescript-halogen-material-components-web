@@ -109,12 +109,12 @@ ariaSelectedAttr { selection } =
 
 hrefAttr :: Config r i -> Maybe (HH.Attribute r i)
 hrefAttr { href } =
-    Maybe.map HH.Attributes.href href
+    map HH.Attributes.href href
 
 targetAttr :: Config r i -> Maybe (HH.Attribute r i)
 targetAttr { href, target } =
     if href /= Nothing then
-        Maybe.map HH.Attributes.target target
+        map HH.Attributes.target target
 
     else
         Nothing

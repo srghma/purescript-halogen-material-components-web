@@ -45,7 +45,7 @@ chip selected onChange toLabel (config_@Chip ({ additionalAttributes }) value) =
                 , chipTouchCs
                 , rowRole
                 , selectedProp (Just value == selected)
-                , interactionHandler (Maybe.map ((#) value) onChange)
+                , interactionHandler (map ((#) value) onChange)
                 ]
                 <> additionalAttributes
             )
@@ -103,7 +103,7 @@ gridcellRole =
 
 interactionHandler :: Maybe r i -> Maybe (HH.Attribute r i)
 interactionHandler r i =
-    Maybe.map (HH.Events.on "MDCChip:interaction" << Decode.succeed) r i
+    map (HH.Events.on "MDCChip:interaction" << Decode.succeed) r i
 
 rippleElt :: Maybe (Html r i)
 rippleElt =
@@ -111,7 +111,7 @@ rippleElt =
 
 leadingIconElt :: Chip.Config r i -> Maybe (Html r i)
 leadingIconElt { icon } =
-    Maybe.map
+    map
         (\iconName ->
             HH.i [ HP.class_ "material-icons mdc-chip__icon mdc-chip__icon--leading" ]
                 [ text iconName ]
