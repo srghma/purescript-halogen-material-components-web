@@ -204,7 +204,7 @@ actionButtonCs :: Maybe (IProp r i)
 actionButtonCs = Just (HP.classes [mdc_button, mdc_snackbar__action])
 
 actionButtonClickHandler :: MessageId -> Message r i -> Maybe (IProp r i)
-actionButtonClickHandler messageId (Message { onActionButtonClick }) = map (HH.Events.onClick << (#) messageId) onActionButtonClick
+actionButtonClickHandler messageId (Message { onActionButtonClick }) = map (HH.Events.onClick <<< (#) messageId) onActionButtonClick
 
 actionIconElt :: MessageId -> Message r i -> Maybe (HH.HTML w i)
 actionIconElt messageId (message_@(Message { actionIcon })) =

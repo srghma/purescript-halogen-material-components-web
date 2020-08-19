@@ -103,28 +103,28 @@ sliderRoleAttr :: Maybe (IProp r i)
 sliderRoleAttr = Just (HP.attr "role" "slider")
 
 valueProp :: Config r i -> Maybe (IProp r i)
-valueProp { value } = map (HP.prop "value" << Encode.float) value
+valueProp { value } = map (HP.prop "value" <<< Encode.float) value
 
 minProp :: Config r i -> Maybe (IProp r i)
-minProp { min } = map (HP.prop "min" << Encode.float) min
+minProp { min } = map (HP.prop "min" <<< Encode.float) min
 
 maxProp :: Config r i -> Maybe (IProp r i)
-maxProp { max } = map (HP.prop "max" << Encode.float) max
+maxProp { max } = map (HP.prop "max" <<< Encode.float) max
 
 stepProp :: Config r i -> Maybe (IProp r i)
-stepProp { step } = map (HP.prop "step" << Encode.float) step
+stepProp { step } = map (HP.prop "step" <<< Encode.float) step
 
 disabledProp :: Config r i -> Maybe (IProp r i)
 disabledProp { disabled } = Just (HP.prop "disabled" disabled)
 
 ariaValueMinAttr :: Config r i -> Maybe (IProp r i)
-ariaValueMinAttr { min } = map (HP.attr "aria-valuemin" << String.fromFloat) min
+ariaValueMinAttr { min } = map (HP.attr "aria-valuemin" <<< String.fromFloat) min
 
 ariaValueMaxAttr :: Config r i -> Maybe (IProp r i)
-ariaValueMaxAttr { max } = map (HP.attr "aria-valuemax" << String.fromFloat) max
+ariaValueMaxAttr { max } = map (HP.attr "aria-valuemax" <<< String.fromFloat) max
 
 ariaValuenowAttr :: Config r i -> Maybe (IProp r i)
-ariaValuenowAttr { value } = map (HP.attr "aria-valuenow" << String.fromFloat) value
+ariaValuenowAttr { value } = map (HP.attr "aria-valuenow" <<< String.fromFloat) value
 
 changeHandler :: Config r i -> Maybe (IProp r i)
 changeHandler { onInput } =

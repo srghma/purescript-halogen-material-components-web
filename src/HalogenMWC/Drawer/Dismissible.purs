@@ -57,7 +57,7 @@ openProp :: Config r i -> Maybe (IProp r i)
 openProp { open } = Just (HP.prop "open" open)
 
 closeHandler :: Config r i -> Maybe (IProp r i)
-closeHandler { onClose } = map (HH.Events.on "MDCDrawer:close" << Decode.succeed) onClose
+closeHandler { onClose } = map (HH.Events.on "MDCDrawer:close" <<< Decode.succeed) onClose
 
 appContent :: IProp r i
 appContent = HP.class_ mdc_drawer_app_content

@@ -57,7 +57,7 @@ ariaModalAttr :: Maybe (IProp r i)
 ariaModalAttr = Just (HP.attr "aria-modal" "true")
 
 closeHandler :: Config r i -> Maybe (IProp r i)
-closeHandler { onClose } = map (HH.Events.on "MDCDialog:close" << Decode.succeed) onClose
+closeHandler { onClose } = map (HH.Events.on "MDCDialog:close" <<< Decode.succeed) onClose
 
 containerElt :: Content r i -> HH.HTML w i
 containerElt content = HH.div [ HP.class_ mdc_dialog__container ] [ surfaceElt content ]

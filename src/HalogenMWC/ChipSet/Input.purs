@@ -42,7 +42,7 @@ tabIndexProp :: Int -> IProp r i
 tabIndexProp tabIndex = HP.prop "tabIndex" tabIndex
 
 removalHandler :: Chip.Config r i -> Maybe (IProp r i)
-removalHandler { onDelete } = map (HH.Events.on "MDCChip:removal" << Decode.succeed) onDelete
+removalHandler { onDelete } = map (HH.Events.on "MDCChip:removal" <<< Decode.succeed) onDelete
 
 rippleElt :: Maybe (HH.HTML w i)
 rippleElt = Just (HH.div [ HP.class_ mdc_chip__ripple ] [])

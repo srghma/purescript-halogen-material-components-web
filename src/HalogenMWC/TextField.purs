@@ -180,10 +180,10 @@ maxLengthProp { maxLength } =
     )
 
 minLengthAttr :: Config r i -> Maybe (IProp r i)
-minLengthAttr { minLength } = map (HP.attr "minLength" << String.fromInt) minLength
+minLengthAttr { minLength } = map (HP.attr "minLength" <<< String.fromInt) minLength
 
 maxLengthAttr :: Config r i -> Maybe (IProp r i)
-maxLengthAttr { maxLength } = map (HP.attr "maxLength" << String.fromInt) maxLength
+maxLengthAttr { maxLength } = map (HP.attr "maxLength" <<< String.fromInt) maxLength
 
 minProp :: Config r i -> Maybe (IProp r i)
 minProp { min } =
@@ -207,7 +207,7 @@ stepProp { step } =
     )
 
 valueProp :: Config r i -> Maybe (IProp r i)
-valueProp { value } = map (HP.prop "value" << Encode.string) value
+valueProp { value } = map (HP.prop "value" <<< Encode.string) value
 
 placeholderAttr :: Config r i -> Maybe (IProp r i)
 placeholderAttr { placeholder } = map HP.placeholder placeholder

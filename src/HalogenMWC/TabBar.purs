@@ -58,7 +58,7 @@ activeTabIndexProp tabs =
         # Array.head
         # map Tuple.first
   in
-    map (HP.prop "activeTabIndex" << Encode.int) activeTabIndex
+    map (HP.prop "activeTabIndex" <<< Encode.int) activeTabIndex
 
 viewTab :: Config r i -> Tab r i -> HH.HTML w i
 viewTab (barConfig@{ indicatorSpansContent }) (tabConfig@(Tab ({ additionalAttributes, content }))) =
@@ -105,7 +105,7 @@ tabRoleAttr :: Maybe (IProp r i)
 tabRoleAttr = Just (HP.attr "role" "tab")
 
 tabClickHandler :: Tab.Config r i -> Maybe (IProp r i)
-tabClickHandler { onClick } = map (HH.Events.on "MDCTab:interacted" << Decode.succeed) onClick
+tabClickHandler { onClick } = map (HH.Events.on "MDCTab:interacted" <<< Decode.succeed) onClick
 
 tabContentElt :: Config r i -> Tab.Config r i -> Tab.Content -> Maybe (HH.HTML w i)
 tabContentElt (barConfig@{ indicatorSpansContent }) config_ content =

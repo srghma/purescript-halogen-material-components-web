@@ -84,7 +84,7 @@ ariaLabelAttr { label } = map (HP.attr "aria-label") label
 
 changeHandler :: Config r i -> Maybe (IProp r i)
 changeHandler { onChange } =
-  map (HH.Events.on "MDCIconButtonToggle:change" << Decode.succeed)
+  map (HH.Events.on "MDCIconButtonToggle:change" <<< Decode.succeed)
     onChange
 
 disabledAttr :: Config r i -> Maybe (IProp r i)
