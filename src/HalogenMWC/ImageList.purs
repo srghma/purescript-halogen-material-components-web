@@ -34,7 +34,7 @@ imageArray (config_@{ additionalAttributes }) listItems =
             ]
             <> additionalAttributes
         )
-        (Array.map (listItemElt config_) listItems)
+        (map (listItemElt config_) listItems)
 
 rootCs :: Maybe (HH.Attribute r i)
 rootCs =

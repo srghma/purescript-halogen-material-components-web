@@ -37,8 +37,8 @@ dataTable (config_@{ additionalAttributes }) { thead, tbody } =
             , ariaLabelAttr config_
             ]
         )
-        [ HH.thead [] (Array.map headerRow thead)
-        , HH.tbody [ dataTableContentCs ] (Array.map bodyRow tbody)
+        [ HH.thead [] (map headerRow thead)
+        , HH.tbody [ dataTableContentCs ] (map bodyRow tbody)
         ]
     ]
 
@@ -70,13 +70,13 @@ dataTableRowSelectedCs :: HH.Attribute r i
 dataTableRowSelectedCs = HP.class_ mdc_data_table__row____selected
 
 headerRow :: Row r i -> Html r i
-headerRow (Row { attributes, nodes }) = HH.tr ([ dataTableHeaderRowCs, attributes ] <> (Array.map headerCell nodes))
+headerRow (Row { attributes, nodes }) = HH.tr ([ dataTableHeaderRowCs, attributes ] <> (map headerCell nodes))
 
 dataTableHeaderRowCs :: HH.Attribute r i
 dataTableHeaderRowCs = HP.class_ mdc_data_table__header_row
 
 bodyRow :: Row r i -> Html r i
-bodyRow (Row { attributes, nodes }) = HH.tr ([ dataTableRowCs, attributes ] <> (Array.map bodyCell nodes))
+bodyRow (Row { attributes, nodes }) = HH.tr ([ dataTableRowCs, attributes ] <> (map bodyCell nodes))
 
 dataTableRowCs :: HH.Attribute r i
 dataTableRowCs = HP.class_ mdc_data_table__row

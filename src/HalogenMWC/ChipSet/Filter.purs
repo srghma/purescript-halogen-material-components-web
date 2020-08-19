@@ -7,23 +7,24 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Chip.Filter as Chip
+import HalogenMWC.Chip.Filter
 import Halogen.SVG.Elements as Halogen.SVG.Elements
 import Halogen.SVG.Attributes as Halogen.SVG.Attributes
 
 chipSet :: Array (IProp r i) -> Array (Chip r i) -> Html r i
 chipSet additionalAttributes chips =
   HH.element "mdc-chip-set"
-    ([ chipSetCs, chipSetFilterCs, gridRole ] <> additionalAttributes)
-    (Array.map chip chips)
+    ([ HP.class_ mdc_chip_set, HP.class_ mdc_chip_set____filter, HH.Attributes.attribute "role" "grid" ] <> additionalAttributes)
+    (map chip chips)
 
 chip :: Chip r i -> Html r i
 chip (Chip (config_@{ additionalAttributes }) label) =
   HH.div [ HP.class_ mdc_touch_target_wrapper ]
     [ HH.element "mdc-chip"
         ( Array.filterMap identity
-            [ chipCs
-            , chipTouchCs
-            , rowRole
+            [ HP.class_ mdc_chip
+            , HP.class_ mdc_chip____touch
+            , HH.Attributes.attribute "role" "row"
             , selectedProp config_
             , interactionHandler config_
             ]
@@ -38,38 +39,8 @@ chip (Chip (config_@{ additionalAttributes }) label) =
         )
     ]
 
-chipSetCs :: HH.Attribute r i
-chipSetCs = HP.class_ mdc_chip_set
-
-chipSetFilterCs :: HH.Attribute r i
-chipSetFilterCs = HP.class_ mdc_chip_set____filter
-
-gridRole :: HH.Attribute r i
-gridRole = HH.Attributes.attribute "role" "grid"
-
-chipCs :: Maybe (HH.Attribute r i)
-chipCs = Just (HP.class_ mdc_chip)
-
-chipTextCs :: HH.Attribute r i
-chipTextCs = HP.class_ mdc_chip__text
-
-chipTouchCs :: Maybe (HH.Attribute r i)
-chipTouchCs = Just (HP.class_ mdc_chip____touch)
-
-chipPrimaryActionCs :: HH.Attribute r i
-chipPrimaryActionCs = HP.class_ mdc_chip__primary_action
-
 selectedProp :: Chip.Config r i -> Maybe (HH.Attribute r i)
 selectedProp { selected } = Just (HH.Attributes.property "selected" (Encode.bool selected))
-
-buttonRole :: HH.Attribute r i
-buttonRole = HH.Attributes.attribute "role" "button"
-
-rowRole :: Maybe (HH.Attribute r i)
-rowRole = Just (HH.Attributes.attribute "role" "row")
-
-gridcellRole :: HH.Attribute r i
-gridcellRole = HH.Attributes.attribute "role" "gridcell"
 
 interactionHandler :: Chip.Config r i -> Maybe (HH.Attribute r i)
 interactionHandler { onChange } = map (HH.Events.on "MDCChip:interaction" << Decode.succeed) onChange
@@ -111,11 +82,11 @@ checkmarkElt =
 primaryActionElt :: String -> Maybe (Html r i)
 primaryActionElt label =
   Just
-    $ HH.span [ chipPrimaryActionCs, gridcellRole ]
+    $ HH.span [ HP.class_ mdc_chip__primary_action, HH.Attributes.attribute "role" "gridcell" ]
         (Array.filterMap identity [ textElt label, touchElt ])
 
 textElt :: String -> Maybe (Html r i)
-textElt label = Just (HH.span [ chipTextCs, buttonRole ] [ text label ])
+textElt label = Just (HH.span [ HP.class_ mdc_chip__text, HH.Attributes.attribute "role" "button" ] [ text label ])
 
 touchElt :: Maybe (Html r i)
 touchElt = Just (HH.div [ HP.class_ mdc_chip__touch ] [])

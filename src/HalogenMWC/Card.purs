@@ -38,7 +38,7 @@ card (config_@{ additionalAttributes }) content =
     )
 
 blocksElt :: Content r i -> Array (Html r i)
-blocksElt { blocks } = Array.map (\(Block html) -> html) blocks
+blocksElt { blocks } = map (\(Block html) -> html) blocks
 
 actionsElt :: Content r i -> Array (Html r i)
 actionsElt content = case content.actions of
@@ -55,13 +55,13 @@ actionsElt content = case content.actions of
         ( Array.concat
             [ if not (Array.isEmpty buttons) then
                 [ HH.div [ HP.class_ mdc_card__action_buttons ]
-                    (Array.map (\(Button button_) -> button_) buttons)
+                    (map (\(Button button_) -> button_) buttons)
                 ]
               else
                 []
             , if not (Array.isEmpty icons) then
                 [ HH.div [ HP.class_ mdc_card__action_icons ]
-                    (Array.map (\(Icon icon_) -> icon_) icons)
+                    (map (\(Icon icon_) -> icon_) icons)
                 ]
               else
                 []

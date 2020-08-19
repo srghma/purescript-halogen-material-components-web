@@ -202,4 +202,4 @@ tabScrollerScrollAreaElt barConfig tabs =
 tabScrollerScrollContentElt :: Config r i -> Array (Tab r i) -> Html r i
 tabScrollerScrollContentElt barConfig tabs =
     HH.div [ HP.class_ mdc_tab_scroller__scroll_content ]
-        (Array.map (viewTab barConfig) tabs)
+        (map (viewTab barConfig) tabs)

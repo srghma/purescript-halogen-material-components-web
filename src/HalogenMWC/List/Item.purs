@@ -7,10 +7,24 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
-import HalogenMWC.Array.Item (Config(..), ArrayItem(..), Selection(..))
+type Config r i
+  = { disabled :: Boolean
+    , selection :: Maybe Selection
+    , href :: Maybe String
+    , target :: Maybe String
+    , additionalAttributes :: Array (IProp r i)
+    , onClick :: Maybe r i
+    , node :: Html r i
+    }
 
-type Config r i =
-    Material.Array.Item.Config r i
+data Selection
+  = Selected
+  | Activated
+
+data ArrayItem r i
+  = ArrayItem (Config r i)
+  | ArrayItemDivider (Html r i)
+  | ArrayGroupSubheader (Html r i)
 
 defaultConfig :: Config r i
 defaultConfig =
@@ -23,9 +37,6 @@ defaultConfig =
         , node: HH.text ""
         }
 
-data Selection =
-    Material.Array.Item.Selection
-
 selected :: Selection
 selected =
     Selected
@@ -34,37 +45,30 @@ activated :: Selection
 activated =
     Activated
 
-data ArrayItem r i =
-    Material.Array.Item.ArrayItem r i
-
 listItem :: Config r i -> Array (Html r i) -> ArrayItem r i
-listItem (config_@Config ({ additionalAttributes, href })) nodes =
-    ArrayItem { config_ { node = listItemView (Config config_) nodes }
+listItem config_ nodes =
+    ArrayItem (config_ { node = listItemView config_ nodes })
 
 listItemView :: Config r i -> Array (Html r i) -> Html r i
-listItemView (config_@{ additionalAttributes, href }) nodes =
+listItemView config_ nodes =
     (\attributes ->
-        if href /= Nothing then
+        if config_.href /= Nothing then
             HH.element "mdc-list-item" [] [ HH.a attributes nodes ]
 
         else
             HH.element "mdc-list-item" attributes nodes
-    ) where
-        (Array.filterMap identity
-            [ listItemCs
-            , hrefAttr config_
-            , targetAttr config_
-            , disabledCs config_
-            , selectedCs config_
-            , activatedCs config_
-            , ariaSelectedAttr config_
-            ]
-            <> additionalAttributes
-        )
-
-listItemCs :: Maybe (HH.Attribute r i)
-listItemCs =
-    Just (HP.class_ mdc_list_item)
+    )
+    (Array.filterMap identity
+        [ HP.class_ mdc_list_item
+        , hrefAttr config_
+        , targetAttr config_
+        , disabledCs config_
+        , selectedCs config_
+        , activatedCs config_
+        , ariaSelectedAttr config_
+        ]
+        <> config_.additionalAttributes
+    )
 
 disabledCs :: Config r i -> Maybe (HH.Attribute r i)
 disabledCs { disabled } =
@@ -86,7 +90,6 @@ activatedCs :: Config r i -> Maybe (HH.Attribute r i)
 activatedCs { selection } =
     if selection == Just Activated then
         Just (HP.class_ mdc_list_item____activated)
-
     else
         Nothing
 
@@ -111,7 +114,7 @@ targetAttr { href, target } =
 
 {-| Two-line list item's text
 -}
-text :
+text ::
     Array (IProp r i)
     ->
         { primary :: Array (Html r i)
@@ -119,7 +122,7 @@ text :
         }
     -> Html r i
 text additionalAttributes { primary, secondary } =
-    HH.div (HP.class_ mdc_list_item__text] <> additionalAttributes)
+    HH.div ([HP.class_ mdc_list_item__text] <> additionalAttributes)
         [ primaryText [] primary
         , secondaryText [] secondary
         ]

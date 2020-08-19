@@ -30,7 +30,7 @@ fab (config_@{ additionalAttributes }) label =
     HH.element "mdc-fab"
         (Array.filterMap identity
             [ rootCs
-            , extendedFabCs
+            , HP.classes [mdc_fab mdc_fab____extended]
             , exitedCs config_
             , clickHandler config_
             , tabIndexProp 0
@@ -49,18 +49,14 @@ tabIndexProp :: Int -> Maybe (HH.Attribute r i)
 tabIndexProp tabIndex =
     Just (HH.Attributes.property "tabIndex" (Encode.int tabIndex))
 
-extendedFabCs :: Maybe (HH.Attribute r i)
-extendedFabCs =
-    Just (HP.class_ "mdc-fab mdc-fab--extended")
-
 rippleElt :: Maybe (Html r i)
 rippleElt =
     Just (HH.div [ HP.class_ mdc_fab__ripple ] [])
 
 leadingIconElt :: Config r i -> Maybe (Html r i)
 leadingIconElt { icon, trailingIcon } =
-    case ( icon, trailingIcon ) of
-        ( Just iconName, False ) ->
+    case Tuple icon trailingIcon of
+        Just (Tuple iconName False)  ->
             Just
                 (HH.span [ HP.class_ material_icons, HP.class_ mdc_fab__icon ]
                     [ text iconName ]
@@ -75,7 +71,7 @@ labelElt label =
 
 trailingIconElt :: Config r i -> Maybe (Html r i)
 trailingIconElt { icon, trailingIcon } =
-    case ( icon, trailingIcon ) of
+    case (Tuple icon trailingIcon) of
         ( Just iconName, True ) ->
             Just
                 (HH.span [ HP.class_ material_icons, HP.class_ mdc_fab__icon ]

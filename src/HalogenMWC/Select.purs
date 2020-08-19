@@ -185,7 +185,7 @@ menuElt leadingIcon selected onChange firstSelectItem remainingSelectItems =
         )
         [ Array.list (Array.config # Array.setWrapFocus True)
             (listItem leadingIcon selected onChange firstSelectItem)
-            (Array.map (listItem leadingIcon selected onChange) remainingSelectItems)
+            (map (listItem leadingIcon selected onChange) remainingSelectItems)
         ]
 
 listItem :: Maybe (Icon r i) -> Maybe a -> Maybe (a -> r i) -> SelectItem a r i -> ArrayItem r i

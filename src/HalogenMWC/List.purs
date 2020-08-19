@@ -46,7 +46,7 @@ remaining list items. This way we guarantee lists to be non-empty.
 list :: Config r i -> ArrayItem r i -> Array (ArrayItem r i) -> Html r i
 list (config_@{ additionalAttributes }) firstArrayItem remainingArrayItems =
   let
-    listItems = firstArrayItem :: remainingArrayItems
+    listItems = [firstArrayItem] <> remainingArrayItems
   in
     HH.element "mdc-list"
       ( Array.filterMap identity
@@ -61,7 +61,7 @@ list (config_@{ additionalAttributes }) firstArrayItem remainingArrayItems =
           ]
           <> additionalAttributes
       )
-      ( Array.map
+      ( map
           ( \listItem_ -> case listItem_ of
               ArrayItem.ArrayItem { node } -> node
               ArrayItem.ArrayItemDivider node -> node
@@ -111,7 +111,7 @@ clickHandler listItems =
 
     nthOnClick index =
       listItems
-        # Array.map getOnClick
+        # map getOnClick
         # Array.filterMap identity
         # Array.drop index
         # Array.head

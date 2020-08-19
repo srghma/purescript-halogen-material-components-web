@@ -7,25 +7,26 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
+import HalogenMWC.Chip.Input
 import HalogenMWC.Chip.Input as Chip
 
 chipSet :: Array (IProp r i) -> Array (Tuple String (Chip r i)) -> Html r i
 chipSet additionalAttributes keyedChips =
     HH.keyed "mdc-chip-set"
-        ([ chipSetCs, chipSetInputCs, gridRole] <> additionalAttributes)
-        (Array.map (Tuple.mapSecond chip) keyedChips)
+        ([ HP.class_ mdc_chip_set, HP.class_ mdc_chip_set____input, HH.Attributes.attribute "role" "grid"] <> additionalAttributes)
+        (map (Tuple.mapSecond chip) keyedChips)
 
 chip :: Chip r i -> Html r i
-chip (Chip (config_@{ additionalAttributes }) label) =
+chip (Chip config_ label) =
     HH.div [ HP.class_ mdc_touch_target_wrapper ]
         [ HH.element "mdc-chip"
             (Array.filterMap identity
-                [ chipCs
-                , chipTouchCs
-                , rowRole
+                [ HP.class_ mdc_chip
+                , HP.class_ mdc_chip____touch
+                , HH.Attributes.attribute "role" "row"
                 , removalHandler config_
                 ]
-                <> additionalAttributes
+                <> config_.additionalAttributes
             )
             (Array.filterMap identity
                 [ rippleElt
@@ -36,49 +37,9 @@ chip (Chip (config_@{ additionalAttributes }) label) =
             )
         ]
 
-chipSetCs :: HH.Attribute r i
-chipSetCs =
-    HP.class_ mdc_chip_set
-
-chipSetInputCs :: HH.Attribute r i
-chipSetInputCs =
-    HP.class_ mdc_chip_set____input
-
-gridRole :: HH.Attribute r i
-gridRole =
-    HH.Attributes.attribute "role" "grid"
-
-chipCs :: Maybe (HH.Attribute r i)
-chipCs =
-    Just (HP.class_ mdc_chip)
-
-chipTextCs :: HH.Attribute r i
-chipTextCs =
-    HP.class_ mdc_chip__text
-
-chipTouchCs :: Maybe (HH.Attribute r i)
-chipTouchCs =
-    Just (HP.class_ mdc_chip____touch)
-
-chipPrimaryActionCs :: HH.Attribute r i
-chipPrimaryActionCs =
-    HP.class_ mdc_chip__primary_action
-
 tabIndexProp :: Int -> HH.Attribute r i
 tabIndexProp tabIndex =
     HH.Attributes.property "tabIndex" (Encode.int tabIndex)
-
-buttonRole :: HH.Attribute r i
-buttonRole =
-    HH.Attributes.attribute "role" "button"
-
-rowRole :: Maybe (HH.Attribute r i)
-rowRole =
-    Just (HH.Attributes.attribute "role" "row")
-
-gridcellRole :: HH.Attribute r i
-gridcellRole =
-    HH.Attributes.attribute "role" "gridcell"
 
 removalHandler :: Chip.Config r i -> Maybe (HH.Attribute r i)
 removalHandler { onDelete } =
@@ -100,12 +61,12 @@ leadingIconElt { leadingIcon } =
 primaryActionElt :: String -> Maybe (Html r i)
 primaryActionElt label =
     Just $
-        HH.span [ chipPrimaryActionCs, gridcellRole, tabIndexProp -1 ]
+        HH.span [ HP.class_ mdc_chip__primary_action, HH.Attributes.attribute "role" "gridcell", tabIndexProp -1 ]
             (Array.filterMap identity [ textElt label, touchElt ])
 
 textElt :: String -> Maybe (Html r i)
 textElt label =
-    Just (HH.span [ chipTextCs, buttonRole ] [ text label ])
+    Just (HH.span [ HP.class_ mdc_chip__text, HH.Attributes.attribute "role" "button" ] [ text label ])
 
 touchElt :: Maybe (Html r i)
 touchElt =
@@ -118,7 +79,7 @@ trailingIconElt { trailingIcon, onDelete } =
             HH.i
                 [ HP.class_ "material-icons mdc-chip__icon mdc-chip__icon--trailing"
                 , tabIndexProp -1
-                , buttonRole
+                , HH.Attributes.attribute "role" "button"
                 ]
                 [ text (Maybe.withDefault "cancel" trailingIcon) ]
 

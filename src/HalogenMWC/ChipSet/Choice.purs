@@ -6,16 +6,14 @@ import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import HalogenMWC.Chip.Choice
 
-import HalogenMWC.Chip.Choice as Chip
-
-data Config a r i
-    =
-        { selected :: Maybe a
-        , onChange :: Maybe (a -> r i)
-        , toLabel :: a -> String
-        , additionalAttributes :: Array (IProp r i)
-        }
+type Config a r i =
+  { selected :: Maybe a
+  , onChange :: Maybe (a -> r i)
+  , toLabel :: a -> String
+  , additionalAttributes :: Array (IProp r i)
+  }
 
 config :: { toLabel :: a -> String } -> Config a r i
 config { toLabel } =
@@ -29,10 +27,10 @@ chipSet :: Config a r i -> Array (Chip a r i) -> Html r i
 chipSet (config_@{ selected, onChange, toLabel, additionalAttributes }) chips =
     HH.element "mdc-chip-set"
         ([ chipSetCs, chipSetChoiceCs, gridRole] <> additionalAttributes)
-        (Array.map (chip selected onChange toLabel) chips)
+        (map (chip selected onChange toLabel) chips)
 
 chip :: Maybe a -> Maybe (a -> r i) -> (a -> String) -> Chip a r i -> Html r i
-chip selected onChange toLabel (config_@Chip ({ additionalAttributes }) value) =
+chip selected onChange toLabel (Chip config_ value) =
     HH.div [ HP.class_ mdc_touch_target_wrapper ]
         [ HH.element "mdc-chip"
             (Array.filterMap identity
@@ -42,7 +40,7 @@ chip selected onChange toLabel (config_@Chip ({ additionalAttributes }) value) =
                 , selectedProp (Just value == selected)
                 , interactionHandler (map ((#) value) onChange)
                 ]
-                <> additionalAttributes
+                <> config_.additionalAttributes
             )
             (Array.filterMap identity
                 [ rippleElt
@@ -104,7 +102,7 @@ rippleElt :: Maybe (Html r i)
 rippleElt =
     Just (HH.div [ HP.class_ mdc_chip__ripple ] [])
 
-leadingIconElt :: Chip.Config r i -> Maybe (Html r i)
+leadingIconElt :: Config r i -> Maybe (Html r i)
 leadingIconElt { icon } =
     map
         (\iconName ->

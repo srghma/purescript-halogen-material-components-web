@@ -6,54 +6,44 @@ import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import Data.List (List(..), (:))
+import Data.List as List
 
-data Queue r i
-    = Queue
-        { messages :: Array ( MessageId, Message r i )
-        , nextMessageId :: MessageId
-        }
+type Queue r i =
+  { messages :: Array (Tuple MessageId (Message r i))
+  , nextMessageId :: MessageId
+  }
 
-data MessageId
-    = MessageId Int
+newtype MessageId = MessageId Int
 
 inc :: MessageId -> MessageId
-inc (MessageId messageId) =
-    MessageId (messageId + 1)
+inc (MessageId messageId) = MessageId (messageId + 1)
 
 initialQueue :: Queue r i
 initialQueue =
-    Queue
-        { messages: []
-        , nextMessageId: MessageId 0
-        }
+  { messages: []
+  , nextMessageId: MessageId 0
+  }
 
 close :: MessageId -> Queue r i -> Queue r i
-close messageId (Queue queue) =
-    Queue $
-        { queue
-            { messages =
-                case queue.messages of
-                    [] ->
-                        []
-
-                    ( currentMessageId, _ ) :: otherMessages ->
-                        if currentMessageId == messageId then
-                            otherMessages
-
-                        else
-                            queue.messages
-        }
+close messageId queue =
+  { messages:
+      case queue.messages of
+          [] -> []
+          (Tuple currentMessageId _) : otherMessages ->
+              if currentMessageId == messageId
+                then otherMessages
+                else queue.messages
+  , nextMessageId: queue.nextMessageId
+  }
 
 addMessage :: Message r i -> Queue r i -> Queue r i
-addMessage message_ (Queue queue) =
-    Queue
-        { queue
-            { messages = queue.messages <> [ ( queue.nextMessageId, message_ ) ]
-            , nextMessageId: inc queue.nextMessageId
-        }
+addMessage message_ queue =
+  { messages: queue.messages <> List.singleton (Tuple queue.nextMessageId message_ )
+  , nextMessageId: inc queue.nextMessageId
+  }
 
-type Config r i
-    =
+type Config r i =
         { closeOnEscape :: Boolean
         , additionalAttributes :: Array (IProp r i)
         , onClosed :: MessageId -> r i
@@ -67,12 +57,12 @@ config { onClosed } =
         }
 
 snackbar :: Config r i -> Queue r i -> Html r i
-snackbar (config_@{ additionalAttributes }) ((Queue { messages, nextMessageId }) as queue) =
+snackbar config_ queue =
     let
-        ( currentMessageId, currentMessage ) =
-            Array.head messages
+        (Tuple currentMessageId currentMessage) =
+            Array.head queue.messages
                 # map (Tuple.mapSecond Just)
-                # Maybe.withDefault ( MessageId -1, Nothing )
+                # Maybe.withDefault ( Tuple (MessageId -1) Nothing )
     in
     HH.element "mdc-snackbar"
         (Array.filterMap identity
@@ -84,7 +74,7 @@ snackbar (config_@{ additionalAttributes }) ((Queue { messages, nextMessageId })
             , timeoutMsProp currentMessage
             , closedHandler currentMessageId config_
             ]
-            <> additionalAttributes
+            <> config_.additionalAttributes
         )
         [ surfaceElt currentMessageId (Maybe.withDefault (message "") currentMessage) ]
 
@@ -199,7 +189,7 @@ actionsElt messageId message_ =
         )
 
 actionButtonElt :: MessageId -> Message r i -> Maybe (Html r i)
-actionButtonElt messageId ((Message { actionButton }) as message_) =
+actionButtonElt messageId (message_@(Message { actionButton })) =
     map
         (\actionButtonLabel ->
             HH.button
@@ -221,7 +211,7 @@ actionButtonClickHandler messageId (Message { onActionButtonClick }) =
     map (HH.Events.onClick << (#) messageId) onActionButtonClick
 
 actionIconElt :: MessageId -> Message r i -> Maybe (Html r i)
-actionIconElt messageId ((Message { actionIcon }) as message_) =
+actionIconElt messageId (message_@(Message { actionIcon })) =
     map
         (\actionIconLabel ->
             HH.i

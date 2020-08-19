@@ -6,7 +6,6 @@ import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
-import HalogenMWC.Chip.Action as Chip
 
 chipSet :: Array (IProp r i) -> Array (Chip r i) -> Html r i
 chipSet additionalAttributes chips =
@@ -16,7 +15,7 @@ chipSet additionalAttributes chips =
       ]
         <> additionalAttributes
     )
-    (Array.map chip chips)
+    (map chip chips)
 
 chip :: Chip r i -> Html r i
 chip (Chip config_ label) =
