@@ -29,8 +29,8 @@ require decisions, or involve multiple tasks.
 
 # Basic Usage
 
-    import Material.Button as Button
-    import Material.Dialog as Dialog
+    import HalogenMWC.Button as Button
+    import HalogenMWC.Dialog as Dialog
 
     data Msg
         = Closed

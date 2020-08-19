@@ -38,7 +38,7 @@ can look for patterns and insights.
 
 # Basic Usage
 
-    import Material.DataTable as DataTable
+    import HalogenMWC.DataTable as DataTable
 
     main =
         DataTable.dataTable DataTable.config
@@ -96,7 +96,7 @@ can look for patterns and insights.
 
 ## Checkbox Cell
 
-    import Material.Checkbox as Checkbox
+    import HalogenMWC.Checkbox as Checkbox
 
     DataTable.checkboxCell [] Checkbox.config
 
@@ -111,8 +111,8 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
-import Material.Checkbox as Checkbox
-import Material.Checkbox.Internal
+import HalogenMWC.Checkbox as Checkbox
+import HalogenMWC.Checkbox.Internal
 
 
 {-| Configuration of a data table

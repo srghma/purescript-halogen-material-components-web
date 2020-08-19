@@ -36,9 +36,9 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
     
-    import Material.Drawer.Permanent as PermanentDrawer
-    import Material.Array as Array
-    import Material.ArrayItem as ArrayItem
+    import HalogenMWC.Drawer.Permanent as PermanentDrawer
+    import HalogenMWC.Array as Array
+    import HalogenMWC.ArrayItem as ArrayItem
 
     main =
         Html.div

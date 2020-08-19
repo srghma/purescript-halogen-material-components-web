@@ -35,7 +35,7 @@ Ripples come in two variants. Use `bounded` for bounded ripple effects which
 work best when used for contained surfaces, and `unbounded` for unbounded
 ripple effects which work best with icons.
 
-    import Material.Ripple as Ripple
+    import HalogenMWC.Ripple as Ripple
 
     main =
         Html.div []

@@ -32,8 +32,8 @@ options.
 
 # Basic Usage
 
-    import Material.Chip.Choice as ChoiceChip
-    import Material.ChipSet.Choice as ChoiceChipSet
+    import HalogenMWC.Chip.Choice as ChoiceChip
+    import HalogenMWC.ChipSet.Choice as ChoiceChipSet
 
     data Color
         = Red
@@ -90,7 +90,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Html.Events
 import Json.Decode as Decode
 import Json.Encode as Encode
-import Material.Chip.Choice.Internal as Chip (Chip(..))
+import HalogenMWC.Chip.Choice.Internal as Chip (Chip(..))
 
 
 {-| Configuration of a choice chip set

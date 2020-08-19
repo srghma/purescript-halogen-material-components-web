@@ -42,7 +42,7 @@ Note that you are expected to wrap cells in `LayoutGrid.inner`. This has to do
 with nesting layout grids, but it is required for flat layout grids as
 well.
 
-    import Material.LayoutGrid as LayoutGrid
+    import HalogenMWC.LayoutGrid as LayoutGrid
 
     main =
         LayoutGrid.layoutGrid []

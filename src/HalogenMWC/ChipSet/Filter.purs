@@ -27,8 +27,8 @@ icon. If the chip already has a leading icon, the checkmark replaces it.
 
 # Basic Usage
 
-    import Material.Chip.Filter as FilterChip
-    import Material.ChipSet.Filter as FilterChipSet
+    import HalogenMWC.Chip.Filter as FilterChip
+    import HalogenMWC.ChipSet.Filter as FilterChipSet
 
     data Msg
         = ChipClicked String
@@ -67,7 +67,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Html.Events
 import Json.Decode as Decode
 import Json.Encode as Encode
-import Material.Chip.Filter.Internal as Chip (Chip(..))
+import HalogenMWC.Chip.Filter.Internal as Chip (Chip(..))
 import Svg
 import Svg.Attributes
 

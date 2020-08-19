@@ -36,10 +36,10 @@ positioning, wrap the button and the menu within an element that sets the
 `surfaceAnchor` attribute. The menu's items are simply a
 [list](Material-Array).
 
-    import Material.Button as Button
-    import Material.Array as Array
-    import Material.ArrayItem as ArrayItem
-    import Material.Menu as Menu
+    import HalogenMWC.Button as Button
+    import HalogenMWC.Array as Array
+    import HalogenMWC.ArrayItem as ArrayItem
+    import HalogenMWC.Menu as Menu
 
     data Msg
         = MenuOpened

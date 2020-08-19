@@ -39,8 +39,8 @@ Note that you will have to set the width and margin of image list items
 yourself, preferably through SASS or through inline CSS.
 
     
-    import Material.ImageArray as ImageArray
-    import Material.ImageArray.Item as ImageArrayItem
+    import HalogenMWC.ImageArray as ImageArray
+    import HalogenMWC.ImageArray.Item as ImageArrayItem
 
     main =
         ImageArray.imageArray ImageArray.config
@@ -109,8 +109,8 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
-import Material.ImageArray.Item (ImageArrayItem)
-import Material.ImageArray.Item.Internal as ImageArrayItem
+import HalogenMWC.ImageArray.Item (ImageArrayItem)
+import HalogenMWC.ImageArray.Item.Internal as ImageArrayItem
 
 
 {-| Configuration of an image list

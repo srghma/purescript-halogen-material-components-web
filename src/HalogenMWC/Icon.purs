@@ -17,7 +17,7 @@ module HalogenMWC.Icon (icon)
 
 # Basic Usage
 
-    import Material.Icon as Icon
+    import HalogenMWC.Icon as Icon
 
     main =
         Icon.icon [] "favorite"

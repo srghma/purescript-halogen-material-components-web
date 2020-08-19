@@ -24,8 +24,8 @@ appear persistently and consistently.
 
 # Basic Usage
 
-    import Material.Chip.Action as ActionChip
-    import Material.ChipSet.Action as ActionChipSet
+    import HalogenMWC.Chip.Action as ActionChip
+    import HalogenMWC.ChipSet.Action as ActionChipSet
 
     data Msg
         = Clicked String
@@ -56,7 +56,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 import Html.Events
 import Json.Decode as Decode
-import Material.Chip.Action.Internal as Chip (Chip(..))
+import HalogenMWC.Chip.Action.Internal as Chip (Chip(..))
 
 
 {-| Chip set view function

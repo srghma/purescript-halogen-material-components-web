@@ -40,7 +40,7 @@ Developers are required to manually position the floating action button within
 their page layout, for instance by setting a fixed position via CSS.
 
     
-    import Material.Fab as Fab
+    import HalogenMWC.Fab as Fab
 
     data Msg
         = FabClicked

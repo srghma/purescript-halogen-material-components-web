@@ -31,8 +31,8 @@ be used. It should be visible either persistently or only on focus.
 
 # Basic Usage
 
-    import Material.HelperText as HelperText
-    import Material.TextField as TextField
+    import HalogenMWC.HelperText as HelperText
+    import HalogenMWC.TextField as TextField
 
     main =
         Html.div []

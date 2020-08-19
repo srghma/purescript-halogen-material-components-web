@@ -34,7 +34,7 @@ tap.
 
 # Basic Usage
 
-    import Material.IconButton as IconButton
+    import HalogenMWC.IconButton as IconButton
 
     data Msg
         = Clicked
@@ -113,7 +113,7 @@ import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 import Html.Events
-import Material.IconButton.Internal (Config(..))
+import HalogenMWC.IconButton.Internal (Config(..))
 
 
 {-| Icon button configuration

@@ -46,7 +46,7 @@ navigation icon, and action items.
 
 # Basic Usage
 
-    import Material.TopAppBar as TopAppBar
+    import HalogenMWC.TopAppBar as TopAppBar
 
     main =
         TopAppBar.regular TopAppBar.config

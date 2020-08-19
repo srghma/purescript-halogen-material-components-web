@@ -42,7 +42,7 @@ bottom of the screen.
 # Basic Usage
 
     import Browser
-    import Material.Snackbar as Snackbar
+    import HalogenMWC.Snackbar as Snackbar
 
     data Model =
         { queue :: Snackbar.Queue Msg }

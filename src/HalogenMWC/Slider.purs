@@ -40,7 +40,7 @@ module HalogenMWC.Slider
 
 # Basic Usage
 
-    import Material.Slider as Slider
+    import HalogenMWC.Slider as Slider
 
     data Msg
         = ValueChanged Float

@@ -24,8 +24,8 @@ into chips.
 
 # Basic Usage
 
-    import Material.Chip.Input as InputChip
-    import Material.ChipSet.Input as InputChipSet
+    import HalogenMWC.Chip.Input as InputChip
+    import HalogenMWC.ChipSet.Input as InputChipSet
 
     data Msg
         = ChipSelected String
@@ -54,7 +54,7 @@ import Html.Events
 import Html.Keyed
 import Json.Decode as Decode
 import Json.Encode as Encode
-import Material.Chip.Input.Internal as Chip (Chip(..))
+import HalogenMWC.Chip.Input.Internal as Chip (Chip(..))
 
 
 {-| Input chip set view function

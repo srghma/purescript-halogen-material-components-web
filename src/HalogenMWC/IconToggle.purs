@@ -35,7 +35,7 @@ tap.
 
 # Basic Usage
 
-    import Material.IconToggle as IconToggle
+    import HalogenMWC.IconToggle as IconToggle
 
     data Msg
         = Clicked

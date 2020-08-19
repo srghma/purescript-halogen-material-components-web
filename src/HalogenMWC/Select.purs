@@ -44,8 +44,8 @@ about select options, refer to [Material.Select.Item](Material-Select-Item).
 
 # Basic Usage
 
-    import Material.Select as Select
-    import Material.Select.Item as SelectItem
+    import HalogenMWC.Select as Select
+    import HalogenMWC.Select.Item as SelectItem
 
     data Msg
         = ValueChanged String
@@ -207,12 +207,12 @@ import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 import Json.Encode as Encode
-import Material.Icon as Icon
-import Material.Array as Array
-import Material.Array.Item as ArrayItem (ArrayItem)
-import Material.Menu as Menu
-import Material.Select.Item (SelectItem)
-import Material.Select.Item.Internal as SelectItem
+import HalogenMWC.Icon as Icon
+import HalogenMWC.Array as Array
+import HalogenMWC.Array.Item as ArrayItem (ArrayItem)
+import HalogenMWC.Menu as Menu
+import HalogenMWC.Select.Item (SelectItem)
+import HalogenMWC.Select.Item.Internal as SelectItem
 
 
 {-| Configuration of a select

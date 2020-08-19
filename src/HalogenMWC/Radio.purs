@@ -38,7 +38,7 @@ all available options.
 Note that radio buttons are usually used in conjunction with [form
 fields](Material-FormField).
 
-    import Material.Radio as Radio
+    import HalogenMWC.Radio as Radio
 
     data Msg
         = Changed

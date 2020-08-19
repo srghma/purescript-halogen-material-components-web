@@ -32,8 +32,8 @@ appear persistently and consistently.
 
 # Basic Usage
 
-    import Material.Chip.Action as ActionChip
-    import Material.ChipSet.Action as ActionChipSet
+    import HalogenMWC.Chip.Action as ActionChip
+    import HalogenMWC.ChipSet.Action as ActionChipSet
 
     data Msg
         = Clicked String
@@ -68,7 +68,7 @@ appear persistently and consistently.
 -}
 
 import Html
-import Material.Chip.Action.Internal (Chip(..), Config(..))
+import HalogenMWC.Chip.Action.Internal (Chip(..), Config(..))
 
 
 {-| Configuration of an action chip

@@ -47,8 +47,8 @@ refer to [Material.Array](Material-Array).
 
 # Basic Usage
 
-    import Material.Array as Array
-    import Material.Array.Item as ArrayItem
+    import HalogenMWC.Array as Array
+    import HalogenMWC.Array.Item as ArrayItem
 
     main =
         Array.list Array.config
@@ -195,7 +195,7 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
-import Material.Array.Item.Internal (Config(..), ArrayItem(..), Selection(..))
+import HalogenMWC.Array.Item.Internal (Config(..), ArrayItem(..), Selection(..))
 
 
 {-| Configuration of a list item

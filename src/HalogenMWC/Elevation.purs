@@ -28,7 +28,7 @@ shadow. The elevation values are mapped out in a "z-space" and range from 0
 
 # Basic Usage
 
-    import Material.Elevation as Elevation
+    import HalogenMWC.Elevation as Elevation
 
     main =
         Html.div [ Elevation.z8 ] [ text "Elevation" ]

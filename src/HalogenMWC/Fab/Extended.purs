@@ -43,7 +43,7 @@ Developers are required to manually position the floating action button within
 their page layout, for instance by setting a fixed position via CSS.
 
     
-    import Material.Fab.Extended as ExtendedFab
+    import HalogenMWC.Fab.Extended as ExtendedFab
 
     data Msg
         = Clicked

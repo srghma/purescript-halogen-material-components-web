@@ -40,8 +40,8 @@ the tab bar container, refer to [Material.TabBar](Material-TabBar).
 
 # Basic Usage
 
-    import Material.Tab as Tab
-    import Material.TabBar as TabBar
+    import HalogenMWC.Tab as Tab
+    import HalogenMWC.TabBar as TabBar
 
     data Msg
         = TabClicked Int
@@ -86,7 +86,7 @@ To mark a tab as active, set its `setActive` configuration option to `True`.
 -}
 
 import Html
-import Material.Tab.Internal (Config(..), Tab(..))
+import HalogenMWC.Tab.Internal (Config(..), Tab(..))
 
 
 {-| Configuration of a tab

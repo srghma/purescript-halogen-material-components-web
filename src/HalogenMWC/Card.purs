@@ -49,9 +49,9 @@ import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
-    import Material.Button as Button
-    import Material.Card as Card
-    import Material.IconButton as IconButton
+    import HalogenMWC.Button as Button
+    import HalogenMWC.Card as Card
+    import HalogenMWC.IconButton as IconButton
 
     main =
         Card.card Card.config
@@ -211,10 +211,10 @@ import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 import Json.Encode as Encode
-import Material.Button as Button
-import Material.Button.Internal
-import Material.IconButton as IconButton
-import Material.IconButton.Internal
+import HalogenMWC.Button as Button
+import HalogenMWC.Button.Internal
+import HalogenMWC.IconButton as IconButton
+import HalogenMWC.IconButton.Internal
 
 
 {-| Configuration of a card

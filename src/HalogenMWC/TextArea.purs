@@ -47,7 +47,7 @@ module HalogenMWC.TextArea
 
 # Basic Usage
 
-    import Material.TextArea as TextArea
+    import HalogenMWC.TextArea as TextArea
 
     data Msg
         = ValueChanged String

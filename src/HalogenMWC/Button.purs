@@ -40,7 +40,7 @@ module HalogenMWC.Button
 
 # Basic Usage
 
-    import Material.Button as Button
+    import HalogenMWC.Button as Button
 
     data Msg
         = Clicked
@@ -171,7 +171,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 import Html.Events
 import Json.Encode as Encode
-import Material.Button.Internal (Config(..))
+import HalogenMWC.Button.Internal (Config(..))
 
 
 {-| Configuration of a button

@@ -34,9 +34,9 @@ the list item, refer to [Material.Array.Item](Material-Array-Item).
 
 # Basic Usage
 
-    import Material.Array as Array
-    import Material.Array.Divider as ArrayDivider
-    import Material.Array.Item as ArrayItem
+    import HalogenMWC.Array as Array
+    import HalogenMWC.Array.Divider as ArrayDivider
+    import HalogenMWC.Array.Item as ArrayItem
 
     main =
         Array.list Array.config
@@ -104,8 +104,8 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
-import Material.Array.Item (ArrayItem)
-import Material.Array.Item.Internal as ArrayItem
+import HalogenMWC.Array.Item (ArrayItem)
+import HalogenMWC.Array.Item.Internal as ArrayItem
 
 
 {-| Configuration of a list item divider

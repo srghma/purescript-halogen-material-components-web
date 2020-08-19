@@ -49,7 +49,7 @@ out](https://github.com/material-components/material-components-web/tree/master/
 
 # Basic Usage
 
-    import Material.Theme as Theme
+    import HalogenMWC.Theme as Theme
 
     main =
         Html.span [ Theme.primary ] [ text "Primary color" ]

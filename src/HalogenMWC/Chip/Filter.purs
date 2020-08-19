@@ -34,8 +34,8 @@ icon. If the chip already has a leading icon, the checkmark replaces it.
 
 # Basic Usage
 
-    import Material.Chip.Filter as FilterChip
-    import Material.ChipSet.Filter as FilterChipSet
+    import HalogenMWC.Chip.Filter as FilterChip
+    import HalogenMWC.ChipSet.Filter as FilterChipSet
 
     data Msg
         = ChipClicked String
@@ -78,7 +78,7 @@ icon. If the chip already has a leading icon, the checkmark replaces it.
 -}
 
 import Html
-import Material.Chip.Filter.Internal (Chip(..), Config(..))
+import HalogenMWC.Chip.Filter.Internal (Chip(..), Config(..))
 
 
 {-| Configuration of a filter chip

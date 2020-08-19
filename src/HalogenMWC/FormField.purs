@@ -31,8 +31,8 @@ interacting with the label.
 
 # Basic Usage
 
-    import Material.Checkbox as Checkbox
-    import Material.FormField as FormField
+    import HalogenMWC.Checkbox as Checkbox
+    import HalogenMWC.FormField as FormField
 
     main =
         FormField.formField

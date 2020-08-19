@@ -40,7 +40,7 @@ module HalogenMWC.Checkbox
 Note that checkboxes are usually used in conjunction with form fields. Refer to
 [FormField](Material-FormField) for more information.
 
-    import Material.Checkbox as Checkbox
+    import HalogenMWC.Checkbox as Checkbox
 
     data Msg
         = Changed
@@ -137,7 +137,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Html.Events
 import Json.Decode as Decode
 import Json.Encode as Encode
-import Material.Checkbox.Internal (Config(..), State(..))
+import HalogenMWC.Checkbox.Internal (Config(..), State(..))
 import Svg
 import Svg.Attributes
 

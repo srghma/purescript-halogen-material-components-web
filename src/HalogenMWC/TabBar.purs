@@ -48,8 +48,8 @@ item, refer to [Material.Tab](Material-Tab).
 
 # Basic Usage
 
-    import Material.Tab as Tab
-    import Material.TabBar as TabBar
+    import HalogenMWC.Tab as Tab
+    import HalogenMWC.TabBar as TabBar
 
     data Msg
         = TabClicked Int
@@ -157,7 +157,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Html.Events
 import Json.Decode as Decode
 import Json.Encode as Encode
-import Material.Tab.Internal as Tab (Tab(..))
+import HalogenMWC.Tab.Internal as Tab (Tab(..))
 
 
 {-| Configuration of a tab bar

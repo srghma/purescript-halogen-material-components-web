@@ -35,7 +35,7 @@ determinate or indeterminate activities.
 
 # Basic Usage
 
-    import Material.LinearProgress as LinearProgress
+    import HalogenMWC.LinearProgress as LinearProgress
 
     main =
         LinearProgress.indeterminate LinearProgress.config

@@ -31,8 +31,8 @@ refer to [Material.Select](Material-Select).
 
 # Basic Usage
 
-    import Material.Select as Select
-    import Material.Select.Item as SelectItem
+    import HalogenMWC.Select as Select
+    import HalogenMWC.Select.Item as SelectItem
 
     data Msg
         = ValueChanged String
@@ -89,7 +89,7 @@ import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
-import Material.Select.Item.Internal (Config(..), SelectItem(..))
+import HalogenMWC.Select.Item.Internal (Config(..), SelectItem(..))
 
 
 {-| Configuration of a select item

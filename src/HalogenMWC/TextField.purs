@@ -57,7 +57,7 @@ module HalogenMWC.TextField
 
 # Basic Usage
 
-    import Material.TextField as TextField
+    import HalogenMWC.TextField as TextField
 
     data Msg
         = ValueChanged String
@@ -235,7 +235,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Html.Events
 import Json.Decode as Decode
 import Json.Encode as Encode
-import Material.Icon as Icon
+import HalogenMWC.Icon as Icon
 
 
 {-| Configuration of a text field

@@ -36,7 +36,7 @@ preferred way to adjust settings on mobile.
 Note that switches are usually used in conjunction with [form
 fields](Material-FormField).
 
-    import Material.Switch as Switch
+    import HalogenMWC.Switch as Switch
 
     data Msg
         = Changed

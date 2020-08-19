@@ -34,8 +34,8 @@ into chips.
 
 # Basic Usage
 
-    import Material.Chip.Input as InputChip
-    import Material.ChipSet.Input as InputChipSet
+    import HalogenMWC.Chip.Input as InputChip
+    import HalogenMWC.ChipSet.Input as InputChipSet
 
     data Msg
         = ChipSelected String
@@ -68,7 +68,7 @@ into chips.
 -}
 
 import Html
-import Material.Chip.Input.Internal (Chip(..), Config(..))
+import HalogenMWC.Chip.Input.Internal (Chip(..), Config(..))
 
 
 {-| Configuration of an input chip
