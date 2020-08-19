@@ -2,8 +2,6 @@ module HalogenMWC.TopAppBar where
 
 import Material.Classes.TopAppBar
 import Protolude
-import Data.Array as Array
-import Data.Maybe as Maybe
 
 import Data.Array as Array
 import Data.Maybe as Maybe
