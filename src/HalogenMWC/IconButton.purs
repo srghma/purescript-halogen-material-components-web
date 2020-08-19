@@ -16,14 +16,12 @@ import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 
-import HalogenMWC.IconButton.Internal (Config(..))
-
-
-
-type Config r i =
-    Material.IconButton.Internal.Config r i
-
-
+type Config r i
+  = { disabled :: Boolean
+    , label :: Maybe String
+    , additionalAttributes :: Array (IProp r i)
+    , onClick :: Maybe r i
+    }
 
 config :: Config r i
 config =
@@ -33,27 +31,6 @@ config =
         , additionalAttributes = []
         , onClick = Nothing
         }
-
-
-
-
-
-
-
-{-| Specify an icon button's HTML5 arial-label attribute
--}
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
