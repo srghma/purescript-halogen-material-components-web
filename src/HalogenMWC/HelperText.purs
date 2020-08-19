@@ -47,7 +47,7 @@ setAttributes additionalAttributes (Config config_) =
 
 helperText :: Config r i -> String -> Html r i
 helperText ((Config { additionalAttributes }) as config_) string =
-    Html.div
+    HH.div
         (Array.filterMap identity
             [ helperTextCs
             , persistentCs config_
@@ -61,20 +61,20 @@ helperText ((Config { additionalAttributes }) as config_) string =
 
 helperLine :: Array (IProp r i) -> Array (Html r i) -> Html r i
 helperLine additionalAttributes nodes =
-    Html.div (helperLineCs :: additionalAttributes) nodes
+    HH.div (helperLineCs :: additionalAttributes) nodes
 
 
-helperTextCs :: Maybe (Html.Attribute r i)
+helperTextCs :: Maybe (HH.Attribute r i)
 helperTextCs =
     Just (HP.class_ mdc_text_field_helper_text)
 
 
-helperLineCs :: Html.Attribute r i
+helperLineCs :: HH.Attribute r i
 helperLineCs =
     HP.class_ mdc_text_field_helper_line
 
 
-persistentCs :: Config r i -> Maybe (Html.Attribute r i)
+persistentCs :: Config r i -> Maybe (HH.Attribute r i)
 persistentCs (Config config_) =
     if config_.persistent then
         Just (HP.class_ mdc_text_field_helper_text____persistent)
@@ -83,17 +83,17 @@ persistentCs (Config config_) =
         Nothing
 
 
-ariaHiddenAttr :: Maybe (Html.Attribute r i)
+ariaHiddenAttr :: Maybe (HH.Attribute r i)
 ariaHiddenAttr =
-    Just (Html.Attributes.attribute "aria-hidden" "true")
+    Just (HH.Attributes.attribute "aria-hidden" "true")
 
 
 
 characterCounter :: Array (IProp r i) -> Html r i
 characterCounter additionalAttributes =
-    Html.div (characterCounterCs :: additionalAttributes) []
+    HH.div (characterCounterCs :: additionalAttributes) []
 
 
-characterCounterCs :: Html.Attribute r i
+characterCounterCs :: HH.Attribute r i
 characterCounterCs =
     HP.class_ mdc_text_field_character_counter

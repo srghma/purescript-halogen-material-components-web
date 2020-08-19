@@ -34,7 +34,7 @@ setAttributes additionalAttributes (Config config_) =
 
 drawer :: Config r i -> Array (Html r i) -> Html r i
 drawer (Config { additionalAttributes }) nodes =
-    Html.div
+    HH.div
         (Array.filterMap identity [ rootCs ] ++ additionalAttributes)
         nodes
 
@@ -42,27 +42,27 @@ drawer (Config { additionalAttributes }) nodes =
 
 content :: Array (IProp r i) -> Array (Html r i) -> Html r i
 content attributes nodes =
-    Html.div (HP.class_ mdc_drawer__content :: attributes) nodes
+    HH.div (HP.class_ mdc_drawer__content :: attributes) nodes
 
 
 
 header :: Array (IProp r i) -> Array (Html r i) -> Html r i
 header additionalAttributes nodes =
-    Html.div (HP.class_ mdc_drawer__header :: additionalAttributes) nodes
+    HH.div (HP.class_ mdc_drawer__header :: additionalAttributes) nodes
 
 
 
-title :: Html.Attribute r i
+title :: HH.Attribute r i
 title =
     HP.class_ mdc_drawer__title
 
 
 
-subtitle :: Html.Attribute r i
+subtitle :: HH.Attribute r i
 subtitle =
     HP.class_ mdc_drawer__subtitle
 
 
-rootCs :: Maybe (Html.Attribute r i)
+rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ mdc_drawer)

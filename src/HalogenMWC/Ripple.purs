@@ -66,7 +66,7 @@ accent =
 
 ripple :: Boolean -> Config r i -> Html r i
 ripple isUnbounded ((Config { additionalAttributes }) as config_) =
-    Html.node "mdc-ripple"
+    HH.node "mdc-ripple"
         (Array.filterMap identity
             [ unboundedProp isUnbounded
             , unboundedData isUnbounded
@@ -95,12 +95,12 @@ unbounded =
     ripple True
 
 
-rippleSurface :: Maybe (Html.Attribute r i)
+rippleSurface :: Maybe (HH.Attribute r i)
 rippleSurface =
     Just (HP.class_ mdc_ripple_surface)
 
 
-colorCs :: Config r i -> Maybe (Html.Attribute r i)
+colorCs :: Config r i -> Maybe (HH.Attribute r i)
 colorCs (Config { color }) =
     case color of
         Just Primary ->
@@ -113,15 +113,15 @@ colorCs (Config { color }) =
             Nothing
 
 
-unboundedProp :: Boolean -> Maybe (Html.Attribute r i)
+unboundedProp :: Boolean -> Maybe (HH.Attribute r i)
 unboundedProp isUnbounded =
-    Just (Html.Attributes.property "unbounded" (Encode.bool isUnbounded))
+    Just (HH.Attributes.property "unbounded" (Encode.bool isUnbounded))
 
 
-unboundedData :: Boolean -> Maybe (Html.Attribute r i)
+unboundedData :: Boolean -> Maybe (HH.Attribute r i)
 unboundedData isUnbounded =
     if isUnbounded then
-        Just (Html.Attributes.attribute "data-mdc-ripple-is-unbounded" "")
+        Just (HH.Attributes.attribute "data-mdc-ripple-is-unbounded" "")
 
     else
         Nothing

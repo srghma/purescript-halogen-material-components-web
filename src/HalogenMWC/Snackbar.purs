@@ -123,7 +123,7 @@ snackbar ((Config { additionalAttributes }) as config_) ((Queue { messages, next
                 # Maybe.map (Tuple.mapSecond Just)
                 # Maybe.withDefault ( MessageId -1, Nothing )
     in
-    Html.node "mdc-snackbar"
+    HH.node "mdc-snackbar"
         (Array.filterMap identity
             [ rootCs
             , closeOnEscapeProp config_
@@ -210,17 +210,17 @@ message label =
         }
 
 
-rootCs :: Maybe (Html.Attribute r i)
+rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ mdc_snackbar)
 
 
-closeOnEscapeProp :: Config r i -> Maybe (Html.Attribute r i)
+closeOnEscapeProp :: Config r i -> Maybe (HH.Attribute r i)
 closeOnEscapeProp (Config { closeOnEscape }) =
-    Just (Html.Attributes.property "closeOnEscape" (Encode.bool closeOnEscape))
+    Just (HH.Attributes.property "closeOnEscape" (Encode.bool closeOnEscape))
 
 
-leadingCs :: Maybe (Message r i) -> Maybe (Html.Attribute r i)
+leadingCs :: Maybe (Message r i) -> Maybe (HH.Attribute r i)
 leadingCs message_ =
     Maybe.andThen
         (\(Message { leading }) ->
@@ -233,7 +233,7 @@ leadingCs message_ =
         message_
 
 
-stackedCs :: Maybe (Message r i) -> Maybe (Html.Attribute r i)
+stackedCs :: Maybe (Message r i) -> Maybe (HH.Attribute r i)
 stackedCs message_ =
     Maybe.andThen
         (\(Message { stacked }) ->
@@ -246,12 +246,12 @@ stackedCs message_ =
         message_
 
 
-messageIdProp :: MessageId -> Maybe (Html.Attribute r i)
+messageIdProp :: MessageId -> Maybe (HH.Attribute r i)
 messageIdProp (MessageId messageId) =
-    Just (Html.Attributes.property "messageId" (Encode.int messageId))
+    Just (HH.Attributes.property "messageId" (Encode.int messageId))
 
 
-timeoutMsProp :: Maybe (Message r i) -> Maybe (Html.Attribute r i)
+timeoutMsProp :: Maybe (Message r i) -> Maybe (HH.Attribute r i)
 timeoutMsProp message_ =
     let
         normalizedTimeoutMs =
@@ -263,27 +263,27 @@ timeoutMsProp message_ =
         indefiniteTimeout =
             -1
     in
-    Just (Html.Attributes.property "timeoutMs" (Encode.int normalizedTimeoutMs))
+    Just (HH.Attributes.property "timeoutMs" (Encode.int normalizedTimeoutMs))
 
 
-closedHandler :: MessageId -> Config r i -> Maybe (Html.Attribute r i)
+closedHandler :: MessageId -> Config r i -> Maybe (HH.Attribute r i)
 closedHandler messageId (Config { onClosed }) =
-    Just (Html.Events.on "MDCSnackbar:closed" (Decode.succeed (onClosed messageId)))
+    Just (HH.Events.on "MDCSnackbar:closed" (Decode.succeed (onClosed messageId)))
 
 
-ariaStatusRoleAttr :: Html.Attribute r i
+ariaStatusRoleAttr :: HH.Attribute r i
 ariaStatusRoleAttr =
-    Html.Attributes.attribute "aria-role" "status"
+    HH.Attributes.attribute "aria-role" "status"
 
 
-ariaPoliteLiveAttr :: Html.Attribute r i
+ariaPoliteLiveAttr :: HH.Attribute r i
 ariaPoliteLiveAttr =
-    Html.Attributes.attribute "aria-live" "polite"
+    HH.Attributes.attribute "aria-live" "polite"
 
 
 surfaceElt :: MessageId -> Message r i -> Html r i
 surfaceElt messageId message_ =
-    Html.div [ HP.class_ mdc_snackbar__surface ]
+    HH.div [ HP.class_ mdc_snackbar__surface ]
         [ labelElt message_
         , actionsElt messageId message_
         ]
@@ -291,13 +291,13 @@ surfaceElt messageId message_ =
 
 labelElt :: Message r i -> Html r i
 labelElt (Message { label }) =
-    Html.div [ HP.class_ mdc_snackbar__label, ariaStatusRoleAttr, ariaPoliteLiveAttr ]
+    HH.div [ HP.class_ mdc_snackbar__label, ariaStatusRoleAttr, ariaPoliteLiveAttr ]
         [ text label ]
 
 
 actionsElt :: MessageId -> Message r i -> Html r i
 actionsElt messageId message_ =
-    Html.div [ HP.class_ mdc_snackbar__actions ]
+    HH.div [ HP.class_ mdc_snackbar__actions ]
         (Array.filterMap identity
             [ actionButtonElt messageId message_
             , actionIconElt messageId message_
@@ -309,7 +309,7 @@ actionButtonElt :: MessageId -> Message r i -> Maybe (Html r i)
 actionButtonElt messageId ((Message { actionButton }) as message_) =
     Maybe.map
         (\actionButtonLabel ->
-            Html.button
+            HH.button
                 (Array.filterMap identity
                     [ actionButtonCs
                     , actionButtonClickHandler messageId message_
@@ -320,21 +320,21 @@ actionButtonElt messageId ((Message { actionButton }) as message_) =
         actionButton
 
 
-actionButtonCs :: Maybe (Html.Attribute r i)
+actionButtonCs :: Maybe (HH.Attribute r i)
 actionButtonCs =
     Just (HP.class_ "mdc-button mdc-snackbar__action")
 
 
-actionButtonClickHandler :: MessageId -> Message r i -> Maybe (Html.Attribute r i)
+actionButtonClickHandler :: MessageId -> Message r i -> Maybe (HH.Attribute r i)
 actionButtonClickHandler messageId (Message { onActionButtonClick }) =
-    Maybe.map (Html.Events.onClick << (#) messageId) onActionButtonClick
+    Maybe.map (HH.Events.onClick << (#) messageId) onActionButtonClick
 
 
 actionIconElt :: MessageId -> Message r i -> Maybe (Html r i)
 actionIconElt messageId ((Message { actionIcon }) as message_) =
     Maybe.map
         (\actionIconLabel ->
-            Html.i
+            HH.i
                 (Array.filterMap identity
                     [ actionIconCs
                     , actionIconClickHandler messageId message_
@@ -345,11 +345,11 @@ actionIconElt messageId ((Message { actionIcon }) as message_) =
         actionIcon
 
 
-actionIconCs :: Maybe (Html.Attribute r i)
+actionIconCs :: Maybe (HH.Attribute r i)
 actionIconCs =
     Just (HP.class_ "mdc-icon-button mdc-snackbar__dismiss material-icons")
 
 
-actionIconClickHandler :: MessageId -> Message r i -> Maybe (Html.Attribute r i)
+actionIconClickHandler :: MessageId -> Message r i -> Maybe (HH.Attribute r i)
 actionIconClickHandler messageId (Message { onActionIconClick }) =
-    Maybe.map (Html.Events.onClick << (#) messageId) onActionIconClick
+    Maybe.map (HH.Events.onClick << (#) messageId) onActionIconClick

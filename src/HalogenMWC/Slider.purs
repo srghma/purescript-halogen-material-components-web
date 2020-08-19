@@ -129,7 +129,7 @@ setOnInput onInput (Config config_) =
 
 slider :: Config r i -> Html r i
 slider ((Config { additionalAttributes }) as config_) =
-    Html.node "mdc-slider"
+    HH.node "mdc-slider"
         (Array.filterMap identity
             [ rootCs
             , displayCss
@@ -154,17 +154,17 @@ slider ((Config { additionalAttributes }) as config_) =
         ]
 
 
-rootCs :: Maybe (Html.Attribute r i)
+rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ mdc_slider)
 
 
-displayCss :: Maybe (Html.Attribute r i)
+displayCss :: Maybe (HH.Attribute r i)
 displayCss =
     Just (style "display" "block")
 
 
-discreteCs :: Config r i -> Maybe (Html.Attribute r i)
+discreteCs :: Config r i -> Maybe (HH.Attribute r i)
 discreteCs (Config { discrete }) =
     if discrete then
         Just (HP.class_ mdc_slider____discrete)
@@ -173,7 +173,7 @@ discreteCs (Config { discrete }) =
         Nothing
 
 
-displayMarkersCs :: Config r i -> Maybe (Html.Attribute r i)
+displayMarkersCs :: Config r i -> Maybe (HH.Attribute r i)
 displayMarkersCs (Config { discrete, displayMarkers }) =
     if discrete && displayMarkers then
         Just (HP.class_ "mdc-slider--display-markers")
@@ -182,61 +182,61 @@ displayMarkersCs (Config { discrete, displayMarkers }) =
         Nothing
 
 
-tabIndexProp :: Maybe (Html.Attribute r i)
+tabIndexProp :: Maybe (HH.Attribute r i)
 tabIndexProp =
-    Just (Html.Attributes.tabindex 0)
+    Just (HH.Attributes.tabindex 0)
 
 
-sliderRoleAttr :: Maybe (Html.Attribute r i)
+sliderRoleAttr :: Maybe (HH.Attribute r i)
 sliderRoleAttr =
-    Just (Html.Attributes.attribute "role" "slider")
+    Just (HH.Attributes.attribute "role" "slider")
 
 
-valueProp :: Config r i -> Maybe (Html.Attribute r i)
+valueProp :: Config r i -> Maybe (HH.Attribute r i)
 valueProp (Config { value }) =
-    Maybe.map (Html.Attributes.property "value" << Encode.float) value
+    Maybe.map (HH.Attributes.property "value" << Encode.float) value
 
 
-minProp :: Config r i -> Maybe (Html.Attribute r i)
+minProp :: Config r i -> Maybe (HH.Attribute r i)
 minProp (Config { min }) =
-    Maybe.map (Html.Attributes.property "min" << Encode.float) min
+    Maybe.map (HH.Attributes.property "min" << Encode.float) min
 
 
-maxProp :: Config r i -> Maybe (Html.Attribute r i)
+maxProp :: Config r i -> Maybe (HH.Attribute r i)
 maxProp (Config { max }) =
-    Maybe.map (Html.Attributes.property "max" << Encode.float) max
+    Maybe.map (HH.Attributes.property "max" << Encode.float) max
 
 
-stepProp :: Config r i -> Maybe (Html.Attribute r i)
+stepProp :: Config r i -> Maybe (HH.Attribute r i)
 stepProp (Config { step }) =
-    Maybe.map (Html.Attributes.property "step" << Encode.float) step
+    Maybe.map (HH.Attributes.property "step" << Encode.float) step
 
 
-disabledProp :: Config r i -> Maybe (Html.Attribute r i)
+disabledProp :: Config r i -> Maybe (HH.Attribute r i)
 disabledProp (Config { disabled }) =
-    Just (Html.Attributes.property "disabled" (Encode.bool disabled))
+    Just (HH.Attributes.property "disabled" (Encode.bool disabled))
 
 
-ariaValueMinAttr :: Config r i -> Maybe (Html.Attribute r i)
+ariaValueMinAttr :: Config r i -> Maybe (HH.Attribute r i)
 ariaValueMinAttr (Config { min }) =
-    Maybe.map (Html.Attributes.attribute "aria-valuemin" << String.fromFloat) min
+    Maybe.map (HH.Attributes.attribute "aria-valuemin" << String.fromFloat) min
 
 
-ariaValueMaxAttr :: Config r i -> Maybe (Html.Attribute r i)
+ariaValueMaxAttr :: Config r i -> Maybe (HH.Attribute r i)
 ariaValueMaxAttr (Config { max }) =
-    Maybe.map (Html.Attributes.attribute "aria-valuemax" << String.fromFloat) max
+    Maybe.map (HH.Attributes.attribute "aria-valuemax" << String.fromFloat) max
 
 
-ariaValuenowAttr :: Config r i -> Maybe (Html.Attribute r i)
+ariaValuenowAttr :: Config r i -> Maybe (HH.Attribute r i)
 ariaValuenowAttr (Config { value }) =
-    Maybe.map (Html.Attributes.attribute "aria-valuenow" << String.fromFloat) value
+    Maybe.map (HH.Attributes.attribute "aria-valuenow" << String.fromFloat) value
 
 
-changeHandler :: Config r i -> Maybe (Html.Attribute r i)
+changeHandler :: Config r i -> Maybe (HH.Attribute r i)
 changeHandler (Config { onInput }) =
     Maybe.map
         (\handler ->
-            Html.Events.on "MDCSlider:input"
+            HH.Events.on "MDCSlider:input"
                 (Decode.map handler (Decode.at [ "target", "value" ] Decode.float))
         )
         onInput
@@ -244,22 +244,22 @@ changeHandler (Config { onInput }) =
 
 trackContainerElt :: Html r i
 trackContainerElt =
-    Html.div [ HP.class_ mdc_slider__track_container ] [ trackElt, trackMarkerContainerElt ]
+    HH.div [ HP.class_ mdc_slider__track_container ] [ trackElt, trackMarkerContainerElt ]
 
 
 trackElt :: Html r i
 trackElt =
-    Html.div [ HP.class_ mdc_slider__track ] []
+    HH.div [ HP.class_ mdc_slider__track ] []
 
 
 trackMarkerContainerElt :: Html r i
 trackMarkerContainerElt =
-    Html.div [ HP.class_ mdc_slider__track_marker_container ] []
+    HH.div [ HP.class_ mdc_slider__track_marker_container ] []
 
 
 thumbContainerElt :: Config r i -> Html r i
 thumbContainerElt (Config { discrete }) =
-    Html.div [ HP.class_ mdc_slider__thumb_container ]
+    HH.div [ HP.class_ mdc_slider__thumb_container ]
         (if discrete then
             [ pinElt, thumbElt, focusRingElt ]
 
@@ -270,12 +270,12 @@ thumbContainerElt (Config { discrete }) =
 
 pinElt :: Html r i
 pinElt =
-    Html.div [ HP.class_ mdc_slider__pin ] [ pinValueMarkerElt ]
+    HH.div [ HP.class_ mdc_slider__pin ] [ pinValueMarkerElt ]
 
 
 pinValueMarkerElt :: Html r i
 pinValueMarkerElt =
-    Html.div [ HP.class_ mdc_slider__pin_value_marker ] []
+    HH.div [ HP.class_ mdc_slider__pin_value_marker ] []
 
 
 thumbElt :: Html r i
@@ -296,4 +296,4 @@ thumbElt =
 
 focusRingElt :: Html r i
 focusRingElt =
-    Html.div [ HP.class_ mdc_slider__focus_ring ] []
+    HH.div [ HP.class_ mdc_slider__focus_ring ] []

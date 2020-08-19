@@ -78,7 +78,7 @@ setAttributes additionalAttributes (Config config_) =
 
 tabBar :: Config r i -> Array (Tab r i) -> Html r i
 tabBar ((Config { additionalAttributes, align }) as config_) tabs =
-    Html.node "mdc-tab-bar"
+    HH.node "mdc-tab-bar"
         (Array.filterMap identity
             [ rootCs
             , tablistRoleAttr
@@ -89,17 +89,17 @@ tabBar ((Config { additionalAttributes, align }) as config_) tabs =
         [ tabScroller config_ align tabs ]
 
 
-rootCs :: Maybe (Html.Attribute r i)
+rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ mdc_tab_bar)
 
 
-tablistRoleAttr :: Maybe (Html.Attribute r i)
+tablistRoleAttr :: Maybe (HH.Attribute r i)
 tablistRoleAttr =
-    Just (Html.Attributes.attribute "role" "tablist")
+    Just (HH.Attributes.attribute "role" "tablist")
 
 
-activeTabIndexProp :: Array (Tab r i) -> Maybe (Html.Attribute r i)
+activeTabIndexProp :: Array (Tab r i) -> Maybe (HH.Attribute r i)
 activeTabIndexProp tabs =
     let
         activeTabIndex =
@@ -108,12 +108,12 @@ activeTabIndexProp tabs =
                 # Array.head
                 # Maybe.map Tuple.first
     in
-    Maybe.map (Html.Attributes.property "activeTabIndex" << Encode.int) activeTabIndex
+    Maybe.map (HH.Attributes.property "activeTabIndex" << Encode.int) activeTabIndex
 
 
 viewTab :: Config r i -> Tab r i -> Html r i
 viewTab ((Config { indicatorSpansContent }) as barConfig) ((Tab ((Tab.Config { additionalAttributes, content }) as tabConfig)) as tab) =
-    Html.button
+    HH.button
         (Array.filterMap identity
             [ tabCs
             , tabRoleAttr
@@ -137,12 +137,12 @@ viewTab ((Config { indicatorSpansContent }) as barConfig) ((Tab ((Tab.Config { a
         )
 
 
-tabCs :: Maybe (Html.Attribute r i)
+tabCs :: Maybe (HH.Attribute r i)
 tabCs =
     Just (HP.class_ mdc_tab)
 
 
-tabStackedCs :: Config r i -> Maybe (Html.Attribute r i)
+tabStackedCs :: Config r i -> Maybe (HH.Attribute r i)
 tabStackedCs (Config { stacked }) =
     if stacked then
         Just (HP.class_ mdc_tab____stacked)
@@ -151,7 +151,7 @@ tabStackedCs (Config { stacked }) =
         Nothing
 
 
-tabMinWidthCs :: Config r i -> Maybe (Html.Attribute r i)
+tabMinWidthCs :: Config r i -> Maybe (HH.Attribute r i)
 tabMinWidthCs (Config { minWidth }) =
     if minWidth then
         Just (HP.class_ "mdc-tab--min-width")
@@ -160,20 +160,20 @@ tabMinWidthCs (Config { minWidth }) =
         Nothing
 
 
-tabRoleAttr :: Maybe (Html.Attribute r i)
+tabRoleAttr :: Maybe (HH.Attribute r i)
 tabRoleAttr =
-    Just (Html.Attributes.attribute "role" "tab")
+    Just (HH.Attributes.attribute "role" "tab")
 
 
-tabClickHandler :: Tab.Config r i -> Maybe (Html.Attribute r i)
+tabClickHandler :: Tab.Config r i -> Maybe (HH.Attribute r i)
 tabClickHandler (Tab.Config { onClick }) =
-    Maybe.map (Html.Events.on "MDCTab:interacted" << Decode.succeed) onClick
+    Maybe.map (HH.Events.on "MDCTab:interacted" << Decode.succeed) onClick
 
 
 tabContentElt :: Config r i -> Tab.Config r i -> Tab.Content -> Maybe (Html r i)
 tabContentElt ((Config { indicatorSpansContent }) as barConfig) config_ content =
     Just
-        (Html.div [ HP.class_ mdc_tab__content ]
+        (HH.div [ HP.class_ mdc_tab__content ]
             (if indicatorSpansContent then
                 Array.filterMap identity
                     [ tabIconElt content
@@ -194,7 +194,7 @@ tabIconElt :: Tab.Content -> Maybe (Html r i)
 tabIconElt { icon } =
     Maybe.map
         (\iconName ->
-            Html.span
+            HH.span
                 [ HP.class_ "mdc-tab__icon material-icons" ]
                 [ text iconName ]
         )
@@ -203,17 +203,17 @@ tabIconElt { icon } =
 
 tabTextLabelElt :: Tab.Content -> Maybe (Html r i)
 tabTextLabelElt { label } =
-    Just (Html.span [ HP.class_ mdc_tab__text_label ] [ text label ])
+    Just (HH.span [ HP.class_ mdc_tab__text_label ] [ text label ])
 
 
 tabIndicatorElt :: Tab.Config r i -> Maybe (Html r i)
 tabIndicatorElt config_ =
-    Just (Html.span [ HP.class_ mdc_tab_indicator ] [ tabIndicatorContentElt ])
+    Just (HH.span [ HP.class_ mdc_tab_indicator ] [ tabIndicatorContentElt ])
 
 
 tabIndicatorContentElt :: Html r i
 tabIndicatorContentElt =
-    Html.span
+    HH.span
         [ HP.class_ mdc_tab_indicator__content
         , HP.class_ mdc_tab_indicator__content____underline
         ]
@@ -222,7 +222,7 @@ tabIndicatorContentElt =
 
 tabRippleElt :: Maybe (Html r i)
 tabRippleElt =
-    Just (Html.span [ HP.class_ mdc_tab__ripple ] [])
+    Just (HH.span [ HP.class_ mdc_tab__ripple ] [])
 
 
 
@@ -234,7 +234,7 @@ data Align
 
 tabScroller :: Config r i -> Maybe Align -> Array (Tab r i) -> Html r i
 tabScroller config_ align tabs =
-    Html.div
+    HH.div
         (Array.filterMap identity
             [ tabScrollerCs
             , tabScrollerAlignCs align
@@ -243,12 +243,12 @@ tabScroller config_ align tabs =
         [ tabScrollerScrollAreaElt config_ tabs ]
 
 
-tabScrollerCs :: Maybe (Html.Attribute r i)
+tabScrollerCs :: Maybe (HH.Attribute r i)
 tabScrollerCs =
     Just (HP.class_ mdc_tab_scroller)
 
 
-tabScrollerAlignCs :: Maybe Align -> Maybe (Html.Attribute r i)
+tabScrollerAlignCs :: Maybe Align -> Maybe (HH.Attribute r i)
 tabScrollerAlignCs align =
     case align of
         Just Start ->
@@ -266,11 +266,11 @@ tabScrollerAlignCs align =
 
 tabScrollerScrollAreaElt :: Config r i -> Array (Tab r i) -> Html r i
 tabScrollerScrollAreaElt barConfig tabs =
-    Html.div [ HP.class_ mdc_tab_scroller__scroll_area ]
+    HH.div [ HP.class_ mdc_tab_scroller__scroll_area ]
         [ tabScrollerScrollContentElt barConfig tabs ]
 
 
 tabScrollerScrollContentElt :: Config r i -> Array (Tab r i) -> Html r i
 tabScrollerScrollContentElt barConfig tabs =
-    Html.div [ HP.class_ mdc_tab_scroller__scroll_content ]
+    HH.div [ HP.class_ mdc_tab_scroller__scroll_content ]
         (Array.map (viewTab barConfig) tabs)

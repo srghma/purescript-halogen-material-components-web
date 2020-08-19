@@ -63,7 +63,7 @@ setOnClick onClick (Config config_) =
 
 iconButton :: Config r i -> String -> Html r i
 iconButton ((Config { additionalAttributes }) as config_) iconName =
-    Html.node "mdc-icon-button"
+    HH.node "mdc-icon-button"
         (Array.filterMap identity
             [ rootCs
             , materialIconsCs
@@ -78,7 +78,7 @@ iconButton ((Config { additionalAttributes }) as config_) iconName =
 
 custom :: Config r i -> Array (Html r i) -> Html r i
 custom ((Config { additionalAttributes }) as config_) nodes =
-    Html.node "mdc-icon-button"
+    HH.node "mdc-icon-button"
         (Array.filterMap identity
             [ rootCs
             , tabIndexProp
@@ -89,21 +89,21 @@ custom ((Config { additionalAttributes }) as config_) nodes =
         nodes
 
 
-rootCs :: Maybe (Html.Attribute r i)
+rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ mdc_icon_button)
 
 
-materialIconsCs :: Maybe (Html.Attribute r i)
+materialIconsCs :: Maybe (HH.Attribute r i)
 materialIconsCs =
     Just (HP.class_ material_icons)
 
 
-tabIndexProp :: Maybe (Html.Attribute r i)
+tabIndexProp :: Maybe (HH.Attribute r i)
 tabIndexProp =
-    Just (Html.Attributes.tabindex 0)
+    Just (HH.Attributes.tabindex 0)
 
 
-clickHandler :: Config r i -> Maybe (Html.Attribute r i)
+clickHandler :: Config r i -> Maybe (HH.Attribute r i)
 clickHandler (Config { onClick }) =
-    Maybe.map Html.Events.onClick onClick
+    Maybe.map HH.Events.onClick onClick

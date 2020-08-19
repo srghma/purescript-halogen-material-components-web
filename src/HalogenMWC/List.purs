@@ -105,7 +105,7 @@ list ((Config { additionalAttributes }) as config_) firstArrayItem remainingArra
         listItems =
             firstArrayItem :: remainingArrayItems
     in
-    Html.node "mdc-list"
+    HH.node "mdc-list"
         (Array.filterMap identity
             [ rootCs
             , nonInteractiveCs config_
@@ -134,12 +134,12 @@ list ((Config { additionalAttributes }) as config_) firstArrayItem remainingArra
         )
 
 
-rootCs :: Maybe (Html.Attribute r i)
+rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ mdc_list)
 
 
-nonInteractiveCs :: Config r i -> Maybe (Html.Attribute r i)
+nonInteractiveCs :: Config r i -> Maybe (HH.Attribute r i)
 nonInteractiveCs (Config { nonInteractive }) =
     if nonInteractive then
         Just (HP.class_ "mdc-list--non-interactive")
@@ -148,7 +148,7 @@ nonInteractiveCs (Config { nonInteractive }) =
         Nothing
 
 
-denseCs :: Config r i -> Maybe (Html.Attribute r i)
+denseCs :: Config r i -> Maybe (HH.Attribute r i)
 denseCs (Config { dense }) =
     if dense then
         Just (HP.class_ mdc_list____dense)
@@ -157,7 +157,7 @@ denseCs (Config { dense }) =
         Nothing
 
 
-avatarArrayCs :: Config r i -> Maybe (Html.Attribute r i)
+avatarArrayCs :: Config r i -> Maybe (HH.Attribute r i)
 avatarArrayCs (Config { avatarArray }) =
     if avatarArray then
         Just (HP.class_ "mdc-list--avatar-list")
@@ -166,7 +166,7 @@ avatarArrayCs (Config { avatarArray }) =
         Nothing
 
 
-twoLineCs :: Config r i -> Maybe (Html.Attribute r i)
+twoLineCs :: Config r i -> Maybe (HH.Attribute r i)
 twoLineCs (Config { twoLine }) =
     if twoLine then
         Just (HP.class_ "mdc-list--two-line")
@@ -175,7 +175,7 @@ twoLineCs (Config { twoLine }) =
         Nothing
 
 
-clickHandler :: Array (ArrayItem r i) -> Maybe (Html.Attribute r i)
+clickHandler :: Array (ArrayItem r i) -> Maybe (HH.Attribute r i)
 clickHandler listItems =
     let
         getOnClick listItem_ =
@@ -209,10 +209,10 @@ clickHandler listItems =
                                 Decode.fail ""
                     )
     in
-    Just (Html.Events.on "MDCArray:action" mergedClickHandler)
+    Just (HH.Events.on "MDCArray:action" mergedClickHandler)
 
 
-selectedIndexProp :: Array (ArrayItem r i) -> Maybe (Html.Attribute r i)
+selectedIndexProp :: Array (ArrayItem r i) -> Maybe (HH.Attribute r i)
 selectedIndexProp listItems =
     let
         selectedIndex =
@@ -247,16 +247,16 @@ selectedIndexProp listItems =
                     )
                 # Array.filterMap identity
     in
-    Just (Html.Attributes.property "selectedIndex" (Encode.list Encode.int selectedIndex))
+    Just (HH.Attributes.property "selectedIndex" (Encode.list Encode.int selectedIndex))
 
 
 
 group :: Array (IProp r i) -> Array (Html r i) -> Html r i
 group additionalAttributes nodes =
-    Html.div (listGroupCs :: additionalAttributes) nodes
+    HH.div (listGroupCs :: additionalAttributes) nodes
 
 
-listGroupCs :: Html.Attribute r i
+listGroupCs :: HH.Attribute r i
 listGroupCs =
     HP.class_ mdc_list_group
 
@@ -264,14 +264,14 @@ listGroupCs =
 
 subheader :: Array (IProp r i) -> Array (Html r i) -> Html r i
 subheader additionalAttributes nodes =
-    Html.span (listGroupSubheaderCs :: additionalAttributes) nodes
+    HH.span (listGroupSubheaderCs :: additionalAttributes) nodes
 
 
-listGroupSubheaderCs :: Html.Attribute r i
+listGroupSubheaderCs :: HH.Attribute r i
 listGroupSubheaderCs =
     HP.class_ mdc_list_group__subheader
 
 
-wrapFocusProp :: Config r i -> Maybe (Html.Attribute r i)
+wrapFocusProp :: Config r i -> Maybe (HH.Attribute r i)
 wrapFocusProp (Config { wrapFocus }) =
-    Just (Html.Attributes.property "wrapFocus" (Encode.bool wrapFocus))
+    Just (HH.Attributes.property "wrapFocus" (Encode.bool wrapFocus))

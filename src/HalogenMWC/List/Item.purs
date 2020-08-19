@@ -39,7 +39,7 @@ config =
         , target = Nothing
         , additionalAttributes = []
         , onClick = Nothing
-        , node = Html.text ""
+        , node = HH.text ""
         }
 
 
@@ -121,10 +121,10 @@ listItemView :: Config r i -> Array (Html r i) -> Html r i
 listItemView ((Config { additionalAttributes, href }) as config_) nodes =
     (\attributes ->
         if href /= Nothing then
-            Html.node "mdc-list-item" [] [ Html.a attributes nodes ]
+            HH.node "mdc-list-item" [] [ HH.a attributes nodes ]
 
         else
-            Html.node "mdc-list-item" attributes nodes
+            HH.node "mdc-list-item" attributes nodes
     ) where
         (Array.filterMap identity
             [ listItemCs
@@ -139,12 +139,12 @@ listItemView ((Config { additionalAttributes, href }) as config_) nodes =
         )
 
 
-listItemCs :: Maybe (Html.Attribute r i)
+listItemCs :: Maybe (HH.Attribute r i)
 listItemCs =
     Just (HP.class_ mdc_list_item)
 
 
-disabledCs :: Config r i -> Maybe (Html.Attribute r i)
+disabledCs :: Config r i -> Maybe (HH.Attribute r i)
 disabledCs (Config { disabled }) =
     if disabled then
         Just (HP.class_ mdc_list_item____disabled)
@@ -153,7 +153,7 @@ disabledCs (Config { disabled }) =
         Nothing
 
 
-selectedCs :: Config r i -> Maybe (Html.Attribute r i)
+selectedCs :: Config r i -> Maybe (HH.Attribute r i)
 selectedCs (Config { selection }) =
     if selection == Just Selected then
         Just (HP.class_ mdc_list_item____selected)
@@ -162,7 +162,7 @@ selectedCs (Config { selection }) =
         Nothing
 
 
-activatedCs :: Config r i -> Maybe (Html.Attribute r i)
+activatedCs :: Config r i -> Maybe (HH.Attribute r i)
 activatedCs (Config { selection }) =
     if selection == Just Activated then
         Just (HP.class_ mdc_list_item____activated)
@@ -171,24 +171,24 @@ activatedCs (Config { selection }) =
         Nothing
 
 
-ariaSelectedAttr :: Config r i -> Maybe (Html.Attribute r i)
+ariaSelectedAttr :: Config r i -> Maybe (HH.Attribute r i)
 ariaSelectedAttr (Config { selection }) =
     if selection /= Nothing then
-        Just (Html.Attributes.attribute "aria-selected" "true")
+        Just (HH.Attributes.attribute "aria-selected" "true")
 
     else
         Nothing
 
 
-hrefAttr :: Config r i -> Maybe (Html.Attribute r i)
+hrefAttr :: Config r i -> Maybe (HH.Attribute r i)
 hrefAttr (Config { href }) =
-    Maybe.map Html.Attributes.href href
+    Maybe.map HH.Attributes.href href
 
 
-targetAttr :: Config r i -> Maybe (Html.Attribute r i)
+targetAttr :: Config r i -> Maybe (HH.Attribute r i)
 targetAttr (Config { href, target }) =
     if href /= Nothing then
-        Maybe.map Html.Attributes.target target
+        Maybe.map HH.Attributes.target target
 
     else
         Nothing
@@ -204,7 +204,7 @@ text :
         }
     -> Html r i
 text additionalAttributes { primary, secondary } =
-    Html.div (HP.class_ mdc_list_item__text :: additionalAttributes)
+    HH.div (HP.class_ mdc_list_item__text :: additionalAttributes)
         [ primaryText [] primary
         , secondaryText [] secondary
         ]
@@ -212,21 +212,21 @@ text additionalAttributes { primary, secondary } =
 
 primaryText :: Array (IProp r i) -> Array (Html r i) -> Html r i
 primaryText additionalAttributes nodes =
-    Html.div (HP.class_ mdc_list_item__primary_text :: additionalAttributes) nodes
+    HH.div (HP.class_ mdc_list_item__primary_text :: additionalAttributes) nodes
 
 
 secondaryText :: Array (IProp r i) -> Array (Html r i) -> Html r i
 secondaryText additionalAttributes nodes =
-    Html.div (HP.class_ mdc_list_item__secondary_text :: additionalAttributes) nodes
+    HH.div (HP.class_ mdc_list_item__secondary_text :: additionalAttributes) nodes
 
 
 
 graphic :: Array (IProp r i) -> Array (Html r i) -> Html r i
 graphic additionalAttributes nodes =
-    Html.div (HP.class_ mdc_list_item__graphic :: additionalAttributes) nodes
+    HH.div (HP.class_ mdc_list_item__graphic :: additionalAttributes) nodes
 
 
 
 meta :: Array (IProp r i) -> Array (Html r i) -> Html r i
 meta additionalAttributes nodes =
-    Html.div (HP.class_ mdc_list_item__meta :: additionalAttributes) nodes
+    HH.div (HP.class_ mdc_list_item__meta :: additionalAttributes) nodes

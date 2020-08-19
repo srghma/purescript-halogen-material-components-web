@@ -127,7 +127,7 @@ select variant ((Config { leadingIcon, selected, additionalAttributes, onChange 
                 # Array.filterMap identity
                 # Array.head
     in
-    Html.node "mdc-select"
+    HH.node "mdc-select"
         (Array.filterMap identity
             [ rootCs
             , outlinedCs variant
@@ -181,12 +181,12 @@ icon additionalAttributes iconName =
     Icon (Icon.icon (HP.class_ mdc_select__icon :: additionalAttributes) iconName)
 
 
-rootCs :: Maybe (Html.Attribute r i)
+rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ mdc_select)
 
 
-outlinedCs :: Variant -> Maybe (Html.Attribute r i)
+outlinedCs :: Variant -> Maybe (HH.Attribute r i)
 outlinedCs variant =
     if variant == Outlined then
         Just (HP.class_ mdc_select____outlined)
@@ -195,37 +195,37 @@ outlinedCs variant =
         Nothing
 
 
-leadingIconCs :: Config a r i -> Maybe (Html.Attribute r i)
+leadingIconCs :: Config a r i -> Maybe (HH.Attribute r i)
 leadingIconCs (Config { leadingIcon }) =
     Maybe.map (\_ -> HP.class_ "mdc-select--with-leading-icon") leadingIcon
 
 
-disabledProp :: Config a r i -> Maybe (Html.Attribute r i)
+disabledProp :: Config a r i -> Maybe (HH.Attribute r i)
 disabledProp (Config { disabled }) =
-    Just (Html.Attributes.property "disabled" (Encode.bool disabled))
+    Just (HH.Attributes.property "disabled" (Encode.bool disabled))
 
 
-validProp :: Config a r i -> Maybe (Html.Attribute r i)
+validProp :: Config a r i -> Maybe (HH.Attribute r i)
 validProp (Config { valid }) =
-    Just (Html.Attributes.property "valid" (Encode.bool valid))
+    Just (HH.Attributes.property "valid" (Encode.bool valid))
 
 
-selectedIndexProp :: Maybe Int -> Maybe (Html.Attribute r i)
+selectedIndexProp :: Maybe Int -> Maybe (HH.Attribute r i)
 selectedIndexProp selectedIndex =
     Just
-        (Html.Attributes.property "selectedIndex"
+        (HH.Attributes.property "selectedIndex"
             (Encode.int (Maybe.withDefault -1 selectedIndex))
         )
 
 
-requiredProp :: Config a r i -> Maybe (Html.Attribute r i)
+requiredProp :: Config a r i -> Maybe (HH.Attribute r i)
 requiredProp (Config { required }) =
-    Just (Html.Attributes.property "required" (Encode.bool required))
+    Just (HH.Attributes.property "required" (Encode.bool required))
 
 
 anchorElt :: Array (IProp r i) -> Array (Html r i) -> Html r i
 anchorElt additionalAttributes nodes =
-    Html.div (HP.class_ mdc_select__anchor :: additionalAttributes) nodes
+    HH.div (HP.class_ mdc_select__anchor :: additionalAttributes) nodes
 
 
 leadingIconElt :: Config a r i -> Html r i
@@ -240,28 +240,28 @@ leadingIconElt (Config { leadingIcon }) =
 
 dropdownIconElt :: Html r i
 dropdownIconElt =
-    Html.i [ HP.class_ mdc_select__dropdown_icon ] []
+    HH.i [ HP.class_ mdc_select__dropdown_icon ] []
 
 
 floatingLabelElt :: Config a r i -> Html r i
 floatingLabelElt (Config { label }) =
-    Html.div [ HP.class_ mdc_floating_label ] [ text (Maybe.withDefault "" label) ]
+    HH.div [ HP.class_ mdc_floating_label ] [ text (Maybe.withDefault "" label) ]
 
 
 lineRippleElt :: Html r i
 lineRippleElt =
-    Html.label [ HP.class_ mdc_line_ripple ] []
+    HH.label [ HP.class_ mdc_line_ripple ] []
 
 
 notchedOutlineElt :: Config a r i -> Html r i
 notchedOutlineElt (Config { label }) =
-    Html.div [ HP.class_ mdc_notched_outline ]
-        [ Html.div [ HP.class_ mdc_notched_outline__leading ] []
-        , Html.div [ HP.class_ mdc_notched_outline__notch ]
-            [ Html.label [ HP.class_ mdc_floating_label ]
+    HH.div [ HP.class_ mdc_notched_outline ]
+        [ HH.div [ HP.class_ mdc_notched_outline__leading ] []
+        , HH.div [ HP.class_ mdc_notched_outline__notch ]
+            [ HH.label [ HP.class_ mdc_floating_label ]
                 [ text (Maybe.withDefault "" label) ]
             ]
-        , Html.div [ HP.class_ mdc_notched_outline__trailing ] []
+        , HH.div [ HP.class_ mdc_notched_outline__trailing ] []
         ]
 
 
@@ -307,4 +307,4 @@ listItemConfig selectedValue onChange (SelectItem.Config { value, disabled, addi
 
 selectedTextElt :: Html r i
 selectedTextElt =
-    Html.div [ HP.class_ mdc_select__selected_text ] []
+    HH.div [ HP.class_ mdc_select__selected_text ] []

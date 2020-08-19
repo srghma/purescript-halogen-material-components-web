@@ -59,7 +59,7 @@ setAttributes additionalAttributes (Config config_) =
 
 card :: Config r i -> Content r i -> Html r i
 card ((Config { additionalAttributes }) as config_) content =
-    Html.node "mdc-card"
+    HH.node "mdc-card"
         (Array.filterMap identity
             [ rootCs
             , outlinedCs config_
@@ -82,7 +82,7 @@ actionsElt :: Content r i -> Array (Html r i)
 actionsElt content =
     case content.actions of
         Just (Actions { buttons, icons, fullBleed }) ->
-            [ Html.div
+            [ HH.div
                 (Array.filterMap identity
                     [ Just (HP.class_ mdc_card__actions)
                     , if fullBleed then
@@ -94,14 +94,14 @@ actionsElt content =
                 )
                 (Array.concat
                     [ if not (Array.isEmpty buttons) then
-                        [ Html.div [ HP.class_ mdc_card__action_buttons ]
+                        [ HH.div [ HP.class_ mdc_card__action_buttons ]
                             (Array.map (\(Button button_) -> button_) buttons)
                         ]
 
                       else
                         []
                     , if not (Array.isEmpty icons) then
-                        [ Html.div [ HP.class_ mdc_card__action_icons ]
+                        [ HH.div [ HP.class_ mdc_card__action_icons ]
                             (Array.map (\(Icon icon_) -> icon_) icons)
                         ]
 
@@ -115,12 +115,12 @@ actionsElt content =
             []
 
 
-rootCs :: Maybe (Html.Attribute r i)
+rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ mdc_card)
 
 
-outlinedCs :: Config r i -> Maybe (Html.Attribute r i)
+outlinedCs :: Config r i -> Maybe (HH.Attribute r i)
 outlinedCs (Config { outlined }) =
     if outlined then
         Just (HP.class_ mdc_card____outlined)
@@ -155,7 +155,7 @@ data Aspect
 mediaView :: Maybe Aspect -> Array (IProp r i) -> String -> Block r i
 mediaView aspect additionalAttributes backgroundImage =
     Block $
-        Html.div
+        HH.div
             (Array.filterMap identity
                 [ mediaCs
                 , backgroundImageAttr backgroundImage
@@ -184,17 +184,17 @@ media additionalAttributes backgroundImage =
     mediaView Nothing additionalAttributes backgroundImage
 
 
-mediaCs :: Maybe (Html.Attribute r i)
+mediaCs :: Maybe (HH.Attribute r i)
 mediaCs =
     Just (HP.class_ mdc_card__media)
 
 
-backgroundImageAttr :: String -> Maybe (Html.Attribute r i)
+backgroundImageAttr :: String -> Maybe (HH.Attribute r i)
 backgroundImageAttr url =
     Just (style "background-image" ("url(\"" ++ url ++ "\")"))
 
 
-aspectCs :: Maybe Aspect -> Maybe (Html.Attribute r i)
+aspectCs :: Maybe Aspect -> Maybe (HH.Attribute r i)
 aspectCs aspect =
     case aspect of
         Just Square ->
@@ -211,7 +211,7 @@ aspectCs aspect =
 primaryAction :: Array (IProp r i) -> Array (Block r i) -> Array (Block r i)
 primaryAction additionalAttributes blocks =
     [ Block $
-        Html.div
+        HH.div
             ([ primaryActionCs
              , tabIndexProp 0
              ]
@@ -221,14 +221,14 @@ primaryAction additionalAttributes blocks =
     ]
 
 
-primaryActionCs :: Html.Attribute r i
+primaryActionCs :: HH.Attribute r i
 primaryActionCs =
     HP.class_ mdc_card__primary_action
 
 
-tabIndexProp :: Int -> Html.Attribute r i
+tabIndexProp :: Int -> HH.Attribute r i
 tabIndexProp tabIndex =
-    Html.Attributes.property "tabIndex" (Encode.int tabIndex)
+    HH.Attributes.property "tabIndex" (Encode.int tabIndex)
 
 
 

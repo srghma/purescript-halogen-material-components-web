@@ -73,7 +73,7 @@ config =
 
 formField :: Config r i -> Array (Html r i) -> Html r i
 formField ((Config { additionalAttributes }) as config_) nodes =
-    Html.node "mdc-form-field"
+    HH.node "mdc-form-field"
         (Array.filterMap identity
             [ rootCs
             , alignEndCs config_
@@ -83,12 +83,12 @@ formField ((Config { additionalAttributes }) as config_) nodes =
         (nodes ++ [ labelElt config_ ])
 
 
-rootCs :: Maybe (Html.Attribute r i)
+rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ mdc_form_field)
 
 
-alignEndCs :: Config r i -> Maybe (Html.Attribute r i)
+alignEndCs :: Config r i -> Maybe (HH.Attribute r i)
 alignEndCs (Config { alignEnd }) =
     if alignEnd then
         Just (HP.class_ "mdc-form-field--align-end")
@@ -97,19 +97,19 @@ alignEndCs (Config { alignEnd }) =
         Nothing
 
 
-forAttr :: Config r i -> Maybe (Html.Attribute r i)
+forAttr :: Config r i -> Maybe (HH.Attribute r i)
 forAttr (Config { for }) =
-    Maybe.map Html.Attributes.for for
+    Maybe.map HH.Attributes.for for
 
 
-clickHandler :: Config r i -> Maybe (Html.Attribute r i)
+clickHandler :: Config r i -> Maybe (HH.Attribute r i)
 clickHandler (Config { onClick }) =
-    Maybe.map Html.Events.onClick onClick
+    Maybe.map HH.Events.onClick onClick
 
 
 labelElt :: Config r i -> Html r i
 labelElt ((Config { label }) as config_) =
-    Html.label
+    HH.label
         (Array.filterMap identity
             [ forAttr config_
             , clickHandler config_

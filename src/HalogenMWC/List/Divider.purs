@@ -59,7 +59,7 @@ setAttributes additionalAttributes (Config config_) =
 listItem :: Config r i -> ArrayItem r i
 listItem ((Config { additionalAttributes }) as config_) =
     ArrayItem.ArrayItemDivider $
-        Html.li
+        HH.li
             (Array.filterMap identity
                 [ listDividerCs
                 , separatorRoleAttr
@@ -71,17 +71,17 @@ listItem ((Config { additionalAttributes }) as config_) =
             []
 
 
-listDividerCs :: Maybe (Html.Attribute r i)
+listDividerCs :: Maybe (HH.Attribute r i)
 listDividerCs =
     Just (HP.class_ mdc_list_divider)
 
 
-separatorRoleAttr :: Maybe (Html.Attribute r i)
+separatorRoleAttr :: Maybe (HH.Attribute r i)
 separatorRoleAttr =
-    Just (Html.Attributes.attribute "role" "separator")
+    Just (HH.Attributes.attribute "role" "separator")
 
 
-insetCs :: Config r i -> Maybe (Html.Attribute r i)
+insetCs :: Config r i -> Maybe (HH.Attribute r i)
 insetCs (Config { inset }) =
     if inset then
         Just (HP.class_ mdc_list_divider____inset)
@@ -90,7 +90,7 @@ insetCs (Config { inset }) =
         Nothing
 
 
-paddedCs :: Config r i -> Maybe (Html.Attribute r i)
+paddedCs :: Config r i -> Maybe (HH.Attribute r i)
 paddedCs (Config { padded }) =
     if padded then
         Just (HP.class_ mdc_list_divider____padded)
@@ -102,4 +102,4 @@ paddedCs (Config { padded }) =
 
 group :: Array (IProp r i) -> Html r i
 group additionalAttributes =
-    Html.hr (Array.filterMap identity [ listDividerCs ] ++ additionalAttributes) []
+    HH.hr (Array.filterMap identity [ listDividerCs ] ++ additionalAttributes) []

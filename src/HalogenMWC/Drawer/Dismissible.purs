@@ -60,7 +60,7 @@ setAttributes additionalAttributes (Config config_) =
 
 drawer :: Config r i -> Array (Html r i) -> Html r i
 drawer ((Config { additionalAttributes }) as config_) nodes =
-    Html.node "mdc-drawer"
+    HH.node "mdc-drawer"
         (Array.filterMap identity
             [ rootCs
             , dismissibleCs
@@ -75,48 +75,48 @@ drawer ((Config { additionalAttributes }) as config_) nodes =
 
 content :: Array (IProp r i) -> Array (Html r i) -> Html r i
 content attributes nodes =
-    Html.div (HP.class_ mdc_drawer__content :: attributes) nodes
+    HH.div (HP.class_ mdc_drawer__content :: attributes) nodes
 
 
 
 header :: Array (IProp r i) -> Array (Html r i) -> Html r i
 header additionalAttributes nodes =
-    Html.div (HP.class_ mdc_drawer__header :: additionalAttributes) nodes
+    HH.div (HP.class_ mdc_drawer__header :: additionalAttributes) nodes
 
 
 
-title :: Html.Attribute r i
+title :: HH.Attribute r i
 title =
     HP.class_ mdc_drawer__title
 
 
 
-subtitle :: Html.Attribute r i
+subtitle :: HH.Attribute r i
 subtitle =
     HP.class_ mdc_drawer__subtitle
 
 
-rootCs :: Maybe (Html.Attribute r i)
+rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ mdc_drawer)
 
 
-dismissibleCs :: Maybe (Html.Attribute r i)
+dismissibleCs :: Maybe (HH.Attribute r i)
 dismissibleCs =
     Just (HP.class_ mdc_drawer____dismissible)
 
 
-openProp :: Config r i -> Maybe (Html.Attribute r i)
+openProp :: Config r i -> Maybe (HH.Attribute r i)
 openProp (Config { open }) =
-    Just (Html.Attributes.property "open" (Encode.bool open))
+    Just (HH.Attributes.property "open" (Encode.bool open))
 
 
-closeHandler :: Config r i -> Maybe (Html.Attribute r i)
+closeHandler :: Config r i -> Maybe (HH.Attribute r i)
 closeHandler (Config { onClose }) =
-    Maybe.map (Html.Events.on "MDCDrawer:close" << Decode.succeed) onClose
+    Maybe.map (HH.Events.on "MDCDrawer:close" << Decode.succeed) onClose
 
 
 
-appContent :: Html.Attribute r i
+appContent :: HH.Attribute r i
 appContent =
     HP.class_ mdc_drawer_app_content

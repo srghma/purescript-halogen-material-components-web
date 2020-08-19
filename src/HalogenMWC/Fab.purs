@@ -66,7 +66,7 @@ setOnClick onClick (Config config_) =
 
 fab :: Config r i -> String -> Html r i
 fab ((Config { additionalAttributes }) as config_) iconName =
-    Html.node "mdc-fab"
+    HH.node "mdc-fab"
         (Array.filterMap identity
             [ rootCs
             , miniCs config_
@@ -81,17 +81,17 @@ fab ((Config { additionalAttributes }) as config_) iconName =
         ]
 
 
-tabIndexProp :: Int -> Maybe (Html.Attribute r i)
+tabIndexProp :: Int -> Maybe (HH.Attribute r i)
 tabIndexProp tabIndex =
-    Just (Html.Attributes.property "tabIndex" (Encode.int tabIndex))
+    Just (HH.Attributes.property "tabIndex" (Encode.int tabIndex))
 
 
-rootCs :: Maybe (Html.Attribute r i)
+rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ mdc_fab)
 
 
-miniCs :: Config r i -> Maybe (Html.Attribute r i)
+miniCs :: Config r i -> Maybe (HH.Attribute r i)
 miniCs (Config { mini }) =
     if mini then
         Just (HP.class_ mdc_fab____mini)
@@ -100,7 +100,7 @@ miniCs (Config { mini }) =
         Nothing
 
 
-exitedCs :: Config r i -> Maybe (Html.Attribute r i)
+exitedCs :: Config r i -> Maybe (HH.Attribute r i)
 exitedCs (Config { exited }) =
     if exited then
         Just (HP.class_ mdc_fab____exited)
@@ -111,14 +111,14 @@ exitedCs (Config { exited }) =
 
 rippleElt :: Html r i
 rippleElt =
-    Html.div [ HP.class_ mdc_fab__ripple ] []
+    HH.div [ HP.class_ mdc_fab__ripple ] []
 
 
 iconElt :: String -> Html r i
 iconElt iconName =
-    Html.span [ HP.class_ material_icons, HP.class_ mdc_fab__icon ] [ text iconName ]
+    HH.span [ HP.class_ material_icons, HP.class_ mdc_fab__icon ] [ text iconName ]
 
 
-clickHandler :: Config r i -> Maybe (Html.Attribute r i)
+clickHandler :: Config r i -> Maybe (HH.Attribute r i)
 clickHandler (Config { onClick }) =
-    Maybe.map Html.Events.onClick onClick
+    Maybe.map HH.Events.onClick onClick

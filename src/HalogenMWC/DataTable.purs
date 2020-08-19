@@ -60,38 +60,38 @@ dataTable :
         }
     -> Html r i
 dataTable ((Config { additionalAttributes }) as config_) { thead, tbody } =
-    Html.node "mdc-data-table"
+    HH.node "mdc-data-table"
         (dataTableCs :: additionalAttributes)
-        [ Html.table
+        [ HH.table
             (Array.filterMap identity
                 [ dataTableTableCs
                 , ariaLabelAttr config_
                 ]
             )
-            [ Html.thead [] (Array.map headerRow thead)
-            , Html.tbody [ dataTableContentCs ] (Array.map bodyRow tbody)
+            [ HH.thead [] (Array.map headerRow thead)
+            , HH.tbody [ dataTableContentCs ] (Array.map bodyRow tbody)
             ]
         ]
 
 
-dataTableCs :: Html.Attribute r i
+dataTableCs :: HH.Attribute r i
 dataTableCs =
     HP.class_ mdc_data_table
 
 
-dataTableTableCs :: Maybe (Html.Attribute r i)
+dataTableTableCs :: Maybe (HH.Attribute r i)
 dataTableTableCs =
     Just (HP.class_ mdc_data_table__table)
 
 
-dataTableContentCs :: Html.Attribute r i
+dataTableContentCs :: HH.Attribute r i
 dataTableContentCs =
     HP.class_ mdc_data_table__content
 
 
-ariaLabelAttr :: Config r i -> Maybe (Html.Attribute r i)
+ariaLabelAttr :: Config r i -> Maybe (HH.Attribute r i)
 ariaLabelAttr (Config { label }) =
-    Maybe.map (Html.Attributes.attribute "aria-label") label
+    Maybe.map (HH.Attributes.attribute "aria-label") label
 
 
 
@@ -109,31 +109,31 @@ row attributes nodes =
 selected :: Array (IProp r i)
 selected =
     [ dataTableRowSelectedCs
-    , Html.Attributes.attribute "aria-selected" "true"
+    , HH.Attributes.attribute "aria-selected" "true"
     ]
 
 
-dataTableRowSelectedCs :: Html.Attribute r i
+dataTableRowSelectedCs :: HH.Attribute r i
 dataTableRowSelectedCs =
     HP.class_ mdc_data_table__row____selected
 
 
 headerRow :: Row r i -> Html r i
 headerRow (Row { attributes, nodes }) =
-    Html.tr (dataTableHeaderRowCs :: attributes) (Array.map headerCell nodes)
+    HH.tr (dataTableHeaderRowCs :: attributes) (Array.map headerCell nodes)
 
 
-dataTableHeaderRowCs :: Html.Attribute r i
+dataTableHeaderRowCs :: HH.Attribute r i
 dataTableHeaderRowCs =
     HP.class_ mdc_data_table__header_row
 
 
 bodyRow :: Row r i -> Html r i
 bodyRow (Row { attributes, nodes }) =
-    Html.tr (dataTableRowCs :: attributes) (Array.map bodyCell nodes)
+    HH.tr (dataTableRowCs :: attributes) (Array.map bodyCell nodes)
 
 
-dataTableRowCs :: Html.Attribute r i
+dataTableRowCs :: HH.Attribute r i
 dataTableRowCs =
     HP.class_ mdc_data_table__row
 
@@ -142,7 +142,7 @@ headerCell :: Cell r i -> Html r i
 headerCell cell_ =
     case cell_ of
         Cell { numeric, attributes, nodes } ->
-            Html.th
+            HH.th
                 (Array.filterMap identity
                     [ dataTableHeaderCellCs
                     , columnHeaderRoleAttr
@@ -154,7 +154,7 @@ headerCell cell_ =
                 nodes
 
         CheckboxCell { attributes, config_ } ->
-            Html.th
+            HH.th
                 (Array.filterMap identity
                     [ dataTableHeaderCellCs
                     , columnHeaderRoleAttr
@@ -176,22 +176,22 @@ headerCell cell_ =
                 ]
 
 
-dataTableHeaderCellCs :: Maybe (Html.Attribute r i)
+dataTableHeaderCellCs :: Maybe (HH.Attribute r i)
 dataTableHeaderCellCs =
     Just (HP.class_ mdc_data_table__header_cell)
 
 
-columnHeaderRoleAttr :: Maybe (Html.Attribute r i)
+columnHeaderRoleAttr :: Maybe (HH.Attribute r i)
 columnHeaderRoleAttr =
-    Just (Html.Attributes.attribute "role" "columnheader")
+    Just (HH.Attributes.attribute "role" "columnheader")
 
 
-colScopeAttr :: Maybe (Html.Attribute r i)
+colScopeAttr :: Maybe (HH.Attribute r i)
 colScopeAttr =
-    Just (Html.Attributes.attribute "scope" "col")
+    Just (HH.Attributes.attribute "scope" "col")
 
 
-dataTableHeaderCellNumericCs :: Boolean -> Maybe (Html.Attribute r i)
+dataTableHeaderCellNumericCs :: Boolean -> Maybe (HH.Attribute r i)
 dataTableHeaderCellNumericCs numeric =
     if numeric then
         Just (HP.class_ mdc_data_table__header_cell____numeric)
@@ -200,7 +200,7 @@ dataTableHeaderCellNumericCs numeric =
         Nothing
 
 
-dataTableHeaderCellCheckboxCs :: Maybe (Html.Attribute r i)
+dataTableHeaderCellCheckboxCs :: Maybe (HH.Attribute r i)
 dataTableHeaderCellCheckboxCs =
     Just (HP.class_ mdc_data_table__header_cell____checkbox)
 
@@ -209,7 +209,7 @@ bodyCell :: Cell r i -> Html r i
 bodyCell cell_ =
     case cell_ of
         Cell { numeric, attributes, nodes } ->
-            Html.td
+            HH.td
                 (Array.filterMap identity
                     [ dataTableCellCs
                     , dataTableCellNumericCs numeric
@@ -219,7 +219,7 @@ bodyCell cell_ =
                 nodes
 
         CheckboxCell { attributes, config_ } ->
-            Html.td
+            HH.td
                 (Array.filterMap identity
                     [ dataTableCellCs
                     , dataTableCellCheckboxCs
@@ -271,12 +271,12 @@ checkboxCell attributes config_ =
     CheckboxCell { attributes = attributes, config_ = config_ }
 
 
-dataTableCellCs :: Maybe (Html.Attribute r i)
+dataTableCellCs :: Maybe (HH.Attribute r i)
 dataTableCellCs =
     Just (HP.class_ mdc_data_table__cell)
 
 
-dataTableCellNumericCs :: Boolean -> Maybe (Html.Attribute r i)
+dataTableCellNumericCs :: Boolean -> Maybe (HH.Attribute r i)
 dataTableCellNumericCs numeric =
     if numeric then
         Just (HP.class_ mdc_data_table__cell____numeric)
@@ -285,6 +285,6 @@ dataTableCellNumericCs numeric =
         Nothing
 
 
-dataTableCellCheckboxCs :: Maybe (Html.Attribute r i)
+dataTableCellCheckboxCs :: Maybe (HH.Attribute r i)
 dataTableCellCheckboxCs =
     Just (HP.class_ mdc_data_table__cell____checkbox)

@@ -110,13 +110,13 @@ checkbox ((Config { touch, additionalAttributes }) as config_) =
     let
         wrapTouch node =
             if touch then
-                Html.div [ HP.class_ mdc_touch_target_wrapper ] [ node ]
+                HH.div [ HP.class_ mdc_touch_target_wrapper ] [ node ]
 
             else
                 node
     in
     wrapTouch $
-        Html.node "mdc-checkbox"
+        HH.node "mdc-checkbox"
             (Array.filterMap identity
                 [ rootCs
                 , touchCs config_
@@ -131,12 +131,12 @@ checkbox ((Config { touch, additionalAttributes }) as config_) =
             ]
 
 
-rootCs :: Maybe (Html.Attribute r i)
+rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ mdc_checkbox)
 
 
-touchCs :: Config r i -> Maybe (Html.Attribute r i)
+touchCs :: Config r i -> Maybe (HH.Attribute r i)
 touchCs (Config { touch }) =
     if touch then
         Just (HP.class_ mdc_checkbox____touch)
@@ -145,28 +145,28 @@ touchCs (Config { touch }) =
         Nothing
 
 
-checkedProp :: Config r i -> Maybe (Html.Attribute r i)
+checkedProp :: Config r i -> Maybe (HH.Attribute r i)
 checkedProp (Config { state }) =
-    Just (Html.Attributes.property "checked" (Encode.bool (state == Just Checked)))
+    Just (HH.Attributes.property "checked" (Encode.bool (state == Just Checked)))
 
 
-indeterminateProp :: Config r i -> Maybe (Html.Attribute r i)
+indeterminateProp :: Config r i -> Maybe (HH.Attribute r i)
 indeterminateProp (Config { state }) =
-    Just (Html.Attributes.property "indeterminate" (Encode.bool (state == Just Indeterminate)))
+    Just (HH.Attributes.property "indeterminate" (Encode.bool (state == Just Indeterminate)))
 
 
-disabledProp :: Config r i -> Maybe (Html.Attribute r i)
+disabledProp :: Config r i -> Maybe (HH.Attribute r i)
 disabledProp (Config { disabled }) =
-    Just (Html.Attributes.property "disabled" (Encode.bool disabled))
+    Just (HH.Attributes.property "disabled" (Encode.bool disabled))
 
 
-changeHandler :: Config r i -> Maybe (Html.Attribute r i)
+changeHandler :: Config r i -> Maybe (HH.Attribute r i)
 changeHandler (Config { state, onChange }) =
     -- Note: MDCArray choses to send a change event to all checkboxes, thus we
     -- have to check here if the state actually changed.
     Maybe.map
         (\r i ->
-            Html.Events.on "change"
+            HH.Events.on "change"
                 (Decode.at [ "target", "checked" ] Decode.bool
                     # Decode.andThen
                         (\isChecked ->
@@ -186,9 +186,9 @@ changeHandler (Config { state, onChange }) =
 
 nativeControlElt :: Config r i -> Html r i
 nativeControlElt config_ =
-    Html.input
+    HH.input
         (Array.filterMap identity
-            [ Just (Html.Attributes.type_ "checkbox")
+            [ Just (HH.Attributes.type_ "checkbox")
             , Just (HP.class_ mdc_checkbox__native_control)
             , checkedProp config_
             , indeterminateProp config_
@@ -200,7 +200,7 @@ nativeControlElt config_ =
 
 backgroundElt :: Html r i
 backgroundElt =
-    Html.div
+    HH.div
         [ HP.class_ mdc_checkbox__background ]
         [ Svg.svg
             [ Svg.Attributes.class_ "mdc-checkbox__checkmark"
@@ -213,5 +213,5 @@ backgroundElt =
                 ]
                 []
             ]
-        , Html.div [ HP.class_ mdc_checkbox__mixedmark ] []
+        , HH.div [ HP.class_ mdc_checkbox__mixedmark ] []
         ]

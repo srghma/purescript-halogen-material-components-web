@@ -66,7 +66,7 @@ data Content r i =
 
 dialog :: Config r i -> Content r i -> Html r i
 dialog ((Config { additionalAttributes }) as config_) content =
-    Html.node "mdc-dialog"
+    HH.node "mdc-dialog"
         (Array.filterMap identity
             [ rootCs
             , openProp config_
@@ -81,39 +81,39 @@ dialog ((Config { additionalAttributes }) as config_) content =
         ]
 
 
-rootCs :: Maybe (Html.Attribute r i)
+rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ mdc_dialog)
 
 
-openProp :: Config r i -> Maybe (Html.Attribute r i)
+openProp :: Config r i -> Maybe (HH.Attribute r i)
 openProp (Config { open }) =
-    Just (Html.Attributes.property "open" (Encode.bool open))
+    Just (HH.Attributes.property "open" (Encode.bool open))
 
 
-roleAttr :: Maybe (Html.Attribute r i)
+roleAttr :: Maybe (HH.Attribute r i)
 roleAttr =
-    Just (Html.Attributes.attribute "role" "alertdialog")
+    Just (HH.Attributes.attribute "role" "alertdialog")
 
 
-ariaModalAttr :: Maybe (Html.Attribute r i)
+ariaModalAttr :: Maybe (HH.Attribute r i)
 ariaModalAttr =
-    Just (Html.Attributes.attribute "aria-modal" "true")
+    Just (HH.Attributes.attribute "aria-modal" "true")
 
 
-closeHandler :: Config r i -> Maybe (Html.Attribute r i)
+closeHandler :: Config r i -> Maybe (HH.Attribute r i)
 closeHandler (Config { onClose }) =
-    Maybe.map (Html.Events.on "MDCDialog:close" << Decode.succeed) onClose
+    Maybe.map (HH.Events.on "MDCDialog:close" << Decode.succeed) onClose
 
 
 containerElt :: Content r i -> Html r i
 containerElt content =
-    Html.div [ HP.class_ mdc_dialog__container ] [ surfaceElt content ]
+    HH.div [ HP.class_ mdc_dialog__container ] [ surfaceElt content ]
 
 
 surfaceElt :: Content r i -> Html r i
 surfaceElt content =
-    Html.div
+    HH.div
         [ HP.class_ mdc_dialog__surface ]
         (Array.filterMap identity
             [ titleElt content
@@ -127,7 +127,7 @@ titleElt :: Content r i -> Maybe (Html r i)
 titleElt { title } =
     case title of
         Just title_ ->
-            Just (Html.div [ HP.class_ mdc_dialog__title ] [ text title_ ])
+            Just (HH.div [ HP.class_ mdc_dialog__title ] [ text title_ ])
 
         Nothing ->
             Nothing
@@ -135,7 +135,7 @@ titleElt { title } =
 
 contentElt :: Content r i -> Maybe (Html r i)
 contentElt { content } =
-    Just (Html.div [ HP.class_ mdc_dialog__content ] content)
+    Just (HH.div [ HP.class_ mdc_dialog__content ] content)
 
 
 actionsElt :: Content r i -> Maybe (Html r i)
@@ -144,9 +144,9 @@ actionsElt { actions } =
         Nothing
 
     else
-        Just (Html.div [ HP.class_ mdc_dialog__actions ] actions)
+        Just (HH.div [ HP.class_ mdc_dialog__actions ] actions)
 
 
 scrimElt :: Html r i
 scrimElt =
-    Html.div [ HP.class_ mdc_dialog__scrim ] []
+    HH.div [ HP.class_ mdc_dialog__scrim ] []

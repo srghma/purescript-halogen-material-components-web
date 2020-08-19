@@ -74,7 +74,7 @@ setOnClick onClick (Config config_) =
 
 fab :: Config r i -> String -> Html r i
 fab ((Config { additionalAttributes }) as config_) label =
-    Html.node "mdc-fab"
+    HH.node "mdc-fab"
         (Array.filterMap identity
             [ rootCs
             , extendedFabCs
@@ -93,19 +93,19 @@ fab ((Config { additionalAttributes }) as config_) label =
         )
 
 
-tabIndexProp :: Int -> Maybe (Html.Attribute r i)
+tabIndexProp :: Int -> Maybe (HH.Attribute r i)
 tabIndexProp tabIndex =
-    Just (Html.Attributes.property "tabIndex" (Encode.int tabIndex))
+    Just (HH.Attributes.property "tabIndex" (Encode.int tabIndex))
 
 
-extendedFabCs :: Maybe (Html.Attribute r i)
+extendedFabCs :: Maybe (HH.Attribute r i)
 extendedFabCs =
     Just (HP.class_ "mdc-fab mdc-fab--extended")
 
 
 rippleElt :: Maybe (Html r i)
 rippleElt =
-    Just (Html.div [ HP.class_ mdc_fab__ripple ] [])
+    Just (HH.div [ HP.class_ mdc_fab__ripple ] [])
 
 
 leadingIconElt :: Config r i -> Maybe (Html r i)
@@ -113,7 +113,7 @@ leadingIconElt (Config { icon, trailingIcon }) =
     case ( icon, trailingIcon ) of
         ( Just iconName, False ) ->
             Just
-                (Html.span [ HP.class_ material_icons, HP.class_ mdc_fab__icon ]
+                (HH.span [ HP.class_ material_icons, HP.class_ mdc_fab__icon ]
                     [ text iconName ]
                 )
 
@@ -123,7 +123,7 @@ leadingIconElt (Config { icon, trailingIcon }) =
 
 labelElt :: String -> Maybe (Html r i)
 labelElt label =
-    Just (Html.span [ HP.class_ mdc_fab__label ] [ text label ])
+    Just (HH.span [ HP.class_ mdc_fab__label ] [ text label ])
 
 
 trailingIconElt :: Config r i -> Maybe (Html r i)
@@ -131,7 +131,7 @@ trailingIconElt (Config { icon, trailingIcon }) =
     case ( icon, trailingIcon ) of
         ( Just iconName, True ) ->
             Just
-                (Html.span [ HP.class_ material_icons, HP.class_ mdc_fab__icon ]
+                (HH.span [ HP.class_ material_icons, HP.class_ mdc_fab__icon ]
                     [ text iconName ]
                 )
 
@@ -139,12 +139,12 @@ trailingIconElt (Config { icon, trailingIcon }) =
             Nothing
 
 
-rootCs :: Maybe (Html.Attribute r i)
+rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ mdc_fab)
 
 
-exitedCs :: Config r i -> Maybe (Html.Attribute r i)
+exitedCs :: Config r i -> Maybe (HH.Attribute r i)
 exitedCs (Config { exited }) =
     if exited then
         Just (HP.class_ mdc_fab____exited)
@@ -153,6 +153,6 @@ exitedCs (Config { exited }) =
         Nothing
 
 
-clickHandler :: Config r i -> Maybe (Html.Attribute r i)
+clickHandler :: Config r i -> Maybe (HH.Attribute r i)
 clickHandler (Config { onClick }) =
-    Maybe.map Html.Events.onClick onClick
+    Maybe.map HH.Events.onClick onClick

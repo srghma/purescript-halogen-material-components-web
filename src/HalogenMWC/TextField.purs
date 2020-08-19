@@ -222,7 +222,7 @@ outlined config_ =
 
 textField :: Boolean -> Config r i -> Html r i
 textField outlined_ ((Config { additionalAttributes, fullwidth }) as config_) =
-    Html.node "mdc-text-field"
+    HH.node "mdc-text-field"
         (Array.filterMap identity
             [ rootCs
             , noLabelCs config_
@@ -278,12 +278,12 @@ icon additionalAttributes iconName =
     Icon (Icon.icon (HP.class_ mdc_text_field__icon :: additionalAttributes) iconName)
 
 
-rootCs :: Maybe (Html.Attribute r i)
+rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ mdc_text_field)
 
 
-outlinedCs :: Boolean -> Maybe (Html.Attribute r i)
+outlinedCs :: Boolean -> Maybe (HH.Attribute r i)
 outlinedCs outlined_ =
     if outlined_ then
         Just (HP.class_ mdc_text_field____outlined)
@@ -292,7 +292,7 @@ outlinedCs outlined_ =
         Nothing
 
 
-fullwidthCs :: Config r i -> Maybe (Html.Attribute r i)
+fullwidthCs :: Config r i -> Maybe (HH.Attribute r i)
 fullwidthCs (Config { fullwidth }) =
     if fullwidth then
         Just (HP.class_ mdc_text_field____fullwidth)
@@ -301,7 +301,7 @@ fullwidthCs (Config { fullwidth }) =
         Nothing
 
 
-disabledCs :: Config r i -> Maybe (Html.Attribute r i)
+disabledCs :: Config r i -> Maybe (HH.Attribute r i)
 disabledCs (Config { disabled }) =
     if disabled then
         Just (HP.class_ mdc_text_field____disabled)
@@ -310,7 +310,7 @@ disabledCs (Config { disabled }) =
         Nothing
 
 
-withLeadingIconCs :: Config r i -> Maybe (Html.Attribute r i)
+withLeadingIconCs :: Config r i -> Maybe (HH.Attribute r i)
 withLeadingIconCs (Config { leadingIcon }) =
     if leadingIcon /= Nothing then
         Just (HP.class_ "mdc-text-field--with-leading-icon")
@@ -319,7 +319,7 @@ withLeadingIconCs (Config { leadingIcon }) =
         Nothing
 
 
-withTrailingIconCs :: Config r i -> Maybe (Html.Attribute r i)
+withTrailingIconCs :: Config r i -> Maybe (HH.Attribute r i)
 withTrailingIconCs (Config { trailingIcon }) =
     if trailingIcon /= Nothing then
         Just (HP.class_ "mdc-text-field--with-trailing-icon")
@@ -328,74 +328,74 @@ withTrailingIconCs (Config { trailingIcon }) =
         Nothing
 
 
-requiredProp :: Config r i -> Maybe (Html.Attribute r i)
+requiredProp :: Config r i -> Maybe (HH.Attribute r i)
 requiredProp (Config { required }) =
-    Just (Html.Attributes.property "required" (Encode.bool required))
+    Just (HH.Attributes.property "required" (Encode.bool required))
 
 
-validProp :: Config r i -> Maybe (Html.Attribute r i)
+validProp :: Config r i -> Maybe (HH.Attribute r i)
 validProp (Config { valid }) =
-    Just (Html.Attributes.property "valid" (Encode.bool valid))
+    Just (HH.Attributes.property "valid" (Encode.bool valid))
 
 
-minLengthProp :: Config r i -> Maybe (Html.Attribute r i)
+minLengthProp :: Config r i -> Maybe (HH.Attribute r i)
 minLengthProp (Config { minLength }) =
     Just
-        (Html.Attributes.property "minLength"
+        (HH.Attributes.property "minLength"
             (Encode.int (Maybe.withDefault -1 minLength))
         )
 
 
-maxLengthProp :: Config r i -> Maybe (Html.Attribute r i)
+maxLengthProp :: Config r i -> Maybe (HH.Attribute r i)
 maxLengthProp (Config { maxLength }) =
     Just
-        (Html.Attributes.property "maxLength"
+        (HH.Attributes.property "maxLength"
             (Encode.int (Maybe.withDefault -1 maxLength))
         )
 
 
-minLengthAttr :: Config r i -> Maybe (Html.Attribute r i)
+minLengthAttr :: Config r i -> Maybe (HH.Attribute r i)
 minLengthAttr (Config { minLength }) =
-    Maybe.map (Html.Attributes.attribute "minLength" << String.fromInt) minLength
+    Maybe.map (HH.Attributes.attribute "minLength" << String.fromInt) minLength
 
 
-maxLengthAttr :: Config r i -> Maybe (Html.Attribute r i)
+maxLengthAttr :: Config r i -> Maybe (HH.Attribute r i)
 maxLengthAttr (Config { maxLength }) =
-    Maybe.map (Html.Attributes.attribute "maxLength" << String.fromInt) maxLength
+    Maybe.map (HH.Attributes.attribute "maxLength" << String.fromInt) maxLength
 
 
-minProp :: Config r i -> Maybe (Html.Attribute r i)
+minProp :: Config r i -> Maybe (HH.Attribute r i)
 minProp (Config { min }) =
     Just
-        (Html.Attributes.property "min"
+        (HH.Attributes.property "min"
             (Encode.string (Maybe.withDefault "" (Maybe.map String.fromInt min)))
         )
 
 
-maxProp :: Config r i -> Maybe (Html.Attribute r i)
+maxProp :: Config r i -> Maybe (HH.Attribute r i)
 maxProp (Config { max }) =
     Just
-        (Html.Attributes.property "max"
+        (HH.Attributes.property "max"
             (Encode.string (Maybe.withDefault "" (Maybe.map String.fromInt max)))
         )
 
 
-stepProp :: Config r i -> Maybe (Html.Attribute r i)
+stepProp :: Config r i -> Maybe (HH.Attribute r i)
 stepProp (Config { step }) =
     Just
-        (Html.Attributes.property "step"
+        (HH.Attributes.property "step"
             (Encode.string (Maybe.withDefault "" (Maybe.map String.fromInt step)))
         )
 
 
-valueProp :: Config r i -> Maybe (Html.Attribute r i)
+valueProp :: Config r i -> Maybe (HH.Attribute r i)
 valueProp (Config { value }) =
-    Maybe.map (Html.Attributes.property "value" << Encode.string) value
+    Maybe.map (HH.Attributes.property "value" << Encode.string) value
 
 
-placeholderAttr :: Config r i -> Maybe (Html.Attribute r i)
+placeholderAttr :: Config r i -> Maybe (HH.Attribute r i)
 placeholderAttr (Config { placeholder }) =
-    Maybe.map Html.Attributes.placeholder placeholder
+    Maybe.map HH.Attributes.placeholder placeholder
 
 
 leadingIconElt :: Config r i -> Array (Html r i)
@@ -418,20 +418,20 @@ trailingIconElt (Config { trailingIcon }) =
             [ html ]
 
 
-inputHandler :: Config r i -> Maybe (Html.Attribute r i)
+inputHandler :: Config r i -> Maybe (HH.Attribute r i)
 inputHandler (Config { onInput }) =
-    Maybe.map Html.Events.onInput onInput
+    Maybe.map HH.Events.onInput onInput
 
 
-changeHandler :: Config r i -> Maybe (Html.Attribute r i)
+changeHandler :: Config r i -> Maybe (HH.Attribute r i)
 changeHandler (Config { onChange }) =
-    Maybe.map (\f -> Html.Events.on "change" (Decode.map f Html.Events.targetValue))
+    Maybe.map (\f -> HH.Events.on "change" (Decode.map f HH.Events.targetValue))
         onChange
 
 
 inputElt :: Config r i -> Html r i
 inputElt config_ =
-    Html.input
+    HH.input
         (Array.filterMap identity
             [ inputCs
             , typeAttr config_
@@ -446,36 +446,36 @@ inputElt config_ =
         []
 
 
-inputCs :: Maybe (Html.Attribute r i)
+inputCs :: Maybe (HH.Attribute r i)
 inputCs =
     Just (HP.class_ mdc_text_field__input)
 
 
-patternProp :: Config r i -> Maybe (Html.Attribute r i)
+patternProp :: Config r i -> Maybe (HH.Attribute r i)
 patternProp (Config { pattern }) =
     Just
-        (Html.Attributes.property "pattern"
+        (HH.Attributes.property "pattern"
             (Maybe.withDefault Encode.null (Maybe.map Encode.string pattern))
         )
 
 
-typeAttr :: Config r i -> Maybe (Html.Attribute r i)
+typeAttr :: Config r i -> Maybe (HH.Attribute r i)
 typeAttr (Config { type_ }) =
-    Maybe.map Html.Attributes.type_ type_
+    Maybe.map HH.Attributes.type_ type_
 
 
-ariaLabelAttr :: Config r i -> Maybe (Html.Attribute r i)
+ariaLabelAttr :: Config r i -> Maybe (HH.Attribute r i)
 ariaLabelAttr (Config { fullwidth, placeholder, label }) =
     if fullwidth then
-        Maybe.map (Html.Attributes.attribute "aria-label") label
+        Maybe.map (HH.Attributes.attribute "aria-label") label
 
     else
         Nothing
 
 
-disabledProp :: Config r i -> Maybe (Html.Attribute r i)
+disabledProp :: Config r i -> Maybe (HH.Attribute r i)
 disabledProp (Config { disabled }) =
-    Just (Html.Attributes.property "disabled" (Encode.bool disabled))
+    Just (HH.Attributes.property "disabled" (Encode.bool disabled))
 
 
 labelElt :: Config r i -> Html r i
@@ -489,13 +489,13 @@ labelElt (Config { label, value }) =
     in
     case label of
         Just str ->
-            Html.div
+            HH.div
                 [ if Maybe.withDefault "" value /= "" then
                     HP.class_ (floatingLabelCs ++ " " ++ floatingLabelFloatAboveCs)
 
                   else
                     HP.class_ floatingLabelCs
-                , Html.Attributes.property "foucClassNames"
+                , HH.Attributes.property "foucClassNames"
                     (Encode.list Encode.string [ floatingLabelFloatAboveCs ])
                 ]
                 [ text str ]
@@ -504,7 +504,7 @@ labelElt (Config { label, value }) =
             text ""
 
 
-noLabelCs :: Config r i -> Maybe (Html.Attribute r i)
+noLabelCs :: Config r i -> Maybe (HH.Attribute r i)
 noLabelCs (Config { label }) =
     if label == Nothing then
         Just (HP.class_ "mdc-text-field--no-label")
@@ -515,12 +515,12 @@ noLabelCs (Config { label }) =
 
 lineRippleElt :: Html r i
 lineRippleElt =
-    Html.div [ HP.class_ mdc_line_ripple ] []
+    HH.div [ HP.class_ mdc_line_ripple ] []
 
 
 notchedOutlineElt :: Config r i -> Html r i
 notchedOutlineElt config_ =
-    Html.div [ HP.class_ mdc_notched_outline ]
+    HH.div [ HP.class_ mdc_notched_outline ]
         [ notchedOutlineLeadingElt
         , notchedOutlineNotchElt config_
         , notchedOutlineTrailingElt
@@ -529,14 +529,14 @@ notchedOutlineElt config_ =
 
 notchedOutlineLeadingElt :: Html r i
 notchedOutlineLeadingElt =
-    Html.div [ HP.class_ mdc_notched_outline__leading ] []
+    HH.div [ HP.class_ mdc_notched_outline__leading ] []
 
 
 notchedOutlineTrailingElt :: Html r i
 notchedOutlineTrailingElt =
-    Html.div [ HP.class_ mdc_notched_outline__trailing ] []
+    HH.div [ HP.class_ mdc_notched_outline__trailing ] []
 
 
 notchedOutlineNotchElt :: Config r i -> Html r i
 notchedOutlineNotchElt config_ =
-    Html.div [ HP.class_ mdc_notched_outline__notch ] [ labelElt config_ ]
+    HH.div [ HP.class_ mdc_notched_outline__notch ] [ labelElt config_ ]

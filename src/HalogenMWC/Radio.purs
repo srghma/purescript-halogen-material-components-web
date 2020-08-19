@@ -88,13 +88,13 @@ radio ((Config { touch, additionalAttributes }) as config_) =
     let
         wrapTouch node =
             if touch then
-                Html.div [ HP.class_ mdc_touch_target_wrapper ] [ node ]
+                HH.div [ HP.class_ mdc_touch_target_wrapper ] [ node ]
 
             else
                 node
     in
     wrapTouch $
-        Html.node "mdc-radio"
+        HH.node "mdc-radio"
             (Array.filterMap identity
                 [ rootCs
                 , touchCs config_
@@ -109,12 +109,12 @@ radio ((Config { touch, additionalAttributes }) as config_) =
             ]
 
 
-rootCs :: Maybe (Html.Attribute r i)
+rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ mdc_radio)
 
 
-touchCs :: Config r i -> Maybe (Html.Attribute r i)
+touchCs :: Config r i -> Maybe (HH.Attribute r i)
 touchCs (Config { touch }) =
     if touch then
         Just (HP.class_ mdc_radio____touch)
@@ -123,23 +123,23 @@ touchCs (Config { touch }) =
         Nothing
 
 
-checkedProp :: Config r i -> Maybe (Html.Attribute r i)
+checkedProp :: Config r i -> Maybe (HH.Attribute r i)
 checkedProp (Config { checked }) =
-    Just (Html.Attributes.property "checked" (Encode.bool checked))
+    Just (HH.Attributes.property "checked" (Encode.bool checked))
 
 
-disabledProp :: Config r i -> Maybe (Html.Attribute r i)
+disabledProp :: Config r i -> Maybe (HH.Attribute r i)
 disabledProp (Config { disabled }) =
-    Just (Html.Attributes.property "disabled" (Encode.bool disabled))
+    Just (HH.Attributes.property "disabled" (Encode.bool disabled))
 
 
-changeHandler :: Config r i -> Maybe (Html.Attribute r i)
+changeHandler :: Config r i -> Maybe (HH.Attribute r i)
 changeHandler (Config { checked, onChange }) =
     -- Note: MDCArray choses to send a change event to all checkboxes, thus we
     -- have to check here if the state actually changed.
     Maybe.map
         (\r i ->
-            Html.Events.on "change"
+            HH.Events.on "change"
                 (Decode.at [ "target", "checked" ] Decode.bool
                     # Decode.andThen
                         (\checked_ ->
@@ -156,7 +156,7 @@ changeHandler (Config { checked, onChange }) =
 
 nativeControlElt :: Config r i -> Html r i
 nativeControlElt config_ =
-    Html.input
+    HH.input
         (Array.filterMap identity
             [ nativeControlCs
             , radioTypeAttr
@@ -167,31 +167,31 @@ nativeControlElt config_ =
         []
 
 
-nativeControlCs :: Maybe (Html.Attribute r i)
+nativeControlCs :: Maybe (HH.Attribute r i)
 nativeControlCs =
     Just (HP.class_ mdc_radio__native_control)
 
 
-radioTypeAttr :: Maybe (Html.Attribute r i)
+radioTypeAttr :: Maybe (HH.Attribute r i)
 radioTypeAttr =
-    Just (Html.Attributes.type_ "radio")
+    Just (HH.Attributes.type_ "radio")
 
 
 backgroundElt :: Html r i
 backgroundElt =
-    Html.div [ HP.class_ mdc_radio__background ] [ outerCircleElt, innerCircleElt ]
+    HH.div [ HP.class_ mdc_radio__background ] [ outerCircleElt, innerCircleElt ]
 
 
 outerCircleElt :: Html r i
 outerCircleElt =
-    Html.div [ HP.class_ mdc_radio__outer_circle ] []
+    HH.div [ HP.class_ mdc_radio__outer_circle ] []
 
 
 innerCircleElt :: Html r i
 innerCircleElt =
-    Html.div [ HP.class_ mdc_radio__inner_circle ] []
+    HH.div [ HP.class_ mdc_radio__inner_circle ] []
 
 
 rippleElt :: Html r i
 rippleElt =
-    Html.div [ HP.class_ mdc_radio__ripple ] []
+    HH.div [ HP.class_ mdc_radio__ripple ] []

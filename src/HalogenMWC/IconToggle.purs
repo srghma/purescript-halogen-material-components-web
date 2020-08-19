@@ -77,7 +77,7 @@ setOnChange onChange (Config config_) =
 
 iconToggle :: Config r i -> { onIcon :: String, offIcon :: String } -> Html r i
 iconToggle ((Config { additionalAttributes }) as config_) { onIcon, offIcon } =
-    Html.node "mdc-icon-button"
+    HH.node "mdc-icon-button"
         (Array.filterMap identity
             [ rootCs
             , onProp config_
@@ -90,50 +90,50 @@ iconToggle ((Config { additionalAttributes }) as config_) { onIcon, offIcon } =
             ]
             ++ additionalAttributes
         )
-        [ Html.i (Array.filterMap identity [ materialIconsCs, onIconCs ]) [ text onIcon ]
-        , Html.i (Array.filterMap identity [ materialIconsCs, iconCs ]) [ text offIcon ]
+        [ HH.i (Array.filterMap identity [ materialIconsCs, onIconCs ]) [ text onIcon ]
+        , HH.i (Array.filterMap identity [ materialIconsCs, iconCs ]) [ text offIcon ]
         ]
 
 
-rootCs :: Maybe (Html.Attribute r i)
+rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ mdc_icon_button)
 
 
-onProp :: Config r i -> Maybe (Html.Attribute r i)
+onProp :: Config r i -> Maybe (HH.Attribute r i)
 onProp (Config { on }) =
-    Just (Html.Attributes.property "on" (Encode.bool on))
+    Just (HH.Attributes.property "on" (Encode.bool on))
 
 
-materialIconsCs :: Maybe (Html.Attribute r i)
+materialIconsCs :: Maybe (HH.Attribute r i)
 materialIconsCs =
     Just (HP.class_ material_icons)
 
 
-iconCs :: Maybe (Html.Attribute r i)
+iconCs :: Maybe (HH.Attribute r i)
 iconCs =
     Just (HP.class_ mdc_icon_button__icon)
 
 
-onIconCs :: Maybe (Html.Attribute r i)
+onIconCs :: Maybe (HH.Attribute r i)
 onIconCs =
     Just (HP.class_ "mdc-icon-button__icon mdc-icon-button__icon--on")
 
 
-tabIndexProp :: Maybe (Html.Attribute r i)
+tabIndexProp :: Maybe (HH.Attribute r i)
 tabIndexProp =
-    Just (Html.Attributes.tabindex 0)
+    Just (HH.Attributes.tabindex 0)
 
 
-ariaHiddenAttr :: Maybe (Html.Attribute r i)
+ariaHiddenAttr :: Maybe (HH.Attribute r i)
 ariaHiddenAttr =
-    Just (Html.Attributes.attribute "aria-hidden" "true")
+    Just (HH.Attributes.attribute "aria-hidden" "true")
 
 
-ariaPressedAttr :: Config r i -> Maybe (Html.Attribute r i)
+ariaPressedAttr :: Config r i -> Maybe (HH.Attribute r i)
 ariaPressedAttr (Config { on }) =
     Just
-        (Html.Attributes.attribute "aria-pressed"
+        (HH.Attributes.attribute "aria-pressed"
             (if on then
                 "true"
 
@@ -143,17 +143,17 @@ ariaPressedAttr (Config { on }) =
         )
 
 
-ariaLabelAttr :: Config r i -> Maybe (Html.Attribute r i)
+ariaLabelAttr :: Config r i -> Maybe (HH.Attribute r i)
 ariaLabelAttr (Config { label }) =
-    Maybe.map (Html.Attributes.attribute "aria-label") label
+    Maybe.map (HH.Attributes.attribute "aria-label") label
 
 
-changeHandler :: Config r i -> Maybe (Html.Attribute r i)
+changeHandler :: Config r i -> Maybe (HH.Attribute r i)
 changeHandler (Config { onChange }) =
-    Maybe.map (Html.Events.on "MDCIconButtonToggle:change" << Decode.succeed)
+    Maybe.map (HH.Events.on "MDCIconButtonToggle:change" << Decode.succeed)
         onChange
 
 
-disabledAttr :: Config r i -> Maybe (Html.Attribute r i)
+disabledAttr :: Config r i -> Maybe (HH.Attribute r i)
 disabledAttr (Config { disabled }) =
-    Just (Html.Attributes.disabled disabled)
+    Just (HH.Attributes.disabled disabled)

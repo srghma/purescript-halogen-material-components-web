@@ -67,7 +67,7 @@ setAttributes additionalAttributes (Config config_) =
 
 menu :: Config r i -> Array (Html r i) -> Html r i
 menu ((Config { additionalAttributes }) as config_) nodes =
-    Html.node "mdc-menu"
+    HH.node "mdc-menu"
         (Array.filterMap identity
             [ rootCs
             , openProp config_
@@ -80,26 +80,26 @@ menu ((Config { additionalAttributes }) as config_) nodes =
 
 
 
-surfaceAnchor :: Html.Attribute r i
+surfaceAnchor :: HH.Attribute r i
 surfaceAnchor =
     HP.class_ mdc_menu_surface____anchor
 
 
-rootCs :: Maybe (Html.Attribute r i)
+rootCs :: Maybe (HH.Attribute r i)
 rootCs =
     Just (HP.class_ "mdc-menu mdc-menu-surface")
 
 
-openProp :: Config r i -> Maybe (Html.Attribute r i)
+openProp :: Config r i -> Maybe (HH.Attribute r i)
 openProp (Config { open }) =
-    Just (Html.Attributes.property "open" (Encode.bool open))
+    Just (HH.Attributes.property "open" (Encode.bool open))
 
 
-quickOpenProp :: Config r i -> Maybe (Html.Attribute r i)
+quickOpenProp :: Config r i -> Maybe (HH.Attribute r i)
 quickOpenProp (Config { quickOpen }) =
-    Just (Html.Attributes.property "quickOpen" (Encode.bool quickOpen))
+    Just (HH.Attributes.property "quickOpen" (Encode.bool quickOpen))
 
 
-closeHandler :: Config r i -> Maybe (Html.Attribute r i)
+closeHandler :: Config r i -> Maybe (HH.Attribute r i)
 closeHandler (Config { onClose }) =
-    Maybe.map (Html.Events.on "MDCMenu:close" << Decode.succeed) onClose
+    Maybe.map (HH.Events.on "MDCMenu:close" << Decode.succeed) onClose

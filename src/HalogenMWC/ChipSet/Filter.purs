@@ -18,15 +18,15 @@ import Svg.Attributes
 
 chipSet :: Array (IProp r i) -> Array (Chip r i) -> Html r i
 chipSet additionalAttributes chips =
-    Html.node "mdc-chip-set"
+    HH.node "mdc-chip-set"
         (chipSetCs :: chipSetFilterCs :: gridRole :: additionalAttributes)
         (Array.map chip chips)
 
 
 chip :: Chip r i -> Html r i
 chip (Chip ((Chip.Config { additionalAttributes }) as config_) label) =
-    Html.div [ HP.class_ mdc_touch_target_wrapper ]
-        [ Html.node "mdc-chip"
+    HH.div [ HP.class_ mdc_touch_target_wrapper ]
+        [ HH.node "mdc-chip"
             (Array.filterMap identity
                 [ chipCs
                 , chipTouchCs
@@ -46,76 +46,76 @@ chip (Chip ((Chip.Config { additionalAttributes }) as config_) label) =
         ]
 
 
-chipSetCs :: Html.Attribute r i
+chipSetCs :: HH.Attribute r i
 chipSetCs =
     HP.class_ mdc_chip_set
 
 
-chipSetFilterCs :: Html.Attribute r i
+chipSetFilterCs :: HH.Attribute r i
 chipSetFilterCs =
     HP.class_ mdc_chip_set____filter
 
 
-gridRole :: Html.Attribute r i
+gridRole :: HH.Attribute r i
 gridRole =
-    Html.Attributes.attribute "role" "grid"
+    HH.Attributes.attribute "role" "grid"
 
 
-chipCs :: Maybe (Html.Attribute r i)
+chipCs :: Maybe (HH.Attribute r i)
 chipCs =
     Just (HP.class_ mdc_chip)
 
 
-chipTextCs :: Html.Attribute r i
+chipTextCs :: HH.Attribute r i
 chipTextCs =
     HP.class_ mdc_chip__text
 
 
-chipTouchCs :: Maybe (Html.Attribute r i)
+chipTouchCs :: Maybe (HH.Attribute r i)
 chipTouchCs =
     Just (HP.class_ mdc_chip____touch)
 
 
-chipPrimaryActionCs :: Html.Attribute r i
+chipPrimaryActionCs :: HH.Attribute r i
 chipPrimaryActionCs =
     HP.class_ mdc_chip__primary_action
 
 
-selectedProp :: Chip.Config r i -> Maybe (Html.Attribute r i)
+selectedProp :: Chip.Config r i -> Maybe (HH.Attribute r i)
 selectedProp (Chip.Config { selected }) =
-    Just (Html.Attributes.property "selected" (Encode.bool selected))
+    Just (HH.Attributes.property "selected" (Encode.bool selected))
 
 
-buttonRole :: Html.Attribute r i
+buttonRole :: HH.Attribute r i
 buttonRole =
-    Html.Attributes.attribute "role" "button"
+    HH.Attributes.attribute "role" "button"
 
 
-rowRole :: Maybe (Html.Attribute r i)
+rowRole :: Maybe (HH.Attribute r i)
 rowRole =
-    Just (Html.Attributes.attribute "role" "row")
+    Just (HH.Attributes.attribute "role" "row")
 
 
-gridcellRole :: Html.Attribute r i
+gridcellRole :: HH.Attribute r i
 gridcellRole =
-    Html.Attributes.attribute "role" "gridcell"
+    HH.Attributes.attribute "role" "gridcell"
 
 
-interactionHandler :: Chip.Config r i -> Maybe (Html.Attribute r i)
+interactionHandler :: Chip.Config r i -> Maybe (HH.Attribute r i)
 interactionHandler (Chip.Config { onChange }) =
-    Maybe.map (Html.Events.on "MDCChip:interaction" << Decode.succeed) onChange
+    Maybe.map (HH.Events.on "MDCChip:interaction" << Decode.succeed) onChange
 
 
 rippleElt :: Maybe (Html r i)
 rippleElt =
-    Just (Html.div [ HP.class_ mdc_chip__ripple ] [])
+    Just (HH.div [ HP.class_ mdc_chip__ripple ] [])
 
 
 leadingIconElt :: Chip.Config r i -> Maybe (Html r i)
 leadingIconElt (Chip.Config { icon, selected }) =
     Maybe.map
         (\iconName ->
-            Html.i
+            HH.i
                 [ HP.class_ material_icons
                 , HP.class_ "mdc-chip__icon mdc-chip__icon--leading"
                 ]
@@ -127,7 +127,7 @@ leadingIconElt (Chip.Config { icon, selected }) =
 checkmarkElt :: Maybe (Html r i)
 checkmarkElt =
     Just
-        (Html.div [ HP.class_ mdc_chip__checkmark ]
+        (HH.div [ HP.class_ mdc_chip__checkmark ]
             [ Svg.svg
                 [ Svg.Attributes.class_ "mdc-chip__checkmark-svg"
                 , Svg.Attributes.viewBox "-2 -3 30 30"
@@ -147,15 +147,15 @@ checkmarkElt =
 primaryActionElt :: String -> Maybe (Html r i)
 primaryActionElt label =
     Just $
-        Html.span [ chipPrimaryActionCs, gridcellRole ]
+        HH.span [ chipPrimaryActionCs, gridcellRole ]
             (Array.filterMap identity [ textElt label, touchElt ])
 
 
 textElt :: String -> Maybe (Html r i)
 textElt label =
-    Just (Html.span [ chipTextCs, buttonRole ] [ text label ])
+    Just (HH.span [ chipTextCs, buttonRole ] [ text label ])
 
 
 touchElt :: Maybe (Html r i)
 touchElt =
-    Just (Html.div [ HP.class_ mdc_chip__touch ] [])
+    Just (HH.div [ HP.class_ mdc_chip__touch ] [])
