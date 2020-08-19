@@ -23,21 +23,21 @@ type Config r i
 defaultConfig :: Config r i
 defaultConfig =
     Config
-        { label = Nothing
-        , for = Nothing
-        , alignEnd = False
-        , additionalAttributes = []
-        , onClick = Nothing
+        { label: Nothing
+        , for: Nothing
+        , alignEnd: False
+        , additionalAttributes: []
+        , onClick: Nothing
         }
 
 formField :: Config r i -> Array (Html r i) -> Html r i
-formField (config_@{ additionalAttributes }) nodes =
+formField config_ nodes =
     HH.node "mdc-form-field"
         (Array.filterMap identity
             [ rootCs
             , alignEndCs config_
             ]
-            <> additionalAttributes
+            <> config_.additionalAttributes
         )
         (nodes <> [ labelElt config_ ])
 

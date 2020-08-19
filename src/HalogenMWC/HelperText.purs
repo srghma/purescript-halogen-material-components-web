@@ -21,8 +21,8 @@ type Config r i
 defaultConfig :: Config r i
 defaultConfig =
     Config
-        { persistent = False
-        , additionalAttributes = []
+        { persistent: False
+        , additionalAttributes: []
         }
 
 helperText :: Config r i -> String -> Html r i

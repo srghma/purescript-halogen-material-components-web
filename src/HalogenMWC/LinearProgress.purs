@@ -28,9 +28,9 @@ data Variant
 defaultConfig :: Config r i
 defaultConfig =
     Config
-        { reverse = False
-        , closed = False
-        , additionalAttributes = []
+        { reverse: False
+        , closed: False
+        , additionalAttributes: []
         }
 
 linearProgress :: Variant -> Config r i -> Html r i

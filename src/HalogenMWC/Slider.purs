@@ -32,15 +32,15 @@ type Config r i
 defaultConfig :: Config r i
 defaultConfig =
     Config
-        { discrete = False
-        , displayMarkers = False
-        , min = Nothing
-        , max = Nothing
-        , step = Nothing
-        , value = Nothing
-        , disabled = False
-        , additionalAttributes = []
-        , onInput = Nothing
+        { discrete: False
+        , displayMarkers: False
+        , min: Nothing
+        , max: Nothing
+        , step: Nothing
+        , value: Nothing
+        , disabled: False
+        , additionalAttributes: []
+        , onInput: Nothing
         }
 
 {-| Specify whether a slider is _discrete_

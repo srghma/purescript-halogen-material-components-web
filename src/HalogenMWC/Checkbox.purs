@@ -26,11 +26,11 @@ data State
 defaultConfig :: Config r i
 defaultConfig =
     Config
-        { state = Nothing
-        , disabled = False
-        , additionalAttributes = []
-        , onChange = Nothing
-        , touch = True
+        { state: Nothing
+        , disabled: False
+        , additionalAttributes: []
+        , onChange: Nothing
+        , touch: True
         }
 
 checkbox :: Config r i -> Html r i

@@ -35,14 +35,14 @@ data Config a r i
 config :: Config a r i
 defaultConfig =
     Config
-        { label = Nothing
-        , disabled = False
-        , required = False
-        , valid = True
-        , selected = Nothing
-        , leadingIcon = Nothing
-        , additionalAttributes = []
-        , onChange = Nothing
+        { label: Nothing
+        , disabled: False
+        , required: False
+        , valid: True
+        , selected: Nothing
+        , leadingIcon: Nothing
+        , additionalAttributes: []
+        , onChange: Nothing
         }
 
 data Variant

@@ -22,10 +22,10 @@ type Config r i
 defaultConfig :: Config r i
 defaultConfig =
     Config
-        { checked = False
-        , disabled = False
-        , additionalAttributes = []
-        , onChange = Nothing
+        { checked: False
+        , disabled: False
+        , additionalAttributes: []
+        , onChange: Nothing
         }
 
 switch :: Config r i -> Html r i

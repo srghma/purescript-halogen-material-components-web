@@ -26,11 +26,11 @@ type Config r i
 defaultConfig :: Config r i
 defaultConfig =
     Config
-        { stacked = False
-        , minWidth = False
-        , indicatorSpansContent = False
-        , align = Nothing
-        , additionalAttributes = []
+        { stacked: False
+        , minWidth: False
+        , indicatorSpansContent: False
+        , align: Nothing
+        , additionalAttributes: []
         }
 
 tabBar :: Config r i -> Array (Tab r i) -> Html r i

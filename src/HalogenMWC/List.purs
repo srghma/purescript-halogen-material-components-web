@@ -29,13 +29,13 @@ type Config r i
 defaultConfig :: Config r i
 defaultConfig =
     Config
-        { nonInteractive = False
-        , dense = False
-        , avatarArray = False
-        , twoLine = False
-        , vertical = False
-        , wrapFocus = False
-        , additionalAttributes = []
+        { nonInteractive: False
+        , dense: False
+        , avatarArray: False
+        , twoLine: False
+        , vertical: False
+        , wrapFocus: False
+        , additionalAttributes: []
         }
 
 {-| Specify whether a list should be non-interactive

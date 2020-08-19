@@ -23,11 +23,11 @@ type Config r i
 defaultConfig :: Config r i
 defaultConfig =
     Config
-        { on = False
-        , disabled = False
-        , label = Nothing
-        , additionalAttributes = []
-        , onChange = Nothing
+        { on: False
+        , disabled: False
+        , label: Nothing
+        , additionalAttributes: []
+        , onChange: Nothing
         }
 
 {-| Specify the HTML5 aria-label attribute of an icon toggle

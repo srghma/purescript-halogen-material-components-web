@@ -38,9 +38,9 @@ data Variant
 defaultConfig :: Config r i
 defaultConfig =
     Config
-        { dense = False
-        , fixed = False
-        , additionalAttributes = []
+        { dense: False
+        , fixed: False
+        , additionalAttributes: []
         }
 
 genericTopAppBar :: Variant -> Config r i -> Array (Html r i) -> Html r i

@@ -22,10 +22,10 @@ type Config r i
 defaultConfig :: Config r i
 defaultConfig =
     Config
-        { open = False
-        , quickOpen = False
-        , additionalAttributes = []
-        , onClose = Nothing
+        { open: False
+        , quickOpen: False
+        , additionalAttributes: []
+        , onClose: Nothing
         }
 
 menu :: Config r i -> Array (Html r i) -> Html r i

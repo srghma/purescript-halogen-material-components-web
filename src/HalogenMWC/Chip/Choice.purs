@@ -21,6 +21,6 @@ data Chip a r i
 
 defaultConfig :: Config r i
 defaultConfig =
-        { icon = Nothing
-        , additionalAttributes = []
+        { icon: Nothing
+        , additionalAttributes: []
         }

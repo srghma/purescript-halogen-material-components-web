@@ -31,15 +31,15 @@ inc (MessageId messageId) =
 initialQueue :: Queue r i
 initialQueue =
     Queue
-        { messages = []
-        , nextMessageId = MessageId 0
+        { messages: []
+        , nextMessageId: MessageId 0
         }
 
 close :: MessageId -> Queue r i -> Queue r i
 close messageId (Queue queue) =
     Queue $
         { queue
-            | messages =
+            { messages =
                 case queue.messages of
                     [] ->
                         []
@@ -56,8 +56,8 @@ addMessage :: Message r i -> Queue r i -> Queue r i
 addMessage message_ (Queue queue) =
     Queue
         { queue
-            | messages = queue.messages <> [ ( queue.nextMessageId, message_ ) ]
-            , nextMessageId = inc queue.nextMessageId
+            { messages = queue.messages <> [ ( queue.nextMessageId, message_ ) ]
+            , nextMessageId: inc queue.nextMessageId
         }
 
 type Config r i
@@ -70,9 +70,9 @@ type Config r i
 config :: { onClosed :: MessageId -> r i } -> Config r i
 config { onClosed } =
     Config
-        { closeOnEscape = False
-        , additionalAttributes = []
-        , onClosed = onClosed
+        { closeOnEscape: False
+        , additionalAttributes: []
+        , onClosed: onClosed
         }
 
 snackbar :: Config r i -> Queue r i -> Html r i
@@ -114,14 +114,14 @@ data Message r i
 message :: String -> Message r i
 message label =
     Message
-        { label = label
-        , actionButton = Nothing
-        , onActionButtonClick = Nothing
-        , actionIcon = Nothing
-        , onActionIconClick = Nothing
-        , leading = False
-        , stacked = False
-        , timeoutMs = Just 5000
+        { label: label
+        , actionButton: Nothing
+        , onActionButtonClick: Nothing
+        , actionIcon: Nothing
+        , onActionIconClick: Nothing
+        , leading: False
+        , stacked: False
+        , timeoutMs: Just 5000
         }
 
 rootCs :: Maybe (HH.Attribute r i)

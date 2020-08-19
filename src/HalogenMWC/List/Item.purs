@@ -24,13 +24,13 @@ type Config r i =
 defaultConfig :: Config r i
 defaultConfig =
     Config
-        { disabled = False
-        , selection = Nothing
-        , href = Nothing
-        , target = Nothing
-        , additionalAttributes = []
-        , onClick = Nothing
-        , node = HH.text ""
+        { disabled: False
+        , selection: Nothing
+        , href: Nothing
+        , target: Nothing
+        , additionalAttributes: []
+        , onClick: Nothing
+        , node: HH.text ""
         }
 
 data Selection =
@@ -49,7 +49,7 @@ data ArrayItem r i =
 
 listItem :: Config r i -> Array (Html r i) -> ArrayItem r i
 listItem (config_@Config ({ additionalAttributes, href })) nodes =
-    ArrayItem { config_ | node = listItemView (Config config_) nodes }
+    ArrayItem { config_ { node = listItemView (Config config_) nodes }
 
 listItemView :: Config r i -> Array (Html r i) -> Html r i
 listItemView (config_@{ additionalAttributes, href }) nodes =

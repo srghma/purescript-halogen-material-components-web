@@ -17,7 +17,7 @@ type Config r i
 
 defaultConfig :: Config r i
 defaultConfig =
-    { additionalAttributes = [] }
+    { additionalAttributes: [] }
 
 drawer :: Config r i -> Array (Html r i) -> Html r i
 drawer { additionalAttributes } nodes =

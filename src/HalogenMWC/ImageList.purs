@@ -24,9 +24,9 @@ type Config r i
 defaultConfig :: Config r i
 defaultConfig =
     Config
-        { masonry = False
-        , withTextProtection = False
-        , additionalAttributes = []
+        { masonry: False
+        , withTextProtection: False
+        , additionalAttributes: []
         }
 
 imageArray :: Config r i -> Array (ImageArrayItem r i) -> Html r i

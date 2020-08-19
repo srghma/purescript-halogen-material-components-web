@@ -21,9 +21,9 @@ type Config r i
 defaultConfig :: Config r i
 defaultConfig =
     Config
-        { open = False
-        , additionalAttributes = []
-        , onClose = Nothing
+        { open: False
+        , additionalAttributes: []
+        , onClose: Nothing
         }
 
 type Content r i =

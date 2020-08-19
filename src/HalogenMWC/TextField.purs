@@ -46,25 +46,25 @@ data Icon r i
 defaultConfig :: Config r i
 defaultConfig =
     Config
-        { label = Nothing
-        , fullwidth = False
-        , value = Nothing
-        , placeholder = Nothing
-        , disabled = False
-        , required = False
-        , valid = True
-        , minLength = Nothing
-        , maxLength = Nothing
-        , pattern = Nothing
-        , type_ = Nothing
-        , min = Nothing
-        , max = Nothing
-        , step = Nothing
-        , leadingIcon = Nothing
-        , trailingIcon = Nothing
-        , additionalAttributes = []
-        , onInput = Nothing
-        , onChange = Nothing
+        { label: Nothing
+        , fullwidth: False
+        , value: Nothing
+        , placeholder: Nothing
+        , disabled: False
+        , required: False
+        , valid: True
+        , minLength: Nothing
+        , maxLength: Nothing
+        , pattern: Nothing
+        , type_: Nothing
+        , min: Nothing
+        , max: Nothing
+        , step: Nothing
+        , leadingIcon: Nothing
+        , trailingIcon: Nothing
+        , additionalAttributes: []
+        , onInput: Nothing
+        , onChange: Nothing
         }
 
 filled :: Config r i -> Html r i

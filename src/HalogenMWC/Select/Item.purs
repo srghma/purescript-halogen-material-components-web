@@ -18,9 +18,9 @@ data Config a r i =
 config :: { value :: a } -> Config a r i
 config { value } =
     Config
-        { value = value
-        , disabled = False
-        , additionalAttributes = []
+        { value: value
+        , disabled: False
+        , additionalAttributes: []
         }
 
 data SelectItem a r i =

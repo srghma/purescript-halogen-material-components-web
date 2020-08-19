@@ -26,15 +26,15 @@ type Config r i
 defaultConfig :: Config r i
 defaultConfig =
     Config
-        { icon = Nothing
-        , trailingIcon = False
-        , disabled = False
-        , dense = False
-        , href = Nothing
-        , target = Nothing
-        , additionalAttributes = []
-        , onClick = Nothing
-        , touch = True
+        { icon: Nothing
+        , trailingIcon: False
+        , disabled: False
+        , dense: False
+        , href: Nothing
+        , target: Nothing
+        , additionalAttributes: []
+        , onClick: Nothing
+        , touch: True
         }
 
 data Variant

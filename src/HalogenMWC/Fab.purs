@@ -22,10 +22,10 @@ type Config r i
 defaultConfig :: Config r i
 defaultConfig =
     Config
-        { mini = False
-        , exited = False
-        , onClick = Nothing
-        , additionalAttributes = []
+        { mini: False
+        , exited: False
+        , onClick: Nothing
+        , additionalAttributes: []
         }
 
 fab :: Config r i -> String -> Html r i

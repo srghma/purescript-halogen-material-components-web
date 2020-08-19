@@ -28,8 +28,8 @@ type Config r i
 defaultConfig :: Config r i
 defaultConfig =
     Config
-        { label = Nothing
-        , additionalAttributes = []
+        { label: Nothing
+        , additionalAttributes: []
         }
 
 {-| Specify the data table's HTML5 aria-label attribute
@@ -130,11 +130,7 @@ headerCell cell_ =
                     ]
                     <> attributes
                 )
-                [ Checkbox.checkbox
-                    (case config_ of
-                        Material.Checkbox.Internal.Config config__ ->
-                            Material.Checkbox.Internal.Config (config__ { additionalAttributes = [HP.class_ mdc_data_table__row_checkbox] <> config__.additionalAttributes })
-                    )
+                [ Checkbox.checkbox (config_ { additionalAttributes = [HP.class_ mdc_data_table__row_checkbox] <> config__.additionalAttributes })
                 ]
 
 dataTableHeaderCellCs :: Maybe (HH.Attribute r i)
@@ -182,11 +178,7 @@ bodyCell cell_ =
                     ]
                     <> attributes
                 )
-                [ Checkbox.checkbox
-                    (case config_ of
-                        Material.Checkbox.Internal.Config config__ ->
-                            Material.Checkbox.Internal.Config (config__ { additionalAttributes = [HP.class_ mdc_data_table__row_checkbox] <> config__.additionalAttributes })
-                    )
+                [ Checkbox.checkbox (config_ { additionalAttributes = [HP.class_ mdc_data_table__row_checkbox] <> config_.additionalAttributes })
                 ]
 
 data Cell r i

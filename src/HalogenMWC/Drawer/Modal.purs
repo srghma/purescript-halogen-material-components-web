@@ -23,9 +23,9 @@ type Config r i
 defaultConfig :: Config r i
 defaultConfig =
     Config
-        { open = False
-        , additionalAttributes = []
-        , onClose = Nothing
+        { open: False
+        , additionalAttributes: []
+        , onClose: Nothing
         }
 
 drawer :: Config r i -> Array (Html r i) -> Html r i

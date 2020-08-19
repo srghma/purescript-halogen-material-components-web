@@ -24,10 +24,10 @@ data Config a r i
 config :: { toLabel :: a -> String } -> Config a r i
 config { toLabel } =
     Config
-        { selected = Nothing
-        , onChange = Nothing
-        , toLabel = toLabel
-        , additionalAttributes = []
+        { selected: Nothing
+        , onChange: Nothing
+        , toLabel: toLabel
+        , additionalAttributes: []
         }
 
 chipSet :: Config a r i -> Array (Chip a r i) -> Html r i

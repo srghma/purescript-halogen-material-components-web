@@ -23,11 +23,11 @@ type Config r i
 defaultConfig :: Config r i
 defaultConfig =
     Config
-        { checked = False
-        , disabled = False
-        , additionalAttributes = []
-        , onChange = Nothing
-        , touch = True
+        { checked: False
+        , disabled: False
+        , additionalAttributes: []
+        , onChange: Nothing
+        , touch: True
         }
 
 {-| Specify whether touch support is enabled (enabled by default)

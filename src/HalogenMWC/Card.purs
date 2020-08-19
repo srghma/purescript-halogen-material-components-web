@@ -33,15 +33,15 @@ type Config r i
 defaultConfig :: Config r i
 defaultConfig =
     Config
-        { outlined = False
-        , additionalAttributes = []
+        { outlined: False
+        , additionalAttributes: []
         }
 
 card :: Config r i -> Content r i -> Html r i
 card (config_@{ additionalAttributes }) content =
     HH.node "mdc-card"
         (Array.filterMap identity
-            [ rootCs
+            [ HP.class_ mdc_card
             , outlinedCs config_
             ]
             <> additionalAttributes
@@ -92,56 +92,43 @@ actionsElt content =
         Nothing ->
             []
 
-rootCs :: Maybe (HH.Attribute r i)
-rootCs =
-    Just (HP.class_ mdc_card)
-
 outlinedCs :: Config r i -> Maybe (HH.Attribute r i)
-outlinedCs { outlined } =
-    if outlined then
+outlinedCs config =
+    if config.outlined then
         Just (HP.class_ mdc_card____outlined)
-
     else
         Nothing
 
-data Content r i =
+type Content r i =
     { blocks :: Array (Block r i)
     , actions :: Maybe (Actions r i)
     }
-
-data Block r i
-    = Block (Html r i)
-
-block :: Html r i -> Block r i
-block =
-    Block
 
 data Aspect
     = Square
     | SixteenToNine
 
-mediaView :: Maybe Aspect -> Array (IProp r i) -> String -> Block r i
+mediaView :: Maybe Aspect -> Array (IProp r i) -> String -> Html r i
 mediaView aspect additionalAttributes backgroundImage =
-    Block $
-        HH.div
-            (Array.filterMap identity
-                [ mediaCs
-                , backgroundImageAttr backgroundImage
-                , aspectCs aspect
-                ]
-                <> additionalAttributes
-            )
-            []
+  HH.div
+      (Array.filterMap identity
+          [ mediaCs
+          , backgroundImageAttr backgroundImage
+          , aspectCs aspect
+          ]
+          <> additionalAttributes
+      )
+      []
 
-squareMedia :: Array (IProp r i) -> String -> Block r i
+squareMedia :: Array (IProp r i) -> String -> Html r i
 squareMedia additionalAttributes backgroundImage =
     mediaView (Just Square) additionalAttributes backgroundImage
 
-sixteenToNineMedia :: Array (IProp r i) -> String -> Block r i
+sixteenToNineMedia :: Array (IProp r i) -> String -> Html r i
 sixteenToNineMedia additionalAttributes backgroundImage =
     mediaView (Just SixteenToNine) additionalAttributes backgroundImage
 
-media :: Array (IProp r i) -> String -> Block r i
+media :: Array (IProp r i) -> String -> Html r i
 media additionalAttributes backgroundImage =
     mediaView Nothing additionalAttributes backgroundImage
 
@@ -165,27 +152,22 @@ aspectCs aspect =
         Nothing ->
             Nothing
 
-primaryAction :: Array (IProp r i) -> Array (Block r i) -> Array (Block r i)
+primaryAction :: Array (IProp r i) -> Array (Html r i) -> Array (Html r i)
 primaryAction additionalAttributes blocks =
-    [ Block $
-        HH.div
-            ([ primaryActionCs
-             , tabIndexProp 0
-             ]
-                <> additionalAttributes
-            )
-            (Array.map (\(Block html) -> html) blocks)
+    [ HH.div
+        ( [ HP.class_ mdc_card__primary_action
+          , tabIndexProp 0
+          ]
+          <> additionalAttributes
+        )
+        blocks
     ]
-
-primaryActionCs :: HH.Attribute r i
-primaryActionCs =
-    HP.class_ mdc_card__primary_action
 
 tabIndexProp :: Int -> HH.Attribute r i
 tabIndexProp tabIndex =
     HH.Attributes.property "tabIndex" (Encode.int tabIndex)
 
-data Actions r i
+newtype Actions r i
     = Actions
         { buttons :: Array (Button r i)
         , icons :: Array (Icon r i)
@@ -209,36 +191,14 @@ fullBleedActions :: Button r i -> Actions r i
 fullBleedActions button_ =
     Actions { buttons = [ button_ ], icons = [], fullBleed = True }
 
-data Button r i
-    = Button (Html r i)
+button :: Button.Config r i -> String -> Html r i
+button config label =
+  Button.text
+    (config { additionalAttributes = HP.classes [mdc_card__action, mdc_card__action____button] <> config.additionalAttributes })
+    label
 
-button :: Button.Config r i -> String -> Button r i
-button (Material.Button.Internal.Config buttonConfig) label =
-    Button $
-        Button.text
-            (Material.Button.Internal.Config
-                { buttonConfig
-                    | additionalAttributes =
-                        HP.class_ mdc_card__action
-                            :: HP.class_ mdc_card__action____button
-                            :: buttonConfig.additionalAttributes
-                }
-            )
-            label
-
-data Icon r i
-    = Icon (Html r i)
-
-icon :: IconButton.Config r i -> String -> Icon r i
-icon (Material.IconButton.Internal.Config iconButtonConfig) iconName =
-    Icon $
-        IconButton.iconButton
-            (Material.IconButton.Internal.Config
-                { iconButtonConfig
-                    | additionalAttributes =
-                        HP.class_ mdc_card__action
-                            :: HP.class_ mdc_card__action____icon
-                            :: iconButtonConfig.additionalAttributes
-                }
-            )
-            iconName
+icon :: IconButton.Config r i -> String -> Html r i
+icon config iconName =
+  IconButton.iconButton
+      (config { additionalAttributes = HP.classes [mdc_card__action, mdc_card__action____icon] <> config.additionalAttributes })
+      iconName

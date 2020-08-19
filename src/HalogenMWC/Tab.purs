@@ -18,10 +18,10 @@ type Config r i =
 defaultConfig :: Config r i
 defaultConfig =
     Config
-        { active = False
-        , additionalAttributes = []
-        , onClick = Nothing
-        , content = { label = "", icon = Nothing }
+        { active: False
+        , additionalAttributes: []
+        , onClick: Nothing
+        , content: { label = "", icon = Nothing }
         }
 
 data Content =
@@ -39,4 +39,4 @@ data Tab r i =
 
 tab :: Config r i -> Content -> Tab r i
 tab (Config config_) content =
-    Tab { config_ | content = content }
+    Tab { config_ { content = content }

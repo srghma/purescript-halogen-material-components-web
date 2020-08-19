@@ -22,8 +22,8 @@ type Config r i
 defaultConfig :: Config r i
 defaultConfig =
     Config
-        { color = Nothing
-        , additionalAttributes = []
+        { color: Nothing
+        , additionalAttributes: []
         }
 
 data Color

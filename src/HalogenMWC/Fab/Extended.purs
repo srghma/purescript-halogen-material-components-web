@@ -23,11 +23,11 @@ type Config r i
 defaultConfig :: Config r i
 defaultConfig =
     Config
-        { icon = Nothing
-        , trailingIcon = False
-        , exited = False
-        , onClick = Nothing
-        , additionalAttributes = []
+        { icon: Nothing
+        , trailingIcon: False
+        , exited: False
+        , onClick: Nothing
+        , additionalAttributes: []
         }
 
 fab :: Config r i -> String -> Html r i

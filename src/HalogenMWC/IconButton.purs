@@ -22,10 +22,10 @@ type Config r i
 defaultConfig :: Config r i
 defaultConfig =
     Config
-        { disabled = False
-        , label = Nothing
-        , additionalAttributes = []
-        , onClick = Nothing
+        { disabled: False
+        , label: Nothing
+        , additionalAttributes: []
+        , onClick: Nothing
         }
 
 iconButton :: Config r i -> String -> Html r i

@@ -33,20 +33,20 @@ type Config r i
 defaultConfig :: Config r i
 defaultConfig =
     Config
-        { label = Nothing
-        , fullwidth = False
-        , value = Nothing
-        , placeholder = Nothing
-        , rows = Nothing
-        , cols = Nothing
-        , disabled = False
-        , required = False
-        , valid = True
-        , minLength = Nothing
-        , maxLength = Nothing
-        , additionalAttributes = []
-        , onInput = Nothing
-        , onChange = Nothing
+        { label: Nothing
+        , fullwidth: False
+        , value: Nothing
+        , placeholder: Nothing
+        , rows: Nothing
+        , cols: Nothing
+        , disabled: False
+        , required: False
+        , valid: True
+        , minLength: Nothing
+        , maxLength: Nothing
+        , additionalAttributes: []
+        , onInput: Nothing
+        , onChange: Nothing
         }
 
 filled :: Config r i -> Html r i

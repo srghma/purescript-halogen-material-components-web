@@ -23,7 +23,7 @@ data Chip r i
 
 defaultConfig :: Config r i
 defaultConfig =
-  { icon = Nothing
-  , additionalAttributes = []
-  , onClick = Nothing
+  { icon: Nothing
+  , additionalAttributes: []
+  , onClick: Nothing
   }
