@@ -59,4 +59,3 @@ mdc_grid_tile__support_text = ClassName "mdc-grid-tile__support-text"
 
 mdc_grid_tile__title :: ClassName
 mdc_grid_tile__title = ClassName "mdc-grid-tile__title"
-

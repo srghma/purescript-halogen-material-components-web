@@ -23,4 +23,3 @@ rmwc_badge____no_content = ClassName "rmwc-badge--no-content"
 
 rmwc_badge_anchor :: ClassName
 rmwc_badge_anchor = ClassName "rmwc-badge-anchor"
-

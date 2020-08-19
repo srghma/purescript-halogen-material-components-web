@@ -5,4 +5,3 @@ import Halogen.HTML (ClassName(..))
 
 mdc_layout_grid :: ClassName
 mdc_layout_grid = ClassName "mdc-layout-grid"
-

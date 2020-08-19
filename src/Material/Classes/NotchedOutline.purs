@@ -29,4 +29,3 @@ mdc_notched_outline__notch = ClassName "mdc-notched-outline__notch"
 
 mdc_notched_outline__trailing :: ClassName
 mdc_notched_outline__trailing = ClassName "mdc-notched-outline__trailing"
-

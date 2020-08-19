@@ -32,4 +32,3 @@ mdc_linear_progress__primary_bar = ClassName "mdc-linear-progress__primary-bar"
 
 mdc_linear_progress__secondary_bar :: ClassName
 mdc_linear_progress__secondary_bar = ClassName "mdc-linear-progress__secondary-bar"
-

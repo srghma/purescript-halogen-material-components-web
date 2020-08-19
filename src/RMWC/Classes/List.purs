@@ -23,4 +23,3 @@ rmwc_collapsible_list__children_inner = ClassName "rmwc-collapsible-list__childr
 
 rmwc_collapsible_list__handle :: ClassName
 rmwc_collapsible_list__handle = ClassName "rmwc-collapsible-list__handle"
-

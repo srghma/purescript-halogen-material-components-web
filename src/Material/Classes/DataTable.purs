@@ -53,4 +53,3 @@ mdc_data_table__row_checkbox = ClassName "mdc-data-table__row-checkbox"
 
 mdc_data_table__table :: ClassName
 mdc_data_table__table = ClassName "mdc-data-table__table"
-

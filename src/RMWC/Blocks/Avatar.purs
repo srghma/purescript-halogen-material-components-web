@@ -27,9 +27,9 @@ data Size
 
 sizeToClassName :: Size -> ClassName
 sizeToClassName Xsmall = rmwc_avatar____xsmall
-sizeToClassName Small  = rmwc_avatar____small
+sizeToClassName Small = rmwc_avatar____small
 sizeToClassName Medium = rmwc_avatar____medium
-sizeToClassName Large  = rmwc_avatar____large
+sizeToClassName Large = rmwc_avatar____large
 sizeToClassName Xlarge = rmwc_avatar____xlarge
 
 foreign import getInitialsForName :: String -> String
@@ -39,29 +39,29 @@ containToStyle true = "contain"
 containToStyle false = "cover"
 
 squareToClassName :: Boolean -> Array ClassName
-squareToClassName true = [rmwc_avatar____square]
+squareToClassName true = [ rmwc_avatar____square ]
 squareToClassName false = []
 
-avatarImage
-  :: forall w i
-   . { size :: Size
-     , url :: Url
-     , name :: String
-     , square :: Boolean
-     , contain :: Boolean
-     }
-  -> HH.HTML w i
+avatarImage ::
+  forall w i.
+  { size :: Size
+  , url :: Url
+  , name :: String
+  , square :: Boolean
+  , contain :: Boolean
+  } ->
+  HH.HTML w i
 avatarImage config =
   HH.span
     [ HP.title config.name
-    , HP.classes $
-        [ rmwc_icon
-        , rmwc_icon____component
-        , material_icons
-        , rmwc_avatar
-        , sizeToClassName config.size
-        , rmwc_avatar____has_image
-        ]
+    , HP.classes
+        $ [ rmwc_icon
+          , rmwc_icon____component
+          , material_icons
+          , rmwc_avatar
+          , sizeToClassName config.size
+          , rmwc_avatar____has_image
+          ]
         <> squareToClassName config.square
     ]
     [ HH.div
@@ -75,24 +75,24 @@ avatarImage config =
         []
     ]
 
-avatarInitials
-  :: forall w i
-   . { size :: Size
-     , name :: String
-     , square :: Boolean
-     , contain :: Boolean
-     }
-  -> HH.HTML w i
+avatarInitials ::
+  forall w i.
+  { size :: Size
+  , name :: String
+  , square :: Boolean
+  , contain :: Boolean
+  } ->
+  HH.HTML w i
 avatarInitials config =
   HH.span
     [ HP.title config.name
-    , HP.classes $
-        [ rmwc_icon
-        , rmwc_icon____component
-        , material_icons
-        , rmwc_avatar
-        , sizeToClassName config.size
-        ]
+    , HP.classes
+        $ [ rmwc_icon
+          , rmwc_icon____component
+          , material_icons
+          , rmwc_avatar
+          , sizeToClassName config.size
+          ]
         <> squareToClassName config.square
     ]
     [ HH.div

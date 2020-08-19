@@ -38,4 +38,3 @@ mdc_menu__selection_group = ClassName "mdc-menu__selection-group"
 
 mdc_menu__selection_group_icon :: ClassName
 mdc_menu__selection_group_icon = ClassName "mdc-menu__selection-group-icon"
-

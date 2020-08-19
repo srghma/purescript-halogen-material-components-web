@@ -11,4 +11,3 @@ mdc_floating_label____float_above = ClassName "mdc-floating-label--float-above"
 
 mdc_floating_label____shake :: ClassName
 mdc_floating_label____shake = ClassName "mdc-floating-label--shake"
-

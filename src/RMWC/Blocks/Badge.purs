@@ -17,20 +17,22 @@ import MaterialIconsFont.Classes
 import Protolude.Url (Url)
 import Protolude.Url as Url
 
-inlineNoContent :: forall w i . HH.HTML w i
-inlineNoContent = HH.div
-  [ HP.classes
-    [ rmwc_badge
-    , rmwc_badge____align_inline
-    , rmwc_badge____no_content
+inlineNoContent :: forall w i. HH.HTML w i
+inlineNoContent =
+  HH.div
+    [ HP.classes
+        [ rmwc_badge
+        , rmwc_badge____align_inline
+        , rmwc_badge____no_content
+        ]
     ]
-  ]
-  []
+    []
 
-inlineWithContent :: forall w i . Array (HH.HTML w i) -> HH.HTML w i
-inlineWithContent = HH.div
-  [ HP.classes
-    [ rmwc_badge
-    , rmwc_badge____align_inline
+inlineWithContent :: forall w i. Array (HH.HTML w i) -> HH.HTML w i
+inlineWithContent =
+  HH.div
+    [ HP.classes
+        [ rmwc_badge
+        , rmwc_badge____align_inline
+        ]
     ]
-  ]

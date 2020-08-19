@@ -11,4 +11,3 @@ mdc_icon_button____on = ClassName "mdc-icon-button--on"
 
 mdc_icon_button__icon :: ClassName
 mdc_icon_button__icon = ClassName "mdc-icon-button__icon"
-

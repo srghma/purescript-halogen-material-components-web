@@ -23,4 +23,3 @@ mdc_switch__thumb_underlay = ClassName "mdc-switch__thumb-underlay"
 
 mdc_switch__track :: ClassName
 mdc_switch__track = ClassName "mdc-switch__track"
-

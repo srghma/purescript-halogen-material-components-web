@@ -11,4 +11,3 @@ mdc_tab____stacked = ClassName "mdc-tab--stacked"
 
 mdc_tab_bar :: ClassName
 mdc_tab_bar = ClassName "mdc-tab-bar"
-

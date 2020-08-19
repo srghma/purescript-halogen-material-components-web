@@ -35,4 +35,3 @@ mdc_fab__touch = ClassName "mdc-fab__touch"
 
 mdc_touch_target_wrapper :: ClassName
 mdc_touch_target_wrapper = ClassName "mdc-touch-target-wrapper"
-

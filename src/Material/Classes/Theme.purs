@@ -80,4 +80,3 @@ mdc_theme____text_secondary_on_dark = ClassName "mdc-theme--text-secondary-on-da
 
 mdc_theme____text_secondary_on_light :: ClassName
 mdc_theme____text_secondary_on_light = ClassName "mdc-theme--text-secondary-on-light"
-

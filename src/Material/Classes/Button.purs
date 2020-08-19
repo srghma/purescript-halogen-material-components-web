@@ -35,4 +35,3 @@ mdc_elevation_overlay = ClassName "mdc-elevation-overlay"
 
 mdc_touch_target_wrapper :: ClassName
 mdc_touch_target_wrapper = ClassName "mdc-touch-target-wrapper"
-
