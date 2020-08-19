@@ -1,229 +1,28 @@
 module HalogenMWC.TextField
     ( Config, config
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     , filled
     , outlined
     , Icon, icon
     ) where
-
-{-| Text fields allow users to input, edit, and select text.
-
-
-# Table of Contents
-
-  - [Resources](#resources)
-  - [Basic Usage](#basic-usage)
-  - [Configuration](#configuration)
-      - [Configuration Options](#configuration-options)
-  - [Filled Text Field](#filled-text-field)
-  - [Outlined Text Field](#outlined-text-field)
-  - [Full Width Text Field](#full-width-text-field)
-  - [Multiline Text Field](#multiline-text-field)
-  - [Disabled Text Field](#disabled-text-field)
-  - [Password Text Field](#password-text-field)
-  - [Required Text Field](#disabled-text-field)
-  - [Valid Text Field](#valid-text-field)
-  - [Text Field with Leading Icon](#text-field-with-leading-icon)
-  - [Text Field with Trailing Icon](#text-field-with-trailing-icon)
-  - [Text Field with Character Counter](#text-field-with-character-counter)
-  - [Focus a Text Field](#focus-a-text-field)
-
-
-# Resources
-
-  - [Demo: Text Fields](https://aforemny.github.io/material-components-web-elm/#text-field)
-  - [Material Design Guidelines: Menus](https://material.io/go/design-menus)
-  - [MDC Web: Menu](https://github.com/material-components/material-components-web/tree/master/packages/mdc-menu)
-  - [Sass Mixins (MDC Web)](https://github.com/material-components/material-components-web/tree/master/packages/mdc-menu#sass-mixins)
-
-
-# Basic Usage
-
-    import HalogenMWC.TextField as TextField
-
-    data Msg
-        = ValueChanged String
-
-    main =
-        TextField.filled
-            (TextField.config
-                |> TextField.setLabel (Just "My text field")
-                |> TextField.setValue (Just "hello world")
-                |> TextField.setOnInput ValueChanged
-            )
-
-
-# Configuration
-
-@docs Config, config
-
-
-## Configuration Options
-
-@docs setOnInput
-@docs setOnChange
-@docs setLabel
-@docs setFullwidth
-@docs setValue
-@docs setPlaceholder
-@docs setDisabled
-@docs setRequired
-@docs setValid
-@docs setMinLength
-@docs setMaxLength
-@docs setPattern
-@docs setType
-@docs setMin
-@docs setMax
-@docs setStep
-@docs setLeadingIcon
-@docs setTrailingIcon
-@docs setAttributes
-
-
-# Filled Text Field
-
-
-# Filled Text Field
-
-    TextField.filled TextField.config
-
-@docs filled
-
-
-# Outlined Text Field
-
-Text fields may have a visible outlined around them by using their
-`outlined` variant.
-
-    TextField.outlined TextField.config
-
-Note that `setFullwidth` does not have any effect on an outlined text field.
-
-@docs outlined
-
-
-# Full Width Text Field
-
-To make a text field span all of its available width its `setFullwidth`
-configuration option to `True`.
-
-    TextField.filled
-        (TextField.config |> TextField.setFullwidth True)
-
-Full width text fields do not support a label and will ignore the `setLabel`
-configuration option. You may use `setPlaceholder` or provide an extraneous
-label for a full width text field.
-
-Outlined text fields do not support `setFullwidth` and wll ignore this
-configuration option.
-
-
-# Disabled Text Field
-
-To disable a text field its `setDisabled` configuration option to `True`.
-
-    TextField.filled
-        (TextField.config |> TextField.setDisabled True)
-
-
-# Password Text Field
-
-To mark a text field as an input for entering a passwort, use its `setType`
-configuration option to specify `"password"`.
-
-    TextField.filled
-        (TextField.config |> TextField.setType (Just "password"))
-
-Other input types besides `"password"` may or may not be supported.
-
-
-# Required Text Field
-
-To mark a text field as required its `setRequired` configuration option to
-`True`.
-
-    TextField.filled
-        (TextField.config |> TextField.setRequired True)
-
-
-# Valid Text Field
-
-To mark a text field as valid its `setValid` configuration option to
-`True`.
-
-    TextField.filled
-        (TextField.config |> TextField.setValid True)
-
-
-# Text Field with Leading Icon
-
-To have a text field display a leading icon, use its `setLeadingIcon`
-configuration option to specify a value of `Icon`.
-
-    TextField.filled
-        (TextField.config
-            |> TextField.setLeadingIcon
-                (Just (TextField.icon [] "wifi"))
-        )
-
-@docs Icon, icon
-
-
-# Text Field with Trailing Icon
-
-To have a text field display a trailing icon, use its `setTrailingIcon`
-configuration option to specify a value of `Icon`.
-
-    TextField.filled
-        (TextField.config
-            |> TextField.setTrailingIcon
-                (Just (TextField.icon [] "clear"))
-        )
-
-
-# Text Field with Character Counter
-
-To have a text field display a character counter, specify its `setMaxLength`
-configuration option, and also add a `HelperText.characterCounter` as a child
-of `HelperText.helperLine`.
-
-    [ TextField.filled
-        (TextField.config |> TextField.setMaxLength (Just 18))
-    , HelperText.helperLine [] [ HelperText.characterCounter [] ]
-    ]
-
-
-# Focus a Text Field
-
-You may programatically focus a text field by assigning an id attribute to it
-and use `Browser.Dom.focus`.
-
-    TextField.filled
-        (TextField.config
-            |> TextField.setAttributes
-                [ Html.Attributes.id "my-text-field" ]
-        )
-
--}
 
 import Protolude
 import Halogen (AttrName(..))

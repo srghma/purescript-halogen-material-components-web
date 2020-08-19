@@ -1,106 +1,10 @@
 module HalogenMWC.ImageArray
     ( Config, config
-    
-    
-    
+
+
+
     , imageArray
     ) where
-
-{-| An Image Array consists of several items, each containing an image and
-optionally supporting a text label.
-
-This modules concerns the container image list. If you are looking for
-information about the image list items, refer to
-[Material.ImageArray.Item](Material-ImageArray-Item).
-
-
-# Table of Contents
-
-  - [Resources](#resources)
-  - [Configuration](#configuration)
-      - [Configuration Options](#configuration-options)
-  - [Basic Usage](#basic-usage)
-  - [Image Array](#image-list)
-  - [Masonry Image Array](#masonry-image-list)
-  - [Image Array with Text Label](#image-list-with-text-label)
-
-
-# Resources
-
-  - [Demo: Image Arrays](https://aforemny.github.io/material-components-web-elm/#image-list)
-  - [Material Design Guidelines: Image list](https://material.io/go/design-image-list)
-  - [MDC Web: Image Array](https://github.com/material-components/material-components-web/tree/master/packages/mdc-image-list)
-  - [Sass Mixins (MDC Web)](https://github.com/material-components/material-components-web/tree/master/packages/mdc-image-list#sass-mixins)
-
-
-# Basic Usage
-
-Note that you will have to set the width and margin of image list items
-yourself, preferably through SASS or through inline CSS.
-
-    
-    import HalogenMWC.ImageArray as ImageArray
-    import HalogenMWC.ImageArray.Item as ImageArrayItem
-
-    main =
-        ImageArray.imageArray ImageArray.config
-            [ ImageArrayItem.imageArrayItem
-                (ImageArrayItem.config
-                    |> ImageArrayItem.setAttributes
-                        [ style "width" "calc(100% / 5 - 4px)"
-                        , style "margin" "2px"
-                        ]
-                )
-                "images/photos/3x2/1.jpg"
-            ]
-
-
-# Configuration
-
-@docs Config, config
-
-
-## Configuration Options
-
-@docs setMasonry
-@docs setWithTextProtection
-@docs setAttributes
-
-
-# Image Array
-
-@docs imageArray
-
-
-# Masonry Image Array
-
-The _masonry image list_ variant presents images vertically arranged into
-several columns. In this layout, images may be any combination of aspect
-ratios.
-
-    ImageArray.imageArray
-        (ImageArray.config |> ImageArray.setMasonry True)
-        []
-
-
-# Image Array with Label
-
-Image's labels are by default positioned below the image. If you want image
-labels to be positioned in a scrim overlaying each image, use the image list's
-`setWithTextProtection` configuration option.
-
-    ImageArray.imageArray
-        (ImageArray.config
-            |> ImageArray.setWithTextProtection True
-        )
-        [ ImageArrayItem.imageArrayItem
-            (ImageArrayItem.config
-                |> ImageArrayItem.setLabel (Just "Photo")
-            )
-            "images/photos/3x2/1.jpg"
-        ]
-
--}
 
 import Protolude
 import Halogen (AttrName(..))

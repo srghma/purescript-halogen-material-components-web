@@ -1,101 +1,11 @@
 module HalogenMWC.Array.Divider
     ( Config, config
-    
-    
-    
+
+
+
     , listItem
     , group
     ) where
-
-{-| Arrays are continuous, vertical indexes of text or images.
-
-This module concerns a list's divider elements. If you are looking for the list
-container, refer to [Material.Array](Material-Array), and if you are looking for
-the list item, refer to [Material.Array.Item](Material-Array-Item).
-
-
-# Table of Contents
-
-  - [Resources](#resources)
-  - [Basic Usage](#basic-usage)
-  - [Configuration](#configuration)
-      - [Configuration Options](#configuration-options)
-  - [Array Item Divider](#list-item-divider)
-  - [Array Group Divider](#list-group-divider)
-
-
-# Resources
-
-  - [Demo: Arrays](https://aforemny.github.io/material-components-web-elm/#lists)
-  - [Material Design Guidelines: Arrays](https://material.io/design/components/lists.html)
-  - [MDC Web: Array](https://github.com/material-components/material-components-web/tree/master/packages/mdc-list)
-  - [Sass Mixins (MDC Web)](https://github.com/material-components/material-components-web/tree/master/packages/mdc-list#sass-mixins)
-
-
-# Basic Usage
-
-    import HalogenMWC.Array as Array
-    import HalogenMWC.Array.Divider as ArrayDivider
-    import HalogenMWC.Array.Item as ArrayItem
-
-    main =
-        Array.list Array.config
-            [ ArrayItem.listItem ArrayItem.config
-                [ text "Line item" ]
-            , ArrayDivider.listItem ArrayDivider.config
-            , ArrayItem.listItem ArrayItem.config
-                [ text "Line item" ]
-            ]
-
-
-# Configuration
-
-@docs Config, config
-
-
-## Configuration Options
-
-@docs setPadded
-@docs setInset
-@docs setAttributes
-
-
-# Array Item Divider
-
-Array items may be seperated by a divider. The divider may optionally be _inset_
-so that it does not intersect the list item's graphic, or _padded_ so that it
-does not intersect the list item's meta.
-
-    Array.list Array.config
-        [ ArrayItem.listItem ArrayItem.config
-            [ text "Array item" ]
-        , ArrayDivider.listItem ArrayDivider.config
-        , ArrayItem.listItem ArrayItem.config
-            [ text "Array item" ]
-        ]
-
-@docs listItem
-
-
-### Array Group Divider
-
-Multiple lists within a group may be visually seperated by a list group divider.
-
-    Array.group []
-        [ Array.list Array.config
-            [ ArrayItem.listItem ArrayItem.config [ text "Folder" ]
-            , ArrayItem.listItem ArrayItem.config [ text "Folder" ]
-            ]
-        , ArrayDivider.group []
-        , Array.list Array.config
-            [ ArrayItem.listItem ArrayItem.config [ text "File" ]
-            , ArrayItem.listItem ArrayItem.config [ text "File" ]
-            ]
-        ]
-
-@docs group
-
--}
 
 import Protolude
 import Halogen (AttrName(..))

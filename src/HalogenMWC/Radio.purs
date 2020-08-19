@@ -1,113 +1,12 @@
 module HalogenMWC.Radio
     ( Config, config
-    
-    
-    
-    
-    
+
+
+
+
+
     , radio
     ) where
-
-{-| Radio buttons allow the user to select one option from a set while seeing
-all available options.
-
-
-# Table of Contents
-
-  - [Resources](#resources)
-  - [Basic Usage](#basic-usage)
-  - [Configuration](#configuration)
-      - [Configuration Options](#configuration-options)
-  - [Radio](#radio)
-  - [Checked Radio](#checked-radio)
-  - [Disabled Radio](#disabled-radio)
-  - [Focus a Radio](#focus-a-radio)
-  - [Touch Support](#touch-support)
-
-
-# Resources
-
-  - [Demo: Radio Buttons](https://aforemny.github.io/material-components-web-elm/#radio-buttons)
-  - [Material Design Guidelines: Selection Controls – Radio buttons](https://material.io/go/design-radio-buttons)
-  - [MDC Web: Radio](https://github.com/material-components/material-components-web/tree/master/packages/mdc-radio)
-  - [Sass Mixins (MDC Web)](https://github.com/material-components/material-components-web/tree/master/packages/mdc-radio#sass-mixins)
-
-
-# Basic Usage
-
-Note that radio buttons are usually used in conjunction with [form
-fields](Material-FormField).
-
-    import HalogenMWC.Radio as Radio
-
-    data Msg
-        = Changed
-
-    main =
-        Radio.radio
-            (Radio.config
-                |> Radio.setChecked True
-                |> Radio.setOnChange Changed
-            )
-
-
-# Configuration
-
-@docs Config, config
-
-
-## Configuration Options
-
-@docs setOnChange
-@docs setChecked
-@docs setDisabled
-@docs setTouch
-@docs setAttributes
-
-
-# Radio
-
-@docs radio
-
-
-# Checked Radio
-
-To make a radio button display its checked state its `setChecked`
-configuration option to `True`.
-
-    Radio.radio (Radio.config |> Radio.setChecked True)
-
-
-# Disabled Radio
-
-To disable a radio button its `setDisabled` configuration option to `True`.
-
-Disabled radio buttons cannot be interacted with and have no visual interaction
-effect.
-
-    Radio.radio (Radio.config |> Radio.setDisabled True)
-
-
-# Focus a Radio
-
-You may programatically focus a radio button by assigning an id attribute to it
-and use `Browser.Dom.focus`.
-
-    Radio.radio
-        (Radio.config
-            |> Radio.setAttributes
-                [ Html.Attributes.id "my-radio" ]
-        )
-
-
-# Touch Support
-
-Touch support is enabled by default. To disable touch support set a radio's
-`setTouch` configuration option to `False`.
-
-    Radio.radio (Radio.config |> Radio.setTouch False)
-
--}
 
 import Protolude
 import Halogen (AttrName(..))

@@ -1,110 +1,11 @@
 module HalogenMWC.Fab
     ( Config, config
-    
-    
-    
-    
+
+
+
+
     , fab
     ) where
-
-{-| A floating action button represents the primary action in an application.
-
-A floating action button only contains an icon to indicate its action. For a
-floating action button that may contain text, refer to the [extended floating
-action button](Material-Fab-Extended).
-
-
-# Table of Contents
-
-  - [Resources](#resources)
-  - [Basic Usage](#basic-usage)
-  - [Configuration](#configuration)
-      - [Configuration Options](#configuration-options)
-  - [Floating Action Button](#floating-action-button)
-  - [Mini FAB](#mini-fab)
-  - [Exited FAB](#exited-fab)
-  - [Focus a FAB](#focus-a-fab)
-
-
-# Resources
-
-  - [Demo: Floating action buttons](https://aforemny.github.io/material-components-web-elm/#fab)
-  - [Material Design Guidelines: Floating Action Button](https://material.io/go/design-fab)
-  - [MDC Web: Floating Action Button](https://github.com/material-components/material-components-web/tree/master/packages/mdc-fab)
-  - [Sass Mixins (MDC Web)](https://github.com/material-components/material-components-web/tree/master/packages/mdc-fab#sass-mixins)
-
-
-# Basic Usage
-
-Developers are required to manually position the floating action button within
-their page layout, for instance by setting a fixed position via CSS.
-
-    
-    import HalogenMWC.Fab as Fab
-
-    data Msg
-        = FabClicked
-
-    main =
-        Fab.fab
-            (Fab.config
-                |> Fab.setOnClick FabClicked
-                |> Fab.setAttributes
-                    [ style "position" "fixed"
-                    , style "bottom" "2rem"
-                    , style "right" "2rem"
-                    ]
-            )
-            "favorite"
-
-
-# Configuration
-
-@docs Config, config
-
-
-## Configuration Options
-
-@docs setOnClick
-@docs setMini
-@docs setExited
-@docs setAttributes
-
-
-# Floating Action Button
-
-@docs fab
-
-
-# Mini FAB
-
-If you want the floating action button to appear in smaller size its
-`setMini` configuration option to `True`.
-
-    Fab.fab (Fab.config |> Fab.setMini True) "favorite"
-
-
-# Exited FAB
-
-If you want the floating action button to transition off the screen its
-`setExited` configuration option to `True`.
-
-    Fab.fab (Fab.config |> Fab.setExited True) "favorite"
-
-
-# Focus a FAB
-
-You may programatically focus a floating action button by assigning an id
-attribute to it and use `Browser.Dom.focus`.
-
-    Fab.fab
-        (Fab.config
-            |> Fab.setAttributes
-                [ Html.Attributes.id "my-fab" ]
-        )
-        "favorite_border"
-
--}
 
 import Protolude
 import Halogen (AttrName(..))

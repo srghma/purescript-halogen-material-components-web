@@ -1,131 +1,14 @@
 module HalogenMWC.Checkbox
     ( Config, config
-    
+
     , State
-    
-    
-    
+
+
+
     , checkbox
     , checked, unchecked
     , indeterminate
     ) where
-
-{-| Checkboxes allow the user to select one or more items from a set.
-
-
-# Table of Contents
-
-  - [Resources](#resources)
-  - [Basic Usage](#basic-usage)
-  - [Configuration](#configuration)
-      - [Configuration Options](#configuration-options)
-  - [Checkbox](#checkbox)
-  - [Checked Checkbox](#checked-Checkbox)
-  - [Indeterminate Checkbox](#indeterminate-checkbox)
-  - [Disabled Checkbox](#disabled-checkbox)
-  - [Focus a Checkbox](#focus-a-checkbox)
-  - [Touch Support](#touch-support)
-
-
-# Resources
-
-  - [Demo: Checkboxes](https://aforemny.github.io/material-components-web-elm/#checkbox)
-  - [Material Design Guidelines: Selection Controls – Checkbox](https://material.io/go/design-checkboxes)
-  - [MDC Web: Checkbox](https://github.com/material-components/material-components-web/tree/master/packages/mdc-checkbox)
-  - [Sass Mixins (MDC Web)](https://github.com/material-components/material-components-web/tree/master/packages/mdc-checkbox#sass-mixins)
-
-
-# Basic Usage
-
-Note that checkboxes are usually used in conjunction with form fields. Refer to
-[FormField](Material-FormField) for more information.
-
-    import HalogenMWC.Checkbox as Checkbox
-
-    data Msg
-        = Changed
-
-    main =
-        Checkbox.checkbox
-            (Checkbox.config
-                |> Checkbox.setState (Just Checkbox.unchecked)
-                |> Checkbox.setOnChange Changed
-            )
-
-
-# Configuration
-
-@docs Config, config
-
-
-## Configuration Options
-
-@docs setOnChange
-@docs State
-@docs setDisabled
-@docs setTouch
-@docs setAttributes
-
-
-# Checkbox
-
-@docs checkbox
-
-
-# Checked Checkbox
-
-To set the state of a checkbox, use its `setState` configuration option.
-
-    Checkbox.checkbox
-        (Checkbox.config
-            |> Checkbox.setState (Just Checkbox.checked)
-        )
-
-@docs checked, unchecked
-
-
-# Indeterminate Checkbox
-
-To set the state of a checkbox, use its `setState` configuration option.
-
-    Checkbox.checkbox
-        (Checkbox.config
-            |> Checkbox.setState (Just Checkbox.indeterminate)
-        )
-
-@docs indeterminate
-
-
-# Disabled Checkbox
-
-To disable a checkbox, use its `setDisabled` configuration option. Disabled
-checkboxes cannot be interacted with and have no visual interaction effect.
-
-    Checkbox.checkbox
-        (Checkbox.config |> Checkbox.setDisabled True)
-
-
-# Focus a Checkbox
-
-You may programatically focus a checkbox by assigning an id attribute to it and
-use `Browser.Dom.focus`.
-
-    Checkbox.checkbox
-        (Checkbox.config
-            |> Checkbox.setAttributes
-                [ Html.Attributes.id "my-checkbox" ]
-        )
-
-
-# Touch Support
-
-Touch support is enabled by default. To disable touch support set a checkbox'
-`setTouch` configuration option to `False`.
-
-    Checkbox.checkbox
-        (Checkbox.config |> Checkbox.setTouch False)
-
--}
 
 import Protolude
 import Halogen (AttrName(..))

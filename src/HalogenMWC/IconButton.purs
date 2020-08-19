@@ -1,109 +1,12 @@
 module HalogenMWC.IconButton
     ( Config, config
-    
-    
-    
-    
+
+
+
+
     , iconButton
     , custom
     ) where
-
-{-| Icon buttons allow users to take actions and make choices with a single
-tap.
-
-
-# Table of Contents
-
-  - [Resources](#resources)
-  - [Basic Usage](#basic-usage)
-  - [Configuration](#configuration)
-      - [Configuration Options](#configuration-options)
-  - [Icon Button](#icon-button)
-  - [Disabled Icon Button](#disabled-icon-button)
-  - [Labeled Icon Button](#labeled-icon-button)
-  - [Focus an Icon Button](#focus-an-icon-button)
-
-
-# Resources
-
-  - [Demo: Icon buttons](https://aforemny.github.io/material-components-web-elm/#icon-button)
-  - [Material Design Guidelines: Toggle buttons](https://material.io/go/design-buttons#toggle-button)
-  - [MDC Web: Icon Button](https://github.com/material-components/material-components-web/tree/master/packages/mdc-icon-button)
-  - [Sass Mixins (MDC Web)](https://github.com/material-components/material-components-web/tree/master/packages/mdc-icon-button#sass-mixins)
-
-
-# Basic Usage
-
-    import HalogenMWC.IconButton as IconButton
-
-    data Msg
-        = Clicked
-
-    main =
-        IconButton.iconButton
-            (IconButton.config |> IconButton.setOnClick Clicked)
-            "favorite"
-
-
-# Configuration
-
-@docs Config, config
-
-
-## Configuration Options
-
-@docs setOnClick
-@docs setDisabled
-@docs setLabel
-@docs setAttributes
-
-
-# Icon Button
-
-@docs iconButton
-
-
-# Disabled Icon Button
-
-To disable an icon button its `setDisabled` configuration option to
-`True`. Disabled icon buttons cannot be interacted with and have no visual
-interaction effect.
-
-    IconButton.iconButton
-        (IconButton.config |> IconButton.setDisabled True)
-        "favorite"
-
-
-# Labeled Icon Button
-
-To set the HTML attribute `arial-label` of a icon button, use its `setLabel`
-configuration option.
-
-    IconButton.iconButton
-        (IconButton.config
-            |> IconButton.setLabel (Just "Add to favorites")
-        )
-        "favorite"
-
-
-# Variant: Custom Icon Button
-
-@docs custom
-
-
-# Focus an Icon Button
-
-You may programatically focus an icon button by assigning an id attribute to it
-and use `Browser.Dom.focus`.
-
-    IconButton.iconButton
-        (IconButton.config
-            |> IconButton.setAttributes
-                [ Html.Attributes.id "my-icon-button" ]
-        )
-        "wifi"
-
--}
 
 import Protolude
 import Halogen (AttrName(..))

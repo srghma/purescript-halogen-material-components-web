@@ -1,76 +1,10 @@
 module HalogenMWC.Dialog
     ( Config, config
-    
-    
-    
+
+
+
     , dialog, Content
     ) where
-
-{-| Dialogs inform users about a task and can contain critical information,
-require decisions, or involve multiple tasks.
-
-
-# Table of Contents
-
-  - [Resources](#resources)
-  - [Basic Usage](#basic-usage)
-  - [Configuration](#configuration)
-      - [Configuration Options](#configuration-options)
-  - [Dialog](#dialog)
-
-
-# Resources
-
-  - [Demo: Dialogs](https://aforemny.github.io/material-components-web-elm/#dialog)
-  - [Material Design Guidelines: Dialogs](https://material.io/go/design-dialogs)
-  - [MDC Web: Dialog](https://github.com/material-components/material-components-web/tree/master/packages/mdc-dialog)
-  - [Sass Mixins (MDC Web)](https://github.com/material-components/material-components-web/tree/master/packages/mdc-dialog#sass-mixins)
-
-
-# Basic Usage
-
-    import HalogenMWC.Button as Button
-    import HalogenMWC.Dialog as Dialog
-
-    data Msg
-        = Closed
-
-    main =
-        Dialog.dialog
-            (Dialog.config
-                |> Dialog.setOpen True
-                |> Dialog.setOnClose Closed
-            )
-            { title = Nothing
-            , content = [ text "Discard draft?" ]
-            , actions =
-                [ Button.text
-                    (Button.config |> Button.setOnClick Closed)
-                    "Cancel"
-                , Button.text
-                    (Button.config |> Button.setOnClick Closed)
-                    "Discard"
-                ]
-            }
-
-
-# Configuration
-
-@docs Config, config
-
-
-## Configuration Options
-
-@docs setOnClose
-@docs setOpen
-@docs setAttributes
-
-
-# Dialog
-
-@docs dialog, Content
-
--}
 
 import Protolude
 import Halogen (AttrName(..))

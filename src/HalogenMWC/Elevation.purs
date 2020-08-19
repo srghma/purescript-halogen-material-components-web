@@ -4,44 +4,6 @@ module HalogenMWC.Elevation
     , z17, z18, z19, z20, z21, z22, z23, z24
     ) where
 
-{-| Shadows provide important visual cues about objects’ depth and directional
-movement. They are the only visual cue indicating the amount of separation
-between surfaces. An object’s elevation determines the appearance of its
-shadow. The elevation values are mapped out in a "z-space" and range from 0
-(flush with the surface) to 24dp (most elevated).
-
-
-# Table of Contents
-
-  - [Resources](#resources)
-  - [Basic Usage](#basic-usage)
-  - [Elevation](#elevation)
-
-
-# Resources
-
-  - [Demo: Elevations](https://aforemny.github.io/material-components-web-elm/#elevation)
-  - [Material Design Guidelines: Shadows & elevation](https://material.io/go/design-elevation)
-  - [MDC Web: Elevation](https://github.com/material-components/material-components-web/tree/master/packages/mdc-elevation)
-  - [Sass Mixins (MDC Web)](https://github.com/material-components/material-components-web/tree/master/packages/mdc-elevation#sass-mixins-variables-and-functions)
-
-
-# Basic Usage
-
-    import HalogenMWC.Elevation as Elevation
-
-    main =
-        Html.div [ Elevation.z8 ] [ text "Elevation" ]
-
-
-# Elevation
-
-@docs z0, z1, z2, z3, z4, z5, z6, z7, z8
-@docs z9, z10, z11, z12, z13, z14, z15, z16
-@docs z17, z18, z19, z20, z21, z22, z23, z24
-
--}
-
 import Protolude
 import Halogen (AttrName(..))
 import Halogen.HTML (IProp)

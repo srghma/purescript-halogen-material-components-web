@@ -1,98 +1,11 @@
 module HalogenMWC.Menu
     ( Config, config
-    
-    
-    
-    
+
+
+
+
     , menu, surfaceAnchor
     ) where
-
-{-| A menu displays a list of choices on a temporary surface. They appear when
-users interact with a button, action, or other control.
-
-
-# Table of Contents
-
-  - [Resources](#resources)
-  - [Basic usage](#basic-usage)
-  - [Configuration](#configuration)
-      - [Configuration Options](#configuration-options)
-  - [Menu](#menu)
-  - [Quick-opening menu](#quick-opening-menu)
-
-
-# Resources
-
-  - [Demo: Menus](https://aforemny.github.io/material-components-web-elm/#menu)
-  - [Material Design Guidelines: Menus](https://material.io/go/design-menus)
-  - [MDC Web: Menu](https://github.com/material-components/material-components-web/tree/master/packages/mdc-menu)
-  - [Sass Mixins (MDC Web)](https://github.com/material-components/material-components-web/tree/master/packages/mdc-menu#sass-mixins)
-
-
-# Basic usage
-
-A menu is usually tied to an element that opens it, such as a button. For
-positioning, wrap the button and the menu within an element that sets the
-`surfaceAnchor` attribute. The menu's items are simply a
-[list](Material-Array).
-
-    import HalogenMWC.Button as Button
-    import HalogenMWC.Array as Array
-    import HalogenMWC.ArrayItem as ArrayItem
-    import HalogenMWC.Menu as Menu
-
-    data Msg
-        = MenuOpened
-        | MenuClosed
-
-    main =
-        Html.div [ Menu.surfaceAnchor ]
-            [ Button.text
-                (Button.config |> Button.setOnClick MenuOpened)
-                "Open menu"
-            , Menu.menu
-                (Menu.config
-                    |> Menu.setOpen True
-                    |> Menu.setOnClose MenuClosed
-                )
-                [ Array.list
-                    (Array.config |> Array.setWrapFocus True)
-                    (ArrayItem.listItem ArrayItem.config
-                        [ text "Menu item" ]
-                    )
-                    [ ArrayItem.listItem ArrayItem.config
-                        [ text "Menu item" ]
-                    ]
-                ]
-            ]
-
-
-# Configuration
-
-@docs Config, config
-
-
-## Configuration Options
-
-@docs setOnClose
-@docs setOpen
-@docs setQuickOpen
-@docs setAttributes
-
-
-# Menu
-
-@docs menu, surfaceAnchor
-
-
-# Quick-opening menu
-
-A menu may not show a transition when opening by setting its `setQuickOpen`
-configuration option to `True`.
-
-    Menu.menu (Menu.config |> Menu.setQuickOpen True) []
-
--}
 
 import Protolude
 import Halogen (AttrName(..))

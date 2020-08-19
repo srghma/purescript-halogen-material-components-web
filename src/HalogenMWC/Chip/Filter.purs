@@ -1,81 +1,11 @@
 module HalogenMWC.Chip.Filter
     ( Config, config
-    
-    
-    
-    
+
+
+
+
     , chip, Chip
     ) where
-
-{-| Chips are compact elements that allow users to enter information, select a
-choice, filter content, or trigger an action.
-
-Filter chips are a variant of chips which allow multiple selection from a set
-of options. When a filter chip is selected, a checkmark appears as the leading
-icon. If the chip already has a leading icon, the checkmark replaces it.
-
-
-# Table of Contents
-
-  - [Resources](#resources)
-  - [Basic Usage](#basic-usage)
-  - [Configuration](#configuration)
-      - [Configuration Options](#configuration-options)
-  - [Filter Chips](#filter-chips)
-
-
-# Resources
-
-  - [Demo: Chips](https://aforemny.github.io/material-components-web-elm/#chips)
-  - [Material Design Guidelines: Chips](https://material.io/go/design-chips)
-  - [MDC Web: Chips](https://github.com/material-components/material-components-web/tree/master/packages/mdc-chips)
-  - [Sass Mixins (MDC Web)](https://github.com/material-components/material-components-web/tree/master/packages/mdc-chips#sass-mixins)
-
-
-# Basic Usage
-
-    import HalogenMWC.Chip.Filter as FilterChip
-    import HalogenMWC.ChipSet.Filter as FilterChipSet
-
-    data Msg
-        = ChipClicked String
-
-    main =
-        FilterChipSet.chipSet []
-            [ FilterChip.chip
-                (FilterChip.config
-                    |> FilterChip.setSelected True
-                    |> FilterChip.setOnChange
-                        (ChipClicked "Tops")
-                )
-                "Tops"
-            , FilterChip.chip
-                (FilterChip.config
-                    |> FilterChip.setOnChange
-                        (ChipClicked "Shoes")
-                )
-                "Shoes"
-            ]
-
-
-# Configuration
-
-@docs Config, config
-
-
-## Configuration Options
-
-@docs setOnChange
-@docs setIcon
-@docs setSelected
-@docs setAttributes
-
-
-# Filter Chips
-
-@docs chip, Chip
-
--}
 
 import Protolude
 import Halogen (AttrName(..))

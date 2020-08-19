@@ -1,89 +1,10 @@
 module HalogenMWC.Tab
     ( Config, config
-    
-    
-    
+
+
+
     , Tab, tab, Content
     ) where
-
-{-| Tabs organize and allow navigation between groups of content that are
-related and at the same level of hierarchy. The tab bar contains the tab
-components.
-
-This module concerns the tab items. If you are looking for information about
-the tab bar container, refer to [Material.TabBar](Material-TabBar).
-
-
-# Table of Contents
-
-  - [Resources](#resources)
-  - [Basic Usage](#basic-usage)
-  - [Configuration](#configuration)
-      - [Configuration Options](#configuration-options)
-  - [Tab](#tab)
-  - [Active Tab](#active-tab)
-
-
-# Resources
-
-  - [Demo: Tab Bar](https://aforemny.github.io/material-components-web-elm/#tabbar)
-  - [Material Design Guidelines: Tabs](https://material.io/go/design-tabs)
-  - MDC Web:
-    [Tab Bar](https://github.com/material-components/material-components-web/tree/master/packages/mdc-tab-bar),
-    [Tab](https://github.com/material-components/material-components-web/tree/master/packages/mdc-tab),
-    [Tab Scroller](https://github.com/material-components/material-components-web/tree/master/packages/mdc-tab-scroller)
-  - Sass Mixins:
-    [Tab Bar](https://github.com/material-components/material-components-web/tree/master/packages/mdc-tab-bar#sass-mixins),
-    [Tab](https://github.com/material-components/material-components-web/tree/master/packages/mdc-tab#sass-mixins),
-    [Tab Scroller](https://github.com/material-components/material-components-web/tree/master/packages/mdc-tab-scroller#sass-mixins)
-
-
-# Basic Usage
-
-    import HalogenMWC.Tab as Tab
-    import HalogenMWC.TabBar as TabBar
-
-    data Msg
-        = TabClicked Int
-
-    main =
-        TabBar.tabBar TabBar.config
-            [ Tab.tab
-                (Tab.config
-                    |> Tab.setActive True
-                    |> Tab.setOnClick (TabClicked 0)
-                )
-                { label = "Tab 1", icon = Nothing }
-            , Tab.tab
-                (Tab.config |> Tab.setOnClick (TabClicked 1))
-                { label = "Tab 2", icon = Nothing }
-            ]
-
-
-# Configuration
-
-@docs Config, config
-
-
-## Configuration Options
-
-@docs setOnClick
-@docs setActive
-@docs setAttributes
-
-
-# Tab
-
-@docs Tab, tab, Content
-
-
-# Active Tab
-
-To mark a tab as active its `setActive` configuration option to `True`.
-
-    Tab.tab (Tab.config |> Tab.setActive True)
-
--}
 
 import Protolude
 import Halogen (AttrName(..))

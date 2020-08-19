@@ -1,102 +1,11 @@
 module HalogenMWC.Switch
     ( switch
     , Config, config
-    
-    
-    
-    
+
+
+
+
     ) where
-
-{-| Switches toggle the state of a single setting on or off. They are the
-preferred way to adjust settings on mobile.
-
-
-# Table of Contents
-
-  - [Resources](#resources)
-  - [Basic Usage](#basic-usage)
-  - [Configuration](#configuration)
-      - [Configuration Options](#configuration-options)
-  - [Switch](#switch)
-  - [On Switch](#on-switch)
-  - [Disabled Switch](#disabled-switch)
-  - [Focus a Switch](#focus-a-switch)
-
-
-# Resources
-
-  - [Demo: Switches](https://aforemny.github.io/material-components-web-elm/#switch)
-  - [Material Design Guidelines: Selection Controls – Switches](https://material.io/go/design-switches)
-  - [MDC Web: Switch](https://github.com/material-components/material-components-web/tree/master/packages/mdc-switch)
-  - [Sass Mixins (MDC Web)](https://github.com/material-components/material-components-web/tree/master/packages/mdc-switch#sass-mixins)
-
-
-# Basic Usage
-
-Note that switches are usually used in conjunction with [form
-fields](Material-FormField).
-
-    import HalogenMWC.Switch as Switch
-
-    data Msg
-        = Changed
-
-    main =
-        Switch.switch
-            (Switch.config
-                |> Switch.setChecked True
-                |> Switch.setOnChange Changed
-            )
-
-
-# Switch
-
-@docs switch
-
-
-# Configuration
-
-@docs Config, config
-
-
-## Configuration Options
-
-@docs setOnChange
-@docs setChecked
-@docs setDisabled
-@docs setAttributes
-
-
-# On Switch
-
-To set the state of a switch to on its `setChecked` configuration option
-to `True`.
-
-    Switch.switch (Switch.config |> Switch.setChecked True)
-
-
-# Disabled Switch
-
-To disable a switch its `setDisabled` configuration option to `True`.
-
-Disabled switches cannot be interacted with and have no visual interaction
-effect.
-
-    Switch.switch (Switch.config |> Switch.setDisabled True)
-
-
-# Focus a Switch
-
-You may programatically focus a switch by assigning an id attribute to it and
-use `Browser.Dom.focus`.
-
-    Switch.switch
-        (Switch.config
-            |> Switch.setAttributes
-                [ Html.Attributes.id "my-switch" ]
-        )
-
--}
 
 import Protolude
 import Halogen (AttrName(..))

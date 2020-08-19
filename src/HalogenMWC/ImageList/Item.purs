@@ -1,75 +1,10 @@
 module HalogenMWC.ImageArray.Item
     ( Config, config
-    
-    
-    
+
+
+
     , ImageArrayItem, imageArrayItem
     ) where
-
-{-| An Image Array consists of several items, each containing an image and
-optionally supporting a text label.
-
-This modules concerns the image list item. If you are looking for information
-about the image list contianer, refer to
-[Material.ImageArray](Material-ImageArray).
-
-
-# Table of Contents
-
-  - [Resources](#resources)
-  - [Configuration](#configuration)
-      - [Configuration Options](#configuration-options)
-  - [Basic Usage](#basic-usage)
-  - [Image Array Item](#image-list-item)
-
-
-# Resources
-
-  - [Demo: Image Arrays](https://aforemny.github.io/material-components-web-elm/#image-list)
-  - [Material Design Guidelines: Image list](https://material.io/go/design-image-list)
-  - [MDC Web: Image Array](https://github.com/material-components/material-components-web/tree/master/packages/mdc-image-list)
-  - [Sass Mixins (MDC Web)](https://github.com/material-components/material-components-web/tree/master/packages/mdc-image-list#sass-mixins)
-
-
-# Basic Usage
-
-Note that you will have to set the width and margin of image list items
-yourself, preferably through SASS or through inline CSS.
-
-    
-    import HalogenMWC.ImageArray as ImageArray
-    import HalogenMWC.ImageArray.Item as ImageArrayItem
-
-    main =
-        ImageArray.imageArray ImageArray.config
-            [ ImageArrayItem.imageArrayItem
-                (ImageArray.itemConfig
-                    |> ImageArray.setAttributes
-                        [ style "width" "calc(100% / 5 - 4px)"
-                        , style "margin" "2px"
-                        ]
-                )
-                "images/photos/3x2/1.jpg"
-            ]
-
-
-# Configuration
-
-@docs Config, config
-
-
-## Configuration Options
-
-@docs setLabel
-@docs setHref
-@docs setAttributes
-
-
-# Image list Item
-
-@docs ImageArrayItem, imageArrayItem
-
--}
 
 import Protolude
 import Halogen (AttrName(..))

@@ -1,84 +1,10 @@
 module HalogenMWC.ChipSet.Choice
     ( Config, config
-    
-    
-    
+
+
+
     , chipSet
     ) where
-
-{-| Chips are compact elements that allow users to enter information, select a
-choice, filter content, or trigger an action.
-
-Choice chips are a variant of chips which allow single selection from a set of
-options.
-
-
-# Table of Contents
-
-  - [Resources](#resources)
-  - [Basic Usage](#basic-usage)
-  - [Configuration](#configuration)
-      - [Configuration Options](#configuration-options)
-  - [Choice Chip Set](#choice-chip-set)
-
-
-# Resources
-
-  - [Demo: Chips](https://aforemny.github.io/material-components-web-elm/#chips)
-  - [Material Design Guidelines: Chips](https://material.io/go/design-chips)
-  - [MDC Web: Chips](https://github.com/material-components/material-components-web/tree/master/packages/mdc-chips)
-  - [Sass Mixins (MDC Web)](https://github.com/material-components/material-components-web/tree/master/packages/mdc-chips#sass-mixins)
-
-
-# Basic Usage
-
-    import HalogenMWC.Chip.Choice as ChoiceChip
-    import HalogenMWC.ChipSet.Choice as ChoiceChipSet
-
-    data Color
-        = Red
-        | Blue
-
-    data Msg
-        = ColorChanged Color
-
-    main =
-        ChoiceChipSet.chipSet
-            (ChoiceChipSet.config
-                { toLabel =
-                    \color ->
-                        case color of
-                            Red ->
-                                "Red"
-
-                            Blue ->
-                                "Blue"
-                }
-                |> ChoiceChipSet.setSelected (Just Red)
-                |> ChocieChipSet.setOnChange ColorChanged
-            )
-            [ ChoiceChip.chip ChoiceChip.config Red
-            , ChoiceChip.chip ChoiceChip.config Blue
-            ]
-
-
-# Configuration
-
-@docs Config, config
-
-
-## Configuration Options
-
-@docs setSelected
-@docs setOnChange
-@docs setAttributes
-
-
-# Choice Chip Set
-
-@docs chipSet
-
--}
 
 import Protolude
 import Halogen (AttrName(..))

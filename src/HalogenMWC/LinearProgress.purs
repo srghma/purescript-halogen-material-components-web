@@ -1,97 +1,12 @@
 module HalogenMWC.LinearProgress
     ( Config, config
-    
-    
-    
+
+
+
     , indeterminate
     , determinate
     , buffered
     ) where
-
-{-| Linear progress indicators visualize the linear progression of either
-determinate or indeterminate activities.
-
-
-# Table of Contents
-
-  - [Resources](#resources)
-  - [Basic Usage](#basic-usage)
-  - [Configuration](#configuration)
-      - [Configuration Options](#configuration-options)
-  - [Indeterminate Linear Progress](#indeterminate-linear-progress)
-  - [Determinate Linear Progress](#determinate-linear-progress)
-  - [Buffered Linear Progress](#buffered-linear-progress)
-  - [Closed Linear Progress](#closed-linear-progress)
-  - [Reversed Linear Progress](#reversed-linear-progress)
-
-
-# Resources
-
-  - [Demo: Linear Progress](https://aforemny.github.io/material-components-web-elm/#linear-progress)
-  - [Material Design Guidelines: Progress indicators](https://material.io/go/design-progress-indicators)
-  - [MDC Web: Linear Progress](https://github.com/material-components/material-components-web/tree/master/packages/mdc-linear-progress)
-  - [Sass Mixins (MDC Web)](https://github.com/material-components/material-components-web/tree/master/packages/mdc-linear-progress#sass-mixins)
-
-
-# Basic Usage
-
-    import HalogenMWC.LinearProgress as LinearProgress
-
-    main =
-        LinearProgress.indeterminate LinearProgress.config
-
-
-# Configuration
-
-@docs Config, config
-
-
-## Configuration Options
-
-@docs setReverse
-@docs setClosed
-@docs setAttributes
-
-
-# Indeterminate Linear Progress
-
-@docs indeterminate
-
-
-# Determinate Linear Progress
-
-    LinearProgress.determinate LinearProgress.config
-        { progress = 0.5 }
-
-@docs determinate
-
-
-## Buffered Linear Progress
-
-    LinearProgress.buffered LinearProgress.config
-        { progress = 0.5, buffered = 0.75 }
-
-@docs buffered
-
-
-# Closed Linear Progress
-
-If you want to hide the linear progress indicator its `setClosed`
-configuration option to `True`.
-
-    LinearProgress.indeterminate
-        (LinearProgress.config |> LinearProgress.setClosed True)
-
-
-# Reverse Linear Progress
-
-If you want to reverse the direction of the linear progress indicator its
-`setReverse` configuration option to `True`.
-
-    LinearProgress.indeterminate
-        (LinearProgress.config |> LinearProgress.setReverse True)
-
--}
 
 import Protolude
 import Halogen (AttrName(..))

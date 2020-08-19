@@ -1,52 +1,5 @@
 module HalogenMWC.ChipSet.Action (chipSet) where
 
-{-| Action chips offer actions related to primary content. They should appear
-dynamically and contextually in a UI.
-
-An alternative to action chips are [buttons](Material-Button), which should
-appear persistently and consistently.
-
-
-# Table of Contents
-
-  - [Resources](#resources)
-  - [Basic Usage](#basic-usage)
-  - [Action Chip Set](#action-chip-set)
-
-
-# Resources
-
-  - [Demo: Chips](https://aforemny.github.io/material-components-web-elm/#chips)
-  - [Material Design Guidelines: Chips](https://material.io/go/design-chips)
-  - [MDC Web: Chips](https://github.com/material-components/material-components-web/tree/master/packages/mdc-chips)
-  - [Sass Mixins (MDC Web)](https://github.com/material-components/material-components-web/tree/master/packages/mdc-chips#sass-mixins)
-
-
-# Basic Usage
-
-    import HalogenMWC.Chip.Action as ActionChip
-    import HalogenMWC.ChipSet.Action as ActionChipSet
-
-    data Msg
-        = Clicked String
-
-    main =
-        ActionChipSet.chipSet []
-            [ ActionChip.chip
-                (ActionChip.config
-                    |> ActionChip.setOnClick Clicked "Chip One"
-                )
-                "Chip One"
-            , ActionChip.chip ActionChip.config "Chip Two"
-            ]
-
-
-# Action Chip Set
-
-@docs chipSet
-
--}
-
 import Protolude
 import Halogen (AttrName(..))
 import Halogen.HTML (IProp)

@@ -1,142 +1,16 @@
 module HalogenMWC.Slider
     ( Config, config
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
     , slider
     ) where
-
-{-| Slider provides a component to select a numerical value within a range.
-
-
-# Table of Contents
-
-  - [Resources](#resources)
-  - [Basic Usage](#basic-usage)
-  - [Configuration](#configuration)
-      - [Configuration Options](#configuration-options)
-  - [Continuous Slider](#continuous-slider)
-  - [Custom range values](#using-a-step-value)
-  - [Using a step value](#using-a-step-value)
-  - [Disabled Slider](#disabled-slider)
-  - [Discrete Slider](#discrete-slider)
-      - [Track Markers](#track-markers)
-  - [Focus a Slider](#focus-a-slider)
-
-
-# Resources
-
-  - [Demo: Sliders](https://aforemny.github.io/material-components-web-elm/#slider)
-  - [Material Design Guidelines: Sliders](https://material.io/go/design-sliders)
-  - [MDC Web: Slider](https://github.com/material-components/material-components-web/tree/master/packages/mdc-slider)
-  - [Sass Mixins (MDC Web)](https://github.com/material-components/material-components-web/tree/master/packages/mdc-slider#sass-mixins)
-
-
-# Basic Usage
-
-    import HalogenMWC.Slider as Slider
-
-    data Msg
-        = ValueChanged Float
-
-    main =
-        Slider.slider
-            (Slider.config
-                |> Slider.setValue (Just 50)
-                |> Slider.setOnInput ValueChanged
-            )
-
-
-# Configurations
-
-@docs Config, config
-
-
-## Configuration Options
-
-@docs setOnInput
-@docs setDiscrete
-@docs setDisplayMarkers
-@docs setMin
-@docs setMax
-@docs setStep
-@docs setValue
-@docs setDisabled
-@docs setAttributes
-
-
-# Continuous Slider
-
-@docs slider
-
-
-# Custom range values
-
-To set a custom range, use the slider's `setMin` and `setMax` configuration
-options.
-
-    Slider.slider
-        (Slider.config
-            |> Slider.setMin (Just 0)
-            |> Slider.setMax (Just 100)
-        )
-
-
-# Using a step value
-
-To allow for quantization of the user input, use the slider's `setStep`
-configuration option.
-
-    Slider.slider (Slider.config |> Slider.setStep (Just 4.5))
-
-
-# Disabled Slider
-
-To disable a slider its `setDisabled` configuration option to `True`.
-
-Disabled sliders cannot be interacted with and have no visual interaction
-effect.
-
-    Slider.slider (Slider.config |> Slider.setDisabled True)
-
-
-# Discrete Slider
-
-To treat a slider as a discrete slider its `setDiscrete` configuration
-option to `True`.
-
-    Slider.slider (Slider.config |> Slider.setDiscrete True)
-
-
-## Track Markers
-
-To have a discrete slider show track markers its `setDisplayMarkers`
-configuration option to `True`.
-
-Note that non-discrete sliders ignore this configuration option.
-
-    Slider.slider
-        (Slider.config |> Slider.setDisplayMarkers True)
-
-
-# Focus a Slider
-
-You may programatically focus a slider by assigning an id attribute to it and
-use `Browser.Dom.focus`.
-
-    Slider.slider
-        (Slider.config
-            |> Slider.setAttributes
-                [ Html.Attributes.id "my-slider" ]
-        )
-
--}
 
 import Protolude
 import Halogen (AttrName(..))

@@ -1,7 +1,7 @@
 module HalogenMWC.DataTable
     ( Config, config
-    
-    
+
+
     , dataTable
     , Row, row
     , selected
@@ -9,100 +9,6 @@ module HalogenMWC.DataTable
     , numericCell
     , checkboxCell
     ) where
-
-{-| Data tables display information in a way that’s easy to scan, so that users
-can look for patterns and insights.
-
-
-# Table of Contents
-
-  - [Resources](#resources)
-  - [Configution](#configuration)
-      - [Configuration Options](#configuration-options)
-  - [Basic Usage](#basic-usage)
-  - [Data Table](#data-table)
-  - [Row](#row)
-      - [Selected Row](#selected-row)
-  - [Cell](#cell)
-      - [Numeric Cell](#numeric-cell)
-      - [Checkbox Cell](#checkbox-cell)
-
-
-# Resources
-
-  - [Demo: Data Table](https://aforemny.github.io/material-components-web-elm/#data-table)
-  - [Material Design Guidelines: Data tables](https://material.io/go/design-data-tables)
-  - [MDC Web: Data Table](https://github.com/material-components/material-components-web/tree/master/packages/mdc-data-table)
-  - [Sass Mixins (MDC Web)](https://github.com/material-components/material-components-web/tree/master/packages/mdc-data-table#sass-mixins)
-
-
-# Basic Usage
-
-    import HalogenMWC.DataTable as DataTable
-
-    main =
-        DataTable.dataTable DataTable.config
-            { thead =
-                [ DataTable.row []
-                    [ DataTable.cell [] [ text "Desert" ] ]
-                ]
-            , tbody =
-                [ DataTable.row []
-                    [ DataTable.cell [] [ text "Frozen yogurt" ]
-                    ]
-                ]
-            }
-
-
-# Configuration
-
-@docs Config, config
-
-
-## Configuration Options
-
-@docs setLabel
-@docs setAttributes
-
-
-# Data Table
-
-@docs dataTable
-
-
-# Row
-
-@docs Row, row
-
-
-## Selected Row
-
-    DataTable.row DataTable.selected []
-
-@docs selected
-
-
-# Cell
-
-@docs Cell, cell
-
-
-## Numeric Cell
-
-    DataTable.numericCell [] [ text "9.000,00" ]
-
-@docs numericCell
-
-
-## Checkbox Cell
-
-    import HalogenMWC.Checkbox as Checkbox
-
-    DataTable.checkboxCell [] Checkbox.config
-
-@docs checkboxCell
-
--}
 
 import Protolude
 import Halogen (AttrName(..))

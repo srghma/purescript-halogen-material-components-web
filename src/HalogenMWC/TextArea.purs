@@ -1,175 +1,22 @@
 module HalogenMWC.TextArea
     ( Config, config
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     , filled
     , outlined
     ) where
-
-{-| Text areas allow users to input, edit, and select multiline text.
-
-
-# Table of Contents
-
-  - [Resources](#resources)
-  - [Basic Usage](#basic-usage)
-  - [Configuration](#configuration)
-      - [Configuration Options](#configuration-options)
-  - [Filled Text Area](#filled-text-area)
-  - [Outlined Text Area](#outlined-text-area)
-  - [Full Width Text Area](#full-width-text-area)
-  - [Disabled Text Area](#disabled-text-area)
-  - [Required Text Area](#required-text-area)
-  - [Valid Text Area](#valid-text-area)
-  - [Text Area with Character Counter](#text-area-with-character-counter)
-  - [Focus a Text Area](#focus-a-text-area)
-
-
-# Resources
-
-  - [Demo: Text Areas](https://aforemny.github.io/material-components-web-elm/#text-field)
-  - [Material Design Guidelines: Menus](https://material.io/go/design-menus)
-  - [MDC Web: Menu](https://github.com/material-components/material-components-web/tree/master/packages/mdc-menu)
-  - [Sass Mixins (MDC Web)](https://github.com/material-components/material-components-web/tree/master/packages/mdc-menu#sass-mixins)
-
-
-# Basic Usage
-
-    import HalogenMWC.TextArea as TextArea
-
-    data Msg
-        = ValueChanged String
-
-    main =
-        TextArea.filled
-            (TextArea.config
-                |> TextArea.setLabel (Just "My text area")
-                |> TextArea.setValue (Just "hello world")
-                |> TextArea.setOnInput ValueChanged
-                |> TextArea.setRows (Just 4)
-                |> TextArea.setCols (Just 20)
-            )
-
-
-# Configuration
-
-@docs Config, config
-
-
-## Configuration Options
-
-@docs setOnInput
-@docs setOnChange
-@docs setLabel
-@docs setFullwidth
-@docs setValue
-@docs setPlaceholder
-@docs setRows
-@docs setCols
-@docs setDisabled
-@docs setRequired
-@docs setValid
-@docs setMinLength
-@docs setMaxLength
-@docs setAttributes
-
-
-# Filled Text Area
-
-    TextArea.filled TextArea.config
-
-@docs filled
-
-
-# Outlined Text Area
-
-Text areas may have a visible outlined around them by using their `outlined`
-variant.
-
-    TextArea.outlined TextArea.config
-
-Note that `setFullwidth` does not have any effect on an outlined text area.
-
-@docs outlined
-
-
-# Full Width Text Area
-
-To make a text area span all of its available width its `setFullwidth`
-configuration option to `True`.
-
-    TextArea.filled
-        (TextArea.config |> TextArea.setFullwidth True)
-
-Full width text areas do not support labels and will ignore the `setLabel`
-configuration option. You may use `setPlaceholder` or provide an extraneous
-label for a full width text area.
-
-Outlined text areas do not support `setFullwidth` and will ignore this
-configuration option.
-
-
-# Disabled Text Area
-
-To disable a text area its `setDisabled` configuration option to `True`.
-
-    TextArea.filled
-        (TextArea.config |> TextArea.setDisabled True)
-
-
-# Required Text Area
-
-To mark a text area as required its `setRequired` configuration option to
-`True`.
-
-    TextArea.filled
-        (TextArea.config |> TextArea.setRequired True)
-
-
-# Valid Text Area
-
-To mark a text area as valid its `setValid` configuration option to
-`True`.
-
-    TextArea.filled (TextArea.config |> TextArea.setValid True)
-
-
-# Text Area with Character Counter
-
-To have a text area display a character counter, specify its `setMaxLength`
-configuration option, and also add a `HelperText.characterCounter` as a child
-of `HelperText.helperLine`.
-
-    [ TextArea.filled
-        (TextArea.config |> TextArea.setMaxLength (Just 18))
-    , HelperText.helperLine [] [ HelperText.characterCounter [] ]
-    ]
-
-
-# Focus a Text Area
-
-You may programatically focus a text area by assigning an id attribute to it
-and use `Browser.Dom.focus`.
-
-    TextArea.filled
-        (TextArea.config
-            |> TextArea.setAttributes
-                [ Html.Attributes.id "my-text-area" ]
-        )
-
--}
 
 import Protolude
 import Halogen (AttrName(..))
