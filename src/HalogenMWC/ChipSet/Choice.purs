@@ -23,13 +23,13 @@ config { toLabel } =
   , additionalAttributes: []
   }
 
-chipSet :: Config a r i -> Array (Chip a r i) -> Html r i
+chipSet :: Config a r i -> Array (Chip a r i) -> HH.HTML w i
 chipSet (config_@{ selected, onChange, toLabel, additionalAttributes }) chips =
   HH.element "mdc-chip-set"
     ([ chipSetCs, chipSetChoiceCs, gridRole ] <> additionalAttributes)
     (map (chip selected onChange toLabel) chips)
 
-chip :: Maybe a -> Maybe (a -> r i) -> (a -> String) -> Chip a r i -> Html r i
+chip :: Maybe a -> Maybe (a -> r i) -> (a -> String) -> Chip a r i -> HH.HTML w i
 chip selected onChange toLabel (Chip config_ value) =
   HH.div [ HP.class_ mdc_touch_target_wrapper ]
     [ HH.element "mdc-chip"
@@ -86,10 +86,10 @@ gridcellRole = HH.Attributes.attribute "role" "gridcell"
 interactionHandler :: Maybe r i -> Maybe (IProp r i)
 interactionHandler r i = map (HH.Events.on "MDCChip:interaction" << Decode.succeed) r i
 
-rippleElt :: Maybe (Html r i)
+rippleElt :: Maybe (HH.HTML w i)
 rippleElt = Just (HH.div [ HP.class_ mdc_chip__ripple ] [])
 
-leadingIconElt :: Config r i -> Maybe (Html r i)
+leadingIconElt :: Config r i -> Maybe (HH.HTML w i)
 leadingIconElt { icon } =
   map
     ( \iconName ->
@@ -98,14 +98,14 @@ leadingIconElt { icon } =
     )
     icon
 
-primaryActionElt :: String -> Maybe (Html r i)
+primaryActionElt :: String -> Maybe (HH.HTML w i)
 primaryActionElt label =
   Just
     $ HH.span [ chipPrimaryActionCs, gridcellRole ]
         (Array.filterMap identity [ textElt label, touchElt ])
 
-textElt :: String -> Maybe (Html r i)
+textElt :: String -> Maybe (HH.HTML w i)
 textElt label = Just (HH.span [ chipTextCs, buttonRole ] [ text label ])
 
-touchElt :: Maybe (Html r i)
+touchElt :: Maybe (HH.HTML w i)
 touchElt = Just (HH.div [ HP.class_ mdc_chip__touch ] [])

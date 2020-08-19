@@ -26,7 +26,7 @@ defaultConfig =
   , additionalAttributes: []
   }
 
-genericTopAppBar :: Variant -> Config r i -> Array (Html r i) -> Html r i
+genericTopAppBar :: Variant -> Config r i -> Array (HH.HTML w i) -> HH.HTML w i
 genericTopAppBar variant (config_@{ additionalAttributes }) nodes =
   HH.element "mdc-top-app-bar"
     ( Array.filterMap identity
@@ -39,22 +39,22 @@ genericTopAppBar variant (config_@{ additionalAttributes }) nodes =
     )
     nodes
 
-regular :: Config r i -> Array (Html r i) -> Html r i
+regular :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
 regular config_ nodes = genericTopAppBar Regular config_ nodes
 
-short :: Config r i -> Array (Html r i) -> Html r i
+short :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
 short config_ nodes = genericTopAppBar Short config_ nodes
 
-shortCollapsed :: Config r i -> Array (Html r i) -> Html r i
+shortCollapsed :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
 shortCollapsed config_ nodes = genericTopAppBar ShortCollapsed config_ nodes
 
-prominent :: Config r i -> Array (Html r i) -> Html r i
+prominent :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
 prominent config_ nodes = genericTopAppBar Prominent config_ nodes
 
-row :: Array (IProp r i) -> Array (Html r i) -> Html r i
+row :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
 row attributes nodes = HH.section ([ HP.class_ mdc_top_app_bar__row ] <> attributes) nodes
 
-section :: Array (IProp r i) -> Array (Html r i) -> Html r i
+section :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
 section attributes nodes = HH.section ([ HP.class_ mdc_top_app_bar__section ] <> attributes) nodes
 
 variantCs :: Variant -> Maybe (IProp r i)

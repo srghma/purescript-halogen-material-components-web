@@ -22,7 +22,7 @@ defaultConfig =
   , onClick: Nothing
   }
 
-iconButton :: Config r i -> String -> Html r i
+iconButton :: Config r i -> String -> HH.HTML w i
 iconButton config_ iconName =
   HH.element "mdc-icon-button"
     ( Array.filterMap identity
@@ -35,7 +35,7 @@ iconButton config_ iconName =
     )
     [ text iconName ]
 
-custom :: Config r i -> Array (Html r i) -> Html r i
+custom :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
 custom config_ nodes =
   HH.element "mdc-icon-button"
     ( Array.filterMap identity

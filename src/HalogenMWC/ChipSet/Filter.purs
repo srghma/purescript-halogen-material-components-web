@@ -11,13 +11,13 @@ import HalogenMWC.Chip.Filter
 import Halogen.SVG.Elements as Halogen.SVG.Elements
 import Halogen.SVG.Attributes as Halogen.SVG.Attributes
 
-chipSet :: Array (IProp r i) -> Array (Chip r i) -> Html r i
+chipSet :: Array (IProp r i) -> Array (Chip r i) -> HH.HTML w i
 chipSet additionalAttributes chips =
   HH.element "mdc-chip-set"
     ([ HP.class_ mdc_chip_set, HP.class_ mdc_chip_set____filter, HH.Attributes.attribute "role" "grid" ] <> additionalAttributes)
     (map chip chips)
 
-chip :: Chip r i -> Html r i
+chip :: Chip r i -> HH.HTML w i
 chip (Chip (config_@{ additionalAttributes }) label) =
   HH.div [ HP.class_ mdc_touch_target_wrapper ]
     [ HH.element "mdc-chip"
@@ -45,10 +45,10 @@ selectedProp { selected } = Just (HH.Attributes.property "selected" (Encode.bool
 interactionHandler :: Chip.Config r i -> Maybe (IProp r i)
 interactionHandler { onChange } = map (HH.Events.on "MDCChip:interaction" << Decode.succeed) onChange
 
-rippleElt :: Maybe (Html r i)
+rippleElt :: Maybe (HH.HTML w i)
 rippleElt = Just (HH.div [ HP.class_ mdc_chip__ripple ] [])
 
-leadingIconElt :: Chip.Config r i -> Maybe (Html r i)
+leadingIconElt :: Chip.Config r i -> Maybe (HH.HTML w i)
 leadingIconElt { icon, selected } =
   map
     ( \iconName ->
@@ -60,7 +60,7 @@ leadingIconElt { icon, selected } =
     )
     icon
 
-checkmarkElt :: Maybe (Html r i)
+checkmarkElt :: Maybe (HH.HTML w i)
 checkmarkElt =
   Just
     ( HH.div [ HP.class_ mdc_chip__checkmark ]
@@ -79,14 +79,14 @@ checkmarkElt =
         ]
     )
 
-primaryActionElt :: String -> Maybe (Html r i)
+primaryActionElt :: String -> Maybe (HH.HTML w i)
 primaryActionElt label =
   Just
     $ HH.span [ HP.class_ mdc_chip__primary_action, HH.Attributes.attribute "role" "gridcell" ]
         (Array.filterMap identity [ textElt label, touchElt ])
 
-textElt :: String -> Maybe (Html r i)
+textElt :: String -> Maybe (HH.HTML w i)
 textElt label = Just (HH.span [ HP.class_ mdc_chip__text, HH.Attributes.attribute "role" "button" ] [ text label ])
 
-touchElt :: Maybe (Html r i)
+touchElt :: Maybe (HH.HTML w i)
 touchElt = Just (HH.div [ HP.class_ mdc_chip__touch ] [])

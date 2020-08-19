@@ -25,7 +25,7 @@ defaultConfig =
   , additionalAttributes: []
   }
 
-linearProgress :: Variant -> Config r i -> Html r i
+linearProgress :: Variant -> Config r i -> HH.HTML w i
 linearProgress variant (config_@{ additionalAttributes }) =
   HH.element "mdc-linear-progress"
     ( Array.filterMap identity
@@ -47,13 +47,13 @@ linearProgress variant (config_@{ additionalAttributes }) =
     , secondaryBarElt
     ]
 
-indeterminate :: Config r i -> Html r i
+indeterminate :: Config r i -> HH.HTML w i
 indeterminate config_ = linearProgress Indeterminate config_
 
-determinate :: Config r i -> { progress :: Float } -> Html r i
+determinate :: Config r i -> { progress :: Float } -> HH.HTML w i
 determinate config_ { progress } = linearProgress (Determinate progress) config_
 
-buffered :: Config r i -> { progress :: Float, buffered :: Float } -> Html r i
+buffered :: Config r i -> { progress :: Float, buffered :: Float } -> HH.HTML w i
 buffered config_ data_ = linearProgress (Buffered data_.progress data_.buffered) config_
 
 rootCs :: Maybe (IProp r i)
@@ -104,21 +104,21 @@ reverseProp { reverse } = Just (HH.Attributes.property "reverse" (Encode.bool re
 closedProp :: Config r i -> Maybe (IProp r i)
 closedProp { closed } = Just (HH.Attributes.property "closed" (Encode.bool closed))
 
-bufferingDotsElt :: Html r i
+bufferingDotsElt :: HH.HTML w i
 bufferingDotsElt = HH.div [ HP.class_ mdc_linear_progress__buffering_dots ] []
 
-bufferElt :: Html r i
+bufferElt :: HH.HTML w i
 bufferElt = HH.div [ HP.class_ mdc_linear_progress__buffer ] []
 
-primaryBarElt :: Html r i
+primaryBarElt :: HH.HTML w i
 primaryBarElt =
   HH.div [ HP.class_ "mdc-linear-progress__bar mdc-linear-progress__primary-bar" ]
     [ barInnerElt ]
 
-secondaryBarElt :: Html r i
+secondaryBarElt :: HH.HTML w i
 secondaryBarElt =
   HH.div [ HP.class_ "mdc-linear-progress__bar mdc-linear-progress__secondary-bar" ]
     [ barInnerElt ]
 
-barInnerElt :: Html r i
+barInnerElt :: HH.HTML w i
 barInnerElt = HH.div [ HP.class_ mdc_linear_progress__bar_inner ] []

@@ -55,5 +55,5 @@ paddedCs { padded } =
   else
     Nothing
 
-group :: Array (IProp r i) -> Html r i
+group :: Array (IProp r i) -> HH.HTML w i
 group additionalAttributes = HH.hr (Array.filterMap identity [ listDividerCs ] <> additionalAttributes) []

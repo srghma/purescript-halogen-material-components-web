@@ -48,7 +48,7 @@ This works best for integer-valued sliders, but this is not a requirement.
 Note that this option is ignored by non-discrete sliders.
 
 -}
-slider :: Config r i -> Html r i
+slider :: Config r i -> HH.HTML w i
 slider (config_@{ additionalAttributes }) =
   HH.element "mdc-slider"
     ( Array.filterMap identity
@@ -133,16 +133,16 @@ changeHandler { onInput } =
     )
     onInput
 
-trackContainerElt :: Html r i
+trackContainerElt :: HH.HTML w i
 trackContainerElt = HH.div [ HP.class_ mdc_slider__track_container ] [ trackElt, trackMarkerContainerElt ]
 
-trackElt :: Html r i
+trackElt :: HH.HTML w i
 trackElt = HH.div [ HP.class_ mdc_slider__track ] []
 
-trackMarkerContainerElt :: Html r i
+trackMarkerContainerElt :: HH.HTML w i
 trackMarkerContainerElt = HH.div [ HP.class_ mdc_slider__track_marker_container ] []
 
-thumbContainerElt :: Config r i -> Html r i
+thumbContainerElt :: Config r i -> HH.HTML w i
 thumbContainerElt { discrete } =
   HH.div [ HP.class_ mdc_slider__thumb_container ]
     ( if discrete then
@@ -151,13 +151,13 @@ thumbContainerElt { discrete } =
         [ thumbElt, focusRingElt ]
     )
 
-pinElt :: Html r i
+pinElt :: HH.HTML w i
 pinElt = HH.div [ HP.class_ mdc_slider__pin ] [ pinValueMarkerElt ]
 
-pinValueMarkerElt :: Html r i
+pinValueMarkerElt :: HH.HTML w i
 pinValueMarkerElt = HH.div [ HP.class_ mdc_slider__pin_value_marker ] []
 
-thumbElt :: Html r i
+thumbElt :: HH.HTML w i
 thumbElt =
   Halogen.SVG.Elements.svg
     [ Halogen.SVG.Attributes.class_ "mdc-slider__thumb"
@@ -172,5 +172,5 @@ thumbElt =
         []
     ]
 
-focusRingElt :: Html r i
+focusRingElt :: HH.HTML w i
 focusRingElt = HH.div [ HP.class_ mdc_slider__focus_ring ] []

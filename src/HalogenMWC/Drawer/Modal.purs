@@ -20,7 +20,7 @@ defaultConfig =
   , onClose: Nothing
   }
 
-drawer :: Config r i -> Array (Html r i) -> Html r i
+drawer :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
 drawer (config_@{ additionalAttributes }) nodes =
   HH.element "mdc-drawer"
     ( Array.filterMap identity
@@ -33,10 +33,10 @@ drawer (config_@{ additionalAttributes }) nodes =
     )
     nodes
 
-content :: Array (IProp r i) -> Array (Html r i) -> Html r i
+content :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
 content attributes nodes = HH.div ([ HP.class_ mdc_drawer__content ] <> attributes) nodes
 
-header :: Array (IProp r i) -> Array (Html r i) -> Html r i
+header :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
 header additionalAttributes nodes = HH.div ([ HP.class_ mdc_drawer__header ] <> additionalAttributes) nodes
 
 title :: IProp r i
@@ -57,5 +57,5 @@ openProp { open } = Just (HH.Attributes.property "open" (Encode.bool open))
 closeHandler :: Config r i -> Maybe (IProp r i)
 closeHandler { onClose } = map (HH.Events.on "MDCDrawer:close" << Decode.succeed) onClose
 
-scrim :: Array (IProp r i) -> Array (Html r i) -> Html r i
+scrim :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
 scrim additionalAttributes nodes = HH.div ([ HP.class_ mdc_drawer_scrim ] <> additionalAttributes) nodes

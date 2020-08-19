@@ -22,7 +22,7 @@ defaultConfig =
   , additionalAttributes: []
   }
 
-card :: Config r i -> Content r i -> Html r i
+card :: Config r i -> Content r i -> HH.HTML w i
 card (config_@{ additionalAttributes }) content =
   HH.element "mdc-card"
     ( Array.filterMap identity
@@ -37,10 +37,10 @@ card (config_@{ additionalAttributes }) content =
         ]
     )
 
-blocksElt :: Content r i -> Array (Html r i)
+blocksElt :: Content r i -> Array (HH.HTML w i)
 blocksElt { blocks } = map (\(Block html) -> html) blocks
 
-actionsElt :: Content r i -> Array (Html r i)
+actionsElt :: Content r i -> Array (HH.HTML w i)
 actionsElt content = case content.actions of
   Just (Actions { buttons, icons, fullBleed }) ->
     [ HH.div
@@ -86,7 +86,7 @@ data Aspect
   = Square
   | SixteenToNine
 
-mediaView :: Maybe Aspect -> Array (IProp r i) -> String -> Html r i
+mediaView :: Maybe Aspect -> Array (IProp r i) -> String -> HH.HTML w i
 mediaView aspect additionalAttributes backgroundImage =
   HH.div
     ( Array.filterMap identity
@@ -98,13 +98,13 @@ mediaView aspect additionalAttributes backgroundImage =
     )
     []
 
-squareMedia :: Array (IProp r i) -> String -> Html r i
+squareMedia :: Array (IProp r i) -> String -> HH.HTML w i
 squareMedia additionalAttributes backgroundImage = mediaView (Just Square) additionalAttributes backgroundImage
 
-sixteenToNineMedia :: Array (IProp r i) -> String -> Html r i
+sixteenToNineMedia :: Array (IProp r i) -> String -> HH.HTML w i
 sixteenToNineMedia additionalAttributes backgroundImage = mediaView (Just SixteenToNine) additionalAttributes backgroundImage
 
-media :: Array (IProp r i) -> String -> Html r i
+media :: Array (IProp r i) -> String -> HH.HTML w i
 media additionalAttributes backgroundImage = mediaView Nothing additionalAttributes backgroundImage
 
 mediaCs :: Maybe (IProp r i)
@@ -119,7 +119,7 @@ aspectCs aspect = case aspect of
   Just SixteenToNine -> Just (HP.class_ mdc_card__media____16_9)
   Nothing -> Nothing
 
-primaryAction :: Array (IProp r i) -> Array (Html r i) -> Array (Html r i)
+primaryAction :: Array (IProp r i) -> Array (HH.HTML w i) -> Array (HH.HTML w i)
 primaryAction additionalAttributes blocks =
   [ HH.div
       ( [ HP.class_ mdc_card__primary_action
@@ -155,13 +155,13 @@ full width by using `cardFullBleedActions`.
 fullBleedActions :: Button r i -> Actions r i
 fullBleedActions button_ = Actions { buttons = [ button_ ], icons = [], fullBleed = true }
 
-button :: Button.Config r i -> String -> Html r i
+button :: Button.Config r i -> String -> HH.HTML w i
 button config label =
   Button.text
     (config { additionalAttributes = HP.classes [ mdc_card__action, mdc_card__action____button ] <> config.additionalAttributes })
     label
 
-icon :: IconButton.Config r i -> String -> Html r i
+icon :: IconButton.Config r i -> String -> HH.HTML w i
 icon config iconName =
   IconButton.iconButton
     (config { additionalAttributes = HP.classes [ mdc_card__action, mdc_card__action____icon ] <> config.additionalAttributes })

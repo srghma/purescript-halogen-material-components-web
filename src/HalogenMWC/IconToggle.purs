@@ -26,7 +26,7 @@ defaultConfig =
 
 {-| Specify the HTML5 aria-label attribute of an icon toggle
 -}
-iconToggle :: Config r i -> { onIcon :: String, offIcon :: String } -> Html r i
+iconToggle :: Config r i -> { onIcon :: String, offIcon :: String } -> HH.HTML w i
 iconToggle (config_@{ additionalAttributes }) { onIcon, offIcon } =
   HH.element "mdc-icon-button"
     ( Array.filterMap identity

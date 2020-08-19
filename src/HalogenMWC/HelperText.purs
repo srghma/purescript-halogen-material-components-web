@@ -18,7 +18,7 @@ defaultConfig =
   , additionalAttributes: []
   }
 
-helperText :: Config r i -> String -> Html r i
+helperText :: Config r i -> String -> HH.HTML w i
 helperText (config_@{ additionalAttributes }) string =
   HH.div
     ( Array.filterMap identity
@@ -30,7 +30,7 @@ helperText (config_@{ additionalAttributes }) string =
     )
     [ text string ]
 
-helperLine :: Array (IProp r i) -> Array (Html r i) -> Html r i
+helperLine :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
 helperLine additionalAttributes nodes = HH.div ([ helperLineCs ] <> additionalAttributes) nodes
 
 helperTextCs :: Maybe (IProp r i)
@@ -49,7 +49,7 @@ persistentCs (Config config_) =
 ariaHiddenAttr :: Maybe (IProp r i)
 ariaHiddenAttr = Just (HH.Attributes.attribute "aria-hidden" "true")
 
-characterCounter :: Array (IProp r i) -> Html r i
+characterCounter :: Array (IProp r i) -> HH.HTML w i
 characterCounter additionalAttributes = HH.div ([ characterCounterCs ] <> additionalAttributes) []
 
 characterCounterCs :: IProp r i

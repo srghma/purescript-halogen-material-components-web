@@ -31,7 +31,7 @@ defaultConfig =
   , touch: true
   }
 
-checkbox :: Config r i -> Html r i
+checkbox :: Config r i -> HH.HTML w i
 checkbox (config_@{ touch, additionalAttributes }) =
   let
     wrapTouch node =
@@ -94,7 +94,7 @@ changeHandler { state, onChange } =
     )
     onChange
 
-nativeControlElt :: Config r i -> Html r i
+nativeControlElt :: Config r i -> HH.HTML w i
 nativeControlElt config_ =
   HH.input
     ( Array.filterMap identity
@@ -107,7 +107,7 @@ nativeControlElt config_ =
     )
     []
 
-backgroundElt :: Html r i
+backgroundElt :: HH.HTML w i
 backgroundElt =
   HH.div
     [ HP.class_ mdc_checkbox__background ]

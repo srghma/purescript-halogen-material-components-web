@@ -27,7 +27,7 @@ dataTable ::
   { thead :: Array (Row r i)
   , tbody :: Array (Row r i)
   } ->
-  Html r i
+  HH.HTML w i
 dataTable (config_@{ additionalAttributes }) { thead, tbody } =
   HH.element "mdc-data-table"
     ([ dataTableCs ] <> additionalAttributes)
@@ -69,19 +69,19 @@ selected =
 dataTableRowSelectedCs :: IProp r i
 dataTableRowSelectedCs = HP.class_ mdc_data_table__row____selected
 
-headerRow :: Row r i -> Html r i
+headerRow :: Row r i -> HH.HTML w i
 headerRow (Row { attributes, nodes }) = HH.tr ([ dataTableHeaderRowCs, attributes ] <> (map headerCell nodes))
 
 dataTableHeaderRowCs :: IProp r i
 dataTableHeaderRowCs = HP.class_ mdc_data_table__header_row
 
-bodyRow :: Row r i -> Html r i
+bodyRow :: Row r i -> HH.HTML w i
 bodyRow (Row { attributes, nodes }) = HH.tr ([ dataTableRowCs, attributes ] <> (map bodyCell nodes))
 
 dataTableRowCs :: IProp r i
 dataTableRowCs = HP.class_ mdc_data_table__row
 
-headerCell :: Cell r i -> Html r i
+headerCell :: Cell r i -> HH.HTML w i
 headerCell cell_ = case cell_ of
   Cell { numeric, attributes, nodes } ->
     HH.th
@@ -126,7 +126,7 @@ dataTableHeaderCellNumericCs numeric =
 dataTableHeaderCellCheckboxCs :: Maybe (IProp r i)
 dataTableHeaderCellCheckboxCs = Just (HP.class_ mdc_data_table__header_cell____checkbox)
 
-bodyCell :: Cell r i -> Html r i
+bodyCell :: Cell r i -> HH.HTML w i
 bodyCell cell_ = case cell_ of
   Cell { numeric, attributes, nodes } ->
     HH.td
@@ -152,17 +152,17 @@ data Cell r i
   = Cell
     { numeric :: Boolean
     , attributes :: Array (IProp r i)
-    , nodes :: Array (Html r i)
+    , nodes :: Array (HH.HTML w i)
     }
   | CheckboxCell
     { config_ :: Checkbox.Config r i
     , attributes :: Array (IProp r i)
     }
 
-cell :: Array (IProp r i) -> Array (Html r i) -> Cell r i
+cell :: Array (IProp r i) -> Array (HH.HTML w i) -> Cell r i
 cell attributes nodes = Cell { numeric = false, attributes = attributes, nodes = nodes }
 
-numericCell :: Array (IProp r i) -> Array (Html r i) -> Cell r i
+numericCell :: Array (IProp r i) -> Array (HH.HTML w i) -> Cell r i
 numericCell attributes nodes = Cell { numeric: true, attributes: attributes, nodes: nodes }
 
 checkboxCell :: Array (IProp r i) -> Checkbox.Config r i -> Cell r i

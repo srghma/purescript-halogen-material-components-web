@@ -43,7 +43,7 @@ argument represents the first list item, and the second argument reresents the
 remaining list items. This way we guarantee lists to be non-empty.
 
 -}
-list :: Config r i -> ArrayItem r i -> Array (ArrayItem r i) -> Html r i
+list :: Config r i -> ArrayItem r i -> Array (ArrayItem r i) -> HH.HTML w i
 list (config_@{ additionalAttributes }) firstArrayItem remainingArrayItems =
   let
     listItems = [ firstArrayItem ] <> remainingArrayItems
@@ -152,13 +152,13 @@ selectedIndexProp listItems =
   in
     Just (HH.Attributes.property "selectedIndex" (Encode.list Encode.int selectedIndex))
 
-group :: Array (IProp r i) -> Array (Html r i) -> Html r i
+group :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
 group additionalAttributes nodes = HH.div ([ listGroupCs ] <> additionalAttributes) nodes
 
 listGroupCs :: IProp r i
 listGroupCs = HP.class_ mdc_list_group
 
-subheader :: Array (IProp r i) -> Array (Html r i) -> Html r i
+subheader :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
 subheader additionalAttributes nodes = HH.span ([ listGroupSubheaderCs ] <> additionalAttributes) nodes
 
 listGroupSubheaderCs :: IProp r i

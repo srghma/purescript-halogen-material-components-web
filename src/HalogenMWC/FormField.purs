@@ -24,7 +24,7 @@ defaultConfig =
   , onClick: Nothing
   }
 
-formField :: Config r i -> Array (Html r i) -> Html r i
+formField :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
 formField config_ nodes =
   HH.element "mdc-form-field"
     ( Array.filterMap identity
@@ -51,7 +51,7 @@ forAttr { for } = map HH.Attributes.for for
 clickHandler :: Config r i -> Maybe (IProp r i)
 clickHandler { onClick } = map HH.Events.onClick onClick
 
-labelElt :: Config r i -> Html r i
+labelElt :: Config r i -> HH.HTML w i
 labelElt (config_@{ label }) =
   HH.label
     ( Array.filterMap identity

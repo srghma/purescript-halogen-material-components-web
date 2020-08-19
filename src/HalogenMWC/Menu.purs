@@ -22,7 +22,7 @@ defaultConfig =
   , onClose: Nothing
   }
 
-menu :: Config r i -> Array (Html r i) -> Html r i
+menu :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
 menu (config_@{ additionalAttributes }) nodes =
   HH.element "mdc-menu"
     ( Array.filterMap identity

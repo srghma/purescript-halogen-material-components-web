@@ -14,7 +14,7 @@ type Config a r i
     }
 
 data SelectItem a r i
-  = SelectItem (Config a r i) (Array (Html r i))
+  = SelectItem (Config a r i) (Array (HH.HTML w i))
 
 defaultConfig :: { value :: a } -> Config a r i
 defaultConfig { value } =

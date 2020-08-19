@@ -26,7 +26,7 @@ defaultConfig =
   , additionalAttributes: []
   }
 
-tabBar :: Config r i -> Array (Tab r i) -> Html r i
+tabBar :: Config r i -> Array (Tab r i) -> HH.HTML w i
 tabBar (config_@{ additionalAttributes, align }) tabs =
   HH.element "mdc-tab-bar"
     ( Array.filterMap identity
@@ -55,7 +55,7 @@ activeTabIndexProp tabs =
   in
     map (HH.Attributes.property "activeTabIndex" << Encode.int) activeTabIndex
 
-viewTab :: Config r i -> Tab r i -> Html r i
+viewTab :: Config r i -> Tab r i -> HH.HTML w i
 viewTab (barConfig@{ indicatorSpansContent }) (tabConfig@(Tab ({ additionalAttributes, content }))) =
   HH.button
     ( Array.filterMap identity
@@ -102,7 +102,7 @@ tabRoleAttr = Just (HH.Attributes.attribute "role" "tab")
 tabClickHandler :: Tab.Config r i -> Maybe (IProp r i)
 tabClickHandler { onClick } = map (HH.Events.on "MDCTab:interacted" << Decode.succeed) onClick
 
-tabContentElt :: Config r i -> Tab.Config r i -> Tab.Content -> Maybe (Html r i)
+tabContentElt :: Config r i -> Tab.Config r i -> Tab.Content -> Maybe (HH.HTML w i)
 tabContentElt (barConfig@{ indicatorSpansContent }) config_ content =
   Just
     ( HH.div [ HP.class_ mdc_tab__content ]
@@ -120,7 +120,7 @@ tabContentElt (barConfig@{ indicatorSpansContent }) config_ content =
         )
     )
 
-tabIconElt :: Tab.Content -> Maybe (Html r i)
+tabIconElt :: Tab.Content -> Maybe (HH.HTML w i)
 tabIconElt { icon } =
   map
     ( \iconName ->
@@ -130,13 +130,13 @@ tabIconElt { icon } =
     )
     icon
 
-tabTextLabelElt :: Tab.Content -> Maybe (Html r i)
+tabTextLabelElt :: Tab.Content -> Maybe (HH.HTML w i)
 tabTextLabelElt { label } = Just (HH.span [ HP.class_ mdc_tab__text_label ] [ text label ])
 
-tabIndicatorElt :: Tab.Config r i -> Maybe (Html r i)
+tabIndicatorElt :: Tab.Config r i -> Maybe (HH.HTML w i)
 tabIndicatorElt config_ = Just (HH.span [ HP.class_ mdc_tab_indicator ] [ tabIndicatorContentElt ])
 
-tabIndicatorContentElt :: Html r i
+tabIndicatorContentElt :: HH.HTML w i
 tabIndicatorContentElt =
   HH.span
     [ HP.class_ mdc_tab_indicator__content
@@ -144,7 +144,7 @@ tabIndicatorContentElt =
     ]
     []
 
-tabRippleElt :: Maybe (Html r i)
+tabRippleElt :: Maybe (HH.HTML w i)
 tabRippleElt = Just (HH.span [ HP.class_ mdc_tab__ripple ] [])
 
 data Align
@@ -152,7 +152,7 @@ data Align
   | End
   | Center
 
-tabScroller :: Config r i -> Maybe Align -> Array (Tab r i) -> Html r i
+tabScroller :: Config r i -> Maybe Align -> Array (Tab r i) -> HH.HTML w i
 tabScroller config_ align tabs =
   HH.div
     ( Array.filterMap identity
@@ -172,12 +172,12 @@ tabScrollerAlignCs align = case align of
   Just Center -> Just (HP.class_ mdc_tab_scroller____align_center)
   Nothing -> Nothing
 
-tabScrollerScrollAreaElt :: Config r i -> Array (Tab r i) -> Html r i
+tabScrollerScrollAreaElt :: Config r i -> Array (Tab r i) -> HH.HTML w i
 tabScrollerScrollAreaElt barConfig tabs =
   HH.div [ HP.class_ mdc_tab_scroller__scroll_area ]
     [ tabScrollerScrollContentElt barConfig tabs ]
 
-tabScrollerScrollContentElt :: Config r i -> Array (Tab r i) -> Html r i
+tabScrollerScrollContentElt :: Config r i -> Array (Tab r i) -> HH.HTML w i
 tabScrollerScrollContentElt barConfig tabs =
   HH.div [ HP.class_ mdc_tab_scroller__scroll_content ]
     (map (viewTab barConfig) tabs)

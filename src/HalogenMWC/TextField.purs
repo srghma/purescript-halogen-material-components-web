@@ -33,7 +33,7 @@ type Config r i
 {-| Text field trailing or leading icon -
 -}
 data Icon r i
-  = Icon (Html r i)
+  = Icon (HH.HTML w i)
 
 defaultConfig :: Config r i
 defaultConfig =
@@ -58,13 +58,13 @@ defaultConfig =
   , onChange: Nothing
   }
 
-filled :: Config r i -> Html r i
+filled :: Config r i -> HH.HTML w i
 filled config_ = textField false config_
 
-outlined :: Config r i -> Html r i
+outlined :: Config r i -> HH.HTML w i
 outlined config_ = textField true config_
 
-textField :: Boolean -> Config r i -> Html r i
+textField :: Boolean -> Config r i -> HH.HTML w i
 textField outlined_ (config_@{ additionalAttributes, fullwidth }) =
   HH.element "mdc-text-field"
     ( Array.filterMap identity
@@ -207,12 +207,12 @@ valueProp { value } = map (HH.Attributes.property "value" << Encode.string) valu
 placeholderAttr :: Config r i -> Maybe (IProp r i)
 placeholderAttr { placeholder } = map HH.Attributes.placeholder placeholder
 
-leadingIconElt :: Config r i -> Array (Html r i)
+leadingIconElt :: Config r i -> Array (HH.HTML w i)
 leadingIconElt { leadingIcon } = case leadingIcon of
   Nothing -> []
   Just (Icon html) -> [ html ]
 
-trailingIconElt :: Config r i -> Array (Html r i)
+trailingIconElt :: Config r i -> Array (HH.HTML w i)
 trailingIconElt { trailingIcon } = case trailingIcon of
   Nothing -> []
   Just (Icon html) -> [ html ]
@@ -225,7 +225,7 @@ changeHandler { onChange } =
   map (\f -> HH.Events.on "change" (Decode.map f HH.Events.targetValue))
     onChange
 
-inputElt :: Config r i -> Html r i
+inputElt :: Config r i -> HH.HTML w i
 inputElt config_ =
   HH.input
     ( Array.filterMap identity
@@ -264,7 +264,7 @@ ariaLabelAttr { fullwidth, placeholder, label } =
 disabledProp :: Config r i -> Maybe (IProp r i)
 disabledProp { disabled } = Just (HH.Attributes.property "disabled" (Encode.bool disabled))
 
-labelElt :: Config r i -> Html r i
+labelElt :: Config r i -> HH.HTML w i
 labelElt { label, value } =
   let
     floatingLabelCs = "mdc-floating-label"
@@ -291,10 +291,10 @@ noLabelCs { label } =
   else
     Nothing
 
-lineRippleElt :: Html r i
+lineRippleElt :: HH.HTML w i
 lineRippleElt = HH.div [ HP.class_ mdc_line_ripple ] []
 
-notchedOutlineElt :: Config r i -> Html r i
+notchedOutlineElt :: Config r i -> HH.HTML w i
 notchedOutlineElt config_ =
   HH.div [ HP.class_ mdc_notched_outline ]
     [ notchedOutlineLeadingElt
@@ -302,11 +302,11 @@ notchedOutlineElt config_ =
     , notchedOutlineTrailingElt
     ]
 
-notchedOutlineLeadingElt :: Html r i
+notchedOutlineLeadingElt :: HH.HTML w i
 notchedOutlineLeadingElt = HH.div [ HP.class_ mdc_notched_outline__leading ] []
 
-notchedOutlineTrailingElt :: Html r i
+notchedOutlineTrailingElt :: HH.HTML w i
 notchedOutlineTrailingElt = HH.div [ HP.class_ mdc_notched_outline__trailing ] []
 
-notchedOutlineNotchElt :: Config r i -> Html r i
+notchedOutlineNotchElt :: Config r i -> HH.HTML w i
 notchedOutlineNotchElt config_ = HH.div [ HP.class_ mdc_notched_outline__notch ] [ labelElt config_ ]

@@ -22,11 +22,11 @@ defaultConfig =
 
 type Content r i
   = { title :: Maybe String
-    , content :: Array (Html r i)
-    , actions :: Array (Html r i)
+    , content :: Array (HH.HTML w i)
+    , actions :: Array (HH.HTML w i)
     }
 
-dialog :: Config r i -> Content r i -> Html r i
+dialog :: Config r i -> Content r i -> HH.HTML w i
 dialog (config_@{ additionalAttributes }) content =
   HH.element "mdc-dialog"
     ( Array.filterMap identity
@@ -57,10 +57,10 @@ ariaModalAttr = Just (HH.Attributes.attribute "aria-modal" "true")
 closeHandler :: Config r i -> Maybe (IProp r i)
 closeHandler { onClose } = map (HH.Events.on "MDCDialog:close" << Decode.succeed) onClose
 
-containerElt :: Content r i -> Html r i
+containerElt :: Content r i -> HH.HTML w i
 containerElt content = HH.div [ HP.class_ mdc_dialog__container ] [ surfaceElt content ]
 
-surfaceElt :: Content r i -> Html r i
+surfaceElt :: Content r i -> HH.HTML w i
 surfaceElt content =
   HH.div
     [ HP.class_ mdc_dialog__surface ]
@@ -71,20 +71,20 @@ surfaceElt content =
         ]
     )
 
-titleElt :: Content r i -> Maybe (Html r i)
+titleElt :: Content r i -> Maybe (HH.HTML w i)
 titleElt { title } = case title of
   Just title_ -> Just (HH.div [ HP.class_ mdc_dialog__title ] [ text title_ ])
   Nothing -> Nothing
 
-contentElt :: Content r i -> Maybe (Html r i)
+contentElt :: Content r i -> Maybe (HH.HTML w i)
 contentElt { content } = Just (HH.div [ HP.class_ mdc_dialog__content ] content)
 
-actionsElt :: Content r i -> Maybe (Html r i)
+actionsElt :: Content r i -> Maybe (HH.HTML w i)
 actionsElt { actions } =
   if Array.isEmpty actions then
     Nothing
   else
     Just (HH.div [ HP.class_ mdc_dialog__actions ] actions)
 
-scrimElt :: Html r i
+scrimElt :: HH.HTML w i
 scrimElt = HH.div [ HP.class_ mdc_dialog__scrim ] []

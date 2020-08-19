@@ -40,7 +40,7 @@ data Variant
   = Filled
   | Outlined
 
-select :: Variant -> Config a r i -> SelectItem a r i -> Array (SelectItem a r i) -> Html r i
+select :: Variant -> Config a r i -> SelectItem a r i -> Array (SelectItem a r i) -> HH.HTML w i
 select variant (config_@{ leadingIcon, selected, additionalAttributes, onChange }) firstSelectItem remainingSelectItems =
   let
     selectedIndex =
@@ -84,14 +84,14 @@ select variant (config_@{ leadingIcon, selected, additionalAttributes, onChange 
       , menuElt leadingIcon selected onChange firstSelectItem remainingSelectItems
       ]
 
-filled :: Config a r i -> SelectItem a r i -> Array (SelectItem a r i) -> Html r i
+filled :: Config a r i -> SelectItem a r i -> Array (SelectItem a r i) -> HH.HTML w i
 filled config_ firstSelectItem remainingSelectItems = select Filled config_ firstSelectItem remainingSelectItems
 
-outlined :: Config a r i -> SelectItem a r i -> Array (SelectItem a r i) -> Html r i
+outlined :: Config a r i -> SelectItem a r i -> Array (SelectItem a r i) -> HH.HTML w i
 outlined config_ firstSelectItem remainingSelectItems = select Outlined config_ firstSelectItem remainingSelectItems
 
 data Icon r i
-  = Icon (Html r i)
+  = Icon (HH.HTML w i)
 
 icon :: Array (IProp r i) -> String -> Icon r i
 icon additionalAttributes iconName = Icon (Icon.icon ([ HP.class_ mdc_select__icon ] <> additionalAttributes) iconName)
@@ -125,24 +125,24 @@ selectedIndexProp selectedIndex =
 requiredProp :: Config a r i -> Maybe (IProp r i)
 requiredProp { required } = Just (HH.Attributes.property "required" (Encode.bool required))
 
-anchorElt :: Array (IProp r i) -> Array (Html r i) -> Html r i
+anchorElt :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
 anchorElt additionalAttributes nodes = HH.div ([ HP.class_ mdc_select__anchor ] <> additionalAttributes) nodes
 
-leadingIconElt :: Config a r i -> Html r i
+leadingIconElt :: Config a r i -> HH.HTML w i
 leadingIconElt { leadingIcon } = case leadingIcon of
   Just (Icon icon_) -> icon_
   Nothing -> text ""
 
-dropdownIconElt :: Html r i
+dropdownIconElt :: HH.HTML w i
 dropdownIconElt = HH.i [ HP.class_ mdc_select__dropdown_icon ] []
 
-floatingLabelElt :: Config a r i -> Html r i
+floatingLabelElt :: Config a r i -> HH.HTML w i
 floatingLabelElt { label } = HH.div [ HP.class_ mdc_floating_label ] [ text (Maybe.withDefault "" label) ]
 
-lineRippleElt :: Html r i
+lineRippleElt :: HH.HTML w i
 lineRippleElt = HH.label [ HP.class_ mdc_line_ripple ] []
 
-notchedOutlineElt :: Config a r i -> Html r i
+notchedOutlineElt :: Config a r i -> HH.HTML w i
 notchedOutlineElt { label } =
   HH.div [ HP.class_ mdc_notched_outline ]
     [ HH.div [ HP.class_ mdc_notched_outline__leading ] []
@@ -153,7 +153,7 @@ notchedOutlineElt { label } =
     , HH.div [ HP.class_ mdc_notched_outline__trailing ] []
     ]
 
-menuElt :: Maybe (Icon r i) -> Maybe a -> Maybe (a -> r i) -> SelectItem a r i -> Array (SelectItem a r i) -> Html r i
+menuElt :: Maybe (Icon r i) -> Maybe a -> Maybe (a -> r i) -> SelectItem a r i -> Array (SelectItem a r i) -> HH.HTML w i
 menuElt leadingIcon selected onChange firstSelectItem remainingSelectItems =
   Menu.menu
     ( Menu.config
@@ -186,5 +186,5 @@ listItemConfig selectedValue onChange { value, disabled, additionalAttributes } 
           Nothing -> identity
       )
 
-selectedTextElt :: Html r i
+selectedTextElt :: HH.HTML w i
 selectedTextElt = HH.div [ HP.class_ mdc_select__selected_text ] []

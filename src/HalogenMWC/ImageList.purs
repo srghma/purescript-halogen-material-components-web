@@ -22,7 +22,7 @@ defaultConfig =
   , additionalAttributes: []
   }
 
-imageArray :: Config r i -> Array (ImageArrayItem r i) -> Html r i
+imageArray :: Config r i -> Array (ImageArrayItem r i) -> HH.HTML w i
 imageArray config_ listItems =
   HH.element "mdc-image-list"
     ( Array.filterMap identity
@@ -48,7 +48,7 @@ withTextProtectionCs { withTextProtection } =
   else
     Nothing
 
-listItemElt :: Config r i -> ImageArrayItem r i -> Html r i
+listItemElt :: Config r i -> ImageArrayItem r i -> HH.HTML w i
 listItemElt (config_@{ masonry }) (listItem@(ImageArrayItem.ImageArrayItem { href, additionalAttributes })) =
   let
     inner =
@@ -66,7 +66,7 @@ listItemElt (config_@{ masonry }) (listItem@(ImageArrayItem.ImageArrayItem { hre
           # Maybe.withDefault inner
       )
 
-imageAspectContainerElt :: Boolean -> ImageArrayItem r i -> Html r i
+imageAspectContainerElt :: Boolean -> ImageArrayItem r i -> HH.HTML w i
 imageAspectContainerElt masonry (listItem@(ImageArrayItem.ImageArrayItem { href })) =
   HH.div
     ( Array.filterMap identity
@@ -76,7 +76,7 @@ imageAspectContainerElt masonry (listItem@(ImageArrayItem.ImageArrayItem { href 
     )
     [ imageElt masonry listItem ]
 
-imageElt :: Boolean -> ImageArrayItem r i -> Html r i
+imageElt :: Boolean -> ImageArrayItem r i -> HH.HTML w i
 imageElt masonry (ImageArrayItem.ImageArrayItem { href, image }) =
   let
     img =
@@ -98,7 +98,7 @@ imageElt masonry (ImageArrayItem.ImageArrayItem { href, image }) =
         ]
         []
 
-supportingElt :: ImageArrayItem r i -> Html r i
+supportingElt :: ImageArrayItem r i -> HH.HTML w i
 supportingElt (ImageArrayItem.ImageArrayItem { label }) = case label of
   Just string ->
     HH.div

@@ -58,7 +58,7 @@ config { onClosed } =
   , onClosed: onClosed
   }
 
-snackbar :: Config r i -> Queue r i -> Html r i
+snackbar :: Config r i -> Queue r i -> HH.HTML w i
 snackbar config_ queue =
   let
     (Tuple currentMessageId currentMessage) =
@@ -160,19 +160,19 @@ ariaStatusRoleAttr = HH.Attributes.attribute "aria-role" "status"
 ariaPoliteLiveAttr :: IProp r i
 ariaPoliteLiveAttr = HH.Attributes.attribute "aria-live" "polite"
 
-surfaceElt :: MessageId -> Message r i -> Html r i
+surfaceElt :: MessageId -> Message r i -> HH.HTML w i
 surfaceElt messageId message_ =
   HH.div [ HP.class_ mdc_snackbar__surface ]
     [ labelElt message_
     , actionsElt messageId message_
     ]
 
-labelElt :: Message r i -> Html r i
+labelElt :: Message r i -> HH.HTML w i
 labelElt (Message { label }) =
   HH.div [ HP.class_ mdc_snackbar__label, ariaStatusRoleAttr, ariaPoliteLiveAttr ]
     [ text label ]
 
-actionsElt :: MessageId -> Message r i -> Html r i
+actionsElt :: MessageId -> Message r i -> HH.HTML w i
 actionsElt messageId message_ =
   HH.div [ HP.class_ mdc_snackbar__actions ]
     ( Array.filterMap identity
@@ -181,7 +181,7 @@ actionsElt messageId message_ =
         ]
     )
 
-actionButtonElt :: MessageId -> Message r i -> Maybe (Html r i)
+actionButtonElt :: MessageId -> Message r i -> Maybe (HH.HTML w i)
 actionButtonElt messageId (message_@(Message { actionButton })) =
   map
     ( \actionButtonLabel ->
@@ -201,7 +201,7 @@ actionButtonCs = Just (HP.class_ "mdc-button mdc-snackbar__action")
 actionButtonClickHandler :: MessageId -> Message r i -> Maybe (IProp r i)
 actionButtonClickHandler messageId (Message { onActionButtonClick }) = map (HH.Events.onClick << (#) messageId) onActionButtonClick
 
-actionIconElt :: MessageId -> Message r i -> Maybe (Html r i)
+actionIconElt :: MessageId -> Message r i -> Maybe (HH.HTML w i)
 actionIconElt messageId (message_@(Message { actionIcon })) =
   map
     ( \actionIconLabel ->

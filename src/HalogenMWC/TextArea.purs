@@ -42,13 +42,13 @@ defaultConfig =
   , onChange: Nothing
   }
 
-filled :: Config r i -> Html r i
+filled :: Config r i -> HH.HTML w i
 filled config_ = textArea false config_
 
-outlined :: Config r i -> Html r i
+outlined :: Config r i -> HH.HTML w i
 outlined config_ = textArea true config_
 
-textArea :: Boolean -> Config r i -> Html r i
+textArea :: Boolean -> Config r i -> HH.HTML w i
 textArea outlined_ (config_@{ additionalAttributes, fullwidth }) =
   HH.element "mdc-text-field"
     ( Array.filterMap identity
@@ -128,7 +128,7 @@ changeHandler { onChange } =
   map (\f -> HH.Events.on "change" (Decode.map f HH.Events.targetValue))
     onChange
 
-inputElt :: Config r i -> Html r i
+inputElt :: Config r i -> HH.HTML w i
 inputElt config_ =
   HH.textarea
     ( Array.filterMap identity
@@ -164,7 +164,7 @@ ariaLabelAttr { fullwidth, placeholder, label } =
 disabledProp :: Config r i -> Maybe (IProp r i)
 disabledProp { disabled } = Just (HH.Attributes.property "disabled" (Encode.bool disabled))
 
-labelElt :: Config r i -> Html r i
+labelElt :: Config r i -> HH.HTML w i
 labelElt { label, value } =
   let
     floatingLabelCs = "mdc-floating-label"
@@ -191,7 +191,7 @@ noLabelCs { label } =
   else
     Nothing
 
-notchedOutlineElt :: Config r i -> Html r i
+notchedOutlineElt :: Config r i -> HH.HTML w i
 notchedOutlineElt config_ =
   HH.div [ HP.class_ mdc_notched_outline ]
     [ notchedOutlineLeadingElt
@@ -199,11 +199,11 @@ notchedOutlineElt config_ =
     , notchedOutlineTrailingElt
     ]
 
-notchedOutlineLeadingElt :: Html r i
+notchedOutlineLeadingElt :: HH.HTML w i
 notchedOutlineLeadingElt = HH.div [ HP.class_ mdc_notched_outline__leading ] []
 
-notchedOutlineTrailingElt :: Html r i
+notchedOutlineTrailingElt :: HH.HTML w i
 notchedOutlineTrailingElt = HH.div [ HP.class_ mdc_notched_outline__trailing ] []
 
-notchedOutlineNotchElt :: Config r i -> Html r i
+notchedOutlineNotchElt :: Config r i -> HH.HTML w i
 notchedOutlineNotchElt config_ = HH.div [ HP.class_ mdc_notched_outline__notch ] [ labelElt config_ ]

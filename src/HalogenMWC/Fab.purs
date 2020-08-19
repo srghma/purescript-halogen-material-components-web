@@ -22,7 +22,7 @@ defaultConfig =
   , additionalAttributes: []
   }
 
-fab :: Config r i -> String -> Html r i
+fab :: Config r i -> String -> HH.HTML w i
 fab (config_@{ additionalAttributes }) iconName =
   HH.element "mdc-fab"
     ( Array.filterMap identity
@@ -58,10 +58,10 @@ exitedCs { exited } =
   else
     Nothing
 
-rippleElt :: Html r i
+rippleElt :: HH.HTML w i
 rippleElt = HH.div [ HP.class_ mdc_fab__ripple ] []
 
-iconElt :: String -> Html r i
+iconElt :: String -> HH.HTML w i
 iconElt iconName = HH.span [ HP.class_ material_icons, HP.class_ mdc_fab__icon ] [ text iconName ]
 
 clickHandler :: Config r i -> Maybe (IProp r i)

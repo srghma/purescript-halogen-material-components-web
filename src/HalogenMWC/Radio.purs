@@ -34,7 +34,7 @@ disable increased touch target size.
 prevent potentially overlapping touch targets on adjacent elements.
 
 -}
-radio :: Config r i -> Html r i
+radio :: Config r i -> HH.HTML w i
 radio (config_@{ touch, additionalAttributes }) =
   let
     wrapTouch node =
@@ -93,7 +93,7 @@ changeHandler { checked, onChange } =
     )
     onChange
 
-nativeControlElt :: Config r i -> Html r i
+nativeControlElt :: Config r i -> HH.HTML w i
 nativeControlElt config_ =
   HH.input
     ( Array.filterMap identity
@@ -111,14 +111,14 @@ nativeControlCs = Just (HP.class_ mdc_radio__native_control)
 radioTypeAttr :: Maybe (IProp r i)
 radioTypeAttr = Just (HH.Attributes.type_ "radio")
 
-backgroundElt :: Html r i
+backgroundElt :: HH.HTML w i
 backgroundElt = HH.div [ HP.class_ mdc_radio__background ] [ outerCircleElt, innerCircleElt ]
 
-outerCircleElt :: Html r i
+outerCircleElt :: HH.HTML w i
 outerCircleElt = HH.div [ HP.class_ mdc_radio__outer_circle ] []
 
-innerCircleElt :: Html r i
+innerCircleElt :: HH.HTML w i
 innerCircleElt = HH.div [ HP.class_ mdc_radio__inner_circle ] []
 
-rippleElt :: Html r i
+rippleElt :: HH.HTML w i
 rippleElt = HH.div [ HP.class_ mdc_radio__ripple ] []

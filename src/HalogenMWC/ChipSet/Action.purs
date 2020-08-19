@@ -7,7 +7,7 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
-chipSet :: Array (IProp r i) -> Array (Chip r i) -> Html r i
+chipSet :: Array (IProp r i) -> Array (Chip r i) -> HH.HTML w i
 chipSet additionalAttributes chips =
   HH.element "mdc-chip-set"
     ( [ HP.classes [ mdc_chip_set, mdc_chip_set____action ]
@@ -17,7 +17,7 @@ chipSet additionalAttributes chips =
     )
     (map chip chips)
 
-chip :: Chip r i -> Html r i
+chip :: Chip r i -> HH.HTML w i
 chip (Chip config_ label) =
   HH.div [ HP.class_ mdc_touch_target_wrapper ]
     [ HH.element "mdc-chip"
@@ -40,10 +40,10 @@ chip (Chip config_ label) =
 interactionHandler :: Chip.Config r i -> Maybe (IProp r i)
 interactionHandler { onClick } = map (HH.Events.on "MDCChip:interaction" << Decode.succeed) onClick
 
-rippleElt :: Maybe (Html r i)
+rippleElt :: Maybe (HH.HTML w i)
 rippleElt = Just (HH.div [ HP.class_ mdc_chip__ripple ] [])
 
-leadingIconElt :: Chip.Config r i -> Maybe (Html r i)
+leadingIconElt :: Chip.Config r i -> Maybe (HH.HTML w i)
 leadingIconElt config =
   map
     ( \iconName ->
@@ -52,14 +52,14 @@ leadingIconElt config =
     )
     config.icon
 
-primaryActionElt :: String -> Maybe (Html r i)
+primaryActionElt :: String -> Maybe (HH.HTML w i)
 primaryActionElt label =
   Just
     $ HH.span [ HP.class_ mdc_chip__primary_action, HH.Attributes.attribute "role" "gridcell" ]
         (Array.filterMap identity [ textElt label, touchElt ])
 
-textElt :: String -> Maybe (Html r i)
+textElt :: String -> Maybe (HH.HTML w i)
 textElt label = Just (HH.span [ HP.class_ mdc_chip__text, HH.Attributes.attribute "role" "button" ] [ text label ])
 
-touchElt :: Maybe (Html r i)
+touchElt :: Maybe (HH.HTML w i)
 touchElt = Just (HH.div [ HP.class_ mdc_chip__touch ] [])

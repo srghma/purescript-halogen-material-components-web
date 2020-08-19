@@ -38,7 +38,7 @@ data Variant
   | Unelevated
   | Outlined
 
-button :: Variant -> Config r i -> String -> Html r i
+button :: Variant -> Config r i -> String -> HH.HTML w i
 button variant (config_@{ additionalAttributes, touch, href }) label =
   let
     wrapTouch node =
@@ -80,22 +80,22 @@ button variant (config_@{ additionalAttributes, touch, href }) label =
 
 {-| Text button variant (flush without outline)
 -}
-text :: Config r i -> String -> Html r i
+text :: Config r i -> String -> HH.HTML w i
 text config_ label = button Text config_ label
 
 {-| Outlined button variant (flush with outline)
 -}
-outlined :: Config r i -> String -> Html r i
+outlined :: Config r i -> String -> HH.HTML w i
 outlined config_ label = button Outlined config_ label
 
 {-| Raised button variant (contained with elevation)
 -}
-raised :: Config r i -> String -> Html r i
+raised :: Config r i -> String -> HH.HTML w i
 raised config_ label = button Raised config_ label
 
 {-| Unelevated button variant (contained without elevation)
 -}
-unelevated :: Config r i -> String -> Html r i
+unelevated :: Config r i -> String -> HH.HTML w i
 unelevated config_ label = button Unelevated config_ label
 
 rootCs :: Maybe (IProp r i)
@@ -148,7 +148,7 @@ touchCs { touch } =
   else
     Nothing
 
-iconElt :: Config r i -> Maybe (Html r i)
+iconElt :: Config r i -> Maybe (HH.HTML w i)
 iconElt { icon } =
   map
     ( \iconName ->
@@ -160,29 +160,29 @@ iconElt { icon } =
     )
     icon
 
-rippleElt :: Maybe (Html r i)
+rippleElt :: Maybe (HH.HTML w i)
 rippleElt = Just (HH.div [ HP.class_ mdc_button__ripple ] [])
 
-leadingIconElt :: Config r i -> Maybe (Html r i)
+leadingIconElt :: Config r i -> Maybe (HH.HTML w i)
 leadingIconElt (config_@{ trailingIcon }) =
   if not trailingIcon then
     iconElt config_
   else
     Nothing
 
-trailingIconElt :: Config r i -> Maybe (Html r i)
+trailingIconElt :: Config r i -> Maybe (HH.HTML w i)
 trailingIconElt (config_@{ trailingIcon }) =
   if trailingIcon then
     iconElt config_
   else
     Nothing
 
-touchElt :: Config r i -> Maybe (Html r i)
+touchElt :: Config r i -> Maybe (HH.HTML w i)
 touchElt { touch } =
   if touch then
     Just (HH.div [ HP.class_ mdc_button__touch ] [])
   else
     Nothing
 
-labelElt :: String -> Maybe (Html r i)
+labelElt :: String -> Maybe (HH.HTML w i)
 labelElt label = Just (HH.span [ HP.class_ mdc_button__label ] [ HH.text label ])

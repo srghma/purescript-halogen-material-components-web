@@ -28,7 +28,7 @@ primary = Primary
 accent :: Color
 accent = Accent
 
-ripple :: Boolean -> Config r i -> Html r i
+ripple :: Boolean -> Config r i -> HH.HTML w i
 ripple isUnbounded (config_@{ additionalAttributes }) =
   HH.element "mdc-ripple"
     ( Array.filterMap identity
@@ -46,10 +46,10 @@ ripple isUnbounded (config_@{ additionalAttributes }) =
     )
     []
 
-bounded :: Config r i -> Html r i
+bounded :: Config r i -> HH.HTML w i
 bounded = ripple false
 
-unbounded :: Config r i -> Html r i
+unbounded :: Config r i -> HH.HTML w i
 unbounded = ripple true
 
 rippleSurface :: Maybe (IProp r i)

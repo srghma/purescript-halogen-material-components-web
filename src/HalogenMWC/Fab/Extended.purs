@@ -24,7 +24,7 @@ defaultConfig =
   , additionalAttributes: []
   }
 
-fab :: Config r i -> String -> Html r i
+fab :: Config r i -> String -> HH.HTML w i
 fab (config_@{ additionalAttributes }) label =
   HH.element "mdc-fab"
     ( Array.filterMap identity
@@ -47,10 +47,10 @@ fab (config_@{ additionalAttributes }) label =
 tabIndexProp :: Int -> Maybe (IProp r i)
 tabIndexProp tabIndex = Just (HH.Attributes.property "tabIndex" (Encode.int tabIndex))
 
-rippleElt :: Maybe (Html r i)
+rippleElt :: Maybe (HH.HTML w i)
 rippleElt = Just (HH.div [ HP.class_ mdc_fab__ripple ] [])
 
-leadingIconElt :: Config r i -> Maybe (Html r i)
+leadingIconElt :: Config r i -> Maybe (HH.HTML w i)
 leadingIconElt { icon, trailingIcon } = case Tuple icon trailingIcon of
   Just (Tuple iconName false) ->
     Just
@@ -59,10 +59,10 @@ leadingIconElt { icon, trailingIcon } = case Tuple icon trailingIcon of
       )
   _ -> Nothing
 
-labelElt :: String -> Maybe (Html r i)
+labelElt :: String -> Maybe (HH.HTML w i)
 labelElt label = Just (HH.span [ HP.class_ mdc_fab__label ] [ text label ])
 
-trailingIconElt :: Config r i -> Maybe (Html r i)
+trailingIconElt :: Config r i -> Maybe (HH.HTML w i)
 trailingIconElt { icon, trailingIcon } = case (Tuple icon trailingIcon) of
   Just (Tuple iconName true) ->
     Just

@@ -22,7 +22,7 @@ defaultConfig =
   , onChange: Nothing
   }
 
-switch :: Config r i -> Html r i
+switch :: Config r i -> HH.HTML w i
 switch (config_@{ additionalAttributes }) =
   HH.element "mdc-switch"
     ( Array.filterMap identity
@@ -57,16 +57,16 @@ checkboxTypeAttr = Just (HH.Attributes.type_ "checkbox")
 changeHandler :: Config r i -> Maybe (IProp r i)
 changeHandler { onChange } = map (HH.Events.on "change" << Decode.succeed) onChange
 
-trackElt :: Html r i
+trackElt :: HH.HTML w i
 trackElt = HH.div [ HP.class_ mdc_switch__track ] []
 
-thumbUnderlayElt :: Config r i -> Html r i
+thumbUnderlayElt :: Config r i -> HH.HTML w i
 thumbUnderlayElt config_ = HH.div [ HP.class_ mdc_switch__thumb_underlay ] [ thumbElt config_ ]
 
-thumbElt :: Config r i -> Html r i
+thumbElt :: Config r i -> HH.HTML w i
 thumbElt config_ = HH.div [ HP.class_ mdc_switch__thumb ] [ nativeControlElt config_ ]
 
-nativeControlElt :: Config r i -> Html r i
+nativeControlElt :: Config r i -> HH.HTML w i
 nativeControlElt config_ =
   HH.input
     ( Array.filterMap identity
