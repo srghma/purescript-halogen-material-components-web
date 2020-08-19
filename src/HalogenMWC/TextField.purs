@@ -238,12 +238,12 @@ import Material.Icon as Icon
 type Config r i
     = Config
         { label :: Maybe String
-        , fullwidth :: Bool
+        , fullwidth :: Boolean
         , value :: Maybe String
         , placeholder :: Maybe String
-        , disabled :: Bool
-        , required :: Bool
-        , valid :: Bool
+        , disabled :: Boolean
+        , required :: Boolean
+        , valid :: Boolean
         , minLength :: Maybe Int
         , maxLength :: Maybe Int
         , pattern :: Maybe String
@@ -301,7 +301,7 @@ setLabel label (Config config_) =
 
 {-| Specify a text field to be fullwidth
 -}
-setFullwidth :: Bool -> Config msg -> Config msg
+setFullwidth :: Boolean -> Config msg -> Config msg
 setFullwidth fullwidth (Config config_) =
     Config { config_ | fullwidth = fullwidth }
 
@@ -326,21 +326,21 @@ Disabled text fields cannot be interacted with and have no visual interaction
 effect.
 
 -}
-setDisabled :: Bool -> Config msg -> Config msg
+setDisabled :: Boolean -> Config msg -> Config msg
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 
 
 {-| Specify a text field to be required
 -}
-setRequired :: Bool -> Config msg -> Config msg
+setRequired :: Boolean -> Config msg -> Config msg
 setRequired required (Config config_) =
     Config { config_ | required = required }
 
 
 {-| Specify a text field to be valid
 -}
-setValid :: Bool -> Config msg -> Config msg
+setValid :: Boolean -> Config msg -> Config msg
 setValid valid (Config config_) =
     Config { config_ | valid = valid }
 
@@ -444,7 +444,7 @@ outlined config_ =
     textField True config_
 
 
-textField :: Bool -> Config msg -> Html msg
+textField :: Boolean -> Config msg -> Html msg
 textField outlined_ ((Config { additionalAttributes, fullwidth }) as config_) =
     Html.node "mdc-text-field"
         (Array.filterMap identity
@@ -508,7 +508,7 @@ rootCs =
     Just (class "mdc-text-field")
 
 
-outlinedCs :: Bool -> Maybe (Html.Attribute msg)
+outlinedCs :: Boolean -> Maybe (Html.Attribute msg)
 outlinedCs outlined_ =
     if outlined_ then
         Just (class "mdc-text-field--outlined")

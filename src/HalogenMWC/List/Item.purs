@@ -220,7 +220,7 @@ Disabled list items cannot be interacted with and have not visual interaction
 effect.
 
 -}
-setDisabled :: Bool -> Config msg -> Config msg
+setDisabled :: Boolean -> Config msg -> Config msg
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 

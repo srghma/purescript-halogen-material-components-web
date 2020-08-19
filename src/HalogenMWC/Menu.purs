@@ -105,8 +105,8 @@ import Json.Encode as Encode
 -}
 type Config r i
     = Config
-        { open :: Bool
-        , quickOpen :: Bool
+        { open :: Boolean
+        , quickOpen :: Boolean
         , additionalAttributes :: Array (IProp r i)
         , onClose :: Maybe msg
         }
@@ -126,7 +126,7 @@ config =
 
 {-| Specify whether a menu is open
 -}
-setOpen :: Bool -> Config msg -> Config msg
+setOpen :: Boolean -> Config msg -> Config msg
 setOpen open (Config config_) =
     Config { config_ | open = open }
 
@@ -136,7 +136,7 @@ setOpen open (Config config_) =
 A quickly opening menu opens without showing an animation.
 
 -}
-setQuickOpen :: Bool -> Config msg -> Config msg
+setQuickOpen :: Boolean -> Config msg -> Config msg
 setQuickOpen quickOpen (Config config_) =
     Config { config_ | quickOpen = quickOpen }
 

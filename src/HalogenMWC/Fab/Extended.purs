@@ -142,8 +142,8 @@ import Json.Encode as Encode
 type Config r i
     = Config
         { icon :: Maybe String
-        , trailingIcon :: Bool
-        , exited :: Bool
+        , trailingIcon :: Boolean
+        , exited :: Boolean
         , onClick :: Maybe msg
         , additionalAttributes :: Array (IProp r i)
         }
@@ -174,14 +174,14 @@ setIcon icon (Config config_) =
 Trailing icons are displyed after the label rather than before.
 
 -}
-setTrailingIcon :: Bool -> Config msg -> Config msg
+setTrailingIcon :: Boolean -> Config msg -> Config msg
 setTrailingIcon trailingIcon (Config config_) =
     Config { config_ | trailingIcon = trailingIcon }
 
 
 {-| Specify whether a floating action button transitions off the screen
 -}
-setExited :: Bool -> Config msg -> Config msg
+setExited :: Boolean -> Config msg -> Config msg
 setExited exited (Config config_) =
     Config { config_ | exited = exited }
 

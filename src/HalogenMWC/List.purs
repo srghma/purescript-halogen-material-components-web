@@ -180,12 +180,12 @@ import Material.Array.Item.Internal as ArrayItem
 -}
 type Config r i
     = Config
-        { nonInteractive :: Bool
-        , dense :: Bool
-        , avatarArray :: Bool
-        , twoLine :: Bool
-        , vertical :: Bool
-        , wrapFocus :: Bool
+        { nonInteractive :: Boolean
+        , dense :: Boolean
+        , avatarArray :: Boolean
+        , twoLine :: Boolean
+        , vertical :: Boolean
+        , wrapFocus :: Boolean
         , additionalAttributes :: Array (IProp r i)
         }
 
@@ -211,7 +211,7 @@ Non-interactive lists do not feature keyboard interaction and list items have
 no visual interaction effect.
 
 -}
-setNonInteractive :: Bool -> Config msg -> Config msg
+setNonInteractive :: Boolean -> Config msg -> Config msg
 setNonInteractive nonInteractive (Config config_) =
     Config { config_ | nonInteractive = nonInteractive }
 
@@ -221,7 +221,7 @@ setNonInteractive nonInteractive (Config config_) =
 Dense lists are more compact and feature smaller than normal margins
 
 -}
-setDense :: Bool -> Config msg -> Config msg
+setDense :: Boolean -> Config msg -> Config msg
 setDense dense (Config config_) =
     Config { config_ | dense = dense }
 
@@ -231,7 +231,7 @@ setDense dense (Config config_) =
 An avatar list features a larger than usual list item _graphic_.
 
 -}
-setAvatarArray :: Bool -> Config msg -> Config msg
+setAvatarArray :: Boolean -> Config msg -> Config msg
 setAvatarArray avatarArray (Config config_) =
     Config { config_ | avatarArray = avatarArray }
 
@@ -241,7 +241,7 @@ setAvatarArray avatarArray (Config config_) =
 Two line lists feature list items with a primary and a secondary text line.
 
 -}
-setTwoLine :: Bool -> Config msg -> Config msg
+setTwoLine :: Boolean -> Config msg -> Config msg
 setTwoLine twoLine (Config config_) =
     Config { config_ | twoLine = twoLine }
 
@@ -253,7 +253,7 @@ last list item. By default, a list in that case passes focus to the next
 focusable control.
 
 -}
-setWrapFocus :: Bool -> Config msg -> Config msg
+setWrapFocus :: Boolean -> Config msg -> Config msg
 setWrapFocus wrapFocus (Config config_) =
     Config { config_ | wrapFocus = wrapFocus }
 

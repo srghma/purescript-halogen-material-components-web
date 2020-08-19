@@ -83,7 +83,7 @@ import Json.Encode as Encode
 -}
 type Config r i
     = Config
-        { open :: Bool
+        { open :: Boolean
         , additionalAttributes :: Array (IProp r i)
         , onClose :: Maybe msg
         }
@@ -102,7 +102,7 @@ config =
 
 {-| Specify whether a dialog is open
 -}
-setOpen :: Bool -> Config msg -> Config msg
+setOpen :: Boolean -> Config msg -> Config msg
 setOpen open (Config config_) =
     Config { config_ | open = open }
 

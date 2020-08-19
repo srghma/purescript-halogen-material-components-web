@@ -112,8 +112,8 @@ import Material.ImageArray.Item.Internal as ImageArrayItem
 -}
 type Config r i
     = Config
-        { masonry :: Bool
-        , withTextProtection :: Bool
+        { masonry :: Boolean
+        , withTextProtection :: Boolean
         , additionalAttributes :: Array (IProp r i)
         }
 
@@ -135,7 +135,7 @@ The masonry image list variant presents images vertically arranged into several
 columns. In this layout, images may be any combination of aspect ratios.
 
 -}
-setMasonry :: Bool -> Config msg -> Config msg
+setMasonry :: Boolean -> Config msg -> Config msg
 setMasonry masonry (Config config_) =
     Config { config_ | masonry = masonry }
 
@@ -146,7 +146,7 @@ of the image
 By default, image list item's labels display below the image.
 
 -}
-setWithTextProtection :: Bool -> Config msg -> Config msg
+setWithTextProtection :: Boolean -> Config msg -> Config msg
 setWithTextProtection withTextProtection (Config config_) =
     Config { config_ | withTextProtection = withTextProtection }
 
@@ -216,7 +216,7 @@ listItemElt ((Config { masonry }) as config_) ((ImageArrayItem.ImageArrayItem (I
         )
 
 
-imageAspectContainerElt :: Bool -> ImageArrayItem msg -> Html msg
+imageAspectContainerElt :: Boolean -> ImageArrayItem msg -> Html msg
 imageAspectContainerElt masonry ((ImageArrayItem.ImageArrayItem (ImageArrayItem.Config { href })) as listItem) =
     Html.div
         (Array.filterMap identity
@@ -227,7 +227,7 @@ imageAspectContainerElt masonry ((ImageArrayItem.ImageArrayItem (ImageArrayItem.
         [ imageElt masonry listItem ]
 
 
-imageElt :: Bool -> ImageArrayItem msg -> Html msg
+imageElt :: Boolean -> ImageArrayItem msg -> Html msg
 imageElt masonry (ImageArrayItem.ImageArrayItem (ImageArrayItem.Config { href, image })) =
     let
         img =

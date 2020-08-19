@@ -135,7 +135,7 @@ Disabled icon buttons cannot be interacted with and have no visual interaction
 effect.
 
 -}
-setDisabled :: Bool -> Config msg -> Config msg
+setDisabled :: Boolean -> Config msg -> Config msg
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 

@@ -141,7 +141,7 @@ accent =
     Accent
 
 
-ripple :: Bool -> Config msg -> Html msg
+ripple :: Boolean -> Config msg -> Html msg
 ripple isUnbounded ((Config { additionalAttributes }) as config_) =
     Html.node "mdc-ripple"
         (Array.filterMap identity
@@ -192,12 +192,12 @@ colorCs (Config { color }) =
             Nothing
 
 
-unboundedProp :: Bool -> Maybe (Html.Attribute msg)
+unboundedProp :: Boolean -> Maybe (Html.Attribute msg)
 unboundedProp isUnbounded =
     Just (Html.Attributes.property "unbounded" (Encode.bool isUnbounded))
 
 
-unboundedData :: Bool -> Maybe (Html.Attribute msg)
+unboundedData :: Boolean -> Maybe (Html.Attribute msg)
 unboundedData isUnbounded =
     if isUnbounded then
         Just (Html.Attributes.attribute "data-mdc-ripple-is-unbounded" "")

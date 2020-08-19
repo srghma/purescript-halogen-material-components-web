@@ -101,7 +101,7 @@ config =
 
 {-| Specify whether a filter chip is selected
 -}
-setSelected :: Bool -> Config msg -> Config msg
+setSelected :: Boolean -> Config msg -> Config msg
 setSelected selected (Config config_) =
     Config { config_ | selected = selected }
 

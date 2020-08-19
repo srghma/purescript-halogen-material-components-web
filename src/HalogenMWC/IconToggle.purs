@@ -146,8 +146,8 @@ import Json.Encode as Encode
 -}
 type Config r i
     = Config
-        { on :: Bool
-        , disabled :: Bool
+        { on :: Boolean
+        , disabled :: Boolean
         , label :: Maybe String
         , additionalAttributes :: Array (IProp r i)
         , onChange :: Maybe msg
@@ -169,7 +169,7 @@ config =
 
 {-| Specify whether an icon toggle is on
 -}
-setOn :: Bool -> Config msg -> Config msg
+setOn :: Boolean -> Config msg -> Config msg
 setOn on (Config config_) =
     Config { config_ | on = on }
 
@@ -180,7 +180,7 @@ Disabled icon buttons cannot be interacted with and have no visual interaction
 effect.
 
 -}
-setDisabled :: Bool -> Config msg -> Config msg
+setDisabled :: Boolean -> Config msg -> Config msg
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 

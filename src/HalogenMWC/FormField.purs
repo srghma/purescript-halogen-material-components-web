@@ -94,7 +94,7 @@ type Config r i
     = Config
         { label :: Maybe String
         , for :: Maybe String
-        , alignEnd :: Bool
+        , alignEnd :: Boolean
         , additionalAttributes :: Array (IProp r i)
         , onClick :: Maybe msg
         }
@@ -119,7 +119,7 @@ setFor for (Config config_) =
 This is usefile for, say, checkboxes.
 
 -}
-setAlignEnd :: Bool -> Config msg -> Config msg
+setAlignEnd :: Boolean -> Config msg -> Config msg
 setAlignEnd alignEnd (Config config_) =
     Config { config_ | alignEnd = alignEnd }
 

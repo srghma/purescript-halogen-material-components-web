@@ -116,8 +116,8 @@ import Json.Encode as Encode
 -}
 type Config r i
     = Config
-        { mini :: Bool
-        , exited :: Bool
+        { mini :: Boolean
+        , exited :: Boolean
         , additionalAttributes :: Array (IProp r i)
         , onClick :: Maybe msg
         }
@@ -137,14 +137,14 @@ config =
 
 {-| Specify whether the floating actions button should be smaller than normally
 -}
-setMini :: Bool -> Config msg -> Config msg
+setMini :: Boolean -> Config msg -> Config msg
 setMini mini (Config config_) =
     Config { config_ | mini = mini }
 
 
 {-| Specify whether a floating action button should transition off the screen
 -}
-setExited :: Bool -> Config msg -> Config msg
+setExited :: Boolean -> Config msg -> Config msg
 setExited exited (Config config_) =
     Config { config_ | exited = exited }
 

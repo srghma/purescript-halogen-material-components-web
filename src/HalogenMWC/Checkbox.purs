@@ -172,7 +172,7 @@ Disabled checkboxes cannot be interacted with and have no visual interaction
 effect.
 
 -}
-setDisabled :: Bool -> Config msg -> Config msg
+setDisabled :: Boolean -> Config msg -> Config msg
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 
@@ -201,7 +201,7 @@ disable increased touch target size.
 to prevent potentially overlapping touch targets on adjacent elements.
 
 -}
-setTouch :: Bool -> Config msg -> Config msg
+setTouch :: Boolean -> Config msg -> Config msg
 setTouch touch (Config config_) =
     Config { config_ | touch = touch }
 

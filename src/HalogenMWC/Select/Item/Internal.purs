@@ -6,7 +6,7 @@ import Html (Html)
 data Config a msg
     = Config
         { value :: a
-        , disabled :: Bool
+        , disabled :: Boolean
         , additionalAttributes :: Array (IProp r i)
         }
 

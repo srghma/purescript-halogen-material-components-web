@@ -293,7 +293,7 @@ colScopeAttr =
     Just (Html.Attributes.attribute "scope" "col")
 
 
-dataTableHeaderCellNumericCs :: Bool -> Maybe (Html.Attribute msg)
+dataTableHeaderCellNumericCs :: Boolean -> Maybe (Html.Attribute msg)
 dataTableHeaderCellNumericCs numeric =
     if numeric then
         Just (class "mdc-data-table__header-cell--numeric")
@@ -345,7 +345,7 @@ bodyCell cell_ =
 -}
 data Cell msg
     = Cell
-        { numeric :: Bool
+        { numeric :: Boolean
         , attributes :: Array (IProp r i)
         , nodes :: Array (Html msg)
         }
@@ -381,7 +381,7 @@ dataTableCellCs =
     Just (class "mdc-data-table__cell")
 
 
-dataTableCellNumericCs :: Bool -> Maybe (Html.Attribute msg)
+dataTableCellNumericCs :: Boolean -> Maybe (Html.Attribute msg)
 dataTableCellNumericCs numeric =
     if numeric then
         Just (class "mdc-data-table__cell--numeric")

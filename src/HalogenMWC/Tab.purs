@@ -116,7 +116,7 @@ setOnClick onClick (Config config_) =
 
 {-| Specify whether the tab is active
 -}
-setActive :: Bool -> Config msg -> Config msg
+setActive :: Boolean -> Config msg -> Config msg
 setActive active (Config config_) =
     Config { config_ | active = active }
 

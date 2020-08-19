@@ -211,7 +211,7 @@ import Material.IconButton.Internal
 -}
 type Config r i
     = Config
-        { outlined :: Bool
+        { outlined :: Boolean
         , additionalAttributes :: Array (IProp r i)
         }
 
@@ -228,7 +228,7 @@ config =
 
 {-| Specify whether a card should have a visual outline
 -}
-setOutlined :: Bool -> Config msg -> Config msg
+setOutlined :: Boolean -> Config msg -> Config msg
 setOutlined outlined (Config config_) =
     Config { config_ | outlined = outlined }
 
@@ -433,7 +433,7 @@ data Actions msg
     = Actions
         { buttons :: Array (Button msg)
         , icons :: Array (Icon msg)
-        , fullBleed :: Bool
+        , fullBleed :: Boolean
         }
 
 

@@ -5,7 +5,7 @@ import Html
 
 type Config r i
     = Config
-        { disabled :: Bool
+        { disabled :: Boolean
         , label :: Maybe String
         , additionalAttributes :: Array (IProp r i)
         , onClick :: Maybe msg

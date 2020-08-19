@@ -198,7 +198,7 @@ chipPrimaryActionCs =
     class "mdc-chip__primary-action"
 
 
-selectedProp :: Bool -> Maybe (Html.Attribute msg)
+selectedProp :: Boolean -> Maybe (Html.Attribute msg)
 selectedProp selected =
     Just (Html.Attributes.property "selected" (Encode.bool selected))
 

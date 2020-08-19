@@ -9,7 +9,7 @@ import Html (Html)
 
 type Config r i
     = Config
-        { disabled :: Bool
+        { disabled :: Boolean
         , selection :: Maybe Selection
         , href :: Maybe String
         , target :: Maybe String

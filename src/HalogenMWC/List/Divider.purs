@@ -107,8 +107,8 @@ import Material.Array.Item.Internal as ArrayItem
 -}
 type Config r i
     = Config
-        { inset :: Bool
-        , padded :: Bool
+        { inset :: Boolean
+        , padded :: Boolean
         , additionalAttributes :: Array (IProp r i)
         }
 
@@ -129,7 +129,7 @@ config =
 Insert list item dividers to not intersect a list item's meta.
 
 -}
-setInset :: Bool -> Config msg -> Config msg
+setInset :: Boolean -> Config msg -> Config msg
 setInset inset (Config config_) =
     Config { config_ | inset = inset }
 
@@ -139,7 +139,7 @@ setInset inset (Config config_) =
 Padded list item dividers do not intersect a list item's avatar.
 
 -}
-setPadded :: Bool -> Config msg -> Config msg
+setPadded :: Boolean -> Config msg -> Config msg
 setPadded padded (Config config_) =
     Config { config_ | padded = padded }
 

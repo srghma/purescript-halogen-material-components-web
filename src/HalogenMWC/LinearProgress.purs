@@ -102,8 +102,8 @@ import Json.Encode as Encode
 -}
 type Config r i
     = Config
-        { reverse :: Bool
-        , closed :: Bool
+        { reverse :: Boolean
+        , closed :: Boolean
         , additionalAttributes :: Array (IProp r i)
         }
 
@@ -127,14 +127,14 @@ config =
 
 {-| Specify whether a linear progress indicator should be hidden
 -}
-setClosed :: Bool -> Config msg -> Config msg
+setClosed :: Boolean -> Config msg -> Config msg
 setClosed closed (Config config_) =
     Config { config_ | closed = closed }
 
 
 {-| Specify whether the direction of a linear progress indicator should be reversed
 -}
-setReverse :: Bool -> Config msg -> Config msg
+setReverse :: Boolean -> Config msg -> Config msg
 setReverse reverse (Config config_) =
     Config { config_ | reverse = reverse }
 

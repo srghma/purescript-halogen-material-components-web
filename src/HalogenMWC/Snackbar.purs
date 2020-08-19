@@ -289,7 +289,7 @@ addMessage message_ (Queue queue) =
 -}
 type Config r i
     = Config
-        { closeOnEscape :: Bool
+        { closeOnEscape :: Boolean
         , additionalAttributes :: Array (IProp r i)
         , onClosed :: MessageId -> msg
         }
@@ -309,7 +309,7 @@ config { onClosed } =
 {-| Specify whether the snackbar's messages should close when the user presses
 escape
 -}
-setCloseOnEscape :: Bool -> Config msg -> Config msg
+setCloseOnEscape :: Boolean -> Config msg -> Config msg
 setCloseOnEscape closeOnEscape (Config config_) =
     Config { config_ | closeOnEscape = closeOnEscape }
 
@@ -355,8 +355,8 @@ data Message msg
         , onActionButtonClick :: Maybe (MessageId -> msg)
         , actionIcon :: Maybe String
         , onActionIconClick :: Maybe (MessageId -> msg)
-        , leading :: Bool
-        , stacked :: Bool
+        , leading :: Boolean
+        , stacked :: Boolean
         , timeoutMs :: Maybe Int
         }
 
@@ -396,7 +396,7 @@ can optionally be displyed on the _leading_ edge of the screen. To display a
 message as leading, set its `setLeading` configuration option to `True`.
 
 -}
-setLeading :: Bool -> Message msg -> Message msg
+setLeading :: Boolean -> Message msg -> Message msg
 setLeading leading (Message message_) =
     Message { message_ | leading = leading }
 
@@ -407,7 +407,7 @@ Stacked messages display their label above their action button or icon. This
 works best for messages with a long label.
 
 -}
-setStacked :: Bool -> Message msg -> Message msg
+setStacked :: Boolean -> Message msg -> Message msg
 setStacked stacked (Message message_) =
     Message { message_ | stacked = stacked }
 

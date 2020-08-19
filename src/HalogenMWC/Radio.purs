@@ -120,11 +120,11 @@ import Json.Encode as Encode
 -}
 type Config r i
     = Config
-        { checked :: Bool
-        , disabled :: Bool
+        { checked :: Boolean
+        , disabled :: Boolean
         , additionalAttributes :: Array (IProp r i)
         , onChange :: Maybe msg
-        , touch :: Bool
+        , touch :: Boolean
         }
 
 
@@ -143,7 +143,7 @@ config =
 
 {-| Specify whether a radio button is checked
 -}
-setChecked :: Bool -> Config msg -> Config msg
+setChecked :: Boolean -> Config msg -> Config msg
 setChecked checked (Config config_) =
     Config { config_ | checked = checked }
 
@@ -154,7 +154,7 @@ Disabled radio buttons cannot be interacted with and have no visual interaction
 effect.
 
 -}
-setDisabled :: Bool -> Config msg -> Config msg
+setDisabled :: Boolean -> Config msg -> Config msg
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 
@@ -183,7 +183,7 @@ disable increased touch target size.
 prevent potentially overlapping touch targets on adjacent elements.
 
 -}
-setTouch :: Bool -> Config msg -> Config msg
+setTouch :: Boolean -> Config msg -> Config msg
 setTouch touch (Config config_) =
     Config { config_ | touch = touch }
 

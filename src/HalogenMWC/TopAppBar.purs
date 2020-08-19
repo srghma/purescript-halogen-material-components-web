@@ -189,8 +189,8 @@ import Html.Attributes (class)
 -}
 type Config r i
     = Config
-        { dense :: Bool
-        , fixed :: Bool
+        { dense :: Boolean
+        , fixed :: Boolean
         , additionalAttributes :: Array (IProp r i)
         }
 
@@ -218,7 +218,7 @@ config =
 A dense top app bar is more compact, featuring smaller than usual margins.
 
 -}
-setDense :: Bool -> Config msg -> Config msg
+setDense :: Boolean -> Config msg -> Config msg
 setDense dense (Config config_) =
     Config { config_ | dense = dense }
 
@@ -228,7 +228,7 @@ setDense dense (Config config_) =
 A fixed top app bar does not scroll away when the user is scrolling the page.
 
 -}
-setFixed :: Bool -> Config msg -> Config msg
+setFixed :: Boolean -> Config msg -> Config msg
 setFixed fixed (Config config_) =
     Config { config_ | fixed = fixed }
 

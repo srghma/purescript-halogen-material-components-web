@@ -9,7 +9,7 @@ import Html
 
 type Config r i
     = Config
-        { active :: Bool
+        { active :: Boolean
         , additionalAttributes :: Array (IProp r i)
         , onClick :: Maybe msg
         , content :: Content

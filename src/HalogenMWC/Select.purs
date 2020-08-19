@@ -215,9 +215,9 @@ import Material.Select.Item.Internal as SelectItem
 data Config a msg
     = Config
         { label :: Maybe String
-        , disabled :: Bool
-        , required :: Bool
-        , valid :: Bool
+        , disabled :: Boolean
+        , required :: Boolean
+        , valid :: Boolean
         , selected :: Maybe a
         , leadingIcon :: Maybe (Icon msg)
         , additionalAttributes :: Array (IProp r i)
@@ -261,21 +261,21 @@ Disabled selects cannot be interacted with an have no visual interaction
 effect.
 
 -}
-setDisabled :: Bool -> Config a msg -> Config a msg
+setDisabled :: Boolean -> Config a msg -> Config a msg
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 
 
 {-| Specify whether a select is required
 -}
-setRequired :: Bool -> Config a msg -> Config a msg
+setRequired :: Boolean -> Config a msg -> Config a msg
 setRequired required (Config config_) =
     Config { config_ | required = required }
 
 
 {-| Specify whether a select is valid
 -}
-setValid :: Bool -> Config a msg -> Config a msg
+setValid :: Boolean -> Config a msg -> Config a msg
 setValid valid (Config config_) =
     Config { config_ | valid = valid }
 

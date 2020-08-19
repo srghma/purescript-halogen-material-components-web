@@ -159,9 +159,9 @@ import Material.Tab.Internal as Tab (Tab(..))
 -}
 type Config r i
     = Config
-        { stacked :: Bool
-        , minWidth :: Bool
-        , indicatorSpansContent :: Bool
+        { stacked :: Boolean
+        , minWidth :: Boolean
+        , indicatorSpansContent :: Boolean
         , additionalAttributes :: Array (IProp r i)
         , align :: Maybe Align
         }
@@ -185,7 +185,7 @@ config =
 Stacked tabs display their icon below the their label.
 
 -}
-setStacked :: Bool -> Config msg -> Config msg
+setStacked :: Boolean -> Config msg -> Config msg
 setStacked stacked (Config config_) =
     Config { config_ | stacked = stacked }
 
@@ -196,7 +196,7 @@ Usually, a tab bar's tabs have a minimum with. Using this option, tabs are as
 narrow as possible.
 
 -}
-setMinWidth :: Bool -> Config msg -> Config msg
+setMinWidth :: Boolean -> Config msg -> Config msg
 setMinWidth minWidth (Config config_) =
     Config { config_ | minWidth = minWidth }
 
@@ -207,7 +207,7 @@ Usually, a tab bar's tab indicator spans the entire tab. Use this option to
 make it span only it's label instead.
 
 -}
-setIndicatorSpansContent :: Bool -> Config msg -> Config msg
+setIndicatorSpansContent :: Boolean -> Config msg -> Config msg
 setIndicatorSpansContent indicatorSpansContent (Config config_) =
     Config { config_ | indicatorSpansContent = indicatorSpansContent }
 

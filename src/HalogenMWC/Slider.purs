@@ -155,13 +155,13 @@ import Svg.Attributes
 -}
 type Config r i
     = Config
-        { discrete :: Bool
-        , displayMarkers :: Bool
+        { discrete :: Boolean
+        , displayMarkers :: Boolean
         , min :: Maybe Float
         , max :: Maybe Float
         , step :: Maybe Float
         , value :: Maybe Float
-        , disabled :: Bool
+        , disabled :: Boolean
         , additionalAttributes :: Array (IProp r i)
         , onInput :: Maybe (Float -> msg)
         }
@@ -192,7 +192,7 @@ interacting with the slider.
 This works best for integer-valued sliders, but this is not a requirement.
 
 -}
-setDiscrete :: Bool -> Config msg -> Config msg
+setDiscrete :: Boolean -> Config msg -> Config msg
 setDiscrete discrete (Config config_) =
     Config { config_ | discrete = discrete }
 
@@ -202,7 +202,7 @@ setDiscrete discrete (Config config_) =
 Note that this option is ignored by non-discrete sliders.
 
 -}
-setDisplayMarkers :: Bool -> Config msg -> Config msg
+setDisplayMarkers :: Boolean -> Config msg -> Config msg
 setDisplayMarkers displayMarkers (Config config_) =
     Config { config_ | displayMarkers = displayMarkers }
 
@@ -241,7 +241,7 @@ Disabled sliders canot be interacted with and have no visual interaction
 effect.
 
 -}
-setDisabled :: Bool -> Config msg -> Config msg
+setDisabled :: Boolean -> Config msg -> Config msg
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 

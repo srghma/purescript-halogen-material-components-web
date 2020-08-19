@@ -204,7 +204,7 @@ setIcon icon (Config config_) =
 Trailing icons are displayed after the button's label rather than before.
 
 -}
-setTrailingIcon :: Bool -> Config msg -> Config msg
+setTrailingIcon :: Boolean -> Config msg -> Config msg
 setTrailingIcon trailingIcon (Config config_) =
     Config { config_ | trailingIcon = trailingIcon }
 
@@ -215,7 +215,7 @@ Disabled buttons cannot be interacted with and do not have no visual
 interaction effect.
 
 -}
-setDisabled :: Bool -> Config msg -> Config msg
+setDisabled :: Boolean -> Config msg -> Config msg
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 
@@ -225,7 +225,7 @@ setDisabled disabled (Config config_) =
 Dense buttons feature smaller than normal padding.
 
 -}
-setDense :: Bool -> Config msg -> Config msg
+setDense :: Boolean -> Config msg -> Config msg
 setDense dense (Config config_) =
     Config { config_ | dense = dense }
 
@@ -276,7 +276,7 @@ disable increased touch target size.
 prevent potentially overlapping touch targets on adjacent elements.
 
 -}
-setTouch :: Bool -> Config msg -> Config msg
+setTouch :: Boolean -> Config msg -> Config msg
 setTouch touch (Config config_) =
     Config { config_ | touch = touch }
 

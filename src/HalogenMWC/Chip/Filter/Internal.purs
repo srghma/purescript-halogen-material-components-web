@@ -6,7 +6,7 @@ import Html
 type Config r i
     = Config
         { icon :: Maybe String
-        , selected :: Bool
+        , selected :: Boolean
         , additionalAttributes :: Array (IProp r i)
         , onChange :: Maybe msg
         }

@@ -6,12 +6,12 @@ import Html
 type Config r i
     = Config
         { icon :: Maybe String
-        , trailingIcon :: Bool
-        , disabled :: Bool
-        , dense :: Bool
+        , trailingIcon :: Boolean
+        , disabled :: Boolean
+        , dense :: Boolean
         , href :: Maybe String
         , target :: Maybe String
         , additionalAttributes :: Array (IProp r i)
         , onClick :: Maybe msg
-        , touch :: Bool
+        , touch :: Boolean
         }

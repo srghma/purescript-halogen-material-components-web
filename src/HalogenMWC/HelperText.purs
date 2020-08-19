@@ -95,7 +95,7 @@ import Html.Attributes (class)
 -}
 type Config r i
     = Config
-        { persistent :: Bool
+        { persistent :: Boolean
         , additionalAttributes :: Array (IProp r i)
         }
 
@@ -116,7 +116,7 @@ Persistent helper texts always display regardless of whether the input has
 focus or not.
 
 -}
-setPersistent :: Bool -> Config msg -> Config msg
+setPersistent :: Boolean -> Config msg -> Config msg
 setPersistent persistent (Config config_) =
     Config { config_ | persistent = persistent }
 

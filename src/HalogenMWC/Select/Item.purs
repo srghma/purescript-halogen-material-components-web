@@ -110,7 +110,7 @@ Disabled select items cannot be interacted with and have not visual interaction
 effect.
 
 -}
-setDisabled :: Bool -> Config a msg -> Config a msg
+setDisabled :: Boolean -> Config a msg -> Config a msg
 setDisabled disabled (Config config_) =
     Config { config_ | disabled = disabled }
 
