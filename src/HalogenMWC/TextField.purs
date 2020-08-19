@@ -223,7 +223,7 @@ textField outlined_ ((Config { additionalAttributes, fullwidth }) as config_) =
             , maxProp config_
             , stepProp config_
             ]
-            ++ additionalAttributes
+            <> additionalAttributes
         )
         (Array.concat
             [ leadingIconElt config_
@@ -256,7 +256,7 @@ textField outlined_ ((Config { additionalAttributes, fullwidth }) as config_) =
 
 icon :: Array (IProp r i) -> String -> Icon r i
 icon additionalAttributes iconName =
-    Icon (Icon.icon (HP.class_ mdc_text_field__icon :: additionalAttributes) iconName)
+    Icon (Icon.icon (HP.class_ mdc_text_field__icon <> additionalAttributes) iconName)
 
 
 rootCs :: Maybe (HH.Attribute r i)

@@ -83,7 +83,7 @@ iconToggle ((Config { additionalAttributes }) as config_) { onIcon, offIcon } =
             , changeHandler config_
             , disabledAttr config_
             ]
-            ++ additionalAttributes
+            <> additionalAttributes
         )
         [ HH.i (Array.filterMap identity [ materialIconsCs, onIconCs ]) [ text onIcon ]
         , HH.i (Array.filterMap identity [ materialIconsCs, iconCs ]) [ text offIcon ]

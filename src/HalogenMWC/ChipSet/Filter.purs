@@ -19,7 +19,7 @@ import Halogen.SVG.Attributes as Halogen.SVG.Attributes
 chipSet :: Array (IProp r i) -> Array (Chip r i) -> Html r i
 chipSet additionalAttributes chips =
     HH.node "mdc-chip-set"
-        (chipSetCs :: chipSetFilterCs :: gridRole :: additionalAttributes)
+        (chipSetCs :: chipSetFilterCs :: gridRole <> additionalAttributes)
         (Array.map chip chips)
 
 
@@ -34,7 +34,7 @@ chip (Chip ((Chip.Config { additionalAttributes }) as config_) label) =
                 , selectedProp config_
                 , interactionHandler config_
                 ]
-                ++ additionalAttributes
+                <> additionalAttributes
             )
             (Array.filterMap identity
                 [ rippleElt

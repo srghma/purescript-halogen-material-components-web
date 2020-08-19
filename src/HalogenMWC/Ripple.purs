@@ -76,7 +76,7 @@ ripple isUnbounded ((Config { additionalAttributes }) as config_) =
             , Just (style "right" "0")
             , Just (style "bottom" "0")
             ]
-            ++ additionalAttributes
+            <> additionalAttributes
         )
         []
 

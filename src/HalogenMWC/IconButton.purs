@@ -66,7 +66,7 @@ iconButton ((Config { additionalAttributes }) as config_) iconName =
             , tabIndexProp
             , clickHandler config_
             ]
-            ++ additionalAttributes
+            <> additionalAttributes
         )
         [ text iconName ]
 
@@ -80,7 +80,7 @@ custom ((Config { additionalAttributes }) as config_) nodes =
             , tabIndexProp
             , clickHandler config_
             ]
-            ++ additionalAttributes
+            <> additionalAttributes
         )
         nodes
 

@@ -70,7 +70,7 @@ fab ((Config { additionalAttributes }) as config_) iconName =
             , clickHandler config_
             , tabIndexProp 0
             ]
-            ++ additionalAttributes
+            <> additionalAttributes
         )
         [ rippleElt
         , iconElt iconName

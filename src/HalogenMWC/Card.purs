@@ -62,7 +62,7 @@ card ((Config { additionalAttributes }) as config_) content =
             [ rootCs
             , outlinedCs config_
             ]
-            ++ additionalAttributes
+            <> additionalAttributes
         )
         (Array.concat
             [ blocksElt content
@@ -159,7 +159,7 @@ mediaView aspect additionalAttributes backgroundImage =
                 , backgroundImageAttr backgroundImage
                 , aspectCs aspect
                 ]
-                ++ additionalAttributes
+                <> additionalAttributes
             )
             []
 
@@ -213,7 +213,7 @@ primaryAction additionalAttributes blocks =
             ([ primaryActionCs
              , tabIndexProp 0
              ]
-                ++ additionalAttributes
+                <> additionalAttributes
             )
             (Array.map (\(Block html) -> html) blocks)
     ]

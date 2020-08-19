@@ -110,7 +110,7 @@ list ((Config { additionalAttributes }) as config_) firstArrayItem remainingArra
             , clickHandler listItems
             , selectedIndexProp listItems
             ]
-            ++ additionalAttributes
+            <> additionalAttributes
         )
         (Array.map
             (\listItem_ ->
@@ -247,7 +247,7 @@ selectedIndexProp listItems =
 
 group :: Array (IProp r i) -> Array (Html r i) -> Html r i
 group additionalAttributes nodes =
-    HH.div (listGroupCs :: additionalAttributes) nodes
+    HH.div (listGroupCs <> additionalAttributes) nodes
 
 
 listGroupCs :: HH.Attribute r i
@@ -258,7 +258,7 @@ listGroupCs =
 
 subheader :: Array (IProp r i) -> Array (Html r i) -> Html r i
 subheader additionalAttributes nodes =
-    HH.span (listGroupSubheaderCs :: additionalAttributes) nodes
+    HH.span (listGroupSubheaderCs <> additionalAttributes) nodes
 
 
 listGroupSubheaderCs :: HH.Attribute r i

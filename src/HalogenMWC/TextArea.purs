@@ -169,7 +169,7 @@ textArea outlined_ ((Config { additionalAttributes, fullwidth }) as config_) =
             , minLengthAttr config_
             , maxLengthAttr config_
             ]
-            ++ additionalAttributes
+            <> additionalAttributes
         )
         (Array.concat
             [ if fullwidth then

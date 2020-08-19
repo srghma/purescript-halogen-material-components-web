@@ -69,7 +69,7 @@ switch ((Config { additionalAttributes }) as config_) =
             , checkedProp config_
             , disabledProp config_
             ]
-            ++ additionalAttributes
+            <> additionalAttributes
         )
         [ trackElt
         , thumbUnderlayElt config_

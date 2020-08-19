@@ -59,7 +59,7 @@ dataTable :
     -> Html r i
 dataTable ((Config { additionalAttributes }) as config_) { thead, tbody } =
     HH.node "mdc-data-table"
-        (dataTableCs :: additionalAttributes)
+        (dataTableCs <> additionalAttributes)
         [ HH.table
             (Array.filterMap identity
                 [ dataTableTableCs

@@ -129,7 +129,7 @@ listItemView ((Config { additionalAttributes, href }) as config_) nodes =
             , activatedCs config_
             , ariaSelectedAttr config_
             ]
-            ++ additionalAttributes
+            <> additionalAttributes
         )
 
 
@@ -198,7 +198,7 @@ text :
         }
     -> Html r i
 text additionalAttributes { primary, secondary } =
-    HH.div (HP.class_ mdc_list_item__text :: additionalAttributes)
+    HH.div (HP.class_ mdc_list_item__text <> additionalAttributes)
         [ primaryText [] primary
         , secondaryText [] secondary
         ]
@@ -206,21 +206,21 @@ text additionalAttributes { primary, secondary } =
 
 primaryText :: Array (IProp r i) -> Array (Html r i) -> Html r i
 primaryText additionalAttributes nodes =
-    HH.div (HP.class_ mdc_list_item__primary_text :: additionalAttributes) nodes
+    HH.div (HP.class_ mdc_list_item__primary_text <> additionalAttributes) nodes
 
 
 secondaryText :: Array (IProp r i) -> Array (Html r i) -> Html r i
 secondaryText additionalAttributes nodes =
-    HH.div (HP.class_ mdc_list_item__secondary_text :: additionalAttributes) nodes
+    HH.div (HP.class_ mdc_list_item__secondary_text <> additionalAttributes) nodes
 
 
 
 graphic :: Array (IProp r i) -> Array (Html r i) -> Html r i
 graphic additionalAttributes nodes =
-    HH.div (HP.class_ mdc_list_item__graphic :: additionalAttributes) nodes
+    HH.div (HP.class_ mdc_list_item__graphic <> additionalAttributes) nodes
 
 
 
 meta :: Array (IProp r i) -> Array (Html r i) -> Html r i
 meta additionalAttributes nodes =
-    HH.div (HP.class_ mdc_list_item__meta :: additionalAttributes) nodes
+    HH.div (HP.class_ mdc_list_item__meta <> additionalAttributes) nodes

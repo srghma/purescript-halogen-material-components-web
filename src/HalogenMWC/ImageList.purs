@@ -60,7 +60,7 @@ imageArray ((Config { additionalAttributes }) as config_) listItems =
             , masonryCs config_
             , withTextProtectionCs config_
             ]
-            ++ additionalAttributes
+            <> additionalAttributes
         )
         (Array.map (listItemElt config_) listItems)
 
@@ -101,7 +101,7 @@ listItemElt ((Config { masonry }) as config_) ((ImageArrayItem.ImageArrayItem (I
             ]
     in
     HH.node "mdc-image-list-item"
-        (HP.class_ mdc_image_list__item :: additionalAttributes)
+        (HP.class_ mdc_image_list__item <> additionalAttributes)
         (href
             # Maybe.map (\href_ -> [ HH.a [ HH.Attributes.href href_ ] inner ])
             # Maybe.withDefault inner

@@ -80,7 +80,7 @@ button variant (config_@{ additionalAttributes, touch, href }) label =
                     , targetAttr config_
                     , clickHandler config_
                     ]
-                    ++ additionalAttributes
+                    <> additionalAttributes
                 )
                 (Array.filterMap identity
                     [ rippleElt

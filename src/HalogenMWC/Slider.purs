@@ -138,7 +138,7 @@ slider ((Config { additionalAttributes }) as config_) =
             , ariaValuenowAttr config_
             , changeHandler config_
             ]
-            ++ additionalAttributes
+            <> additionalAttributes
         )
         [ trackContainerElt
         , thumbContainerElt config_

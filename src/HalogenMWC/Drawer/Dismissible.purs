@@ -64,7 +64,7 @@ drawer ((Config { additionalAttributes }) as config_) nodes =
             , openProp config_
             , closeHandler config_
             ]
-            ++ additionalAttributes
+            <> additionalAttributes
         )
         nodes
 
@@ -78,7 +78,7 @@ content attributes nodes =
 
 header :: Array (IProp r i) -> Array (Html r i) -> Html r i
 header additionalAttributes nodes =
-    HH.div (HP.class_ mdc_drawer__header :: additionalAttributes) nodes
+    HH.div (HP.class_ mdc_drawer__header <> additionalAttributes) nodes
 
 
 

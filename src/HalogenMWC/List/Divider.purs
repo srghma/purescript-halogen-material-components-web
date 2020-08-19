@@ -63,7 +63,7 @@ listItem ((Config { additionalAttributes }) as config_) =
                 , insetCs config_
                 , paddedCs config_
                 ]
-                ++ additionalAttributes
+                <> additionalAttributes
             )
             []
 
@@ -99,4 +99,4 @@ paddedCs (Config { padded }) =
 
 group :: Array (IProp r i) -> Html r i
 group additionalAttributes =
-    HH.hr (Array.filterMap identity [ listDividerCs ] ++ additionalAttributes) []
+    HH.hr (Array.filterMap identity [ listDividerCs ] <> additionalAttributes) []

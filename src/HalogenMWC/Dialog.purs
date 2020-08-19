@@ -71,7 +71,7 @@ dialog ((Config { additionalAttributes }) as config_) content =
             , ariaModalAttr
             , closeHandler config_
             ]
-            ++ additionalAttributes
+            <> additionalAttributes
         )
         [ containerElt content
         , scrimElt

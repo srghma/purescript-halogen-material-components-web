@@ -72,7 +72,7 @@ linearProgress variant ((Config { additionalAttributes }) as config_) =
             , reverseProp config_
             , closedProp config_
             ]
-            ++ additionalAttributes
+            <> additionalAttributes
         )
         [ bufferingDotsElt
         , bufferElt

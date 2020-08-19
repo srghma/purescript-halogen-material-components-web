@@ -77,7 +77,7 @@ fab ((Config { additionalAttributes }) as config_) label =
             , clickHandler config_
             , tabIndexProp 0
             ]
-            ++ additionalAttributes
+            <> additionalAttributes
         )
         (Array.filterMap identity
             [ rippleElt

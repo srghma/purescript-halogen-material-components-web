@@ -73,7 +73,7 @@ formField ((Config { additionalAttributes }) as config_) nodes =
             [ rootCs
             , alignEndCs config_
             ]
-            ++ additionalAttributes
+            <> additionalAttributes
         )
         (nodes ++ [ labelElt config_ ])
 

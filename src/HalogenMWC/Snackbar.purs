@@ -131,7 +131,7 @@ snackbar ((Config { additionalAttributes }) as config_) ((Queue { messages, next
             , timeoutMsProp currentMessage
             , closedHandler currentMessageId config_
             ]
-            ++ additionalAttributes
+            <> additionalAttributes
         )
         [ surfaceElt currentMessageId (Maybe.withDefault (message "") currentMessage) ]
 

@@ -79,7 +79,7 @@ tabBar ((Config { additionalAttributes, align }) as config_) tabs =
             , tablistRoleAttr
             , activeTabIndexProp tabs
             ]
-            ++ additionalAttributes
+            <> additionalAttributes
         )
         [ tabScroller config_ align tabs ]
 
@@ -116,7 +116,7 @@ viewTab ((Config { indicatorSpansContent }) as barConfig) ((Tab ((Tab.Config { a
             , tabMinWidthCs barConfig
             , tabClickHandler tabConfig
             ]
-            ++ additionalAttributes
+            <> additionalAttributes
         )
         (Array.filterMap identity $
             if indicatorSpansContent then

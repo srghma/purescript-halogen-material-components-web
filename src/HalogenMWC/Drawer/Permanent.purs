@@ -34,7 +34,7 @@ config =
 drawer :: Config r i -> Array (Html r i) -> Html r i
 drawer (Config { additionalAttributes }) nodes =
     HH.div
-        (Array.filterMap identity [ rootCs ] ++ additionalAttributes)
+        (Array.filterMap identity [ rootCs ] <> additionalAttributes)
         nodes
 
 
@@ -47,7 +47,7 @@ content attributes nodes =
 
 header :: Array (IProp r i) -> Array (Html r i) -> Html r i
 header additionalAttributes nodes =
-    HH.div (HP.class_ mdc_drawer__header :: additionalAttributes) nodes
+    HH.div (HP.class_ mdc_drawer__header <> additionalAttributes) nodes
 
 
 

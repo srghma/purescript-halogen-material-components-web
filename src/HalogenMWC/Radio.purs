@@ -96,7 +96,7 @@ radio ((Config { touch, additionalAttributes }) as config_) =
                 , checkedProp config_
                 , disabledProp config_
                 ]
-                ++ additionalAttributes
+                <> additionalAttributes
             )
             [ nativeControlElt config_
             , backgroundElt

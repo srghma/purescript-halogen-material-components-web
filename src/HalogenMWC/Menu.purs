@@ -70,7 +70,7 @@ menu ((Config { additionalAttributes }) as config_) nodes =
             , quickOpenProp config_
             , closeHandler config_
             ]
-            ++ additionalAttributes
+            <> additionalAttributes
         )
         nodes
 

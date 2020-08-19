@@ -119,7 +119,7 @@ checkbox ((Config { touch, additionalAttributes }) as config_) =
                 , indeterminateProp config_
                 , disabledProp config_
                 ]
-                ++ additionalAttributes
+                <> additionalAttributes
             )
             [ nativeControlElt config_
             , backgroundElt

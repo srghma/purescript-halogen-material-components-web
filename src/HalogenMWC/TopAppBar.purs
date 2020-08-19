@@ -76,7 +76,7 @@ genericTopAppBar variant ((Config { additionalAttributes }) as config_) nodes =
             , denseCs config_
             , fixedCs config_
             ]
-            ++ additionalAttributes
+            <> additionalAttributes
         )
         nodes
 

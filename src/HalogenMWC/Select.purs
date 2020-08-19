@@ -129,7 +129,7 @@ select variant ((Config { leadingIcon, selected, additionalAttributes, onChange 
             , validProp config_
             , requiredProp config_
             ]
-            ++ additionalAttributes
+            <> additionalAttributes
         )
         [ anchorElt []
             (Array.concat
@@ -170,7 +170,7 @@ data Icon r i
 
 icon :: Array (IProp r i) -> String -> Icon r i
 icon additionalAttributes iconName =
-    Icon (Icon.icon (HP.class_ mdc_select__icon :: additionalAttributes) iconName)
+    Icon (Icon.icon (HP.class_ mdc_select__icon <> additionalAttributes) iconName)
 
 
 rootCs :: Maybe (HH.Attribute r i)
@@ -217,7 +217,7 @@ requiredProp (Config { required }) =
 
 anchorElt :: Array (IProp r i) -> Array (Html r i) -> Html r i
 anchorElt additionalAttributes nodes =
-    HH.div (HP.class_ mdc_select__anchor :: additionalAttributes) nodes
+    HH.div (HP.class_ mdc_select__anchor <> additionalAttributes) nodes
 
 
 leadingIconElt :: Config a r i -> Html r i
