@@ -110,9 +110,9 @@ disabledAttr { disabled } = Just (HH.Attributes.disabled disabled)
 tabIndexProp :: Config r i -> Maybe (IProp r i)
 tabIndexProp { disabled } =
   if disabled then
-    Just (HP.prop "tabIndex" (Encode.int - 1))
+    Just (HP.prop "tabIndex" -1)
   else
-    Just (HP.prop "tabIndex" (Encode.int 0))
+    Just (HP.prop "tabIndex" 0)
 
 hrefAttr :: Config r i -> Maybe (IProp r i)
 hrefAttr { href } = map HH.Attributes.href href

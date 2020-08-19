@@ -150,7 +150,7 @@ selectedIndexProp listItems =
             )
         # Array.filterMap identity
   in
-    Just (HP.prop "selectedIndex" (Encode.list Encode.int selectedIndex))
+    Just (HP.prop "selectedIndex" (Encode.list selectedIndex))
 
 group :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
 group additionalAttributes nodes = HH.div ([ listGroupCs ] <> additionalAttributes) nodes
