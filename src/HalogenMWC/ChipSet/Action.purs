@@ -1,6 +1,7 @@
 module HalogenMWC.ChipSet.Action where
 
 import Protolude
+
 import Data.Array as Array
 import Data.Maybe as Maybe
 import Halogen (AttrName(..))
@@ -8,6 +9,8 @@ import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import Material.Classes.Chips
+import HalogenMWC.Chip.Action
 
 chipSet :: Array (IProp r i) -> Array (Chip r i) -> HH.HTML w i
 chipSet additionalAttributes chips =
@@ -39,17 +42,17 @@ chip (Chip config_ label) =
         )
     ]
 
-interactionHandler :: Chip.Config r i -> Maybe (IProp r i)
+interactionHandler :: Config r i -> Maybe (IProp r i)
 interactionHandler { onClick } = map (HH.Events.on "MDCChip:interaction" <<< Decode.succeed) onClick
 
 rippleElt :: Maybe (HH.HTML w i)
 rippleElt = Just (HH.div [ HP.class_ mdc_chip__ripple ] [])
 
-leadingIconElt :: Chip.Config r i -> Maybe (HH.HTML w i)
+leadingIconElt :: Config r i -> Maybe (HH.HTML w i)
 leadingIconElt config =
   map
     ( \iconName ->
-        HH.i [ HP.class_ "material-icons mdc-chip__icon mdc-chip__icon--leading" ]
+        HH.i [ HP.classes [ material_icons, mdc_chip__icon, mdc_chip__icon____leading ] ]
           [ HH.text iconName ]
     )
     config.icon
@@ -58,7 +61,7 @@ primaryActionElt :: String -> Maybe (HH.HTML w i)
 primaryActionElt label =
   Just
     $ HH.span [ HP.class_ mdc_chip__primary_action, HP.attr "role" "gridcell" ]
-        (Array.catMaybes [ HH.textElt label, touchElt ])
+        (Array.catMaybes [ textElt label, touchElt ])
 
 textElt :: String -> Maybe (HH.HTML w i)
 textElt label = Just (HH.span [ HP.class_ mdc_chip__text, HP.attr "role" "button" ] [ HH.text label ])

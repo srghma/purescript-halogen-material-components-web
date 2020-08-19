@@ -12,6 +12,7 @@ import HalogenMWC.Chip.Filter as Chip
 import HalogenMWC.Chip.Filter
 import Halogen.SVG.Elements as Halogen.SVG.Elements
 import Halogen.SVG.Attributes as Halogen.SVG.Attributes
+import Material.Classes.Chips
 
 chipSet :: Array (IProp r i) -> Array (Chip r i) -> HH.HTML w i
 chipSet additionalAttributes chips =
@@ -56,7 +57,7 @@ leadingIconElt { icon, selected } =
     ( \iconName ->
         HH.i
           [ HP.class_ material_icons
-          , HP.class_ "mdc-chip__icon mdc-chip__icon--leading"
+          , HP.class_ [ mdc_chip__icon, mdc_chip__icon____leading ]
           ]
           [ HH.text iconName ]
     )
@@ -67,11 +68,11 @@ checkmarkElt =
   Just
     ( HH.div [ HP.class_ mdc_chip__checkmark ]
         [ Halogen.SVG.Elements.svg
-            [ Halogen.SVG.Attributes.class_ "mdc-chip__checkmark-svg"
+            [ Halogen.SVG.Attributes.class_ mdc_chip__checkmark_svg
             , Halogen.SVG.Attributes.viewBox "-2 -3 30 30"
             ]
             [ Halogen.SVG.Elements.path
-                [ Halogen.SVG.Attributes.class_ "mdc-chip__checkmark-path"
+                [ Halogen.SVG.Attributes.class_ mdc_chip__checkmark_path
                 , Halogen.SVG.Attributes.fill "none"
                 , Halogen.SVG.Attributes.stroke "black"
                 , Halogen.SVG.Attributes.d "M1.73,12.91 8.1,19.28 22.79,4.59"

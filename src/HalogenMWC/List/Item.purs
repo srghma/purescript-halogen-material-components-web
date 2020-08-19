@@ -1,6 +1,7 @@
 module HalogenMWC.Array.Item where
 
 import Protolude
+
 import Data.Array as Array
 import Data.Maybe as Maybe
 import Halogen (AttrName(..))
@@ -8,6 +9,7 @@ import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import Material.Classes.List
 
 type Config r i
   = { disabled :: Boolean
@@ -106,8 +108,6 @@ targetAttr { href, target } =
   else
     Nothing
 
-{-| Two-line list item's text
--}
 text ::
   Array (IProp r i) ->
   { primary :: Array (HH.HTML w i)

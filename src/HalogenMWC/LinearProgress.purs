@@ -116,12 +116,12 @@ bufferElt = HH.div [ HP.class_ mdc_linear_progress__buffer ] []
 
 primaryBarElt :: HH.HTML w i
 primaryBarElt =
-  HH.div [ HP.class_ "mdc-linear-progress__bar mdc-linear-progress__primary-bar" ]
+  HH.div [ HP.classes [ mdc_linear_progress__bar, mdc_linear_progress__primary_bar ] ]
     [ barInnerElt ]
 
 secondaryBarElt :: HH.HTML w i
 secondaryBarElt =
-  HH.div [ HP.class_ "mdc-linear-progress__bar mdc-linear-progress__secondary-bar" ]
+  HH.div [ HP.classes [ mdc_linear_progress__bar, mdc_linear_progress__secondary_bar ] ]
     [ barInnerElt ]
 
 barInnerElt :: HH.HTML w i

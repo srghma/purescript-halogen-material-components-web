@@ -24,8 +24,6 @@ defaultConfig =
   , additionalAttributes: []
   }
 
-{-| Specify the data table's HTML5 aria-label attribute
--}
 dataTable ::
   Config r i ->
   { thead :: Array (Row r i)

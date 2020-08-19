@@ -149,7 +149,7 @@ iconElt { icon } =
   map
     ( \iconName ->
         HH.i
-          [ HP.class_ "mdc-button__icon material-icons"
+          [ HP.classes [mdc_button__icon, material_icons]
           , HP.attr "aria-hidden" "true"
           ]
           [ HH.text iconName ]

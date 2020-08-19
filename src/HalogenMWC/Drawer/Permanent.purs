@@ -8,6 +8,7 @@ import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import Material.Classes.Drawer
 
 type Config r i
   = { additionalAttributes :: Array (IProp r i) }

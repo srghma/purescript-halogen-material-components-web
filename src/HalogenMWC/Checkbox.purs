@@ -116,11 +116,11 @@ backgroundElt =
   HH.div
     [ HP.class_ mdc_checkbox__background ]
     [ Halogen.SVG.Elements.svg
-        [ Halogen.SVG.Attributes.class_ "mdc-checkbox__checkmark"
+        [ Halogen.SVG.Attributes.class_ mdc_checkbox__checkmark
         , Halogen.SVG.Attributes.viewBox "0 0 24 24"
         ]
         [ Halogen.SVG.Elements.path
-            [ Halogen.SVG.Attributes.class_ "mdc-checkbox__checkmark-path"
+            [ Halogen.SVG.Attributes.class_ mdc_checkbox__checkmark_path
             , Halogen.SVG.Attributes.fill "none"
             , Halogen.SVG.Attributes.d "M1.73,12.91 8.1,19.28 22.79,4.59"
             ]

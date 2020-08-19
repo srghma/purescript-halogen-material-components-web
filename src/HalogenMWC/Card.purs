@@ -147,15 +147,6 @@ newtype Actions r i
 actions :: { buttons :: Array (Button r i), icons :: Array (Icon r i) } -> Actions r i
 actions { buttons, icons } = Actions { buttons = buttons, icons = icons, fullBleed = false }
 
-{-| Card full bleed action
-
-If a card's action is comprised of a single button, that button can be made
-full width by using `cardFullBleedActions`.
-
-    Card.fullBleedActions
-        (Card.button Button.config "Visit")
-
--}
 fullBleedActions :: Button r i -> Actions r i
 fullBleedActions button_ = Actions { buttons = [ button_ ], icons = [], fullBleed = true }
 

@@ -10,6 +10,7 @@ import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Chip.Input
 import HalogenMWC.Chip.Input as Chip
+import Material.Classes.Chips
 
 chipSet :: Array (IProp r i) -> Array (Tuple String (Chip r i)) -> HH.HTML w i
 chipSet additionalAttributes keyedChips =
@@ -51,7 +52,7 @@ leadingIconElt :: Chip.Config r i -> Maybe (HH.HTML w i)
 leadingIconElt { leadingIcon } =
   map
     ( \iconName ->
-        HH.i [ HP.class_ "material-icons mdc-chip__icon mdc-chip__icon--leading" ]
+        HH.i [ HP.classes [ material_icons, mdc_chip__icon, mdc_chip__icon____leading ] ]
           [ HH.text iconName ]
     )
     leadingIcon
@@ -73,7 +74,7 @@ trailingIconElt { trailingIcon, onDelete } =
   if onDelete /= Nothing then
     Just
       $ HH.i
-          [ HP.class_ "material-icons mdc-chip__icon mdc-chip__icon--trailing"
+          [ HP.classes [ material_icons, mdc_chip__icon, mdc_chip__icon____trailing ]
           , tabIndexProp - 1
           , HP.attr "role" "button"
           ]

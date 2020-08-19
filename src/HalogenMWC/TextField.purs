@@ -271,20 +271,15 @@ disabledProp { disabled } = Just (HP.prop "disabled" disabled)
 
 labelElt :: Config r i -> HH.HTML w i
 labelElt { label, value } =
-  let
-    floatingLabelCs = "mdc-floating-label"
-
-    floatingLabelFloatAboveCs = "mdc-floating-label--float-above"
-  in
     case label of
       Just str ->
         HH.div
           [ if Maybe.fromMaybe "" value /= "" then
-              HP.class_ (floatingLabelCs <> " " <> floatingLabelFloatAboveCs)
+              HP.classes [ mdc_floating_label, mdc_floating_label____float_above ]
             else
-              HP.class_ floatingLabelCs
+              HP.class_ mdc_floating_label
           , HP.prop "foucClassNames"
-              (Encode.list Encode.string [ floatingLabelFloatAboveCs ])
+              (Encode.list Encode.string [ mdc_floating_label____float_above ])
           ]
           [ HH.text str ]
       Nothing -> text ""

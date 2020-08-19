@@ -1,6 +1,9 @@
 module HalogenMWC.ChipSet.Choice where
 
+import HalogenMWC.Chip.Choice
+import Material.Classes.Chips
 import Protolude
+
 import Data.Array as Array
 import Data.Maybe as Maybe
 import Halogen (AttrName(..))
@@ -8,7 +11,7 @@ import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
-import HalogenMWC.Chip.Choice
+import MaterialIconsFont.Classes
 
 type Config a r i
   = { selected :: Maybe a
@@ -95,7 +98,7 @@ leadingIconElt :: Config r i -> Maybe (HH.HTML w i)
 leadingIconElt { icon } =
   map
     ( \iconName ->
-        HH.i [ HP.class_ "material-icons mdc-chip__icon mdc-chip__icon--leading" ]
+        HH.i [ HP.classes [material_icons, mdc_chip__icon, mdc_chip__icon____leading] ]
           [ HH.text iconName ]
     )
     icon

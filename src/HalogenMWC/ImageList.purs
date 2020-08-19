@@ -1,6 +1,7 @@
 module HalogenMWC.ImageList where
 
 import Protolude
+
 import Data.Array as Array
 import Data.Maybe as Maybe
 import Halogen (AttrName(..))
@@ -10,6 +11,7 @@ import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.ImageList.Item (ImageArrayItem)
 import HalogenMWC.ImageList.Item as ImageArrayItem
+import Material.Classes.ImageList
 
 type Config r i
   = { masonry :: Boolean
