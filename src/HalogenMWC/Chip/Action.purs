@@ -12,15 +12,13 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 type Config r i
   = { icon :: Maybe String
     , additionalAttributes :: Array (IProp r i)
-    , onClick :: Maybe r i
     }
 
 data Chip r i
   = Chip (Config r i) String
 
-defaultConfig :: Config r i
+defaultConfig :: forall r i . Config r i
 defaultConfig =
   { icon: Nothing
   , additionalAttributes: []
-  , onClick: Nothing
   }

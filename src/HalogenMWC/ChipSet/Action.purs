@@ -18,53 +18,61 @@ chipSet additionalAttributes chips =
     ( [ HP.classes [ mdc_chip_set, mdc_chip_set____action ]
       , HP.attr "role" "grid"
       ]
-        <> additionalAttributes
+      <> additionalAttributes
     )
     (map chip chips)
 
 chip :: Chip r i -> HH.HTML w i
-chip (Chip config_ label) =
+chip (Chip config label) =
   HH.div [ HP.class_ mdc_touch_target_wrapper ]
     [ HH.element "mdc-chip"
-        ( Array.catMaybes
-            [ HP.class_ mdc_chip
-            , HP.class_ mdc_chip____touch
-            , HP.attr "role" "row"
-            , interactionHandler config_
-            ]
-            <> config_.additionalAttributes
+        ( [ HP.classes [ mdc_chip, mdc_chip____touch ]
+          , HP.attr "role" "row"
+          -- | , interactionHandler config
+          ]
+          <> config.additionalAttributes
         )
-        ( Array.catMaybes
-            [ rippleElt
-            , leadingIconElt config_
-            , primaryActionElt label
-            ]
+        ( [ HH.div
+            [ HP.class_ mdc_chip__ripple ]
+            (  [ rippleElt ]
+            <> leadingIconElt config.icon
+            <> [ primaryActionElt label ]
+            )
+          ]
         )
     ]
 
-interactionHandler :: Config r i -> Maybe (IProp r i)
-interactionHandler { onClick } = map (HH.Events.on "MDCChip:interaction" <<< Decode.succeed) onClick
+rippleElt :: HH.HTML w i
+rippleElt = HH.div [ HP.class_ mdc_chip__ripple ] []
 
-rippleElt :: Maybe (HH.HTML w i)
-rippleElt = Just (HH.div [ HP.class_ mdc_chip__ripple ] [])
+-- | interactionHandler :: Config r i -> Maybe (IProp r i)
+-- | interactionHandler { onClick } = map (HH.Events.on "MDCChip:interaction" <<< Decode.succeed) onClick
 
-leadingIconElt :: Config r i -> Maybe (HH.HTML w i)
-leadingIconElt config =
-  map
-    ( \iconName ->
-        HH.i [ HP.classes [ material_icons, mdc_chip__icon, mdc_chip__icon____leading ] ]
-          [ HH.text iconName ]
-    )
-    config.icon
+leadingIconElt :: Maybe String -> Array (HH.HTML w i)
+leadingIconElt Nothing = []
+leadingIconElt (Just iconName) =
+  HH.i
+  [ HP.classes [ material_icons, mdc_chip__icon, mdc_chip__icon____leading ]
+  ]
+  [ HH.text iconName
+  ]
 
-primaryActionElt :: String -> Maybe (HH.HTML w i)
+primaryActionElt :: String -> HH.HTML w i
 primaryActionElt label =
-  Just
-    $ HH.span [ HP.class_ mdc_chip__primary_action, HP.attr "role" "gridcell" ]
-        (Array.catMaybes [ textElt label, touchElt ])
+  HH.span
+    [ HP.class_ mdc_chip__primary_action
+    , HP.attr "role" "gridcell"
+    ]
+    [ textElt label
+    , HH.div
+      [ HP.class_ mdc_chip__touch ]
+      []
+    ]
 
-textElt :: String -> Maybe (HH.HTML w i)
-textElt label = Just (HH.span [ HP.class_ mdc_chip__text, HP.attr "role" "button" ] [ HH.text label ])
-
-touchElt :: Maybe (HH.HTML w i)
-touchElt = Just (HH.div [ HP.class_ mdc_chip__touch ] [])
+textElt :: String -> HH.HTML w i
+textElt label =
+  HH.span
+  [ HP.class_ mdc_chip__text
+  , HP.attr "role" "button"
+  ]
+  [ HH.text label ]
