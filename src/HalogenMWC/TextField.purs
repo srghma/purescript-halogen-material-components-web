@@ -1,118 +1,118 @@
 module HalogenMWC.TextField where
 
+import Material.Classes.LineRipple
+import Material.Classes.Textfield hiding (mdc_line_ripple)
 import Protolude
+
 import Data.Array as Array
 import Data.Maybe as Maybe
-
 import Halogen (AttrName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Icon as Icon
-import Material.Classes.LineRipple
-import Material.Classes.Textfield
+import Web.Event.Event (Event)
 
-type Config r i
-  = { label :: Maybe String
-    , fullwidth :: Boolean
-    , value :: Maybe String
-    , placeholder :: Maybe String
-    , disabled :: Boolean
-    , required :: Boolean
-    , valid :: Boolean
-    , minLength :: Maybe Int
-    , maxLength :: Maybe Int
-    , pattern :: Maybe String
-    , type_ :: Maybe String
-    , min :: Maybe Int
-    , max :: Maybe Int
-    , step :: Maybe Int
-    , leadingIcon :: Maybe (Icon r i)
-    , trailingIcon :: Maybe (Icon r i)
-    , additionalAttributes :: Array (IProp r i)
-    , onInput :: Maybe (String -> r i)
-    , onChange :: Maybe (String -> r i)
-    }
+type Config r i =
+  { label                :: Maybe String
+  , fullwidth            :: Boolean
+  , value                :: Maybe String
+  , placeholder          :: Maybe String
+  , disabled             :: Boolean
+  , required             :: Boolean
+  , valid                :: Boolean
+  , minLength            :: Maybe Int
+  , maxLength            :: Maybe Int
+  , pattern              :: Maybe String
+  , type_                :: Maybe String
+  , min                  :: Maybe Int
+  , max                  :: Maybe Int
+  , step                 :: Maybe Int
+  , leadingIcon          :: Maybe (Icon r i)
+  , trailingIcon         :: Maybe (Icon r i)
+  , additionalAttributes :: Array (IProp r i)
+  , onInput              :: Maybe (Event -> i)
+  , onChange             :: Maybe (Event -> i)
+  }
 
-data Icon r i
-  = Icon (HH.HTML w i)
+newtype Icon r i = Icon (HH.HTML w i)
 
 defaultConfig :: Config r i
 defaultConfig =
-  { label: Nothing
-  , fullwidth: false
-  , value: Nothing
-  , placeholder: Nothing
-  , disabled: false
-  , required: false
-  , valid: true
-  , minLength: Nothing
-  , maxLength: Nothing
-  , pattern: Nothing
-  , type_: Nothing
-  , min: Nothing
-  , max: Nothing
-  , step: Nothing
-  , leadingIcon: Nothing
-  , trailingIcon: Nothing
+  { label:                Nothing
+  , fullwidth:            false
+  , value:                Nothing
+  , placeholder:          Nothing
+  , disabled:             false
+  , required:             false
+  , valid:                true
+  , minLength:            Nothing
+  , maxLength:            Nothing
+  , pattern:              Nothing
+  , type_:                Nothing
+  , min:                  Nothing
+  , max:                  Nothing
+  , step:                 Nothing
+  , leadingIcon:          Nothing
+  , trailingIcon:         Nothing
   , additionalAttributes: []
-  , onInput: Nothing
-  , onChange: Nothing
+  , onInput:              Nothing
+  , onChange:             Nothing
   }
 
 filled :: Config r i -> HH.HTML w i
-filled config_ = textField false config_
+filled config = textField false config
 
 outlined :: Config r i -> HH.HTML w i
-outlined config_ = textField true config_
+outlined config = textField true config
 
 textField :: Boolean -> Config r i -> HH.HTML w i
-textField outlined_ (config_@{ additionalAttributes, fullwidth }) =
+textField outlined_ config =
   HH.element "mdc-text-field"
     ( Array.catMaybes
         [ rootCs
-        , noLabelCs config_
+        , noLabelCs config
         , outlinedCs outlined_
-        , fullwidthCs config_
-        , disabledCs config_
-        , withLeadingIconCs config_
-        , withTrailingIconCs config_
-        , valueProp config_
-        , disabledProp config_
-        , requiredProp config_
-        , validProp config_
-        , patternProp config_
-        , minLengthProp config_
-        , maxLengthProp config_
-        , minProp config_
-        , maxProp config_
-        , stepProp config_
+        , fullwidthCs config
+        , disabledCs config
+        , withLeadingIconCs config
+        , withTrailingIconCs config
+        , valueProp config
+        , disabledProp config
+        , requiredProp config
+        , validProp config
+        , patternProp config
+        , minLengthProp config
+        , maxLengthProp config
+        , minProp config
+        , maxProp config
+        , stepProp config
         ]
-        <> additionalAttributes
+        <> config.additionalAttributes
     )
     ( Array.concat
-        [ leadingIconElt config_
-        , if fullwidth then
+        [ leadingIconElt config
+        , if config.fullwidth then
             if outlined_ then
-              [ inputElt config_
-              , notchedOutlineElt config_
+              [ inputElt config
+              , notchedOutlineElt config
               ]
             else
-              [ inputElt config_
+              [ inputElt config
               , lineRippleElt
               ]
           else
             if outlined_ then
-              [ inputElt config_
-              , notchedOutlineElt config_
+              [ inputElt config
+              , notchedOutlineElt config
               ]
             else
-              [ inputElt config_
-              , labelElt config_
+              [ inputElt config
+              , labelElt config
               , lineRippleElt
               ]
-        , trailingIconElt config_
+        , trailingIconElt config
         ]
     )
 
@@ -229,17 +229,17 @@ changeHandler { onChange } =
     onChange
 
 inputElt :: Config r i -> HH.HTML w i
-inputElt config_ =
+inputElt config =
   HH.input
     ( Array.catMaybes
         [ inputCs
-        , typeAttr config_
-        , ariaLabelAttr config_
-        , placeholderAttr config_
-        , inputHandler config_
-        , changeHandler config_
-        , minLengthAttr config_
-        , maxLengthAttr config_
+        , typeAttr config
+        , ariaLabelAttr config
+        , placeholderAttr config
+        , inputHandler config
+        , changeHandler config
+        , minLengthAttr config
+        , maxLengthAttr config
         ]
     )
     []
@@ -293,10 +293,10 @@ lineRippleElt :: HH.HTML w i
 lineRippleElt = HH.div [ HP.class_ mdc_line_ripple ] []
 
 notchedOutlineElt :: Config r i -> HH.HTML w i
-notchedOutlineElt config_ =
+notchedOutlineElt config =
   HH.div [ HP.class_ mdc_notched_outline ]
     [ notchedOutlineLeadingElt
-    , notchedOutlineNotchElt config_
+    , notchedOutlineNotchElt config
     , notchedOutlineTrailingElt
     ]
 
@@ -307,4 +307,4 @@ notchedOutlineTrailingElt :: HH.HTML w i
 notchedOutlineTrailingElt = HH.div [ HP.class_ mdc_notched_outline__trailing ] []
 
 notchedOutlineNotchElt :: Config r i -> HH.HTML w i
-notchedOutlineNotchElt config_ = HH.div [ HP.class_ mdc_notched_outline__notch ] [ labelElt config_ ]
+notchedOutlineNotchElt config = HH.div [ HP.class_ mdc_notched_outline__notch ] [ labelElt config ]
