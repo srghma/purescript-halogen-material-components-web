@@ -84,7 +84,7 @@ changeHandler { checked, onChange } =
   -- have to check here if the state actually changed.
   map
     ( \r i ->
-        HH.Events.on "change"
+        HE.on "change"
           ( Decode.at [ "target", "checked" ] Decode.bool
               # Decode.andThen
                   ( \checked_ ->

@@ -157,7 +157,7 @@ timeoutMsProp message_ =
     Just (HP.prop "timeoutMs" normalizedTimeoutMs)
 
 closedHandler :: MessageId -> Config r i -> Maybe (IProp r i)
-closedHandler messageId { onClosed } = Just (HH.Events.on "MDCSnackbar:closed" (Decode.succeed (onClosed messageId)))
+closedHandler messageId { onClosed } = Just (HE.on "MDCSnackbar:closed" (Decode.succeed (onClosed messageId)))
 
 ariaStatusRoleAttr :: IProp r i
 ariaStatusRoleAttr = HP.attr "aria-role" "status"
@@ -204,7 +204,7 @@ actionButtonCs :: Maybe (IProp r i)
 actionButtonCs = Just (HP.classes [mdc_button, mdc_snackbar__action])
 
 actionButtonClickHandler :: MessageId -> Message r i -> Maybe (IProp r i)
-actionButtonClickHandler messageId (Message { onActionButtonClick }) = map (HH.Events.onClick <<< (#) messageId) onActionButtonClick
+actionButtonClickHandler messageId (Message { onActionButtonClick }) = map (HE.onClick <<< (#) messageId) onActionButtonClick
 
 actionIconElt :: MessageId -> Message r i -> Maybe (HH.HTML w i)
 actionIconElt messageId (message_@(Message { actionIcon })) =
@@ -224,4 +224,4 @@ actionIconCs :: Maybe (IProp r i)
 actionIconCs = Just (HP.classes [mdc_icon_button, mdc_snackbar__dismiss material_icons])
 
 actionIconClickHandler :: MessageId -> Message r i -> Maybe (IProp r i)
-actionIconClickHandler messageId (Message { onActionIconClick }) = map (HH.Events.onClick <<< (#) messageId) onActionIconClick
+actionIconClickHandler messageId (Message { onActionIconClick }) = map (HE.onClick <<< (#) messageId) onActionIconClick

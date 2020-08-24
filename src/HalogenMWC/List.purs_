@@ -129,7 +129,7 @@ clickHandler listItems =
                 Nothing -> Decode.fail ""
             )
   in
-    Just (HH.Events.on "MDCArray:action" mergedClickHandler)
+    Just (HE.on "MDCArray:action" mergedClickHandler)
 
 selectedIndexProp :: Array (ArrayItem r i) -> Maybe (IProp r i)
 selectedIndexProp listItems =

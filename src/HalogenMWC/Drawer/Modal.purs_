@@ -59,7 +59,7 @@ openProp :: Config r i -> Maybe (IProp r i)
 openProp { open } = Just (HP.prop "open" open)
 
 closeHandler :: Config r i -> Maybe (IProp r i)
-closeHandler { onClose } = map (HH.Events.on "MDCDrawer:close" <<< Decode.succeed) onClose
+closeHandler { onClose } = map (HE.on "MDCDrawer:close" <<< Decode.succeed) onClose
 
 scrim :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
 scrim additionalAttributes nodes = HH.div ([ HP.class_ mdc_drawer_scrim ] <> additionalAttributes) nodes

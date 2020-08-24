@@ -87,4 +87,4 @@ exitedCs { exited } =
     Nothing
 
 clickHandler :: Config r i -> Maybe (IProp r i)
-clickHandler { onClick } = map HH.Events.onClick onClick
+clickHandler { onClick } = map HE.onClick onClick

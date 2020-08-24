@@ -1,20 +1,23 @@
 module HalogenMWC.TextField where
 
-import Material.Classes.LineRipple
-import Material.Classes.Textfield hiding (mdc_line_ripple)
-import Protolude
+import Material.Classes.LineRipple (mdc_line_ripple)
+import Material.Classes.Textfield (mdc_floating_label, mdc_floating_label____float_above, mdc_notched_outline, mdc_notched_outline__leading, mdc_notched_outline__notch, mdc_notched_outline__trailing, mdc_text_field, mdc_text_field____disabled, mdc_text_field____fullwidth, mdc_text_field____no_label, mdc_text_field____outlined, mdc_text_field____with_leading_icon, mdc_text_field____with_trailing_icon, mdc_text_field__icon, mdc_text_field__input)
+import Protolude (Maybe(..), const, map, maybe, negate, show, (/=), (<<<), (<>))
 
+import DOM.HTML.Indexed as I
+import DOM.HTML.Indexed.InputType (InputType)
 import Data.Array as Array
 import Data.Maybe as Maybe
-import Halogen (AttrName(..))
+import Halogen (AttrName(..), ElemName(..), PropName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
+import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Icon as Icon
-import Web.Event.Event (Event)
+import HalogenMWC.Utils as Utils
+import Web.Event.Event (Event, EventType(..))
 
-type Config r i =
+type Config w i =
   { label                :: Maybe String
   , fullwidth            :: Boolean
   , value                :: Maybe String
@@ -25,20 +28,18 @@ type Config r i =
   , minLength            :: Maybe Int
   , maxLength            :: Maybe Int
   , pattern              :: Maybe String
-  , type_                :: Maybe String
+  , type_                :: Maybe InputType
   , min                  :: Maybe Int
   , max                  :: Maybe Int
   , step                 :: Maybe Int
-  , leadingIcon          :: Maybe (Icon r i)
-  , trailingIcon         :: Maybe (Icon r i)
-  , additionalAttributes :: Array (IProp r i)
+  , leadingIcon          :: Maybe (HH.HTML w i)
+  , trailingIcon         :: Maybe (HH.HTML w i)
+  , additionalAttributes :: Array (IProp I.HTMLdiv i)
   , onInput              :: Maybe (Event -> i)
   , onChange             :: Maybe (Event -> i)
   }
 
-newtype Icon r i = Icon (HH.HTML w i)
-
-defaultConfig :: Config r i
+defaultConfig :: forall w i . Config w i
 defaultConfig =
   { label:                Nothing
   , fullwidth:            false
@@ -61,250 +62,134 @@ defaultConfig =
   , onChange:             Nothing
   }
 
-filled :: Config r i -> HH.HTML w i
-filled config = textField false config
+data TextFieldType
+  = Filled
+  | Outlined
 
-outlined :: Config r i -> HH.HTML w i
-outlined config = textField true config
+filled :: forall w i . Config w i -> HH.HTML w i
+filled config = textField Filled config
 
-textField :: Boolean -> Config r i -> HH.HTML w i
-textField outlined_ config =
-  HH.element "mdc-text-field"
-    ( Array.catMaybes
-        [ rootCs
-        , noLabelCs config
-        , outlinedCs outlined_
-        , fullwidthCs config
-        , disabledCs config
-        , withLeadingIconCs config
-        , withTrailingIconCs config
-        , valueProp config
-        , disabledProp config
-        , requiredProp config
-        , validProp config
-        , patternProp config
-        , minLengthProp config
-        , maxLengthProp config
-        , minProp config
-        , maxProp config
-        , stepProp config
+outlined :: forall w i . Config w i -> HH.HTML w i
+outlined config = textField Outlined config
+
+textField :: forall w i . TextFieldType -> Config w i -> HH.HTML w i
+textField type_ config =
+  HH.element (ElemName "mdc-text-field")
+    ( [ HP.classes
+        ( Array.concat
+            [ [ mdc_text_field ]
+            , if config.fullwidth then [ mdc_text_field____fullwidth ] else []
+            , if config.disabled then [ mdc_text_field____disabled ] else []
+            ]
+          <> Array.catMaybes
+            [ map (const mdc_text_field____no_label) config.label
+            , map (const mdc_text_field____outlined) config.type_
+            , map (const mdc_text_field____with_leading_icon) config.leadingIcon
+            , map (const mdc_text_field____with_trailing_icon) config.trailingIcon
+            ]
+        )
+      , HP.prop (PropName "disabled") config.disabled
+      , HP.prop (PropName "required") config.required
+      , HP.prop (PropName "valid") config.valid
+      , HP.prop (PropName "minLength") (Maybe.fromMaybe (-1) config.minLength)
+      , HP.prop (PropName "maxLength") (Maybe.fromMaybe (-1) config.maxLength)
+      , HP.prop (PropName "min") (maybe "" show config.min)
+      , HP.prop (PropName "max") (maybe "" show config.max)
+      , HP.prop (PropName "step") (maybe "" show config.step)
+      ]
+      <> Array.catMaybes
+        [ map (HP.prop (PropName "pattern")) config.pattern
+        , map (HP.prop (PropName "value")) config.value
         ]
-        <> config.additionalAttributes
+      <> config.additionalAttributes
     )
     ( Array.concat
-        [ leadingIconElt config
+        [ case config.leadingIcon of
+               Nothing -> []
+               Just html -> [ html ]
         , if config.fullwidth then
-            if outlined_ then
-              [ inputElt config
-              , notchedOutlineElt config
-              ]
-            else
-              [ inputElt config
-              , lineRippleElt
-              ]
+            case type_ of
+                 Filled ->
+                   [ inputElt config
+                   , lineRippleElt
+                   ]
+                 Outlined ->
+                   [ inputElt config
+                   , notchedOutlineElt config
+                   ]
           else
-            if outlined_ then
-              [ inputElt config
-              , notchedOutlineElt config
-              ]
-            else
-              [ inputElt config
-              , labelElt config
-              , lineRippleElt
-              ]
-        , trailingIconElt config
+            case type_ of
+                 Filled ->
+                   [ inputElt config
+                   , labelElt config
+                   , lineRippleElt
+                   ]
+                 Outlined ->
+                   [ inputElt config
+                   , notchedOutlineElt config
+                   ]
+        , case config.trailingIcon of
+               Nothing -> []
+               Just html -> [ html ]
         ]
     )
 
-icon :: Array (IProp r i) -> String -> Icon r i
-icon additionalAttributes iconName = Icon (Icon.icon ([ HP.class_ mdc_text_field__icon ] <> additionalAttributes) iconName)
+icon :: forall w i . Array (IProp I.HTMLi i) -> String -> HH.HTML w i
+icon additionalAttributes iconName = Icon.icon ([ HP.class_ mdc_text_field__icon ] <> additionalAttributes) iconName
 
-rootCs :: Maybe (IProp r i)
-rootCs = Just (HP.class_ mdc_text_field)
-
-outlinedCs :: Boolean -> Maybe (IProp r i)
-outlinedCs outlined_ =
-  if outlined_ then
-    Just (HP.class_ mdc_text_field____outlined)
-  else
-    Nothing
-
-fullwidthCs :: Config r i -> Maybe (IProp r i)
-fullwidthCs { fullwidth } =
-  if fullwidth then
-    Just (HP.class_ mdc_text_field____fullwidth)
-  else
-    Nothing
-
-disabledCs :: Config r i -> Maybe (IProp r i)
-disabledCs { disabled } =
-  if disabled then
-    Just (HP.class_ mdc_text_field____disabled)
-  else
-    Nothing
-
-withLeadingIconCs :: Config r i -> Maybe (IProp r i)
-withLeadingIconCs { leadingIcon } =
-  if leadingIcon /= Nothing then
-    Just (HP.class_ mdc_text_field____with_leading_icon)
-  else
-    Nothing
-
-withTrailingIconCs :: Config r i -> Maybe (IProp r i)
-withTrailingIconCs { trailingIcon } =
-  if trailingIcon /= Nothing then
-    Just (HP.class_ mdc_text_field____with_trailing_icon)
-  else
-    Nothing
-
-requiredProp :: Config r i -> Maybe (IProp r i)
-requiredProp { required } = Just (HP.prop "required" required)
-
-validProp :: Config r i -> Maybe (IProp r i)
-validProp { valid } = Just (HP.prop "valid" valid)
-
-minLengthProp :: Config r i -> Maybe (IProp r i)
-minLengthProp { minLength } =
-  Just
-    ( HP.prop "minLength"
-        (Encode.int (Maybe.fromMaybe - 1 minLength))
-    )
-
-maxLengthProp :: Config r i -> Maybe (IProp r i)
-maxLengthProp { maxLength } =
-  Just
-    ( HP.prop "maxLength"
-        (Encode.int (Maybe.fromMaybe - 1 maxLength))
-    )
-
-minLengthAttr :: Config r i -> Maybe (IProp r i)
-minLengthAttr { minLength } = map (HP.attr "minLength" <<< String.fromInt) minLength
-
-maxLengthAttr :: Config r i -> Maybe (IProp r i)
-maxLengthAttr { maxLength } = map (HP.attr "maxLength" <<< String.fromInt) maxLength
-
-minProp :: Config r i -> Maybe (IProp r i)
-minProp { min } =
-  Just
-    ( HP.prop "min"
-        (Encode.string (Maybe.fromMaybe "" (map String.fromInt min)))
-    )
-
-maxProp :: Config r i -> Maybe (IProp r i)
-maxProp { max } =
-  Just
-    ( HP.prop "max"
-        (Encode.string (Maybe.fromMaybe "" (map String.fromInt max)))
-    )
-
-stepProp :: Config r i -> Maybe (IProp r i)
-stepProp { step } =
-  Just
-    ( HP.prop "step"
-        (Encode.string (Maybe.fromMaybe "" (map String.fromInt step)))
-    )
-
-valueProp :: Config r i -> Maybe (IProp r i)
-valueProp { value } = map (HP.prop "value" <<< Encode.string) value
-
-placeholderAttr :: Config r i -> Maybe (IProp r i)
-placeholderAttr { placeholder } = map HP.placeholder placeholder
-
-leadingIconElt :: Config r i -> Array (HH.HTML w i)
-leadingIconElt { leadingIcon } = case leadingIcon of
-  Nothing -> []
-  Just (Icon html) -> [ html ]
-
-trailingIconElt :: Config r i -> Array (HH.HTML w i)
-trailingIconElt { trailingIcon } = case trailingIcon of
-  Nothing -> []
-  Just (Icon html) -> [ html ]
-
-inputHandler :: Config r i -> Maybe (IProp r i)
-inputHandler { onInput } = map HH.Events.onInput onInput
-
-changeHandler :: Config r i -> Maybe (IProp r i)
-changeHandler { onChange } =
-  map (\f -> HH.Events.on "change" (Decode.map f HH.Events.targetValue))
-    onChange
-
-inputElt :: Config r i -> HH.HTML w i
+inputElt :: forall w i . Config w i -> HH.HTML w i
 inputElt config =
   HH.input
-    ( Array.catMaybes
-        [ inputCs
-        , typeAttr config
+    ( [ HP.class_ mdc_text_field__input ]
+      <> Array.catMaybes
+        [ map HP.type_ config.type_
         , ariaLabelAttr config
-        , placeholderAttr config
-        , inputHandler config
-        , changeHandler config
-        , minLengthAttr config
-        , maxLengthAttr config
+        , map HP.placeholder config.placeholder
+        , map HE.onInput config.onInput
+        , map (HE.handler (EventType "change")) config.onChange
+        , map (HP.attr (AttrName "minLength") <<< show) config.minLength
+        , map (HP.attr (AttrName "maxLength") <<< show) config.maxLength
         ]
     )
-    []
 
-inputCs :: Maybe (IProp r i)
-inputCs = Just (HP.class_ mdc_text_field__input)
-
-patternProp :: Config r i -> Maybe (IProp r i)
-patternProp { pattern } =
-  Just
-    ( HP.prop "pattern"
-        (Maybe.fromMaybe Encode.null (map Encode.string pattern))
-    )
-
-typeAttr :: Config r i -> Maybe (IProp r i)
-typeAttr { type_ } = map HP.type_ type_
-
-ariaLabelAttr :: Config r i -> Maybe (IProp r i)
-ariaLabelAttr { fullwidth, placeholder, label } =
-  if fullwidth then
-    map (HP.attr "aria-label") label
+ariaLabelAttr :: forall w i r . Config w i -> Maybe (IProp r i)
+ariaLabelAttr config =
+  if config.fullwidth then
+    map (HP.attr (AttrName "aria-label")) config.label
   else
     Nothing
 
-disabledProp :: Config r i -> Maybe (IProp r i)
-disabledProp { disabled } = Just (HP.prop "disabled" disabled)
+labelElt :: forall w i . Config w i -> HH.HTML w i
+labelElt config =
+  case config.label of
+    Just str ->
+      HH.div
+        [ if Maybe.fromMaybe "" config.value /= "" then
+            HP.classes [ mdc_floating_label, mdc_floating_label____float_above ]
+          else
+            HP.class_ mdc_floating_label
+        , Utils.prop (PropName "foucClassNames") (Utils.propFromArrayClassName [ mdc_floating_label____float_above ])
+        ]
+        [ HH.text str ]
+    Nothing -> HH.text ""
 
-labelElt :: Config r i -> HH.HTML w i
-labelElt { label, value } =
-    case label of
-      Just str ->
-        HH.div
-          [ if Maybe.fromMaybe "" value /= "" then
-              HP.classes [ mdc_floating_label, mdc_floating_label____float_above ]
-            else
-              HP.class_ mdc_floating_label
-          , HP.prop "foucClassNames"
-              (Encode.list Encode.string [ mdc_floating_label____float_above ])
-          ]
-          [ HH.text str ]
-      Nothing -> text ""
-
-noLabelCs :: Config r i -> Maybe (IProp r i)
-noLabelCs { label } =
-  if label == Nothing then
-    Just (HP.class_ mdc_text_field____no_label)
-  else
-    Nothing
-
-lineRippleElt :: HH.HTML w i
+lineRippleElt :: forall w i . HH.HTML w i
 lineRippleElt = HH.div [ HP.class_ mdc_line_ripple ] []
 
-notchedOutlineElt :: Config r i -> HH.HTML w i
+notchedOutlineElt :: forall w i . Config w i -> HH.HTML w i
 notchedOutlineElt config =
-  HH.div [ HP.class_ mdc_notched_outline ]
+  HH.div
+    [ HP.class_ mdc_notched_outline ]
     [ notchedOutlineLeadingElt
     , notchedOutlineNotchElt config
     , notchedOutlineTrailingElt
     ]
 
-notchedOutlineLeadingElt :: HH.HTML w i
+notchedOutlineLeadingElt :: forall w i . HH.HTML w i
 notchedOutlineLeadingElt = HH.div [ HP.class_ mdc_notched_outline__leading ] []
 
-notchedOutlineTrailingElt :: HH.HTML w i
+notchedOutlineTrailingElt :: forall w i . HH.HTML w i
 notchedOutlineTrailingElt = HH.div [ HP.class_ mdc_notched_outline__trailing ] []
 
-notchedOutlineNotchElt :: Config r i -> HH.HTML w i
+notchedOutlineNotchElt :: forall w i . Config w i -> HH.HTML w i
 notchedOutlineNotchElt config = HH.div [ HP.class_ mdc_notched_outline__notch ] [ labelElt config ]

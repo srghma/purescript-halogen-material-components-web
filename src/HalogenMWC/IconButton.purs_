@@ -61,4 +61,4 @@ tabIndexProp :: Maybe (IProp r i)
 tabIndexProp = Just (HP.tabindex 0)
 
 clickHandler :: Config r i -> Maybe (IProp r i)
-clickHandler config_ = map HH.Events.onClick config_.onClick
+clickHandler config_ = map HE.onClick config_.onClick

@@ -125,11 +125,11 @@ placeholderAttr :: Config r i -> Maybe (IProp r i)
 placeholderAttr { placeholder } = map HP.placeholder placeholder
 
 inputHandler :: Config r i -> Maybe (IProp r i)
-inputHandler { onInput } = map HH.Events.onInput onInput
+inputHandler { onInput } = map HE.onInput onInput
 
 changeHandler :: Config r i -> Maybe (IProp r i)
 changeHandler { onChange } =
-  map (\f -> HH.Events.on "change" (Decode.map f HH.Events.targetValue))
+  map (\f -> HE.on "change" (Decode.map f HE.targetValue))
     onChange
 
 inputElt :: Config r i -> HH.HTML w i

@@ -132,7 +132,7 @@ changeHandler :: Config r i -> Maybe (IProp r i)
 changeHandler { onInput } =
   map
     ( \handler ->
-        HH.Events.on "MDCSlider:input"
+        HE.on "MDCSlider:input"
           (Decode.map handler (Decode.at [ "target", "value" ] Decode.float))
     )
     onInput

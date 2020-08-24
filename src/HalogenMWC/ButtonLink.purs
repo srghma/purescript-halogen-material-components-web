@@ -3,7 +3,7 @@ module HalogenMWC.ButtonLink
   , module Export
   ) where
 
-import Protolude (Maybe(..), ($), (<>))
+import Protolude (($), (<>))
 
 import DOM.HTML.Indexed as I
 import Halogen (ElemName(..), PropName(..))
@@ -11,7 +11,7 @@ import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import HalogenMWC.Button.Common as Common
-import HalogenMWC.Button.Common (Variant(..))
+import HalogenMWC.Button.Common (Variant)
 import HalogenMWC.Button.Common (Variant(..), buttonLabel, buttonIcon, defaultConfig) as Export
 
 type Config i =

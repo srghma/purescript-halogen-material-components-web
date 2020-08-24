@@ -59,7 +59,7 @@ checkboxTypeAttr :: Maybe (IProp r i)
 checkboxTypeAttr = Just (HP.type_ "checkbox")
 
 changeHandler :: Config r i -> Maybe (IProp r i)
-changeHandler { onChange } = map (HH.Events.on "change" <<< Decode.succeed) onChange
+changeHandler { onChange } = map (HE.on "change" <<< Decode.succeed) onChange
 
 trackElt :: HH.HTML w i
 trackElt = HH.div [ HP.class_ mdc_switch__track ] []

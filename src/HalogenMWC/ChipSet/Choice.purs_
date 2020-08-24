@@ -89,7 +89,7 @@ gridcellRole :: IProp r i
 gridcellRole = HP.attr "role" "gridcell"
 
 interactionHandler :: Maybe r i -> Maybe (IProp r i)
-interactionHandler r i = map (HH.Events.on "MDCChip:interaction" <<< Decode.succeed) r i
+interactionHandler r i = map (HE.on "MDCChip:interaction" <<< Decode.succeed) r i
 
 rippleElt :: Maybe (HH.HTML w i)
 rippleElt = Just (HH.div [ HP.class_ mdc_chip__ripple ] [])

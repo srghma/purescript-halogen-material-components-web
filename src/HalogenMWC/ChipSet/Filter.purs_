@@ -46,7 +46,7 @@ selectedProp :: Chip.Config r i -> Maybe (IProp r i)
 selectedProp { selected } = Just (HP.prop "selected" selected)
 
 interactionHandler :: Chip.Config r i -> Maybe (IProp r i)
-interactionHandler { onChange } = map (HH.Events.on "MDCChip:interaction" <<< Decode.succeed) onChange
+interactionHandler { onChange } = map (HE.on "MDCChip:interaction" <<< Decode.succeed) onChange
 
 rippleElt :: Maybe (HH.HTML w i)
 rippleElt = Just (HH.div [ HP.class_ mdc_chip__ripple ] [])
