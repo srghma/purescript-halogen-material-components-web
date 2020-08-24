@@ -1,20 +1,13 @@
 module RMWC.Blocks.Avatar where
 
-import Protolude
+import Protolude (($), (<>))
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Halogen.HTML.Core (AttrName(..))
-import Halogen.SVG.Attributes as SVG.Attributes
-import Halogen.SVG.Elements as SVG
-import Math as Math
-import Unsafe.Coerce (unsafeCoerce)
-import Halogen.HTML (ClassName(..))
-import Material.Classes.LinearProgress
-import Data.Percent (Percent)
-import RMWC.Classes.Icon
-import RMWC.Classes.Avatar
-import MaterialIconsFont.Classes
+import Halogen.HTML (ClassName)
+import RMWC.Classes.Icon (rmwc_icon, rmwc_icon____component)
+import RMWC.Classes.Avatar (rmwc_avatar, rmwc_avatar____has_image, rmwc_avatar____large, rmwc_avatar____medium, rmwc_avatar____small, rmwc_avatar____square, rmwc_avatar____xlarge, rmwc_avatar____xsmall, rmwc_avatar__icon, rmwc_avatar__text, rmwc_avatar__text_inner)
+import MaterialIconsFont.Classes (material_icons)
 import Protolude.Url (Url)
 import Protolude.Url as Url
 

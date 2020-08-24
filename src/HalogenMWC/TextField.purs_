@@ -35,8 +35,6 @@ type Config r i
     , onChange :: Maybe (String -> r i)
     }
 
-{-| Text field trailing or leading icon -
--}
 data Icon r i
   = Icon (HH.HTML w i)
 

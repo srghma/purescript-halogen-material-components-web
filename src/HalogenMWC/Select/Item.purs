@@ -1,13 +1,7 @@
 module HalogenMWC.Select.Item where
 
-import Protolude
-import Data.Array as Array
-import Data.Maybe as Maybe
-import Halogen (AttrName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
-import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 type Config a r i
   = { value :: a

@@ -3,18 +3,13 @@ module HalogenMWC.ButtonLink
   , module Export
   ) where
 
-import Material.Classes.Button
-import Protolude
+import Protolude (Maybe(..), ($), (<>))
 
 import DOM.HTML.Indexed as I
-import Data.Array as Array
-import Data.Maybe as Maybe
-import Halogen (AttrName(..), ClassName(..), ElemName(..), PropName(..))
+import Halogen (ElemName(..), PropName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
-import MaterialIconsFont.Classes (material_icons)
 import HalogenMWC.Button.Common as Common
 import HalogenMWC.Button.Common (Variant(..))
 import HalogenMWC.Button.Common (Variant(..)) as Export

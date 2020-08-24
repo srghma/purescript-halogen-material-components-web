@@ -1,16 +1,12 @@
 module HalogenMWC.Button.Common where
 
-import Material.Classes.Button
-import Protolude
+import Material.Classes.Button (mdc_button, mdc_button____outlined, mdc_button____raised, mdc_button____touch, mdc_button____unelevated, mdc_button__icon, mdc_button__label, mdc_button__ripple, mdc_button__touch, mdc_touch_target_wrapper)
+import Protolude (Maybe(..))
 
-import DOM.HTML.Indexed as I
 import Data.Array as Array
-import Data.Maybe as Maybe
-import Halogen (AttrName(..), ClassName(..), ElemName(..), PropName(..))
-import Halogen.HTML (IProp)
+import Halogen (AttrName(..), ClassName)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import MaterialIconsFont.Classes (material_icons)
 
 data Variant
