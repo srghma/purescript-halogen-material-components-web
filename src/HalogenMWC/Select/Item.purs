@@ -15,10 +15,10 @@ type Config a r i
     , additionalAttributes :: Array (IProp r i)
     }
 
-data SelectItem a r i
+data SelectItem w a r i
   = SelectItem (Config a r i) (Array (HH.HTML w i))
 
-defaultConfig :: { value :: a } -> Config a r i
+defaultConfig :: forall r i a . { value :: a } -> Config a r i
 defaultConfig { value } =
   { value: value
   , disabled: false

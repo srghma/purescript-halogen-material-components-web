@@ -1,5 +1,5 @@
-module HalogenMWC.Button
-  ( module HalogenMWC.Button
+module HalogenMWC.ButtonLink
+  ( module HalogenMWC.ButtonLink
   , module Export
   ) where
 
@@ -23,7 +23,7 @@ type Config i
   = { icon :: Maybe String
     , trailingIcon :: Boolean
     , disabled :: Boolean
-    , additionalAttributes :: Array (IProp I.HTMLbutton i) -- put `HE.onClick (\_ -> Increment)` here
+    , additionalAttributes :: Array (IProp I.HTMLa i) -- put `HE.onClick (\_ -> Increment)` here
     , touch :: Boolean
     }
 
@@ -31,7 +31,7 @@ defaultConfig :: forall i . Config i
 defaultConfig =
   { icon: Nothing
   , trailingIcon: false
-  , disabled: false
+  , disabled: false -- TODO: link cannot be disabled?
   , additionalAttributes: []
   , touch: true
   }
@@ -41,18 +41,13 @@ button variant config =
   let
     wrapTouch = Common.wrapTouch config.touch
     commonHtml = Common.commonHtml config
-
-    commonProps =
-      [ HP.classes (Common.commonClasses variant config.touch)
-      , HP.disabled config.disabled
-      , HP.prop (PropName "tabIndex") (if config.disabled then -1 else 0)
-      ]
+    commonProps = [ HP.classes (Common.commonClasses variant config.touch) ]
   in \label ->
       wrapTouch
         $ HH.element (ElemName "mdc-button")
             [ HP.prop (PropName "disabled") config.disabled
             ]
-            [ HH.button (commonProps <> config.additionalAttributes) (commonHtml label)
+            [ HH.a (commonProps <> config.additionalAttributes) (commonHtml label)
             ]
 
 -----------------
