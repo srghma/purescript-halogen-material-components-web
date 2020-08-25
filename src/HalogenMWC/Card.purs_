@@ -27,11 +27,11 @@ defaultConfig =
   }
 
 card :: Config r i -> Content r i -> HH.HTML w i
-card (config_@{ additionalAttributes }) content =
+card (config@{ additionalAttributes }) content =
   HH.element "mdc-card"
     ( Array.catMaybes
         [ HP.class_ mdc_card
-        , outlinedCs config_
+        , outlinedCs config
         ]
         <> additionalAttributes
     )

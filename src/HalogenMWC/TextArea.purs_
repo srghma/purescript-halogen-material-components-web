@@ -47,37 +47,37 @@ defaultConfig =
   }
 
 filled :: Config r i -> HH.HTML w i
-filled config_ = textArea false config_
+filled config = textArea false config
 
 outlined :: Config r i -> HH.HTML w i
-outlined config_ = textArea true config_
+outlined config = textArea true config
 
 textArea :: Boolean -> Config r i -> HH.HTML w i
-textArea outlined_ (config_@{ additionalAttributes, fullwidth }) =
+textArea outlined_ (config@{ additionalAttributes, fullwidth }) =
   HH.element "mdc-text-field"
     ( Array.catMaybes
         [ rootCs
-        , noLabelCs config_
+        , noLabelCs config
         , outlinedCs outlined_
-        , fullwidthCs config_
-        , disabledCs config_
-        , valueProp config_
-        , disabledProp config_
-        , requiredProp config_
-        , validProp config_
-        , minLengthAttr config_
-        , maxLengthAttr config_
+        , fullwidthCs config
+        , disabledCs config
+        , valueProp config
+        , disabledProp config
+        , requiredProp config
+        , validProp config
+        , minLengthAttr config
+        , maxLengthAttr config
         ]
         <> additionalAttributes
     )
     ( Array.concat
         [ if fullwidth then
-            [ inputElt config_
-            , notchedOutlineElt config_
+            [ inputElt config
+            , notchedOutlineElt config
             ]
           else
-            [ inputElt config_
-            , notchedOutlineElt config_
+            [ inputElt config
+            , notchedOutlineElt config
             ]
         ]
     )
@@ -133,18 +133,18 @@ changeHandler { onChange } =
     onChange
 
 inputElt :: Config r i -> HH.HTML w i
-inputElt config_ =
+inputElt config =
   HH.textarea
     ( Array.catMaybes
         [ inputCs
-        , ariaLabelAttr config_
-        , rowsAttr config_
-        , colsAttr config_
-        , placeholderAttr config_
-        , inputHandler config_
-        , changeHandler config_
-        , minLengthAttr config_
-        , maxLengthAttr config_
+        , ariaLabelAttr config
+        , rowsAttr config
+        , colsAttr config
+        , placeholderAttr config
+        , inputHandler config
+        , changeHandler config
+        , minLengthAttr config
+        , maxLengthAttr config
         ]
     )
     []
@@ -196,10 +196,10 @@ noLabelCs { label } =
     Nothing
 
 notchedOutlineElt :: Config r i -> HH.HTML w i
-notchedOutlineElt config_ =
+notchedOutlineElt config =
   HH.div [ HP.class_ mdc_notched_outline ]
     [ notchedOutlineLeadingElt
-    , notchedOutlineNotchElt config_
+    , notchedOutlineNotchElt config
     , notchedOutlineTrailingElt
     ]
 
@@ -210,4 +210,4 @@ notchedOutlineTrailingElt :: HH.HTML w i
 notchedOutlineTrailingElt = HH.div [ HP.class_ mdc_notched_outline__trailing ] []
 
 notchedOutlineNotchElt :: Config r i -> HH.HTML w i
-notchedOutlineNotchElt config_ = HH.div [ HP.class_ mdc_notched_outline__notch ] [ labelElt config_ ]
+notchedOutlineNotchElt config = HH.div [ HP.class_ mdc_notched_outline__notch ] [ labelElt config ]

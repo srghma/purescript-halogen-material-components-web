@@ -27,13 +27,13 @@ defaultConfig =
   }
 
 fab :: Config r i -> String -> HH.HTML w i
-fab (config_@{ additionalAttributes }) iconName =
+fab (config@{ additionalAttributes }) iconName =
   HH.element "mdc-fab"
     ( Array.catMaybes
         [ rootCs
-        , miniCs config_
-        , exitedCs config_
-        , clickHandler config_
+        , miniCs config
+        , exitedCs config
+        , clickHandler config
         , tabIndexProp 0
         ]
         <> additionalAttributes

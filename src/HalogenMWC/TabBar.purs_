@@ -32,7 +32,7 @@ defaultConfig =
   }
 
 tabBar :: Config r i -> Array (Tab r i) -> HH.HTML w i
-tabBar (config_@{ additionalAttributes, align }) tabs =
+tabBar (config@{ additionalAttributes, align }) tabs =
   HH.element "mdc-tab-bar"
     ( Array.catMaybes
         [ rootCs
@@ -41,7 +41,7 @@ tabBar (config_@{ additionalAttributes, align }) tabs =
         ]
         <> additionalAttributes
     )
-    [ tabScroller config_ align tabs ]
+    [ tabScroller config align tabs ]
 
 rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_tab_bar)
@@ -108,14 +108,14 @@ tabClickHandler :: Tab.Config r i -> Maybe (IProp r i)
 tabClickHandler { onClick } = map (HE.on "MDCTab:interacted" <<< Decode.succeed) onClick
 
 tabContentElt :: Config r i -> Tab.Config r i -> Tab.Content -> Maybe (HH.HTML w i)
-tabContentElt (barConfig@{ indicatorSpansContent }) config_ content =
+tabContentElt (barConfig@{ indicatorSpansContent }) config content =
   Just
     ( HH.div [ HP.class_ mdc_tab__content ]
         ( if indicatorSpansContent then
             Array.catMaybes
               [ tabIconElt content
               , tabTextLabelElt content
-              , tabIndicatorElt config_
+              , tabIndicatorElt config
               ]
           else
             Array.catMaybes
@@ -139,7 +139,7 @@ tabTextLabelElt :: Tab.Content -> Maybe (HH.HTML w i)
 tabTextLabelElt { label } = Just (HH.span [ HP.class_ mdc_tab__text_label ] [ HH.text label ])
 
 tabIndicatorElt :: Tab.Config r i -> Maybe (HH.HTML w i)
-tabIndicatorElt config_ = Just (HH.span [ HP.class_ mdc_tab_indicator ] [ tabIndicatorContentElt ])
+tabIndicatorElt config = Just (HH.span [ HP.class_ mdc_tab_indicator ] [ tabIndicatorContentElt ])
 
 tabIndicatorContentElt :: HH.HTML w i
 tabIndicatorContentElt =
@@ -158,14 +158,14 @@ data Align
   | Center
 
 tabScroller :: Config r i -> Maybe Align -> Array (Tab r i) -> HH.HTML w i
-tabScroller config_ align tabs =
+tabScroller config align tabs =
   HH.div
     ( Array.catMaybes
         [ tabScrollerCs
         , tabScrollerAlignCs align
         ]
     )
-    [ tabScrollerScrollAreaElt config_ tabs ]
+    [ tabScrollerScrollAreaElt config tabs ]
 
 tabScrollerCs :: Maybe (IProp r i)
 tabScrollerCs = Just (HP.class_ mdc_tab_scroller)

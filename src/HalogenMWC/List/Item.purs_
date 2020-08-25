@@ -48,26 +48,26 @@ activated :: Selection
 activated = Activated
 
 listItem :: Config r i -> Array (HH.HTML w i) -> ArrayItem r i
-listItem config_ nodes = ArrayItem (config_ { node = listItemView config_ nodes })
+listItem config nodes = ArrayItem (config { node = listItemView config nodes })
 
 listItemView :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
-listItemView config_ nodes =
+listItemView config nodes =
   ( \attributes ->
-      if config_.href /= Nothing then
+      if config.href /= Nothing then
         HH.element "mdc-list-item" [] [ HH.a attributes nodes ]
       else
         HH.element "mdc-list-item" attributes nodes
   )
     ( Array.catMaybes
         [ HP.class_ mdc_list_item
-        , hrefAttr config_
-        , targetAttr config_
-        , disabledCs config_
-        , selectedCs config_
-        , activatedCs config_
-        , ariaSelectedAttr config_
+        , hrefAttr config
+        , targetAttr config
+        , disabledCs config
+        , selectedCs config
+        , activatedCs config
+        , ariaSelectedAttr config
         ]
-        <> config_.additionalAttributes
+        <> config.additionalAttributes
     )
 
 disabledCs :: Config r i -> Maybe (IProp r i)

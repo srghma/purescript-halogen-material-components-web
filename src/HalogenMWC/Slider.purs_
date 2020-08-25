@@ -53,29 +53,29 @@ Note that this option is ignored by non-discrete sliders.
 
 -}
 slider :: Config r i -> HH.HTML w i
-slider (config_@{ additionalAttributes }) =
+slider (config@{ additionalAttributes }) =
   HH.element "mdc-slider"
     ( Array.catMaybes
         [ rootCs
         , displayCss
-        , discreteCs config_
-        , displayMarkersCs config_
+        , discreteCs config
+        , displayMarkersCs config
         , tabIndexProp
         , sliderRoleAttr
-        , valueProp config_
-        , minProp config_
-        , maxProp config_
-        , stepProp config_
-        , disabledProp config_
-        , ariaValueMinAttr config_
-        , ariaValueMaxAttr config_
-        , ariaValuenowAttr config_
-        , changeHandler config_
+        , valueProp config
+        , minProp config
+        , maxProp config
+        , stepProp config
+        , disabledProp config
+        , ariaValueMinAttr config
+        , ariaValueMaxAttr config
+        , ariaValuenowAttr config
+        , changeHandler config
         ]
         <> additionalAttributes
     )
     [ trackContainerElt
-    , thumbContainerElt config_
+    , thumbContainerElt config
     ]
 
 rootCs :: Maybe (IProp r i)

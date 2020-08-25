@@ -27,27 +27,27 @@ defaultConfig =
   }
 
 iconButton :: Config r i -> String -> HH.HTML w i
-iconButton config_ iconName =
+iconButton config iconName =
   HH.element "mdc-icon-button"
     ( Array.catMaybes
         [ rootCs
         , materialIconsCs
         , tabIndexProp
-        , clickHandler config_
+        , clickHandler config
         ]
-        <> config_.additionalAttributes
+        <> config.additionalAttributes
     )
     [ HH.text iconName ]
 
 custom :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
-custom config_ nodes =
+custom config nodes =
   HH.element "mdc-icon-button"
     ( Array.catMaybes
         [ rootCs
         , tabIndexProp
-        , clickHandler config_
+        , clickHandler config
         ]
-        <> config_.additionalAttributes
+        <> config.additionalAttributes
     )
     nodes
 
@@ -61,4 +61,4 @@ tabIndexProp :: Maybe (IProp r i)
 tabIndexProp = Just (HP.tabindex 0)
 
 clickHandler :: Config r i -> Maybe (IProp r i)
-clickHandler config_ = map HE.onClick config_.onClick
+clickHandler config = map HE.onClick config.onClick

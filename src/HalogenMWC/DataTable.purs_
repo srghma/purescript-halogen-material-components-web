@@ -30,13 +30,13 @@ dataTable ::
   , tbody :: Array (Row r i)
   } ->
   HH.HTML w i
-dataTable (config_@{ additionalAttributes }) { thead, tbody } =
+dataTable (config@{ additionalAttributes }) { thead, tbody } =
   HH.element "mdc-data-table"
     ([ dataTableCs ] <> additionalAttributes)
     [ HH.table
         ( Array.catMaybes
             [ dataTableTableCs
-            , ariaLabelAttr config_
+            , ariaLabelAttr config
             ]
         )
         [ HH.thead [] (map headerRow thead)
@@ -96,7 +96,7 @@ headerCell cell_ = case cell_ of
           <> attributes
       )
       nodes
-  CheckboxCell { attributes, config_ } ->
+  CheckboxCell { attributes, config } ->
     HH.th
       ( Array.catMaybes
           [ dataTableHeaderCellCs
@@ -106,7 +106,7 @@ headerCell cell_ = case cell_ of
           ]
           <> attributes
       )
-      [ Checkbox.checkbox (config_ { additionalAttributes = [ HP.class_ mdc_data_table__row_checkbox ] <> config__.additionalAttributes })
+      [ Checkbox.checkbox (config { additionalAttributes = [ HP.class_ mdc_data_table__row_checkbox ] <> config_.additionalAttributes })
       ]
 
 dataTableHeaderCellCs :: Maybe (IProp r i)
@@ -139,7 +139,7 @@ bodyCell cell_ = case cell_ of
           <> attributes
       )
       nodes
-  CheckboxCell { attributes, config_ } ->
+  CheckboxCell { attributes, config } ->
     HH.td
       ( Array.catMaybes
           [ dataTableCellCs
@@ -147,7 +147,7 @@ bodyCell cell_ = case cell_ of
           ]
           <> attributes
       )
-      [ Checkbox.checkbox (config_ { additionalAttributes = [ HP.class_ mdc_data_table__row_checkbox ] <> config_.additionalAttributes })
+      [ Checkbox.checkbox (config { additionalAttributes = [ HP.class_ mdc_data_table__row_checkbox ] <> config.additionalAttributes })
       ]
 
 data Cell r i
@@ -157,7 +157,7 @@ data Cell r i
     , nodes :: Array (HH.HTML w i)
     }
   | CheckboxCell
-    { config_ :: Checkbox.Config r i
+    { config :: Checkbox.Config r i
     , attributes :: Array (IProp r i)
     }
 
@@ -168,7 +168,7 @@ numericCell :: Array (IProp r i) -> Array (HH.HTML w i) -> Cell r i
 numericCell attributes nodes = Cell { numeric: true, attributes: attributes, nodes: nodes }
 
 checkboxCell :: Array (IProp r i) -> Checkbox.Config r i -> Cell r i
-checkboxCell attributes config_ = CheckboxCell { attributes: attributes, config_: config_ }
+checkboxCell attributes config = CheckboxCell { attributes: attributes, config: config }
 
 dataTableCellCs :: Maybe (IProp r i)
 dataTableCellCs = Just (HP.class_ mdc_data_table__cell)

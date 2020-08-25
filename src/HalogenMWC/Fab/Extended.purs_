@@ -30,22 +30,22 @@ defaultConfig =
   }
 
 fab :: Config r i -> String -> HH.HTML w i
-fab (config_@{ additionalAttributes }) label =
+fab (config@{ additionalAttributes }) label =
   HH.element "mdc-fab"
     ( Array.catMaybes
         [ rootCs
         , HP.classes [ mdc_fab mdc_fab____extended ]
-        , exitedCs config_
-        , clickHandler config_
+        , exitedCs config
+        , clickHandler config
         , tabIndexProp 0
         ]
         <> additionalAttributes
     )
     ( Array.catMaybes
         [ rippleElt
-        , leadingIconElt config_
+        , leadingIconElt config
         , labelElt label
-        , trailingIconElt config_
+        , trailingIconElt config
         ]
     )
 

@@ -64,7 +64,7 @@ config { onClosed } =
   }
 
 snackbar :: Config r i -> Queue r i -> HH.HTML w i
-snackbar config_ queue =
+snackbar config queue =
   let
     (Tuple currentMessageId currentMessage) =
       Array.head queue.messages
@@ -74,14 +74,14 @@ snackbar config_ queue =
     HH.element "mdc-snackbar"
       ( Array.catMaybes
           [ rootCs
-          , closeOnEscapeProp config_
+          , closeOnEscapeProp config
           , leadingCs currentMessage
           , stackedCs currentMessage
           , messageIdProp currentMessageId
           , timeoutMsProp currentMessage
-          , closedHandler currentMessageId config_
+          , closedHandler currentMessageId config
           ]
-          <> config_.additionalAttributes
+          <> config.additionalAttributes
       )
       [ surfaceElt currentMessageId (Maybe.fromMaybe (message "") currentMessage) ]
 

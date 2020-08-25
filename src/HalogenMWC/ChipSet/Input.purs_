@@ -19,22 +19,22 @@ chipSet additionalAttributes keyedChips =
     (map (Tuple.mapSecond chip) keyedChips)
 
 chip :: Chip r i -> HH.HTML w i
-chip (Chip config_ label) =
+chip (Chip config label) =
   HH.div [ HP.class_ mdc_touch_target_wrapper ]
     [ HH.element "mdc-chip"
         ( Array.catMaybes
             [ HP.class_ mdc_chip
             , HP.class_ mdc_chip____touch
             , HP.attr "role" "row"
-            , removalHandler config_
+            , removalHandler config
             ]
-            <> config_.additionalAttributes
+            <> config.additionalAttributes
         )
         ( Array.catMaybes
             [ rippleElt
-            , leadingIconElt config_
+            , leadingIconElt config
             , primaryActionElt label
-            , trailingIconElt config_
+            , trailingIconElt config
             ]
         )
     ]

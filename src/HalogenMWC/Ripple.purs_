@@ -33,12 +33,12 @@ accent :: Color
 accent = Accent
 
 ripple :: Boolean -> Config r i -> HH.HTML w i
-ripple isUnbounded (config_@{ additionalAttributes }) =
+ripple isUnbounded (config@{ additionalAttributes }) =
   HH.element "mdc-ripple"
     ( Array.catMaybes
         [ unboundedProp isUnbounded
         , unboundedData isUnbounded
-        , colorCs config_
+        , colorCs config
         , rippleSurface
         , Just (style "position" "absolute")
         , Just (style "top" "0")

@@ -27,17 +27,17 @@ defaultConfig =
   }
 
 switch :: Config r i -> HH.HTML w i
-switch (config_@{ additionalAttributes }) =
+switch (config@{ additionalAttributes }) =
   HH.element "mdc-switch"
     ( Array.catMaybes
         [ rootCs
-        , checkedProp config_
-        , disabledProp config_
+        , checkedProp config
+        , disabledProp config
         ]
         <> additionalAttributes
     )
     [ trackElt
-    , thumbUnderlayElt config_
+    , thumbUnderlayElt config
     ]
 
 rootCs :: Maybe (IProp r i)
@@ -65,20 +65,20 @@ trackElt :: HH.HTML w i
 trackElt = HH.div [ HP.class_ mdc_switch__track ] []
 
 thumbUnderlayElt :: Config r i -> HH.HTML w i
-thumbUnderlayElt config_ = HH.div [ HP.class_ mdc_switch__thumb_underlay ] [ thumbElt config_ ]
+thumbUnderlayElt config = HH.div [ HP.class_ mdc_switch__thumb_underlay ] [ thumbElt config ]
 
 thumbElt :: Config r i -> HH.HTML w i
-thumbElt config_ = HH.div [ HP.class_ mdc_switch__thumb ] [ nativeControlElt config_ ]
+thumbElt config = HH.div [ HP.class_ mdc_switch__thumb ] [ nativeControlElt config ]
 
 nativeControlElt :: Config r i -> HH.HTML w i
-nativeControlElt config_ =
+nativeControlElt config =
   HH.input
     ( Array.catMaybes
         [ nativeControlCs
         , checkboxTypeAttr
         , switchRoleAttr
-        , checkedProp config_
-        , changeHandler config_
+        , checkedProp config
+        , changeHandler config
         ]
     )
     []

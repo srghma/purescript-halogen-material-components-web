@@ -27,13 +27,13 @@ defaultConfig =
   }
 
 menu :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
-menu (config_@{ additionalAttributes }) nodes =
+menu (config@{ additionalAttributes }) nodes =
   HH.element "mdc-menu"
     ( Array.catMaybes
         [ rootCs
-        , openProp config_
-        , quickOpenProp config_
-        , closeHandler config_
+        , openProp config
+        , quickOpenProp config
+        , closeHandler config
         ]
         <> additionalAttributes
     )

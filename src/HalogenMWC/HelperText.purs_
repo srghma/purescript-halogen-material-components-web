@@ -23,14 +23,14 @@ defaultConfig =
   }
 
 helperText :: Config r i -> String -> HH.HTML w i
-helperText config_ string =
+helperText config string =
   HH.div
     ( Array.catMaybes
         [ helperTextCs
-        , persistentCs config_
+        , persistentCs config
         , ariaHiddenAttr
         ]
-        <> config_.additionalAttributes
+        <> config.additionalAttributes
     )
     [ HH.text string ]
 
@@ -44,8 +44,8 @@ helperLineCs :: IProp r i
 helperLineCs = HP.class_ mdc_text_field_helper_line
 
 persistentCs :: Config r i -> Maybe (IProp r i)
-persistentCs (Config config_) =
-  if config_.persistent then
+persistentCs (Config config) =
+  if config.persistent then
     Just (HP.class_ mdc_text_field_helper_text____persistent)
   else
     Nothing

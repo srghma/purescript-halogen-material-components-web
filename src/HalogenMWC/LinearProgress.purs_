@@ -30,7 +30,7 @@ defaultConfig =
   }
 
 linearProgress :: Variant -> Config r i -> HH.HTML w i
-linearProgress variant (config_@{ additionalAttributes }) =
+linearProgress variant (config@{ additionalAttributes }) =
   HH.element "mdc-linear-progress"
     ( Array.catMaybes
         [ rootCs
@@ -40,8 +40,8 @@ linearProgress variant (config_@{ additionalAttributes }) =
         , determinateProp variant
         , progressProp variant
         , bufferProp variant
-        , reverseProp config_
-        , closedProp config_
+        , reverseProp config
+        , closedProp config
         ]
         <> additionalAttributes
     )
@@ -52,13 +52,13 @@ linearProgress variant (config_@{ additionalAttributes }) =
     ]
 
 indeterminate :: Config r i -> HH.HTML w i
-indeterminate config_ = linearProgress Indeterminate config_
+indeterminate config = linearProgress Indeterminate config
 
 determinate :: Config r i -> { progress :: Float } -> HH.HTML w i
-determinate config_ { progress } = linearProgress (Determinate progress) config_
+determinate config { progress } = linearProgress (Determinate progress) config
 
 buffered :: Config r i -> { progress :: Float, buffered :: Float } -> HH.HTML w i
-buffered config_ data_ = linearProgress (Buffered data_.progress data_.buffered) config_
+buffered config data_ = linearProgress (Buffered data_.progress data_.buffered) config
 
 rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_linear_progress)

@@ -37,4 +37,4 @@ defaultConfig =
   }
 
 tab :: Config r i -> Content -> Tab r i
-tab config_ content = Tab (config_ { content = content })
+tab config content = Tab (config { content = content })

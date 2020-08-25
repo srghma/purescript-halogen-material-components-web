@@ -45,7 +45,7 @@ data Variant
   | Outlined
 
 select :: Variant -> Config a r i -> SelectItem a r i -> Array (SelectItem a r i) -> HH.HTML w i
-select variant (config_@{ leadingIcon, selected, additionalAttributes, onChange }) firstSelectItem remainingSelectItems =
+select variant (config@{ leadingIcon, selected, additionalAttributes, onChange }) firstSelectItem remainingSelectItems =
   let
     selectedIndex =
       Array.indexedMap
@@ -63,24 +63,24 @@ select variant (config_@{ leadingIcon, selected, additionalAttributes, onChange 
       ( Array.catMaybes
           [ rootCs
           , outlinedCs variant
-          , leadingIconCs config_
-          , disabledProp config_
+          , leadingIconCs config
+          , disabledProp config
           , selectedIndexProp selectedIndex
-          , validProp config_
-          , requiredProp config_
+          , validProp config
+          , requiredProp config
           ]
           <> additionalAttributes
       )
       [ anchorElt []
           ( Array.concat
-              [ [ leadingIconElt config_
+              [ [ leadingIconElt config
                 , dropdownIconElt
                 , selectedTextElt
                 ]
               , if variant == Outlined then
-                  [ notchedOutlineElt config_ ]
+                  [ notchedOutlineElt config ]
                 else
-                  [ floatingLabelElt config_
+                  [ floatingLabelElt config
                   , lineRippleElt
                   ]
               ]
@@ -89,10 +89,10 @@ select variant (config_@{ leadingIcon, selected, additionalAttributes, onChange 
       ]
 
 filled :: Config a r i -> SelectItem a r i -> Array (SelectItem a r i) -> HH.HTML w i
-filled config_ firstSelectItem remainingSelectItems = select Filled config_ firstSelectItem remainingSelectItems
+filled config firstSelectItem remainingSelectItems = select Filled config firstSelectItem remainingSelectItems
 
 outlined :: Config a r i -> SelectItem a r i -> Array (SelectItem a r i) -> HH.HTML w i
-outlined config_ firstSelectItem remainingSelectItems = select Outlined config_ firstSelectItem remainingSelectItems
+outlined config firstSelectItem remainingSelectItems = select Outlined config firstSelectItem remainingSelectItems
 
 data Icon r i
   = Icon (HH.HTML w i)
@@ -172,8 +172,8 @@ menuElt leadingIcon selected onChange firstSelectItem remainingSelectItems =
     ]
 
 listItem :: Maybe (Icon r i) -> Maybe a -> Maybe (a -> r i) -> SelectItem a r i -> ArrayItem r i
-listItem leadingIcon selected onChange (SelectItem.SelectItem config_ nodes) =
-  ArrayItem.listItem (listItemConfig selected onChange config_)
+listItem leadingIcon selected onChange (SelectItem.SelectItem config nodes) =
+  ArrayItem.listItem (listItemConfig selected onChange config)
     ( if leadingIcon /= Nothing then
         ArrayItem.graphic [] [] :: nodes
       else

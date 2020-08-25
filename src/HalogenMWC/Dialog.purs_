@@ -31,14 +31,14 @@ type Content r i
     }
 
 dialog :: Config r i -> Content r i -> HH.HTML w i
-dialog (config_@{ additionalAttributes }) content =
+dialog (config@{ additionalAttributes }) content =
   HH.element "mdc-dialog"
     ( Array.catMaybes
         [ rootCs
-        , openProp config_
+        , openProp config
         , roleAttr
         , ariaModalAttr
-        , closeHandler config_
+        , closeHandler config
         ]
         <> additionalAttributes
     )

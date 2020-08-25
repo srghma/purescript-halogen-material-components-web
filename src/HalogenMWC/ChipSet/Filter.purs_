@@ -21,21 +21,21 @@ chipSet additionalAttributes chips =
     (map chip chips)
 
 chip :: Chip r i -> HH.HTML w i
-chip (Chip (config_@{ additionalAttributes }) label) =
+chip (Chip (config@{ additionalAttributes }) label) =
   HH.div [ HP.class_ mdc_touch_target_wrapper ]
     [ HH.element "mdc-chip"
         ( Array.catMaybes
             [ HP.class_ mdc_chip
             , HP.class_ mdc_chip____touch
             , HP.attr "role" "row"
-            , selectedProp config_
-            , interactionHandler config_
+            , selectedProp config
+            , interactionHandler config
             ]
             <> additionalAttributes
         )
         ( Array.catMaybes
             [ rippleElt
-            , leadingIconElt config_
+            , leadingIconElt config
             , checkmarkElt
             , primaryActionElt label
             ]

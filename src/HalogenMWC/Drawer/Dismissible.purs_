@@ -25,13 +25,13 @@ defaultConfig =
   }
 
 drawer :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
-drawer (config_@{ additionalAttributes }) nodes =
+drawer (config@{ additionalAttributes }) nodes =
   HH.element "mdc-drawer"
     ( Array.catMaybes
         [ rootCs
         , dismissibleCs
-        , openProp config_
-        , closeHandler config_
+        , openProp config
+        , closeHandler config
         ]
         <> additionalAttributes
     )

@@ -48,18 +48,18 @@ remaining list items. This way we guarantee lists to be non-empty.
 
 -}
 list :: Config r i -> ArrayItem r i -> Array (ArrayItem r i) -> HH.HTML w i
-list (config_@{ additionalAttributes }) firstArrayItem remainingArrayItems =
+list (config@{ additionalAttributes }) firstArrayItem remainingArrayItems =
   let
     listItems = [ firstArrayItem ] <> remainingArrayItems
   in
     HH.element "mdc-list"
       ( Array.catMaybes
           [ rootCs
-          , nonInteractiveCs config_
-          , denseCs config_
-          , avatarArrayCs config_
-          , twoLineCs config_
-          , wrapFocusProp config_
+          , nonInteractiveCs config
+          , denseCs config
+          , avatarArrayCs config
+          , twoLineCs config
+          , wrapFocusProp config
           , clickHandler listItems
           , selectedIndexProp listItems
           ]

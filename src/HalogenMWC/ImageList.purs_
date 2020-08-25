@@ -27,16 +27,16 @@ defaultConfig =
   }
 
 imageArray :: Config r i -> Array (ImageArrayItem r i) -> HH.HTML w i
-imageArray config_ listItems =
+imageArray config listItems =
   HH.element "mdc-image-list"
     ( Array.catMaybes
         [ HP.class_ mdc_image_list
-        , masonryCs config_
-        , withTextProtectionCs config_
+        , masonryCs config
+        , withTextProtectionCs config
         ]
-        <> config_.additionalAttributes
+        <> config.additionalAttributes
     )
-    (map (listItemElt config_) listItems)
+    (map (listItemElt config) listItems)
 
 masonryCs :: Config r i -> Maybe (IProp r i)
 masonryCs { masonry } =
@@ -53,7 +53,7 @@ withTextProtectionCs { withTextProtection } =
     Nothing
 
 listItemElt :: Config r i -> ImageArrayItem r i -> HH.HTML w i
-listItemElt (config_@{ masonry }) (listItem@(ImageArrayItem.ImageArrayItem { href, additionalAttributes })) =
+listItemElt (config@{ masonry }) (listItem@(ImageArrayItem.ImageArrayItem { href, additionalAttributes })) =
   let
     inner =
       [ if masonry then

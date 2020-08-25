@@ -27,14 +27,14 @@ defaultConfig =
   }
 
 listItem :: Config r i -> ArrayItem r i
-listItem (config_@{ additionalAttributes }) =
+listItem (config@{ additionalAttributes }) =
   ArrayItem.ArrayItemDivider
     $ HH.li
         ( Array.catMaybes
             [ listDividerCs
             , separatorRoleAttr
-            , insetCs config_
-            , paddedCs config_
+            , insetCs config
+            , paddedCs config
             ]
             <> additionalAttributes
         )

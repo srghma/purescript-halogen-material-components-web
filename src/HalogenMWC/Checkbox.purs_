@@ -36,7 +36,7 @@ defaultConfig =
   }
 
 checkbox :: Config r i -> HH.HTML w i
-checkbox (config_@{ touch, additionalAttributes }) =
+checkbox (config@{ touch, additionalAttributes }) =
   let
     wrapTouch node =
       if touch then
@@ -48,14 +48,14 @@ checkbox (config_@{ touch, additionalAttributes }) =
       $ HH.element "mdc-checkbox"
           ( Array.catMaybes
               [ rootCs
-              , touchCs config_
-              , checkedProp config_
-              , indeterminateProp config_
-              , disabledProp config_
+              , touchCs config
+              , checkedProp config
+              , indeterminateProp config
+              , disabledProp config
               ]
               <> additionalAttributes
           )
-          [ nativeControlElt config_
+          [ nativeControlElt config
           , backgroundElt
           ]
 
@@ -99,14 +99,14 @@ changeHandler { state, onChange } =
     onChange
 
 nativeControlElt :: Config r i -> HH.HTML w i
-nativeControlElt config_ =
+nativeControlElt config =
   HH.input
     ( Array.catMaybes
         [ Just (HP.type_ "checkbox")
         , Just (HP.class_ mdc_checkbox__native_control)
-        , checkedProp config_
-        , indeterminateProp config_
-        , changeHandler config_
+        , checkedProp config
+        , indeterminateProp config
+        , changeHandler config
         ]
     )
     []

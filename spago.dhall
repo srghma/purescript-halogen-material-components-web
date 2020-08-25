@@ -15,6 +15,7 @@
   , "record"
   , "strings"
   , "tuples"
+  , "either"
   ]
 , packages = ./packages.dhall
 , sources =
