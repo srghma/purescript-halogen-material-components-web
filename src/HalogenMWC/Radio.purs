@@ -1,25 +1,20 @@
 module HalogenMWC.Radio where
 
-import Material.Classes.Radio
-import Protolude
+import Material.Classes.Radio (mdc_radio, mdc_radio____touch, mdc_radio__background, mdc_radio__inner_circle, mdc_radio__native_control, mdc_radio__outer_circle, mdc_radio__ripple, mdc_touch_target_wrapper)
+import Protolude (Maybe(..), runExcept, (#), ($), (<>), (>>=))
 
 import DOM.HTML.Indexed as I
 import Data.Array as Array
 import Data.Either (hush) as Either
-import Data.Maybe as Maybe
-import Foreign (Foreign)
-import Foreign as Foreign
-import Foreign.Index as Foreign
-import Halogen (AttrName(..), ElemName(..))
+import Foreign (readBoolean, unsafeToForeign) as Foreign
+import Foreign.Index (readProp) as Foreign
+import Halogen (ElemName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
-import Halogen.HTML.Events (onChange)
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties (InputType(..))
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Web.Event.Event (Event, EventType(..))
-import Web.Event.Event as Web.Event.Event
 
 type Config i
   = { checked :: Boolean
