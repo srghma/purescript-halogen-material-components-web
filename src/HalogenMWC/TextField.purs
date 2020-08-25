@@ -67,10 +67,10 @@ data TextFieldType
   | Outlined
 
 filled :: forall w i . Config w i -> HH.HTML w i
-filled config = textField Filled config
+filled = textField Filled
 
 outlined :: forall w i . Config w i -> HH.HTML w i
-outlined config = textField Outlined config
+outlined = textField Outlined
 
 textField :: forall w i . TextFieldType -> Config w i -> HH.HTML w i
 textField type_ config =
@@ -136,6 +136,8 @@ textField type_ config =
 
 icon :: forall w i . Array (IProp I.HTMLi i) -> String -> HH.HTML w i
 icon additionalAttributes iconName = Icon.icon ([ HP.class_ mdc_text_field__icon ] <> additionalAttributes) iconName
+
+-----------------
 
 inputElt :: forall w i . Config w i -> HH.HTML w i
 inputElt config =
