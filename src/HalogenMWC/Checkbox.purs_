@@ -15,8 +15,8 @@ import Halogen.SVG.Attributes as Halogen.SVG.Attributes
 import Halogen.SVG.Elements as Halogen.SVG.Elements
 import Material.Classes.Checkbox
 
-type Config r i
-  = { state :: Maybe State
+type Config r i =
+  { state :: Maybe State
     , disabled :: Boolean
     , additionalAttributes :: Array (IProp r i)
     , onChange :: Maybe (Event -> i)

@@ -17,8 +17,8 @@ import HalogenMWC.Button as Button
 import HalogenMWC.IconButton as IconButton
 import Material.Classes.Card
 
-type Config r i
-  = { outlined :: Boolean
+type Config r i =
+  { outlined :: Boolean
     , additionalAttributes :: Array (IProp r i)
     }
 

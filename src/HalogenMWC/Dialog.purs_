@@ -13,8 +13,8 @@ import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Material.Classes.Dialog
 
-type Config r i
-  = { open :: Boolean
+type Config r i =
+  { open :: Boolean
     , additionalAttributes :: Array (IProp r i)
     , onClose :: Maybe (Event -> i)
     }

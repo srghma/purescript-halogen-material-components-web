@@ -13,8 +13,8 @@ import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Material.Classes.Ripple
 
-type Config r i
-  = { color :: Maybe Color
+type Config r i =
+  { color :: Maybe Color
     , additionalAttributes :: Array (IProp r i)
     }
 

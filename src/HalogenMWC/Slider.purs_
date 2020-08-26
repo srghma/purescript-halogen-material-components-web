@@ -16,8 +16,8 @@ import Halogen.SVG.Elements as Halogen.SVG.Elements
 import Material.Classes.Slider
 
 -- TODO: Prevent FOUC
-type Config r i
-  = { discrete :: Boolean
+type Config r i =
+  { discrete :: Boolean
     , displayMarkers :: Boolean
     , min :: Maybe Float
     , max :: Maybe Float

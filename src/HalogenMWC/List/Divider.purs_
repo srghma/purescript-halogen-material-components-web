@@ -15,8 +15,8 @@ import HalogenMWC.Array.Item (ArrayItem)
 import HalogenMWC.Array.Item as ArrayItem
 import Material.Classes.List
 
-type Config r i
-  = { inset :: Boolean
+type Config r i =
+  { inset :: Boolean
     , padded :: Boolean
     , additionalAttributes :: Array (IProp r i)
     }

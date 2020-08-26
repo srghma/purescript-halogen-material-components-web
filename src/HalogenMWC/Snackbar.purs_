@@ -52,8 +52,8 @@ addMessage message_ queue =
   , nextMessageId: inc queue.nextMessageId
   }
 
-type Config r i
-  = { closeOnEscape :: Boolean
+type Config r i =
+  { closeOnEscape :: Boolean
     , additionalAttributes :: Array (IProp r i)
     , onClosed :: MessageId -> r i
     }

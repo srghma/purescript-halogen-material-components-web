@@ -3,8 +3,8 @@ module HalogenMWC.ImageList.Item where
 import Protolude (Maybe(..))
 import Halogen.HTML (IProp)
 
-type Config r i
-  = { label :: Maybe String
+type Config r i =
+  { label :: Maybe String
     , href :: Maybe String
     , additionalAttributes :: Array (IProp r i)
     , image :: String

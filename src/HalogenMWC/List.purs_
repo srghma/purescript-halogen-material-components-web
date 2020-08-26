@@ -15,8 +15,8 @@ import HalogenMWC.Array.Item (Config, ArrayItem)
 import HalogenMWC.Array.Item as ArrayItem
 import Material.Classes.List
 
-type Config r i
-  = { nonInteractive :: Boolean
+type Config r i =
+  { nonInteractive :: Boolean
     , dense :: Boolean
     , avatarArray :: Boolean
     , twoLine :: Boolean

@@ -15,8 +15,8 @@ import HalogenMWC.ImageList.Item (ImageArrayItem)
 import HalogenMWC.ImageList.Item as ImageArrayItem
 import Material.Classes.ImageList
 
-type Config r i
-  = { masonry :: Boolean
+type Config r i =
+  { masonry :: Boolean
     , withTextProtection :: Boolean
     , additionalAttributes :: Array (IProp r i)
     }
