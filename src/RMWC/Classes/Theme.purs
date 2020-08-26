@@ -77,4 +77,3 @@ mdc_text_field____invalid = ClassName "mdc-text-field--invalid"
 
 mdc_top_app_bar :: ClassName
 mdc_top_app_bar = ClassName "mdc-top-app-bar"
-

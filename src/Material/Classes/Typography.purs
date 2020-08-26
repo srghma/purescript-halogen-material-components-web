@@ -44,4 +44,3 @@ mdc_typography____subtitle1 = ClassName "mdc-typography--subtitle1"
 
 mdc_typography____subtitle2 :: ClassName
 mdc_typography____subtitle2 = ClassName "mdc-typography--subtitle2"
-

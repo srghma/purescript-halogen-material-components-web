@@ -41,4 +41,3 @@ mdc_tab__ripple = ClassName "mdc-tab__ripple"
 
 mdc_tab__text_label :: ClassName
 mdc_tab__text_label = ClassName "mdc-tab__text-label"
-

@@ -71,4 +71,3 @@ mdc_ripple_upgraded____unbounded = ClassName "mdc-ripple-upgraded--unbounded"
 
 mdc_touch_target_wrapper :: ClassName
 mdc_touch_target_wrapper = ClassName "mdc-touch-target-wrapper"
-

@@ -53,4 +53,3 @@ rmwc_avatar__text = ClassName "rmwc-avatar__text"
 
 rmwc_avatar__text_inner :: ClassName
 rmwc_avatar__text_inner = ClassName "rmwc-avatar__text-inner"
-

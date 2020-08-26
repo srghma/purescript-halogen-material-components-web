@@ -68,4 +68,3 @@ mdc_top_app_bar__section____align_start = ClassName "mdc-top-app-bar__section--a
 
 mdc_top_app_bar__title :: ClassName
 mdc_top_app_bar__title = ClassName "mdc-top-app-bar__title"
-

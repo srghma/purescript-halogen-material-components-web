@@ -2,7 +2,6 @@ module HalogenMWC.FormField where
 
 import Material.Classes.FormField (mdc_form_field, mdc_form_field____align_end)
 import Protolude (Maybe(..), ($), (<>))
-
 import DOM.HTML.Indexed (HTMLdiv) as I
 import Data.Array as Array
 import Halogen
@@ -20,7 +19,7 @@ type Config i
     , onClick :: Maybe (MouseEvent -> i)
     }
 
-defaultConfig :: forall i . Config i
+defaultConfig :: forall i. Config i
 defaultConfig =
   { label: ""
   , for: Nothing
@@ -29,25 +28,25 @@ defaultConfig =
   , onClick: Nothing
   }
 
-formField :: forall w i . Config i -> Array (HH.HTML w i) -> HH.HTML w i
+formField :: forall w i. Config i -> Array (HH.HTML w i) -> HH.HTML w i
 formField config nodes =
   HH.element (ElemName "mdc-form-field")
     ( [ HP.classes $ [ mdc_form_field ] <> (if config.alignEnd then [ mdc_form_field____align_end ] else [])
       ]
-      <> config.additionalAttributes
+        <> config.additionalAttributes
     )
     (nodes <> [ labelElt config ])
 
-labelElt :: forall w i . Config i -> HH.HTML w i
+labelElt :: forall w i. Config i -> HH.HTML w i
 labelElt config =
   HH.label
     ( Array.concat
-      [ case config.for of
-             Nothing -> []
-             Just for -> [ HP.for for ]
-      , case config.onClick of
-             Nothing -> []
-             Just onClick -> [ HE.onClick onClick ]
-      ]
+        [ case config.for of
+            Nothing -> []
+            Just for -> [ HP.for for ]
+        , case config.onClick of
+            Nothing -> []
+            Just onClick -> [ HE.onClick onClick ]
+        ]
     )
     [ HH.text config.label ]

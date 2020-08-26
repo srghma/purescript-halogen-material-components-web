@@ -20,4 +20,3 @@ mdc_menu_surface____fixed = ClassName "mdc-menu-surface--fixed"
 
 mdc_menu_surface____open :: ClassName
 mdc_menu_surface____open = ClassName "mdc-menu-surface--open"
-

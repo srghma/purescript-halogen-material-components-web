@@ -62,4 +62,3 @@ mdc_ripple_upgraded____foreground_deactivation = ClassName "mdc-ripple-upgraded-
 
 mdc_ripple_upgraded____unbounded :: ClassName
 mdc_ripple_upgraded____unbounded = ClassName "mdc-ripple-upgraded--unbounded"
-

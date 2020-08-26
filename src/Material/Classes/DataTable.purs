@@ -74,4 +74,3 @@ mdc_ripple_upgraded = ClassName "mdc-ripple-upgraded"
 
 mdc_ripple_upgraded____background_focused :: ClassName
 mdc_ripple_upgraded____background_focused = ClassName "mdc-ripple-upgraded--background-focused"
-

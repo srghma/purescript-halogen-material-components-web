@@ -1,12 +1,11 @@
 module HalogenMWC.Utils where
 
-
 import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML.Core (Prop(..), PropValue)
 import Unsafe.Coerce (unsafeCoerce)
 
-prop :: forall value r i . PropName value -> PropValue -> IProp r i
+prop :: forall value r i. PropName value -> PropValue -> IProp r i
 prop = unsafeCoerce Property
 
 propFromArrayInt :: Array Int -> PropValue

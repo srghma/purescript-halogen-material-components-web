@@ -14,4 +14,3 @@ mdc_floating_label____required = ClassName "mdc-floating-label--required"
 
 mdc_floating_label____shake :: ClassName
 mdc_floating_label____shake = ClassName "mdc-floating-label--shake"
-

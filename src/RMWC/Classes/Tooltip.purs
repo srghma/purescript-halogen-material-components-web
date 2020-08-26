@@ -74,4 +74,3 @@ rmwc_tooltip_zoom_leave = ClassName "rmwc-tooltip-zoom-leave"
 
 rmwc_tooltip_zoom_leave_active :: ClassName
 rmwc_tooltip_zoom_leave_active = ClassName "rmwc-tooltip-zoom-leave-active"
-

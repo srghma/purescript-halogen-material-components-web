@@ -209,4 +209,3 @@ mdc_layout_grid__cell____span_9_tablet = ClassName "mdc-layout-grid__cell--span-
 
 mdc_layout_grid__inner :: ClassName
 mdc_layout_grid__inner = ClassName "mdc-layout-grid__inner"
-
