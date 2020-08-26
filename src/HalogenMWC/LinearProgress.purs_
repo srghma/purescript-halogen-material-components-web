@@ -4,7 +4,7 @@ import Protolude
 
 import Data.Array as Array
 import Data.Maybe as Maybe
-import Halogen (AttrName(..))
+import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
@@ -31,7 +31,7 @@ defaultConfig =
 
 linearProgress :: Variant -> Config r i -> HH.HTML w i
 linearProgress variant (config@{ additionalAttributes }) =
-  HH.element "mdc-linear-progress"
+  HH.element (ElemName "mdc-linear-progress"
     ( Array.catMaybes
         [ rootCs
         , displayCss
@@ -67,7 +67,7 @@ displayCss :: Maybe (IProp r i)
 displayCss = Just (style "display" "block")
 
 roleAttr :: Maybe (IProp r i)
-roleAttr = Just (HP.attr "role" "progressbar")
+roleAttr = Just (HP.attr (AttrName "role") "progressbar")
 
 variantCs :: Variant -> Maybe (IProp r i)
 variantCs variant = case variant of

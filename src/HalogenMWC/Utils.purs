@@ -1,7 +1,7 @@
 module HalogenMWC.Utils where
 
 
-import Halogen (ClassName, PropName)
+import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML.Core (Prop(..), PropValue)
 import Unsafe.Coerce (unsafeCoerce)

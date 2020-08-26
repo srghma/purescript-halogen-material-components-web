@@ -4,7 +4,7 @@ import Protolude
 
 import Data.Array as Array
 import Data.Maybe as Maybe
-import Halogen (AttrName(..))
+import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
@@ -28,7 +28,7 @@ defaultConfig =
 
 imageArray :: Config r i -> Array (ImageArrayItem r i) -> HH.HTML w i
 imageArray config listItems =
-  HH.element "mdc-image-list"
+  HH.element (ElemName "mdc-image-list"
     ( Array.catMaybes
         [ HP.class_ mdc_image_list
         , masonryCs config
@@ -63,7 +63,7 @@ listItemElt (config@{ masonry }) (listItem@(ImageArrayItem.ImageArrayItem { href
       , supportingElt listItem
       ]
   in
-    HH.element "mdc-image-list-item"
+    HH.element (ElemName "mdc-image-list-item"
       ([ HP.class_ mdc_image_list__item ] <> additionalAttributes)
       ( href
           # map (\href_ -> [ HH.a [ HP.href href_ ] inner ])
@@ -108,4 +108,4 @@ supportingElt (ImageArrayItem.ImageArrayItem { label }) = case label of
     HH.div
       [ HP.class_ mdc_image_list__supporting ]
       [ HH.span [ HP.class_ mdc_image_list__label ] [ HH.text string ] ]
-  Nothing -> text ""
+  Nothing -> HH.text ""

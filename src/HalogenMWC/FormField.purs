@@ -5,7 +5,7 @@ import Protolude (Maybe(..), ($), (<>))
 
 import DOM.HTML.Indexed (HTMLdiv) as I
 import Data.Array as Array
-import Halogen (ElemName(..))
+import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events (onClick) as HE
@@ -29,7 +29,7 @@ defaultConfig =
   , onClick: Nothing
   }
 
-formField :: forall i w . Config i -> Array (HH.HTML w i) -> HH.HTML w i
+formField :: forall w i . Config i -> Array (HH.HTML w i) -> HH.HTML w i
 formField config nodes =
   HH.element (ElemName "mdc-form-field")
     ( [ HP.classes $ [ mdc_form_field ] <> (if config.alignEnd then [ mdc_form_field____align_end ] else [])
@@ -38,7 +38,7 @@ formField config nodes =
     )
     (nodes <> [ labelElt config ])
 
-labelElt :: forall i w . Config i -> HH.HTML w i
+labelElt :: forall w i . Config i -> HH.HTML w i
 labelElt config =
   HH.label
     ( Array.concat

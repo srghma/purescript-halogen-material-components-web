@@ -4,7 +4,7 @@ import Protolude
 
 import Data.Array as Array
 import Data.Maybe as Maybe
-import Halogen (AttrName(..))
+import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
@@ -44,7 +44,7 @@ listDividerCs :: Maybe (IProp r i)
 listDividerCs = Just (HP.class_ mdc_list_divider)
 
 separatorRoleAttr :: Maybe (IProp r i)
-separatorRoleAttr = Just (HP.attr "role" "separator")
+separatorRoleAttr = Just (HP.attr (AttrName "role") "separator")
 
 insetCs { inset } =
   if inset then

@@ -6,7 +6,7 @@ import Protolude
 
 import Data.Array as Array
 import Data.Maybe as Maybe
-import Halogen (AttrName(..))
+import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
@@ -30,14 +30,14 @@ config { toLabel } =
 
 chipSet :: Config a r i -> Array (Chip a r i) -> HH.HTML w i
 chipSet (config@{ selected, onChange, toLabel, additionalAttributes }) chips =
-  HH.element "mdc-chip-set"
+  HH.element (ElemName "mdc-chip-set"
     ([ chipSetCs, chipSetChoiceCs, gridRole ] <> additionalAttributes)
     (map (chip selected onChange toLabel) chips)
 
 chip :: Maybe a -> Maybe (a -> r i) -> (a -> String) -> Chip a r i -> HH.HTML w i
 chip selected onChange toLabel (Chip config value) =
   HH.div [ HP.class_ mdc_touch_target_wrapper ]
-    [ HH.element "mdc-chip"
+    [ HH.element (ElemName "mdc-chip"
         ( Array.catMaybes
             [ chipCs
             , chipTouchCs
@@ -62,7 +62,7 @@ chipSetChoiceCs :: IProp r i
 chipSetChoiceCs = HP.class_ mdc_chip_set____choice
 
 gridRole :: IProp r i
-gridRole = HP.attr "role" "grid"
+gridRole = HP.attr (AttrName "role") "grid"
 
 chipCs :: Maybe (IProp r i)
 chipCs = Just (HP.class_ mdc_chip)
@@ -80,15 +80,15 @@ selectedProp :: Boolean -> Maybe (IProp r i)
 selectedProp selected = Just (HP.prop "selected" selected)
 
 buttonRole :: IProp r i
-buttonRole = HP.attr "role" "button"
+buttonRole = HP.attr (AttrName "role") "button"
 
 rowRole :: Maybe (IProp r i)
-rowRole = Just (HP.attr "role" "row")
+rowRole = Just (HP.attr (AttrName "role") "row")
 
 gridcellRole :: IProp r i
-gridcellRole = HP.attr "role" "gridcell"
+gridcellRole = HP.attr (AttrName "role") "gridcell"
 
-interactionHandler :: Maybe r i -> Maybe (IProp r i)
+interactionHandler :: Maybe (Event -> i) -> Maybe (IProp r i)
 interactionHandler r i = map (HE.on "MDCChip:interaction" <<< Decode.succeed) r i
 
 rippleElt :: Maybe (HH.HTML w i)

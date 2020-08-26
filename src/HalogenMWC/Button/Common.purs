@@ -1,7 +1,7 @@
 module HalogenMWC.Button.Common where
 
 import Data.Array as Array
-import Halogen (AttrName(..), ClassName)
+import Halogen
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Material.Classes.Button (mdc_button, mdc_button____outlined, mdc_button____raised, mdc_button____touch, mdc_button____unelevated, mdc_button__icon, mdc_button__label, mdc_button__ripple, mdc_button__touch, mdc_touch_target_wrapper)

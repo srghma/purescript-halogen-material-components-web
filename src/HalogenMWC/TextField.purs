@@ -8,7 +8,7 @@ import DOM.HTML.Indexed as I
 import DOM.HTML.Indexed.InputType (InputType)
 import Data.Array as Array
 import Data.Maybe as Maybe
-import Halogen (AttrName(..), ElemName(..), PropName(..))
+import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE

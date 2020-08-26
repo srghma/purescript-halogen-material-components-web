@@ -4,7 +4,7 @@ import Protolude
 
 import Data.Array as Array
 import Data.Maybe as Maybe
-import Halogen (AttrName(..))
+import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
@@ -15,7 +15,7 @@ type Config r i
   = { open :: Boolean
     , quickOpen :: Boolean
     , additionalAttributes :: Array (IProp r i)
-    , onClose :: Maybe r i
+    , onClose :: Maybe (Event -> i)
     }
 
 defaultConfig :: Config r i
@@ -28,7 +28,7 @@ defaultConfig =
 
 menu :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
 menu (config@{ additionalAttributes }) nodes =
-  HH.element "mdc-menu"
+  HH.element (ElemName "mdc-menu"
     ( Array.catMaybes
         [ rootCs
         , openProp config

@@ -4,7 +4,7 @@ import Protolude
 
 import Data.Array as Array
 import Data.Maybe as Maybe
-import Halogen (AttrName(..))
+import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
@@ -59,7 +59,7 @@ select variant (config@{ leadingIcon, selected, additionalAttributes, onChange }
         # Array.catMaybes
         # Array.head
   in
-    HH.element "mdc-select"
+    HH.element (ElemName "mdc-select"
       ( Array.catMaybes
           [ rootCs
           , outlinedCs variant
@@ -135,7 +135,7 @@ anchorElt additionalAttributes nodes = HH.div ([ HP.class_ mdc_select__anchor ] 
 leadingIconElt :: Config a r i -> HH.HTML w i
 leadingIconElt { leadingIcon } = case leadingIcon of
   Just (Icon icon_) -> icon_
-  Nothing -> text ""
+  Nothing -> HH.text ""
 
 dropdownIconElt :: HH.HTML w i
 dropdownIconElt = HH.i [ HP.class_ mdc_select__dropdown_icon ] []

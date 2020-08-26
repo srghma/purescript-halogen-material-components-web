@@ -4,7 +4,7 @@ import Protolude
 
 import Data.Array as Array
 import Data.Maybe as Maybe
-import Halogen (AttrName(..))
+import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
@@ -34,7 +34,7 @@ accent = Accent
 
 ripple :: Boolean -> Config r i -> HH.HTML w i
 ripple isUnbounded (config@{ additionalAttributes }) =
-  HH.element "mdc-ripple"
+  HH.element (ElemName "mdc-ripple"
     ( Array.catMaybes
         [ unboundedProp isUnbounded
         , unboundedData isUnbounded
@@ -71,6 +71,6 @@ unboundedProp isUnbounded = Just (HP.prop "unbounded" isUnbounded)
 unboundedData :: Boolean -> Maybe (IProp r i)
 unboundedData isUnbounded =
   if isUnbounded then
-    Just (HP.attr "data-mdc-ripple-is-unbounded" "")
+    Just (HP.attr (AttrName "data-mdc-ripple-is-unbounded") "")
   else
     Nothing

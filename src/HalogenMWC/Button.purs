@@ -6,7 +6,7 @@ module HalogenMWC.Button
 import Protolude (negate, ($), (<>))
 
 import DOM.HTML.Indexed as I
-import Halogen (ElemName(..), PropName(..))
+import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
@@ -21,7 +21,7 @@ type Config r i =
   , additionalAttributes :: Array (IProp r i) -- put `HE.onClick (\_ -> Increment)` here
   }
 
-button :: forall i w . Config I.HTMLbutton i -> Array (HH.HTML w i) -> HH.HTML w i
+button :: forall w i . Config I.HTMLbutton i -> Array (HH.HTML w i) -> HH.HTML w i
 button config =
   let
     wrapTouch = Common.wrapTouch config.touch
@@ -39,7 +39,7 @@ button config =
             [ HH.button (commonProps <> config.additionalAttributes) (commonHtml content)
             ]
 
-buttonLink :: forall i w . Config I.HTMLa i -> Array (HH.HTML w i) -> HH.HTML w i
+buttonLink :: forall w i . Config I.HTMLa i -> Array (HH.HTML w i) -> HH.HTML w i
 buttonLink config =
   let
     wrapTouch = Common.wrapTouch config.touch

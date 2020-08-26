@@ -3,7 +3,7 @@ module HalogenMWC.Chip.Filter where
 import Protolude
 import Data.Array as Array
 import Data.Maybe as Maybe
-import Halogen (AttrName(..))
+import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
@@ -13,7 +13,7 @@ type Config r i
   = { icon :: Maybe String
     , selected :: Boolean
     , additionalAttributes :: Array (IProp r i)
-    , onChange :: Maybe r i
+    , onChange :: Maybe (Event -> i)
     }
 
 data Chip r i

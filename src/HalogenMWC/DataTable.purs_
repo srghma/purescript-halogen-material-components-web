@@ -5,7 +5,7 @@ import Protolude
 
 import Data.Array as Array
 import Data.Maybe as Maybe
-import Halogen (AttrName(..))
+import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
@@ -31,7 +31,7 @@ dataTable ::
   } ->
   HH.HTML w i
 dataTable (config@{ additionalAttributes }) { thead, tbody } =
-  HH.element "mdc-data-table"
+  HH.element (ElemName "mdc-data-table"
     ([ dataTableCs ] <> additionalAttributes)
     [ HH.table
         ( Array.catMaybes
@@ -54,7 +54,7 @@ dataTableContentCs :: IProp r i
 dataTableContentCs = HP.class_ mdc_data_table__content
 
 ariaLabelAttr :: Config r i -> Maybe (IProp r i)
-ariaLabelAttr { label } = map (HP.attr "aria-label") label
+ariaLabelAttr { label } = map (HP.attr (AttrName "aria-label")) label
 
 data Row r i
   = Row { attributes :: Array (IProp r i), nodes :: Array (Cell r i) }
@@ -65,7 +65,7 @@ row attributes nodes = Row { attributes = attributes, nodes = nodes }
 selected :: Array (IProp r i)
 selected =
   [ dataTableRowSelectedCs
-  , HP.attr "aria-selected" "true"
+  , HP.attr (AttrName "aria-selected") "true"
   ]
 
 dataTableRowSelectedCs :: IProp r i
@@ -113,10 +113,10 @@ dataTableHeaderCellCs :: Maybe (IProp r i)
 dataTableHeaderCellCs = Just (HP.class_ mdc_data_table__header_cell)
 
 columnHeaderRoleAttr :: Maybe (IProp r i)
-columnHeaderRoleAttr = Just (HP.attr "role" "columnheader")
+columnHeaderRoleAttr = Just (HP.attr (AttrName "role") "columnheader")
 
 colScopeAttr :: Maybe (IProp r i)
-colScopeAttr = Just (HP.attr "scope" "col")
+colScopeAttr = Just (HP.attr (AttrName "scope") "col")
 
 dataTableHeaderCellNumericCs :: Boolean -> Maybe (IProp r i)
 dataTableHeaderCellNumericCs numeric =

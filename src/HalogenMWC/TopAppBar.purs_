@@ -5,7 +5,7 @@ import Protolude
 
 import Data.Array as Array
 import Data.Maybe as Maybe
-import Halogen (AttrName(..))
+import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
@@ -32,7 +32,7 @@ defaultConfig =
 
 genericTopAppBar :: Variant -> Config r i -> Array (HH.HTML w i) -> HH.HTML w i
 genericTopAppBar variant (config@{ additionalAttributes }) nodes =
-  HH.element "mdc-top-app-bar"
+  HH.element (ElemName "mdc-top-app-bar"
     ( Array.catMaybes
         [ HP.class_ mdc_top_app_bar
         , variantCs variant

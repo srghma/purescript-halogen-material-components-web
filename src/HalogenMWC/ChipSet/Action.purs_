@@ -4,7 +4,7 @@ import Protolude
 
 import Data.Array as Array
 import Data.Maybe as Maybe
-import Halogen (AttrName(..))
+import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
@@ -14,9 +14,9 @@ import HalogenMWC.Chip.Action
 
 chipSet :: Array (IProp r i) -> Array (Chip r i) -> HH.HTML w i
 chipSet additionalAttributes chips =
-  HH.element "mdc-chip-set"
+  HH.element (ElemName "mdc-chip-set"
     ( [ HP.classes [ mdc_chip_set, mdc_chip_set____action ]
-      , HP.attr "role" "grid"
+      , HP.attr (AttrName "role") "grid"
       ]
       <> additionalAttributes
     )
@@ -25,9 +25,9 @@ chipSet additionalAttributes chips =
 chip :: Chip r i -> HH.HTML w i
 chip (Chip config label) =
   HH.div [ HP.class_ mdc_touch_target_wrapper ]
-    [ HH.element "mdc-chip"
+    [ HH.element (ElemName "mdc-chip"
         ( [ HP.classes [ mdc_chip, mdc_chip____touch ]
-          , HP.attr "role" "row"
+          , HP.attr (AttrName "role") "row"
           -- | , interactionHandler config
           ]
           <> config.additionalAttributes
@@ -61,7 +61,7 @@ primaryActionElt :: String -> HH.HTML w i
 primaryActionElt label =
   HH.span
     [ HP.class_ mdc_chip__primary_action
-    , HP.attr "role" "gridcell"
+    , HP.attr (AttrName "role") "gridcell"
     ]
     [ textElt label
     , HH.div
@@ -73,6 +73,6 @@ textElt :: String -> HH.HTML w i
 textElt label =
   HH.span
   [ HP.class_ mdc_chip__text
-  , HP.attr "role" "button"
+  , HP.attr (AttrName "role") "button"
   ]
   [ HH.text label ]

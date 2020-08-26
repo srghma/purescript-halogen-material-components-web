@@ -4,7 +4,7 @@ import Protolude
 
 import Data.Array as Array
 import Data.Maybe as Maybe
-import Halogen (AttrName(..))
+import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
@@ -17,7 +17,7 @@ type Config r i
     , href :: Maybe String
     , target :: Maybe String
     , additionalAttributes :: Array (IProp r i)
-    , onClick :: Maybe r i
+    , onClick :: Maybe (Event -> i)
     , node :: HH.HTML w i
     }
 
@@ -54,9 +54,9 @@ listItemView :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
 listItemView config nodes =
   ( \attributes ->
       if config.href /= Nothing then
-        HH.element "mdc-list-item" [] [ HH.a attributes nodes ]
+        HH.element (ElemName "mdc-list-item" [] [ HH.a attributes nodes ]
       else
-        HH.element "mdc-list-item" attributes nodes
+        HH.element (ElemName "mdc-list-item" attributes nodes
   )
     ( Array.catMaybes
         [ HP.class_ mdc_list_item
@@ -94,7 +94,7 @@ activatedCs { selection } =
 ariaSelectedAttr :: Config r i -> Maybe (IProp r i)
 ariaSelectedAttr { selection } =
   if selection /= Nothing then
-    Just (HP.attr "aria-selected" "true")
+    Just (HP.attr (AttrName "aria-selected") "true")
   else
     Nothing
 

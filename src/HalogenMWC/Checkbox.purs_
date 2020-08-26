@@ -4,7 +4,7 @@ import Protolude
 
 import Data.Array as Array
 import Data.Maybe as Maybe
-import Halogen (AttrName(..))
+import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
@@ -17,7 +17,7 @@ type Config r i
   = { state :: Maybe State
     , disabled :: Boolean
     , additionalAttributes :: Array (IProp r i)
-    , onChange :: Maybe r i
+    , onChange :: Maybe (Event -> i)
     , touch :: Boolean
     }
 
@@ -45,7 +45,7 @@ checkbox (config@{ touch, additionalAttributes }) =
         node
   in
     wrapTouch
-      $ HH.element "mdc-checkbox"
+      $ HH.element (ElemName "mdc-checkbox"
           ( Array.catMaybes
               [ rootCs
               , touchCs config

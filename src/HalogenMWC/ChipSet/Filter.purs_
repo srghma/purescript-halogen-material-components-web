@@ -3,7 +3,7 @@ module HalogenMWC.ChipSet.Filter where
 import Protolude
 import Data.Array as Array
 import Data.Maybe as Maybe
-import Halogen (AttrName(..))
+import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
@@ -16,18 +16,18 @@ import Material.Classes.Chips
 
 chipSet :: Array (IProp r i) -> Array (Chip r i) -> HH.HTML w i
 chipSet additionalAttributes chips =
-  HH.element "mdc-chip-set"
-    ([ HP.class_ mdc_chip_set, HP.class_ mdc_chip_set____filter, HP.attr "role" "grid" ] <> additionalAttributes)
+  HH.element (ElemName "mdc-chip-set"
+    ([ HP.class_ mdc_chip_set, HP.class_ mdc_chip_set____filter, HP.attr (AttrName "role") "grid" ] <> additionalAttributes)
     (map chip chips)
 
 chip :: Chip r i -> HH.HTML w i
 chip (Chip (config@{ additionalAttributes }) label) =
   HH.div [ HP.class_ mdc_touch_target_wrapper ]
-    [ HH.element "mdc-chip"
+    [ HH.element (ElemName "mdc-chip"
         ( Array.catMaybes
             [ HP.class_ mdc_chip
             , HP.class_ mdc_chip____touch
-            , HP.attr "role" "row"
+            , HP.attr (AttrName "role") "row"
             , selectedProp config
             , interactionHandler config
             ]
@@ -85,11 +85,11 @@ checkmarkElt =
 primaryActionElt :: String -> Maybe (HH.HTML w i)
 primaryActionElt label =
   Just
-    $ HH.span [ HP.class_ mdc_chip__primary_action, HP.attr "role" "gridcell" ]
+    $ HH.span [ HP.class_ mdc_chip__primary_action, HP.attr (AttrName "role") "gridcell" ]
         (Array.catMaybes [ HH.textElt label, touchElt ])
 
 textElt :: String -> Maybe (HH.HTML w i)
-textElt label = Just (HH.span [ HP.class_ mdc_chip__text, HP.attr "role" "button" ] [ HH.text label ])
+textElt label = Just (HH.span [ HP.class_ mdc_chip__text, HP.attr (AttrName "role") "button" ] [ HH.text label ])
 
 touchElt :: Maybe (HH.HTML w i)
 touchElt = Just (HH.div [ HP.class_ mdc_chip__touch ] [])

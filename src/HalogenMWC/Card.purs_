@@ -6,7 +6,7 @@ import Protolude
 
 import Data.Array as Array
 import Data.Maybe as Maybe
-import Halogen (AttrName(..))
+import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
@@ -28,7 +28,7 @@ defaultConfig =
 
 card :: Config r i -> Content r i -> HH.HTML w i
 card (config@{ additionalAttributes }) content =
-  HH.element "mdc-card"
+  HH.element (ElemName "mdc-card"
     ( Array.catMaybes
         [ HP.class_ mdc_card
         , outlinedCs config

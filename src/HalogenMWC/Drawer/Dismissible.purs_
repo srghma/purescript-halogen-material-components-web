@@ -4,7 +4,7 @@ import Protolude
 
 import Data.Array as Array
 import Data.Maybe as Maybe
-import Halogen (AttrName(..))
+import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
@@ -14,7 +14,7 @@ import Material.Classes.Drawer
 type Config r i
   = { open :: Boolean
     , additionalAttributes :: Array (IProp r i)
-    , onClose :: Maybe r i
+    , onClose :: Maybe (Event -> i)
     }
 
 defaultConfig :: Config r i
@@ -26,7 +26,7 @@ defaultConfig =
 
 drawer :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
 drawer (config@{ additionalAttributes }) nodes =
-  HH.element "mdc-drawer"
+  HH.element (ElemName "mdc-drawer"
     ( Array.catMaybes
         [ rootCs
         , dismissibleCs

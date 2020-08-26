@@ -8,7 +8,7 @@ import Data.Array as Array
 import Data.Either (hush) as Either
 import Foreign (readBoolean, unsafeToForeign) as Foreign
 import Foreign.Index (readProp) as Foreign
-import Halogen (ElemName(..))
+import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
@@ -33,7 +33,7 @@ defaultConfig =
   , touch: true
   }
 
-radio :: forall i w . Config i -> HH.HTML w i
+radio :: forall w i . Config i -> HH.HTML w i
 radio config =
   let
     wrapTouch node =
@@ -75,7 +75,7 @@ changeHandler =
                             Nothing -> Nothing
                             Just _ -> Just $ onChange event
 
-nativeControlElt :: forall i w . Config i -> HH.HTML w i
+nativeControlElt :: forall w i . Config i -> HH.HTML w i
 nativeControlElt config =
   HH.input
     ( [ HP.class_ mdc_radio__native_control
@@ -85,14 +85,14 @@ nativeControlElt config =
       <> changeHandler config.onChange
     )
 
-backgroundElt :: forall i w . HH.HTML w i
+backgroundElt :: forall w i . HH.HTML w i
 backgroundElt = HH.div [ HP.class_ mdc_radio__background ] [ outerCircleElt, innerCircleElt ]
 
-outerCircleElt :: forall i w . HH.HTML w i
+outerCircleElt :: forall w i . HH.HTML w i
 outerCircleElt = HH.div [ HP.class_ mdc_radio__outer_circle ] []
 
-innerCircleElt :: forall i w . HH.HTML w i
+innerCircleElt :: forall w i . HH.HTML w i
 innerCircleElt = HH.div [ HP.class_ mdc_radio__inner_circle ] []
 
-rippleElt :: forall i w . HH.HTML w i
+rippleElt :: forall w i . HH.HTML w i
 rippleElt = HH.div [ HP.class_ mdc_radio__ripple ] []

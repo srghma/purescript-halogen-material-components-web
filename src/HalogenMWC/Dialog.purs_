@@ -4,7 +4,7 @@ import Protolude
 
 import Data.Array as Array
 import Data.Maybe as Maybe
-import Halogen (AttrName(..))
+import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
@@ -14,7 +14,7 @@ import Material.Classes.Dialog
 type Config r i
   = { open :: Boolean
     , additionalAttributes :: Array (IProp r i)
-    , onClose :: Maybe r i
+    , onClose :: Maybe (Event -> i)
     }
 
 defaultConfig :: Config r i
@@ -32,7 +32,7 @@ type Content r i
 
 dialog :: Config r i -> Content r i -> HH.HTML w i
 dialog (config@{ additionalAttributes }) content =
-  HH.element "mdc-dialog"
+  HH.element (ElemName "mdc-dialog"
     ( Array.catMaybes
         [ rootCs
         , openProp config
@@ -53,10 +53,10 @@ openProp :: Config r i -> Maybe (IProp r i)
 openProp { open } = Just (HP.prop "open" open)
 
 roleAttr :: Maybe (IProp r i)
-roleAttr = Just (HP.attr "role" "alertdialog")
+roleAttr = Just (HP.attr (AttrName "role") "alertdialog")
 
 ariaModalAttr :: Maybe (IProp r i)
-ariaModalAttr = Just (HP.attr "aria-modal" "true")
+ariaModalAttr = Just (HP.attr (AttrName "aria-modal") "true")
 
 closeHandler :: Config r i -> Maybe (IProp r i)
 closeHandler { onClose } = map (HE.on "MDCDialog:close" <<< Decode.succeed) onClose

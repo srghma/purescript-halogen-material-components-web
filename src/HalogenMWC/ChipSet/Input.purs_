@@ -3,7 +3,7 @@ module HalogenMWC.ChipSet.Input where
 import Protolude
 import Data.Array as Array
 import Data.Maybe as Maybe
-import Halogen (AttrName(..))
+import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
@@ -15,17 +15,17 @@ import Material.Classes.Chips
 chipSet :: Array (IProp r i) -> Array (Tuple String (Chip r i)) -> HH.HTML w i
 chipSet additionalAttributes keyedChips =
   HH.keyed "mdc-chip-set"
-    ([ HP.class_ mdc_chip_set, HP.class_ mdc_chip_set____input, HP.attr "role" "grid" ] <> additionalAttributes)
+    ([ HP.class_ mdc_chip_set, HP.class_ mdc_chip_set____input, HP.attr (AttrName "role") "grid" ] <> additionalAttributes)
     (map (Tuple.mapSecond chip) keyedChips)
 
 chip :: Chip r i -> HH.HTML w i
 chip (Chip config label) =
   HH.div [ HP.class_ mdc_touch_target_wrapper ]
-    [ HH.element "mdc-chip"
+    [ HH.element (ElemName "mdc-chip"
         ( Array.catMaybes
             [ HP.class_ mdc_chip
             , HP.class_ mdc_chip____touch
-            , HP.attr "role" "row"
+            , HP.attr (AttrName "role") "row"
             , removalHandler config
             ]
             <> config.additionalAttributes
@@ -60,11 +60,11 @@ leadingIconElt { leadingIcon } =
 primaryActionElt :: String -> Maybe (HH.HTML w i)
 primaryActionElt label =
   Just
-    $ HH.span [ HP.class_ mdc_chip__primary_action, HP.attr "role" "gridcell", tabIndexProp - 1 ]
+    $ HH.span [ HP.class_ mdc_chip__primary_action, HP.attr (AttrName "role") "gridcell", tabIndexProp - 1 ]
         (Array.catMaybes [ HH.textElt label, touchElt ])
 
 textElt :: String -> Maybe (HH.HTML w i)
-textElt label = Just (HH.span [ HP.class_ mdc_chip__text, HP.attr "role" "button" ] [ HH.text label ])
+textElt label = Just (HH.span [ HP.class_ mdc_chip__text, HP.attr (AttrName "role") "button" ] [ HH.text label ])
 
 touchElt :: Maybe (HH.HTML w i)
 touchElt = Just (HH.div [ HP.class_ mdc_chip__touch ] [])
@@ -76,7 +76,7 @@ trailingIconElt { trailingIcon, onDelete } =
       $ HH.i
           [ HP.classes [ material_icons, mdc_chip__icon, mdc_chip__icon____trailing ]
           , tabIndexProp - 1
-          , HP.attr "role" "button"
+          , HP.attr (AttrName "role") "button"
           ]
           [ HH.text (Maybe.fromMaybe "cancel" trailingIcon) ]
   else

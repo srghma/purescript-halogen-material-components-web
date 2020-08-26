@@ -4,7 +4,7 @@ import Protolude
 
 import Data.Array as Array
 import Data.Maybe as Maybe
-import Halogen (AttrName(..))
+import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
@@ -15,7 +15,7 @@ type Config r i
   = { disabled :: Boolean
     , label :: Maybe String
     , additionalAttributes :: Array (IProp r i)
-    , onClick :: Maybe r i
+    , onClick :: Maybe (Event -> i)
     }
 
 defaultConfig :: Config r i
@@ -28,7 +28,7 @@ defaultConfig =
 
 iconButton :: Config r i -> String -> HH.HTML w i
 iconButton config iconName =
-  HH.element "mdc-icon-button"
+  HH.element (ElemName "mdc-icon-button"
     ( Array.catMaybes
         [ rootCs
         , materialIconsCs
@@ -41,7 +41,7 @@ iconButton config iconName =
 
 custom :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
 custom config nodes =
-  HH.element "mdc-icon-button"
+  HH.element (ElemName "mdc-icon-button"
     ( Array.catMaybes
         [ rootCs
         , tabIndexProp

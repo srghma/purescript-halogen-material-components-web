@@ -4,7 +4,7 @@ import Protolude
 
 import Data.Array as Array
 import Data.Maybe as Maybe
-import Halogen (AttrName(..))
+import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
@@ -54,7 +54,7 @@ Note that this option is ignored by non-discrete sliders.
 -}
 slider :: Config r i -> HH.HTML w i
 slider (config@{ additionalAttributes }) =
-  HH.element "mdc-slider"
+  HH.element (ElemName "mdc-slider"
     ( Array.catMaybes
         [ rootCs
         , displayCss
@@ -102,7 +102,7 @@ tabIndexProp :: Maybe (IProp r i)
 tabIndexProp = Just (HP.tabindex 0)
 
 sliderRoleAttr :: Maybe (IProp r i)
-sliderRoleAttr = Just (HP.attr "role" "slider")
+sliderRoleAttr = Just (HP.attr (AttrName "role") "slider")
 
 valueProp :: Config r i -> Maybe (IProp r i)
 valueProp { value } = map (HP.prop "value" <<< Encode.float) value
@@ -120,13 +120,13 @@ disabledProp :: Config r i -> Maybe (IProp r i)
 disabledProp { disabled } = Just (HP.prop "disabled" disabled)
 
 ariaValueMinAttr :: Config r i -> Maybe (IProp r i)
-ariaValueMinAttr { min } = map (HP.attr "aria-valuemin" <<< String.fromFloat) min
+ariaValueMinAttr { min } = map (HP.attr (AttrName "aria-valuemin") <<< String.fromFloat) min
 
 ariaValueMaxAttr :: Config r i -> Maybe (IProp r i)
-ariaValueMaxAttr { max } = map (HP.attr "aria-valuemax" <<< String.fromFloat) max
+ariaValueMaxAttr { max } = map (HP.attr (AttrName "aria-valuemax") <<< String.fromFloat) max
 
 ariaValuenowAttr :: Config r i -> Maybe (IProp r i)
-ariaValuenowAttr { value } = map (HP.attr "aria-valuenow" <<< String.fromFloat) value
+ariaValuenowAttr { value } = map (HP.attr (AttrName "aria-valuenow") <<< String.fromFloat) value
 
 changeHandler :: Config r i -> Maybe (IProp r i)
 changeHandler { onInput } =
