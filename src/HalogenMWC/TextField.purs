@@ -14,7 +14,6 @@ import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import HalogenMWC.Icon as Icon
 import HalogenMWC.Utils as Utils
-import Web.Event.Event (Event, EventType(..))
 
 type Config w i
   = { label :: Maybe String
@@ -34,8 +33,8 @@ type Config w i
     , leadingIcon :: Maybe (HH.HTML w i)
     , trailingIcon :: Maybe (HH.HTML w i)
     , additionalAttributes :: Array (IProp I.HTMLdiv i)
-    , onInput :: Maybe (Event -> i)
-    , onChange :: Maybe (Event -> i)
+    , onInput :: Maybe (String -> i)
+    , onChange :: Maybe (String -> i)
     }
 
 defaultConfig :: forall w i. Config w i
@@ -143,8 +142,8 @@ inputElt config =
             [ map HP.type_ config.type_
             , ariaLabelAttr config
             , map HP.placeholder config.placeholder
-            , map HE.onInput config.onInput
-            , map (HE.handler (EventType "change")) config.onChange
+            , map HE.onValueInput config.onInput
+            , map HE.onValueChange config.onChange
             , map (HP.attr (AttrName "minLength") <<< show) config.minLength
             , map (HP.attr (AttrName "maxLength") <<< show) config.maxLength
             ]

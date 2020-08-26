@@ -10,6 +10,7 @@ import Data.Maybe as Maybe
 import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
+import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Material.Classes.LinearProgress
@@ -54,7 +55,7 @@ linearProgress variant config =
     , secondaryBarElt
     ]
 
-indeterminate :: Config i -> HH.HTML w i
+indeterminate :: forall w i . Config i -> HH.HTML w i
 indeterminate config = linearProgress Indeterminate config
 
 determinate :: Config i -> { progress :: Float } -> HH.HTML w i
@@ -111,21 +112,21 @@ reverseProp { reverse } = Just (HP.prop (PropName "reverse") reverse)
 closedProp :: Config i -> Maybe (IProp r i)
 closedProp { closed } = Just (HP.prop (PropName "closed") closed)
 
-bufferingDotsElt :: HH.HTML w i
+bufferingDotsElt :: forall w i . HH.HTML w i
 bufferingDotsElt = HH.div [ HP.class_ mdc_linear_progress__buffering_dots ] []
 
-bufferElt :: HH.HTML w i
+bufferElt :: forall w i . HH.HTML w i
 bufferElt = HH.div [ HP.class_ mdc_linear_progress__buffer ] []
 
-primaryBarElt :: HH.HTML w i
+primaryBarElt :: forall w i . HH.HTML w i
 primaryBarElt =
   HH.div [ HP.classes [ mdc_linear_progress__bar, mdc_linear_progress__primary_bar ] ]
     [ barInnerElt ]
 
-secondaryBarElt :: HH.HTML w i
+secondaryBarElt :: forall w i . HH.HTML w i
 secondaryBarElt =
   HH.div [ HP.classes [ mdc_linear_progress__bar, mdc_linear_progress__secondary_bar ] ]
     [ barInnerElt ]
 
-barInnerElt :: HH.HTML w i
+barInnerElt :: forall w i . HH.HTML w i
 barInnerElt = HH.div [ HP.class_ mdc_linear_progress__bar_inner ] []

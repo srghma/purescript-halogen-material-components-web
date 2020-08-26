@@ -10,6 +10,7 @@ import Data.Maybe as Maybe
 import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
+import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Halogen.SVG.Attributes as Halogen.SVG.Attributes
@@ -38,7 +39,7 @@ defaultConfig =
   , touch: true
   }
 
-checkbox :: Config i -> HH.HTML w i
+checkbox :: forall w i . Config i -> HH.HTML w i
 checkbox (config@{ touch, additionalAttributes }) =
   let
     wrapTouch node =
@@ -87,7 +88,7 @@ changeHandler { state, onChange } =
   -- have to check here if the state actually changed.
   map
     ( \r i ->
-        HE.on "change"
+        HE.onValueChange
           ( Decode.at [ "target", "checked" ] Decode.bool
               # Decode.andThen
                   ( \isChecked ->
@@ -101,7 +102,7 @@ changeHandler { state, onChange } =
     )
     onChange
 
-nativeControlElt :: Config i -> HH.HTML w i
+nativeControlElt :: forall w i . Config i -> HH.HTML w i
 nativeControlElt config =
   HH.input
     ( Array.catMaybes
@@ -114,7 +115,7 @@ nativeControlElt config =
     )
     []
 
-backgroundElt :: HH.HTML w i
+backgroundElt :: forall w i . HH.HTML w i
 backgroundElt =
   HH.div
     [ HP.class_ mdc_checkbox__background ]

@@ -9,6 +9,7 @@ import Data.Maybe as Maybe
 import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
+import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Chip.Input
@@ -46,7 +47,7 @@ tabIndexProp :: Int -> IProp r i
 tabIndexProp tabIndex = HP.prop (PropName "tabIndex") tabIndex
 
 removalHandler :: Chip.Config i -> Maybe (IProp r i)
-removalHandler { onDelete } = map (HE.on "MDCChip:removal" <<< Decode.succeed) onDelete
+removalHandler { onDelete } = map (HE.handler (EventType "MDCChip:removal")) onDelete
 
 rippleElt :: Maybe (HH.HTML w i)
 rippleElt = Just (HH.div [ HP.class_ mdc_chip__ripple ] [])

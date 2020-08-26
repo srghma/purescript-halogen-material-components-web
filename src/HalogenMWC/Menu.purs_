@@ -10,6 +10,7 @@ import Data.Maybe as Maybe
 import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
+import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Material.Classes.Menu
@@ -55,4 +56,4 @@ quickOpenProp :: Config i -> Maybe (IProp r i)
 quickOpenProp { quickOpen } = Just (HP.prop (PropName "quickOpen") quickOpen)
 
 closeHandler :: Config i -> Maybe (IProp r i)
-closeHandler { onClose } = map (HE.on "MDCMenu:close" <<< Decode.succeed) onClose
+closeHandler { onClose } = map (HE.handler (EventType "MDCMenu:close")) onClose

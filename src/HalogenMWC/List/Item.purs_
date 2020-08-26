@@ -10,6 +10,7 @@ import Data.Maybe as Maybe
 import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
+import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Material.Classes.List
@@ -21,7 +22,7 @@ type Config i =
     , target :: Maybe String
     , additionalAttributes :: Array (IProp I.HTMLdiv i)
     , onClick :: Maybe (Event -> i)
-    , node :: HH.HTML w i
+    , node :: forall w i . HH.HTML w i
     }
 
 data Selection

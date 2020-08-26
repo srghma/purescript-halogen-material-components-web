@@ -12,6 +12,7 @@ import Data.List as List
 import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
+import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Material.Classes.Button
@@ -160,7 +161,7 @@ timeoutMsProp message_ =
     Just (HP.prop (PropName "timeoutMs") normalizedTimeoutMs)
 
 closedHandler :: MessageId -> Config i -> Maybe (IProp r i)
-closedHandler messageId { onClosed } = Just (HE.on "MDCSnackbar:closed" (Decode.succeed (onClosed messageId)))
+closedHandler messageId { onClosed } = Just (HE.handler (EventType "MDCSnackbar:closed") (Decode.succeed (onClosed messageId)))
 
 ariaStatusRoleAttr :: IProp r i
 ariaStatusRoleAttr = HP.attr (AttrName "aria-role") "status"

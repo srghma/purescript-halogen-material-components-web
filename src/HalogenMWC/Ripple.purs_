@@ -10,6 +10,7 @@ import Data.Maybe as Maybe
 import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
+import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Material.Classes.Ripple
@@ -53,10 +54,10 @@ ripple isUnbounded config =
     )
     []
 
-bounded :: Config i -> HH.HTML w i
+bounded :: forall w i . Config i -> HH.HTML w i
 bounded = ripple false
 
-unbounded :: Config i -> HH.HTML w i
+unbounded :: forall w i . Config i -> HH.HTML w i
 unbounded = ripple true
 
 rippleSurface :: Maybe (IProp r i)

@@ -10,6 +10,7 @@ import Data.Maybe as Maybe
 import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
+import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Material.Classes.Dialog
@@ -62,7 +63,7 @@ ariaModalAttr :: Maybe (IProp r i)
 ariaModalAttr = Just (HP.attr (AttrName "aria-modal") "true")
 
 closeHandler :: Config i -> Maybe (IProp r i)
-closeHandler { onClose } = map (HE.on "MDCDialog:close" <<< Decode.succeed) onClose
+closeHandler { onClose } = map (HE.handler (EventType "MDCDialog:close")) onClose
 
 containerElt :: Content r i -> HH.HTML w i
 containerElt content = HH.div [ HP.class_ mdc_dialog__container ] [ surfaceElt content ]
@@ -93,5 +94,5 @@ actionsElt { actions } =
   else
     Just (HH.div [ HP.class_ mdc_dialog__actions ] actions)
 
-scrimElt :: HH.HTML w i
+scrimElt :: forall w i . HH.HTML w i
 scrimElt = HH.div [ HP.class_ mdc_dialog__scrim ] []

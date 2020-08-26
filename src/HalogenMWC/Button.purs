@@ -8,6 +8,7 @@ import DOM.HTML.Indexed as I
 import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
+import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import HalogenMWC.Button.Common as Common
 import HalogenMWC.Button.Common (Variant)

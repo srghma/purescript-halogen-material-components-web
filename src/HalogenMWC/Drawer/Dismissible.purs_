@@ -10,6 +10,7 @@ import Data.Maybe as Maybe
 import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
+import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Material.Classes.Drawer
@@ -62,7 +63,7 @@ openProp :: Config i -> Maybe (IProp r i)
 openProp { open } = Just (HP.prop (PropName "open") open)
 
 closeHandler :: Config i -> Maybe (IProp r i)
-closeHandler { onClose } = map (HE.on "MDCDrawer:close" <<< Decode.succeed) onClose
+closeHandler { onClose } = map (HE.handler (EventType "MDCDrawer:close")) onClose
 
 appContent :: IProp r i
 appContent = HP.class_ mdc_drawer_app_content

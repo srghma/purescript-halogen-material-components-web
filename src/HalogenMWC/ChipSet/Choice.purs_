@@ -12,6 +12,7 @@ import Data.Maybe as Maybe
 import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
+import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import MaterialIconsFont.Classes
@@ -92,7 +93,7 @@ gridcellRole :: IProp r i
 gridcellRole = HP.attr (AttrName "role") "gridcell"
 
 interactionHandler :: Maybe (Event -> i) -> Maybe (IProp r i)
-interactionHandler r i = map (HE.on "MDCChip:interaction" <<< Decode.succeed) r i
+interactionHandler r i = map (HE.handler (EventType "MDCChip:interaction")) r i
 
 rippleElt :: Maybe (HH.HTML w i)
 rippleElt = Just (HH.div [ HP.class_ mdc_chip__ripple ] [])

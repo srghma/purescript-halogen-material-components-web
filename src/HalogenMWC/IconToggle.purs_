@@ -12,6 +12,7 @@ import Data.Maybe as Maybe
 import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
+import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Material.Classes.IconButton
@@ -91,7 +92,7 @@ ariaLabelAttr { label } = map (HP.attr (AttrName "aria-label")) label
 
 changeHandler :: Config i -> Maybe (IProp r i)
 changeHandler { onChange } =
-  map (HE.on "MDCIconButtonToggle:change" <<< Decode.succeed)
+  map (HE.handler (EventType "MDCIconButtonToggle:change"))
     onChange
 
 disabledAttr :: Config i -> Maybe (IProp r i)

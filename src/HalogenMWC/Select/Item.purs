@@ -3,6 +3,7 @@ module HalogenMWC.Select.Item where
 import Halogen.HTML (IProp)
 import DOM.HTML.Indexed as I
 import Halogen.HTML as HH
+import Halogen.HTML.Events as HE
 
 type Config a i
   = { value :: a

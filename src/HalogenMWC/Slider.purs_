@@ -10,6 +10,7 @@ import Data.Maybe as Maybe
 import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
+import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Halogen.SVG.Attributes as Halogen.SVG.Attributes
@@ -55,7 +56,7 @@ This works best for integer-valued sliders, but this is not a requirement.
 Note that this option is ignored by non-discrete sliders.
 
 -}
-slider :: Config i -> HH.HTML w i
+slider :: forall w i . Config i -> HH.HTML w i
 slider config =
   HH.element (ElemName "mdc-slider")
     ( Array.catMaybes
@@ -135,21 +136,21 @@ changeHandler :: Config i -> Maybe (IProp r i)
 changeHandler { onInput } =
   map
     ( \handler ->
-        HE.on "MDCSlider:input"
+        HE.handler (EventType "MDCSlider:input")
           (Decode.map handler (Decode.at [ "target", "value" ] Decode.float))
     )
     onInput
 
-trackContainerElt :: HH.HTML w i
+trackContainerElt :: forall w i . HH.HTML w i
 trackContainerElt = HH.div [ HP.class_ mdc_slider__track_container ] [ trackElt, trackMarkerContainerElt ]
 
-trackElt :: HH.HTML w i
+trackElt :: forall w i . HH.HTML w i
 trackElt = HH.div [ HP.class_ mdc_slider__track ] []
 
-trackMarkerContainerElt :: HH.HTML w i
+trackMarkerContainerElt :: forall w i . HH.HTML w i
 trackMarkerContainerElt = HH.div [ HP.class_ mdc_slider__track_marker_container ] []
 
-thumbContainerElt :: Config i -> HH.HTML w i
+thumbContainerElt :: forall w i . Config i -> HH.HTML w i
 thumbContainerElt { discrete } =
   HH.div [ HP.class_ mdc_slider__thumb_container ]
     ( if discrete then
@@ -158,13 +159,13 @@ thumbContainerElt { discrete } =
         [ thumbElt, focusRingElt ]
     )
 
-pinElt :: HH.HTML w i
+pinElt :: forall w i . HH.HTML w i
 pinElt = HH.div [ HP.class_ mdc_slider__pin ] [ pinValueMarkerElt ]
 
-pinValueMarkerElt :: HH.HTML w i
+pinValueMarkerElt :: forall w i . HH.HTML w i
 pinValueMarkerElt = HH.div [ HP.class_ mdc_slider__pin_value_marker ] []
 
-thumbElt :: HH.HTML w i
+thumbElt :: forall w i . HH.HTML w i
 thumbElt =
   Halogen.SVG.Elements.svg
     [ Halogen.SVG.Attributes.class_ "mdc-slider__thumb"
@@ -179,5 +180,5 @@ thumbElt =
         []
     ]
 
-focusRingElt :: HH.HTML w i
+focusRingElt :: forall w i . HH.HTML w i
 focusRingElt = HH.div [ HP.class_ mdc_slider__focus_ring ] []

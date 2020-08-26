@@ -10,6 +10,7 @@ import Data.Maybe as Maybe
 import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
+import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Array as Array
@@ -140,13 +141,13 @@ leadingIconElt { leadingIcon } = case leadingIcon of
   Just (Icon icon_) -> icon_
   Nothing -> HH.text ""
 
-dropdownIconElt :: HH.HTML w i
+dropdownIconElt :: forall w i . HH.HTML w i
 dropdownIconElt = HH.i [ HP.class_ mdc_select__dropdown_icon ] []
 
 floatingLabelElt :: Config a r i -> HH.HTML w i
 floatingLabelElt { label } = HH.div [ HP.class_ mdc_floating_label ] [ HH.text (Maybe.fromMaybe "" label) ]
 
-lineRippleElt :: HH.HTML w i
+lineRippleElt :: forall w i . HH.HTML w i
 lineRippleElt = HH.label [ HP.class_ mdc_line_ripple ] []
 
 notchedOutlineElt :: Config a r i -> HH.HTML w i
@@ -193,5 +194,5 @@ listItemConfig selectedValue onChange { value, disabled, additionalAttributes } 
           Nothing -> identity
       )
 
-selectedTextElt :: HH.HTML w i
+selectedTextElt :: forall w i . HH.HTML w i
 selectedTextElt = HH.div [ HP.class_ mdc_select__selected_text ] []

@@ -10,6 +10,7 @@ import Data.Maybe as Maybe
 import Halogen
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
+import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Array.Item (Config, ArrayItem)
@@ -132,7 +133,7 @@ clickHandler listItems =
                 Nothing -> Decode.fail ""
             )
   in
-    Just (HE.on "MDCArray:action" mergedClickHandler)
+    Just (HE.handler (EventType "MDCArray:action") mergedClickHandler)
 
 selectedIndexProp :: Array (ArrayItem r i) -> Maybe (IProp r i)
 selectedIndexProp listItems =
