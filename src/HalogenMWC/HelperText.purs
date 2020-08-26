@@ -1,16 +1,13 @@
 module HalogenMWC.HelperText where
 
-import Protolude
+import Protolude (($), (<>))
 
-import Data.Array as Array
-import Data.Maybe as Maybe
 import DOM.HTML.Indexed as I
-import Halogen
+import Halogen (AttrName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
-import Material.Classes.Textfield
+import Material.Classes.Textfield (mdc_text_field_character_counter, mdc_text_field_helper_line, mdc_text_field_helper_text, mdc_text_field_helper_text____persistent)
 
 type Config i =
   { persistent :: Boolean

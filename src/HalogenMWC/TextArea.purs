@@ -1,8 +1,8 @@
 module HalogenMWC.TextArea where
 
-import Halogen
-import Material.Classes.Textfield
-import Protolude
+import Halogen (AttrName(..), ElemName(..), PropName(..))
+import Material.Classes.Textfield (mdc_floating_label, mdc_floating_label____float_above, mdc_notched_outline, mdc_notched_outline__leading, mdc_notched_outline__notch, mdc_notched_outline__trailing, mdc_text_field, mdc_text_field____disabled, mdc_text_field____fullwidth, mdc_text_field____no_label, mdc_text_field____outlined, mdc_text_field____textarea, mdc_text_field__input)
+import Protolude (class Eq, Maybe(..), map, show, ($), (/=), (<<<), (<>), (==))
 
 import Data.Array as Array
 import Data.Maybe as Maybe
@@ -10,7 +10,6 @@ import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Utils as Utils
 import DOM.HTML.Indexed as I
 

@@ -3,6 +3,8 @@ module HalogenMWC.IconToggle where
 import Material.Classes.IconButton
 import MaterialIconsFont.Classes
 import Protolude
+import MaterialIconsFont.Classes
+import Web.Event.Event
 
 import Data.Array as Array
 import Data.Maybe as Maybe

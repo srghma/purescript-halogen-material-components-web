@@ -3,6 +3,8 @@ module HalogenMWC.Card where
 import HalogenMWC.Button
 import HalogenMWC.IconButton
 import Protolude
+import MaterialIconsFont.Classes
+import Web.Event.Event
 
 import Data.Array as Array
 import Data.Maybe as Maybe

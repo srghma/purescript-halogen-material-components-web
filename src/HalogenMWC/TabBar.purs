@@ -1,22 +1,21 @@
 module HalogenMWC.TabBar where
 
-import Halogen
-import Material.Classes.TabBar
-import Protolude
+import Halogen (AttrName(..), ElemName(..), PropName(..))
+import Material.Classes.Tab (mdc_tab, mdc_tab____min_width, mdc_tab____stacked, mdc_tab__content, mdc_tab__icon, mdc_tab__ripple, mdc_tab__text_label)
+import Material.Classes.TabIndicator (mdc_tab_indicator, mdc_tab_indicator__content, mdc_tab_indicator__content____underline)
+import Material.Classes.TabScroller (mdc_tab_scroller, mdc_tab_scroller____align_center, mdc_tab_scroller____align_end, mdc_tab_scroller____align_start, mdc_tab_scroller__scroll_area, mdc_tab_scroller__scroll_content)
+import Protolude (Maybe(..), map, ($), (<>))
+import MaterialIconsFont.Classes (material_icons)
 
 import DOM.HTML.Indexed as I
 import Data.Array as Array
-import Data.Maybe as Maybe
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Tab as Tab
-import Material.Classes.Tab
 import Material.Classes.TabBar (mdc_tab_bar)
-import Material.Classes.TabScroller
-import Material.Classes.TabIndicator
+import Web.Event.Event (EventType(..))
 
 type Config i =
   { stacked :: Boolean
@@ -55,79 +54,12 @@ activeTabIndexProp tabs =
   in
     map (HP.prop (PropName "activeTabIndex")) activeTabIndex
 
-viewTab :: Config i -> Tab.Config i -> HH.HTML w i
-viewTab barConfig tabConfig =
-  HH.button
-    ( Array.catMaybes
-        [ Just $ HP.class_ $ Array.concat
-          [ [ mdc_tab ]
-          , if barConfig.stacked then [ mdc_tab____stacked ] else []
-          , if barConfig.minWidth then [ mdc_tab____min_width ] else []
-          ]
-        , Just (HP.attr (AttrName "role") "tab")
-        , map (HE.handler "MDCTab:interacted" <<< Decode.succeed) tabConfig.onClick
-        ]
-        <> tabConfig.additionalAttributes
-    )
-    ( Array.catMaybes
-        $ if barConfig.indicatorSpansContent then
-            [ tabContentElt barConfig tabConfig tabConfig.content
-            , tabRippleElt
-            ]
-          else
-            [ tabContentElt barConfig tabConfig tabConfig.content
-            , tabIndicatorElt tabConfig
-            , tabRippleElt
-            ]
-    )
-
-tabContentElt :: Config i -> Tab.Config.Config i -> Tab.Config.Content -> HH.HTML w i
-tabContentElt barConfig config content =
-    HH.div [ HP.class_ mdc_tab__content ]
-        ( if barConfig.indicatorSpansContent then
-            Array.catMaybes
-              [ tabIconElt content
-              , tabTextLabelElt content
-              , tabIndicatorElt config
-              ]
-          else
-            Array.catMaybes
-              [ tabIconElt content
-              , tabTextLabelElt content
-              ]
-        )
-
-tabIconElt :: Tab.Config.Content -> Maybe (HH.HTML w i)
-tabIconElt configContent =
-  map
-    ( \iconName ->
-        HH.span
-          [ HP.class_ mdc_tab__icon material_icons ]
-          [ HH.text iconName ]
-    )
-    configContent.icon
-
-tabTextLabelElt :: Tab.Config.Content -> HH.HTML w i
-tabTextLabelElt configContent = HH.span [ HP.class_ mdc_tab__text_label ] [ HH.text configContent.label ]
-
-tabIndicatorElt :: HH.HTML w i
-tabIndicatorElt =
-  HH.span
-  [ HP.class_ mdc_tab_indicator ]
-  [ HH.span
-    [ HP.classes [ mdc_tab_indicator__content, mdc_tab_indicator__content____underline ] ]
-    []
-  ]
-
-tabRippleElt :: HH.HTML w i
-tabRippleElt = HH.span [ HP.class_ mdc_tab__ripple ] []
-
 data Align
   = Start
   | End
   | Center
 
-tabScroller :: Config i -> Maybe Align -> Array (Tab.Config i) -> HH.HTML w i
+tabScroller :: forall w i . Config i -> Maybe Align -> Array (Tab.Config i) -> HH.HTML w i
 tabScroller config align tabs =
   HH.div
     [ HP.classes $
@@ -142,8 +74,74 @@ tabScroller config align tabs =
     ]
     [ tabScrollerScrollAreaElt config tabs ]
 
-tabScrollerScrollAreaElt :: Config i -> Array (Tab.Config i) -> HH.HTML w i
+tabScrollerScrollAreaElt :: forall w i . Config i -> Array (Tab.Config i) -> HH.HTML w i
 tabScrollerScrollAreaElt barConfig tabs = HH.div [ HP.class_ mdc_tab_scroller__scroll_area ] [ tabScrollerScrollContentElt barConfig tabs ]
 
-tabScrollerScrollContentElt :: Config i -> Array (Tab.Config i) -> HH.HTML w i
+tabScrollerScrollContentElt :: forall w i . Config i -> Array (Tab.Config i) -> HH.HTML w i
 tabScrollerScrollContentElt barConfig tabs = HH.div [ HP.class_ mdc_tab_scroller__scroll_content ] (map (viewTab barConfig) tabs)
+
+viewTab :: forall w i . Config i -> Tab.Config i -> HH.HTML w i
+viewTab barConfig tabConfig =
+  HH.button
+    ( Array.catMaybes
+        [ Just $ HP.classes $ Array.catMaybes
+          [ Just mdc_tab
+          , if barConfig.stacked then Just mdc_tab____stacked else Nothing
+          , if barConfig.minWidth then Just mdc_tab____min_width else Nothing
+          ]
+        , Just (HP.attr (AttrName "role") "tab")
+        , map (HE.handler (EventType "MDCTab:interacted")) tabConfig.onClick
+        ]
+        <> tabConfig.additionalAttributes
+    )
+    ( if barConfig.indicatorSpansContent then
+        [ tabContentElt barConfig tabConfig tabConfig.content
+        , tabRippleElt
+        ]
+      else
+        [ tabContentElt barConfig tabConfig tabConfig.content
+        , tabIndicatorElt
+        , tabRippleElt
+        ]
+    )
+
+tabRippleElt :: forall w i . HH.HTML w i
+tabRippleElt = HH.span [ HP.class_ mdc_tab__ripple ] []
+
+tabContentElt :: forall w i . Config i -> Tab.Config i -> Tab.Content -> HH.HTML w i
+tabContentElt barConfig config content =
+    HH.div
+    [ HP.class_ mdc_tab__content ]
+    ( if barConfig.indicatorSpansContent then
+        Array.catMaybes
+          [ tabIconElt content.icon
+          , Just $ tabTextLabelElt content.label
+          , Just $ tabIndicatorElt
+          ]
+      else
+        Array.catMaybes
+          [ tabIconElt content.icon
+          , Just $ tabTextLabelElt content.label
+          ]
+    )
+
+tabIconElt :: forall w i . Maybe String -> Maybe (HH.HTML w i)
+tabIconElt =
+  map
+    ( \iconName ->
+        HH.span
+          [ HP.classes [ mdc_tab__icon, material_icons ] ]
+          [ HH.text iconName ]
+    )
+
+tabTextLabelElt :: forall w i . String -> HH.HTML w i
+tabTextLabelElt label = HH.span [ HP.class_ mdc_tab__text_label ] [ HH.text label ]
+
+tabIndicatorElt :: forall w i . HH.HTML w i
+tabIndicatorElt =
+  HH.span
+  [ HP.class_ mdc_tab_indicator ]
+  [ HH.span
+    [ HP.classes [ mdc_tab_indicator__content, mdc_tab_indicator__content____underline ] ]
+    []
+  ]

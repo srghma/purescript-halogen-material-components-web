@@ -3,6 +3,8 @@ module HalogenMWC.ChipSet.Choice where
 import HalogenMWC.Chip.Choice
 import Material.Classes.Chips
 import Protolude
+import MaterialIconsFont.Classes
+import Web.Event.Event
 
 import Data.Array as Array
 import Data.Maybe as Maybe

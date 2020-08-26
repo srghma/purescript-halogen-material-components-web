@@ -1,6 +1,6 @@
 module HalogenMWC.ImageList.Item where
 
-import Protolude
+import Protolude (Maybe(..))
 import Halogen.HTML (IProp)
 
 type Config r i
