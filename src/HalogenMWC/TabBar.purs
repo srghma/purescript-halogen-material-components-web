@@ -11,7 +11,6 @@ import Data.Array as Array
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
-import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import HalogenMWC.Tab as Tab
 import Material.Classes.TabBar (mdc_tab_bar)

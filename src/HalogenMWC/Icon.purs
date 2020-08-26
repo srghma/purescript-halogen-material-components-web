@@ -5,7 +5,6 @@ import Protolude ((<>))
 import DOM.HTML.Indexed (HTMLi) as I
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
-import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 
 icon :: forall w i. Array (IProp I.HTMLi i) -> String -> HH.HTML w i

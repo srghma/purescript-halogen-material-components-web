@@ -8,7 +8,6 @@ import Data.Maybe as Maybe
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
-import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import HalogenMWC.Utils as Utils
 import DOM.HTML.Indexed as I

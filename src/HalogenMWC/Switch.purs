@@ -1,20 +1,16 @@
 module HalogenMWC.Switch where
 
-import Protolude
+import Protolude (Maybe(..), map, (<>))
 import DOM.HTML.Indexed as I
-import MaterialIconsFont.Classes
-import Web.Event.Event
 import Data.Array as Array
-import Data.Maybe as Maybe
 
-import Halogen
+import Halogen (AttrName(..), ElemName(..), PropName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
-import Material.Classes.Switch
-import DOM.HTML.Indexed.InputType
+import Material.Classes.Switch (mdc_switch, mdc_switch__native_control, mdc_switch__thumb, mdc_switch__thumb_underlay, mdc_switch__track)
+import DOM.HTML.Indexed.InputType (InputType(..))
 
 type Config i =
   { checked :: Boolean

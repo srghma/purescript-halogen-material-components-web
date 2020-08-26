@@ -1,19 +1,14 @@
 module HalogenMWC.TopAppBar where
 
-import Material.Classes.TopAppBar
-import Protolude
+import Material.Classes.TopAppBar (mdc_top_app_bar, mdc_top_app_bar____dense, mdc_top_app_bar____fixed, mdc_top_app_bar____prominent, mdc_top_app_bar____short, mdc_top_app_bar____short_collapsed, mdc_top_app_bar__row, mdc_top_app_bar__section)
+import Protolude (($), (<>))
 import DOM.HTML.Indexed as I
-import MaterialIconsFont.Classes
-import Web.Event.Event
 
 import Data.Array as Array
-import Data.Maybe as Maybe
-import Halogen
+import Halogen (ClassName, ElemName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
-import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 type Config i =
   { dense :: Boolean

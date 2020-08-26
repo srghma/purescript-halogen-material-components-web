@@ -5,7 +5,6 @@ import DOM.HTML.Indexed as I
 import Halogen (AttrName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
-import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Material.Classes.Textfield (mdc_text_field_character_counter, mdc_text_field_helper_line, mdc_text_field_helper_text, mdc_text_field_helper_text____persistent)
 
