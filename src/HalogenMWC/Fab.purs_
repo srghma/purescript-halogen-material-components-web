@@ -43,7 +43,7 @@ fab (config@{ additionalAttributes }) iconName =
     ]
 
 tabIndexProp :: Int -> Maybe (IProp r i)
-tabIndexProp tabIndex = Just (HP.prop "tabIndex" tabIndex)
+tabIndexProp tabIndex = Just (HP.prop (PropName "tabIndex") tabIndex)
 
 rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_fab)

@@ -66,7 +66,7 @@ colorCs { color } = case color of
   Nothing -> Nothing
 
 unboundedProp :: Boolean -> Maybe (IProp r i)
-unboundedProp isUnbounded = Just (HP.prop "unbounded" isUnbounded)
+unboundedProp isUnbounded = Just (HP.prop (PropName "unbounded") isUnbounded)
 
 unboundedData :: Boolean -> Maybe (IProp r i)
 unboundedData isUnbounded =

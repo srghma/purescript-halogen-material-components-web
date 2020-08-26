@@ -77,7 +77,7 @@ chipPrimaryActionCs :: IProp r i
 chipPrimaryActionCs = HP.class_ mdc_chip__primary_action
 
 selectedProp :: Boolean -> Maybe (IProp r i)
-selectedProp selected = Just (HP.prop "selected" selected)
+selectedProp selected = Just (HP.prop (PropName "selected") selected)
 
 buttonRole :: IProp r i
 buttonRole = HP.attr (AttrName "role") "button"

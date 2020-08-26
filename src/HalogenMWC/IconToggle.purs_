@@ -55,7 +55,7 @@ rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_icon_button)
 
 onProp :: Config r i -> Maybe (IProp r i)
-onProp { on } = Just (HP.prop "on" on)
+onProp { on } = Just (HP.prop (PropName "on") on)
 
 materialIconsCs :: Maybe (IProp r i)
 materialIconsCs = Just (HP.class_ material_icons)

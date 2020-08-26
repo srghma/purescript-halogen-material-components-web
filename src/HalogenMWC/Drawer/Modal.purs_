@@ -56,7 +56,7 @@ modalCs :: Maybe (IProp r i)
 modalCs = Just (HP.class_ mdc_drawer____modal)
 
 openProp :: Config r i -> Maybe (IProp r i)
-openProp { open } = Just (HP.prop "open" open)
+openProp { open } = Just (HP.prop (PropName "open") open)
 
 closeHandler :: Config r i -> Maybe (IProp r i)
 closeHandler { onClose } = map (HE.on "MDCDrawer:close" <<< Decode.succeed) onClose

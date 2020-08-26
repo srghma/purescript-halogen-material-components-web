@@ -46,10 +46,10 @@ rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.classes [mdc_menu, mdc_menu_surface])
 
 openProp :: Config r i -> Maybe (IProp r i)
-openProp { open } = Just (HP.prop "open" open)
+openProp { open } = Just (HP.prop (PropName "open") open)
 
 quickOpenProp :: Config r i -> Maybe (IProp r i)
-quickOpenProp { quickOpen } = Just (HP.prop "quickOpen" quickOpen)
+quickOpenProp { quickOpen } = Just (HP.prop (PropName "quickOpen") quickOpen)
 
 closeHandler :: Config r i -> Maybe (IProp r i)
 closeHandler { onClose } = map (HE.on "MDCMenu:close" <<< Decode.succeed) onClose

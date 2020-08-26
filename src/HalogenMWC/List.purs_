@@ -155,7 +155,7 @@ selectedIndexProp listItems =
             )
         # Array.catMaybes
   in
-    Just (HP.prop "selectedIndex" (Encode.list selectedIndex))
+    Just (HP.prop (PropName "selectedIndex") (Encode.list selectedIndex))
 
 group :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
 group additionalAttributes nodes = HH.div ([ listGroupCs ] <> additionalAttributes) nodes
@@ -170,4 +170,4 @@ listGroupSubheaderCs :: IProp r i
 listGroupSubheaderCs = HP.class_ mdc_list_group__subheader
 
 wrapFocusProp :: Config r i -> Maybe (IProp r i)
-wrapFocusProp { wrapFocus } = Just (HP.prop "wrapFocus" wrapFocus)
+wrapFocusProp { wrapFocus } = Just (HP.prop (PropName "wrapFocus") wrapFocus)

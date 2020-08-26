@@ -44,10 +44,10 @@ rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_switch)
 
 checkedProp :: Config r i -> Maybe (IProp r i)
-checkedProp { checked } = Just (HP.prop "checked" checked)
+checkedProp { checked } = Just (HP.prop (PropName "checked") checked)
 
 disabledProp :: Config r i -> Maybe (IProp r i)
-disabledProp { disabled } = Just (HP.prop "disabled" disabled)
+disabledProp { disabled } = Just (HP.prop (PropName "disabled") disabled)
 
 nativeControlCs :: Maybe (IProp r i)
 nativeControlCs = Just (HP.class_ mdc_switch__native_control)

@@ -43,7 +43,7 @@ chip (Chip (config@{ additionalAttributes }) label) =
     ]
 
 selectedProp :: Chip.Config r i -> Maybe (IProp r i)
-selectedProp { selected } = Just (HP.prop "selected" selected)
+selectedProp { selected } = Just (HP.prop (PropName "selected") selected)
 
 interactionHandler :: Chip.Config r i -> Maybe (IProp r i)
 interactionHandler { onChange } = map (HE.on "MDCChip:interaction" <<< Decode.succeed) onChange
