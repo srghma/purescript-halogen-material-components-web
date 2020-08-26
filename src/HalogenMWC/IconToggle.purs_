@@ -36,7 +36,7 @@ defaultConfig =
 -}
 iconToggle :: Config r i -> { onIcon :: String, offIcon :: String } -> HH.HTML w i
 iconToggle (config@{ additionalAttributes }) { onIcon, offIcon } =
-  HH.element (ElemName "mdc-icon-button"
+  HH.element (ElemName "mdc-icon-button")
     ( Array.catMaybes
         [ rootCs
         , onProp config

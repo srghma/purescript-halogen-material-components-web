@@ -36,7 +36,7 @@ accent = Accent
 
 ripple :: Boolean -> Config r i -> HH.HTML w i
 ripple isUnbounded (config@{ additionalAttributes }) =
-  HH.element (ElemName "mdc-ripple"
+  HH.element (ElemName "mdc-ripple")
     ( Array.catMaybes
         [ unboundedProp isUnbounded
         , unboundedData isUnbounded

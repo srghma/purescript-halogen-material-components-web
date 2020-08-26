@@ -30,7 +30,7 @@ defaultConfig =
 
 iconButton :: Config r i -> String -> HH.HTML w i
 iconButton config iconName =
-  HH.element (ElemName "mdc-icon-button"
+  HH.element (ElemName "mdc-icon-button")
     ( Array.catMaybes
         [ rootCs
         , materialIconsCs
@@ -43,7 +43,7 @@ iconButton config iconName =
 
 custom :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
 custom config nodes =
-  HH.element (ElemName "mdc-icon-button"
+  HH.element (ElemName "mdc-icon-button")
     ( Array.catMaybes
         [ rootCs
         , tabIndexProp

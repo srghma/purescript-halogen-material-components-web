@@ -30,7 +30,7 @@ defaultConfig =
 
 menu :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
 menu (config@{ additionalAttributes }) nodes =
-  HH.element (ElemName "mdc-menu"
+  HH.element (ElemName "mdc-menu")
     ( Array.catMaybes
         [ rootCs
         , openProp config

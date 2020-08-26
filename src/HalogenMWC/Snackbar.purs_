@@ -73,7 +73,7 @@ snackbar config queue =
         # map (Tuple.mapSecond Just)
         # Maybe.fromMaybe (Tuple (MessageId - 1) Nothing)
   in
-    HH.element (ElemName "mdc-snackbar"
+    HH.element (ElemName "mdc-snackbar")
       ( Array.catMaybes
           [ rootCs
           , closeOnEscapeProp config

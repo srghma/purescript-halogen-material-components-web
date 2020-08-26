@@ -61,7 +61,7 @@ select variant (config@{ leadingIcon, selected, additionalAttributes, onChange }
         # Array.catMaybes
         # Array.head
   in
-    HH.element (ElemName "mdc-select"
+    HH.element (ElemName "mdc-select")
       ( Array.catMaybes
           [ rootCs
           , outlinedCs variant

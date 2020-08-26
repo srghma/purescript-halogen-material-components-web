@@ -23,7 +23,7 @@ chipSet additionalAttributes keyedChips =
 chip :: Chip r i -> HH.HTML w i
 chip (Chip config label) =
   HH.div [ HP.class_ mdc_touch_target_wrapper ]
-    [ HH.element (ElemName "mdc-chip"
+    [ HH.element (ElemName "mdc-chip")
         ( Array.catMaybes
             [ HP.class_ mdc_chip
             , HP.class_ mdc_chip____touch

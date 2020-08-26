@@ -54,7 +54,7 @@ list (config@{ additionalAttributes }) firstArrayItem remainingArrayItems =
   let
     listItems = [ firstArrayItem ] <> remainingArrayItems
   in
-    HH.element (ElemName "mdc-list"
+    HH.element (ElemName "mdc-list")
       ( Array.catMaybes
           [ rootCs
           , nonInteractiveCs config

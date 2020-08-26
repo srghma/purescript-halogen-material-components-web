@@ -33,7 +33,7 @@ defaultConfig =
 
 linearProgress :: Variant -> Config r i -> HH.HTML w i
 linearProgress variant (config@{ additionalAttributes }) =
-  HH.element (ElemName "mdc-linear-progress"
+  HH.element (ElemName "mdc-linear-progress")
     ( Array.catMaybes
         [ rootCs
         , displayCss

@@ -47,7 +47,7 @@ checkbox (config@{ touch, additionalAttributes }) =
         node
   in
     wrapTouch
-      $ HH.element (ElemName "mdc-checkbox"
+      $ HH.element (ElemName "mdc-checkbox")
           ( Array.catMaybes
               [ rootCs
               , touchCs config

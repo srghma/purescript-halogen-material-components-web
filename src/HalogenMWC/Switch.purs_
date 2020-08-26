@@ -30,7 +30,7 @@ defaultConfig =
 
 switch :: Config r i -> HH.HTML w i
 switch (config@{ additionalAttributes }) =
-  HH.element (ElemName "mdc-switch"
+  HH.element (ElemName "mdc-switch")
     ( Array.catMaybes
         [ rootCs
         , checkedProp config

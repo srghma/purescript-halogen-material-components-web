@@ -18,14 +18,14 @@ import Material.Classes.Chips
 
 chipSet :: Array (IProp r i) -> Array (Chip r i) -> HH.HTML w i
 chipSet additionalAttributes chips =
-  HH.element (ElemName "mdc-chip-set"
+  HH.element (ElemName "mdc-chip-set")
     ([ HP.class_ mdc_chip_set, HP.class_ mdc_chip_set____filter, HP.attr (AttrName "role") "grid" ] <> additionalAttributes)
     (map chip chips)
 
 chip :: Chip r i -> HH.HTML w i
 chip (Chip (config@{ additionalAttributes }) label) =
   HH.div [ HP.class_ mdc_touch_target_wrapper ]
-    [ HH.element (ElemName "mdc-chip"
+    [ HH.element (ElemName "mdc-chip")
         ( Array.catMaybes
             [ HP.class_ mdc_chip
             , HP.class_ mdc_chip____touch

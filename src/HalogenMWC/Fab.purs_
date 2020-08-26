@@ -30,7 +30,7 @@ defaultConfig =
 
 fab :: Config r i -> String -> HH.HTML w i
 fab (config@{ additionalAttributes }) iconName =
-  HH.element (ElemName "mdc-fab"
+  HH.element (ElemName "mdc-fab")
     ( Array.catMaybes
         [ rootCs
         , miniCs config

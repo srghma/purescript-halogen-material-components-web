@@ -16,7 +16,7 @@ import HalogenMWC.Chip.Action
 
 chipSet :: Array (IProp r i) -> Array (Chip r i) -> HH.HTML w i
 chipSet additionalAttributes chips =
-  HH.element (ElemName "mdc-chip-set"
+  HH.element (ElemName "mdc-chip-set")
     ( [ HP.classes [ mdc_chip_set, mdc_chip_set____action ]
       , HP.attr (AttrName "role") "grid"
       ]
@@ -27,7 +27,7 @@ chipSet additionalAttributes chips =
 chip :: Chip r i -> HH.HTML w i
 chip (Chip config label) =
   HH.div [ HP.class_ mdc_touch_target_wrapper ]
-    [ HH.element (ElemName "mdc-chip"
+    [ HH.element (ElemName "mdc-chip")
         ( [ HP.classes [ mdc_chip, mdc_chip____touch ]
           , HP.attr (AttrName "role") "row"
           -- | , interactionHandler config

@@ -33,7 +33,7 @@ dataTable ::
   } ->
   HH.HTML w i
 dataTable (config@{ additionalAttributes }) { thead, tbody } =
-  HH.element (ElemName "mdc-data-table"
+  HH.element (ElemName "mdc-data-table")
     ([ dataTableCs ] <> additionalAttributes)
     [ HH.table
         ( Array.catMaybes
