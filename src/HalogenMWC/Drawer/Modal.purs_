@@ -54,10 +54,10 @@ subtitle :: IProp r i
 subtitle = HP.class_ mdc_drawer__subtitle
 
 rootCs :: Maybe (IProp r i)
-rootCs = Just (HP.class_ mdc_drawer)
+rootCs = Just mdc_drawer
 
 modalCs :: Maybe (IProp r i)
-modalCs = Just (HP.class_ mdc_drawer____modal)
+modalCs = Just mdc_drawer____modal
 
 openProp :: Config i -> Maybe (IProp r i)
 openProp { open } = Just (HP.prop (PropName "open") open)

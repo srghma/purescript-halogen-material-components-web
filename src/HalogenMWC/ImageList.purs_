@@ -45,14 +45,14 @@ imageArray config listItems =
 masonryCs :: Config i -> Maybe (IProp r i)
 masonryCs { masonry } =
   if masonry then
-    Just (HP.class_ mdc_image_list____masonry)
+    Just mdc_image_list____masonry
   else
     Nothing
 
 withTextProtectionCs :: Config i -> Maybe (IProp r i)
 withTextProtectionCs { withTextProtection } =
   if withTextProtection then
-    Just (HP.class_ mdc_image_list____with_text_protection)
+    Just mdc_image_list____with_text_protection
   else
     Nothing
 
@@ -78,7 +78,7 @@ imageAspectContainerElt :: Boolean -> ImageArrayItem r i -> HH.HTML w i
 imageAspectContainerElt masonry (listItem@(ImageArrayItem.ImageArrayItem { href })) =
   HH.div
     ( Array.catMaybes
-        [ Just (HP.class_ mdc_image_list__image_aspect_container)
+        [ Just mdc_image_list__image_aspect_container
         , map (\_ -> HP.class_ mdc_ripple_surface) href
         ]
     )
@@ -102,7 +102,7 @@ imageElt masonry (ImageArrayItem.ImageArrayItem { href, image }) =
     else
       HH.div
         [ HP.class_ mdc_image_list__image
-        , style "background-image" ("url('" <> image <> "')")
+        , HP.attr (AttrName "style") "background-image" ("url('" <> image <> "')")
         ]
         []
 

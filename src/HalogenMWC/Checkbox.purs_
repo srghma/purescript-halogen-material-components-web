@@ -64,12 +64,12 @@ checkbox (config@{ touch, additionalAttributes }) =
           ]
 
 rootCs :: Maybe (IProp r i)
-rootCs = Just (HP.class_ mdc_checkbox)
+rootCs = Just mdc_checkbox
 
 touchCs :: Config i -> Maybe (IProp r i)
 touchCs { touch } =
   if touch then
-    Just (HP.class_ mdc_checkbox____touch)
+    Just mdc_checkbox____touch
   else
     Nothing
 
@@ -107,7 +107,7 @@ nativeControlElt config =
   HH.input
     ( Array.catMaybes
         [ Just (HP.type_ "checkbox")
-        , Just (HP.class_ mdc_checkbox__native_control)
+        , Just mdc_checkbox__native_control
         , checkedProp config
         , indeterminateProp config
         , changeHandler config

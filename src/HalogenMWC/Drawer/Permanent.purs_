@@ -39,4 +39,4 @@ subtitle :: IProp r i
 subtitle = HP.class_ mdc_drawer__subtitle
 
 rootCs :: Maybe (IProp r i)
-rootCs = Just (HP.class_ mdc_drawer)
+rootCs = Just mdc_drawer

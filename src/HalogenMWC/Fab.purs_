@@ -50,19 +50,19 @@ tabIndexProp :: Int -> Maybe (IProp r i)
 tabIndexProp tabIndex = Just (HP.prop (PropName "tabIndex") tabIndex)
 
 rootCs :: Maybe (IProp r i)
-rootCs = Just (HP.class_ mdc_fab)
+rootCs = Just mdc_fab
 
 miniCs :: Config i -> Maybe (IProp r i)
 miniCs { mini } =
   if mini then
-    Just (HP.class_ mdc_fab____mini)
+    Just mdc_fab____mini
   else
     Nothing
 
 exitedCs :: Config i -> Maybe (IProp r i)
 exitedCs { exited } =
   if exited then
-    Just (HP.class_ mdc_fab____exited)
+    Just mdc_fab____exited
   else
     Nothing
 

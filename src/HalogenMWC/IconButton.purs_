@@ -56,13 +56,13 @@ custom config nodes =
     nodes
 
 rootCs :: Maybe (IProp r i)
-rootCs = Just (HP.class_ mdc_icon_button)
+rootCs = Just mdc_icon_button
 
 materialIconsCs :: Maybe (IProp r i)
-materialIconsCs = Just (HP.class_ material_icons)
+materialIconsCs = Just material_icons
 
 tabIndexProp :: Maybe (IProp r i)
-tabIndexProp = Just (HP.tabindex 0)
+tabIndexProp = Just (HP.tabIndex 0)
 
 clickHandler :: Config i -> Maybe (IProp r i)
 clickHandler config = map HE.onClick config.onClick

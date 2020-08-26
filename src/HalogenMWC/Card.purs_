@@ -53,9 +53,9 @@ actionsElt content = case content.actions of
   Just (Actions { buttons, icons, fullBleed }) ->
     [ HH.div
         ( Array.catMaybes
-            [ Just (HP.class_ mdc_card__actions)
+            [ Just mdc_card__actions
             , if fullBleed then
-                Just (HP.class_ mdc_card__actions____full_bleed)
+                Just mdc_card__actions____full_bleed
               else
                 Nothing
             ]
@@ -81,7 +81,7 @@ actionsElt content = case content.actions of
 outlinedCs :: Config i -> Maybe (IProp r i)
 outlinedCs config =
   if config.outlined then
-    Just (HP.class_ mdc_card____outlined)
+    Just mdc_card____outlined
   else
     Nothing
 
@@ -116,15 +116,15 @@ media :: Array (IProp r i) -> String -> HH.HTML w i
 media additionalAttributes backgroundImage = mediaView Nothing additionalAttributes backgroundImage
 
 mediaCs :: Maybe (IProp r i)
-mediaCs = Just (HP.class_ mdc_card__media)
+mediaCs = Just mdc_card__media
 
 backgroundImageAttr :: String -> Maybe (IProp r i)
-backgroundImageAttr url = Just (style "background-image" ("url(\"" <> url <> "\")"))
+backgroundImageAttr url = Just (HP.attr (AttrName "style") "background-image" ("url(\"" <> url <> "\")"))
 
 aspectCs :: Maybe Aspect -> Maybe (IProp r i)
 aspectCs aspect = case aspect of
-  Just Square -> Just (HP.class_ mdc_card__media____square)
-  Just SixteenToNine -> Just (HP.class_ mdc_card__media____16_9)
+  Just Square -> Just mdc_card__media____square
+  Just SixteenToNine -> Just mdc_card__media____16_9
   Nothing -> Nothing
 
 primaryAction :: Array (IProp r i) -> Array (HH.HTML w i) -> Array (HH.HTML w i)

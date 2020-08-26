@@ -79,33 +79,33 @@ list config firstArrayItem remainingArrayItems =
       )
 
 rootCs :: Maybe (IProp r i)
-rootCs = Just (HP.class_ mdc_list)
+rootCs = Just mdc_list
 
 nonInteractiveCs :: Config i -> Maybe (IProp r i)
 nonInteractiveCs { nonInteractive } =
   if nonInteractive then
-    Just (HP.class_ mdc_list____non_interactive)
+    Just mdc_list____non_interactive
   else
     Nothing
 
 denseCs :: Config i -> Maybe (IProp r i)
 denseCs { dense } =
   if dense then
-    Just (HP.class_ mdc_list____dense)
+    Just mdc_list____dense
   else
     Nothing
 
 avatarArrayCs :: Config i -> Maybe (IProp r i)
 avatarArrayCs { avatarArray } =
   if avatarArray then
-    Just (HP.class_ mdc_list____avatar_list)
+    Just mdc_list____avatar_list
   else
     Nothing
 
 twoLineCs :: Config i -> Maybe (IProp r i)
 twoLineCs { twoLine } =
   if twoLine then
-    Just (HP.class_ mdc_list____two_line)
+    Just mdc_list____two_line
   else
     Nothing
 

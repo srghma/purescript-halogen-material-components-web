@@ -18,7 +18,7 @@ import Material.Classes.Chips
 
 chipSet :: Array (IProp r i) -> Array (Tuple String (Chip r i)) -> HH.HTML w i
 chipSet additionalAttributes keyedChips =
-  HH.keyed "mdc-chip-set"
+  HH.keyed (ElemName "mdc-chip-set")
     ([ HP.class_ mdc_chip_set, HP.class_ mdc_chip_set____input, HP.attr (AttrName "role") "grid" ] <> config.additionalAttributes)
     (map (Tuple.mapSecond chip) keyedChips)
 

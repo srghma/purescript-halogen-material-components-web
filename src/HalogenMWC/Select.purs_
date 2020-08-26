@@ -29,7 +29,7 @@ type Config a r i
     , selected :: Maybe a
     , leadingIcon :: Maybe (Icon r i)
     , additionalAttributes :: Array (IProp I.HTMLdiv i)
-    , onChange :: Maybe (a -> r i)
+    , onChange :: Maybe (a -> i)
     }
 
 config :: Config a r i
@@ -105,12 +105,12 @@ icon :: Array (IProp r i) -> String -> Icon r i
 icon additionalAttributes iconName = Icon (Icon.icon ([ HP.class_ mdc_select__icon ] <> config.additionalAttributes) iconName)
 
 rootCs :: Maybe (IProp r i)
-rootCs = Just (HP.class_ mdc_select)
+rootCs = Just mdc_select
 
 outlinedCs :: Variant -> Maybe (IProp r i)
 outlinedCs variant =
   if variant == Outlined then
-    Just (HP.class_ mdc_select____outlined)
+    Just mdc_select____outlined
   else
     Nothing
 
@@ -161,13 +161,13 @@ notchedOutlineElt { label } =
     , HH.div [ HP.class_ mdc_notched_outline__trailing ] []
     ]
 
-menuElt :: Maybe (Icon r i) -> Maybe a -> Maybe (a -> r i) -> SelectItem a r i -> Array (SelectItem a r i) -> HH.HTML w i
+menuElt :: Maybe (Icon r i) -> Maybe a -> Maybe (a -> i) -> SelectItem a r i -> Array (SelectItem a r i) -> HH.HTML w i
 menuElt leadingIcon selected onChange firstSelectItem remainingSelectItems =
   Menu.menu
     ( Menu.config
         # Menu.setAttributes
             [ HP.class_ mdc_select__menu
-            , style "width" "100%"
+            , HP.attr (AttrName "style") "width" "100%"
             ]
     )
     [ Array.list (Array.config # Array.setWrapFocus true)
@@ -175,7 +175,7 @@ menuElt leadingIcon selected onChange firstSelectItem remainingSelectItems =
         (map (listItem leadingIcon selected onChange) remainingSelectItems)
     ]
 
-listItem :: Maybe (Icon r i) -> Maybe a -> Maybe (a -> r i) -> SelectItem a r i -> ArrayItem r i
+listItem :: Maybe (Icon r i) -> Maybe a -> Maybe (a -> i) -> SelectItem a r i -> ArrayItem r i
 listItem leadingIcon selected onChange (SelectItem.SelectItem config nodes) =
   ArrayItem.listItem (listItemConfig selected onChange config)
     ( if leadingIcon /= Nothing then
@@ -184,7 +184,7 @@ listItem leadingIcon selected onChange (SelectItem.SelectItem config nodes) =
         nodes
     )
 
-listItemConfig :: Maybe a -> Maybe (a -> r i) -> SelectItem.Config a r i -> ArrayItem.Config i
+listItemConfig :: Maybe a -> Maybe (a -> i) -> SelectItem.Config a r i -> ArrayItem.Config i
 listItemConfig selectedValue onChange { value, disabled, additionalAttributes } =
   ArrayItem.config
     # ArrayItem.setDisabled disabled

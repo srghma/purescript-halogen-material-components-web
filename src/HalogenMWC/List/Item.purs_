@@ -77,21 +77,21 @@ listItemView config nodes =
 disabledCs :: Config i -> Maybe (IProp r i)
 disabledCs { disabled } =
   if disabled then
-    Just (HP.class_ mdc_list_item____disabled)
+    Just mdc_list_item____disabled
   else
     Nothing
 
 selectedCs :: Config i -> Maybe (IProp r i)
 selectedCs { selection } =
   if selection == Just Selected then
-    Just (HP.class_ mdc_list_item____selected)
+    Just mdc_list_item____selected
   else
     Nothing
 
 activatedCs :: Config i -> Maybe (IProp r i)
 activatedCs { selection } =
   if selection == Just Activated then
-    Just (HP.class_ mdc_list_item____activated)
+    Just mdc_list_item____activated
   else
     Nothing
 

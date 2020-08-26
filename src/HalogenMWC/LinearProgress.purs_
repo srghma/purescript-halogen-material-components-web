@@ -23,8 +23,8 @@ type Config i =
 
 data Variant
   = Indeterminate
-  | Determinate Float
-  | Buffered Float Float
+  | Determinate Number
+  | Buffered Number Number
 
 defaultConfig :: forall i . Config i
 defaultConfig =
@@ -58,24 +58,24 @@ linearProgress variant config =
 indeterminate :: forall w i . Config i -> HH.HTML w i
 indeterminate config = linearProgress Indeterminate config
 
-determinate :: Config i -> { progress :: Float } -> HH.HTML w i
+determinate :: Config i -> { progress :: Number } -> HH.HTML w i
 determinate config { progress } = linearProgress (Determinate progress) config
 
-buffered :: Config i -> { progress :: Float, buffered :: Float } -> HH.HTML w i
+buffered :: Config i -> { progress :: Number, buffered :: Number } -> HH.HTML w i
 buffered config data_ = linearProgress (Buffered data_.progress data_.buffered) config
 
 rootCs :: Maybe (IProp r i)
-rootCs = Just (HP.class_ mdc_linear_progress)
+rootCs = Just mdc_linear_progress
 
 displayCss :: Maybe (IProp r i)
-displayCss = Just (style "display" "block")
+displayCss = Just (HP.attr (AttrName "style") "display" "block")
 
 roleAttr :: Maybe (IProp r i)
 roleAttr = Just (HP.attr (AttrName "role") "progressbar")
 
 variantCs :: Variant -> Maybe (IProp r i)
 variantCs variant = case variant of
-  Indeterminate -> Just (HP.class_ mdc_linear_progress____indeterminate)
+  Indeterminate -> Just mdc_linear_progress____indeterminate
   _ -> Nothing
 
 determinateProp :: Variant -> Maybe (IProp r i)

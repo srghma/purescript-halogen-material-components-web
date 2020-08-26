@@ -88,7 +88,7 @@ inputElt :: forall w i. Config i -> HH.HTML w i
 inputElt config =
   HH.textarea
     ( Array.catMaybes
-        [ Just (HP.class_ mdc_text_field__input)
+        [ Just $ HP.class_ mdc_text_field__input
         , map (HP.attr (AttrName "aria-label")) config.label
         , map HP.rows config.rows
         , map HP.cols config.cols

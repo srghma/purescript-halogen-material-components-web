@@ -44,11 +44,11 @@ ripple isUnbounded config =
         , unboundedData isUnbounded
         , colorCs config
         , rippleSurface
-        , Just (style "position" "absolute")
-        , Just (style "top" "0")
-        , Just (style "left" "0")
-        , Just (style "right" "0")
-        , Just (style "bottom" "0")
+        , Just (HP.attr (AttrName "style") "position" "absolute")
+        , Just (HP.attr (AttrName "style") "top" "0")
+        , Just (HP.attr (AttrName "style") "left" "0")
+        , Just (HP.attr (AttrName "style") "right" "0")
+        , Just (HP.attr (AttrName "style") "bottom" "0")
         ]
         <> config.additionalAttributes
     )
@@ -61,12 +61,12 @@ unbounded :: forall w i . Config i -> HH.HTML w i
 unbounded = ripple true
 
 rippleSurface :: Maybe (IProp r i)
-rippleSurface = Just (HP.class_ mdc_ripple_surface)
+rippleSurface = Just mdc_ripple_surface
 
 colorCs :: Config i -> Maybe (IProp r i)
 colorCs { color } = case color of
-  Just Primary -> Just (HP.class_ mdc_ripple_surface____primary)
-  Just Accent -> Just (HP.class_ mdc_ripple_surface____accent)
+  Just Primary -> Just mdc_ripple_surface____primary
+  Just Accent -> Just mdc_ripple_surface____accent
   Nothing -> Nothing
 
 unboundedProp :: Boolean -> Maybe (IProp r i)

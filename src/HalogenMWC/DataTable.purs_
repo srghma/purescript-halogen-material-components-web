@@ -52,7 +52,7 @@ dataTableCs :: IProp r i
 dataTableCs = HP.class_ mdc_data_table
 
 dataTableTableCs :: Maybe (IProp r i)
-dataTableTableCs = Just (HP.class_ mdc_data_table__table)
+dataTableTableCs = Just mdc_data_table__table
 
 dataTableContentCs :: IProp r i
 dataTableContentCs = HP.class_ mdc_data_table__content
@@ -114,7 +114,7 @@ headerCell cell_ = case cell_ of
       ]
 
 dataTableHeaderCellCs :: Maybe (IProp r i)
-dataTableHeaderCellCs = Just (HP.class_ mdc_data_table__header_cell)
+dataTableHeaderCellCs = Just mdc_data_table__header_cell
 
 columnHeaderRoleAttr :: Maybe (IProp r i)
 columnHeaderRoleAttr = Just (HP.attr (AttrName "role") "columnheader")
@@ -125,12 +125,12 @@ colScopeAttr = Just (HP.attr (AttrName "scope") "col")
 dataTableHeaderCellNumericCs :: Boolean -> Maybe (IProp r i)
 dataTableHeaderCellNumericCs numeric =
   if numeric then
-    Just (HP.class_ mdc_data_table__header_cell____numeric)
+    Just mdc_data_table__header_cell____numeric
   else
     Nothing
 
 dataTableHeaderCellCheckboxCs :: Maybe (IProp r i)
-dataTableHeaderCellCheckboxCs = Just (HP.class_ mdc_data_table__header_cell____checkbox)
+dataTableHeaderCellCheckboxCs = Just mdc_data_table__header_cell____checkbox
 
 bodyCell :: Cell r i -> HH.HTML w i
 bodyCell cell_ = case cell_ of
@@ -175,14 +175,14 @@ checkboxCell :: Array (IProp r i) -> Checkbox.Config i -> Cell r i
 checkboxCell attributes config = CheckboxCell { attributes: attributes, config: config }
 
 dataTableCellCs :: Maybe (IProp r i)
-dataTableCellCs = Just (HP.class_ mdc_data_table__cell)
+dataTableCellCs = Just mdc_data_table__cell
 
 dataTableCellNumericCs :: Boolean -> Maybe (IProp r i)
 dataTableCellNumericCs numeric =
   if numeric then
-    Just (HP.class_ mdc_data_table__cell____numeric)
+    Just mdc_data_table__cell____numeric
   else
     Nothing
 
 dataTableCellCheckboxCs :: Maybe (IProp r i)
-dataTableCellCheckboxCs = Just (HP.class_ mdc_data_table__cell____checkbox)
+dataTableCellCheckboxCs = Just mdc_data_table__cell____checkbox

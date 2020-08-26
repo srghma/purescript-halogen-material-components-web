@@ -56,22 +56,22 @@ iconToggle config { onIcon, offIcon } =
     ]
 
 rootCs :: Maybe (IProp r i)
-rootCs = Just (HP.class_ mdc_icon_button)
+rootCs = Just mdc_icon_button
 
 onProp :: Config i -> Maybe (IProp r i)
 onProp { on } = Just (HP.prop (PropName "on") on)
 
 materialIconsCs :: Maybe (IProp r i)
-materialIconsCs = Just (HP.class_ material_icons)
+materialIconsCs = Just material_icons
 
 iconCs :: Maybe (IProp r i)
-iconCs = Just (HP.class_ mdc_icon_button__icon)
+iconCs = Just mdc_icon_button__icon
 
 onIconCs :: Maybe (IProp r i)
 onIconCs = Just (HP.class_ [ mdc_icon_button__icon, mdc_icon_button__icon____on ])
 
 tabIndexProp :: Maybe (IProp r i)
-tabIndexProp = Just (HP.tabindex 0)
+tabIndexProp = Just (HP.tabIndex 0)
 
 ariaHiddenAttr :: Maybe (IProp r i)
 ariaHiddenAttr = Just (HP.attr (AttrName "aria-hidden") "true")

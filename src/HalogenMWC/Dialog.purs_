@@ -51,7 +51,7 @@ dialog config content =
     ]
 
 rootCs :: Maybe (IProp r i)
-rootCs = Just (HP.class_ mdc_dialog)
+rootCs = Just mdc_dialog
 
 openProp :: Config i -> Maybe (IProp r i)
 openProp { open } = Just (HP.prop (PropName "open") open)
