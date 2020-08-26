@@ -2,6 +2,7 @@ module HalogenMWC.TopAppBar where
 
 import Material.Classes.TopAppBar
 import Protolude
+import DOM.HTML.Indexed as I
 import MaterialIconsFont.Classes
 import Web.Event.Event
 
@@ -13,11 +14,11 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
-type Config r i =
+type Config i =
   { dense :: Boolean
-    , fixed :: Boolean
-    , additionalAttributes :: Array (IProp r i)
-    }
+  , fixed :: Boolean
+  , additionalAttributes :: Array (IProp I.HTMLdiv i)
+  }
 
 data Variant
   = Regular
@@ -25,65 +26,53 @@ data Variant
   | ShortCollapsed
   | Prominent
 
-defaultConfig :: Config r i
+defaultConfig :: forall i . Config i
 defaultConfig =
   { dense: false
   , fixed: false
   , additionalAttributes: []
   }
 
-genericTopAppBar :: Variant -> Config r i -> Array (HH.HTML w i) -> HH.HTML w i
-genericTopAppBar variant (config@{ additionalAttributes }) nodes =
+genericTopAppBar :: forall i w . Variant -> Config i -> Array (HH.HTML w i) -> HH.HTML w i
+genericTopAppBar variant config =
   HH.element (ElemName "mdc-top-app-bar")
-    ( Array.catMaybes
-        [ HP.class_ mdc_top_app_bar
-        , variantCs variant
-        , denseCs config
-        , fixedCs config
+    (
+        [ HP.classes $ Array.concat
+          [ [ mdc_top_app_bar ]
+          , variantCs variant
+          , if config.dense then [ mdc_top_app_bar____dense ] else []
+          , if config.fixed then [ mdc_top_app_bar____fixed ] else []
+          ]
         ]
-        <> additionalAttributes
+        <> config.additionalAttributes
     )
-    nodes
 
 ------------
 
-regular :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
+regular :: forall w i . Config i -> Array (HH.HTML w i) -> HH.HTML w i
 regular config nodes = genericTopAppBar Regular config nodes
 
-short :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
+short :: forall w i . Config i -> Array (HH.HTML w i) -> HH.HTML w i
 short config nodes = genericTopAppBar Short config nodes
 
-shortCollapsed :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
+shortCollapsed :: forall w i . Config i -> Array (HH.HTML w i) -> HH.HTML w i
 shortCollapsed config nodes = genericTopAppBar ShortCollapsed config nodes
 
-prominent :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
+prominent :: forall w i . Config i -> Array (HH.HTML w i) -> HH.HTML w i
 prominent config nodes = genericTopAppBar Prominent config nodes
 
 ------------
 
-row :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
+row :: forall w i . Array (IProp I.HTMLsection i) -> Array (HH.HTML w i) -> HH.HTML w i
 row attributes nodes = HH.section ([ HP.class_ mdc_top_app_bar__row ] <> attributes) nodes
 
-section :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
+section :: forall w i . Array (IProp I.HTMLsection i) -> Array (HH.HTML w i) -> HH.HTML w i
 section attributes nodes = HH.section ([ HP.class_ mdc_top_app_bar__section ] <> attributes) nodes
 
-variantCs :: Variant -> Maybe (IProp r i)
+variantCs :: Variant -> Array ClassName
 variantCs variant = case variant of
-  Regular -> Nothing
-  Short -> Just (HP.class_ mdc_top_app_bar____short)
-  ShortCollapsed -> Just (HP.classes [ mdc_top_app_bar____short mdc_top_app_bar____short_collapsed ])
-  Prominent -> Just (HP.class_ mdc_top_app_bar____prominent)
+  Regular -> []
+  Short -> [ mdc_top_app_bar____short ]
+  ShortCollapsed -> [ mdc_top_app_bar____short, mdc_top_app_bar____short_collapsed ]
+  Prominent -> [ mdc_top_app_bar____prominent ]
 
-denseCs :: Config r i -> Maybe (IProp r i)
-denseCs { dense } =
-  if dense then
-    Just (HP.class_ mdc_top_app_bar____dense)
-  else
-    Nothing
-
-fixedCs :: Config r i -> Maybe (IProp r i)
-fixedCs { fixed } =
-  if fixed then
-    Just (HP.class_ mdc_top_app_bar____fixed)
-  else
-    Nothing

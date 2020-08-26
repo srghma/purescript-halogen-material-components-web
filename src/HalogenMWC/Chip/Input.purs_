@@ -1,6 +1,7 @@
 module HalogenMWC.Chip.Input where
 
 import Protolude
+import DOM.HTML.Indexed as I
 import MaterialIconsFont.Classes
 import Web.Event.Event
 import Data.Array as Array
@@ -11,18 +12,18 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
-type Config r i =
+type Config i =
   { leadingIcon :: Maybe String
     , trailingIcon :: Maybe String
-    , additionalAttributes :: Array (IProp r i)
+    , additionalAttributes :: Array (IProp I.HTMLdiv i)
     , onClick :: Maybe (Event -> i)
     , onDelete :: Maybe (Event -> i)
     }
 
 data Chip r i
-  = Chip (Config r i) String
+  = Chip (Config i) String
 
-defaultConfig :: Config r i
+defaultConfig :: forall i . Config i
 defaultConfig =
   { leadingIcon: Nothing
   , trailingIcon: Nothing

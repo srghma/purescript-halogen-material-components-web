@@ -1,19 +1,20 @@
 module HalogenMWC.Select.Item where
 
 import Halogen.HTML (IProp)
+import DOM.HTML.Indexed as I
 import Halogen.HTML as HH
 
-type Config a r i
+type Config a i
   = { value :: a
     , disabled :: Boolean
-    , additionalAttributes :: Array (IProp r i)
+    , additionalAttributes :: Array (IProp I.HTMLdiv i)
     }
 
-data SelectItem w a r i
-  = SelectItem (Config a r i) (Array (HH.HTML w i))
+data SelectItem w a i
+  = SelectItem (Config a i) (Array (HH.HTML w i))
 
-defaultConfig :: forall r i a. { value :: a } -> Config a r i
-defaultConfig { value } =
+defaultConfig :: forall i a. a -> Config a i
+defaultConfig value =
   { value: value
   , disabled: false
   , additionalAttributes: []

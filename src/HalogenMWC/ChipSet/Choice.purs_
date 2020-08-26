@@ -3,6 +3,7 @@ module HalogenMWC.ChipSet.Choice where
 import HalogenMWC.Chip.Choice
 import Material.Classes.Chips
 import Protolude
+import DOM.HTML.Indexed as I
 import MaterialIconsFont.Classes
 import Web.Event.Event
 
@@ -19,7 +20,7 @@ type Config a r i
   = { selected :: Maybe a
     , onChange :: Maybe (a -> r i)
     , toLabel :: a -> String
-    , additionalAttributes :: Array (IProp r i)
+    , additionalAttributes :: Array (IProp I.HTMLdiv i)
     }
 
 config :: { toLabel :: a -> String } -> Config a r i
@@ -33,7 +34,7 @@ config { toLabel } =
 chipSet :: Config a r i -> Array (Chip a r i) -> HH.HTML w i
 chipSet (config@{ selected, onChange, toLabel, additionalAttributes }) chips =
   HH.element (ElemName "mdc-chip-set")
-    ([ chipSetCs, chipSetChoiceCs, gridRole ] <> additionalAttributes)
+    ([ chipSetCs, chipSetChoiceCs, gridRole ] <> config.additionalAttributes)
     (map (chip selected onChange toLabel) chips)
 
 chip :: Maybe a -> Maybe (a -> r i) -> (a -> String) -> Chip a r i -> HH.HTML w i
@@ -96,7 +97,7 @@ interactionHandler r i = map (HE.on "MDCChip:interaction" <<< Decode.succeed) r 
 rippleElt :: Maybe (HH.HTML w i)
 rippleElt = Just (HH.div [ HP.class_ mdc_chip__ripple ] [])
 
-leadingIconElt :: Config r i -> Maybe (HH.HTML w i)
+leadingIconElt :: Config i -> Maybe (HH.HTML w i)
 leadingIconElt { icon } =
   map
     ( \iconName ->

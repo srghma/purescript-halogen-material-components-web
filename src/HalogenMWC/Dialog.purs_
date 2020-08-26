@@ -1,6 +1,7 @@
 module HalogenMWC.Dialog where
 
 import Protolude
+import DOM.HTML.Indexed as I
 import MaterialIconsFont.Classes
 import Web.Event.Event
 
@@ -13,13 +14,13 @@ import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Material.Classes.Dialog
 
-type Config r i =
+type Config i =
   { open :: Boolean
-    , additionalAttributes :: Array (IProp r i)
+    , additionalAttributes :: Array (IProp I.HTMLdiv i)
     , onClose :: Maybe (Event -> i)
     }
 
-defaultConfig :: Config r i
+defaultConfig :: forall i . Config i
 defaultConfig =
   { open: false
   , additionalAttributes: []
@@ -32,8 +33,8 @@ type Content r i
     , actions :: Array (HH.HTML w i)
     }
 
-dialog :: Config r i -> Content r i -> HH.HTML w i
-dialog (config@{ additionalAttributes }) content =
+dialog :: Config i -> Content r i -> HH.HTML w i
+dialog config content =
   HH.element (ElemName "mdc-dialog")
     ( Array.catMaybes
         [ rootCs
@@ -42,7 +43,7 @@ dialog (config@{ additionalAttributes }) content =
         , ariaModalAttr
         , closeHandler config
         ]
-        <> additionalAttributes
+        <> config.additionalAttributes
     )
     [ containerElt content
     , scrimElt
@@ -51,7 +52,7 @@ dialog (config@{ additionalAttributes }) content =
 rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_dialog)
 
-openProp :: Config r i -> Maybe (IProp r i)
+openProp :: Config i -> Maybe (IProp r i)
 openProp { open } = Just (HP.prop (PropName "open") open)
 
 roleAttr :: Maybe (IProp r i)
@@ -60,7 +61,7 @@ roleAttr = Just (HP.attr (AttrName "role") "alertdialog")
 ariaModalAttr :: Maybe (IProp r i)
 ariaModalAttr = Just (HP.attr (AttrName "aria-modal") "true")
 
-closeHandler :: Config r i -> Maybe (IProp r i)
+closeHandler :: Config i -> Maybe (IProp r i)
 closeHandler { onClose } = map (HE.on "MDCDialog:close" <<< Decode.succeed) onClose
 
 containerElt :: Content r i -> HH.HTML w i

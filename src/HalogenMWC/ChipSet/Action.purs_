@@ -1,6 +1,7 @@
 module HalogenMWC.ChipSet.Action where
 
 import Protolude
+import DOM.HTML.Indexed as I
 import MaterialIconsFont.Classes
 import Web.Event.Event
 
@@ -20,7 +21,7 @@ chipSet additionalAttributes chips =
     ( [ HP.classes [ mdc_chip_set, mdc_chip_set____action ]
       , HP.attr (AttrName "role") "grid"
       ]
-      <> additionalAttributes
+      <> config.additionalAttributes
     )
     (map chip chips)
 
@@ -47,7 +48,7 @@ chip (Chip config label) =
 rippleElt :: HH.HTML w i
 rippleElt = HH.div [ HP.class_ mdc_chip__ripple ] []
 
--- | interactionHandler :: Config r i -> Maybe (IProp r i)
+-- | interactionHandler :: Config i -> Maybe (IProp r i)
 -- | interactionHandler { onClick } = map (HE.on "MDCChip:interaction" <<< Decode.succeed) onClick
 
 leadingIconElt :: Maybe String -> Array (HH.HTML w i)

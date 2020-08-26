@@ -1,6 +1,7 @@
 module HalogenMWC.Select where
 
 import Protolude
+import DOM.HTML.Indexed as I
 import MaterialIconsFont.Classes
 import Web.Event.Event
 
@@ -26,7 +27,7 @@ type Config a r i
     , valid :: Boolean
     , selected :: Maybe a
     , leadingIcon :: Maybe (Icon r i)
-    , additionalAttributes :: Array (IProp r i)
+    , additionalAttributes :: Array (IProp I.HTMLdiv i)
     , onChange :: Maybe (a -> r i)
     }
 
@@ -71,7 +72,7 @@ select variant (config@{ leadingIcon, selected, additionalAttributes, onChange }
           , validProp config
           , requiredProp config
           ]
-          <> additionalAttributes
+          <> config.additionalAttributes
       )
       [ anchorElt []
           ( Array.concat
@@ -100,7 +101,7 @@ data Icon r i
   = Icon (HH.HTML w i)
 
 icon :: Array (IProp r i) -> String -> Icon r i
-icon additionalAttributes iconName = Icon (Icon.icon ([ HP.class_ mdc_select__icon ] <> additionalAttributes) iconName)
+icon additionalAttributes iconName = Icon (Icon.icon ([ HP.class_ mdc_select__icon ] <> config.additionalAttributes) iconName)
 
 rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_select)
@@ -132,7 +133,7 @@ requiredProp :: Config a r i -> Maybe (IProp r i)
 requiredProp { required } = Just (HP.prop (PropName "required") required)
 
 anchorElt :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
-anchorElt additionalAttributes nodes = HH.div ([ HP.class_ mdc_select__anchor ] <> additionalAttributes) nodes
+anchorElt additionalAttributes nodes = HH.div ([ HP.class_ mdc_select__anchor ] <> config.additionalAttributes) nodes
 
 leadingIconElt :: Config a r i -> HH.HTML w i
 leadingIconElt { leadingIcon } = case leadingIcon of
@@ -182,7 +183,7 @@ listItem leadingIcon selected onChange (SelectItem.SelectItem config nodes) =
         nodes
     )
 
-listItemConfig :: Maybe a -> Maybe (a -> r i) -> SelectItem.Config a r i -> ArrayItem.Config r i
+listItemConfig :: Maybe a -> Maybe (a -> r i) -> SelectItem.Config a r i -> ArrayItem.Config i
 listItemConfig selectedValue onChange { value, disabled, additionalAttributes } =
   ArrayItem.config
     # ArrayItem.setDisabled disabled

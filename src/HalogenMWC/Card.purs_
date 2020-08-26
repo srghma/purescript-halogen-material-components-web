@@ -3,6 +3,7 @@ module HalogenMWC.Card where
 import HalogenMWC.Button
 import HalogenMWC.IconButton
 import Protolude
+import DOM.HTML.Indexed as I
 import MaterialIconsFont.Classes
 import Web.Event.Event
 
@@ -17,25 +18,25 @@ import HalogenMWC.Button as Button
 import HalogenMWC.IconButton as IconButton
 import Material.Classes.Card
 
-type Config r i =
+type Config i =
   { outlined :: Boolean
-    , additionalAttributes :: Array (IProp r i)
+    , additionalAttributes :: Array (IProp I.HTMLdiv i)
     }
 
-defaultConfig :: Config r i
+defaultConfig :: forall i . Config i
 defaultConfig =
   { outlined: false
   , additionalAttributes: []
   }
 
-card :: Config r i -> Content r i -> HH.HTML w i
-card (config@{ additionalAttributes }) content =
+card :: Config i -> Content r i -> HH.HTML w i
+card config content =
   HH.element (ElemName "mdc-card")
     ( Array.catMaybes
         [ HP.class_ mdc_card
         , outlinedCs config
         ]
-        <> additionalAttributes
+        <> config.additionalAttributes
     )
     ( Array.concat
         [ blocksElt content
@@ -76,7 +77,7 @@ actionsElt content = case content.actions of
     ]
   Nothing -> []
 
-outlinedCs :: Config r i -> Maybe (IProp r i)
+outlinedCs :: Config i -> Maybe (IProp r i)
 outlinedCs config =
   if config.outlined then
     Just (HP.class_ mdc_card____outlined)
@@ -100,7 +101,7 @@ mediaView aspect additionalAttributes backgroundImage =
         , backgroundImageAttr backgroundImage
         , aspectCs aspect
         ]
-        <> additionalAttributes
+        <> config.additionalAttributes
     )
     []
 
@@ -131,7 +132,7 @@ primaryAction additionalAttributes blocks =
       ( [ HP.class_ mdc_card__primary_action
         , tabIndexProp 0
         ]
-          <> additionalAttributes
+          <> config.additionalAttributes
       )
       blocks
   ]
@@ -152,13 +153,13 @@ actions { buttons, icons } = Actions { buttons = buttons, icons = icons, fullBle
 fullBleedActions :: Button r i -> Actions r i
 fullBleedActions button_ = Actions { buttons = [ button_ ], icons = [], fullBleed = true }
 
-button :: Button.Config r i -> String -> HH.HTML w i
+button :: Button.Config i -> String -> HH.HTML w i
 button config label =
   Button.text
     (config { additionalAttributes = HP.classes [ mdc_card__action, mdc_card__action____button ] <> config.additionalAttributes })
     label
 
-icon :: IconButton.Config r i -> String -> HH.HTML w i
+icon :: IconButton.Config i -> String -> HH.HTML w i
 icon config iconName =
   IconButton.iconButton
     (config { additionalAttributes = HP.classes [ mdc_card__action, mdc_card__action____icon ] <> config.additionalAttributes })

@@ -1,6 +1,7 @@
 module HalogenMWC.Drawer.Dismissible where
 
 import Protolude
+import DOM.HTML.Indexed as I
 import MaterialIconsFont.Classes
 import Web.Event.Event
 
@@ -13,21 +14,21 @@ import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Material.Classes.Drawer
 
-type Config r i =
+type Config i =
   { open :: Boolean
-    , additionalAttributes :: Array (IProp r i)
+    , additionalAttributes :: Array (IProp I.HTMLdiv i)
     , onClose :: Maybe (Event -> i)
     }
 
-defaultConfig :: Config r i
+defaultConfig :: forall i . Config i
 defaultConfig =
   { open: false
   , additionalAttributes: []
   , onClose: Nothing
   }
 
-drawer :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
-drawer (config@{ additionalAttributes }) nodes =
+drawer :: Config i -> Array (HH.HTML w i) -> HH.HTML w i
+drawer config nodes =
   HH.element (ElemName "mdc-drawer")
     ( Array.catMaybes
         [ rootCs
@@ -35,7 +36,7 @@ drawer (config@{ additionalAttributes }) nodes =
         , openProp config
         , closeHandler config
         ]
-        <> additionalAttributes
+        <> config.additionalAttributes
     )
     nodes
 
@@ -43,7 +44,7 @@ content :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
 content attributes nodes = HH.div ([ HP.class_ mdc_drawer__content ] <> attributes) nodes
 
 header :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
-header additionalAttributes nodes = HH.div ([ HP.class_ mdc_drawer__header ] <> additionalAttributes) nodes
+header additionalAttributes nodes = HH.div ([ HP.class_ mdc_drawer__header ] <> config.additionalAttributes) nodes
 
 title :: IProp r i
 title = HP.class_ mdc_drawer__title
@@ -57,10 +58,10 @@ rootCs = Just (HP.class_ mdc_drawer)
 dismissibleCs :: Maybe (IProp r i)
 dismissibleCs = Just (HP.class_ mdc_drawer____dismissible)
 
-openProp :: Config r i -> Maybe (IProp r i)
+openProp :: Config i -> Maybe (IProp r i)
 openProp { open } = Just (HP.prop (PropName "open") open)
 
-closeHandler :: Config r i -> Maybe (IProp r i)
+closeHandler :: Config i -> Maybe (IProp r i)
 closeHandler { onClose } = map (HE.on "MDCDrawer:close" <<< Decode.succeed) onClose
 
 appContent :: IProp r i

@@ -1,6 +1,7 @@
 module HalogenMWC.Fab where
 
 import Protolude
+import DOM.HTML.Indexed as I
 import MaterialIconsFont.Classes
 import Web.Event.Event
 
@@ -13,14 +14,14 @@ import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Material.Classes.Fab
 
-type Config r i =
+type Config i =
   { mini :: Boolean
     , exited :: Boolean
-    , additionalAttributes :: Array (IProp r i)
+    , additionalAttributes :: Array (IProp I.HTMLdiv i)
     , onClick :: Maybe (Event -> i)
     }
 
-defaultConfig :: Config r i
+defaultConfig :: forall i . Config i
 defaultConfig =
   { mini: false
   , exited: false
@@ -28,8 +29,8 @@ defaultConfig =
   , additionalAttributes: []
   }
 
-fab :: Config r i -> String -> HH.HTML w i
-fab (config@{ additionalAttributes }) iconName =
+fab :: Config i -> String -> HH.HTML w i
+fab config iconName =
   HH.element (ElemName "mdc-fab")
     ( Array.catMaybes
         [ rootCs
@@ -38,7 +39,7 @@ fab (config@{ additionalAttributes }) iconName =
         , clickHandler config
         , tabIndexProp 0
         ]
-        <> additionalAttributes
+        <> config.additionalAttributes
     )
     [ rippleElt
     , iconElt iconName
@@ -50,14 +51,14 @@ tabIndexProp tabIndex = Just (HP.prop (PropName "tabIndex") tabIndex)
 rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_fab)
 
-miniCs :: Config r i -> Maybe (IProp r i)
+miniCs :: Config i -> Maybe (IProp r i)
 miniCs { mini } =
   if mini then
     Just (HP.class_ mdc_fab____mini)
   else
     Nothing
 
-exitedCs :: Config r i -> Maybe (IProp r i)
+exitedCs :: Config i -> Maybe (IProp r i)
 exitedCs { exited } =
   if exited then
     Just (HP.class_ mdc_fab____exited)
@@ -70,5 +71,5 @@ rippleElt = HH.div [ HP.class_ mdc_fab__ripple ] []
 iconElt :: String -> HH.HTML w i
 iconElt iconName = HH.span [ HP.class_ material_icons, HP.class_ mdc_fab__icon ] [ HH.text iconName ]
 
-clickHandler :: Config r i -> Maybe (IProp r i)
+clickHandler :: Config i -> Maybe (IProp r i)
 clickHandler { onClick } = map HE.onClick onClick

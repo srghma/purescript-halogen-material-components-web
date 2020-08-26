@@ -1,19 +1,20 @@
 module HalogenMWC.ImageList.Item where
 
-import Protolude (Maybe(..))
+import Protolude
+import DOM.HTML.Indexed as I
 import Halogen.HTML (IProp)
 
-type Config r i
+type Config i
   = { label :: Maybe String
     , href :: Maybe String
-    , additionalAttributes :: Array (IProp r i)
+    , additionalAttributes :: Array (IProp I.HTMLdiv i)
     , image :: String
     }
 
 newtype ImageArrayItem r i
-  = ImageArrayItem (Config r i)
+  = ImageArrayItem (Config i)
 
-defaultConfig :: forall r i. Config r i
+defaultConfig :: forall r i. Config i
 defaultConfig =
   { label: Nothing
   , href: Nothing

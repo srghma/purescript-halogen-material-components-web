@@ -1,6 +1,7 @@
 module HalogenMWC.Drawer.Permanent where
 
 import Protolude
+import DOM.HTML.Indexed as I
 import MaterialIconsFont.Classes
 import Web.Event.Event
 import Data.Array as Array
@@ -12,23 +13,23 @@ import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Material.Classes.Drawer
 
-type Config r i =
-  { additionalAttributes :: Array (IProp r i) }
+type Config i =
+  { additionalAttributes :: Array (IProp I.HTMLdiv i) }
 
-defaultConfig :: Config r i
+defaultConfig :: forall i . Config i
 defaultConfig = { additionalAttributes: [] }
 
-drawer :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
+drawer :: Config i -> Array (HH.HTML w i) -> HH.HTML w i
 drawer { additionalAttributes } nodes =
   HH.div
-    (Array.catMaybes [ rootCs ] <> additionalAttributes)
+    (Array.catMaybes [ rootCs ] <> config.additionalAttributes)
     nodes
 
 content :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
 content attributes nodes = HH.div ([ HP.class_ mdc_drawer__content ] <> attributes) nodes
 
 header :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
-header additionalAttributes nodes = HH.div ([ HP.class_ mdc_drawer__header ] <> additionalAttributes) nodes
+header additionalAttributes nodes = HH.div ([ HP.class_ mdc_drawer__header ] <> config.additionalAttributes) nodes
 
 title :: IProp r i
 title = HP.class_ mdc_drawer__title

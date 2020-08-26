@@ -1,6 +1,7 @@
 module HalogenMWC.Checkbox where
 
 import Protolude
+import DOM.HTML.Indexed as I
 import MaterialIconsFont.Classes
 import Web.Event.Event
 
@@ -15,10 +16,10 @@ import Halogen.SVG.Attributes as Halogen.SVG.Attributes
 import Halogen.SVG.Elements as Halogen.SVG.Elements
 import Material.Classes.Checkbox
 
-type Config r i =
+type Config i =
   { state :: Maybe State
     , disabled :: Boolean
-    , additionalAttributes :: Array (IProp r i)
+    , additionalAttributes :: Array (IProp I.HTMLdiv i)
     , onChange :: Maybe (Event -> i)
     , touch :: Boolean
     }
@@ -28,7 +29,7 @@ data State
   | Checked
   | Indeterminate
 
-defaultConfig :: Config r i
+defaultConfig :: forall i . Config i
 defaultConfig =
   { state: Nothing
   , disabled: false
@@ -37,7 +38,7 @@ defaultConfig =
   , touch: true
   }
 
-checkbox :: Config r i -> HH.HTML w i
+checkbox :: Config i -> HH.HTML w i
 checkbox (config@{ touch, additionalAttributes }) =
   let
     wrapTouch node =
@@ -55,7 +56,7 @@ checkbox (config@{ touch, additionalAttributes }) =
               , indeterminateProp config
               , disabledProp config
               ]
-              <> additionalAttributes
+              <> config.additionalAttributes
           )
           [ nativeControlElt config
           , backgroundElt
@@ -64,23 +65,23 @@ checkbox (config@{ touch, additionalAttributes }) =
 rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_checkbox)
 
-touchCs :: Config r i -> Maybe (IProp r i)
+touchCs :: Config i -> Maybe (IProp r i)
 touchCs { touch } =
   if touch then
     Just (HP.class_ mdc_checkbox____touch)
   else
     Nothing
 
-checkedProp :: Config r i -> Maybe (IProp r i)
+checkedProp :: Config i -> Maybe (IProp r i)
 checkedProp { state } = Just (HP.prop (PropName "checked") (Encode.bool (state == Just Checked)))
 
-indeterminateProp :: Config r i -> Maybe (IProp r i)
+indeterminateProp :: Config i -> Maybe (IProp r i)
 indeterminateProp { state } = Just (HP.prop (PropName "indeterminate") (Encode.bool (state == Just Indeterminate)))
 
-disabledProp :: Config r i -> Maybe (IProp r i)
+disabledProp :: Config i -> Maybe (IProp r i)
 disabledProp { disabled } = Just (HP.prop (PropName "disabled") disabled)
 
-changeHandler :: Config r i -> Maybe (IProp r i)
+changeHandler :: Config i -> Maybe (IProp r i)
 changeHandler { state, onChange } =
   -- Note: MDCArray choses to send a change event to all checkboxes, thus we
   -- have to check here if the state actually changed.
@@ -100,7 +101,7 @@ changeHandler { state, onChange } =
     )
     onChange
 
-nativeControlElt :: Config r i -> HH.HTML w i
+nativeControlElt :: Config i -> HH.HTML w i
 nativeControlElt config =
   HH.input
     ( Array.catMaybes

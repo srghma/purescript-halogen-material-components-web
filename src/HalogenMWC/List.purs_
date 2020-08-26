@@ -1,6 +1,7 @@
 module HalogenMWC.Array where
 
 import Protolude
+import DOM.HTML.Indexed as I
 import MaterialIconsFont.Classes
 import Web.Event.Event
 
@@ -15,17 +16,17 @@ import HalogenMWC.Array.Item (Config, ArrayItem)
 import HalogenMWC.Array.Item as ArrayItem
 import Material.Classes.List
 
-type Config r i =
+type Config i =
   { nonInteractive :: Boolean
     , dense :: Boolean
     , avatarArray :: Boolean
     , twoLine :: Boolean
     , vertical :: Boolean
     , wrapFocus :: Boolean
-    , additionalAttributes :: Array (IProp r i)
+    , additionalAttributes :: Array (IProp I.HTMLdiv i)
     }
 
-defaultConfig :: Config r i
+defaultConfig :: forall i . Config i
 defaultConfig =
   { nonInteractive: false
   , dense: false
@@ -49,8 +50,8 @@ argument represents the first list item, and the second argument reresents the
 remaining list items. This way we guarantee lists to be non-empty.
 
 -}
-list :: Config r i -> ArrayItem r i -> Array (ArrayItem r i) -> HH.HTML w i
-list (config@{ additionalAttributes }) firstArrayItem remainingArrayItems =
+list :: Config i -> ArrayItem r i -> Array (ArrayItem r i) -> HH.HTML w i
+list config firstArrayItem remainingArrayItems =
   let
     listItems = [ firstArrayItem ] <> remainingArrayItems
   in
@@ -65,7 +66,7 @@ list (config@{ additionalAttributes }) firstArrayItem remainingArrayItems =
           , clickHandler listItems
           , selectedIndexProp listItems
           ]
-          <> additionalAttributes
+          <> config.additionalAttributes
       )
       ( map
           ( \listItem_ -> case listItem_ of
@@ -79,28 +80,28 @@ list (config@{ additionalAttributes }) firstArrayItem remainingArrayItems =
 rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.class_ mdc_list)
 
-nonInteractiveCs :: Config r i -> Maybe (IProp r i)
+nonInteractiveCs :: Config i -> Maybe (IProp r i)
 nonInteractiveCs { nonInteractive } =
   if nonInteractive then
     Just (HP.class_ mdc_list____non_interactive)
   else
     Nothing
 
-denseCs :: Config r i -> Maybe (IProp r i)
+denseCs :: Config i -> Maybe (IProp r i)
 denseCs { dense } =
   if dense then
     Just (HP.class_ mdc_list____dense)
   else
     Nothing
 
-avatarArrayCs :: Config r i -> Maybe (IProp r i)
+avatarArrayCs :: Config i -> Maybe (IProp r i)
 avatarArrayCs { avatarArray } =
   if avatarArray then
     Just (HP.class_ mdc_list____avatar_list)
   else
     Nothing
 
-twoLineCs :: Config r i -> Maybe (IProp r i)
+twoLineCs :: Config i -> Maybe (IProp r i)
 twoLineCs { twoLine } =
   if twoLine then
     Just (HP.class_ mdc_list____two_line)
@@ -160,16 +161,16 @@ selectedIndexProp listItems =
     Just (HP.prop (PropName "selectedIndex") (Encode.list selectedIndex))
 
 group :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
-group additionalAttributes nodes = HH.div ([ listGroupCs ] <> additionalAttributes) nodes
+group additionalAttributes nodes = HH.div ([ listGroupCs ] <> config.additionalAttributes) nodes
 
 listGroupCs :: IProp r i
 listGroupCs = HP.class_ mdc_list_group
 
 subheader :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
-subheader additionalAttributes nodes = HH.span ([ listGroupSubheaderCs ] <> additionalAttributes) nodes
+subheader additionalAttributes nodes = HH.span ([ listGroupSubheaderCs ] <> config.additionalAttributes) nodes
 
 listGroupSubheaderCs :: IProp r i
 listGroupSubheaderCs = HP.class_ mdc_list_group__subheader
 
-wrapFocusProp :: Config r i -> Maybe (IProp r i)
+wrapFocusProp :: Config i -> Maybe (IProp r i)
 wrapFocusProp { wrapFocus } = Just (HP.prop (PropName "wrapFocus") wrapFocus)

@@ -1,6 +1,7 @@
 module HalogenMWC.ChipSet.Filter where
 
 import Protolude
+import DOM.HTML.Indexed as I
 import MaterialIconsFont.Classes
 import Web.Event.Event
 import Data.Array as Array
@@ -19,11 +20,11 @@ import Material.Classes.Chips
 chipSet :: Array (IProp r i) -> Array (Chip r i) -> HH.HTML w i
 chipSet additionalAttributes chips =
   HH.element (ElemName "mdc-chip-set")
-    ([ HP.class_ mdc_chip_set, HP.class_ mdc_chip_set____filter, HP.attr (AttrName "role") "grid" ] <> additionalAttributes)
+    ([ HP.class_ mdc_chip_set, HP.class_ mdc_chip_set____filter, HP.attr (AttrName "role") "grid" ] <> config.additionalAttributes)
     (map chip chips)
 
 chip :: Chip r i -> HH.HTML w i
-chip (Chip (config@{ additionalAttributes }) label) =
+chip (Chip config label) =
   HH.div [ HP.class_ mdc_touch_target_wrapper ]
     [ HH.element (ElemName "mdc-chip")
         ( Array.catMaybes
@@ -33,7 +34,7 @@ chip (Chip (config@{ additionalAttributes }) label) =
             , selectedProp config
             , interactionHandler config
             ]
-            <> additionalAttributes
+            <> config.additionalAttributes
         )
         ( Array.catMaybes
             [ rippleElt
@@ -44,16 +45,16 @@ chip (Chip (config@{ additionalAttributes }) label) =
         )
     ]
 
-selectedProp :: Chip.Config r i -> Maybe (IProp r i)
+selectedProp :: Chip.Config i -> Maybe (IProp r i)
 selectedProp { selected } = Just (HP.prop (PropName "selected") selected)
 
-interactionHandler :: Chip.Config r i -> Maybe (IProp r i)
+interactionHandler :: Chip.Config i -> Maybe (IProp r i)
 interactionHandler { onChange } = map (HE.on "MDCChip:interaction" <<< Decode.succeed) onChange
 
 rippleElt :: Maybe (HH.HTML w i)
 rippleElt = Just (HH.div [ HP.class_ mdc_chip__ripple ] [])
 
-leadingIconElt :: Chip.Config r i -> Maybe (HH.HTML w i)
+leadingIconElt :: Chip.Config i -> Maybe (HH.HTML w i)
 leadingIconElt { icon, selected } =
   map
     ( \iconName ->

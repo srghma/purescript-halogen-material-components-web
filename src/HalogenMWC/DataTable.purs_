@@ -2,6 +2,7 @@ module HalogenMWC.DataTable where
 
 import HalogenMWC.Checkbox
 import Protolude
+import DOM.HTML.Indexed as I
 import MaterialIconsFont.Classes
 import Web.Event.Event
 
@@ -15,26 +16,26 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Checkbox as Checkbox
 import Material.Classes.DataTable
 
-type Config r i =
+type Config i =
   { label :: Maybe String
-    , additionalAttributes :: Array (IProp r i)
+    , additionalAttributes :: Array (IProp I.HTMLdiv i)
     }
 
-defaultConfig :: Config r i
+defaultConfig :: forall i . Config i
 defaultConfig =
   { label: Nothing
   , additionalAttributes: []
   }
 
 dataTable ::
-  Config r i ->
+  Config i ->
   { thead :: Array (Row r i)
   , tbody :: Array (Row r i)
   } ->
   HH.HTML w i
-dataTable (config@{ additionalAttributes }) { thead, tbody } =
+dataTable config { thead, tbody } =
   HH.element (ElemName "mdc-data-table")
-    ([ dataTableCs ] <> additionalAttributes)
+    ([ dataTableCs ] <> config.additionalAttributes)
     [ HH.table
         ( Array.catMaybes
             [ dataTableTableCs
@@ -55,7 +56,7 @@ dataTableTableCs = Just (HP.class_ mdc_data_table__table)
 dataTableContentCs :: IProp r i
 dataTableContentCs = HP.class_ mdc_data_table__content
 
-ariaLabelAttr :: Config r i -> Maybe (IProp r i)
+ariaLabelAttr :: Config i -> Maybe (IProp r i)
 ariaLabelAttr { label } = map (HP.attr (AttrName "aria-label")) label
 
 data Row r i
@@ -159,7 +160,7 @@ data Cell r i
     , nodes :: Array (HH.HTML w i)
     }
   | CheckboxCell
-    { config :: Checkbox.Config r i
+    { config :: Checkbox.Config i
     , attributes :: Array (IProp r i)
     }
 
@@ -169,7 +170,7 @@ cell attributes nodes = Cell { numeric = false, attributes = attributes, nodes =
 numericCell :: Array (IProp r i) -> Array (HH.HTML w i) -> Cell r i
 numericCell attributes nodes = Cell { numeric: true, attributes: attributes, nodes: nodes }
 
-checkboxCell :: Array (IProp r i) -> Checkbox.Config r i -> Cell r i
+checkboxCell :: Array (IProp r i) -> Checkbox.Config i -> Cell r i
 checkboxCell attributes config = CheckboxCell { attributes: attributes, config: config }
 
 dataTableCellCs :: Maybe (IProp r i)

@@ -1,6 +1,7 @@
 module HalogenMWC.LinearProgress where
 
 import Protolude
+import DOM.HTML.Indexed as I
 import MaterialIconsFont.Classes
 import Web.Event.Event
 
@@ -13,10 +14,10 @@ import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Material.Classes.LinearProgress
 
-type Config r i =
+type Config i =
   { reverse :: Boolean
     , closed :: Boolean
-    , additionalAttributes :: Array (IProp r i)
+    , additionalAttributes :: Array (IProp I.HTMLdiv i)
     }
 
 data Variant
@@ -24,15 +25,15 @@ data Variant
   | Determinate Float
   | Buffered Float Float
 
-defaultConfig :: Config r i
+defaultConfig :: forall i . Config i
 defaultConfig =
   { reverse: false
   , closed: false
   , additionalAttributes: []
   }
 
-linearProgress :: Variant -> Config r i -> HH.HTML w i
-linearProgress variant (config@{ additionalAttributes }) =
+linearProgress :: Variant -> Config i -> HH.HTML w i
+linearProgress variant config =
   HH.element (ElemName "mdc-linear-progress")
     ( Array.catMaybes
         [ rootCs
@@ -45,7 +46,7 @@ linearProgress variant (config@{ additionalAttributes }) =
         , reverseProp config
         , closedProp config
         ]
-        <> additionalAttributes
+        <> config.additionalAttributes
     )
     [ bufferingDotsElt
     , bufferElt
@@ -53,13 +54,13 @@ linearProgress variant (config@{ additionalAttributes }) =
     , secondaryBarElt
     ]
 
-indeterminate :: Config r i -> HH.HTML w i
+indeterminate :: Config i -> HH.HTML w i
 indeterminate config = linearProgress Indeterminate config
 
-determinate :: Config r i -> { progress :: Float } -> HH.HTML w i
+determinate :: Config i -> { progress :: Float } -> HH.HTML w i
 determinate config { progress } = linearProgress (Determinate progress) config
 
-buffered :: Config r i -> { progress :: Float, buffered :: Float } -> HH.HTML w i
+buffered :: Config i -> { progress :: Float, buffered :: Float } -> HH.HTML w i
 buffered config data_ = linearProgress (Buffered data_.progress data_.buffered) config
 
 rootCs :: Maybe (IProp r i)
@@ -104,10 +105,10 @@ bufferProp variant =
         )
     )
 
-reverseProp :: Config r i -> Maybe (IProp r i)
+reverseProp :: Config i -> Maybe (IProp r i)
 reverseProp { reverse } = Just (HP.prop (PropName "reverse") reverse)
 
-closedProp :: Config r i -> Maybe (IProp r i)
+closedProp :: Config i -> Maybe (IProp r i)
 closedProp { closed } = Just (HP.prop (PropName "closed") closed)
 
 bufferingDotsElt :: HH.HTML w i

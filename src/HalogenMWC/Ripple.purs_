@@ -1,6 +1,7 @@
 module HalogenMWC.Ripple where
 
 import Protolude
+import DOM.HTML.Indexed as I
 import MaterialIconsFont.Classes
 import Web.Event.Event
 
@@ -13,12 +14,12 @@ import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Material.Classes.Ripple
 
-type Config r i =
+type Config i =
   { color :: Maybe Color
-    , additionalAttributes :: Array (IProp r i)
+    , additionalAttributes :: Array (IProp I.HTMLdiv i)
     }
 
-defaultConfig :: Config r i
+defaultConfig :: forall i . Config i
 defaultConfig =
   { color: Nothing
   , additionalAttributes: []
@@ -34,8 +35,8 @@ primary = Primary
 accent :: Color
 accent = Accent
 
-ripple :: Boolean -> Config r i -> HH.HTML w i
-ripple isUnbounded (config@{ additionalAttributes }) =
+ripple :: Boolean -> Config i -> HH.HTML w i
+ripple isUnbounded config =
   HH.element (ElemName "mdc-ripple")
     ( Array.catMaybes
         [ unboundedProp isUnbounded
@@ -48,20 +49,20 @@ ripple isUnbounded (config@{ additionalAttributes }) =
         , Just (style "right" "0")
         , Just (style "bottom" "0")
         ]
-        <> additionalAttributes
+        <> config.additionalAttributes
     )
     []
 
-bounded :: Config r i -> HH.HTML w i
+bounded :: Config i -> HH.HTML w i
 bounded = ripple false
 
-unbounded :: Config r i -> HH.HTML w i
+unbounded :: Config i -> HH.HTML w i
 unbounded = ripple true
 
 rippleSurface :: Maybe (IProp r i)
 rippleSurface = Just (HP.class_ mdc_ripple_surface)
 
-colorCs :: Config r i -> Maybe (IProp r i)
+colorCs :: Config i -> Maybe (IProp r i)
 colorCs { color } = case color of
   Just Primary -> Just (HP.class_ mdc_ripple_surface____primary)
   Just Accent -> Just (HP.class_ mdc_ripple_surface____accent)

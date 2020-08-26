@@ -1,6 +1,7 @@
 module HalogenMWC.ImageList where
 
 import Protolude
+import DOM.HTML.Indexed as I
 import MaterialIconsFont.Classes
 import Web.Event.Event
 
@@ -15,20 +16,20 @@ import HalogenMWC.ImageList.Item (ImageArrayItem)
 import HalogenMWC.ImageList.Item as ImageArrayItem
 import Material.Classes.ImageList
 
-type Config r i =
+type Config i =
   { masonry :: Boolean
     , withTextProtection :: Boolean
-    , additionalAttributes :: Array (IProp r i)
+    , additionalAttributes :: Array (IProp I.HTMLdiv i)
     }
 
-defaultConfig :: Config r i
+defaultConfig :: forall i . Config i
 defaultConfig =
   { masonry: false
   , withTextProtection: false
   , additionalAttributes: []
   }
 
-imageArray :: Config r i -> Array (ImageArrayItem r i) -> HH.HTML w i
+imageArray :: Config i -> Array (ImageArrayItem r i) -> HH.HTML w i
 imageArray config listItems =
   HH.element (ElemName "mdc-image-list")
     ( Array.catMaybes
@@ -40,21 +41,21 @@ imageArray config listItems =
     )
     (map (listItemElt config) listItems)
 
-masonryCs :: Config r i -> Maybe (IProp r i)
+masonryCs :: Config i -> Maybe (IProp r i)
 masonryCs { masonry } =
   if masonry then
     Just (HP.class_ mdc_image_list____masonry)
   else
     Nothing
 
-withTextProtectionCs :: Config r i -> Maybe (IProp r i)
+withTextProtectionCs :: Config i -> Maybe (IProp r i)
 withTextProtectionCs { withTextProtection } =
   if withTextProtection then
     Just (HP.class_ mdc_image_list____with_text_protection)
   else
     Nothing
 
-listItemElt :: Config r i -> ImageArrayItem r i -> HH.HTML w i
+listItemElt :: Config i -> ImageArrayItem r i -> HH.HTML w i
 listItemElt (config@{ masonry }) (listItem@(ImageArrayItem.ImageArrayItem { href, additionalAttributes })) =
   let
     inner =
@@ -66,7 +67,7 @@ listItemElt (config@{ masonry }) (listItem@(ImageArrayItem.ImageArrayItem { href
       ]
   in
     HH.element (ElemName "mdc-image-list-item")
-      ([ HP.class_ mdc_image_list__item ] <> additionalAttributes)
+      ([ HP.class_ mdc_image_list__item ] <> config.additionalAttributes)
       ( href
           # map (\href_ -> [ HH.a [ HP.href href_ ] inner ])
           # Maybe.fromMaybe inner

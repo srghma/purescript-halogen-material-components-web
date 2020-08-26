@@ -1,6 +1,7 @@
 module HalogenMWC.Menu where
 
 import Protolude
+import DOM.HTML.Indexed as I
 import MaterialIconsFont.Classes
 import Web.Event.Event
 
@@ -13,14 +14,14 @@ import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Material.Classes.Menu
 
-type Config r i =
+type Config i =
   { open :: Boolean
     , quickOpen :: Boolean
-    , additionalAttributes :: Array (IProp r i)
+    , additionalAttributes :: Array (IProp I.HTMLdiv i)
     , onClose :: Maybe (Event -> i)
     }
 
-defaultConfig :: Config r i
+defaultConfig :: forall i . Config i
 defaultConfig =
   { open: false
   , quickOpen: false
@@ -28,8 +29,8 @@ defaultConfig =
   , onClose: Nothing
   }
 
-menu :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
-menu (config@{ additionalAttributes }) nodes =
+menu :: Config i -> Array (HH.HTML w i) -> HH.HTML w i
+menu config nodes =
   HH.element (ElemName "mdc-menu")
     ( Array.catMaybes
         [ rootCs
@@ -37,7 +38,7 @@ menu (config@{ additionalAttributes }) nodes =
         , quickOpenProp config
         , closeHandler config
         ]
-        <> additionalAttributes
+        <> config.additionalAttributes
     )
     nodes
 
@@ -47,11 +48,11 @@ surfaceAnchor = HP.class_ mdc_menu_surface____anchor
 rootCs :: Maybe (IProp r i)
 rootCs = Just (HP.classes [mdc_menu, mdc_menu_surface])
 
-openProp :: Config r i -> Maybe (IProp r i)
+openProp :: Config i -> Maybe (IProp r i)
 openProp { open } = Just (HP.prop (PropName "open") open)
 
-quickOpenProp :: Config r i -> Maybe (IProp r i)
+quickOpenProp :: Config i -> Maybe (IProp r i)
 quickOpenProp { quickOpen } = Just (HP.prop (PropName "quickOpen") quickOpen)
 
-closeHandler :: Config r i -> Maybe (IProp r i)
+closeHandler :: Config i -> Maybe (IProp r i)
 closeHandler { onClose } = map (HE.on "MDCMenu:close" <<< Decode.succeed) onClose

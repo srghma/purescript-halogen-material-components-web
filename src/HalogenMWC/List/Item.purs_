@@ -1,6 +1,7 @@
 module HalogenMWC.Array.Item where
 
 import Protolude
+import DOM.HTML.Indexed as I
 import MaterialIconsFont.Classes
 import Web.Event.Event
 
@@ -13,12 +14,12 @@ import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Material.Classes.List
 
-type Config r i =
+type Config i =
   { disabled :: Boolean
     , selection :: Maybe Selection
     , href :: Maybe String
     , target :: Maybe String
-    , additionalAttributes :: Array (IProp r i)
+    , additionalAttributes :: Array (IProp I.HTMLdiv i)
     , onClick :: Maybe (Event -> i)
     , node :: HH.HTML w i
     }
@@ -28,11 +29,11 @@ data Selection
   | Activated
 
 data ArrayItem r i
-  = ArrayItem (Config r i)
+  = ArrayItem (Config i)
   | ArrayItemDivider (HH.HTML w i)
   | ArrayGroupSubheader (HH.HTML w i)
 
-defaultConfig :: Config r i
+defaultConfig :: forall i . Config i
 defaultConfig =
   { disabled: false
   , selection: Nothing
@@ -49,10 +50,10 @@ selected = Selected
 activated :: Selection
 activated = Activated
 
-listItem :: Config r i -> Array (HH.HTML w i) -> ArrayItem r i
+listItem :: Config i -> Array (HH.HTML w i) -> ArrayItem r i
 listItem config nodes = ArrayItem (config { node = listItemView config nodes })
 
-listItemView :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
+listItemView :: Config i -> Array (HH.HTML w i) -> HH.HTML w i
 listItemView config nodes =
   ( \attributes ->
       if config.href /= Nothing then
@@ -72,38 +73,38 @@ listItemView config nodes =
         <> config.additionalAttributes
     )
 
-disabledCs :: Config r i -> Maybe (IProp r i)
+disabledCs :: Config i -> Maybe (IProp r i)
 disabledCs { disabled } =
   if disabled then
     Just (HP.class_ mdc_list_item____disabled)
   else
     Nothing
 
-selectedCs :: Config r i -> Maybe (IProp r i)
+selectedCs :: Config i -> Maybe (IProp r i)
 selectedCs { selection } =
   if selection == Just Selected then
     Just (HP.class_ mdc_list_item____selected)
   else
     Nothing
 
-activatedCs :: Config r i -> Maybe (IProp r i)
+activatedCs :: Config i -> Maybe (IProp r i)
 activatedCs { selection } =
   if selection == Just Activated then
     Just (HP.class_ mdc_list_item____activated)
   else
     Nothing
 
-ariaSelectedAttr :: Config r i -> Maybe (IProp r i)
+ariaSelectedAttr :: Config i -> Maybe (IProp r i)
 ariaSelectedAttr { selection } =
   if selection /= Nothing then
     Just (HP.attr (AttrName "aria-selected") "true")
   else
     Nothing
 
-hrefAttr :: Config r i -> Maybe (IProp r i)
+hrefAttr :: Config i -> Maybe (IProp r i)
 hrefAttr { href } = map HP.href href
 
-targetAttr :: Config r i -> Maybe (IProp r i)
+targetAttr :: Config i -> Maybe (IProp r i)
 targetAttr { href, target } =
   if href /= Nothing then
     map HP.target target
@@ -117,19 +118,19 @@ text ::
   } ->
   HH.HTML w i
 text additionalAttributes { primary, secondary } =
-  HH.div ([ HP.class_ mdc_list_item__text ] <> additionalAttributes)
+  HH.div ([ HP.class_ mdc_list_item__text ] <> config.additionalAttributes)
     [ primaryText [] primary
     , secondaryText [] secondary
     ]
 
 primaryText :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
-primaryText additionalAttributes nodes = HH.div ([ HP.class_ mdc_list_item__primary_text ] <> additionalAttributes) nodes
+primaryText additionalAttributes nodes = HH.div ([ HP.class_ mdc_list_item__primary_text ] <> config.additionalAttributes) nodes
 
 secondaryText :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
-secondaryText additionalAttributes nodes = HH.div ([ HP.class_ mdc_list_item__secondary_text ] <> additionalAttributes) nodes
+secondaryText additionalAttributes nodes = HH.div ([ HP.class_ mdc_list_item__secondary_text ] <> config.additionalAttributes) nodes
 
 graphic :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
-graphic additionalAttributes nodes = HH.div ([ HP.class_ mdc_list_item__graphic ] <> additionalAttributes) nodes
+graphic additionalAttributes nodes = HH.div ([ HP.class_ mdc_list_item__graphic ] <> config.additionalAttributes) nodes
 
 meta :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
-meta additionalAttributes nodes = HH.div ([ HP.class_ mdc_list_item__meta ] <> additionalAttributes) nodes
+meta additionalAttributes nodes = HH.div ([ HP.class_ mdc_list_item__meta ] <> config.additionalAttributes) nodes

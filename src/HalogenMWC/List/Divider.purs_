@@ -1,6 +1,7 @@
 module HalogenMWC.Array.Divider where
 
 import Protolude
+import DOM.HTML.Indexed as I
 import MaterialIconsFont.Classes
 import Web.Event.Event
 
@@ -15,21 +16,21 @@ import HalogenMWC.Array.Item (ArrayItem)
 import HalogenMWC.Array.Item as ArrayItem
 import Material.Classes.List
 
-type Config r i =
+type Config i =
   { inset :: Boolean
     , padded :: Boolean
-    , additionalAttributes :: Array (IProp r i)
+    , additionalAttributes :: Array (IProp I.HTMLdiv i)
     }
 
-defaultConfig :: Config r i
+defaultConfig :: forall i . Config i
 defaultConfig =
   { inset: false
   , padded: false
   , additionalAttributes: []
   }
 
-listItem :: Config r i -> ArrayItem r i
-listItem (config@{ additionalAttributes }) =
+listItem :: Config i -> ArrayItem r i
+listItem config =
   ArrayItem.ArrayItemDivider
     $ HH.li
         ( Array.catMaybes
@@ -38,7 +39,7 @@ listItem (config@{ additionalAttributes }) =
             , insetCs config
             , paddedCs config
             ]
-            <> additionalAttributes
+            <> config.additionalAttributes
         )
         []
 
@@ -54,7 +55,7 @@ insetCs { inset } =
   else
     Nothing
 
-paddedCs :: Config r i -> Maybe (IProp r i)
+paddedCs :: Config i -> Maybe (IProp r i)
 paddedCs { padded } =
   if padded then
     Just (HP.class_ mdc_list_divider____padded)
@@ -62,4 +63,4 @@ paddedCs { padded } =
     Nothing
 
 group :: Array (IProp r i) -> HH.HTML w i
-group additionalAttributes = HH.hr (Array.catMaybes [ listDividerCs ] <> additionalAttributes) []
+group additionalAttributes = HH.hr (Array.catMaybes [ listDividerCs ] <> config.additionalAttributes) []

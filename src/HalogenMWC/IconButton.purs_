@@ -1,6 +1,7 @@
 module HalogenMWC.IconButton where
 
 import Protolude
+import DOM.HTML.Indexed as I
 import MaterialIconsFont.Classes
 import Web.Event.Event
 
@@ -13,14 +14,14 @@ import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Material.Classes.IconButton
 
-type Config r i =
+type Config i =
   { disabled :: Boolean
     , label :: Maybe String
-    , additionalAttributes :: Array (IProp r i)
+    , additionalAttributes :: Array (IProp I.HTMLdiv i)
     , onClick :: Maybe (Event -> i)
     }
 
-defaultConfig :: Config r i
+defaultConfig :: forall i . Config i
 defaultConfig =
   { disabled: false
   , label: Nothing
@@ -28,7 +29,7 @@ defaultConfig =
   , onClick: Nothing
   }
 
-iconButton :: Config r i -> String -> HH.HTML w i
+iconButton :: Config i -> String -> HH.HTML w i
 iconButton config iconName =
   HH.element (ElemName "mdc-icon-button")
     ( Array.catMaybes
@@ -41,7 +42,7 @@ iconButton config iconName =
     )
     [ HH.text iconName ]
 
-custom :: Config r i -> Array (HH.HTML w i) -> HH.HTML w i
+custom :: Config i -> Array (HH.HTML w i) -> HH.HTML w i
 custom config nodes =
   HH.element (ElemName "mdc-icon-button")
     ( Array.catMaybes
@@ -62,5 +63,5 @@ materialIconsCs = Just (HP.class_ material_icons)
 tabIndexProp :: Maybe (IProp r i)
 tabIndexProp = Just (HP.tabindex 0)
 
-clickHandler :: Config r i -> Maybe (IProp r i)
+clickHandler :: Config i -> Maybe (IProp r i)
 clickHandler config = map HE.onClick config.onClick

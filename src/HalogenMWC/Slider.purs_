@@ -1,6 +1,7 @@
 module HalogenMWC.Slider where
 
 import Protolude
+import DOM.HTML.Indexed as I
 import MaterialIconsFont.Classes
 import Web.Event.Event
 
@@ -16,7 +17,7 @@ import Halogen.SVG.Elements as Halogen.SVG.Elements
 import Material.Classes.Slider
 
 -- TODO: Prevent FOUC
-type Config r i =
+type Config i =
   { discrete :: Boolean
     , displayMarkers :: Boolean
     , min :: Maybe Float
@@ -24,11 +25,11 @@ type Config r i =
     , step :: Maybe Float
     , value :: Maybe Float
     , disabled :: Boolean
-    , additionalAttributes :: Array (IProp r i)
+    , additionalAttributes :: Array (IProp I.HTMLdiv i)
     , onInput :: Maybe (Float -> r i)
     }
 
-defaultConfig :: Config r i
+defaultConfig :: forall i . Config i
 defaultConfig =
   { discrete: false
   , displayMarkers: false
@@ -54,8 +55,8 @@ This works best for integer-valued sliders, but this is not a requirement.
 Note that this option is ignored by non-discrete sliders.
 
 -}
-slider :: Config r i -> HH.HTML w i
-slider (config@{ additionalAttributes }) =
+slider :: Config i -> HH.HTML w i
+slider config =
   HH.element (ElemName "mdc-slider")
     ( Array.catMaybes
         [ rootCs
@@ -74,7 +75,7 @@ slider (config@{ additionalAttributes }) =
         , ariaValuenowAttr config
         , changeHandler config
         ]
-        <> additionalAttributes
+        <> config.additionalAttributes
     )
     [ trackContainerElt
     , thumbContainerElt config
@@ -86,14 +87,14 @@ rootCs = Just (HP.class_ mdc_slider)
 displayCss :: Maybe (IProp r i)
 displayCss = Just (style "display" "block")
 
-discreteCs :: Config r i -> Maybe (IProp r i)
+discreteCs :: Config i -> Maybe (IProp r i)
 discreteCs { discrete } =
   if discrete then
     Just (HP.class_ mdc_slider____discrete)
   else
     Nothing
 
-displayMarkersCs :: Config r i -> Maybe (IProp r i)
+displayMarkersCs :: Config i -> Maybe (IProp r i)
 displayMarkersCs { discrete, displayMarkers } =
   if discrete && displayMarkers then
     Just (HP.class_ mdc_slider____display_markers)
@@ -106,31 +107,31 @@ tabIndexProp = Just (HP.tabindex 0)
 sliderRoleAttr :: Maybe (IProp r i)
 sliderRoleAttr = Just (HP.attr (AttrName "role") "slider")
 
-valueProp :: Config r i -> Maybe (IProp r i)
+valueProp :: Config i -> Maybe (IProp r i)
 valueProp { value } = map (HP.prop (PropName "value") <<< Encode.float) value
 
-minProp :: Config r i -> Maybe (IProp r i)
+minProp :: Config i -> Maybe (IProp r i)
 minProp { min } = map (HP.prop (PropName "min") <<< Encode.float) min
 
-maxProp :: Config r i -> Maybe (IProp r i)
+maxProp :: Config i -> Maybe (IProp r i)
 maxProp { max } = map (HP.prop (PropName "max") <<< Encode.float) max
 
-stepProp :: Config r i -> Maybe (IProp r i)
+stepProp :: Config i -> Maybe (IProp r i)
 stepProp { step } = map (HP.prop (PropName "step") <<< Encode.float) step
 
-disabledProp :: Config r i -> Maybe (IProp r i)
+disabledProp :: Config i -> Maybe (IProp r i)
 disabledProp { disabled } = Just (HP.prop (PropName "disabled") disabled)
 
-ariaValueMinAttr :: Config r i -> Maybe (IProp r i)
+ariaValueMinAttr :: Config i -> Maybe (IProp r i)
 ariaValueMinAttr { min } = map (HP.attr (AttrName "aria-valuemin") <<< String.fromFloat) min
 
-ariaValueMaxAttr :: Config r i -> Maybe (IProp r i)
+ariaValueMaxAttr :: Config i -> Maybe (IProp r i)
 ariaValueMaxAttr { max } = map (HP.attr (AttrName "aria-valuemax") <<< String.fromFloat) max
 
-ariaValuenowAttr :: Config r i -> Maybe (IProp r i)
+ariaValuenowAttr :: Config i -> Maybe (IProp r i)
 ariaValuenowAttr { value } = map (HP.attr (AttrName "aria-valuenow") <<< String.fromFloat) value
 
-changeHandler :: Config r i -> Maybe (IProp r i)
+changeHandler :: Config i -> Maybe (IProp r i)
 changeHandler { onInput } =
   map
     ( \handler ->
@@ -148,7 +149,7 @@ trackElt = HH.div [ HP.class_ mdc_slider__track ] []
 trackMarkerContainerElt :: HH.HTML w i
 trackMarkerContainerElt = HH.div [ HP.class_ mdc_slider__track_marker_container ] []
 
-thumbContainerElt :: Config r i -> HH.HTML w i
+thumbContainerElt :: Config i -> HH.HTML w i
 thumbContainerElt { discrete } =
   HH.div [ HP.class_ mdc_slider__thumb_container ]
     ( if discrete then
