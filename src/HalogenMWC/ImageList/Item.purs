@@ -11,8 +11,8 @@ type Config i
     , image :: String
     }
 
-newtype ImageArrayItem r i
-  = ImageArrayItem (Config i)
+newtype ImageListItem w i
+  = ImageListItem (Config i)
 
 defaultConfig :: forall r i. Config i
 defaultConfig =

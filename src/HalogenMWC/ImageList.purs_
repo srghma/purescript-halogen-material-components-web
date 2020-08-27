@@ -13,8 +13,8 @@ import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
-import HalogenMWC.ImageList.Item (ImageArrayItem)
-import HalogenMWC.ImageList.Item as ImageArrayItem
+import HalogenMWC.ImageList.Item (ImageListItem)
+import HalogenMWC.ImageList.Item as ImageListItem
 import Material.Classes.ImageList
 
 type Config i =
@@ -30,7 +30,7 @@ defaultConfig =
   , additionalAttributes: []
   }
 
-imageArray :: Config i -> Array (ImageArrayItem r i) -> HH.HTML w i
+imageArray :: Config i -> Array (ImageListItem w i) -> HH.HTML w i
 imageArray config listItems =
   HH.element (ElemName "mdc-image-list")
     ( Array.catMaybes
@@ -56,8 +56,8 @@ withTextProtectionCs { withTextProtection } =
   else
     Nothing
 
-listItemElt :: Config i -> ImageArrayItem r i -> HH.HTML w i
-listItemElt (config@{ masonry }) (listItem@(ImageArrayItem.ImageArrayItem { href, additionalAttributes })) =
+listItemElt :: Config i -> ImageListItem w i -> HH.HTML w i
+listItemElt (config@{ masonry }) (listItem@(ImageListItem.ImageListItem { href, additionalAttributes })) =
   let
     inner =
       [ if masonry then
@@ -74,8 +74,8 @@ listItemElt (config@{ masonry }) (listItem@(ImageArrayItem.ImageArrayItem { href
           # Maybe.fromMaybe inner
       )
 
-imageAspectContainerElt :: Boolean -> ImageArrayItem r i -> HH.HTML w i
-imageAspectContainerElt masonry (listItem@(ImageArrayItem.ImageArrayItem { href })) =
+imageAspectContainerElt :: Boolean -> ImageListItem w i -> HH.HTML w i
+imageAspectContainerElt masonry (listItem@(ImageListItem.ImageListItem { href })) =
   HH.div
     ( Array.catMaybes
         [ Just mdc_image_list__image_aspect_container
@@ -84,8 +84,8 @@ imageAspectContainerElt masonry (listItem@(ImageArrayItem.ImageArrayItem { href 
     )
     [ imageElt masonry listItem ]
 
-imageElt :: Boolean -> ImageArrayItem r i -> HH.HTML w i
-imageElt masonry (ImageArrayItem.ImageArrayItem { href, image }) =
+imageElt :: Boolean -> ImageListItem w i -> HH.HTML w i
+imageElt masonry (ImageListItem.ImageListItem { href, image }) =
   let
     img =
       HH.img
@@ -106,8 +106,8 @@ imageElt masonry (ImageArrayItem.ImageArrayItem { href, image }) =
         ]
         []
 
-supportingElt :: ImageArrayItem r i -> HH.HTML w i
-supportingElt (ImageArrayItem.ImageArrayItem { label }) = case label of
+supportingElt :: ImageListItem w i -> HH.HTML w i
+supportingElt (ImageListItem.ImageListItem { label }) = case label of
   Just string ->
     HH.div
       [ HP.class_ mdc_image_list__supporting ]

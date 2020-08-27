@@ -36,7 +36,7 @@ button config =
     \content ->
       wrapTouch
         $ HH.element (ElemName "mdc-button")
-            [ HP.prop (PropName "disabled") config.disabled
+            [ HP.disabled config.disabled
             ]
             [ HH.button (commonProps <> config.additionalAttributes) (commonHtml content)
             ]
@@ -53,7 +53,7 @@ buttonLink config =
     \content ->
       wrapTouch
         $ HH.element (ElemName "mdc-button")
-            [ HP.prop (PropName "disabled") config.disabled
+            [ HP.disabled config.disabled
             ]
             [ HH.a (commonProps <> config.additionalAttributes) (commonHtml content)
             ]

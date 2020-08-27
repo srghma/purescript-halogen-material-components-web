@@ -80,7 +80,7 @@ indeterminateProp :: Config i -> Maybe (IProp r i)
 indeterminateProp { state } = Just (HP.prop (PropName "indeterminate") (Encode.bool (state == Just Indeterminate)))
 
 disabledProp :: Config i -> Maybe (IProp r i)
-disabledProp { disabled } = Just (HP.prop (PropName "disabled") disabled)
+disabledProp { disabled } = Just (HP.disabled disabled)
 
 changeHandler :: Config i -> Maybe (IProp r i)
 changeHandler { state, onChange } =

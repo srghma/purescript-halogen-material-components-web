@@ -16,6 +16,7 @@
   , "strings"
   , "tuples"
   , "either"
+  , "foldable-traversable"
   ]
 , packages = ./packages.dhall
 , sources =

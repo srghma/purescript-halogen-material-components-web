@@ -14,10 +14,10 @@ import DOM.HTML.Indexed.InputType (InputType(..))
 
 type Config i =
   { checked :: Boolean
-    , disabled :: Boolean
-    , additionalAttributes :: Array (IProp I.HTMLdiv i)
-    , onChange :: Maybe (String -> i)
-    }
+  , disabled :: Boolean
+  , additionalAttributes :: Array (IProp I.HTMLinput i)
+  , onChange :: Maybe (String -> i)
+  }
 
 defaultConfig :: forall i . Config i
 defaultConfig =
@@ -32,7 +32,7 @@ switch config =
   HH.element (ElemName "mdc-switch")
     ( [ HP.class_ mdc_switch
       , HP.prop (PropName "checked") config.checked
-      , HP.prop (PropName "disabled") config.disabled
+      , HP.disabled config.disabled
       ]
       <> config.additionalAttributes
     )

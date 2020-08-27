@@ -15,27 +15,27 @@ import Halogen.HTML.Properties as HP
 import HalogenMWC.Icon as Icon
 import HalogenMWC.Utils as Utils
 
-type Config w i
-  = { label :: Maybe String
-    , fullwidth :: Boolean
-    , value :: Maybe String
-    , placeholder :: Maybe String
-    , disabled :: Boolean
-    , required :: Boolean
-    , valid :: Boolean
-    , minLength :: Maybe Int
-    , maxLength :: Maybe Int
-    , pattern :: Maybe String
-    , type_ :: Maybe InputType
-    , min :: Maybe Int
-    , max :: Maybe Int
-    , step :: Maybe Int
-    , leadingIcon :: Maybe (HH.HTML w i)
-    , trailingIcon :: Maybe (HH.HTML w i)
-    , additionalAttributes :: Array (IProp I.HTMLdiv i)
-    , onInput :: Maybe (String -> i)
-    , onChange :: Maybe (String -> i)
-    }
+type Config w i =
+  { label :: Maybe String
+  , fullwidth :: Boolean
+  , value :: Maybe String
+  , placeholder :: Maybe String
+  , disabled :: Boolean
+  , required :: Boolean
+  , valid :: Boolean
+  , minLength :: Maybe Int
+  , maxLength :: Maybe Int
+  , pattern :: Maybe String
+  , type_ :: Maybe InputType
+  , min :: Maybe Int
+  , max :: Maybe Int
+  , step :: Maybe Int
+  , leadingIcon :: Maybe (HH.HTML w i)
+  , trailingIcon :: Maybe (HH.HTML w i)
+  , additionalAttributes :: Array (IProp I.HTMLinput i)
+  , onInput :: Maybe (String -> i)
+  , onChange :: Maybe (String -> i)
+  }
 
 defaultConfig :: forall w i. Config w i
 defaultConfig =
@@ -86,7 +86,7 @@ textField type_ config =
                   , map (const mdc_text_field____with_trailing_icon) config.trailingIcon
                   ]
           )
-      , HP.prop (PropName "disabled") config.disabled
+      , HP.disabled config.disabled
       , HP.prop (PropName "required") config.required
       , HP.prop (PropName "valid") config.valid
       , HP.prop (PropName "minLength") (Maybe.fromMaybe (-1) config.minLength)

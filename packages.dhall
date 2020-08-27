@@ -7,6 +7,11 @@ let overrides =
           //  { repo = "https://github.com/srghma/purescript-halogen.git"
               , version = "hydration-wip-2"
               }
+      , foldable-traversable =
+              upstream.foldable-traversable
+          //  { repo = "https://github.com/srghma/purescript-foldable-traversable.git"
+              , version = "master"
+              }
       }
 
 let additions =

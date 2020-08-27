@@ -24,7 +24,7 @@ type Config i =
   , step :: Maybe Number
   , value :: Maybe Number
   , disabled :: Boolean
-  , additionalAttributes :: Array (IProp I.HTMLdiv i)
+  , additionalAttributes :: Array (IProp I.HTMLinput i)
   , onInput :: Maybe (Number -> i)
   }
 
@@ -53,7 +53,7 @@ slider config =
         , Just $ HP.attr (AttrName "style") "display: block;"
         , Just $ HP.tabIndex 0
         , Just $ HP.attr (AttrName "role") "slider"
-        , Just $ HP.prop (PropName "disabled") config.disabled
+        , Just $ HP.disabled config.disabled
         , map (HP.prop (PropName "value")) config.value
         , map (HP.prop (PropName "min")) config.min
         , map (HP.prop (PropName "max")) config.max
@@ -83,7 +83,8 @@ trackMarkerContainerElt = HH.div [ HP.class_ mdc_slider__track_marker_container 
 
 thumbContainerElt :: forall w i . Config i -> HH.HTML w i
 thumbContainerElt config =
-  HH.div [ HP.class_ mdc_slider__thumb_container ]
+  HH.div
+    [ HP.class_ mdc_slider__thumb_container ]
     ( if config.discrete then
         [ pinElt, thumbElt, focusRingElt ]
       else
