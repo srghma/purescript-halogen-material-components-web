@@ -17,7 +17,7 @@ type Config i =
   { leadingIcon :: Maybe String
     , trailingIcon :: Maybe String
     , additionalAttributes :: Array (IProp I.HTMLdiv i)
-    , onClick :: Maybe (Event -> i)
+    , onClick :: Maybe (MouseEvent -> i)
     , onDelete :: Maybe (Event -> i)
     }
 

@@ -14,13 +14,14 @@ import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Material.Classes.Fab
+import Web.UIEvent.MouseEvent (MouseEvent)
 
 type Config i =
   { mini :: Boolean
-    , exited :: Boolean
-    , additionalAttributes :: Array (IProp I.HTMLdiv i)
-    , onClick :: Maybe (Event -> i)
-    }
+  , exited :: Boolean
+  , additionalAttributes :: Array (IProp I.HTMLdiv i)
+  , onClick :: Maybe (MouseEvent -> i)
+  }
 
 defaultConfig :: forall i . Config i
 defaultConfig =
@@ -30,15 +31,16 @@ defaultConfig =
   , additionalAttributes: []
   }
 
-fab :: Config i -> String -> HH.HTML w i
+fab :: forall w i . Config i -> String -> HH.HTML w i
 fab config iconName =
   HH.element (ElemName "mdc-fab")
     ( Array.catMaybes
-        [ rootCs
-        , miniCs config
-        , exitedCs config
-        , clickHandler config
-        , tabIndexProp 0
+        [ Just $ HP.classes $
+          [ mdc_fab ]
+          <> if config.mini then [ mdc_fab____mini ] else []
+          <> if config.exited then [ mdc_fab____exited ] else []
+        , Just $ HP.prop (PropName "tabIndex") 0
+        , map HE.onClick config.onClick
         ]
         <> config.additionalAttributes
     )
@@ -46,31 +48,8 @@ fab config iconName =
     , iconElt iconName
     ]
 
-tabIndexProp :: Int -> Maybe (IProp r i)
-tabIndexProp tabIndex = Just (HP.prop (PropName "tabIndex") tabIndex)
-
-rootCs :: Maybe (IProp r i)
-rootCs = Just mdc_fab
-
-miniCs :: Config i -> Maybe (IProp r i)
-miniCs { mini } =
-  if mini then
-    Just mdc_fab____mini
-  else
-    Nothing
-
-exitedCs :: Config i -> Maybe (IProp r i)
-exitedCs { exited } =
-  if exited then
-    Just mdc_fab____exited
-  else
-    Nothing
-
 rippleElt :: forall w i . HH.HTML w i
 rippleElt = HH.div [ HP.class_ mdc_fab__ripple ] []
 
-iconElt :: String -> HH.HTML w i
+iconElt :: forall w i . String -> HH.HTML w i
 iconElt iconName = HH.span [ HP.class_ material_icons, HP.class_ mdc_fab__icon ] [ HH.text iconName ]
-
-clickHandler :: Config i -> Maybe (IProp r i)
-clickHandler { onClick } = map HE.onClick onClick

@@ -17,9 +17,9 @@ import Material.Classes.Dialog
 
 type Config i =
   { open :: Boolean
-    , additionalAttributes :: Array (IProp I.HTMLdiv i)
-    , onClose :: Maybe (Event -> i)
-    }
+  , additionalAttributes :: Array (IProp I.HTMLdiv i)
+  , onClose :: Maybe (Event -> i)
+  }
 
 defaultConfig :: forall i . Config i
 defaultConfig =
@@ -28,47 +28,36 @@ defaultConfig =
   , onClose: Nothing
   }
 
-type Content r i
-  = { title :: Maybe String
-    , content :: Array (HH.HTML w i)
-    , actions :: Array (HH.HTML w i)
-    }
+type Content w i =
+  { title :: Maybe String
+  , content :: Array (HH.HTML w i)
+  , actions :: Array (HH.HTML w i)
+  }
 
-dialog :: Config i -> Content r i -> HH.HTML w i
+dialog :: forall w i . Config i -> Content w i -> HH.HTML w i
 dialog config content =
   HH.element (ElemName "mdc-dialog")
-    ( Array.catMaybes
-        [ rootCs
-        , openProp config
-        , roleAttr
-        , ariaModalAttr
-        , closeHandler config
-        ]
-        <> config.additionalAttributes
+    ( [ HP.class_ mdc_dialog
+      , HP.prop (PropName "open") config.open
+      , HP.attr (AttrName "role") "alertdialog"
+      , HP.attr (AttrName "aria-modal") "true"
+      ]
+      <> Array.catMaybes
+      [ closeHandler config
+      ]
+      <> config.additionalAttributes
     )
     [ containerElt content
     , scrimElt
     ]
 
-rootCs :: Maybe (IProp r i)
-rootCs = Just mdc_dialog
+closeHandler :: forall r i . Config i -> Maybe (IProp r i)
+closeHandler config = map (HE.handler (EventType "MDCDialog:close")) config.onClose
 
-openProp :: Config i -> Maybe (IProp r i)
-openProp { open } = Just (HP.prop (PropName "open") open)
-
-roleAttr :: Maybe (IProp r i)
-roleAttr = Just (HP.attr (AttrName "role") "alertdialog")
-
-ariaModalAttr :: Maybe (IProp r i)
-ariaModalAttr = Just (HP.attr (AttrName "aria-modal") "true")
-
-closeHandler :: Config i -> Maybe (IProp r i)
-closeHandler { onClose } = map (HE.handler (EventType "MDCDialog:close")) onClose
-
-containerElt :: Content r i -> HH.HTML w i
+containerElt :: forall w i . Content w i -> HH.HTML w i
 containerElt content = HH.div [ HP.class_ mdc_dialog__container ] [ surfaceElt content ]
 
-surfaceElt :: Content r i -> HH.HTML w i
+surfaceElt :: forall w i . Content w i -> HH.HTML w i
 surfaceElt content =
   HH.div
     [ HP.class_ mdc_dialog__surface ]
@@ -79,17 +68,17 @@ surfaceElt content =
         ]
     )
 
-titleElt :: Content r i -> Maybe (HH.HTML w i)
+titleElt :: forall w i . Content w i -> Maybe (HH.HTML w i)
 titleElt { title } = case title of
   Just title_ -> Just (HH.div [ HP.class_ mdc_dialog__title ] [ HH.text title_ ])
   Nothing -> Nothing
 
-contentElt :: Content r i -> Maybe (HH.HTML w i)
+contentElt :: forall w i . Content w i -> Maybe (HH.HTML w i)
 contentElt { content } = Just (HH.div [ HP.class_ mdc_dialog__content ] content)
 
-actionsElt :: Content r i -> Maybe (HH.HTML w i)
+actionsElt :: forall w i . Content w i -> Maybe (HH.HTML w i)
 actionsElt { actions } =
-  if Array.isEmpty actions then
+  if Array.null actions then
     Nothing
   else
     Just (HH.div [ HP.class_ mdc_dialog__actions ] actions)
