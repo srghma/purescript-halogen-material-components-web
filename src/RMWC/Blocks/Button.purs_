@@ -76,7 +76,7 @@ button =
          <> (if config.unelevated then [mdc_button____unelevated] else [])
          <> (if config.outlined then [mdc_button____outlined] else [])
        ]
-       <> (if config.danger then [ HP.attr (AttrName "style") dangerStyle ] else [])
+       <> (if config.danger then [ HP.style dangerStyle ] else [])
      )
      (  [ buttonRipple ]
      <> renderIcon config.leftIcon

@@ -59,7 +59,7 @@ avatarImage config =
     ]
     [ HH.div
         [ HP.classes [ rmwc_avatar__icon ]
-        , HP.attr (AttrName "style") $ "background-image: url(" <> config.url <> "); background-size: " <> containToStyle config.contain <> ";"
+        , HP.style $ "background-image: url(" <> config.url <> "); background-size: " <> containToStyle config.contain <> ";"
         ]
         []
     , HH.div

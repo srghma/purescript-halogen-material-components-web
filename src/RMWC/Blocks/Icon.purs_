@@ -46,6 +46,6 @@ iconUrl :: forall w i . { url :: Url, size :: Maybe Size } -> HH.HTML w i
 iconUrl config =
   HH.i
   [ HP.classes $ [rmwc_icon, rmwc_icon____url, material_icons] <> maybeSizeToClassName config.size
-  , HP.attr (AttrName "style") $ "background-image: url(" <> Url.unUrl config.url <> ");"
+  , HP.style $ "background-image: url(" <> Url.unUrl config.url <> ");"
   ]
   []

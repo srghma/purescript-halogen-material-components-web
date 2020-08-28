@@ -32,7 +32,7 @@ ripple isUnbounded config =
         [ Just $ HP.classes $ [ mdc_ripple_surface ] <> colorCs config
         , Just $ HP.prop (PropName "unbounded") isUnbounded
         , if isUnbounded then Just (HP.attr (AttrName "data-mdc-ripple-is-unbounded") "") else Nothing
-        , Just (HP.attr (AttrName "style") "position: absolute; top: 0; left: 0; bottom: 0; right: 0; ")
+        , Just (HP.style "position: absolute; top: 0; left: 0; bottom: 0; right: 0; ")
         ]
         <> config.additionalAttributes
     )

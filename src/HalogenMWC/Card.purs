@@ -90,8 +90,8 @@ mediaView aspect additionalAttributes backgroundImage =
     )
     []
 
-backgroundImageAttr :: forall r i. String -> IProp r i
-backgroundImageAttr url = HP.attr (AttrName "style") ("background-image: url(\"" <> url <> "\")")
+backgroundImageAttr :: forall i. String -> IProp I.HTMLdiv i
+backgroundImageAttr url = HP.style ("background-image: url(\"" <> url <> "\")")
 
 aspectCs :: Maybe Aspect -> Array ClassName
 aspectCs = case _ of

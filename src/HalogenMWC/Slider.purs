@@ -51,7 +51,7 @@ slider config =
                 , if config.discrete then Just mdc_slider____discrete else Nothing
                 , if config.discrete && config.displayMarkers then Just mdc_slider____display_markers else Nothing
                 ]
-        , Just $ HP.attr (AttrName "style") "display: block;"
+        , Just $ HP.style "display: block;"
         , Just $ HP.tabIndex 0
         , Just $ HP.attr (AttrName "role") "slider"
         , Just $ HP.disabled config.disabled

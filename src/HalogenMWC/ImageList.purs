@@ -91,7 +91,7 @@ imageElt masonry (ImageList.Item.ImageListItem imageListItem) =
     else
       HH.div
         [ HP.class_ mdc_image_list__image
-        , HP.attr (AttrName "style") ("background-image: url('" <> imageListItem.image <> "');")
+        , HP.style ("background-image: url('" <> imageListItem.image <> "');")
         ]
         []
 

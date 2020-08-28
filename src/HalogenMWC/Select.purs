@@ -137,7 +137,7 @@ menuElt leadingIcon selected onChange firstSelectItem remainingSelectItems =
   Menu.menu
     ( Menu.defaultConfig
         { additionalClasses = [ mdc_select__menu ]
-        , additionalAttributes = [ HP.attr (AttrName "style") "width: 100%;" ]
+        , additionalAttributes = [ HP.style "width: 100%;" ]
         }
     )
     [ List.list (List.defaultConfig { wrapFocus = true })

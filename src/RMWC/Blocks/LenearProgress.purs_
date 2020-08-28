@@ -26,12 +26,12 @@ linearProgress { buffer, progress } =
     [ HH.div [ HP.class_ mdc_linear_progress__buffering_dots ] []
     , HH.div
       [ HP.class_ mdc_linear_progress__buffer
-      , HP.attr (AttrName "style") $ "transform: scaleX(" <> show buffer <>  ");"
+      , HP.style $ "transform: scaleX(" <> show buffer <>  ");"
       ]
       []
     , HH.div
       [ HP.classes [ mdc_linear_progress__bar, mdc_linear_progress__primary_bar ]
-      , HP.attr (AttrName "style") $ "transform: scaleX(" <> show progress <>  ");"
+      , HP.style $ "transform: scaleX(" <> show progress <>  ");"
       ]
       [ HH.span [ HP.class_ mdc_linear_progress__bar_inner ] []
       ]

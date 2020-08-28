@@ -36,7 +36,7 @@ linearProgress variant config =
               [ Just mdc_linear_progress
               , variantCs variant
               ]
-      , HP.attr (AttrName "style") "display: block;"
+      , HP.style "display: block;"
       , HP.attr (AttrName "role") "progressbar"
       , HP.prop (PropName "determinate")
           ( case variant of

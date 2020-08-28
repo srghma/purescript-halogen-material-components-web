@@ -80,7 +80,7 @@ circularProgressDeterminate { size, progress } =
     styleAttribute =
       let
         n = 2.0 * Math.pi * (size' / 2.4) * Percent.toNumber progress
-       in [ HP.attr (AttrName "style") ("stroke-dasharray: " <> show n <> " 666.66%;") ]
+       in [ HP.style ("stroke-dasharray: " <> show n <> " 666.66%;") ]
   in
     HH.div
       [ Halogen.HTML.Properties.ARIA.valueMin "0"
