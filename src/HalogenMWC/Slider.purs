@@ -2,9 +2,8 @@ module HalogenMWC.Slider where
 
 import Halogen (AttrName(..), ElemName(..), PropName(..))
 import Material.Classes.Slider (mdc_slider, mdc_slider____discrete, mdc_slider____display_markers, mdc_slider__focus_ring, mdc_slider__pin, mdc_slider__pin_value_marker, mdc_slider__thumb, mdc_slider__thumb_container, mdc_slider__track, mdc_slider__track_container, mdc_slider__track_marker_container)
-import Protolude (Maybe(..), map, show, ($), (&&), (<<<), (<>))
+import Prelude
 import Web.Event.Event (EventType(..))
-
 import DOM.HTML.Indexed as I
 import Data.Array as Array
 import Foreign (readNumber)
@@ -16,40 +15,41 @@ import Halogen.SVG.Elements as Halogen.SVG.Elements
 import HalogenMWC.Utils as Utils
 
 -- TODO: Prevent FOUC
-type Config i =
-  { discrete :: Boolean
-  , displayMarkers :: Boolean
-  , min :: Maybe Number
-  , max :: Maybe Number
-  , step :: Maybe Number
-  , value :: Maybe Number
-  , disabled :: Boolean
-  , additionalAttributes :: Array (IProp I.HTMLinput i)
-  , onInput :: Maybe (Number -> i)
-  }
+type Config i
+  = { discrete :: Boolean
+    , displayMarkers :: Boolean
+    , min :: Maybe Number
+    , max :: Maybe Number
+    , step :: Maybe Number
+    , value :: Maybe Number
+    , disabled :: Boolean
+    , additionalAttributes :: Array (IProp I.HTMLinput i)
+    , onInput :: Maybe (Number -> i)
+    }
 
-defaultConfig :: forall i . Config i
+defaultConfig :: forall i. Config i
 defaultConfig =
-  { discrete:             false
-  , displayMarkers:       false
-  , min:                  Nothing
-  , max:                  Nothing
-  , step:                 Nothing
-  , value:                Nothing
-  , disabled:             false
+  { discrete: false
+  , displayMarkers: false
+  , min: Nothing
+  , max: Nothing
+  , step: Nothing
+  , value: Nothing
+  , disabled: false
   , additionalAttributes: []
-  , onInput:              Nothing
+  , onInput: Nothing
   }
 
-slider :: forall w i . Config i -> HH.HTML w i
+slider :: forall w i. Config i -> HH.HTML w i
 slider config =
   HH.element (ElemName "mdc-slider")
     ( Array.catMaybes
-        [ Just $ HP.classes $ Array.catMaybes
-          [ Just mdc_slider
-          , if config.discrete then Just mdc_slider____discrete else Nothing
-          , if config.discrete && config.displayMarkers then Just mdc_slider____display_markers else Nothing
-          ]
+        [ Just $ HP.classes
+            $ Array.catMaybes
+                [ Just mdc_slider
+                , if config.discrete then Just mdc_slider____discrete else Nothing
+                , if config.discrete && config.displayMarkers then Just mdc_slider____display_markers else Nothing
+                ]
         , Just $ HP.attr (AttrName "style") "display: block;"
         , Just $ HP.tabIndex 0
         , Just $ HP.attr (AttrName "role") "slider"
@@ -69,19 +69,19 @@ slider config =
     , thumbContainerElt config
     ]
 
-changeHandler :: forall r i . Maybe (Number -> i) -> Maybe (IProp r i)
+changeHandler :: forall r i. Maybe (Number -> i) -> Maybe (IProp r i)
 changeHandler = map (Utils.addForeignPropHandler (EventType "MDCSlider:input") "value" readNumber)
 
-trackContainerElt :: forall w i . HH.HTML w i
+trackContainerElt :: forall w i. HH.HTML w i
 trackContainerElt = HH.div [ HP.class_ mdc_slider__track_container ] [ trackElt, trackMarkerContainerElt ]
 
-trackElt :: forall w i . HH.HTML w i
+trackElt :: forall w i. HH.HTML w i
 trackElt = HH.div [ HP.class_ mdc_slider__track ] []
 
-trackMarkerContainerElt :: forall w i . HH.HTML w i
+trackMarkerContainerElt :: forall w i. HH.HTML w i
 trackMarkerContainerElt = HH.div [ HP.class_ mdc_slider__track_marker_container ] []
 
-thumbContainerElt :: forall w i . Config i -> HH.HTML w i
+thumbContainerElt :: forall w i. Config i -> HH.HTML w i
 thumbContainerElt config =
   HH.div
     [ HP.class_ mdc_slider__thumb_container ]
@@ -91,13 +91,13 @@ thumbContainerElt config =
         [ thumbElt, focusRingElt ]
     )
 
-pinElt :: forall w i . HH.HTML w i
+pinElt :: forall w i. HH.HTML w i
 pinElt = HH.div [ HP.class_ mdc_slider__pin ] [ pinValueMarkerElt ]
 
-pinValueMarkerElt :: forall w i . HH.HTML w i
+pinValueMarkerElt :: forall w i. HH.HTML w i
 pinValueMarkerElt = HH.div [ HP.class_ mdc_slider__pin_value_marker ] []
 
-thumbElt :: forall w i . HH.HTML w i
+thumbElt :: forall w i. HH.HTML w i
 thumbElt =
   Halogen.SVG.Elements.svg
     [ Halogen.SVG.Attributes.class_ mdc_slider__thumb
@@ -112,5 +112,5 @@ thumbElt =
         []
     ]
 
-focusRingElt :: forall w i . HH.HTML w i
+focusRingElt :: forall w i. HH.HTML w i
 focusRingElt = HH.div [ HP.class_ mdc_slider__focus_ring ] []

@@ -1,7 +1,7 @@
 module HalogenMWC.FormField where
 
 import Material.Classes.FormField (mdc_form_field, mdc_form_field____align_end)
-import Protolude (Maybe(..), ($), (<>))
+import Prelude
 import DOM.HTML.Indexed (HTMLdiv) as I
 import Data.Array as Array
 import Halogen

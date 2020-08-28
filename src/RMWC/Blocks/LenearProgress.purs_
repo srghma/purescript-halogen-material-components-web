@@ -1,6 +1,6 @@
 module RMWC.Blocks.LinearProgress where
 
-import Protolude
+import Prelude
 
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP

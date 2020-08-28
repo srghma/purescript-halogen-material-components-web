@@ -1,6 +1,6 @@
 module HalogenMWC.HelperText where
 
-import Protolude (($), (<>))
+import Prelude
 import DOM.HTML.Indexed as I
 import Halogen (AttrName(..))
 import Halogen.HTML (IProp)

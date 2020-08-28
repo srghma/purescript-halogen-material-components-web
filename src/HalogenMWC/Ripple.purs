@@ -1,36 +1,30 @@
 module HalogenMWC.Ripple where
 
-import Protolude
+import Prelude
 import DOM.HTML.Indexed as I
-import MaterialIconsFont.Classes
-import Web.Event.Event
-
 import Data.Array as Array
-import Data.Maybe as Maybe
-import Halogen
+import Halogen (AttrName(..), ClassName, ElemName(..), PropName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
-import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
-import Material.Classes.Ripple
+import Material.Classes.Ripple (mdc_ripple_surface, mdc_ripple_surface____accent, mdc_ripple_surface____primary)
 
 data Color
   = Primary
   | Accent
 
-type Config i =
-  { color :: Maybe Color
-  , additionalAttributes :: Array (IProp I.HTMLdiv i)
-  }
+type Config i
+  = { color :: Maybe Color
+    , additionalAttributes :: Array (IProp I.HTMLdiv i)
+    }
 
-defaultConfig :: forall i . Config i
+defaultConfig :: forall i. Config i
 defaultConfig =
   { color: Nothing
   , additionalAttributes: []
   }
 
-ripple :: forall w i . Boolean -> Config i -> HH.HTML w i
+ripple :: forall w i. Boolean -> Config i -> HH.HTML w i
 ripple isUnbounded config =
   HH.element (ElemName "mdc-ripple")
     ( Array.catMaybes
@@ -43,7 +37,7 @@ ripple isUnbounded config =
     )
     []
 
-colorCs :: forall i . Config i -> Array ClassName
+colorCs :: forall i. Config i -> Array ClassName
 colorCs config = case config.color of
   Just Primary -> [ mdc_ripple_surface____primary ]
   Just Accent -> [ mdc_ripple_surface____accent ]

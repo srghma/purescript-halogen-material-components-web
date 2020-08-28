@@ -1,6 +1,6 @@
 module RMWC.Blocks.Avatar where
 
-import Protolude (($), (<>))
+import Prelude
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Core (AttrName(..))
@@ -8,8 +8,8 @@ import Halogen.HTML (ClassName)
 import RMWC.Classes.Icon (rmwc_icon, rmwc_icon____component)
 import RMWC.Classes.Avatar (rmwc_avatar, rmwc_avatar____has_image, rmwc_avatar____large, rmwc_avatar____medium, rmwc_avatar____small, rmwc_avatar____square, rmwc_avatar____xlarge, rmwc_avatar____xsmall, rmwc_avatar__icon, rmwc_avatar__text, rmwc_avatar__text_inner)
 import MaterialIconsFont.Classes (material_icons)
-import Protolude.Url (Url)
-import Protolude.Url as Url
+import Prelude
+import Prelude
 
 data Size
   = Xsmall

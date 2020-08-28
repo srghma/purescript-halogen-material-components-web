@@ -1,31 +1,25 @@
 module HalogenMWC.Checkbox where
 
-import Halogen
-import Material.Classes.Checkbox
-import MaterialIconsFont.Classes
-import Protolude
-import Web.Event.Event
-
+import Halogen (AttrName(..), ElemName(..), PropName(..))
+import Material.Classes.Checkbox (mdc_checkbox, mdc_checkbox____touch, mdc_checkbox__background, mdc_checkbox__checkmark, mdc_checkbox__checkmark_path, mdc_checkbox__mixedmark, mdc_checkbox__native_control, mdc_touch_target_wrapper)
+import Prelude
+import Web.Event.Event (Event)
 import DOM.HTML.Indexed as I
 import DOM.HTML.Indexed.InputType (InputType(..))
-import Data.Array as Array
-import Data.Maybe as Maybe
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
-import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Halogen.SVG.Attributes as Halogen.SVG.Attributes
 import Halogen.SVG.Elements as Halogen.SVG.Elements
 import HalogenMWC.Utils (checkboxChangeHandler) as Utils
 
-type Config i =
-  { state :: Maybe State
-  , disabled :: Boolean
-  , additionalAttributes :: Array (IProp I.HTMLinput i)
-  , onChange :: Maybe (Event -> i)
-  , touch :: Boolean
-  }
+type Config i
+  = { state :: Maybe State
+    , disabled :: Boolean
+    , additionalAttributes :: Array (IProp I.HTMLinput i)
+    , onChange :: Maybe (Event -> i)
+    , touch :: Boolean
+    }
 
 data State
   = Unchecked
@@ -34,7 +28,7 @@ data State
 
 derive instance eqState :: Eq State
 
-defaultConfig :: forall i . Config i
+defaultConfig :: forall i. Config i
 defaultConfig =
   { state: Nothing
   , disabled: false
@@ -43,7 +37,7 @@ defaultConfig =
   , touch: true
   }
 
-checkbox :: forall w i . Config i -> HH.HTML w i
+checkbox :: forall w i. Config i -> HH.HTML w i
 checkbox config =
   let
     wrapTouch node =
@@ -54,14 +48,14 @@ checkbox config =
   in
     wrapTouch
       $ HH.element (ElemName "mdc-checkbox")
-          ( [ HP.classes $
-              [ mdc_checkbox ]
-              <> (if config.touch then [ mdc_checkbox____touch ] else [])
+          ( [ HP.classes
+                $ [ mdc_checkbox ]
+                <> (if config.touch then [ mdc_checkbox____touch ] else [])
             , HP.checked (config.state == Just Checked)
             , HP.prop (PropName "indeterminate") (config.state == Just Indeterminate)
             , HP.disabled config.disabled
             ]
-            <> config.additionalAttributes
+              <> config.additionalAttributes
           )
           [ nativeControlElt config
           , backgroundElt
@@ -74,17 +68,18 @@ changeHandler = case _ of
   Nothing -> []
   Just onChange -> [ Utils.checkboxChangeHandler onChange ]
 
-nativeControlElt :: forall w i . Config i -> HH.HTML w i
+nativeControlElt :: forall w i. Config i -> HH.HTML w i
 nativeControlElt config =
   HH.input
     ( [ HP.type_ InputCheckbox
       , HP.classes [ mdc_checkbox__native_control ]
       , HP.checked (config.state == Just Checked)
       , HP.prop (PropName "indeterminate") (config.state == Just Indeterminate)
-      ] <> changeHandler config.onChange
+      ]
+        <> changeHandler config.onChange
     )
 
-backgroundElt :: forall w i . HH.HTML w i
+backgroundElt :: forall w i. HH.HTML w i
 backgroundElt =
   HH.div
     [ HP.class_ mdc_checkbox__background ]

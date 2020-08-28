@@ -1,15 +1,15 @@
 module RMWC.Blocks.Icon where
 
 import MaterialIconsFont.Classes
-import Protolude
+import Prelude
 import RMWC.Classes.Icon
 
 import Halogen (AttrName(..), ClassName(..))
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
-import Protolude.Url (Url)
-import Protolude.Url as Url
+import Prelude
+import Prelude
 
 data Size
   = Xsmall

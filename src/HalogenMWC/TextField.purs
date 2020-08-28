@@ -2,7 +2,7 @@ module HalogenMWC.TextField where
 
 import Material.Classes.LineRipple (mdc_line_ripple)
 import Material.Classes.Textfield (mdc_floating_label, mdc_floating_label____float_above, mdc_notched_outline, mdc_notched_outline__leading, mdc_notched_outline__notch, mdc_notched_outline__trailing, mdc_text_field, mdc_text_field____disabled, mdc_text_field____fullwidth, mdc_text_field____no_label, mdc_text_field____outlined, mdc_text_field____with_leading_icon, mdc_text_field____with_trailing_icon, mdc_text_field__icon, mdc_text_field__input)
-import Protolude (Maybe(..), const, map, maybe, negate, show, (/=), (<<<), (<>))
+import Prelude
 import DOM.HTML.Indexed as I
 import DOM.HTML.Indexed.InputType (InputType)
 import Data.Array as Array
@@ -15,27 +15,27 @@ import Halogen.HTML.Properties as HP
 import HalogenMWC.Icon as Icon
 import HalogenMWC.Utils as Utils
 
-type Config w i =
-  { label :: Maybe String
-  , fullwidth :: Boolean
-  , value :: Maybe String
-  , placeholder :: Maybe String
-  , disabled :: Boolean
-  , required :: Boolean
-  , valid :: Boolean
-  , minLength :: Maybe Int
-  , maxLength :: Maybe Int
-  , pattern :: Maybe String
-  , type_ :: Maybe InputType
-  , min :: Maybe Int
-  , max :: Maybe Int
-  , step :: Maybe Int
-  , leadingIcon :: Maybe (HH.HTML w i)
-  , trailingIcon :: Maybe (HH.HTML w i)
-  , additionalAttributes :: Array (IProp I.HTMLinput i)
-  , onInput :: Maybe (String -> i)
-  , onChange :: Maybe (String -> i)
-  }
+type Config w i
+  = { label :: Maybe String
+    , fullwidth :: Boolean
+    , value :: Maybe String
+    , placeholder :: Maybe String
+    , disabled :: Boolean
+    , required :: Boolean
+    , valid :: Boolean
+    , minLength :: Maybe Int
+    , maxLength :: Maybe Int
+    , pattern :: Maybe String
+    , type_ :: Maybe InputType
+    , min :: Maybe Int
+    , max :: Maybe Int
+    , step :: Maybe Int
+    , leadingIcon :: Maybe (HH.HTML w i)
+    , trailingIcon :: Maybe (HH.HTML w i)
+    , additionalAttributes :: Array (IProp I.HTMLinput i)
+    , onInput :: Maybe (String -> i)
+    , onChange :: Maybe (String -> i)
+    }
 
 defaultConfig :: forall w i. Config w i
 defaultConfig =

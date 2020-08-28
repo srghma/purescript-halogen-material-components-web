@@ -1,6 +1,6 @@
 module Data.Percent (Percent, calcPercent, unsafePercent, toNumber) where
 
-import Protolude
+import Prelude
 import Unsafe.Coerce (unsafeCoerce)
 
 newtype Percent

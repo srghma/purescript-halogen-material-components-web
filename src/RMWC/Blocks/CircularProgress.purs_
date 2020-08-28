@@ -1,6 +1,6 @@
 module RMWC.Blocks.CircularProgress where
 
-import Protolude
+import Prelude
 import RMWC.Classes.CircularProgress
 
 import Halogen.HTML as HH

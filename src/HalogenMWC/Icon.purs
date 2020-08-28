@@ -1,7 +1,7 @@
 module HalogenMWC.Icon where
 
 import MaterialIconsFont.Classes (material_icons)
-import Protolude ((<>))
+import Prelude
 import DOM.HTML.Indexed (HTMLi) as I
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH

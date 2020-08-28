@@ -1,6 +1,6 @@
 module HalogenMWC.ImageList.Item where
 
-import Protolude
+import Prelude
 import DOM.HTML.Indexed as I
 import Halogen.HTML (IProp)
 

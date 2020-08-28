@@ -4,7 +4,7 @@ import Halogen (AttrName(..), ElemName(..), PropName(..))
 import Material.Classes.Tab (mdc_tab, mdc_tab____min_width, mdc_tab____stacked, mdc_tab__content, mdc_tab__icon, mdc_tab__ripple, mdc_tab__text_label)
 import Material.Classes.TabIndicator (mdc_tab_indicator, mdc_tab_indicator__content, mdc_tab_indicator__content____underline)
 import Material.Classes.TabScroller (mdc_tab_scroller, mdc_tab_scroller____align_center, mdc_tab_scroller____align_end, mdc_tab_scroller____align_start, mdc_tab_scroller__scroll_area, mdc_tab_scroller__scroll_content)
-import Protolude (Maybe(..), map, ($), (<>))
+import Prelude
 import MaterialIconsFont.Classes (material_icons)
 import DOM.HTML.Indexed as I
 import Data.Array as Array

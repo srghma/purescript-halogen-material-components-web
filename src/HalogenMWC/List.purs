@@ -1,36 +1,31 @@
 module HalogenMWC.List where
 
-import Halogen
-import Material.Classes.List
-import MaterialIconsFont.Classes
-import Protolude
-import Web.Event.Event
-
-import Control.Monad.Except (runExcept)
+import Halogen (ElemName(..), PropName(..))
+import Material.Classes.List (mdc_list, mdc_list____avatar_list, mdc_list____dense, mdc_list____two_line, mdc_list_group, mdc_list_group__subheader)
+import Prelude
+import Web.Event.Event (Event, EventType(..))
 import DOM.HTML.Indexed as I
 import Data.Array as Array
 import Data.Either (hush) as Either
-import Data.Maybe as Maybe
-import Foreign as Foreign
-import Foreign.Index as Foreign
+import Foreign (readInt, unsafeToForeign) as Foreign
+import Foreign.Index (readProp) as Foreign
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.List.Item as ListItem
 import HalogenMWC.Utils as Utils
 
-type Config i =
-  { dense :: Boolean
-  , avatarList :: Boolean
-  , twoLine :: Boolean
-  , vertical :: Boolean
-  , wrapFocus :: Boolean
-  , additionalAttributes :: Array (IProp I.HTMLdiv i)
-  }
+type Config i
+  = { dense :: Boolean
+    , avatarList :: Boolean
+    , twoLine :: Boolean
+    , vertical :: Boolean
+    , wrapFocus :: Boolean
+    , additionalAttributes :: Array (IProp I.HTMLdiv i)
+    }
 
-defaultConfig :: forall i . Config i
+defaultConfig :: forall i. Config i
 defaultConfig =
   { dense: false
   , avatarList: false
@@ -40,23 +35,24 @@ defaultConfig =
   , additionalAttributes: []
   }
 
-list :: forall w i . Config i -> ListItem.ListItem w i -> Array (ListItem.ListItem w i) -> HH.HTML w i
+list :: forall w i. Config i -> ListItem.ListItem w i -> Array (ListItem.ListItem w i) -> HH.HTML w i
 list config firstListItem remainingListItems =
   let
     listItems = [ firstListItem ] <> remainingListItems
   in
     HH.element (ElemName "mdc-list")
-      ( [ HP.classes $ Array.catMaybes
-          [ Just mdc_list
-          , if config.dense then Just mdc_list____dense else Nothing
-          , if config.avatarList then Just mdc_list____avatar_list else Nothing
-          , if config.twoLine then Just mdc_list____two_line else Nothing
-          ]
+      ( [ HP.classes
+            $ Array.catMaybes
+                [ Just mdc_list
+                , if config.dense then Just mdc_list____dense else Nothing
+                , if config.avatarList then Just mdc_list____avatar_list else Nothing
+                , if config.twoLine then Just mdc_list____two_line else Nothing
+                ]
         , HP.prop (PropName "wrapFocus") config.wrapFocus
         , clickHandler listItems
         , selectedIndexProp listItems
         ]
-        <> config.additionalAttributes
+          <> config.additionalAttributes
       )
       ( map
           ( \listItem_ -> case listItem_ of
@@ -67,7 +63,7 @@ list config firstListItem remainingListItems =
           listItems
       )
 
-clickHandler :: forall w i r . Array (ListItem.ListItem w i) -> IProp r i
+clickHandler :: forall w i r. Array (ListItem.ListItem w i) -> IProp r i
 clickHandler listItems =
   let
     getListItemConfigs :: ListItem.ListItem w i -> Maybe (ListItem.Config w i)
@@ -87,14 +83,13 @@ clickHandler listItems =
     readDetailIndex event = Foreign.unsafeToForeign event # (\f -> Foreign.readProp "detail" f >>= Foreign.readProp "index" >>= Foreign.readInt) # runExcept # Either.hush
 
     mergedClickHandler :: Event -> Maybe i
-    mergedClickHandler event =
-      case readDetailIndex event >>= nthOnClick >>> join of
-           Nothing -> Nothing
-           Just onClick -> Just (onClick event)
+    mergedClickHandler event = case readDetailIndex event >>= nthOnClick >>> join of
+      Nothing -> Nothing
+      Just onClick -> Just (onClick event)
   in
     HE.handler' (EventType "MDCArray:action") mergedClickHandler
 
-selectedIndexProp :: forall w i r . Array (ListItem.ListItem w i) -> IProp r i
+selectedIndexProp :: forall w i r. Array (ListItem.ListItem w i) -> IProp r i
 selectedIndexProp listItems =
   let
     selectedIndex :: Array Int
@@ -119,8 +114,8 @@ selectedIndexProp listItems =
   in
     Utils.prop (PropName "selectedIndex") (Utils.propFromArrayInt selectedIndex)
 
-group :: forall w i . Array (HH.HTML w i) -> HH.HTML w i
+group :: forall w i. Array (HH.HTML w i) -> HH.HTML w i
 group = HH.div [ HP.class_ mdc_list_group ]
 
-subheader :: forall w i . Array (HH.HTML w i) -> HH.HTML w i
+subheader :: forall w i. Array (HH.HTML w i) -> HH.HTML w i
 subheader = HH.span [ HP.class_ mdc_list_group__subheader ]

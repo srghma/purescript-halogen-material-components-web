@@ -3,17 +3,16 @@ module HalogenMWC.Button
   , module Export
   ) where
 
-import Halogen
-
+import Halogen (ElemName(..), PropName(..))
 import DOM.HTML.Indexed as I
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
-import Halogen.HTML.Core (ClassName(..))
+import Halogen.HTML.Core (ClassName)
 import Halogen.HTML.Properties as HP
 import HalogenMWC.Button.Common (Variant(..), buttonLabel, buttonIcon, defaultConfig) as Export
 import HalogenMWC.Button.Common (Variant)
 import HalogenMWC.Button.Common as Common
-import Protolude (negate, ($), (<>))
+import Prelude
 
 type Config r i
   = { disabled :: Boolean

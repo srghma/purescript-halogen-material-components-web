@@ -1,14 +1,13 @@
 module HalogenMWC.Utils where
 
 import Prelude
-
 import Control.Monad.Except (runExcept)
 import Data.Either (either)
 import Data.Either (hush) as Either
 import Data.Maybe (Maybe(..))
 import Foreign (F, Foreign)
-import Foreign as Foreign
-import Foreign.Index as Foreign
+import Foreign (readBoolean, unsafeToForeign) as Foreign
+import Foreign.Index (readProp) as Foreign
 import Halogen (ClassName, PropName)
 import Halogen.HTML.Core (Prop(..), PropValue)
 import Halogen.HTML.Events as HE
@@ -31,8 +30,7 @@ propFromArrayClassName = unsafeCoerce
 
 -- NOTE: copied from Halogen.HTML.Events
 addForeignPropHandler :: forall r i value. EventType -> String -> (Foreign -> F value) -> (value -> i) -> IProp r i
-addForeignPropHandler key prop_ reader f =
-  HE.handler' key $ EE.currentTarget >=> \e -> either (const Nothing) (Just <<< f) $ runExcept $ go e
+addForeignPropHandler key prop_ reader f = HE.handler' key $ EE.currentTarget >=> \e -> either (const Nothing) (Just <<< f) $ runExcept $ go e
   where
   go a = reader <=< Foreign.readProp prop_ $ Foreign.unsafeToForeign a
 
@@ -44,9 +42,9 @@ checkboxChangeHandler = \onChange -> HE.handler' (EventType "change") (handle on
   readChecked :: Event -> Maybe Boolean
   readChecked event =
     Foreign.unsafeToForeign event
-    # (\f -> Foreign.readProp "target" f >>= Foreign.readProp "checked" >>= Foreign.readBoolean)
-    # runExcept
-    # Either.hush
+      # (\f -> Foreign.readProp "target" f >>= Foreign.readProp "checked" >>= Foreign.readBoolean)
+      # runExcept
+      # Either.hush
 
   handle onChange = \event -> case readChecked event of
     Nothing -> Nothing

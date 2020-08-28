@@ -10,7 +10,6 @@
   , "halogen"
   , "numbers"
   , "prelude"
-  , "protolude"
   , "psci-support"
   , "record"
   , "strings"
