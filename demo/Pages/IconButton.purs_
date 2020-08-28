@@ -1,33 +1,33 @@
-module Demo.IconButton exposing (Model, Msg(..), defaultModel, update, view)
+module Demo.Pages.IconButton
 
 import Browser.Dom
-import Demo.CatalogPage exposing (CatalogPage)
-import Html exposing (text)
+import Demo.CatalogPage
+import Html
 import Html.Attributes
 import Material.Button as Button
 import Material.IconButton as IconButton
 import Material.IconToggle as IconToggle
 import Material.Typography as Typography
-import Set exposing (Set)
+import Set
 import Task
 
 
-type alias Model =
-    { ons : Set String }
+data Model =
+    { ons :: Set String }
 
 
-defaultModel : Model
+defaultModel :: Model
 defaultModel =
     { ons = Set.empty }
 
 
-type Msg
+data Msg
     = Toggle String
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update :: Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Toggle id ->
@@ -49,7 +49,7 @@ update msg model =
             ( model, Cmd.none )
 
 
-view : Model -> CatalogPage Msg
+view :: Model -> CatalogPage Msg
 view model =
     { title = "Icon Button"
     , prelude = "Icons are appropriate for buttons that allow a user to take actions or make a selection, such as adding or removing a star to an item."

@@ -1,9 +1,9 @@
-module Demo.Cards exposing (Model, Msg(..), defaultModel, update, view)
+module Demo.Pages.Cards
 
 import Browser.Dom
-import Demo.CatalogPage exposing (CatalogPage)
-import Html exposing (Html, text)
-import Html.Attributes exposing (style)
+import Demo.CatalogPage
+import Html
+import Html.Attributes
 import Material.Button as Button
 import Material.Card as Card
 import Material.IconButton as IconButton
@@ -12,21 +12,21 @@ import Material.Typography as Typography
 import Task
 
 
-type alias Model =
+data Model =
     {}
 
 
-defaultModel : Model
+defaultModel :: Model
 defaultModel =
     {}
 
 
-type Msg
+data Msg
     = Focus String
     | Focused (Result Browser.Dom.Error ())
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update :: Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Focus id ->
@@ -36,7 +36,7 @@ update msg model =
             ( model, Cmd.none )
 
 
-view : Model -> CatalogPage Msg
+view :: Model -> CatalogPage Msg
 view model =
     { title = "Card"
     , prelude = "Cards contain content and actions about a single subject."
@@ -55,7 +55,7 @@ view model =
     }
 
 
-heroCard : List (Html msg)
+heroCard :: Array (Html msg)
 heroCard =
     [ Card.card
         (Card.config
@@ -72,7 +72,7 @@ heroCard =
     ]
 
 
-exampleCard1 : Html msg
+exampleCard1 :: Html msg
 exampleCard1 =
     Card.card
         (Card.config
@@ -91,7 +91,7 @@ exampleCard1 =
         }
 
 
-exampleCard2 : Html msg
+exampleCard2 :: Html msg
 exampleCard2 =
     Card.card
         (Card.config
@@ -109,7 +109,7 @@ exampleCard2 =
         }
 
 
-exampleCard3 : Html msg
+exampleCard3 :: Html msg
 exampleCard3 =
     Card.card
         (Card.config
@@ -128,7 +128,7 @@ exampleCard3 =
         }
 
 
-focusCard : Html Msg
+focusCard :: Html Msg
 focusCard =
     Html.div []
         [ Card.card
@@ -153,12 +153,12 @@ focusCard =
         ]
 
 
-demoMedia : Card.Block msg
+demoMedia :: Card.Block msg
 demoMedia =
     Card.sixteenToNineMedia [] "images/photos/3x2/2.jpg"
 
 
-demoTitle : Card.Block msg
+demoTitle :: Card.Block msg
 demoTitle =
     Card.block <|
         Html.div
@@ -177,7 +177,7 @@ demoTitle =
             ]
 
 
-demoBody : Card.Block msg
+demoBody :: Card.Block msg
 demoBody =
     Card.block <|
         Html.div
@@ -193,7 +193,7 @@ demoBody =
             ]
 
 
-demoActions : Card.Actions msg
+demoActions :: Card.Actions msg
 demoActions =
     Card.actions
         { buttons =

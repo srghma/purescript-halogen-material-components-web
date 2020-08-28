@@ -1,9 +1,9 @@
-module Demo.Switch exposing (Model, Msg(..), defaultModel, update, view)
+module Demo.Pages.Switch
 
 import Browser.Dom
-import Demo.CatalogPage exposing (CatalogPage)
-import Dict exposing (Dict)
-import Html exposing (Html, text)
+import Demo.CatalogPage
+import Dict
+import Html
 import Html.Attributes
 import Material.Button as Button
 import Material.FormField as FormField
@@ -12,22 +12,22 @@ import Material.Typography as Typography
 import Task
 
 
-type alias Model =
-    { switches : Dict String Bool }
+data Model =
+    { switches :: Dict String Boolean }
 
 
-defaultModel : Model
+defaultModel :: Model
 defaultModel =
     { switches = Dict.fromList [ ( "hero-switch", True ) ] }
 
 
-type Msg
+data Msg
     = Toggle String
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update :: Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Toggle id ->
@@ -47,12 +47,12 @@ update msg model =
             ( model, Cmd.none )
 
 
-isChecked : String -> Model -> Bool
+isChecked :: String -> Model -> Boolean
 isChecked id model =
     Maybe.withDefault False (Dict.get id model.switches)
 
 
-view : Model -> CatalogPage Msg
+view :: Model -> CatalogPage Msg
 view model =
     { title = "Switch"
     , prelude = "Switches communicate an action a user can take. They are typically placed throughout your UI, in places like dialogs, forms, cards, and toolbars."
@@ -71,7 +71,7 @@ view model =
     }
 
 
-heroSwitch : Model -> List (Html Msg)
+heroSwitch :: Model -> Array (Html Msg)
 heroSwitch model =
     let
         id =
@@ -92,7 +92,7 @@ heroSwitch model =
     ]
 
 
-demoSwitch : Model -> Html Msg
+demoSwitch :: Model -> Html Msg
 demoSwitch model =
     let
         id =
@@ -112,7 +112,7 @@ demoSwitch model =
         ]
 
 
-focusSwitch : Model -> Html Msg
+focusSwitch :: Model -> Html Msg
 focusSwitch model =
     let
         id =

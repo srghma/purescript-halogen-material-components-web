@@ -1,4 +1,4 @@
-module Demo.Url exposing
+module Demo.Pages.Url
     ( Url(..)
     , fromString
     , fromUrl
@@ -8,7 +8,7 @@ module Demo.Url exposing
 import Url
 
 
-type Url
+data Url
     = StartPage
     | Button
     | Card
@@ -48,7 +48,7 @@ type Url
     | Error404 String
 
 
-toString : Url -> String
+toString :: Url -> String
 toString url =
     case url of
         StartPage ->
@@ -99,7 +99,7 @@ toString url =
         LinearProgress ->
             "#linear-progress"
 
-        List ->
+        Array ->
             "#lists"
 
         RadioButton ->
@@ -163,12 +163,12 @@ toString url =
             requestedHash
 
 
-fromUrl : Url.Url -> Url
+fromUrl :: Url.Url -> Url
 fromUrl url =
     fromString (Maybe.withDefault "" url.fragment)
 
 
-fromString : String -> Url
+fromString :: String -> Url
 fromString url =
     case url of
         "" ->

@@ -1,15 +1,15 @@
-module Demo.Startpage exposing (view)
+module Demo.Pages.Startpage
 
-import Demo.Url as Url exposing (Url(..))
-import Html exposing (Html, text)
-import Html.Attributes exposing (style)
+import Demo.Url as Url
+import Html
+import Html.Attributes
 import Material.IconButton as IconButton
 import Material.ImageList as ImageList
 import Material.ImageList.Item as ImageListItem
 import Material.TopAppBar as TopAppBar
 
 
-view : Html msg
+view :: Html msg
 view =
     Html.div []
         [ TopAppBar.regular TopAppBar.config
@@ -59,7 +59,7 @@ view =
         ]
 
 
-imageListItems : List { url : Url, icon : String, title : String, subtitle : String }
+imageListItems :: Array { url :: Url, icon :: String, title :: String, subtitle :: String }
 imageListItems =
     [ { url = Button
       , icon = "images/buttons_180px.svg"
@@ -114,7 +114,7 @@ imageListItems =
     , { url = ImageList
       , icon = "images/image_list_180px.svg"
       , title = "Image List"
-      , subtitle = "An Image List consists of several items, each containing an image and optionally supporting content (i.e. a text label)"
+      , subtitle = "An Image Array consists of several items, each containing an image and optionally supporting content (i.e. a text label)"
       }
     , { url = LayoutGrid
       , icon = "images/layout_grid_180px.svg"

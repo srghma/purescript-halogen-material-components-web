@@ -1,4 +1,4 @@
-module Demo.DismissibleDrawer exposing
+module Demo.Pages.DismissibleDrawer
     ( Model
     , Msg(..)
     , defaultModel
@@ -6,30 +6,30 @@ module Demo.DismissibleDrawer exposing
     , view
     )
 
-import Demo.DrawerPage as DrawerPage exposing (DrawerPage)
+import Demo.DrawerPage as DrawerPage
 import Material.Drawer.Dismissible as DismissibleDrawer
 
 
-type alias Model =
-    { open : Bool
-    , selectedIndex : Int
+data Model =
+    { open :: Boolean
+    , selectedIndex :: Int
     }
 
 
-defaultModel : Model
+defaultModel :: Model
 defaultModel =
     { open = False
     , selectedIndex = 0
     }
 
 
-type Msg
+data Msg
     = ToggleDrawer
     | CloseDrawer
     | SetSelectedIndex Int
 
 
-update : Msg -> Model -> Model
+update :: Msg -> Model -> Model
 update msg model =
     case msg of
         ToggleDrawer ->
@@ -42,7 +42,7 @@ update msg model =
             { model | selectedIndex = index }
 
 
-view : Model -> DrawerPage Msg
+view :: Model -> DrawerPage Msg
 view model =
     { title = "Dismissible Drawer"
     , drawer =

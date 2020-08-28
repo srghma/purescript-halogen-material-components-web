@@ -1,4 +1,4 @@
-module Demo.Drawer exposing
+module Demo.Pages.Drawer
     ( Model
     , Msg(..)
     , defaultModel
@@ -6,9 +6,9 @@ module Demo.Drawer exposing
     , view
     )
 
-import Demo.CatalogPage exposing (CatalogPage)
-import Html exposing (Html, text)
-import Html.Attributes exposing (style)
+import Demo.CatalogPage
+import Html
+import Html.Attributes
 import Material.Drawer.Permanent as PermanentDrawer
 import Material.Icon as Icon
 import Material.List as List
@@ -16,25 +16,25 @@ import Material.List.Item as ListItem
 import Material.Typography as Typography
 
 
-type alias Model =
+data Model =
     {}
 
 
-defaultModel : Model
+defaultModel :: Model
 defaultModel =
     {}
 
 
-type Msg
+data Msg
     = NoOp
 
 
-update : Msg -> Model -> Model
+update :: Msg -> Model -> Model
 update msg model =
     model
 
 
-view : Model -> CatalogPage Msg
+view :: Model -> CatalogPage Msg
 view model =
     { title = "Drawer"
     , prelude = "The navigation drawer slides in from the left and contains the navigation destinations for your app."
@@ -52,7 +52,7 @@ view model =
     }
 
 
-heroDrawer : List (Html msg)
+heroDrawer :: Array (Html msg)
 heroDrawer =
     let
         listItem ( activated, icon, label ) =
@@ -77,7 +77,7 @@ heroDrawer =
             , Html.h6 [ PermanentDrawer.subtitle ] [ text "Subtitle" ]
             ]
         , PermanentDrawer.content []
-            [ List.list List.config
+            [ Array.list Array.config
                 (listItem ( True, "inbox", "Inbox" ))
                 (List.map listItem
                     [ ( False, "star", "Star" )
@@ -90,7 +90,7 @@ heroDrawer =
     ]
 
 
-iframe : String -> String -> Html msg
+iframe :: String -> String -> Html msg
 iframe label url =
     Html.div
         [ style "display" "inline-block"

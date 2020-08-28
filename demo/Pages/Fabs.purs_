@@ -1,9 +1,9 @@
-module Demo.Fabs exposing (Model, Msg(..), defaultModel, update, view)
+module Demo.Pages.Fabs
 
 import Browser.Dom
-import Demo.CatalogPage exposing (CatalogPage)
-import Html exposing (text)
-import Html.Attributes exposing (style)
+import Demo.CatalogPage
+import Html
+import Html.Attributes
 import Material.Button as Button
 import Material.Fab as Fab
 import Material.Fab.Extended as ExtendedFab
@@ -11,21 +11,21 @@ import Material.Typography as Typography
 import Task
 
 
-type alias Model =
+data Model =
     {}
 
 
-defaultModel : Model
+defaultModel :: Model
 defaultModel =
     {}
 
 
-type Msg
+data Msg
     = Focus String
     | Focused (Result Browser.Dom.Error ())
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update :: Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Focus id ->
@@ -35,7 +35,7 @@ update msg model =
             ( model, Cmd.none )
 
 
-view : Model -> CatalogPage Msg
+view :: Model -> CatalogPage Msg
 view model =
     { title = "Floating Action Button"
     , prelude = "Floating action buttons represents the primary action in an application. Only one floating action button is recommended per screen to represent the most common action."

@@ -1,8 +1,8 @@
-module Demo.TabBar exposing (Model, Msg(..), defaultModel, update, view)
+module Demo.Pages.TabBar
 
 import Browser.Dom
-import Demo.CatalogPage exposing (CatalogPage)
-import Html exposing (Html, text)
+import Demo.CatalogPage
+import Html
 import Html.Attributes
 import Material.Button as Button
 import Material.Tab as Tab
@@ -11,15 +11,15 @@ import Material.Typography as Typography
 import Task
 
 
-type alias Model =
-    { activeHeroTab : Int
-    , activeIconTab : Int
-    , activeStackedTab : Int
-    , activeScrollingTab : Int
+data Model =
+    { activeHeroTab :: Int
+    , activeIconTab :: Int
+    , activeStackedTab :: Int
+    , activeScrollingTab :: Int
     }
 
 
-defaultModel : Model
+defaultModel :: Model
 defaultModel =
     { activeHeroTab = 0
     , activeIconTab = 0
@@ -28,7 +28,7 @@ defaultModel =
     }
 
 
-type Msg
+data Msg
     = SetActiveHeroTab Int
     | SetActiveIconTab Int
     | SetActiveStackedTab Int
@@ -37,7 +37,7 @@ type Msg
     | Focused (Result Browser.Dom.Error ())
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update :: Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         SetActiveHeroTab index ->
@@ -59,7 +59,7 @@ update msg model =
             ( model, Cmd.none )
 
 
-view : Model -> CatalogPage Msg
+view :: Model -> CatalogPage Msg
 view model =
     { title = "Tab Bar"
     , prelude = "Tabs organize and allow navigation between groups of content that are related and at the same level of hierarchy. The Tab Bar contains the Tab Scroller and Tab components."
@@ -83,7 +83,7 @@ view model =
     }
 
 
-heroTabs : Model -> String -> Html Msg
+heroTabs :: Model -> String -> Html Msg
 heroTabs model index =
     TabBar.tabBar TabBar.config
         [ Tab.tab
@@ -107,7 +107,7 @@ heroTabs model index =
         ]
 
 
-tabsWithIcons : Model -> Html Msg
+tabsWithIcons :: Model -> Html Msg
 tabsWithIcons model =
     let
         config index =
@@ -122,7 +122,7 @@ tabsWithIcons model =
         ]
 
 
-tabsWithStackedIcons : Model -> Html Msg
+tabsWithStackedIcons :: Model -> Html Msg
 tabsWithStackedIcons model =
     let
         config index =
@@ -141,7 +141,7 @@ tabsWithStackedIcons model =
         ]
 
 
-scrollingTabs : Model -> Html Msg
+scrollingTabs :: Model -> Html Msg
 scrollingTabs model =
     let
         config index =
@@ -158,7 +158,7 @@ scrollingTabs model =
         )
 
 
-focusTabs : Model -> Html Msg
+focusTabs :: Model -> Html Msg
 focusTabs model =
     Html.div []
         [ TabBar.tabBar

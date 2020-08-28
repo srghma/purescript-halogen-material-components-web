@@ -1,33 +1,33 @@
-module Demo.TopAppBar exposing (Model, Msg(..), defaultModel, update, view)
+module Demo.Pages.TopAppBar
 
-import Demo.CatalogPage exposing (CatalogPage)
-import Demo.Url as Url exposing (Url)
-import Html exposing (Html, text)
-import Html.Attributes exposing (style)
+import Demo.CatalogPage
+import Demo.Url as Url
+import Html
+import Html.Attributes
 import Material.IconButton as IconButton
 import Material.TopAppBar as TopAppBar
 import Material.Typography as Typography
 
 
-type alias Model =
+data Model =
     {}
 
 
-defaultModel : Model
+defaultModel :: Model
 defaultModel =
     {}
 
 
-type Msg
+data Msg
     = NoOp
 
 
-update : Msg -> Model -> Model
+update :: Msg -> Model -> Model
 update msg model =
     model
 
 
-view : Model -> CatalogPage Msg
+view :: Model -> CatalogPage Msg
 view model =
     { title = "Top App Bar"
     , prelude = "Top App Bars are a container for items such as application title, navigation icon, and action items."
@@ -92,7 +92,7 @@ view model =
     }
 
 
-iframe : String -> Url -> Html msg
+iframe :: String -> Url -> Html msg
 iframe title url =
     let
         stringUrl =

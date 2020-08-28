@@ -1,21 +1,21 @@
-module Demo.Checkbox exposing (Model, Msg(..), defaultModel, update, view)
+module Demo.Pages.Checkbox
 
 import Browser.Dom
-import Demo.CatalogPage exposing (CatalogPage)
-import Dict exposing (Dict)
-import Html exposing (Html, text)
-import Html.Attributes exposing (style)
+import Demo.CatalogPage
+import Dict
+import Html
+import Html.Attributes
 import Material.Button as Button
 import Material.Checkbox as Checkbox
 import Material.Typography as Typography
 import Task
 
 
-type alias Model =
-    { checkboxes : Dict String Checkbox.State }
+data Model =
+    { checkboxes :: Dict String Checkbox.State }
 
 
-defaultModel : Model
+defaultModel :: Model
 defaultModel =
     { checkboxes =
         Dict.fromList
@@ -27,13 +27,13 @@ defaultModel =
     }
 
 
-type Msg
+data Msg
     = Changed String
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update :: Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Changed index ->
@@ -58,7 +58,7 @@ update msg model =
             ( model, Cmd.none )
 
 
-view : Model -> CatalogPage Msg
+view :: Model -> CatalogPage Msg
 view model =
     { title = "Checkbox"
     , prelude = "Checkboxes allow the user to select multiple options from a set."
@@ -81,14 +81,14 @@ view model =
     }
 
 
-heroCheckboxes : Model -> List (Html Msg)
+heroCheckboxes :: Model -> Array (Html Msg)
 heroCheckboxes model =
     [ checkbox "checked-hero-checkbox" model heroMargin
     , checkbox "unchecked-hero-checkbox" model heroMargin
     ]
 
 
-checkbox : String -> Model -> List (Html.Attribute Msg) -> Html Msg
+checkbox :: String -> Model -> Array (Html.Attribute Msg) -> Html Msg
 checkbox index model attributes =
     let
         state =
@@ -103,7 +103,7 @@ checkbox index model attributes =
         )
 
 
-focusCheckbox : Html Msg
+focusCheckbox :: Html Msg
 focusCheckbox =
     Html.div []
         [ Checkbox.checkbox
@@ -116,6 +116,6 @@ focusCheckbox =
         ]
 
 
-heroMargin : List (Html.Attribute msg)
+heroMargin :: Array (Html.Attribute msg)
 heroMargin =
     [ style "margin" "8px 16px" ]

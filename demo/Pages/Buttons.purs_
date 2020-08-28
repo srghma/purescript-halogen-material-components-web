@@ -1,29 +1,29 @@
-module Demo.Buttons exposing (Model, Msg, defaultModel, update, view)
+module Demo.Pages.Buttons
 
 import Browser.Dom
-import Demo.CatalogPage exposing (CatalogPage)
-import Html exposing (Html, text)
-import Html.Attributes exposing (style)
+import Demo.CatalogPage
+import Html
+import Html.Attributes
 import Material.Button as Button
 import Material.Typography as Typography
 import Task
 
 
-type alias Model =
+data Model =
     {}
 
 
-defaultModel : Model
+defaultModel :: Model
 defaultModel =
     {}
 
 
-type Msg
+data Msg
     = Focus String
     | Focused (Result Browser.Dom.Error ())
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update :: Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Focus id ->
@@ -33,7 +33,7 @@ update msg model =
             ( model, Cmd.none )
 
 
-view : Model -> CatalogPage Msg
+view :: Model -> CatalogPage Msg
 view model =
     { title = "Button"
     , prelude = "Buttons communicate an action a user can take. They are typically placed throughout your UI, in places like dialogs, forms, cards, and toolbars."
@@ -62,7 +62,7 @@ view model =
     }
 
 
-heroButtons : List (Html msg)
+heroButtons :: Array (Html msg)
 heroButtons =
     let
         config =
@@ -75,39 +75,39 @@ heroButtons =
     ]
 
 
-textButtons : Html msg
+textButtons :: Html msg
 textButtons =
     buttonsRow Button.text []
 
 
-raisedButtons : Html msg
+raisedButtons :: Html msg
 raisedButtons =
     buttonsRow Button.raised []
 
 
-unelevatedButtons : Html msg
+unelevatedButtons :: Html msg
 unelevatedButtons =
     buttonsRow Button.unelevated []
 
 
-outlinedButtons : Html msg
+outlinedButtons :: Html msg
 outlinedButtons =
     buttonsRow Button.outlined []
 
 
-shapedButtons : Html msg
+shapedButtons :: Html msg
 shapedButtons =
     buttonsRow Button.unelevated [ style "border-radius" "18px" ]
 
 
-linkButtons : Html msg
+linkButtons :: Html msg
 linkButtons =
     buttonsRow
         (\config label -> Button.text (config |> Button.setHref (Just "#")) label)
         []
 
 
-focusButton : Html Msg
+focusButton :: Html Msg
 focusButton =
     Html.div []
         [ Button.raised
@@ -129,7 +129,7 @@ focusButton =
         ]
 
 
-buttonsRow : (Button.Config msg -> String -> Html msg) -> List (Html.Attribute msg) -> Html msg
+buttonsRow :: (Button.Config msg -> String -> Html msg) -> Array (Html.Attribute msg) -> Html msg
 buttonsRow button additionalAttributes =
     let
         config =
@@ -143,11 +143,11 @@ buttonsRow button additionalAttributes =
         ]
 
 
-heroMargin : Html.Attribute msg
+heroMargin :: Html.Attribute msg
 heroMargin =
     style "margin" "16px 32px"
 
 
-rowMargin : Html.Attribute msg
+rowMargin :: Html.Attribute msg
 rowMargin =
     style "margin" "8px 16px"

@@ -1,15 +1,15 @@
-module Demo.Helper.ResourceLink exposing (view)
+module Demo.Pages.Helper.ResourceLink
 
-import Html exposing (text)
-import Html.Attributes exposing (class)
-import Material.List.Item as ListItem exposing (ListItem)
+import Html
+import Html.Attributes
+import Material.List.Item as ListItem
 
 
 view :
-    { link : String
-    , title : String
-    , icon : String
-    , altText : String
+    { link :: String
+    , title :: String
+    , icon :: String
+    , altText :: String
     }
     -> ListItem msg
 view { link, title, icon, altText } =

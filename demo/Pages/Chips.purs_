@@ -1,9 +1,9 @@
-module Demo.Chips exposing (Model, Msg(..), defaultModel, update, view)
+module Demo.Pages.Chips
 
 import Browser.Dom
-import Demo.CatalogPage exposing (CatalogPage)
-import Html exposing (Html, text)
-import Html.Attributes exposing (style)
+import Demo.CatalogPage
+import Html
+import Html.Attributes
 import Html.Events
 import Json.Decode as Decode
 import Material.Button as Button
@@ -16,22 +16,22 @@ import Material.ChipSet.Choice as ChoiceChipSet
 import Material.ChipSet.Filter as FilterChipSet
 import Material.ChipSet.Input as InputChipSet
 import Material.Typography as Typography
-import Set exposing (Set)
+import Set
 import Task
 
 
-type alias Model =
-    { chip : Maybe String
-    , size : Size
-    , inputChips : List String
-    , input : String
-    , accessories : Set String
-    , contacts : Set String
-    , focus : String
+data Model =
+    { chip :: Maybe String
+    , size :: Size
+    , inputChips :: Array String
+    , input :: String
+    , accessories :: Set String
+    , contacts :: Set String
+    , focus :: String
     }
 
 
-defaultModel : Model
+defaultModel :: Model
 defaultModel =
     { chip = Just "Chip One"
     , size = Small
@@ -43,7 +43,7 @@ defaultModel =
     }
 
 
-type Size
+data Size
     = ExtraSmall
     | Small
     | Medium
@@ -51,7 +51,7 @@ type Size
     | ExtraLarge
 
 
-type Msg
+data Msg
     = ChipChanged String
     | SizeChanged Size
     | AccessoriesChanged String
@@ -64,7 +64,7 @@ type Msg
     | Focused (Result Browser.Dom.Error ())
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update :: Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         ChipChanged chip ->
@@ -105,7 +105,7 @@ update msg model =
             )
 
         InputChipDeleted inputChip ->
-            ( { model | inputChips = List.filter ((/=) inputChip) model.inputChips }
+            ( { model | inputChips = Array.filter ((/=) inputChip) model.inputChips }
             , Cmd.none
             )
 
@@ -136,7 +136,7 @@ update msg model =
             else if keyCode == backspace && String.isEmpty model.input then
                 ( { model
                     | inputChips =
-                        List.take (List.length model.inputChips - 1)
+                        Array.take (List.length model.inputChips - 1)
                             model.inputChips
                   }
                 , Cmd.none
@@ -155,7 +155,7 @@ update msg model =
             ( model, Cmd.none )
 
 
-view : Model -> CatalogPage Msg
+view :: Model -> CatalogPage Msg
 view model =
     { title = "Chips"
     , prelude = "Chips are compact elements that allow users to enter information, select a choice, filter content, or trigger an action."
@@ -185,7 +185,7 @@ view model =
     }
 
 
-heroChips : Model -> List (Html Msg)
+heroChips :: Model -> Array (Html Msg)
 heroChips model =
     [ ChoiceChipSet.chipSet
         (ChoiceChipSet.config { toLabel = identity }
@@ -200,7 +200,7 @@ heroChips model =
     ]
 
 
-choiceChips : Model -> Html Msg
+choiceChips :: Model -> Html Msg
 choiceChips model =
     let
         toLabel size =
@@ -233,7 +233,7 @@ choiceChips model =
         ]
 
 
-inputChips : Model -> Html Msg
+inputChips :: Model -> Html Msg
 inputChips model =
     Html.div
         [ style "position" "relative"
@@ -261,7 +261,7 @@ inputChips model =
         ]
 
 
-filterChips1 : Model -> Html Msg
+filterChips1 :: Model -> Html Msg
 filterChips1 model =
     let
         chip accessory =
@@ -282,7 +282,7 @@ filterChips1 model =
         )
 
 
-filterChips2 : Model -> Html Msg
+filterChips2 :: Model -> Html Msg
 filterChips2 model =
     let
         chip label =
@@ -304,7 +304,7 @@ filterChips2 model =
         )
 
 
-actionChips : Model -> Html Msg
+actionChips :: Model -> Html Msg
 actionChips model =
     let
         chip ( icon, label ) =
@@ -324,7 +324,7 @@ actionChips model =
         )
 
 
-shapedChips : Model -> Html msg
+shapedChips :: Model -> Html msg
 shapedChips model =
     let
         chip label =
@@ -344,7 +344,7 @@ shapedChips model =
         )
 
 
-focusChips : Model -> Html Msg
+focusChips :: Model -> Html Msg
 focusChips model =
     Html.div []
         [ ChoiceChipSet.chipSet

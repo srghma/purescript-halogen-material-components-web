@@ -1,9 +1,9 @@
-module Demo.Lists exposing (Model, Msg, defaultModel, update, view)
+module Demo.Pages.Lists
 
 import Browser.Dom
-import Demo.CatalogPage exposing (CatalogPage)
-import Html exposing (Html, text)
-import Html.Attributes exposing (style)
+import Demo.CatalogPage
+import Html
+import Html.Attributes
 import Material.Button as Button
 import Material.Checkbox as Checkbox
 import Material.Icon as Icon
@@ -11,19 +11,19 @@ import Material.List as List
 import Material.List.Item as ListItem
 import Material.Radio as Radio
 import Material.Typography as Typography
-import Set exposing (Set)
+import Set
 import Task
 
 
-type alias Model =
-    { checkboxes : Set String
-    , radio : Maybe String
-    , activated : String
-    , shapedActivated : String
+data Model =
+    { checkboxes :: Set String
+    , radio :: Maybe String
+    , activated :: String
+    , shapedActivated :: String
     }
 
 
-defaultModel : Model
+defaultModel :: Model
 defaultModel =
     { checkboxes = Set.empty
     , radio = Nothing
@@ -32,7 +32,7 @@ defaultModel =
     }
 
 
-type Msg
+data Msg
     = ToggleCheckbox String
     | SetRadio String
     | SetActivated String
@@ -41,7 +41,7 @@ type Msg
     | Focused (Result Browser.Dom.Error ())
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update :: Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         ToggleCheckbox id ->
@@ -72,7 +72,7 @@ update msg model =
             ( model, Cmd.none )
 
 
-view : Model -> CatalogPage Msg
+view :: Model -> CatalogPage Msg
 view model =
     { title = "List"
     , prelude = "Lists present multiple line items vertically as a single continuous element."
@@ -108,38 +108,38 @@ view model =
     }
 
 
-demoList : List (Html.Attribute msg)
+demoList :: Array (Html.Attribute msg)
 demoList =
     [ style "max-width" "600px"
     , style "border" "1px solid rgba(0,0,0,.1)"
     ]
 
 
-heroList : List (Html msg)
+heroList :: Array (Html msg)
 heroList =
     let
         listItem =
             ListItem.listItem ListItem.config [ text "Line item" ]
     in
-    [ List.list
-        (List.config |> List.setAttributes (style "background" "#fff" :: demoList))
+    [ Array.list
+        (List.config |> Array.setAttributes (style "background" "#fff" :: demoList))
         listItem
         (List.repeat 2 listItem)
     ]
 
 
-singleLineList : Html msg
+singleLineList :: Html msg
 singleLineList =
     let
         listItem =
             ListItem.listItem ListItem.config [ text "Line item" ]
     in
-    List.list (List.config |> List.setAttributes demoList)
+    Array.list (List.config |> Array.setAttributes demoList)
         listItem
         (List.repeat 2 listItem)
 
 
-twoLineList : Html msg
+twoLineList :: Html msg
 twoLineList =
     let
         listItem =
@@ -150,16 +150,16 @@ twoLineList =
                     }
                 ]
     in
-    List.list
+    Array.list
         (List.config
-            |> List.setTwoLine True
-            |> List.setAttributes demoList
+            |> Array.setTwoLine True
+            |> Array.setAttributes demoList
         )
         listItem
         (List.repeat 2 listItem)
 
 
-leadingIconList : Html msg
+leadingIconList :: Html msg
 leadingIconList =
     let
         listItem icon =
@@ -168,12 +168,12 @@ leadingIconList =
                 , text "Line item"
                 ]
     in
-    List.list (List.config |> List.setAttributes demoList)
+    Array.list (List.config |> Array.setAttributes demoList)
         (listItem "wifi")
         (List.map listItem [ "bluetooth", "data_usage" ])
 
 
-trailingIconList : Html msg
+trailingIconList :: Html msg
 trailingIconList =
     let
         listItem =
@@ -182,12 +182,12 @@ trailingIconList =
                 , ListItem.meta [] [ Icon.icon [] "info" ]
                 ]
     in
-    List.list (List.config |> List.setAttributes demoList)
+    Array.list (List.config |> Array.setAttributes demoList)
         listItem
         (List.repeat 2 listItem)
 
 
-activatedItemList : Model -> Html Msg
+activatedItemList :: Model -> Html Msg
 activatedItemList model =
     let
         listItem ( icon, label ) =
@@ -204,7 +204,7 @@ activatedItemList model =
                 )
                 [ ListItem.graphic [] [ Icon.icon [] icon ], text label ]
     in
-    List.list (List.config |> List.setAttributes demoList)
+    Array.list (List.config |> Array.setAttributes demoList)
         (listItem ( "inbox", "Inbox" ))
         (List.map listItem
             [ ( "star", "Star" )
@@ -214,7 +214,7 @@ activatedItemList model =
         )
 
 
-shapedActivatedItemList : Model -> Html Msg
+shapedActivatedItemList :: Model -> Html Msg
 shapedActivatedItemList model =
     let
         listItem ( icon, label ) =
@@ -232,7 +232,7 @@ shapedActivatedItemList model =
                 )
                 [ ListItem.graphic [] [ Icon.icon [] icon ], text label ]
     in
-    List.list (List.config |> List.setAttributes demoList)
+    Array.list (List.config |> Array.setAttributes demoList)
         (listItem ( "inbox", "Inbox" ))
         (List.map listItem
             [ ( "star", "Star" )
@@ -242,7 +242,7 @@ shapedActivatedItemList model =
         )
 
 
-demoIcon : List (Html.Attribute msg)
+demoIcon :: Array (Html.Attribute msg)
 demoIcon =
     [ style "background" "rgba(0,0,0,.3)"
     , style "border-radius" "50%"
@@ -250,7 +250,7 @@ demoIcon =
     ]
 
 
-folderList : Html msg
+folderList :: Html msg
 folderList =
     let
         listItem { primary, secondary } =
@@ -263,11 +263,11 @@ folderList =
                 , ListItem.meta [] [ Icon.icon [] "info" ]
                 ]
     in
-    List.list
+    Array.list
         (List.config
-            |> List.setAvatarList True
-            |> List.setTwoLine True
-            |> List.setAttributes demoList
+            |> Array.setAvatarList True
+            |> Array.setTwoLine True
+            |> Array.setAttributes demoList
         )
         (listItem
             { primary = "Dog Photos", secondary = "9 Jan 2018" }
@@ -280,7 +280,7 @@ folderList =
         )
 
 
-listWithTrailingCheckbox : Model -> Html Msg
+listWithTrailingCheckbox :: Model -> Html Msg
 listWithTrailingCheckbox model =
     let
         listItem label =
@@ -312,9 +312,9 @@ listWithTrailingCheckbox model =
                     ]
                 ]
     in
-    List.list
+    Array.list
         (List.config
-            |> List.setAttributes
+            |> Array.setAttributes
                 (Html.Attributes.attribute "role" "group"
                     :: demoList
                 )
@@ -328,7 +328,7 @@ listWithTrailingCheckbox model =
         )
 
 
-listWithTrailingRadioButton : Model -> Html Msg
+listWithTrailingRadioButton :: Model -> Html Msg
 listWithTrailingRadioButton model =
     let
         listItem label =
@@ -352,7 +352,7 @@ listWithTrailingRadioButton model =
                     ]
                 ]
     in
-    List.list (List.config |> List.setAttributes demoList)
+    Array.list (List.config |> Array.setAttributes demoList)
         (listItem "Dog Photos")
         (List.map listItem
             [ "Cat Photos"
@@ -362,12 +362,12 @@ listWithTrailingRadioButton model =
         )
 
 
-focusList : Html Msg
+focusList :: Html Msg
 focusList =
     Html.div []
-        [ List.list
+        [ Array.list
             (List.config
-                |> List.setAttributes (demoList ++ [ Html.Attributes.id "my-list" ])
+                |> Array.setAttributes (demoList ++ [ Html.Attributes.id "my-list" ])
             )
             (ListItem.listItem ListItem.config [ text "Line item" ])
             (List.repeat 2 <| ListItem.listItem ListItem.config [ text "Line item" ])

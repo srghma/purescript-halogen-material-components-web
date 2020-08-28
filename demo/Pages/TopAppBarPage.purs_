@@ -1,17 +1,17 @@
-module Demo.TopAppBarPage exposing (TopAppBarPage, view)
+module Demo.Pages.TopAppBarPage
 
-import Html exposing (Html, text)
-import Html.Attributes exposing (style)
+import Html
+import Html.Attributes
 import Material.Typography as Typography
 
 
-type alias TopAppBarPage msg =
-    { fixedAdjust : Html.Attribute msg
-    , topAppBar : Html msg
+data TopAppBarPage msg =
+    { fixedAdjust :: Html.Attribute msg
+    , topAppBar :: Html msg
     }
 
 
-view : (msg -> topMsg) -> TopAppBarPage msg -> Html topMsg
+view :: (msg -> topMsg) -> TopAppBarPage msg -> Html topMsg
 view lift { topAppBar, fixedAdjust } =
     Html.map lift <|
         Html.div
@@ -24,7 +24,7 @@ view lift { topAppBar, fixedAdjust } =
             ]
 
 
-demoParagraph : String
+demoParagraph :: String
 demoParagraph =
     """
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod

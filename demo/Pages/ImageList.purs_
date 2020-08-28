@@ -1,32 +1,32 @@
-module Demo.ImageList exposing (Model, Msg(..), defaultModel, update, view)
+module Demo.Pages.ImageList
 
-import Demo.CatalogPage exposing (CatalogPage)
-import Html exposing (Html, text)
-import Html.Attributes exposing (style)
+import Demo.CatalogPage
+import Html
+import Html.Attributes
 import Material.ImageList as ImageList
-import Material.ImageList.Item as ImageListItem exposing (ImageListItem)
+import Material.ImageList.Item as ImageListItem
 import Material.Typography as Typography
 
 
-type alias Model =
+data Model =
     {}
 
 
-defaultModel : Model
+defaultModel :: Model
 defaultModel =
     {}
 
 
-type Msg
+data Msg
     = NoOp
 
 
-update : Msg -> Model -> Model
+update :: Msg -> Model -> Model
 update msg model =
     model
 
 
-view : Model -> CatalogPage Msg
+view :: Model -> CatalogPage Msg
 view model =
     { title = "Image List"
     , prelude = "Image lists display a collection of images in an organized grid."
@@ -45,7 +45,7 @@ view model =
     , content =
         [ Html.h3
             [ Typography.subtitle1 ]
-            [ text "Standard Image List with Text Protection" ]
+            [ text "Standard Image Array with Text Protection" ]
         , standardImageList
         , Html.h3
             [ Typography.subtitle1 ]
@@ -55,7 +55,7 @@ view model =
     }
 
 
-standardImageList : Html msg
+standardImageList :: Html msg
 standardImageList =
     ImageList.imageList
         (ImageList.config
@@ -65,7 +65,7 @@ standardImageList =
         (List.map standardItem standardImages)
 
 
-masonryImageList : Html msg
+masonryImageList :: Html msg
 masonryImageList =
     ImageList.imageList
         (ImageList.config
@@ -79,7 +79,7 @@ masonryImageList =
         (List.map masonryItem masonryImages)
 
 
-imageListHeroItem : ImageListItem msg
+imageListHeroItem :: ImageListItem msg
 imageListHeroItem =
     ImageListItem.imageListItem
         (ImageListItem.config
@@ -91,7 +91,7 @@ imageListHeroItem =
         "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAABNJREFUCB1jZGBg+A/EDEwgAgQADigBA//q6GsAAAAASUVORK5CYII%3D"
 
 
-standardItem : String -> ImageListItem msg
+standardItem :: String -> ImageListItem msg
 standardItem url =
     -- TODO:
     -- ImageList.imageAspectContainer
@@ -107,7 +107,7 @@ standardItem url =
         url
 
 
-masonryItem : String -> ImageListItem msg
+masonryItem :: String -> ImageListItem msg
 masonryItem url =
     ImageListItem.imageListItem
         (ImageListItem.config
@@ -117,7 +117,7 @@ masonryItem url =
         url
 
 
-standardImages : List String
+standardImages :: Array String
 standardImages =
     [ "images/photos/3x2/1.jpg"
     , "images/photos/3x2/2.jpg"
@@ -137,7 +137,7 @@ standardImages =
     ]
 
 
-masonryImages : List String
+masonryImages :: Array String
 masonryImages =
     [ "images/photos/3x2/16.jpg"
     , "images/photos/2x3/1.jpg"

@@ -1,30 +1,30 @@
-module Demo.Elevation exposing (Model, Msg(..), defaultModel, update, view)
+module Demo.Pages.Elevation
 
-import Demo.CatalogPage exposing (CatalogPage)
-import Html exposing (Html, text)
-import Html.Attributes exposing (class, style)
+import Demo.CatalogPage
+import Html
+import Html.Attributes
 import Material.Elevation as Elevation
 
 
-type alias Model =
+data Model =
     {}
 
 
-defaultModel : Model
+defaultModel :: Model
 defaultModel =
     {}
 
 
-type Msg
+data Msg
     = NoOp
 
 
-update : Msg -> Model -> Model
+update :: Msg -> Model -> Model
 update msg model =
     model
 
 
-view : Model -> CatalogPage Msg
+view :: Model -> CatalogPage Msg
 view model =
     { title = "Elevation"
     , prelude = "Elevation is the relative depth, or distance, between two surfaces along the z-axis."
@@ -66,7 +66,7 @@ view model =
     }
 
 
-heroElevation : List (Html msg)
+heroElevation :: Array (Html msg)
 heroElevation =
     [ Html.div (Elevation.z0 :: heroSurface) [ text "Flat 0dp" ]
     , Html.div (Elevation.z8 :: heroSurface) [ text "Raised 8dp" ]
@@ -74,7 +74,7 @@ heroElevation =
     ]
 
 
-heroSurface : List (Html.Attribute msg)
+heroSurface :: Array (Html.Attribute msg)
 heroSurface =
     [ style "display" "-ms-inline-flexbox"
     , style "display" "inline-flex"
@@ -92,7 +92,7 @@ heroSurface =
     ]
 
 
-demoContainer : List (Html.Attribute msg)
+demoContainer :: Array (Html.Attribute msg)
 demoContainer =
     [ class "elevation-demo-container"
     , style "display" "flex"
@@ -101,7 +101,7 @@ demoContainer =
     ]
 
 
-demoSurface : List (Html.Attribute msg)
+demoSurface :: Array (Html.Attribute msg)
 demoSurface =
     [ style "display" "-ms-inline-flexbox"
     , style "display" "inline-flex"

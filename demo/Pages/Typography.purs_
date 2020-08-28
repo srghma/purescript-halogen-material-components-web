@@ -1,29 +1,29 @@
-module Demo.Typography exposing (Model, Msg, defaultModel, update, view)
+module Demo.Pages.Typography
 
-import Demo.CatalogPage exposing (CatalogPage)
-import Html exposing (text)
+import Demo.CatalogPage
+import Html
 import Material.Typography as Typography
 
 
-type alias Model =
+data Model =
     {}
 
 
-defaultModel : Model
+defaultModel :: Model
 defaultModel =
     {}
 
 
-type Msg
+data Msg
     = NoOp
 
 
-update : Msg -> Model -> Model
+update :: Msg -> Model -> Model
 update msg model =
     model
 
 
-view : Model -> CatalogPage Msg
+view :: Model -> CatalogPage Msg
 view model =
     { title = "Typography"
     , prelude = "Roboto is the standard typeface on Android and Chrome."

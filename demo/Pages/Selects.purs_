@@ -1,27 +1,27 @@
-module Demo.Selects exposing (Model, Msg(..), defaultModel, update, view)
+module Demo.Pages.Selects
 
 import Browser.Dom
-import Demo.CatalogPage exposing (CatalogPage)
-import Html exposing (Html, text)
-import Html.Attributes exposing (style)
+import Demo.CatalogPage
+import Html
+import Html.Attributes
 import Material.Button as Button
 import Material.Select as Select
-import Material.Select.Item as SelectItem exposing (SelectItem)
+import Material.Select.Item as SelectItem
 import Material.Typography as Typography
 import Task
 
 
-type alias Model =
-    { hero : Maybe Fruit
-    , filled : Maybe Fruit
-    , outlined : Maybe Fruit
-    , filledWithIcon : Maybe Fruit
-    , outlinedWithIcon : Maybe Fruit
-    , focused : Maybe Fruit
+data Model =
+    { hero :: Maybe Fruit
+    , filled :: Maybe Fruit
+    , outlined :: Maybe Fruit
+    , filledWithIcon :: Maybe Fruit
+    , outlinedWithIcon :: Maybe Fruit
+    , focused :: Maybe Fruit
     }
 
 
-defaultModel : Model
+defaultModel :: Model
 defaultModel =
     { hero = Nothing
     , filled = Nothing
@@ -32,13 +32,13 @@ defaultModel =
     }
 
 
-type Fruit
+data Fruit
     = Apple
     | Orange
     | Banana
 
 
-type Msg
+data Msg
     = HeroChanged (Maybe Fruit)
     | FilledChanged (Maybe Fruit)
     | OutlinedChanged (Maybe Fruit)
@@ -49,7 +49,7 @@ type Msg
     | Focused (Result Browser.Dom.Error ())
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update :: Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         HeroChanged hero ->
@@ -77,7 +77,7 @@ update msg model =
             ( model, Cmd.none )
 
 
-view : Model -> CatalogPage Msg
+view :: Model -> CatalogPage Msg
 view model =
     { title = "Select"
     , prelude = "Selects allow users to select from a single-option menu."
@@ -102,7 +102,7 @@ view model =
     }
 
 
-heroSelect : Model -> Html Msg
+heroSelect :: Model -> Html Msg
 heroSelect model =
     Select.filled
         (Select.config
@@ -114,14 +114,14 @@ heroSelect model =
         remainingItems
 
 
-firstItem : SelectItem (Maybe a) msg
+firstItem :: SelectItem (Maybe a) msg
 firstItem =
     SelectItem.selectItem
         (SelectItem.config { value = Nothing })
         [ text "" ]
 
 
-remainingItems : List (SelectItem (Maybe Fruit) msg)
+remainingItems :: Array (SelectItem (Maybe Fruit) msg)
 remainingItems =
     [ SelectItem.selectItem
         (SelectItem.config { value = Just Apple })
@@ -135,7 +135,7 @@ remainingItems =
     ]
 
 
-filledSelect : Model -> Html Msg
+filledSelect :: Model -> Html Msg
 filledSelect model =
     Select.filled
         (Select.config
@@ -147,7 +147,7 @@ filledSelect model =
         remainingItems
 
 
-outlinedSelect : Model -> Html Msg
+outlinedSelect :: Model -> Html Msg
 outlinedSelect model =
     Select.outlined
         (Select.config
@@ -159,7 +159,7 @@ outlinedSelect model =
         remainingItems
 
 
-filledWithIconSelect : Model -> Html Msg
+filledWithIconSelect :: Model -> Html Msg
 filledWithIconSelect model =
     Select.filled
         (Select.config
@@ -172,7 +172,7 @@ filledWithIconSelect model =
         remainingItems
 
 
-outlinedWithIconSelect : Model -> Html Msg
+outlinedWithIconSelect :: Model -> Html Msg
 outlinedWithIconSelect model =
     Select.outlined
         (Select.config
@@ -185,7 +185,7 @@ outlinedWithIconSelect model =
         remainingItems
 
 
-focusSelect : Model -> Html Msg
+focusSelect :: Model -> Html Msg
 focusSelect model =
     Html.div
         [ style "display" "flex"

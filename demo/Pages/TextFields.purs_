@@ -1,9 +1,9 @@
-module Demo.TextFields exposing (Model, Msg(..), defaultModel, update, view)
+module Demo.Pages.TextFields
 
 import Browser.Dom
-import Demo.CatalogPage exposing (CatalogPage)
-import Html exposing (Html, text)
-import Html.Attributes exposing (class, style)
+import Demo.CatalogPage
+import Html
+import Html.Attributes
 import Material.Button as Button
 import Material.HelperText as HelperText
 import Material.TextArea as TextArea
@@ -12,21 +12,21 @@ import Material.Typography as Typography
 import Task
 
 
-type alias Model =
-    { value : String }
+data Model =
+    { value :: String }
 
 
-defaultModel : Model
+defaultModel :: Model
 defaultModel =
     { value = "" }
 
 
-type Msg
+data Msg
     = Focus String
     | Focused (Result Browser.Dom.Error ())
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update :: Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Focus id ->
@@ -36,7 +36,7 @@ update msg model =
             ( model, Cmd.none )
 
 
-view : Model -> CatalogPage Msg
+view :: Model -> CatalogPage Msg
 view model =
     { title = "Text Field"
     , prelude = "Text fields allow users to input, edit, and select text. Text fields typically reside in forms but can appear in other places, like dialog boxes and search."
@@ -71,7 +71,7 @@ view model =
     }
 
 
-heroTextFields : Model -> Html Msg
+heroTextFields :: Model -> Html Msg
 heroTextFields model =
     Html.div heroTextFieldContainer
         [ Html.div textFieldContainerHero
@@ -89,7 +89,7 @@ heroTextFields model =
         ]
 
 
-filledTextFields : Model -> Html msg
+filledTextFields :: Model -> Html msg
 filledTextFields model =
     Html.div textFieldRow
         [ Html.div textFieldContainer
@@ -118,7 +118,7 @@ filledTextFields model =
         ]
 
 
-shapedFilledTextFields : Model -> Html msg
+shapedFilledTextFields :: Model -> Html msg
 shapedFilledTextFields model =
     Html.div textFieldRow
         [ Html.div textFieldContainer
@@ -150,7 +150,7 @@ shapedFilledTextFields model =
         ]
 
 
-outlinedTextFields : Model -> Html msg
+outlinedTextFields :: Model -> Html msg
 outlinedTextFields model =
     Html.div textFieldRow
         [ Html.div textFieldContainer
@@ -179,7 +179,7 @@ outlinedTextFields model =
         ]
 
 
-shapedOutlinedTextFields : Model -> Html msg
+shapedOutlinedTextFields :: Model -> Html msg
 shapedOutlinedTextFields model =
     Html.div textFieldRow
         [ Html.div textFieldContainer
@@ -208,7 +208,7 @@ shapedOutlinedTextFields model =
         ]
 
 
-textFieldsWithoutLabel : Model -> Html msg
+textFieldsWithoutLabel :: Model -> Html msg
 textFieldsWithoutLabel model =
     Html.div textFieldRow
         [ Html.div textFieldContainer
@@ -232,7 +232,7 @@ textFieldsWithoutLabel model =
         ]
 
 
-textFieldsWithCharacterCounter : Model -> Html msg
+textFieldsWithCharacterCounter :: Model -> Html msg
 textFieldsWithCharacterCounter model =
     Html.div textFieldRow
         [ Html.div textFieldContainer
@@ -259,7 +259,7 @@ textFieldsWithCharacterCounter model =
         ]
 
 
-textareaTextField : Model -> Html msg
+textareaTextField :: Model -> Html msg
 textareaTextField model =
     Html.div textFieldContainer
         [ TextArea.outlined
@@ -268,7 +268,7 @@ textareaTextField model =
         ]
 
 
-fullwidthTextField : Model -> Html msg
+fullwidthTextField :: Model -> Html msg
 fullwidthTextField model =
     Html.div textFieldContainer
         [ TextField.filled
@@ -280,7 +280,7 @@ fullwidthTextField model =
         ]
 
 
-fullwidthTextareaTextField : Model -> Html msg
+fullwidthTextareaTextField :: Model -> Html msg
 fullwidthTextareaTextField model =
     Html.div textFieldRowFullwidth
         [ Html.div textFieldContainer
@@ -294,7 +294,7 @@ fullwidthTextareaTextField model =
         ]
 
 
-focusTextField : Html Msg
+focusTextField :: Html Msg
 focusTextField =
     Html.div []
         [ TextField.filled
@@ -308,7 +308,7 @@ focusTextField =
         ]
 
 
-heroTextFieldContainer : List (Html.Attribute msg)
+heroTextFieldContainer :: Array (Html.Attribute msg)
 heroTextFieldContainer =
     [ class "hero-text-field-container"
     , style "display" "-ms-flexbox"
@@ -322,19 +322,19 @@ heroTextFieldContainer =
     ]
 
 
-textFieldContainerHero : List (Html.Attribute msg)
+textFieldContainerHero :: Array (Html.Attribute msg)
 textFieldContainerHero =
     style "padding" "20px" :: textFieldContainer
 
 
-textFieldContainer : List (Html.Attribute msg)
+textFieldContainer :: Array (Html.Attribute msg)
 textFieldContainer =
     [ class "text-field-container"
     , style "min-width" "200px"
     ]
 
 
-textFieldRow : List (Html.Attribute msg)
+textFieldRow :: Array (Html.Attribute msg)
 textFieldRow =
     [ class "text-field-row"
     , style "display" "flex"
@@ -344,14 +344,14 @@ textFieldRow =
     ]
 
 
-textFieldRowFullwidth : List (Html.Attribute msg)
+textFieldRowFullwidth :: Array (Html.Attribute msg)
 textFieldRowFullwidth =
     [ class "text-field-row text-field-row--fullwidth"
     , style "display" "block"
     ]
 
 
-demoHelperText : Html msg
+demoHelperText :: Html msg
 demoHelperText =
     HelperText.helperLine []
         [ HelperText.helperText
@@ -360,7 +360,7 @@ demoHelperText =
         ]
 
 
-demoHelperTextWithCharacterCounter : Html msg
+demoHelperTextWithCharacterCounter :: Html msg
 demoHelperTextWithCharacterCounter =
     HelperText.helperLine []
         [ HelperText.helperText

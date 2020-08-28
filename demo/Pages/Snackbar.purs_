@@ -1,23 +1,23 @@
-module Demo.Snackbar exposing (Model, Msg(..), defaultModel, update, view)
+module Demo.Pages.Snackbar
 
-import Demo.CatalogPage exposing (CatalogPage)
-import Html exposing (Html, text)
-import Html.Attributes exposing (class, style)
+import Demo.CatalogPage
+import Html
+import Html.Attributes
 import Material.Button as Button
 import Material.Snackbar as Snackbar
-import Platform.Cmd exposing (Cmd)
+import Platform.Cmd
 
 
-type alias Model =
-    { queue : Snackbar.Queue Msg }
+data Model =
+    { queue :: Snackbar.Queue Msg }
 
 
-defaultModel : Model
+defaultModel :: Model
 defaultModel =
     { queue = Snackbar.initialQueue }
 
 
-type Msg
+data Msg
     = ShowBaseline
     | ShowLeading
     | ShowStacked
@@ -25,7 +25,7 @@ type Msg
     | Click Snackbar.MessageId
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update :: Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         ShowBaseline ->
@@ -50,7 +50,7 @@ update msg model =
             ( model, Cmd.none )
 
 
-baselineMessage : Snackbar.Message Msg
+baselineMessage :: Snackbar.Message Msg
 baselineMessage =
     Snackbar.message "Can't send photo. Retry in 5 seconds."
         |> Snackbar.setActionButton (Just "Retry")
@@ -58,7 +58,7 @@ baselineMessage =
         |> Snackbar.setActionIcon (Just "close")
 
 
-leadingMessage : Snackbar.Message Msg
+leadingMessage :: Snackbar.Message Msg
 leadingMessage =
     Snackbar.message "Your photo has been archived."
         |> Snackbar.setLeading True
@@ -67,7 +67,7 @@ leadingMessage =
         |> Snackbar.setActionIcon (Just "close")
 
 
-stackedMessage : Snackbar.Message Msg
+stackedMessage :: Snackbar.Message Msg
 stackedMessage =
     Snackbar.message "This item already has the label \"travel\". You can add a new label."
         |> Snackbar.setStacked True
@@ -76,7 +76,7 @@ stackedMessage =
         |> Snackbar.setActionIcon (Just "close")
 
 
-view : Model -> CatalogPage Msg
+view :: Model -> CatalogPage Msg
 view model =
     { title = "Snackbar"
     , prelude = "Snackbars provide brief feedback about an operation through a message at the bottom of the screen."
@@ -116,12 +116,12 @@ view model =
     }
 
 
-buttonMargin : List (Html.Attribute msg)
+buttonMargin :: Array (Html.Attribute msg)
 buttonMargin =
     [ style "margin" "14px" ]
 
 
-heroMessage : Html msg
+heroMessage :: Html msg
 heroMessage =
     Html.div
         [ class "mdc-snackbar mdc-snackbar--open"

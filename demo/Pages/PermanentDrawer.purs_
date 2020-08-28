@@ -1,30 +1,30 @@
-module Demo.PermanentDrawer exposing (Model, Msg, defaultModel, update, view)
+module Demo.Pages.PermanentDrawer
 
-import Demo.DrawerPage as DrawerPage exposing (DrawerPage)
+import Demo.DrawerPage as DrawerPage
 import Material.Drawer.Permanent as PermanentDrawer
 
 
-type alias Model =
-    { selectedIndex : Int }
+data Model =
+    { selectedIndex :: Int }
 
 
-defaultModel : Model
+defaultModel :: Model
 defaultModel =
     { selectedIndex = 0 }
 
 
-type Msg
+data Msg
     = SetSelectedIndex Int
 
 
-update : Msg -> Model -> Model
+update :: Msg -> Model -> Model
 update msg model =
     case msg of
         SetSelectedIndex index ->
             { model | selectedIndex = index }
 
 
-view : Model -> DrawerPage Msg
+view :: Model -> DrawerPage Msg
 view model =
     { title = "Permanent Drawer"
     , drawer =

@@ -1,8 +1,8 @@
-module Demo.CatalogPage exposing (CatalogPage, CatalogPageResources, view)
+module Demo.Pages.CatalogPage
 
-import Demo.Url as Url exposing (Url)
-import Html exposing (Html, text)
-import Html.Attributes exposing (style)
+import Demo.Url as Url
+import Html
+import Html.Attributes
 import Material.Drawer.Dismissible as DismissibleDrawer
 import Material.IconButton as IconButton
 import Material.List as List
@@ -11,31 +11,31 @@ import Material.TopAppBar as TopAppBar
 import Material.Typography as Typography
 
 
-type alias CatalogPage msg =
-    { title : String
-    , prelude : String
-    , resources : CatalogPageResources
-    , hero : List (Html msg)
-    , content : List (Html msg)
+data CatalogPage msg =
+    { title :: String
+    , prelude :: String
+    , resources :: CatalogPageResources
+    , hero :: Array (Html msg)
+    , content :: Array (Html msg)
     }
 
 
-type alias CatalogPageResources =
-    { materialDesignGuidelines : Maybe String
-    , documentation : Maybe String
-    , sourceCode : Maybe String
+data CatalogPageResources =
+    { materialDesignGuidelines :: Maybe String
+    , documentation :: Maybe String
+    , sourceCode :: Maybe String
     }
 
 
-type alias CatalogPageConfig topMsg =
-    { openDrawer : topMsg
-    , closeDrawer : topMsg
-    , drawerOpen : Bool
-    , url : Url
+data CatalogPageConfig topMsg =
+    { openDrawer :: topMsg
+    , closeDrawer :: topMsg
+    , drawerOpen :: Boolean
+    , url :: Url
     }
 
 
-view : (msg -> topMsg) -> CatalogPageConfig topMsg -> CatalogPage msg -> Html topMsg
+view :: (msg -> topMsg) -> CatalogPageConfig topMsg -> CatalogPage msg -> Html topMsg
 view lift catalogPageConfig catalogPage =
     let
         toggleCatalogDrawer =
@@ -75,7 +75,7 @@ view lift catalogPageConfig catalogPage =
                 )
                 [ DismissibleDrawer.content []
                     [ case
-                        List.map
+                        Array.map
                             (\{ url, label } ->
                                 ListItem.listItem
                                     (ListItem.config
@@ -93,7 +93,7 @@ view lift catalogPageConfig catalogPage =
                             catalogDrawerItems
                       of
                         listItem :: listItems ->
-                            List.list List.config listItem listItems
+                            Array.list Array.config listItem listItems
 
                         [] ->
                             text ""
@@ -121,9 +121,9 @@ view lift catalogPageConfig catalogPage =
         ]
 
 
-resourcesList : CatalogPageResources -> Html msg
+resourcesList :: CatalogPageResources -> Html msg
 resourcesList { materialDesignGuidelines, documentation, sourceCode } =
-    List.list List.config
+    Array.list Array.config
         (ListItem.listItem
             (ListItem.config
                 |> ListItem.setHref materialDesignGuidelines
@@ -170,7 +170,7 @@ resourcesList { materialDesignGuidelines, documentation, sourceCode } =
         ]
 
 
-catalogDrawerItems : List { label : String, url : Url }
+catalogDrawerItems :: Array { label :: String, url :: Url }
 catalogDrawerItems =
     [ { label = "Home", url = Url.StartPage }
     , { label = "Button", url = Url.Button }
@@ -202,14 +202,14 @@ catalogDrawerItems =
     ]
 
 
-catalogPageContainer : List (Html.Attribute msg)
+catalogPageContainer :: Array (Html.Attribute msg)
 catalogPageContainer =
     [ style "position" "relative"
     , Typography.typography
     ]
 
 
-demoPanel : List (Html.Attribute msg)
+demoPanel :: Array (Html.Attribute msg)
 demoPanel =
     [ style "display" "-ms-flexbox"
     , style "display" "flex"
@@ -219,7 +219,7 @@ demoPanel =
     ]
 
 
-demoContent : List (Html.Attribute msg)
+demoContent :: Array (Html.Attribute msg)
 demoContent =
     [ Html.Attributes.id "demo-content"
     , style "height" "100%"
@@ -242,14 +242,14 @@ demoContent =
     ]
 
 
-demoContentTransition : List (Html.Attribute msg)
+demoContentTransition :: Array (Html.Attribute msg)
 demoContentTransition =
     [ style "max-width" "900px"
     , style "width" "100%"
     ]
 
 
-hero : List (Html.Attribute msg)
+hero :: Array (Html.Attribute msg)
 hero =
     [ style "display" "-ms-flexbox"
     , style "display" "flex"
@@ -265,13 +265,13 @@ hero =
     ]
 
 
-demoTitle : List (Html.Attribute msg)
+demoTitle :: Array (Html.Attribute msg)
 demoTitle =
     [ style "border-bottom" "1px solid rgba(0,0,0,.87)"
     ]
 
 
-resourcesGraphic : List (Html.Attribute msg)
+resourcesGraphic :: Array (Html.Attribute msg)
 resourcesGraphic =
     [ style "width" "30px"
     , style "height" "30px"

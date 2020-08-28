@@ -1,7 +1,7 @@
-module Demo.DrawerPage exposing (DrawerPage, drawerBody, view)
+module Demo.Pages.DrawerPage
 
-import Html exposing (Html, text)
-import Html.Attributes exposing (style)
+import Html
+import Html.Attributes
 import Html.Events
 import Material.Drawer.Dismissible as DismissibleDrawer
 import Material.Drawer.Permanent as PermanentDrawer
@@ -12,15 +12,15 @@ import Material.List.Item as ListItem
 import Material.TopAppBar as TopAppBar
 
 
-type alias DrawerPage msg =
-    { title : String
-    , drawer : Html msg
-    , scrim : Maybe (Html msg)
-    , onMenuClick : Maybe msg
+data DrawerPage msg =
+    { title :: String
+    , drawer :: Html msg
+    , scrim :: Maybe (Html msg)
+    , onMenuClick :: Maybe msg
     }
 
 
-view : (msg -> topMsg) -> DrawerPage msg -> Html topMsg
+view :: (msg -> topMsg) -> DrawerPage msg -> Html topMsg
 view lift { title, drawer, scrim, onMenuClick } =
     Html.map lift <|
         Html.div drawerFrameRoot
@@ -49,7 +49,7 @@ view lift { title, drawer, scrim, onMenuClick } =
             ]
 
 
-drawerBody : (Int -> msg) -> Int -> List (Html msg)
+drawerBody :: (Int -> msg) -> Int -> Array (Html msg)
 drawerBody setSelectedIndex selectedIndex =
     let
         listItemConfig index =
@@ -68,8 +68,8 @@ drawerBody setSelectedIndex selectedIndex =
         , Html.h6 [ PermanentDrawer.subtitle ] [ text "email@material.io" ]
         ]
     , PermanentDrawer.content []
-        [ List.group []
-            [ List.list List.config
+        [ Array.group []
+            [ Array.list Array.config
                 (ListItem.listItem (listItemConfig 0)
                     [ ListItem.graphic [] [ Icon.icon [] "inbox" ]
                     , text "Inbox"
@@ -89,8 +89,8 @@ drawerBody setSelectedIndex selectedIndex =
                     ]
                 ]
             , ListDivider.group []
-            , List.subheader [] [ text "Labels" ]
-            , List.list List.config
+            , Array.subheader [] [ text "Labels" ]
+            , Array.list Array.config
                 (ListItem.listItem (listItemConfig 4)
                     [ ListItem.graphic [] [ Icon.icon [] "bookmark" ]
                     , text "Family"
@@ -119,7 +119,7 @@ drawerBody setSelectedIndex selectedIndex =
     ]
 
 
-mainContent : Html msg
+mainContent :: Html msg
 mainContent =
     Html.div
         [ style "padding-left" "18px"
@@ -133,12 +133,12 @@ mainContent =
         (List.repeat 4 <| Html.p [] [ text loremIpsum ])
 
 
-loremIpsum : String
+loremIpsum :: String
 loremIpsum =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
 
-drawerFrameRoot : List (Html.Attribute msg)
+drawerFrameRoot :: Array (Html.Attribute msg)
 drawerFrameRoot =
     [ style "display" "-ms-flexbox"
     , style "display" "flex"

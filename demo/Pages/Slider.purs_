@@ -1,9 +1,9 @@
-module Demo.Slider exposing (Model, Msg(..), defaultModel, update, view)
+module Demo.Pages.Slider
 
 import Browser.Dom
-import Demo.CatalogPage exposing (CatalogPage)
-import Dict exposing (Dict)
-import Html exposing (Html, text)
+import Demo.CatalogPage
+import Dict
+import Html
 import Html.Attributes
 import Material.Button as Button
 import Material.Slider as Slider
@@ -11,11 +11,11 @@ import Material.Typography as Typography
 import Task
 
 
-type alias Model =
-    { sliders : Dict String Float }
+data Model =
+    { sliders :: Dict String Float }
 
 
-defaultModel : Model
+defaultModel :: Model
 defaultModel =
     { sliders =
         Dict.fromList
@@ -27,13 +27,13 @@ defaultModel =
     }
 
 
-type Msg
+data Msg
     = Changed String Float
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update :: Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Changed id value ->
@@ -46,7 +46,7 @@ update msg model =
             ( model, Cmd.none )
 
 
-view : Model -> CatalogPage Msg
+view :: Model -> CatalogPage Msg
 view model =
     { title = "Slider"
     , prelude = "Sliders let users select from a range of values by moving the slider thumb."
@@ -69,7 +69,7 @@ view model =
     }
 
 
-heroSlider : Model -> Html Msg
+heroSlider :: Model -> Html Msg
 heroSlider model =
     let
         id =
@@ -82,7 +82,7 @@ heroSlider model =
         )
 
 
-continuousSlider : Model -> Html Msg
+continuousSlider :: Model -> Html Msg
 continuousSlider model =
     let
         id =
@@ -97,7 +97,7 @@ continuousSlider model =
         )
 
 
-discreteSlider : Model -> Html Msg
+discreteSlider :: Model -> Html Msg
 discreteSlider model =
     let
         id =
@@ -114,7 +114,7 @@ discreteSlider model =
         )
 
 
-discreteSliderWithTickMarks : Model -> Html Msg
+discreteSliderWithTickMarks :: Model -> Html Msg
 discreteSliderWithTickMarks model =
     let
         id =
@@ -132,7 +132,7 @@ discreteSliderWithTickMarks model =
         )
 
 
-focusSlider : Model -> Html Msg
+focusSlider :: Model -> Html Msg
 focusSlider model =
     let
         id =

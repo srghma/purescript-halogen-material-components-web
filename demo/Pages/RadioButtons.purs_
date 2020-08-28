@@ -1,10 +1,10 @@
-module Demo.RadioButtons exposing (Model, Msg(..), defaultModel, update, view)
+module Demo.Pages.RadioButtons
 
 import Browser.Dom
-import Demo.CatalogPage exposing (CatalogPage)
-import Dict exposing (Dict)
-import Html exposing (Html, text)
-import Html.Attributes exposing (style)
+import Demo.CatalogPage
+import Dict
+import Html
+import Html.Attributes
 import Material.Button as Button
 import Material.FormField as FormField
 import Material.Radio as Radio
@@ -12,11 +12,11 @@ import Material.Typography as Typography
 import Task
 
 
-type alias Model =
-    { radios : Dict String String }
+data Model =
+    { radios :: Dict String String }
 
 
-defaultModel : Model
+defaultModel :: Model
 defaultModel =
     { radios =
         Dict.fromList
@@ -26,13 +26,13 @@ defaultModel =
     }
 
 
-type Msg
+data Msg
     = Set String String
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update :: Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Set group index ->
@@ -45,14 +45,14 @@ update msg model =
             ( model, Cmd.none )
 
 
-isSelected : String -> String -> Model -> Bool
+isSelected :: String -> String -> Model -> Boolean
 isSelected group index model =
     Dict.get group model.radios
         |> Maybe.map ((==) index)
         |> Maybe.withDefault False
 
 
-view : Model -> CatalogPage Msg
+view :: Model -> CatalogPage Msg
 view model =
     { title = "Radio Button"
     , prelude = "Buttons communicate an action a user can take. They are typically placed throughout your UI, in places like dialogs, forms, cards, and toolbars."
@@ -71,7 +71,7 @@ view model =
     }
 
 
-heroRadio : Model -> String -> String -> Html Msg
+heroRadio :: Model -> String -> String -> Html Msg
 heroRadio model group index =
     Radio.radio
         (Radio.config
@@ -81,7 +81,7 @@ heroRadio model group index =
         )
 
 
-heroRadioGroup : Model -> Html Msg
+heroRadioGroup :: Model -> Html Msg
 heroRadioGroup model =
     Html.div []
         [ heroRadio model "hero" "radio-buttons-hero-radio-1"
@@ -89,7 +89,7 @@ heroRadioGroup model =
         ]
 
 
-radio : Model -> String -> String -> String -> Html Msg
+radio :: Model -> String -> String -> String -> Html Msg
 radio model group index label =
     FormField.formField
         (FormField.config
@@ -106,7 +106,7 @@ radio model group index label =
         ]
 
 
-exampleRadioGroup : Model -> Html Msg
+exampleRadioGroup :: Model -> Html Msg
 exampleRadioGroup model =
     Html.div []
         [ radio model "example" "radio-buttons-example-radio-1" "Radio 1"
@@ -114,7 +114,7 @@ exampleRadioGroup model =
         ]
 
 
-focusRadio : Html Msg
+focusRadio :: Html Msg
 focusRadio =
     Html.div []
         [ Radio.radio

@@ -1,4 +1,4 @@
-module Demo.LayoutGrid exposing
+module Demo.Pages.LayoutGrid
     ( Model
     , Msg(..)
     , defaultModel
@@ -6,32 +6,32 @@ module Demo.LayoutGrid exposing
     , view
     )
 
-import Demo.CatalogPage exposing (CatalogPage)
-import Html exposing (Html, text)
-import Html.Attributes exposing (style)
+import Demo.CatalogPage
+import Html
+import Html.Attributes
 import Material.LayoutGrid as LayoutGrid
 import Material.Typography as Typography
 
 
-type alias Model =
+data Model =
     {}
 
 
-defaultModel : Model
+defaultModel :: Model
 defaultModel =
     {}
 
 
-type Msg
+data Msg
     = NoOp
 
 
-update : Msg -> Model -> Model
+update :: Msg -> Model -> Model
 update msg model =
     model
 
 
-view : Model -> CatalogPage Msg
+view :: Model -> CatalogPage Msg
 view model =
     { title = "Layout Grid"
     , prelude = "Material design’s responsive UI is based on a 12-column grid layout."
@@ -63,7 +63,7 @@ view model =
     }
 
 
-demoGrid : List (Html.Attribute msg) -> List (Html msg) -> Html msg
+demoGrid :: Array (Html.Attribute msg) -> Array (Html msg) -> Html msg
 demoGrid options =
     LayoutGrid.layoutGrid
         (style "background" "rgba(0,0,0,.2)"
@@ -72,7 +72,7 @@ demoGrid options =
         )
 
 
-demoCell : List (Html.Attribute msg) -> Html msg
+demoCell :: Array (Html.Attribute msg) -> Html msg
 demoCell options =
     LayoutGrid.cell
         (style "background" "rgba(0,0,0,.2)"
@@ -82,12 +82,12 @@ demoCell options =
         []
 
 
-heroGrid : List (Html msg)
+heroGrid :: Array (Html msg)
 heroGrid =
     [ demoGrid [] [ LayoutGrid.inner [] (List.repeat 3 (demoCell [])) ] ]
 
 
-columnsGrid : Html msg
+columnsGrid :: Html msg
 columnsGrid =
     demoGrid []
         [ LayoutGrid.inner []
@@ -102,7 +102,7 @@ columnsGrid =
         ]
 
 
-leftAlignedGrid : Html msg
+leftAlignedGrid :: Html msg
 leftAlignedGrid =
     demoGrid
         [ LayoutGrid.alignLeft
@@ -116,7 +116,7 @@ leftAlignedGrid =
         ]
 
 
-rightAlignedGrid : Html msg
+rightAlignedGrid :: Html msg
 rightAlignedGrid =
     demoGrid
         [ LayoutGrid.alignRight
@@ -126,7 +126,7 @@ rightAlignedGrid =
         ]
 
 
-cellAlignmentGrid : Html msg
+cellAlignmentGrid :: Html msg
 cellAlignmentGrid =
     let
         innerHeight =

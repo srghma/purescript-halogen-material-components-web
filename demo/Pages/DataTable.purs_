@@ -1,30 +1,30 @@
-module Demo.DataTable exposing (Model, Msg, defaultModel, update, view)
+module Demo.Pages.DataTable
 
-import Demo.CatalogPage exposing (CatalogPage)
-import Html exposing (Html, text)
+import Demo.CatalogPage
+import Html
 import Material.Checkbox as Checkbox
 import Material.DataTable as DataTable
 import Material.Typography as Typography
-import Set exposing (Set)
+import Set
 
 
-type alias Model =
-    { selected : Set String }
+data Model =
+    { selected :: Set String }
 
 
-defaultModel : Model
+defaultModel :: Model
 defaultModel =
     { selected = Set.empty }
 
 
-type Msg
+data Msg
     = NoOp
     | ItemSelected String
     | AllSelected
     | AllUnselected
 
 
-update : Msg -> Model -> Model
+update :: Msg -> Model -> Model
 update msg model =
     case msg of
         NoOp ->
@@ -51,7 +51,7 @@ update msg model =
             { model | selected = Set.empty }
 
 
-view : Model -> CatalogPage Msg
+view :: Model -> CatalogPage Msg
 view model =
     { title = "Data Table"
     , prelude = "Data tables display information in a way that’s easy to scan, so that users can look for patterns and insights."
@@ -70,12 +70,12 @@ view model =
     }
 
 
-heroDataTable : List (Html msg)
+heroDataTable :: Array (Html msg)
 heroDataTable =
     [ standardDataTable ]
 
 
-label : { desert : String, carbs : String, protein : String, comments : String }
+label :: { desert :: String, carbs :: String, protein :: String, comments :: String }
 label =
     { desert = "Desert"
     , carbs = "Carbs (g)"
@@ -84,7 +84,7 @@ label =
     }
 
 
-data : List { desert : String, carbs : String, protein : String, comments : String }
+data :: Array { desert :: String, carbs :: String, protein :: String, comments :: String }
 data =
     [ { desert = "Frozen yogurt"
       , carbs = "24"
@@ -104,7 +104,7 @@ data =
     ]
 
 
-standardDataTable : Html msg
+standardDataTable :: Html msg
 standardDataTable =
     let
         row { desert, carbs, protein, comments } =
@@ -117,11 +117,11 @@ standardDataTable =
     in
     DataTable.dataTable DataTable.config
         { thead = [ row label ]
-        , tbody = List.map row data
+        , tbody = Array.map row data
         }
 
 
-dataTableWithRowSelection : Model -> Html Msg
+dataTableWithRowSelection :: Model -> Html Msg
 dataTableWithRowSelection model =
     let
         allSelected =
@@ -192,7 +192,7 @@ dataTableWithRowSelection model =
                 }
                 label
         , tbody =
-            List.map
+            Array.map
                 (\({ desert } as data_) ->
                     row
                         { onChange = ItemSelected desert

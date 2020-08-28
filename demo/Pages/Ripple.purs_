@@ -1,32 +1,32 @@
-module Demo.Ripple exposing (Model, Msg(..), defaultModel, update, view)
+module Demo.Pages.Ripple
 
-import Demo.CatalogPage exposing (CatalogPage)
-import Html exposing (text)
-import Html.Attributes exposing (class, style)
+import Demo.CatalogPage
+import Html
+import Html.Attributes
 import Material.Elevation as Elevation
 import Material.Ripple as Ripple
 import Material.Typography as Typography
 
 
-type alias Model =
+data Model =
     {}
 
 
-defaultModel : Model
+defaultModel :: Model
 defaultModel =
     {}
 
 
-type Msg
+data Msg
     = NoOp
 
 
-update : Msg -> Model -> Model
+update :: Msg -> Model -> Model
 update msg model =
     model
 
 
-view : Model -> CatalogPage Msg
+view :: Model -> CatalogPage Msg
 view model =
     { title = "Ripple"
     , prelude = "Ripples are visual representations used to communicate the status of a component or interactive element."
@@ -61,7 +61,7 @@ view model =
     }
 
 
-demoBox : List (Html.Attribute msg)
+demoBox :: Array (Html.Attribute msg)
 demoBox =
     [ style "display" "flex"
     , style "align-items" "center"
@@ -79,7 +79,7 @@ demoBox =
     ]
 
 
-demoIcon : List (Html.Attribute msg)
+demoIcon :: Array (Html.Attribute msg)
 demoIcon =
     [ class "material-icons"
     , style "width" "24px"

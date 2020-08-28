@@ -1,33 +1,33 @@
-module Demo.Theme exposing (Model, Msg, defaultModel, update, view)
+module Demo.Pages.Theme
 
-import Demo.CatalogPage exposing (CatalogPage)
-import Html exposing (Html, text)
-import Html.Attributes exposing (class, style)
+import Demo.CatalogPage
+import Html
+import Html.Attributes
 import Material.Button as Button
 import Material.Elevation as Elevation
 import Material.Theme as Theme
 import Material.Typography as Typography
 
 
-type alias Model =
+data Model =
     {}
 
 
-defaultModel : Model
+defaultModel :: Model
 defaultModel =
     {}
 
 
-type Msg
+data Msg
     = NoOp
 
 
-update : Msg -> Model -> Model
+update :: Msg -> Model -> Model
 update msg model =
     model
 
 
-view : Model -> CatalogPage Msg
+view :: Model -> CatalogPage Msg
 view model =
     { title = "Theme"
     , prelude = "Color in Material Design is inspired by bold hues juxtaposed with muted environments, deep shadows, and bright highlights."
@@ -62,7 +62,7 @@ view model =
     }
 
 
-themeColorsAsText : Html msg
+themeColorsAsText :: Html msg
 themeColorsAsText =
     Html.div demoThemeColorGroup
         [ Html.div (Theme.primary :: demoThemeColorSwatches)
@@ -72,7 +72,7 @@ themeColorsAsText =
         ]
 
 
-themeColorsAsBackground : Html msg
+themeColorsAsBackground :: Html msg
 themeColorsAsBackground =
     Html.div demoThemeColorGroup
         [ Html.div
@@ -87,7 +87,7 @@ themeColorsAsBackground =
         ]
 
 
-textOnBackground : Html msg
+textOnBackground :: Html msg
 textOnBackground =
     Html.div demoThemeColorGroup
         [ Html.div (Theme.background :: demoThemeTextRow)
@@ -105,7 +105,7 @@ textOnBackground =
         ]
 
 
-textOnPrimary : Html msg
+textOnPrimary :: Html msg
 textOnPrimary =
     Html.div demoThemeColorGroup
         [ Html.div (Theme.primaryBg :: demoThemeTextRow)
@@ -117,7 +117,7 @@ textOnPrimary =
         ]
 
 
-textOnSecondary : Html msg
+textOnSecondary :: Html msg
 textOnSecondary =
     Html.div demoThemeColorGroup
         [ Html.div (Theme.secondaryBg :: demoThemeTextRow)
@@ -129,7 +129,7 @@ textOnSecondary =
         ]
 
 
-textOnLightBackground : Html msg
+textOnLightBackground :: Html msg
 textOnLightBackground =
     Html.div demoThemeColorGroup
         [ Html.div (demoThemeBgCustomLight ++ demoThemeTextRow)
@@ -147,7 +147,7 @@ textOnLightBackground =
         ]
 
 
-textOnDarkBackground : Html msg
+textOnDarkBackground :: Html msg
 textOnDarkBackground =
     Html.div demoThemeColorGroup
         [ Html.div (demoThemeBgCustomDark ++ demoThemeTextRow)
@@ -165,17 +165,17 @@ textOnDarkBackground =
         ]
 
 
-heroMargin : List (Html.Attribute msg)
+heroMargin :: Array (Html.Attribute msg)
 heroMargin =
     [ style "margin" "16px 32px" ]
 
 
-demoThemeColorGroup : List (Html.Attribute msg)
+demoThemeColorGroup :: Array (Html.Attribute msg)
 demoThemeColorGroup =
     [ style "padding" "16px 0" ]
 
 
-demoThemeColorSwatches : List (Html.Attribute msg)
+demoThemeColorSwatches :: Array (Html.Attribute msg)
 demoThemeColorSwatches =
     [ style "display" "-ms-inline-flexbox"
     , style "display" "inline-flex"
@@ -186,7 +186,7 @@ demoThemeColorSwatches =
     ]
 
 
-demoThemeColorSwatch : List (Html.Attribute msg)
+demoThemeColorSwatch :: Array (Html.Attribute msg)
 demoThemeColorSwatch =
     [ style "display" "inline-block"
     , style "-webkit-box-sizing" "border-box"
@@ -200,7 +200,7 @@ demoThemeColorSwatch =
     ]
 
 
-demoThemeTextRow : List (Html.Attribute msg)
+demoThemeTextRow :: Array (Html.Attribute msg)
 demoThemeTextRow =
     [ style "display" "-ms-inline-flexbox"
     , style "display" "inline-flex"
@@ -215,21 +215,21 @@ demoThemeTextRow =
     ]
 
 
-demoThemeTextStyle : List (Html.Attribute msg)
+demoThemeTextStyle :: Array (Html.Attribute msg)
 demoThemeTextStyle =
     [ style "padding" "0 16px" ]
 
 
-demoThemeIconStyle : List (Html.Attribute msg)
+demoThemeIconStyle :: Array (Html.Attribute msg)
 demoThemeIconStyle =
     class "material-icons" :: demoThemeTextStyle
 
 
-demoThemeBgCustomLight : List (Html.Attribute msg)
+demoThemeBgCustomLight :: Array (Html.Attribute msg)
 demoThemeBgCustomLight =
     [ style "background-color" "#ddd" ]
 
 
-demoThemeBgCustomDark : List (Html.Attribute msg)
+demoThemeBgCustomDark :: Array (Html.Attribute msg)
 demoThemeBgCustomDark =
     [ style "background-color" "#d1d1d1" ]

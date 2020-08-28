@@ -1,29 +1,29 @@
-module Demo.ShortCollapsedTopAppBar exposing (Model, Msg(..), defaultModel, update, view)
+module Demo.Pages.ShortCollapsedTopAppBar
 
-import Demo.TopAppBarPage exposing (TopAppBarPage)
+import Demo.TopAppBarPage
 import Material.IconButton as IconButton
 import Material.TopAppBar as TopAppBar
 
 
-type alias Model =
+data Model =
     {}
 
 
-defaultModel : Model
+defaultModel :: Model
 defaultModel =
     {}
 
 
-type Msg
+data Msg
     = NoOp
 
 
-update : Msg -> Model -> Model
+update :: Msg -> Model -> Model
 update msg model =
     model
 
 
-view : Model -> TopAppBarPage Msg
+view :: Model -> TopAppBarPage Msg
 view model =
     { fixedAdjust = TopAppBar.shortFixedAdjust
     , topAppBar =
