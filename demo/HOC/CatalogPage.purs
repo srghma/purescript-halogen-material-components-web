@@ -62,8 +62,8 @@ view lift catalogPageConfig catalogPage =
                         "menu"
                     , HH.span
                         [ TopAppBar.title
-                        , style "text-transform" "uppercase"
-                        , style "font-weight" "400"
+                        , HP.style "text-transform: uppercase"
+                        , HP.style "font-weight: 400"
                         ]
                         [ HH.text "Material Components for Elm" ]
                     ]
@@ -75,7 +75,7 @@ view lift catalogPageConfig catalogPage =
                     # DismissibleDrawer.setOpen catalogPageConfig.drawerOpen
                     # DismissibleDrawer.setAttributes
                         [ TopAppBar.fixedAdjust
-                        , style "z-index" "1"
+                        , HP.style "z-index: 1"
                         ]
                 )
                 [ DismissibleDrawer.content []
@@ -201,69 +201,69 @@ catalogDrawerItems =
 
 catalogPageContainer :: Array (HH.Attribute w i)
 catalogPageContainer =
-    [ style "position" "relative"
+    [ HP.style "position: relative"
     , Typography.typography
     ]
 
 demoPanel :: Array (HH.Attribute w i)
 demoPanel =
-    [ style "display" "-ms-flexbox"
-    , style "display" "flex"
-    , style "position" "relative"
-    , style "height" "100vh"
-    , style "overflow" "hidden"
+    [ HP.style "display: -ms-flexbox"
+    , HP.style "display: flex"
+    , HP.style "position: relative"
+    , HP.style "height: 100vh"
+    , HP.style "overflow: hidden"
     ]
 
 demoContent :: Array (HH.Attribute w i)
 demoContent =
     [ HP.id "demo-content"
-    , style "height" "100%"
-    , style "-webkit-box-sizing" "border-box"
-    , style "box-sizing" "border-box"
-    , style "max-width" "100%"
-    , style "padding-left" "16px"
-    , style "padding-right" "16px"
-    , style "padding-bottom" "100px"
-    , style "width" "100%"
-    , style "overflow" "auto"
-    , style "display" "-ms-flexbox"
-    , style "display" "flex"
-    , style "-ms-flex-direction" "column"
-    , style "flex-direction" "column"
-    , style "-ms-flex-align" "center"
-    , style "align-items" "center"
-    , style "-ms-flex-pack" "start"
-    , style "justify-content" "flex-start"
+    , HP.style "height: 100%"
+    , HP.style "-webkit-box-sizing: border-box"
+    , HP.style "box-sizing: border-box"
+    , HP.style "max-width: 100%"
+    , HP.style "padding-left: 16px"
+    , HP.style "padding-right: 16px"
+    , HP.style "padding-bottom: 100px"
+    , HP.style "width: 100%"
+    , HP.style "overflow: auto"
+    , HP.style "display: -ms-flexbox"
+    , HP.style "display: flex"
+    , HP.style "-ms-flex-direction: column"
+    , HP.style "flex-direction: column"
+    , HP.style "-ms-flex-align: center"
+    , HP.style "align-items: center"
+    , HP.style "-ms-flex-pack: start"
+    , HP.style "justify-content: flex-start"
     ]
 
 demoContentTransition :: Array (HH.Attribute w i)
 demoContentTransition =
-    [ style "max-width" "900px"
-    , style "width" "100%"
+    [ HP.style "max-width: 900px"
+    , HP.style "width: 100%"
     ]
 
 hero :: Array (HH.Attribute w i)
 hero =
-    [ style "display" "-ms-flexbox"
-    , style "display" "flex"
-    , style "-ms-flex-flow" "row nowrap"
-    , style "flex-flow" "row nowrap"
-    , style "-ms-flex-align" "center"
-    , style "align-items" "center"
-    , style "-ms-flex-pack" "center"
-    , style "justify-content" "center"
-    , style "min-height" "360px"
-    , style "padding" "24px"
-    , style "background-color" "#f2f2f2"
+    [ HP.style "display: -ms-flexbox"
+    , HP.style "display: flex"
+    , HP.style "-ms-flex-flow: row nowrap"
+    , HP.style "flex-flow: row nowrap"
+    , HP.style "-ms-flex-align: center"
+    , HP.style "align-items: center"
+    , HP.style "-ms-flex-pack: center"
+    , HP.style "justify-content: center"
+    , HP.style "min-height: 360px"
+    , HP.style "padding: 24px"
+    , HP.style "background-color: #f2f2f2"
     ]
 
 demoTitle :: Array (HH.Attribute w i)
 demoTitle =
-    [ style "border-bottom" "1px solid rgba(0,0,0,.87)"
+    [ HP.style "border-bottom: 1px solid rgba(0,0,0,.87)"
     ]
 
 resourcesGraphic :: Array (HH.Attribute w i)
 resourcesGraphic =
-    [ style "width" "30px"
-    , style "height" "30px"
+    [ HP.style "width: 30px"
+    , HP.style "height: 30px"
     ]

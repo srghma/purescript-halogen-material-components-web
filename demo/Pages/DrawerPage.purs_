@@ -135,11 +135,11 @@ drawerBody setSelectedIndex selectedIndex =
 mainContent :: HH.HTML w i
 mainContent =
     HH.div
-        [ style "padding-left" "18px"
-        , style "padding-right" "18px"
-        , style "overflow" "auto"
-        , style "height" "100%"
-        , style "box-sizing" "border-box"
+        [ HP.style "padding-left: 18px"
+        , HP.style "padding-right: 18px"
+        , HP.style "overflow: auto"
+        , HP.style "height: 100%"
+        , HP.style "box-sizing: border-box"
         , TopAppBar.fixedAdjust
         , DismissibleDrawer.appContent
         ]
@@ -151,7 +151,7 @@ loremIpsum =
 
 drawerFrameRoot :: Array (HH.Attribute w i)
 drawerFrameRoot =
-    [ style "display" "-ms-flexbox"
-    , style "display" "flex"
-    , style "height" "100vh"
+    [ HP.style "display: -ms-flexbox"
+    , HP.style "display: flex"
+    , HP.style "height: 100vh"
     ]

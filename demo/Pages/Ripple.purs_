@@ -65,17 +65,17 @@ view model =
 
 demoBox :: Array (HH.Attribute w i)
 demoBox =
-    [ style "display" "flex"
-    , style "align-items" "center"
-    , style "justify-content" "center"
-    , style "width" "200px"
-    , style "height" "100px"
-    , style "padding" "1rem"
-    , style "cursor" "pointer"
-    , style "user-select" "none"
-    , style "background-color" "#fff"
-    , style "overflow" "hidden"
-    , style "position" "relative"
+    [ HP.style "display: flex"
+    , HP.style "align-items: center"
+    , HP.style "justify-content: center"
+    , HP.style "width: 200px"
+    , HP.style "height: 100px"
+    , HP.style "padding: 1rem"
+    , HP.style "cursor: pointer"
+    , HP.style "user-select: none"
+    , HP.style "background-color: #fff"
+    , HP.style "overflow: hidden"
+    , HP.style "position: relative"
     , Elevation.z2
     , HP.tabindex 0
     ]
@@ -83,9 +83,9 @@ demoBox =
 demoIcon :: Array (HH.Attribute w i)
 demoIcon =
     [ HP.class_ material_icons
-    , style "width" "24px"
-    , style "height" "24px"
-    , style "padding" "12px"
-    , style "border-radius" "50%"
-    , style "position" "relative"
+    , HP.style "width: 24px"
+    , HP.style "height: 24px"
+    , HP.style "padding: 12px"
+    , HP.style "border-radius: 50%"
+    , HP.style "position: relative"
     ]

@@ -100,8 +100,8 @@ simpleDialog model =
             List.Item.listItem
                 (List.Item.defaultConfig # List.Item.setOnClick Close)
                 [ List.Item.graphic
-                    [ style "background-color" "rgba(0,0,0,.3)"
-                    , style "color" "#fff"
+                    [ HP.style "background-color: rgba(0,0,0,.3)"
+                    , HP.style "color: #fff"
                     ]
                     [ Icon.icon [] icon ]
                 , HH.text label
@@ -262,7 +262,7 @@ heroDialog :: Array (HH.HTML Msg)
 heroDialog =
     [ HH.div
         [ HP.class_ "mdc-dialog mdc-dialog--open"
-        , style "position" "relative"
+        , HP.style "position: relative"
         ]
         [ HH.div
             [ HP.class_ mdc_dialog__surface ]

@@ -67,12 +67,12 @@ view model =
         , HH.h3 [ Typography.subtitle1 ] [ HH.text "Extended FAB (without icon)" ]
         , ExtendedFab.fab ExtendedFab.defaultConfig "Create"
         , HH.h3 [ Typography.subtitle1 ] [ HH.text "FAB (Shaped)" ]
-        , HH.div [ style "display" "flex" ]
+        , HH.div [ HP.style "display: flex" ]
             [ Fab.fab
                 (Fab.defaultConfig
                     # Fab.setAttributes
-                        [ style "border-radius" "50% 0"
-                        , style "margin-right" "24px"
+                        [ HP.style "border-radius: 50% 0"
+                        , HP.style "margin-right: 24px"
                         ]
                 )
                 "favorite_border"
@@ -80,8 +80,8 @@ view model =
                 (Fab.defaultConfig
                     # Fab.setMini true
                     # Fab.setAttributes
-                        [ style "border-radius" "8px"
-                        , style "margin-right" "24px"
+                        [ HP.style "border-radius: 8px"
+                        , HP.style "margin-right: 24px"
                         ]
                 )
                 "favorite_border"
@@ -89,7 +89,7 @@ view model =
                 "Create"
             ]
         , HH.h3 [ Typography.subtitle1 ] [ HH.text "Focus FAB" ]
-        , HH.div [ style "display" "flex" ]
+        , HH.div [ HP.style "display: flex" ]
             [ Fab.fab
                 (Fab.defaultConfig # Fab.setAttributes [ HP.id "my-fab" ])
                 "favorite_border"

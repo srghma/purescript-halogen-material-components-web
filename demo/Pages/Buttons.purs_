@@ -94,7 +94,7 @@ outlinedButtons =
 
 shapedButtons :: HH.HTML w i
 shapedButtons =
-    buttonsRow Button.unelevated [ style "border-radius" "18px" ]
+    buttonsRow Button.unelevated [ HP.style "border-radius: 18px" ]
 
 linkButtons :: HH.HTML w i
 linkButtons =
@@ -138,8 +138,8 @@ buttonsRow button additionalAttributes =
 
 heroMargin :: HH.Attribute w i
 heroMargin =
-    style "margin" "16px 32px"
+    HP.style "margin: 16px 32px"
 
 rowMargin :: HH.Attribute w i
 rowMargin =
-    style "margin" "8px 16px"
+    HP.style "margin: 8px 16px"

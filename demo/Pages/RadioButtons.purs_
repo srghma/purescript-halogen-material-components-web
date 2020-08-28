@@ -78,7 +78,7 @@ heroRadio model group index =
         (Radio.defaultConfig
             # Radio.setChecked (isSelected group index model)
             # Radio.setOnChange (Set group index)
-            # Radio.setAttributes [ style "margin" "0 10px" ]
+            # Radio.setAttributes [ HP.style "margin: 0 10px" ]
         )
 
 heroRadioGroup :: Model -> HH.HTML Msg
@@ -95,7 +95,7 @@ radio model group index label =
             # FormField.setLabel (Just label)
             # FormField.setFor (Just index)
             # FormField.setOnClick (Set group index)
-            # FormField.setAttributes [ style "margin" "0 10px" ]
+            # FormField.setAttributes [ HP.style "margin: 0 10px" ]
         )
         [ Radio.radio
             (Radio.defaultConfig

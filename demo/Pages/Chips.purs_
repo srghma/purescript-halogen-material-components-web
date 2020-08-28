@@ -244,8 +244,8 @@ choiceChips model =
 inputChips :: Model -> HH.HTML Msg
 inputChips model =
     HH.div
-        [ style "position" "relative"
-        , style "display" "flex"
+        [ HP.style "position: relative"
+        , HP.style "display: flex"
         ]
         [ InputChipSet.chipSet []
             (map
@@ -334,7 +334,7 @@ shapedChips model =
         chip label =
             ActionChip.chip
                 (ActionChip.defaultConfig
-                    # ActionChip.setAttributes [ style "border-radius" "4px" ]
+                    # ActionChip.setAttributes [ HP.style "border-radius: 4px" ]
                 )
                 label
     in

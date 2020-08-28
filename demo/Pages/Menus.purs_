@@ -87,11 +87,11 @@ heroMenu :: Model -> HH.HTML w i
 heroMenu model =
     HH.div
         [ HP.class_ "mdc-menu-surface mdc-menu-surface--open"
-        , style "position" "relative"
-        , style "transform-origin" "left top 0px"
-        , style "left" "0px"
-        , style "top" "0px"
-        , style "z-index" "0"
+        , HP.style "position: relative"
+        , HP.style "transform-origin: left top 0px"
+        , HP.style "left: 0px"
+        , HP.style "top: 0px"
+        , HP.style "z-index: 0"
         ]
         [ Array.list Array.defaultConfig
             (List.Item.listItem List.Item.defaultConfig [ HH.text "A Menu Item" ])

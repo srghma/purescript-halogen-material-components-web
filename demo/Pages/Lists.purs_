@@ -112,8 +112,8 @@ view model =
 
 demoList :: Array (HH.Attribute w i)
 demoList =
-    [ style "max-width" "600px"
-    , style "border" "1px solid rgba(0,0,0,.1)"
+    [ HP.style "max-width: 600px"
+    , HP.style "border: 1px solid rgba(0,0,0,.1)"
     ]
 
 heroList :: Array (HH.HTML w i)
@@ -123,7 +123,7 @@ heroList =
             List.Item.listItem List.Item.defaultConfig [ HH.text "Line item" ]
     in
     [ Array.list
-        (List.defaultConfig # Array.setAttributes (style "background" "#fff" :: demoList))
+        (List.defaultConfig # Array.setAttributes (HP.style "background: #fff" :: demoList))
         listItem
         (List.repeat 2 listItem)
     ]
@@ -223,7 +223,7 @@ shapedActivatedItemList model =
                             Nothing
                         )
                     # List.Item.setOnClick (SetShapedActivated label)
-                    # List.Item.setAttributes [ style "border-radius" "0 32px 32px 0" ]
+                    # List.Item.setAttributes [ HP.style "border-radius: 0 32px 32px 0" ]
                 )
                 [ List.Item.graphic [] [ Icon.icon [] icon ], HH.text label ]
     in
@@ -238,9 +238,9 @@ shapedActivatedItemList model =
 
 demoIcon :: Array (HH.Attribute w i)
 demoIcon =
-    [ style "background" "rgba(0,0,0,.3)"
-    , style "border-radius" "50%"
-    , style "color" "#fff"
+    [ HP.style "background: rgba(0,0,0,.3)"
+    , HP.style "border-radius: 50%"
+    , HP.style "color: #fff"
     ]
 
 folderList :: HH.HTML w i

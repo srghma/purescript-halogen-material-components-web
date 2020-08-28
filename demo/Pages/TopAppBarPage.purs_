@@ -21,7 +21,7 @@ view :: (w i -> topMsg) -> TopAppBarPage w i -> HH.HTML topMsg
 view lift { topAppBar, fixedAdjust } =
     HH.map lift $
         HH.div
-            [ style "height" "200vh"
+            [ HP.style "height: 200vh"
             , Typography.typography
             ]
             [ topAppBar

@@ -41,11 +41,11 @@ view model =
         }
     , hero =
         [ HH.div
-            [ style "width" "480px"
-            , style "height" "72px"
+            [ HP.style "width: 480px"
+            , HP.style "height: 72px"
             ]
             [ TopAppBar.regular
-                (TopAppBar.defaultConfig # TopAppBar.setAttributes [ style "position" "static" ])
+                (TopAppBar.defaultConfig # TopAppBar.setAttributes [ HP.style "position: static" ])
                 [ TopAppBar.section
                     [ TopAppBar.alignStart ]
                     [ IconButton.iconButton
@@ -78,11 +78,11 @@ view model =
         ]
     , content =
         [ HH.div
-            [ style "display" "-ms-flexbox"
-            , style "display" "flex"
-            , style "-ms-flex-wrap" "wrap"
-            , style "flex-wrap" "wrap"
-            , style "min-height" "200px"
+            [ HP.style "display: -ms-flexbox"
+            , HP.style "display: flex"
+            , HP.style "-ms-flex-wrap: wrap"
+            , HP.style "flex-wrap: wrap"
+            , HP.style "min-height: 200px"
             ]
             [ iframe "Standard" Route.StandardTopAppBar
             , iframe "Fixed" Route.FixedTopAppBar
@@ -101,14 +101,14 @@ iframe title route =
             Route.toString route
     in
     HH.div
-        [ style "display" "inline-block"
-        , style "-ms-flex" "1 1 45%"
-        , style "flex" "1 1 45%"
-        , style "-ms-flex-pack" "distribute"
-        , style "justify-content" "space-around"
-        , style "min-height" "200px"
-        , style "min-width" "400px"
-        , style "padding" "15px"
+        [ HP.style "display: inline-block"
+        , HP.style "-ms-flex: 1 1 45%"
+        , HP.style "flex: 1 1 45%"
+        , HP.style "-ms-flex-pack: distribute"
+        , HP.style "justify-content: space-around"
+        , HP.style "min-height: 200px"
+        , HP.style "min-width: 400px"
+        , HP.style "padding: 15px"
         ]
         [ HH.div []
             [ HH.a
@@ -119,8 +119,8 @@ iframe title route =
                 ]
             ]
         , HH.iframe
-            [ style "width" "100%"
-            , style "height" "200px"
+            [ HP.style "width: 100%"
+            , HP.style "height: 200px"
             , HP.src stringUrl
             ]
             []

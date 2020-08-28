@@ -182,8 +182,8 @@ outlinedWithIconSelect model =
 focusSelect :: Model -> HH.HTML Msg
 focusSelect model =
     HH.div
-        [ style "display" "flex"
-        , style "align-items" "center"
+        [ HP.style "display: flex"
+        , HP.style "align-items: center"
         ]
         [ Select.filled
             (Select.defaultConfig

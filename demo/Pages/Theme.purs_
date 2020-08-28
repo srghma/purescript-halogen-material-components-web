@@ -162,52 +162,52 @@ textOnDarkBackground =
 
 heroMargin :: Array (HH.Attribute w i)
 heroMargin =
-    [ style "margin" "16px 32px" ]
+    [ HP.style "margin: 16px 32px" ]
 
 demoThemeColorGroup :: Array (HH.Attribute w i)
 demoThemeColorGroup =
-    [ style "padding" "16px 0" ]
+    [ HP.style "padding: 16px 0" ]
 
 demoThemeColorSwatches :: Array (HH.Attribute w i)
 demoThemeColorSwatches =
-    [ style "display" "-ms-inline-flexbox"
-    , style "display" "inline-flex"
-    , style "-ms-flex-direction" "column"
-    , style "flex-direction" "column"
-    , style "margin-right" "16px"
+    [ HP.style "display: -ms-inline-flexbox"
+    , HP.style "display: inline-flex"
+    , HP.style "-ms-flex-direction: column"
+    , HP.style "flex-direction: column"
+    , HP.style "margin-right: 16px"
     , Elevation.z2
     ]
 
 demoThemeColorSwatch :: Array (HH.Attribute w i)
 demoThemeColorSwatch =
-    [ style "display" "inline-block"
-    , style "-webkit-box-sizing" "border-box"
-    , style "box-sizing" "border-box"
-    , style "width" "150px"
-    , style "height" "50px"
-    , style "line-height" "50px"
-    , style "text-align" "center"
-    , style "margin-bottom" "8px"
-    , style "border-radius" "4px"
+    [ HP.style "display: inline-block"
+    , HP.style "-webkit-box-sizing: border-box"
+    , HP.style "box-sizing: border-box"
+    , HP.style "width: 150px"
+    , HP.style "height: 50px"
+    , HP.style "line-height: 50px"
+    , HP.style "text-align: center"
+    , HP.style "margin-bottom: 8px"
+    , HP.style "border-radius: 4px"
     ]
 
 demoThemeTextRow :: Array (HH.Attribute w i)
 demoThemeTextRow =
-    [ style "display" "-ms-inline-flexbox"
-    , style "display" "inline-flex"
-    , style "-webkit-box-sizing" "border-box"
-    , style "box-sizing" "border-box"
-    , style "padding" "16px"
-    , style "border" "1px solid #f0f0f0"
-    , style "-ms-flex-align" "center"
-    , style "align-items" "center"
-    , style "-ms-flex-direction" "row"
-    , style "flex-direction" "row"
+    [ HP.style "display: -ms-inline-flexbox"
+    , HP.style "display: inline-flex"
+    , HP.style "-webkit-box-sizing: border-box"
+    , HP.style "box-sizing: border-box"
+    , HP.style "padding: 16px"
+    , HP.style "border: 1px solid #f0f0f0"
+    , HP.style "-ms-flex-align: center"
+    , HP.style "align-items: center"
+    , HP.style "-ms-flex-direction: row"
+    , HP.style "flex-direction: row"
     ]
 
 demoThemeTextStyle :: Array (HH.Attribute w i)
 demoThemeTextStyle =
-    [ style "padding" "0 16px" ]
+    [ HP.style "padding: 0 16px" ]
 
 demoThemeIconStyle :: Array (HH.Attribute w i)
 demoThemeIconStyle =
@@ -215,8 +215,8 @@ demoThemeIconStyle =
 
 demoThemeBgCustomLight :: Array (HH.Attribute w i)
 demoThemeBgCustomLight =
-    [ style "background-color" "#ddd" ]
+    [ HP.style "background-color: #ddd" ]
 
 demoThemeBgCustomDark :: Array (HH.Attribute w i)
 demoThemeBgCustomDark =
-    [ style "background-color" "#d1d1d1" ]
+    [ HP.style "background-color: #d1d1d1" ]
