@@ -123,7 +123,7 @@ focusButton =
         , Button.raised (Button.defaultConfig # Button.setOnClick (Focus "my-link-button")) "Focus"
         ]
 
-buttonsRow :: (Button.Config w i -> String -> HH.HTML w i) -> Array (HH.Attribute w i) -> HH.HTML w i
+buttonsRow :: (Button.Config w i -> String -> HH.HTML w i) -> Array (IProp r i) -> HH.HTML w i
 buttonsRow button additionalAttributes =
     let
         config =
@@ -136,10 +136,10 @@ buttonsRow button additionalAttributes =
         , button (config # Button.setIcon (Just "favorite")) "Icon"
         ]
 
-heroMargin :: HH.Attribute w i
+heroMargin :: IProp r i
 heroMargin =
     HP.style "margin: 16px 32px"
 
-rowMargin :: HH.Attribute w i
+rowMargin :: IProp r i
 rowMargin =
     HP.style "margin: 8px 16px"

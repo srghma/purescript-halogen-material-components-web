@@ -299,29 +299,29 @@ focusTextField =
             "Focus"
         ]
 
-heroTextFieldContainer :: Array (HH.Attribute w i)
+heroTextFieldContainer :: Array (IProp r i)
 heroTextFieldContainer =
     [ HP.class_ hero_text_field_container
     , HP.style "display: -ms-flexbox; display: flex; -ms-flex: 1 1 100%; flex: 1 1 100%; -ms-flex-pack: distribute; justify-content: space-around; -ms-flex-wrap: wrap; flex-wrap: wrap"
     ]
 
-textFieldContainerHero :: Array (HH.Attribute w i)
+textFieldContainerHero :: Array (IProp r i)
 textFieldContainerHero =
     HP.style "padding: 20px" :: textFieldContainer
 
-textFieldContainer :: Array (HH.Attribute w i)
+textFieldContainer :: Array (IProp r i)
 textFieldContainer =
     [ HP.class_ text_field_container
     , HP.style "min-width: 200px"
     ]
 
-textFieldRow :: Array (HH.Attribute w i)
+textFieldRow :: Array (IProp r i)
 textFieldRow =
     [ HP.class_ text_field_row
     , HP.style "display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap"
     ]
 
-textFieldRowFullwidth :: Array (HH.Attribute w i)
+textFieldRowFullwidth :: Array (IProp r i)
 textFieldRowFullwidth =
     [ HP.class_ "text-field-row text-field-row--fullwidth"
     , HP.style "display: block"

@@ -110,7 +110,7 @@ view model =
         ]
     }
 
-demoList :: Array (HH.Attribute w i)
+demoList :: Array (IProp r i)
 demoList =
     [ HP.style "max-width: 600px; border: 1px solid rgba(0,0,0,.1)"
     ]
@@ -235,7 +235,7 @@ shapedActivatedItemList model =
             ]
         )
 
-demoIcon :: Array (HH.Attribute w i)
+demoIcon :: Array (IProp r i)
 demoIcon =
     [ HP.style "background: rgba(0,0,0,.3); border-radius: 50%; color: #fff"
     ]

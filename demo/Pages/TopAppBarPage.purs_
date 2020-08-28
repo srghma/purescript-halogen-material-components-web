@@ -13,7 +13,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Material.Classes.Typography
 
 data TopAppBarPage w i =
-    { fixedAdjust :: HH.Attribute w i
+    { fixedAdjust :: IProp r i
     , topAppBar :: HH.HTML w i
     }
 

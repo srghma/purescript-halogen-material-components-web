@@ -115,6 +115,6 @@ focusCheckbox =
             "Focus"
         ]
 
-heroMargin :: Array (HH.Attribute w i)
+heroMargin :: Array (IProp r i)
 heroMargin =
     [ HP.style "margin: 8px 16px" ]

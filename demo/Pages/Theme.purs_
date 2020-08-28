@@ -160,42 +160,42 @@ textOnDarkBackground =
             ]
         ]
 
-heroMargin :: Array (HH.Attribute w i)
+heroMargin :: Array (IProp r i)
 heroMargin =
     [ HP.style "margin: 16px 32px" ]
 
-demoThemeColorGroup :: Array (HH.Attribute w i)
+demoThemeColorGroup :: Array (IProp r i)
 demoThemeColorGroup =
     [ HP.style "padding: 16px 0" ]
 
-demoThemeColorSwatches :: Array (HH.Attribute w i)
+demoThemeColorSwatches :: Array (IProp r i)
 demoThemeColorSwatches =
     [ HP.style "display: -ms-inline-flexbox; display: inline-flex; -ms-flex-direction: column; flex-direction: column; margin-right: 16px"
     , Elevation.z2
     ]
 
-demoThemeColorSwatch :: Array (HH.Attribute w i)
+demoThemeColorSwatch :: Array (IProp r i)
 demoThemeColorSwatch =
     [ HP.style "display: inline-block; -webkit-box-sizing: border-box; box-sizing: border-box; width: 150px; height: 50px; line-height: 50px; text-align: center; margin-bottom: 8px; border-radius: 4px"
     ]
 
-demoThemeTextRow :: Array (HH.Attribute w i)
+demoThemeTextRow :: Array (IProp r i)
 demoThemeTextRow =
     [ HP.style "display: -ms-inline-flexbox; display: inline-flex; -webkit-box-sizing: border-box; box-sizing: border-box; padding: 16px; border: 1px solid #f0f0f0; -ms-flex-align: center; align-items: center; -ms-flex-direction: row; flex-direction: row"
     ]
 
-demoThemeTextStyle :: Array (HH.Attribute w i)
+demoThemeTextStyle :: Array (IProp r i)
 demoThemeTextStyle =
     [ HP.style "padding: 0 16px" ]
 
-demoThemeIconStyle :: Array (HH.Attribute w i)
+demoThemeIconStyle :: Array (IProp r i)
 demoThemeIconStyle =
     HP.class_ material_icons :: demoThemeTextStyle
 
-demoThemeBgCustomLight :: Array (HH.Attribute w i)
+demoThemeBgCustomLight :: Array (IProp r i)
 demoThemeBgCustomLight =
     [ HP.style "background-color: #ddd" ]
 
-demoThemeBgCustomDark :: Array (HH.Attribute w i)
+demoThemeBgCustomDark :: Array (IProp r i)
 demoThemeBgCustomDark =
     [ HP.style "background-color: #d1d1d1" ]

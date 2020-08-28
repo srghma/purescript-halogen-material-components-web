@@ -115,7 +115,7 @@ view model =
         ]
     }
 
-buttonMargin :: Array (HH.Attribute w i)
+buttonMargin :: Array (IProp r i)
 buttonMargin =
     [ HP.style "margin: 14px" ]
 

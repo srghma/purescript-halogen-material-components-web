@@ -198,39 +198,39 @@ catalogDrawerItems =
     , { label: "Typography", route: Route.Typography }
     ]
 
-catalogPageContainer :: Array (HH.Attribute w i)
+catalogPageContainer :: Array (IProp r i)
 catalogPageContainer =
     [ HP.style "position: relative"
     , mdc_typography____typography
     ]
 
-demoPanel :: Array (HH.Attribute w i)
+demoPanel :: Array (IProp r i)
 demoPanel =
     [ HP.style "display: -ms-flexbox; display: flex; position: relative; height: 100vh; overflow: hidden"
     ]
 
-demoContent :: Array (HH.Attribute w i)
+demoContent :: Array (IProp r i)
 demoContent =
     [ HP.id "demo-content"
     , HP.style "height: 100%; -webkit-box-sizing: border-box; box-sizing: border-box; max-width: 100%; padding-left: 16px; padding-right: 16px; padding-bottom: 100px; width: 100%; overflow: auto; display: -ms-flexbox; display: flex; -ms-flex-direction: column; flex-direction: column; -ms-flex-align: center; align-items: center; -ms-flex-pack: start; justify-content: flex-start"
     ]
 
-demoContentTransition :: Array (HH.Attribute w i)
+demoContentTransition :: Array (IProp r i)
 demoContentTransition =
     [ HP.style "max-width: 900px; width: 100%"
     ]
 
-hero :: Array (HH.Attribute w i)
+hero :: Array (IProp r i)
 hero =
     [ HP.style "display: -ms-flexbox; display: flex; -ms-flex-flow: row nowrap; flex-flow: row nowrap; -ms-flex-align: center; align-items: center; -ms-flex-pack: center; justify-content: center; min-height: 360px; padding: 24px; background-color: #f2f2f2"
     ]
 
-demoTitle :: Array (HH.Attribute w i)
+demoTitle :: Array (IProp r i)
 demoTitle =
     [ HP.style "border-bottom: 1px solid rgba(0,0,0,.87)"
     ]
 
-resourcesGraphic :: Array (HH.Attribute w i)
+resourcesGraphic :: Array (IProp r i)
 resourcesGraphic =
     [ HP.style "width: 30px; height: 30px"
     ]

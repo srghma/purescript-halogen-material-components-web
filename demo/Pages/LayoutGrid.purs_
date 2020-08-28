@@ -65,7 +65,7 @@ view model =
         ]
     }
 
-demoGrid :: Array (HH.Attribute w i) -> Array (HH.HTML w i) -> HH.HTML w i
+demoGrid :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
 demoGrid options =
     LayoutGrid.layoutGrid
         (HP.style "background: rgba(0,0,0,.2)"
@@ -73,7 +73,7 @@ demoGrid options =
             :: options
         )
 
-demoCell :: Array (HH.Attribute w i) -> HH.HTML w i
+demoCell :: Array (IProp r i) -> HH.HTML w i
 demoCell options =
     LayoutGrid.cell
         (HP.style "background: rgba(0,0,0,.2)"
