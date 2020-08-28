@@ -24,7 +24,7 @@ data Model =
 
 defaultModel :: Model
 defaultModel =
-    { ons = Set.empty }
+    { ons: Set.empty }
 
 data Msg
     = Toggle String
@@ -54,12 +54,12 @@ update w i model =
 
 view :: Model -> CatalogPage Msg
 view model =
-    { title = "Icon Button"
-    , prelude = "Icons are appropriate for buttons that allow a user to take actions or make a selection, such as adding or removing a star to an item."
+    { title: "Icon Button"
+    , prelude: "Icons are appropriate for buttons that allow a user to take actions or make a selection, such as adding or removing a star to an item."
     , resources =
-        { materialDesignGuidelines = Just "https://material.io/design/components/buttons.html#toggle-button"
-        , documentation = Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-IconButton"
-        , sourceCode = Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-icon-button"
+        { materialDesignGuidelines: Just "https://material.io/design/components/buttons.html#toggle-button"
+        , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-IconButton"
+        , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-icon-button"
         }
     , hero =
         [ IconToggle.iconToggle
@@ -67,8 +67,8 @@ view model =
                 # IconToggle.setOn (Set.member "icon-button-hero" model.ons)
                 # IconToggle.setOnChange (Toggle "icon-button-hero")
             )
-            { offIcon = "favorite_border"
-            , onIcon = "favorite"
+            { offIcon: "favorite_border"
+            , onIcon: "favorite"
             }
         ]
     , content =
@@ -80,8 +80,8 @@ view model =
                 # IconToggle.setOn (Set.member "icon-button-toggle" model.ons)
                 # IconToggle.setOnChange (Toggle "icon-button-toggle")
             )
-            { offIcon = "favorite_border"
-            , onIcon = "favorite"
+            { offIcon: "favorite_border"
+            , onIcon: "favorite"
             }
         , HH.h3 [ Typography.subtitle1 ] [ HH.text "Focus Icon Button" ]
         , HH.div []
@@ -103,8 +103,8 @@ view model =
                     # IconToggle.setOnChange (Toggle "icon-button-toggle")
                     # IconToggle.setAttributes [ HP.id "my-icon-toggle" ]
                 )
-                { offIcon = "favorite_border"
-                , onIcon = "favorite"
+                { offIcon: "favorite_border"
+                , onIcon: "favorite"
                 }
             , HH.text "\u{00A0}"
             , Button.raised

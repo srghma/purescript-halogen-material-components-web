@@ -31,10 +31,10 @@ data Model =
 
 defaultModel :: Model
 defaultModel =
-    { checkboxes = Set.empty
-    , radio = Nothing
-    , activated = "Star"
-    , shapedActivated = "Star"
+    { checkboxes: Set.empty
+    , radio: Nothing
+    , activated: "Star"
+    , shapedActivated: "Star"
     }
 
 data Msg
@@ -77,14 +77,14 @@ update w i model =
 
 view :: Model -> CatalogPage Msg
 view model =
-    { title = "List"
-    , prelude = "Lists present multiple line items vertically as a single continuous element."
+    { title: "List"
+    , prelude: "Lists present multiple line items vertically as a single continuous element."
     , resources =
-        { materialDesignGuidelines = Just "https://material.io/go/design-lists"
-        , documentation = Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-List"
-        , sourceCode = Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-list"
+        { materialDesignGuidelines: Just "https://material.io/go/design-lists"
+        , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-List"
+        , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-list"
         }
-    , hero = heroList
+    , hero: heroList
     , content =
         [ HH.h3 [ Typography.subtitle1 ] [ HH.text "Single-Line" ]
         , singleLineList
@@ -144,8 +144,8 @@ twoLineList =
         listItem =
             List.Item.listItem List.Item.defaultConfig
                 [ List.Item.text []
-                    { primary = [ HH.text "Line item" ]
-                    , secondary = [ HH.text "Secondary text" ]
+                    { primary: [ HH.text "Line item" ]
+                    , secondary: [ HH.text "Secondary text" ]
                     }
                 ]
     in
@@ -250,8 +250,8 @@ folderList =
             List.Item.listItem List.Item.defaultConfig
                 [ List.Item.graphic demoIcon [ Icon.icon [] "folder" ]
                 , List.Item.text []
-                    { primary = [ HH.text primary ]
-                    , secondary = [ HH.text secondary ]
+                    { primary: [ HH.text primary ]
+                    , secondary: [ HH.text secondary ]
                     }
                 , List.Item.meta [] [ Icon.icon [] "info" ]
                 ]
@@ -263,12 +263,12 @@ folderList =
             # Array.setAttributes demoList
         )
         (listItem
-            { primary = "Dog Photos", secondary = "9 Jan 2018" }
+            { primary: "Dog Photos", secondary: "9 Jan 2018" }
         )
         (map listItem
-            [ { primary = "Cat Photos", secondary = "22 Dec 2017" }
-            , { primary = "Potatoes", secondary = "30 Noc 2017" }
-            , { primary = "Carrots", secondary = "17 Oct 2017" }
+            [ { primary: "Cat Photos", secondary: "22 Dec 2017" }
+            , { primary: "Potatoes", secondary: "30 Noc 2017" }
+            , { primary: "Carrots", secondary: "17 Oct 2017" }
             ]
         )
 

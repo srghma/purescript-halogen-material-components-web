@@ -29,12 +29,12 @@ data Model =
 
 defaultModel :: Model
 defaultModel =
-    { hero = Nothing
-    , filled = Nothing
-    , outlined = Nothing
-    , filledWithIcon = Nothing
-    , outlinedWithIcon = Nothing
-    , focused = Nothing
+    { hero: Nothing
+    , filled: Nothing
+    , outlined: Nothing
+    , filledWithIcon: Nothing
+    , outlinedWithIcon: Nothing
+    , focused: Nothing
     }
 
 data Fruit
@@ -81,14 +81,14 @@ update w i model =
 
 view :: Model -> CatalogPage Msg
 view model =
-    { title = "Select"
-    , prelude = "Selects allow users to select from a single-option menu."
+    { title: "Select"
+    , prelude: "Selects allow users to select from a single-option menu."
     , resources =
-        { materialDesignGuidelines = Just "https://material.io/go/design-text-fields"
-        , documentation = Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Select"
-        , sourceCode = Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-select"
+        { materialDesignGuidelines: Just "https://material.io/go/design-text-fields"
+        , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Select"
+        , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-select"
         }
-    , hero = [ heroSelect model ]
+    , hero: [ heroSelect model ]
     , content =
         [ HH.h3 [ Typography.subtitle1 ] [ HH.text "Filled" ]
         , filledSelect model
@@ -117,19 +117,19 @@ heroSelect model =
 firstItem :: SelectItem (Maybe a) w i
 firstItem =
     SelectItem.selectItem
-        (SelectItem.defaultConfig { value = Nothing })
+        (SelectItem.defaultConfig { value: Nothing })
         [ HH.text "" ]
 
 remainingItems :: Array (SelectItem (Maybe Fruit) w i)
 remainingItems =
     [ SelectItem.selectItem
-        (SelectItem.defaultConfig { value = Just Apple })
+        (SelectItem.defaultConfig { value: Just Apple })
         [ HH.text "Apple" ]
     , SelectItem.selectItem
-        (SelectItem.defaultConfig { value = Just Orange })
+        (SelectItem.defaultConfig { value: Just Orange })
         [ HH.text "Orange" ]
     , SelectItem.selectItem
-        (SelectItem.defaultConfig { value = Just Banana })
+        (SelectItem.defaultConfig { value: Just Banana })
         [ HH.text "Banana" ]
     ]
 

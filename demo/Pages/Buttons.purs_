@@ -38,14 +38,14 @@ update w i model =
 
 view :: Model -> CatalogPage Msg
 view model =
-    { title = "Button"
-    , prelude = "Buttons communicate an action a user can take. They are typically placed throughout your UI, in places like dialogs, forms, cards, and toolbars."
+    { title: "Button"
+    , prelude: "Buttons communicate an action a user can take. They are typically placed throughout your UI, in places like dialogs, forms, cards, and toolbars."
     , resources =
-        { materialDesignGuidelines = Just "https://material.io/go/design-buttons"
-        , documentation = Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Button"
-        , sourceCode = Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-button"
+        { materialDesignGuidelines: Just "https://material.io/go/design-buttons"
+        , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Button"
+        , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-button"
         }
-    , hero = heroButtons
+    , hero: heroButtons
     , content =
         [ HH.h3 [ Typography.subtitle1 ] [ HH.text "Text Button" ]
         , textButtons

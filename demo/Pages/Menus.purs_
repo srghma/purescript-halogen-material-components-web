@@ -23,7 +23,7 @@ data Model =
 
 defaultModel :: Model
 defaultModel =
-    { open = false }
+    { open: false }
 
 data Msg
     = Open
@@ -40,14 +40,14 @@ update w i model =
 
 view :: Model -> CatalogPage Msg
 view model =
-    { title = "Menu"
-    , prelude = "Menus display a list of choices on a transient sheet of material."
+    { title: "Menu"
+    , prelude: "Menus display a list of choices on a transient sheet of material."
     , resources =
-        { materialDesignGuidelines = Just "https://material.io/go/design-menus"
-        , documentation = Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Menu"
-        , sourceCode = Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-menu"
+        { materialDesignGuidelines: Just "https://material.io/go/design-menus"
+        , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Menu"
+        , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-menu"
         }
-    , hero = [ heroMenu model ]
+    , hero: [ heroMenu model ]
     , content =
         [ HH.h3 [ Typography.subtitle1 ] [ HH.text "Anchored menu" ]
         , HH.div [ Menu.surfaceAnchor ]

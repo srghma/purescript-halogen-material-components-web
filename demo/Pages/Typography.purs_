@@ -28,14 +28,14 @@ update w i model =
 
 view :: Model -> CatalogPage Msg
 view model =
-    { title = "Typography"
-    , prelude = "Roboto is the standard typeface on Android and Chrome."
+    { title: "Typography"
+    , prelude: "Roboto is the standard typeface on Android and Chrome."
     , resources =
-        { materialDesignGuidelines = Just "https://material.io/go/design-typography"
-        , documentation = Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Typography"
-        , sourceCode = Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-typography"
+        { materialDesignGuidelines: Just "https://material.io/go/design-typography"
+        , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Typography"
+        , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-typography"
         }
-    , hero = [ HH.h1 [ Typography.headline1 ] [ HH.text "Typography" ] ]
+    , hero: [ HH.h1 [ Typography.headline1 ] [ HH.text "Typography" ] ]
     , content =
         [ HH.h1 [ Typography.headline1 ] [ HH.text "Headline 1" ]
         , HH.h2 [ Typography.headline2 ] [ HH.text "Headline 2" ]

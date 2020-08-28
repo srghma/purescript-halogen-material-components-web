@@ -40,14 +40,14 @@ update w i model =
 
 view :: Model -> CatalogPage Msg
 view model =
-    { title = "Floating Action Button"
-    , prelude = "Floating action buttons represents the primary action in an application. Only one floating action button is recommended per screen to represent the most common action."
+    { title: "Floating Action Button"
+    , prelude: "Floating action buttons represents the primary action in an application. Only one floating action button is recommended per screen to represent the most common action."
     , resources =
-        { materialDesignGuidelines = Just "https://material.io/go/design-fab"
-        , documentation = Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Fab"
-        , sourceCode = Just "https://github.com/material-components/material-components-web/blob/master/packages/mdc-fab/"
+        { materialDesignGuidelines: Just "https://material.io/go/design-fab"
+        , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Fab"
+        , sourceCode: Just "https://github.com/material-components/material-components-web/blob/master/packages/mdc-fab/"
         }
-    , hero = [ Fab.fab Fab.defaultConfig "favorite_border" ]
+    , hero: [ Fab.fab Fab.defaultConfig "favorite_border" ]
     , content =
         [ HH.h3 [ Typography.subtitle1 ] [ HH.text "Standard Floating Action Button" ]
         , Fab.fab Fab.defaultConfig "favorite_border"

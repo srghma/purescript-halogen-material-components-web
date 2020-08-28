@@ -52,7 +52,7 @@ component =
           ]
           [ IconButton.iconButton
               ( IconButton.defaultConfig
-                { additionalClasses = [ mdc_top_app_bar__navigation_icon ]
+                { additionalClasses: [ mdc_top_app_bar__navigation_icon ]
                 }
               )
               [ HH.img

@@ -20,7 +20,7 @@ data Model =
 
 defaultModel :: Model
 defaultModel =
-    { queue = Snackbar.initialQueue }
+    { queue: Snackbar.initialQueue }
 
 data Msg
     = ShowBaseline
@@ -78,14 +78,14 @@ stackedMessage =
 
 view :: Model -> CatalogPage Msg
 view model =
-    { title = "Snackbar"
-    , prelude = "Snackbars provide brief feedback about an operation through a message at the bottom of the screen."
+    { title: "Snackbar"
+    , prelude: "Snackbars provide brief feedback about an operation through a message at the bottom of the screen."
     , resources =
-        { materialDesignGuidelines = Just "https://material.io/go/design-snackbar"
-        , documentation = Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Snackbar"
-        , sourceCode = Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-snackbar"
+        { materialDesignGuidelines: Just "https://material.io/go/design-snackbar"
+        , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Snackbar"
+        , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-snackbar"
         }
-    , hero = [ heroMessage ]
+    , hero: [ heroMessage ]
     , content =
         [ Button.raised
             (Button.defaultConfig
@@ -108,7 +108,7 @@ view model =
             )
             "Stacked"
         , Snackbar.snackbar
-            (Snackbar.defaultConfig { onClosed = SnackbarClosed }
+            (Snackbar.defaultConfig { onClosed: SnackbarClosed }
                 # Snackbar.setCloseOnEscape true
             )
             model.queue

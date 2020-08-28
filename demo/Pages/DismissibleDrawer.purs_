@@ -16,8 +16,8 @@ data Model =
 
 defaultModel :: Model
 defaultModel =
-    { open = false
-    , selectedIndex = 0
+    { open: false
+    , selectedIndex: 0
     }
 
 data Msg
@@ -39,7 +39,7 @@ update w i model =
 
 view :: Model -> DrawerPage Msg
 view model =
-    { title = "Dismissible Drawer"
+    { title: "Dismissible Drawer"
     , drawer =
         DismissibleDrawer.drawer
             (DismissibleDrawer.defaultConfig
@@ -47,6 +47,6 @@ view model =
                 # DismissibleDrawer.setOnClose CloseDrawer
             )
             (DrawerPage.drawerBody SetSelectedIndex model.selectedIndex)
-    , onMenuClick = Just ToggleDrawer
-    , scrim = Nothing
+    , onMenuClick: Just ToggleDrawer
+    , scrim: Nothing
     }

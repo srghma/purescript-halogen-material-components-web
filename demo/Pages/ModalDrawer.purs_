@@ -16,8 +16,8 @@ data Model =
 
 defaultModel :: Model
 defaultModel =
-    { open = false
-    , selectedIndex = 0
+    { open: false
+    , selectedIndex: 0
     }
 
 data Msg
@@ -39,7 +39,7 @@ update w i model =
 
 view :: Model -> DrawerPage Msg
 view model =
-    { title = "Modal Drawer"
+    { title: "Modal Drawer"
     , drawer =
         ModalDrawer.drawer
             (ModalDrawer.defaultConfig
@@ -47,6 +47,6 @@ view model =
                 # ModalDrawer.setOnClose CloseDrawer
             )
             (DrawerPage.drawerBody SetSelectedIndex model.selectedIndex)
-    , scrim = Just (ModalDrawer.scrim [] [])
-    , onMenuClick = Just OpenDrawer
+    , scrim: Just (ModalDrawer.scrim [] [])
+    , onMenuClick: Just OpenDrawer
     }

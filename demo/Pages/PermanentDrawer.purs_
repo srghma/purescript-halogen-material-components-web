@@ -8,7 +8,7 @@ data Model =
 
 defaultModel :: Model
 defaultModel =
-    { selectedIndex = 0 }
+    { selectedIndex: 0 }
 
 data Msg
     = SetSelectedIndex Int
@@ -21,10 +21,10 @@ update w i model =
 
 view :: Model -> DrawerPage Msg
 view model =
-    { title = "Permanent Drawer"
+    { title: "Permanent Drawer"
     , drawer =
         PermanentDrawer.drawer PermanentDrawer.defaultConfig
             (DrawerPage.drawerBody SetSelectedIndex model.selectedIndex)
-    , scrim = Nothing
-    , onMenuClick = Nothing
+    , scrim: Nothing
+    , onMenuClick: Nothing
     }

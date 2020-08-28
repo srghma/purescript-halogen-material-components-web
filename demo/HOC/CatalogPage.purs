@@ -170,33 +170,33 @@ resourcesList { materialDesignGuidelines, documentation, sourceCode } =
 
 catalogDrawerItems :: Array { label :: String, route :: Route }
 catalogDrawerItems =
-    [ { label = "Home", route = Route.StartPage }
-    , { label = "Button", route = Route.Button }
-    , { label = "Card", route = Route.Card }
-    , { label = "Checkbox", route = Route.Checkbox }
-    , { label = "Chips", route = Route.Chips }
-    , { label = "DataTable", route = Route.DataTable }
-    , { label = "Dialog", route = Route.Dialog }
-    , { label = "Drawer", route = Route.Drawer }
-    , { label = "Elevation", route = Route.Elevation }
-    , { label = "FAB", route = Route.Fab }
-    , { label = "Icon Button", route = Route.IconButton }
-    , { label = "Image List", route = Route.ImageList }
-    , { label = "Layout Grid", route = Route.LayoutGrid }
-    , { label = "Linear Progress Indicator", route = Route.LinearProgress }
-    , { label = "List", route = Route.List }
-    , { label = "Menu", route = Route.Menu }
-    , { label = "Radio Button", route = Route.RadioButton }
-    , { label = "Ripple", route = Route.Ripple }
-    , { label = "Select", route = Route.Select }
-    , { label = "Slider", route = Route.Slider }
-    , { label = "Snackbar", route = Route.Snackbar }
-    , { label = "Switch", route = Route.Switch }
-    , { label = "Tab Bar", route = Route.TabBar }
-    , { label = "Text Field", route = Route.TextField }
-    , { label = "Theme", route = Route.Theme }
-    , { label = "Top App Bar", route = Route.TopAppBar }
-    , { label = "Typography", route = Route.Typography }
+    [ { label: "Home", route: Route.StartPage }
+    , { label: "Button", route: Route.Button }
+    , { label: "Card", route: Route.Card }
+    , { label: "Checkbox", route: Route.Checkbox }
+    , { label: "Chips", route: Route.Chips }
+    , { label: "DataTable", route: Route.DataTable }
+    , { label: "Dialog", route: Route.Dialog }
+    , { label: "Drawer", route: Route.Drawer }
+    , { label: "Elevation", route: Route.Elevation }
+    , { label: "FAB", route: Route.Fab }
+    , { label: "Icon Button", route: Route.IconButton }
+    , { label: "Image List", route: Route.ImageList }
+    , { label: "Layout Grid", route: Route.LayoutGrid }
+    , { label: "Linear Progress Indicator", route: Route.LinearProgress }
+    , { label: "List", route: Route.List }
+    , { label: "Menu", route: Route.Menu }
+    , { label: "Radio Button", route: Route.RadioButton }
+    , { label: "Ripple", route: Route.Ripple }
+    , { label: "Select", route: Route.Select }
+    , { label: "Slider", route: Route.Slider }
+    , { label: "Snackbar", route: Route.Snackbar }
+    , { label: "Switch", route: Route.Switch }
+    , { label: "Tab Bar", route: Route.TabBar }
+    , { label: "Text Field", route: Route.TextField }
+    , { label: "Theme", route: Route.Theme }
+    , { label: "Top App Bar", route: Route.TopAppBar }
+    , { label: "Typography", route: Route.Typography }
     ]
 
 catalogPageContainer :: Array (HH.Attribute w i)

@@ -29,7 +29,7 @@ update w i model =
 
 view :: Model -> TopAppBarPage Msg
 view model =
-    { fixedAdjust = TopAppBar.fixedAdjust
+    { fixedAdjust: TopAppBar.fixedAdjust
     , topAppBar =
         TopAppBar.regular TopAppBar.defaultConfig
             [ TopAppBar.row []

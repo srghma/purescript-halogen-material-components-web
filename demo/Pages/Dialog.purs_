@@ -29,7 +29,7 @@ data Model =
 
 defaultModel :: Model
 defaultModel =
-    { open = Nothing }
+    { open: Nothing }
 
 data Msg
     = Close
@@ -46,14 +46,14 @@ update w i model =
 
 view :: Model -> CatalogPage Msg
 view model =
-    { title = "Dialog"
-    , prelude = "Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks."
+    { title: "Dialog"
+    , prelude: "Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks."
     , resources =
-        { materialDesignGuidelines = Just "https://material.io/go/design-dialogs"
-        , documentation = Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Dialog"
-        , sourceCode = Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-dialog"
+        { materialDesignGuidelines: Just "https://material.io/go/design-dialogs"
+        , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Dialog"
+        , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-dialog"
         }
-    , hero = heroDialog
+    , hero: heroDialog
     , content =
         [ Button.text
             (Button.defaultConfig # Button.setOnClick (Show AlertDialog))
@@ -85,8 +85,8 @@ alertDialog model =
             # Dialog.setOpen (model.open == Just AlertDialog)
             # Dialog.setOnClose Close
         )
-        { title = Nothing
-        , content = [ HH.text "Discard draft?" ]
+        { title: Nothing
+        , content: [ HH.text "Discard draft?" ]
         , actions =
             [ Button.text (Button.defaultConfig # Button.setOnClick Close) "Cancel"
             , Button.text (Button.defaultConfig # Button.setOnClick Close) "Discard"
@@ -112,7 +112,7 @@ simpleDialog model =
             # Dialog.setOpen (model.open == Just SimpleDialog)
             # Dialog.setOnClose Close
         )
-        { title = Just "Select an account"
+        { title: Just "Select an account"
         , content =
             [ Array.list (List.defaultConfig # Array.setAvatarList true)
                 (listItem ( "person", "user1@example.com" ))
@@ -122,7 +122,7 @@ simpleDialog model =
                     ]
                 )
             ]
-        , actions = []
+        , actions: []
         }
 
 confirmationDialog :: Model -> HH.HTML Msg
@@ -140,7 +140,7 @@ confirmationDialog model =
             # Dialog.setOpen (model.open == Just ConfirmationDialog)
             # Dialog.setOnClose Close
         )
-        { title = Just "Phone ringtone"
+        { title: Just "Phone ringtone"
         , content =
             [ Array.list (List.defaultConfig # Array.setAvatarList true)
                 (listItem ( true, "Never Gonna Give You Up" ))
@@ -163,7 +163,7 @@ scrollableDialog model =
             # Dialog.setOpen (model.open == Just ScrollableDialog)
             # Dialog.setOnClose Close
         )
-        { title = Just "The Wonderful Wizard of Oz"
+        { title: Just "The Wonderful Wizard of Oz"
         , content =
             [ HH.p []
                 [ HH.text """

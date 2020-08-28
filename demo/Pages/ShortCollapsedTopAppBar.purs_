@@ -20,7 +20,7 @@ update w i model =
 
 view :: Model -> TopAppBarPage Msg
 view model =
-    { fixedAdjust = TopAppBar.shortFixedAdjust
+    { fixedAdjust: TopAppBar.shortFixedAdjust
     , topAppBar =
         TopAppBar.shortCollapsed TopAppBar.defaultConfig
             [ TopAppBar.row []

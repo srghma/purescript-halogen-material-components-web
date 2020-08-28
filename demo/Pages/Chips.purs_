@@ -48,13 +48,13 @@ data Model =
 
 defaultModel :: Model
 defaultModel =
-    { chip = Just "Chip One"
-    , size = Small
-    , inputChips = [ "Portland", "Biking" ]
-    , input = ""
-    , accessories = Set.singleton "Tops"
-    , contacts = Set.singleton "Alice"
-    , focus = "One"
+    { chip: Just "Chip One"
+    , size: Small
+    , inputChips: [ "Portland", "Biking" ]
+    , input: ""
+    , accessories: Set.singleton "Tops"
+    , contacts: Set.singleton "Alice"
+    , focus: "One"
     }
 
 data Size
@@ -168,14 +168,14 @@ update w i model =
 
 view :: Model -> CatalogPage Msg
 view model =
-    { title = "Chips"
-    , prelude = "Chips are compact elements that allow users to enter information, select a choice, filter content, or trigger an action."
+    { title: "Chips"
+    , prelude: "Chips are compact elements that allow users to enter information, select a choice, filter content, or trigger an action."
     , resources =
-        { materialDesignGuidelines = Just "https://material.io/go/design-chips"
-        , documentation = Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Chips"
-        , sourceCode = Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-chips"
+        { materialDesignGuidelines: Just "https://material.io/go/design-chips"
+        , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Chips"
+        , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-chips"
         }
-    , hero = heroChips model
+    , hero: heroChips model
     , content =
         [ HH.h2 [ Typography.subtitle1 ] [ HH.text "Choice Chips" ]
         , choiceChips model
@@ -198,7 +198,7 @@ view model =
 heroChips :: Model -> Array (HH.HTML Msg)
 heroChips model =
     [ ChoiceChipSet.chipSet
-        (ChoiceChipSet.defaultConfig { toLabel = identity }
+        (ChoiceChipSet.defaultConfig { toLabel: identity }
             # ChoiceChipSet.setSelected model.chip
             # ChoiceChipSet.setOnChange ChipChanged
         )
@@ -230,7 +230,7 @@ choiceChips model =
                     "Extra Large"
     in
     ChoiceChipSet.chipSet
-        (ChoiceChipSet.defaultConfig { toLabel = toLabel }
+        (ChoiceChipSet.defaultConfig { toLabel: toLabel }
             # ChoiceChipSet.setSelected (Just model.size)
             # ChoiceChipSet.setOnChange SizeChanged
         )
@@ -351,7 +351,7 @@ focusChips :: Model -> HH.HTML Msg
 focusChips model =
     HH.div []
         [ ChoiceChipSet.chipSet
-            (ChoiceChipSet.defaultConfig { toLabel = identity }
+            (ChoiceChipSet.defaultConfig { toLabel: identity }
                 # ChoiceChipSet.setSelected (Just model.focus)
                 # ChoiceChipSet.setOnChange FocusChanged
                 # ChoiceChipSet.setAttributes [ HP.id "my-chips" ]

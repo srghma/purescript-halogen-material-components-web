@@ -20,7 +20,7 @@ data Model =
 
 defaultModel :: Model
 defaultModel =
-    { selected = Set.empty }
+    { selected: Set.empty }
 
 data Msg
     = NoOp
@@ -56,14 +56,14 @@ update w i model =
 
 view :: Model -> CatalogPage Msg
 view model =
-    { title = "Data Table"
-    , prelude = "Data tables display information in a way that’s easy to scan, so that users can look for patterns and insights."
+    { title: "Data Table"
+    , prelude: "Data tables display information in a way that’s easy to scan, so that users can look for patterns and insights."
     , resources =
-        { materialDesignGuidelines = Just "https://material.io/go/design-data-tables"
-        , documentation = Just "https://material.io/components/web/catalog/data-tables/"
-        , sourceCode = Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-data-table"
+        { materialDesignGuidelines: Just "https://material.io/go/design-data-tables"
+        , documentation: Just "https://material.io/components/web/catalog/data-tables/"
+        , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-data-table"
         }
-    , hero = heroDataTable
+    , hero: heroDataTable
     , content =
         [ HH.h3 [ Typography.subtitle1 ] [ HH.text "Data Table Standard" ]
         , standardDataTable
@@ -78,28 +78,28 @@ heroDataTable =
 
 label :: { desert :: String, carbs :: String, protein :: String, comments :: String }
 label =
-    { desert = "Desert"
-    , carbs = "Carbs (g)"
-    , protein = "Protein (g)"
-    , comments = "Comments"
+    { desert: "Desert"
+    , carbs: "Carbs (g)"
+    , protein: "Protein (g)"
+    , comments: "Comments"
     }
 
 data :: Array { desert :: String, carbs :: String, protein :: String, comments :: String }
 data =
-    [ { desert = "Frozen yogurt"
-      , carbs = "24"
-      , protein = "4.0"
-      , comments = "Super tasty"
+    [ { desert: "Frozen yogurt"
+      , carbs: "24"
+      , protein: "4.0"
+      , comments: "Super tasty"
       }
-    , { desert = "Ice cream sandwich"
-      , carbs = "37"
-      , protein = "4.33333333333"
-      , comments = "I like ice cream more"
+    , { desert: "Ice cream sandwich"
+      , carbs: "37"
+      , protein: "4.33333333333"
+      , comments: "I like ice cream more"
       }
-    , { desert = "Eclair"
-      , carbs = "24"
-      , protein = "6.0"
-      , comments = "New filing flavor"
+    , { desert: "Eclair"
+      , carbs: "24"
+      , protein: "6.0"
+      , comments: "New filing flavor"
       }
     ]
 
@@ -115,8 +115,8 @@ standardDataTable =
                 ]
     in
     DataTable.dataTable DataTable.defaultConfig
-        { thead = [ row label ]
-        , tbody = map row data
+        { thead: [ row label ]
+        , tbody: map row data
         }
 
 dataTableWithRowSelection :: Model -> HH.HTML Msg
@@ -193,8 +193,8 @@ dataTableWithRowSelection model =
             map
                 (\({ desert } as data_) ->
                     row
-                        { onChange = ItemSelected desert
-                        , selected = Set.member desert model.selected
+                        { onChange: ItemSelected desert
+                        , selected: Set.member desert model.selected
                         }
                         data_
                 )

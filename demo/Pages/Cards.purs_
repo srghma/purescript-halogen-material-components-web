@@ -41,14 +41,14 @@ update w i model =
 
 view :: Model -> CatalogPage Msg
 view model =
-    { title = "Card"
-    , prelude = "Cards contain content and actions about a single subject."
+    { title: "Card"
+    , prelude: "Cards contain content and actions about a single subject."
     , resources =
-        { materialDesignGuidelines = Just "https://material.io/go/design-cards"
-        , documentation = Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Card"
-        , sourceCode = Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-card"
+        { materialDesignGuidelines: Just "https://material.io/go/design-cards"
+        , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Card"
+        , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-card"
         }
-    , hero = heroCard
+    , hero: heroCard
     , content =
         [ exampleCard1
         , exampleCard2
@@ -69,7 +69,7 @@ heroCard =
                 , demoTitle
                 , demoBody
                 ]
-        , actions = Just demoActions
+        , actions: Just demoActions
         }
     ]
 
@@ -88,7 +88,7 @@ exampleCard1 =
                 , demoTitle
                 , demoBody
                 ]
-        , actions = Nothing
+        , actions: Nothing
         }
 
 exampleCard2 :: HH.HTML w i
@@ -105,7 +105,7 @@ exampleCard2 =
                 [ demoTitle
                 , demoBody
                 ]
-        , actions = Just demoActions
+        , actions: Just demoActions
         }
 
 exampleCard3 :: HH.HTML w i
@@ -123,7 +123,7 @@ exampleCard3 =
                 [ demoTitle
                 , demoBody
                 ]
-        , actions = Just demoActions
+        , actions: Just demoActions
         }
 
 focusCard :: HH.HTML Msg
@@ -142,7 +142,7 @@ focusCard =
                     [ demoTitle
                     , demoBody
                     ]
-            , actions = Just demoActions
+            , actions: Just demoActions
             }
         , HH.text "\u{00A0}"
         , Button.raised

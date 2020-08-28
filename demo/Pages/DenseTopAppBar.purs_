@@ -29,7 +29,7 @@ update w i model =
 
 view :: Model -> TopAppBarPage Msg
 view model =
-    { fixedAdjust = TopAppBar.denseFixedAdjust
+    { fixedAdjust: TopAppBar.denseFixedAdjust
     , topAppBar =
         TopAppBar.regular (TopAppBar.defaultConfig # TopAppBar.setDense true)
             [ TopAppBar.row []
