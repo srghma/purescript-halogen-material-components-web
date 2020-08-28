@@ -10,7 +10,7 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
-import HalogenMWC.List.Item as ListItem
+import HalogenMWC.List.Item as List.Item
 
 view :
     { link :: String
@@ -20,14 +20,14 @@ view :
     }
     -> ListItem msg
 view { link, title, icon, altText } =
-    ListItem.listItem
-        (ListItem.defaultConfig
-            # ListItem.setAttributes
+    List.Item.listItem
+        (List.Item.defaultConfig
+            # List.Item.setAttributes
                 [ HP.href link
                 , HP.target "_blank"
                 ]
         )
-        [ ListItem.graphic []
+        [ List.Item.graphic []
             [ HH.img
                 [ HP.class_ resources_icon
                 , HP.src icon

@@ -25,7 +25,7 @@ import HalogenMWC.Drawer.Permanent as PermanentDrawer
 import HalogenMWC.Icon as Icon
 import HalogenMWC.List as List
 import HalogenMWC.List.Divider as ListDivider
-import HalogenMWC.List.Item as ListItem
+import HalogenMWC.List.Item as List.Item
 import HalogenMWC.TopAppBar as TopAppBar
 
 data DrawerPage msg =
@@ -67,15 +67,15 @@ drawerBody :: (Int -> msg) -> Int -> Array (Html msg)
 drawerBody setSelectedIndex selectedIndex =
     let
         listItemConfig index =
-            ListItem.defaultConfig
-                # ListItem.setSelected
+            List.Item.defaultConfig
+                # List.Item.setSelected
                     (if selectedIndex == index then
-                        Just ListItem.activated
+                        Just List.Item.activated
 
                      else
                         Nothing
                     )
-                # ListItem.setOnClick (setSelectedIndex index)
+                # List.Item.setOnClick (setSelectedIndex index)
     in
     [ PermanentDrawer.header []
         [ HH.h3 [ PermanentDrawer.title ] [ HH.text "Mail" ]
@@ -84,47 +84,47 @@ drawerBody setSelectedIndex selectedIndex =
     , PermanentDrawer.content []
         [ Array.group []
             [ Array.list Array.defaultConfig
-                (ListItem.listItem (listItemConfig 0)
-                    [ ListItem.graphic [] [ Icon.icon [] "inbox" ]
+                (List.Item.listItem (listItemConfig 0)
+                    [ List.Item.graphic [] [ Icon.icon [] "inbox" ]
                     , HH.text "Inbox"
                     ]
                 )
-                [ ListItem.listItem (listItemConfig 1)
-                    [ ListItem.graphic [] [ Icon.icon [] "star" ]
+                [ List.Item.listItem (listItemConfig 1)
+                    [ List.Item.graphic [] [ Icon.icon [] "star" ]
                     , HH.text "Star"
                     ]
-                , ListItem.listItem (listItemConfig 2)
-                    [ ListItem.graphic [] [ Icon.icon [] "send" ]
+                , List.Item.listItem (listItemConfig 2)
+                    [ List.Item.graphic [] [ Icon.icon [] "send" ]
                     , HH.text "Sent Mail"
                     ]
-                , ListItem.listItem (listItemConfig 3)
-                    [ ListItem.graphic [] [ Icon.icon [] "drafts" ]
+                , List.Item.listItem (listItemConfig 3)
+                    [ List.Item.graphic [] [ Icon.icon [] "drafts" ]
                     , HH.text "Drafts"
                     ]
                 ]
             , ListDivider.group []
             , Array.subheader [] [ HH.text "Labels" ]
             , Array.list Array.defaultConfig
-                (ListItem.listItem (listItemConfig 4)
-                    [ ListItem.graphic [] [ Icon.icon [] "bookmark" ]
+                (List.Item.listItem (listItemConfig 4)
+                    [ List.Item.graphic [] [ Icon.icon [] "bookmark" ]
                     , HH.text "Family"
                     ]
                 )
-                [ ListItem.listItem (listItemConfig 5)
-                    [ ListItem.graphic [] [ Icon.icon [] "bookmark" ]
+                [ List.Item.listItem (listItemConfig 5)
+                    [ List.Item.graphic [] [ Icon.icon [] "bookmark" ]
                     , HH.text "Friends"
                     ]
-                , ListItem.listItem (listItemConfig 6)
-                    [ ListItem.graphic [] [ Icon.icon [] "bookmark" ]
+                , List.Item.listItem (listItemConfig 6)
+                    [ List.Item.graphic [] [ Icon.icon [] "bookmark" ]
                     , HH.text "Work"
                     ]
                 , ListDivider.listItem ListDivider.defaultConfig
-                , ListItem.listItem (listItemConfig 7)
-                    [ ListItem.graphic [] [ Icon.icon [] "settings" ]
+                , List.Item.listItem (listItemConfig 7)
+                    [ List.Item.graphic [] [ Icon.icon [] "settings" ]
                     , HH.text "Settings"
                     ]
-                , ListItem.listItem (listItemConfig 8)
-                    [ ListItem.graphic [] [ Icon.icon [] "announcement" ]
+                , List.Item.listItem (listItemConfig 8)
+                    [ List.Item.graphic [] [ Icon.icon [] "announcement" ]
                     , HH.text "Help & feedback"
                     ]
                 ]

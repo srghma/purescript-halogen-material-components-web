@@ -16,7 +16,7 @@ import HalogenMWC.Button as Button
 import HalogenMWC.Checkbox as Checkbox
 import HalogenMWC.Icon as Icon
 import HalogenMWC.List as List
-import HalogenMWC.List.Item as ListItem
+import HalogenMWC.List.Item as List.Item
 import HalogenMWC.Radio as Radio
 import HalogenMWC.Typography as Typography
 import Set
@@ -120,7 +120,7 @@ heroList :: Array (Html msg)
 heroList =
     let
         listItem =
-            ListItem.listItem ListItem.defaultConfig [ HH.text "Line item" ]
+            List.Item.listItem List.Item.defaultConfig [ HH.text "Line item" ]
     in
     [ Array.list
         (List.defaultConfig # Array.setAttributes (style "background" "#fff" :: demoList))
@@ -132,7 +132,7 @@ singleLineList :: Html msg
 singleLineList =
     let
         listItem =
-            ListItem.listItem ListItem.defaultConfig [ HH.text "Line item" ]
+            List.Item.listItem List.Item.defaultConfig [ HH.text "Line item" ]
     in
     Array.list (List.defaultConfig # Array.setAttributes demoList)
         listItem
@@ -142,8 +142,8 @@ twoLineList :: Html msg
 twoLineList =
     let
         listItem =
-            ListItem.listItem ListItem.defaultConfig
-                [ ListItem.text []
+            List.Item.listItem List.Item.defaultConfig
+                [ List.Item.text []
                     { primary = [ HH.text "Line item" ]
                     , secondary = [ HH.text "Secondary text" ]
                     }
@@ -161,8 +161,8 @@ leadingIconList :: Html msg
 leadingIconList =
     let
         listItem icon =
-            ListItem.listItem ListItem.defaultConfig
-                [ ListItem.graphic [] [ Icon.icon [] icon ]
+            List.Item.listItem List.Item.defaultConfig
+                [ List.Item.graphic [] [ Icon.icon [] icon ]
                 , HH.text "Line item"
                 ]
     in
@@ -174,9 +174,9 @@ trailingIconList :: Html msg
 trailingIconList =
     let
         listItem =
-            ListItem.listItem ListItem.defaultConfig
+            List.Item.listItem List.Item.defaultConfig
                 [ HH.text "Line item"
-                , ListItem.meta [] [ Icon.icon [] "info" ]
+                , List.Item.meta [] [ Icon.icon [] "info" ]
                 ]
     in
     Array.list (List.defaultConfig # Array.setAttributes demoList)
@@ -187,18 +187,18 @@ activatedItemList :: Model -> Html Msg
 activatedItemList model =
     let
         listItem ( icon, label ) =
-            ListItem.listItem
-                (ListItem.defaultConfig
-                    # ListItem.setSelected
+            List.Item.listItem
+                (List.Item.defaultConfig
+                    # List.Item.setSelected
                         (if model.activated == label then
-                            Just ListItem.activated
+                            Just List.Item.activated
 
                          else
                             Nothing
                         )
-                    # ListItem.setOnClick (SetActivated label)
+                    # List.Item.setOnClick (SetActivated label)
                 )
-                [ ListItem.graphic [] [ Icon.icon [] icon ], HH.text label ]
+                [ List.Item.graphic [] [ Icon.icon [] icon ], HH.text label ]
     in
     Array.list (List.defaultConfig # Array.setAttributes demoList)
         (listItem ( "inbox", "Inbox" ))
@@ -213,19 +213,19 @@ shapedActivatedItemList :: Model -> Html Msg
 shapedActivatedItemList model =
     let
         listItem ( icon, label ) =
-            ListItem.listItem
-                (ListItem.defaultConfig
-                    # ListItem.setSelected
+            List.Item.listItem
+                (List.Item.defaultConfig
+                    # List.Item.setSelected
                         (if model.shapedActivated == label then
-                            Just ListItem.activated
+                            Just List.Item.activated
 
                          else
                             Nothing
                         )
-                    # ListItem.setOnClick (SetShapedActivated label)
-                    # ListItem.setAttributes [ style "border-radius" "0 32px 32px 0" ]
+                    # List.Item.setOnClick (SetShapedActivated label)
+                    # List.Item.setAttributes [ style "border-radius" "0 32px 32px 0" ]
                 )
-                [ ListItem.graphic [] [ Icon.icon [] icon ], HH.text label ]
+                [ List.Item.graphic [] [ Icon.icon [] icon ], HH.text label ]
     in
     Array.list (List.defaultConfig # Array.setAttributes demoList)
         (listItem ( "inbox", "Inbox" ))
@@ -247,13 +247,13 @@ folderList :: Html msg
 folderList =
     let
         listItem { primary, secondary } =
-            ListItem.listItem ListItem.defaultConfig
-                [ ListItem.graphic demoIcon [ Icon.icon [] "folder" ]
-                , ListItem.text []
+            List.Item.listItem List.Item.defaultConfig
+                [ List.Item.graphic demoIcon [ Icon.icon [] "folder" ]
+                , List.Item.text []
                     { primary = [ HH.text primary ]
                     , secondary = [ HH.text secondary ]
                     }
-                , ListItem.meta [] [ Icon.icon [] "info" ]
+                , List.Item.meta [] [ Icon.icon [] "info" ]
                 ]
     in
     Array.list
@@ -276,18 +276,18 @@ listWithTrailingCheckbox :: Model -> Html Msg
 listWithTrailingCheckbox model =
     let
         listItem label =
-            ListItem.listItem
-                (ListItem.defaultConfig
-                    # ListItem.setSelected
+            List.Item.listItem
+                (List.Item.defaultConfig
+                    # List.Item.setSelected
                         (if Set.member label model.checkboxes then
-                            Just ListItem.selected
+                            Just List.Item.selected
 
                          else
                             Nothing
                         )
                 )
                 [ HH.text "Dog Photos"
-                , ListItem.meta []
+                , List.Item.meta []
                     [ Checkbox.checkbox
                         (Checkbox.defaultConfig
                             # Checkbox.setOnChange (ToggleCheckbox label)
@@ -323,18 +323,18 @@ listWithTrailingRadioButton :: Model -> Html Msg
 listWithTrailingRadioButton model =
     let
         listItem label =
-            ListItem.listItem
-                (ListItem.defaultConfig
-                    # ListItem.setSelected
+            List.Item.listItem
+                (List.Item.defaultConfig
+                    # List.Item.setSelected
                         (if model.radio == Just label then
-                            Just ListItem.selected
+                            Just List.Item.selected
 
                          else
                             Nothing
                         )
                 )
                 [ HH.text label
-                , ListItem.meta []
+                , List.Item.meta []
                     [ Radio.radio
                         (Radio.defaultConfig
                             # Radio.setChecked (model.radio == Just label)
@@ -359,8 +359,8 @@ focusList =
             (List.defaultConfig
                 # Array.setAttributes (demoList <> [ HP.id "my-list" ])
             )
-            (ListItem.listItem ListItem.defaultConfig [ HH.text "Line item" ])
-            (List.repeat 2 $ ListItem.listItem ListItem.defaultConfig [ HH.text "Line item" ])
+            (List.Item.listItem List.Item.defaultConfig [ HH.text "Line item" ])
+            (List.repeat 2 $ List.Item.listItem List.Item.defaultConfig [ HH.text "Line item" ])
         , HH.text "\u{00A0}"
         , Button.raised
             (Button.defaultConfig # Button.setOnClick (Focus "my-list"))

@@ -1,6 +1,6 @@
 module Demo.Pages.CatalogPage
 
-import Demo.Url as Url
+import Demo.Route
 import Protolude
 import Data.Array as Array
 import Data.Maybe as Maybe
@@ -14,7 +14,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Drawer.Dismissible as DismissibleDrawer
 import HalogenMWC.IconButton as IconButton
 import HalogenMWC.List as List
-import HalogenMWC.List.Item as ListItem
+import HalogenMWC.List.Item as List.Item
 import HalogenMWC.TopAppBar as TopAppBar
 import HalogenMWC.Typography as Typography
 
@@ -81,16 +81,16 @@ view lift catalogPageConfig catalogPage =
                     [ case
                         map
                             (\{ url, label } ->
-                                ListItem.listItem
-                                    (ListItem.defaultConfig
-                                        # ListItem.setSelected
+                                List.Item.listItem
+                                    (List.Item.defaultConfig
+                                        # List.Item.setSelected
                                             (if catalogPageConfig.url == url then
-                                                Just ListItem.activated
+                                                Just List.Item.activated
 
                                              else
                                                 Nothing
                                             )
-                                        # ListItem.setHref (Just (Url.toString url))
+                                        # List.Item.setHref (Just (Url.toString url))
                                     )
                                     [ HH.text label ]
                             )
@@ -127,12 +127,12 @@ view lift catalogPageConfig catalogPage =
 resourcesList :: CatalogPageResources -> Html msg
 resourcesList { materialDesignGuidelines, documentation, sourceCode } =
     Array.list Array.defaultConfig
-        (ListItem.listItem
-            (ListItem.defaultConfig
-                # ListItem.setHref materialDesignGuidelines
-                # ListItem.setTarget (Just "_blank")
+        (List.Item.listItem
+            (List.Item.defaultConfig
+                # List.Item.setHref materialDesignGuidelines
+                # List.Item.setTarget (Just "_blank")
             )
-            [ ListItem.graphic resourcesGraphic
+            [ List.Item.graphic resourcesGraphic
                 [ HH.img
                     (HP.src "images/ic_material_design_24px.svg"
                         :: resourcesGraphic
@@ -142,12 +142,12 @@ resourcesList { materialDesignGuidelines, documentation, sourceCode } =
             , HH.text "Material Design Guidelines"
             ]
         )
-        [ ListItem.listItem
-            (ListItem.defaultConfig
-                # ListItem.setHref documentation
-                # ListItem.setTarget (Just "_blank")
+        [ List.Item.listItem
+            (List.Item.defaultConfig
+                # List.Item.setHref documentation
+                # List.Item.setTarget (Just "_blank")
             )
-            [ ListItem.graphic resourcesGraphic
+            [ List.Item.graphic resourcesGraphic
                 [ HH.img
                     (HP.src "images/ic_drive_document_24px.svg"
                         :: resourcesGraphic
@@ -156,12 +156,12 @@ resourcesList { materialDesignGuidelines, documentation, sourceCode } =
                 ]
             , HH.text "Documentation"
             ]
-        , ListItem.listItem
-            (ListItem.defaultConfig
-                # ListItem.setHref sourceCode
-                # ListItem.setTarget (Just "_blank")
+        , List.Item.listItem
+            (List.Item.defaultConfig
+                # List.Item.setHref sourceCode
+                # List.Item.setTarget (Just "_blank")
             )
-            [ ListItem.graphic resourcesGraphic
+            [ List.Item.graphic resourcesGraphic
                 [ HH.img
                     (HP.src "images/ic_code_24px.svg"
                         :: resourcesGraphic

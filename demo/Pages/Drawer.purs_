@@ -20,7 +20,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Drawer.Permanent as PermanentDrawer
 import HalogenMWC.Icon as Icon
 import HalogenMWC.List as List
-import HalogenMWC.List.Item as ListItem
+import HalogenMWC.List.Item as List.Item
 import HalogenMWC.Typography as Typography
 
 data Model =
@@ -58,18 +58,18 @@ heroDrawer :: Array (Html msg)
 heroDrawer =
     let
         listItem ( activated, icon, label ) =
-            ListItem.listItem
-                (ListItem.defaultConfig
-                    # ListItem.setSelected
+            List.Item.listItem
+                (List.Item.defaultConfig
+                    # List.Item.setSelected
                         (if activated then
-                            Just ListItem.activated
+                            Just List.Item.activated
 
                          else
                             Nothing
                         )
-                    # ListItem.setAttributes [ HP.href "#drawer" ]
+                    # List.Item.setAttributes [ HP.href "#drawer" ]
                 )
-                [ ListItem.graphic [] [ Icon.icon [] icon ]
+                [ List.Item.graphic [] [ Icon.icon [] icon ]
                 , HH.text label
                 ]
     in

@@ -1,6 +1,6 @@
 module Demo.Pages.Startpage
 
-import Demo.Url as Url
+import Demo.Route
 import Protolude
 import Data.Array as Array
 import Data.Maybe as Maybe
@@ -50,11 +50,11 @@ view =
             )
             (map
                 (\{ url, title, icon } ->
-                    ImageListItem.imageListItem
-                        (ImageListItem.defaultConfig
-                            # ImageListItem.setLabel (Just title)
-                            # ImageListItem.setHref (Just (Url.toString url))
-                            # ImageListItem.setAttributes
+                    ImageList.Item.imageListItem
+                        (ImageList.Item.defaultConfig
+                            # ImageList.Item.setLabel (Just title)
+                            # ImageList.Item.setHref (Just (Url.toString url))
+                            # ImageList.Item.setAttributes
                                 [ style "width" "calc(100% / 4 - 8.25px)"
                                 , style "margin" "4px"
                                 ]

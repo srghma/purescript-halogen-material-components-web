@@ -81,9 +81,9 @@ masonryImageList =
 
 imageListHeroItem :: ImageListItem msg
 imageListHeroItem =
-    ImageListItem.imageListItem
-        (ImageListItem.defaultConfig
-            # ImageListItem.setAttributes
+    ImageList.Item.imageListItem
+        (ImageList.Item.defaultConfig
+            # ImageList.Item.setAttributes
                 [ style "width" "calc(100% / 5 - 4.2px)"
                 , style "margin" "2px"
                 ]
@@ -95,10 +95,10 @@ standardItem url =
     -- TODO:
     -- ImageList.imageAspectContainer
     --   [ style "padding-bottom" "66.66667%" ]
-    ImageListItem.imageListItem
-        (ImageListItem.defaultConfig
-            # ImageListItem.setLabel (Just "Text label")
-            # ImageListItem.setAttributes
+    ImageList.Item.imageListItem
+        (ImageList.Item.defaultConfig
+            # ImageList.Item.setLabel (Just "Text label")
+            # ImageList.Item.setAttributes
                 [ style "width" "calc(100% / 5 - 4.2px)"
                 , style "margin" "2px"
                 ]
@@ -107,10 +107,10 @@ standardItem url =
 
 masonryItem :: String -> ImageListItem msg
 masonryItem url =
-    ImageListItem.imageListItem
-        (ImageListItem.defaultConfig
-            # ImageListItem.setLabel (Just "Text label")
-            # ImageListItem.setAttributes [ style "margin-bottom" "16px" ]
+    ImageList.Item.imageListItem
+        (ImageList.Item.defaultConfig
+            # ImageList.Item.setLabel (Just "Text label")
+            # ImageList.Item.setAttributes [ style "margin-bottom" "16px" ]
         )
         url
 

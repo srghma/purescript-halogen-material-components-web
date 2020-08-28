@@ -14,7 +14,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Button as Button
 import HalogenMWC.List as List
 import HalogenMWC.List.Divider as ListDivider
-import HalogenMWC.List.Item as ListItem
+import HalogenMWC.List.Item as List.Item
 import HalogenMWC.Menu as Menu
 import HalogenMWC.Typography as Typography
 
@@ -81,7 +81,7 @@ view model =
 
 listItem :: String -> ListItem Msg
 listItem label =
-    ListItem.listItem (ListItem.defaultConfig # ListItem.setOnClick Close) [ HH.text label ]
+    List.Item.listItem (List.Item.defaultConfig # List.Item.setOnClick Close) [ HH.text label ]
 
 heroMenu :: Model -> Html msg
 heroMenu model =
@@ -94,7 +94,7 @@ heroMenu model =
         , style "z-index" "0"
         ]
         [ Array.list Array.defaultConfig
-            (ListItem.listItem ListItem.defaultConfig [ HH.text "A Menu Item" ])
-            [ ListItem.listItem ListItem.defaultConfig [ HH.text "Another Menu Item" ]
+            (List.Item.listItem List.Item.defaultConfig [ HH.text "A Menu Item" ])
+            [ List.Item.listItem List.Item.defaultConfig [ HH.text "Another Menu Item" ]
             ]
         ]
