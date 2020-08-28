@@ -1,7 +1,7 @@
 module Demo.Pages.Lists
 
 import Browser.Dom
-import Demo.CatalogPage
+import Demo.HOC.CatalogPage
 import Protolude
 import Data.Array as Array
 import Data.Maybe as Maybe

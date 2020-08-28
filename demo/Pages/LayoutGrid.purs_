@@ -6,7 +6,7 @@ module Demo.Pages.LayoutGrid
     , view
     )
 
-import Demo.CatalogPage
+import Demo.HOC.CatalogPage
 import Protolude
 import Data.Array as Array
 import Data.Maybe as Maybe

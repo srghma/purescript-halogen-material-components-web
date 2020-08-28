@@ -1,4 +1,4 @@
-module Demo.Pages.CatalogPage
+module Demo.HOC.CatalogPage
 
 import Demo.Route
 import Protolude
