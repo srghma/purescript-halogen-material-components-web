@@ -72,7 +72,7 @@ view model =
         ]
     }
 
-heroSwitch :: Model -> Array (Html Msg)
+heroSwitch :: Model -> Array (HH.HTML Msg)
 heroSwitch model =
     let
         id =
@@ -92,7 +92,7 @@ heroSwitch model =
         ]
     ]
 
-demoSwitch :: Model -> Html Msg
+demoSwitch :: Model -> HH.HTML Msg
 demoSwitch model =
     let
         id =
@@ -111,7 +111,7 @@ demoSwitch model =
             )
         ]
 
-focusSwitch :: Model -> Html Msg
+focusSwitch :: Model -> HH.HTML Msg
 focusSwitch model =
     let
         id =

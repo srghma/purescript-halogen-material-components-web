@@ -116,7 +116,7 @@ demoList =
     , style "border" "1px solid rgba(0,0,0,.1)"
     ]
 
-heroList :: Array (Html w i)
+heroList :: Array (HH.HTML w i)
 heroList =
     let
         listItem =
@@ -128,7 +128,7 @@ heroList =
         (List.repeat 2 listItem)
     ]
 
-singleLineList :: Html w i
+singleLineList :: HH.HTML w i
 singleLineList =
     let
         listItem =
@@ -138,7 +138,7 @@ singleLineList =
         listItem
         (List.repeat 2 listItem)
 
-twoLineList :: Html w i
+twoLineList :: HH.HTML w i
 twoLineList =
     let
         listItem =
@@ -157,7 +157,7 @@ twoLineList =
         listItem
         (List.repeat 2 listItem)
 
-leadingIconList :: Html w i
+leadingIconList :: HH.HTML w i
 leadingIconList =
     let
         listItem icon =
@@ -170,7 +170,7 @@ leadingIconList =
         (listItem "wifi")
         (map listItem [ "bluetooth", "data_usage" ])
 
-trailingIconList :: Html w i
+trailingIconList :: HH.HTML w i
 trailingIconList =
     let
         listItem =
@@ -183,7 +183,7 @@ trailingIconList =
         listItem
         (List.repeat 2 listItem)
 
-activatedItemList :: Model -> Html Msg
+activatedItemList :: Model -> HH.HTML Msg
 activatedItemList model =
     let
         listItem ( icon, label ) =
@@ -209,7 +209,7 @@ activatedItemList model =
             ]
         )
 
-shapedActivatedItemList :: Model -> Html Msg
+shapedActivatedItemList :: Model -> HH.HTML Msg
 shapedActivatedItemList model =
     let
         listItem ( icon, label ) =
@@ -243,7 +243,7 @@ demoIcon =
     , style "color" "#fff"
     ]
 
-folderList :: Html w i
+folderList :: HH.HTML w i
 folderList =
     let
         listItem { primary, secondary } =
@@ -272,7 +272,7 @@ folderList =
             ]
         )
 
-listWithTrailingCheckbox :: Model -> Html Msg
+listWithTrailingCheckbox :: Model -> HH.HTML Msg
 listWithTrailingCheckbox model =
     let
         listItem label =
@@ -319,7 +319,7 @@ listWithTrailingCheckbox model =
             ]
         )
 
-listWithTrailingRadioButton :: Model -> Html Msg
+listWithTrailingRadioButton :: Model -> HH.HTML Msg
 listWithTrailingRadioButton model =
     let
         listItem label =
@@ -352,7 +352,7 @@ listWithTrailingRadioButton model =
             ]
         )
 
-focusList :: Html Msg
+focusList :: HH.HTML Msg
 focusList =
     HH.div []
         [ Array.list

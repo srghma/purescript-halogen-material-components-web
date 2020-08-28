@@ -83,7 +83,7 @@ listItem :: String -> ListItem Msg
 listItem label =
     List.Item.listItem (List.Item.defaultConfig # List.Item.setOnClick Close) [ HH.text label ]
 
-heroMenu :: Model -> Html w i
+heroMenu :: Model -> HH.HTML w i
 heroMenu model =
     HH.div
         [ HP.class_ "mdc-menu-surface mdc-menu-surface--open"

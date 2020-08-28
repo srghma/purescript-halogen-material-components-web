@@ -83,13 +83,13 @@ view model =
         ]
     }
 
-heroCheckboxes :: Model -> Array (Html Msg)
+heroCheckboxes :: Model -> Array (HH.HTML Msg)
 heroCheckboxes model =
     [ checkbox "checked-hero-checkbox" model heroMargin
     , checkbox "unchecked-hero-checkbox" model heroMargin
     ]
 
-checkbox :: String -> Model -> Array (HH.Attribute Msg) -> Html Msg
+checkbox :: String -> Model -> Array (HH.Attribute Msg) -> HH.HTML Msg
 checkbox index model attributes =
     let
         state =
@@ -103,7 +103,7 @@ checkbox index model attributes =
             # Checkbox.setAttributes attributes
         )
 
-focusCheckbox :: Html Msg
+focusCheckbox :: HH.HTML Msg
 focusCheckbox =
     HH.div []
         [ Checkbox.checkbox

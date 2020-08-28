@@ -94,7 +94,7 @@ view model =
         ]
     }
 
-iframe :: String -> Url -> Html w i
+iframe :: String -> Url -> HH.HTML w i
 iframe title url =
     let
         stringUrl =

@@ -30,12 +30,12 @@ import HalogenMWC.TopAppBar as TopAppBar
 
 data DrawerPage w i =
     { title :: String
-    , drawer :: Html w i
-    , scrim :: Maybe (Html w i)
+    , drawer :: HH.HTML w i
+    , scrim :: Maybe (HH.HTML w i)
     , onMenuClick :: Maybe w i
     }
 
-view :: (w i -> topMsg) -> DrawerPage w i -> Html topMsg
+view :: (w i -> topMsg) -> DrawerPage w i -> HH.HTML topMsg
 view lift { title, drawer, scrim, onMenuClick } =
     HH.map lift $
         HH.div drawerFrameRoot
@@ -63,7 +63,7 @@ view lift { title, drawer, scrim, onMenuClick } =
                 ]
             ]
 
-drawerBody :: (Int -> w i) -> Int -> Array (Html w i)
+drawerBody :: (Int -> w i) -> Int -> Array (HH.HTML w i)
 drawerBody setSelectedIndex selectedIndex =
     let
         listItemConfig index =
@@ -132,7 +132,7 @@ drawerBody setSelectedIndex selectedIndex =
         ]
     ]
 
-mainContent :: Html w i
+mainContent :: HH.HTML w i
 mainContent =
     HH.div
         [ style "padding-left" "18px"

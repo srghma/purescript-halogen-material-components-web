@@ -72,7 +72,7 @@ view model =
         ]
     }
 
-heroDataTable :: Array (Html w i)
+heroDataTable :: Array (HH.HTML w i)
 heroDataTable =
     [ standardDataTable ]
 
@@ -103,7 +103,7 @@ data =
       }
     ]
 
-standardDataTable :: Html w i
+standardDataTable :: HH.HTML w i
 standardDataTable =
     let
         row { desert, carbs, protein, comments } =
@@ -119,7 +119,7 @@ standardDataTable =
         , tbody = map row data
         }
 
-dataTableWithRowSelection :: Model -> Html Msg
+dataTableWithRowSelection :: Model -> HH.HTML Msg
 dataTableWithRowSelection model =
     let
         allSelected =

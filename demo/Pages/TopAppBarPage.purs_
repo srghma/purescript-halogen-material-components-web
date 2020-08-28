@@ -14,10 +14,10 @@ import HalogenMWC.Typography as Typography
 
 data TopAppBarPage w i =
     { fixedAdjust :: HH.Attribute w i
-    , topAppBar :: Html w i
+    , topAppBar :: HH.HTML w i
     }
 
-view :: (w i -> topMsg) -> TopAppBarPage w i -> Html topMsg
+view :: (w i -> topMsg) -> TopAppBarPage w i -> HH.HTML topMsg
 view lift { topAppBar, fixedAdjust } =
     HH.map lift $
         HH.div

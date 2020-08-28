@@ -64,7 +64,7 @@ view model =
         ]
     }
 
-themeColorsAsText :: Html w i
+themeColorsAsText :: HH.HTML w i
 themeColorsAsText =
     HH.div demoThemeColorGroup
         [ HH.div (Theme.primary :: demoThemeColorSwatches)
@@ -73,7 +73,7 @@ themeColorsAsText =
             [ HH.div demoThemeColorSwatch [ HH.text "Secondary" ] ]
         ]
 
-themeColorsAsBackground :: Html w i
+themeColorsAsBackground :: HH.HTML w i
 themeColorsAsBackground =
     HH.div demoThemeColorGroup
         [ HH.div
@@ -87,7 +87,7 @@ themeColorsAsBackground =
             [ HH.div demoThemeColorSwatch [ HH.text "Background" ] ]
         ]
 
-textOnBackground :: Html w i
+textOnBackground :: HH.HTML w i
 textOnBackground =
     HH.div demoThemeColorGroup
         [ HH.div (Theme.background :: demoThemeTextRow)
@@ -104,7 +104,7 @@ textOnBackground =
             ]
         ]
 
-textOnPrimary :: Html w i
+textOnPrimary :: HH.HTML w i
 textOnPrimary =
     HH.div demoThemeColorGroup
         [ HH.div (Theme.primaryBg :: demoThemeTextRow)
@@ -115,7 +115,7 @@ textOnPrimary =
             ]
         ]
 
-textOnSecondary :: Html w i
+textOnSecondary :: HH.HTML w i
 textOnSecondary =
     HH.div demoThemeColorGroup
         [ HH.div (Theme.secondaryBg :: demoThemeTextRow)
@@ -126,7 +126,7 @@ textOnSecondary =
             ]
         ]
 
-textOnLightBackground :: Html w i
+textOnLightBackground :: HH.HTML w i
 textOnLightBackground =
     HH.div demoThemeColorGroup
         [ HH.div (demoThemeBgCustomLight <> demoThemeTextRow)
@@ -143,7 +143,7 @@ textOnLightBackground =
             ]
         ]
 
-textOnDarkBackground :: Html w i
+textOnDarkBackground :: HH.HTML w i
 textOnDarkBackground =
     HH.div demoThemeColorGroup
         [ HH.div (demoThemeBgCustomDark <> demoThemeTextRow)

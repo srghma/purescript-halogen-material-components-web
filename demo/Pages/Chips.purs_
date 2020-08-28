@@ -195,7 +195,7 @@ view model =
         ]
     }
 
-heroChips :: Model -> Array (Html Msg)
+heroChips :: Model -> Array (HH.HTML Msg)
 heroChips model =
     [ ChoiceChipSet.chipSet
         (ChoiceChipSet.defaultConfig { toLabel = identity }
@@ -209,7 +209,7 @@ heroChips model =
         ]
     ]
 
-choiceChips :: Model -> Html Msg
+choiceChips :: Model -> HH.HTML Msg
 choiceChips model =
     let
         toLabel size =
@@ -241,7 +241,7 @@ choiceChips model =
         , ChoiceChip.chip ChoiceChip.defaultConfig ExtraLarge
         ]
 
-inputChips :: Model -> Html Msg
+inputChips :: Model -> HH.HTML Msg
 inputChips model =
     HH.div
         [ style "position" "relative"
@@ -268,7 +268,7 @@ inputChips model =
             []
         ]
 
-filterChips1 :: Model -> Html Msg
+filterChips1 :: Model -> HH.HTML Msg
 filterChips1 model =
     let
         chip accessory =
@@ -288,7 +288,7 @@ filterChips1 model =
             ]
         )
 
-filterChips2 :: Model -> Html Msg
+filterChips2 :: Model -> HH.HTML Msg
 filterChips2 model =
     let
         chip label =
@@ -309,7 +309,7 @@ filterChips2 model =
             ]
         )
 
-actionChips :: Model -> Html Msg
+actionChips :: Model -> HH.HTML Msg
 actionChips model =
     let
         chip ( icon, label ) =
@@ -328,7 +328,7 @@ actionChips model =
             ]
         )
 
-shapedChips :: Model -> Html w i
+shapedChips :: Model -> HH.HTML w i
 shapedChips model =
     let
         chip label =
@@ -347,7 +347,7 @@ shapedChips model =
             ]
         )
 
-focusChips :: Model -> Html Msg
+focusChips :: Model -> HH.HTML Msg
 focusChips model =
     HH.div []
         [ ChoiceChipSet.chipSet

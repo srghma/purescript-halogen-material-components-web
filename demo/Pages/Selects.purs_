@@ -103,7 +103,7 @@ view model =
         ]
     }
 
-heroSelect :: Model -> Html Msg
+heroSelect :: Model -> HH.HTML Msg
 heroSelect model =
     Select.filled
         (Select.defaultConfig
@@ -133,7 +133,7 @@ remainingItems =
         [ HH.text "Banana" ]
     ]
 
-filledSelect :: Model -> Html Msg
+filledSelect :: Model -> HH.HTML Msg
 filledSelect model =
     Select.filled
         (Select.defaultConfig
@@ -144,7 +144,7 @@ filledSelect model =
         firstItem
         remainingItems
 
-outlinedSelect :: Model -> Html Msg
+outlinedSelect :: Model -> HH.HTML Msg
 outlinedSelect model =
     Select.outlined
         (Select.defaultConfig
@@ -155,7 +155,7 @@ outlinedSelect model =
         firstItem
         remainingItems
 
-filledWithIconSelect :: Model -> Html Msg
+filledWithIconSelect :: Model -> HH.HTML Msg
 filledWithIconSelect model =
     Select.filled
         (Select.defaultConfig
@@ -167,7 +167,7 @@ filledWithIconSelect model =
         firstItem
         remainingItems
 
-outlinedWithIconSelect :: Model -> Html Msg
+outlinedWithIconSelect :: Model -> HH.HTML Msg
 outlinedWithIconSelect model =
     Select.outlined
         (Select.defaultConfig
@@ -179,7 +179,7 @@ outlinedWithIconSelect model =
         firstItem
         remainingItems
 
-focusSelect :: Model -> Html Msg
+focusSelect :: Model -> HH.HTML Msg
 focusSelect model =
     HH.div
         [ style "display" "flex"

@@ -72,7 +72,7 @@ view model =
         ]
     }
 
-heroRadio :: Model -> String -> String -> Html Msg
+heroRadio :: Model -> String -> String -> HH.HTML Msg
 heroRadio model group index =
     Radio.radio
         (Radio.defaultConfig
@@ -81,14 +81,14 @@ heroRadio model group index =
             # Radio.setAttributes [ style "margin" "0 10px" ]
         )
 
-heroRadioGroup :: Model -> Html Msg
+heroRadioGroup :: Model -> HH.HTML Msg
 heroRadioGroup model =
     HH.div []
         [ heroRadio model "hero" "radio-buttons-hero-radio-1"
         , heroRadio model "hero" "radio-buttons-hero-radio-2"
         ]
 
-radio :: Model -> String -> String -> String -> Html Msg
+radio :: Model -> String -> String -> String -> HH.HTML Msg
 radio model group index label =
     FormField.formField
         (FormField.defaultConfig
@@ -104,14 +104,14 @@ radio model group index label =
             )
         ]
 
-exampleRadioGroup :: Model -> Html Msg
+exampleRadioGroup :: Model -> HH.HTML Msg
 exampleRadioGroup model =
     HH.div []
         [ radio model "example" "radio-buttons-example-radio-1" "Radio 1"
         , radio model "example" "radio-buttons-example-radio-2" "Radio 2"
         ]
 
-focusRadio :: Html Msg
+focusRadio :: HH.HTML Msg
 focusRadio =
     HH.div []
         [ Radio.radio

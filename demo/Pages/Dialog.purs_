@@ -78,7 +78,7 @@ view model =
         ]
     }
 
-alertDialog :: Model -> Html Msg
+alertDialog :: Model -> HH.HTML Msg
 alertDialog model =
     Dialog.dialog
         (Dialog.defaultConfig
@@ -93,7 +93,7 @@ alertDialog model =
             ]
         }
 
-simpleDialog :: Model -> Html Msg
+simpleDialog :: Model -> HH.HTML Msg
 simpleDialog model =
     let
         listItem ( icon, label ) =
@@ -125,7 +125,7 @@ simpleDialog model =
         , actions = []
         }
 
-confirmationDialog :: Model -> Html Msg
+confirmationDialog :: Model -> HH.HTML Msg
 confirmationDialog model =
     let
         listItem ( checked, label ) =
@@ -156,7 +156,7 @@ confirmationDialog model =
             ]
         }
 
-scrollableDialog :: Model -> Html Msg
+scrollableDialog :: Model -> HH.HTML Msg
 scrollableDialog model =
     Dialog.dialog
         (Dialog.defaultConfig
@@ -258,7 +258,7 @@ scrollableDialog model =
             ]
         }
 
-heroDialog :: Array (Html Msg)
+heroDialog :: Array (HH.HTML Msg)
 heroDialog =
     [ HH.div
         [ HP.class_ "mdc-dialog mdc-dialog--open"

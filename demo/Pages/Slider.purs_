@@ -71,7 +71,7 @@ view model =
         ]
     }
 
-heroSlider :: Model -> Html Msg
+heroSlider :: Model -> HH.HTML Msg
 heroSlider model =
     let
         id =
@@ -83,7 +83,7 @@ heroSlider model =
             # Slider.setOnInput (Changed id)
         )
 
-continuousSlider :: Model -> Html Msg
+continuousSlider :: Model -> HH.HTML Msg
 continuousSlider model =
     let
         id =
@@ -97,7 +97,7 @@ continuousSlider model =
             # Slider.setMax (Just 50)
         )
 
-discreteSlider :: Model -> Html Msg
+discreteSlider :: Model -> HH.HTML Msg
 discreteSlider model =
     let
         id =
@@ -113,7 +113,7 @@ discreteSlider model =
             # Slider.setStep (Just 1)
         )
 
-discreteSliderWithTickMarks :: Model -> Html Msg
+discreteSliderWithTickMarks :: Model -> HH.HTML Msg
 discreteSliderWithTickMarks model =
     let
         id =
@@ -130,7 +130,7 @@ discreteSliderWithTickMarks model =
             # Slider.setDisplayMarkers true
         )
 
-focusSlider :: Model -> Html Msg
+focusSlider :: Model -> HH.HTML Msg
 focusSlider model =
     let
         id =

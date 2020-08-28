@@ -68,7 +68,7 @@ view model =
         ]
     }
 
-heroElevation :: Array (Html w i)
+heroElevation :: Array (HH.HTML w i)
 heroElevation =
     [ HH.div (Elevation.z0 :: heroSurface) [ HH.text "Flat 0dp" ]
     , HH.div (Elevation.z8 :: heroSurface) [ HH.text "Raised 8dp" ]

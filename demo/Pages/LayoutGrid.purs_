@@ -65,7 +65,7 @@ view model =
         ]
     }
 
-demoGrid :: Array (HH.Attribute w i) -> Array (Html w i) -> Html w i
+demoGrid :: Array (HH.Attribute w i) -> Array (HH.HTML w i) -> HH.HTML w i
 demoGrid options =
     LayoutGrid.layoutGrid
         (style "background" "rgba(0,0,0,.2)"
@@ -73,7 +73,7 @@ demoGrid options =
             :: options
         )
 
-demoCell :: Array (HH.Attribute w i) -> Html w i
+demoCell :: Array (HH.Attribute w i) -> HH.HTML w i
 demoCell options =
     LayoutGrid.cell
         (style "background" "rgba(0,0,0,.2)"
@@ -82,11 +82,11 @@ demoCell options =
         )
         []
 
-heroGrid :: Array (Html w i)
+heroGrid :: Array (HH.HTML w i)
 heroGrid =
     [ demoGrid [] [ LayoutGrid.inner [] (List.repeat 3 (demoCell [])) ] ]
 
-columnsGrid :: Html w i
+columnsGrid :: HH.HTML w i
 columnsGrid =
     demoGrid []
         [ LayoutGrid.inner []
@@ -100,7 +100,7 @@ columnsGrid =
             ]
         ]
 
-leftAlignedGrid :: Html w i
+leftAlignedGrid :: HH.HTML w i
 leftAlignedGrid =
     demoGrid
         [ LayoutGrid.alignLeft
@@ -113,7 +113,7 @@ leftAlignedGrid =
             ]
         ]
 
-rightAlignedGrid :: Html w i
+rightAlignedGrid :: HH.HTML w i
 rightAlignedGrid =
     demoGrid
         [ LayoutGrid.alignRight
@@ -122,7 +122,7 @@ rightAlignedGrid =
         [ LayoutGrid.inner [] (List.repeat 3 (demoCell []))
         ]
 
-cellAlignmentGrid :: Html w i
+cellAlignmentGrid :: HH.HTML w i
 cellAlignmentGrid =
     let
         innerHeight =

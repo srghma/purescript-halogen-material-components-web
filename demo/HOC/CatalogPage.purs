@@ -22,8 +22,8 @@ data CatalogPage w i =
     { title :: String
     , prelude :: String
     , resources :: CatalogPageResources
-    , hero :: Array (Html w i)
-    , content :: Array (Html w i)
+    , hero :: Array (HH.HTML w i)
+    , content :: Array (HH.HTML w i)
     }
 
 data CatalogPageResources =
@@ -39,7 +39,7 @@ data CatalogPageConfig topMsg =
     , url :: Url
     }
 
-view :: (w i -> topMsg) -> CatalogPageConfig topMsg -> CatalogPage w i -> Html topMsg
+view :: (w i -> topMsg) -> CatalogPageConfig topMsg -> CatalogPage w i -> HH.HTML topMsg
 view lift catalogPageConfig catalogPage =
     let
         toggleCatalogDrawer =
@@ -124,7 +124,7 @@ view lift catalogPageConfig catalogPage =
             ]
         ]
 
-resourcesList :: CatalogPageResources -> Html w i
+resourcesList :: CatalogPageResources -> HH.HTML w i
 resourcesList { materialDesignGuidelines, documentation, sourceCode } =
     Array.list Array.defaultConfig
         (List.Item.listItem

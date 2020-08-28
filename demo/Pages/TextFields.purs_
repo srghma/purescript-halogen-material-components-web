@@ -73,7 +73,7 @@ view model =
         ]
     }
 
-heroTextFields :: Model -> Html Msg
+heroTextFields :: Model -> HH.HTML Msg
 heroTextFields model =
     HH.div heroTextFieldContainer
         [ HH.div textFieldContainerHero
@@ -90,7 +90,7 @@ heroTextFields model =
             ]
         ]
 
-filledTextFields :: Model -> Html w i
+filledTextFields :: Model -> HH.HTML w i
 filledTextFields model =
     HH.div textFieldRow
         [ HH.div textFieldContainer
@@ -118,7 +118,7 @@ filledTextFields model =
             ]
         ]
 
-shapedFilledTextFields :: Model -> Html w i
+shapedFilledTextFields :: Model -> HH.HTML w i
 shapedFilledTextFields model =
     HH.div textFieldRow
         [ HH.div textFieldContainer
@@ -149,7 +149,7 @@ shapedFilledTextFields model =
             ]
         ]
 
-outlinedTextFields :: Model -> Html w i
+outlinedTextFields :: Model -> HH.HTML w i
 outlinedTextFields model =
     HH.div textFieldRow
         [ HH.div textFieldContainer
@@ -177,7 +177,7 @@ outlinedTextFields model =
             ]
         ]
 
-shapedOutlinedTextFields :: Model -> Html w i
+shapedOutlinedTextFields :: Model -> HH.HTML w i
 shapedOutlinedTextFields model =
     HH.div textFieldRow
         [ HH.div textFieldContainer
@@ -205,7 +205,7 @@ shapedOutlinedTextFields model =
             ]
         ]
 
-textFieldsWithoutLabel :: Model -> Html w i
+textFieldsWithoutLabel :: Model -> HH.HTML w i
 textFieldsWithoutLabel model =
     HH.div textFieldRow
         [ HH.div textFieldContainer
@@ -228,7 +228,7 @@ textFieldsWithoutLabel model =
             ]
         ]
 
-textFieldsWithCharacterCounter :: Model -> Html w i
+textFieldsWithCharacterCounter :: Model -> HH.HTML w i
 textFieldsWithCharacterCounter model =
     HH.div textFieldRow
         [ HH.div textFieldContainer
@@ -254,7 +254,7 @@ textFieldsWithCharacterCounter model =
             ]
         ]
 
-textareaTextField :: Model -> Html w i
+textareaTextField :: Model -> HH.HTML w i
 textareaTextField model =
     HH.div textFieldContainer
         [ TextArea.outlined
@@ -262,7 +262,7 @@ textareaTextField model =
         , demoHelperText
         ]
 
-fullwidthTextField :: Model -> Html w i
+fullwidthTextField :: Model -> HH.HTML w i
 fullwidthTextField model =
     HH.div textFieldContainer
         [ TextField.filled
@@ -273,7 +273,7 @@ fullwidthTextField model =
         , demoHelperText
         ]
 
-fullwidthTextareaTextField :: Model -> Html w i
+fullwidthTextareaTextField :: Model -> HH.HTML w i
 fullwidthTextareaTextField model =
     HH.div textFieldRowFullwidth
         [ HH.div textFieldContainer
@@ -286,7 +286,7 @@ fullwidthTextareaTextField model =
             ]
         ]
 
-focusTextField :: Html Msg
+focusTextField :: HH.HTML Msg
 focusTextField =
     HH.div []
         [ TextField.filled
@@ -337,7 +337,7 @@ textFieldRowFullwidth =
     , style "display" "block"
     ]
 
-demoHelperText :: Html w i
+demoHelperText :: HH.HTML w i
 demoHelperText =
     HelperText.helperLine []
         [ HelperText.helperText
@@ -345,7 +345,7 @@ demoHelperText =
             "Helper Text"
         ]
 
-demoHelperTextWithCharacterCounter :: Html w i
+demoHelperTextWithCharacterCounter :: HH.HTML w i
 demoHelperTextWithCharacterCounter =
     HelperText.helperLine []
         [ HelperText.helperText

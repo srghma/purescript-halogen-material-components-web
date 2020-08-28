@@ -119,7 +119,7 @@ buttonMargin :: Array (HH.Attribute w i)
 buttonMargin =
     [ style "margin" "14px" ]
 
-heroMessage :: Html w i
+heroMessage :: HH.HTML w i
 heroMessage =
     HH.div
         [ HP.class_ "mdc-snackbar mdc-snackbar--open"

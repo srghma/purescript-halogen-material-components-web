@@ -64,7 +64,7 @@ view model =
         ]
     }
 
-heroButtons :: Array (Html w i)
+heroButtons :: Array (HH.HTML w i)
 heroButtons =
     let
         config =
@@ -76,33 +76,33 @@ heroButtons =
     , Button.outlined config "Outlined"
     ]
 
-textButtons :: Html w i
+textButtons :: HH.HTML w i
 textButtons =
     buttonsRow Button.text []
 
-raisedButtons :: Html w i
+raisedButtons :: HH.HTML w i
 raisedButtons =
     buttonsRow Button.raised []
 
-unelevatedButtons :: Html w i
+unelevatedButtons :: HH.HTML w i
 unelevatedButtons =
     buttonsRow Button.unelevated []
 
-outlinedButtons :: Html w i
+outlinedButtons :: HH.HTML w i
 outlinedButtons =
     buttonsRow Button.outlined []
 
-shapedButtons :: Html w i
+shapedButtons :: HH.HTML w i
 shapedButtons =
     buttonsRow Button.unelevated [ style "border-radius" "18px" ]
 
-linkButtons :: Html w i
+linkButtons :: HH.HTML w i
 linkButtons =
     buttonsRow
         (\config label -> Button.text (config # Button.setHref (Just "#")) label)
         []
 
-focusButton :: Html Msg
+focusButton :: HH.HTML Msg
 focusButton =
     HH.div []
         [ Button.raised
@@ -123,7 +123,7 @@ focusButton =
         , Button.raised (Button.defaultConfig # Button.setOnClick (Focus "my-link-button")) "Focus"
         ]
 
-buttonsRow :: (Button.Config w i -> String -> Html w i) -> Array (HH.Attribute w i) -> Html w i
+buttonsRow :: (Button.Config w i -> String -> HH.HTML w i) -> Array (HH.Attribute w i) -> HH.HTML w i
 buttonsRow button additionalAttributes =
     let
         config =

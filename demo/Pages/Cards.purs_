@@ -57,7 +57,7 @@ view model =
         ]
     }
 
-heroCard :: Array (Html w i)
+heroCard :: Array (HH.HTML w i)
 heroCard =
     [ Card.card
         (Card.defaultConfig
@@ -73,7 +73,7 @@ heroCard =
         }
     ]
 
-exampleCard1 :: Html w i
+exampleCard1 :: HH.HTML w i
 exampleCard1 =
     Card.card
         (Card.defaultConfig
@@ -91,7 +91,7 @@ exampleCard1 =
         , actions = Nothing
         }
 
-exampleCard2 :: Html w i
+exampleCard2 :: HH.HTML w i
 exampleCard2 =
     Card.card
         (Card.defaultConfig
@@ -108,7 +108,7 @@ exampleCard2 =
         , actions = Just demoActions
         }
 
-exampleCard3 :: Html w i
+exampleCard3 :: HH.HTML w i
 exampleCard3 =
     Card.card
         (Card.defaultConfig
@@ -126,7 +126,7 @@ exampleCard3 =
         , actions = Just demoActions
         }
 
-focusCard :: Html Msg
+focusCard :: HH.HTML Msg
 focusCard =
     HH.div []
         [ Card.card
