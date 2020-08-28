@@ -244,8 +244,7 @@ choiceChips model =
 inputChips :: Model -> HH.HTML Msg
 inputChips model =
     HH.div
-        [ HP.style "position: relative"
-        , HP.style "display: flex"
+        [ HP.style "position: relative; display: flex"
         ]
         [ InputChipSet.chipSet []
             (map

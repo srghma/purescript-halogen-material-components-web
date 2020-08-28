@@ -112,8 +112,7 @@ view model =
 
 demoList :: Array (HH.Attribute w i)
 demoList =
-    [ HP.style "max-width: 600px"
-    , HP.style "border: 1px solid rgba(0,0,0,.1)"
+    [ HP.style "max-width: 600px; border: 1px solid rgba(0,0,0,.1)"
     ]
 
 heroList :: Array (HH.HTML w i)
@@ -238,9 +237,7 @@ shapedActivatedItemList model =
 
 demoIcon :: Array (HH.Attribute w i)
 demoIcon =
-    [ HP.style "background: rgba(0,0,0,.3)"
-    , HP.style "border-radius: 50%"
-    , HP.style "color: #fff"
+    [ HP.style "background: rgba(0,0,0,.3); border-radius: 50%; color: #fff"
     ]
 
 folderList :: HH.HTML w i

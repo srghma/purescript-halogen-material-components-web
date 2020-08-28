@@ -62,8 +62,7 @@ view lift catalogPageConfig catalogPage =
                         "menu"
                     , HH.span
                         [ TopAppBar.title
-                        , HP.style "text-transform: uppercase"
-                        , HP.style "font-weight: 400"
+                        , HP.style "text-transform: uppercase; font-weight: 400"
                         ]
                         [ HH.text "Material Components for Elm" ]
                     ]
@@ -207,54 +206,23 @@ catalogPageContainer =
 
 demoPanel :: Array (HH.Attribute w i)
 demoPanel =
-    [ HP.style "display: -ms-flexbox"
-    , HP.style "display: flex"
-    , HP.style "position: relative"
-    , HP.style "height: 100vh"
-    , HP.style "overflow: hidden"
+    [ HP.style "display: -ms-flexbox; display: flex; position: relative; height: 100vh; overflow: hidden"
     ]
 
 demoContent :: Array (HH.Attribute w i)
 demoContent =
     [ HP.id "demo-content"
-    , HP.style "height: 100%"
-    , HP.style "-webkit-box-sizing: border-box"
-    , HP.style "box-sizing: border-box"
-    , HP.style "max-width: 100%"
-    , HP.style "padding-left: 16px"
-    , HP.style "padding-right: 16px"
-    , HP.style "padding-bottom: 100px"
-    , HP.style "width: 100%"
-    , HP.style "overflow: auto"
-    , HP.style "display: -ms-flexbox"
-    , HP.style "display: flex"
-    , HP.style "-ms-flex-direction: column"
-    , HP.style "flex-direction: column"
-    , HP.style "-ms-flex-align: center"
-    , HP.style "align-items: center"
-    , HP.style "-ms-flex-pack: start"
-    , HP.style "justify-content: flex-start"
+    , HP.style "height: 100%; -webkit-box-sizing: border-box; box-sizing: border-box; max-width: 100%; padding-left: 16px; padding-right: 16px; padding-bottom: 100px; width: 100%; overflow: auto; display: -ms-flexbox; display: flex; -ms-flex-direction: column; flex-direction: column; -ms-flex-align: center; align-items: center; -ms-flex-pack: start; justify-content: flex-start"
     ]
 
 demoContentTransition :: Array (HH.Attribute w i)
 demoContentTransition =
-    [ HP.style "max-width: 900px"
-    , HP.style "width: 100%"
+    [ HP.style "max-width: 900px; width: 100%"
     ]
 
 hero :: Array (HH.Attribute w i)
 hero =
-    [ HP.style "display: -ms-flexbox"
-    , HP.style "display: flex"
-    , HP.style "-ms-flex-flow: row nowrap"
-    , HP.style "flex-flow: row nowrap"
-    , HP.style "-ms-flex-align: center"
-    , HP.style "align-items: center"
-    , HP.style "-ms-flex-pack: center"
-    , HP.style "justify-content: center"
-    , HP.style "min-height: 360px"
-    , HP.style "padding: 24px"
-    , HP.style "background-color: #f2f2f2"
+    [ HP.style "display: -ms-flexbox; display: flex; -ms-flex-flow: row nowrap; flex-flow: row nowrap; -ms-flex-align: center; align-items: center; -ms-flex-pack: center; justify-content: center; min-height: 360px; padding: 24px; background-color: #f2f2f2"
     ]
 
 demoTitle :: Array (HH.Attribute w i)
@@ -264,6 +232,5 @@ demoTitle =
 
 resourcesGraphic :: Array (HH.Attribute w i)
 resourcesGraphic =
-    [ HP.style "width: 30px"
-    , HP.style "height: 30px"
+    [ HP.style "width: 30px; height: 30px"
     ]

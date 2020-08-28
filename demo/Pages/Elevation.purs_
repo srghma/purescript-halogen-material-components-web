@@ -77,38 +77,16 @@ heroElevation =
 
 heroSurface :: Array (HH.Attribute w i)
 heroSurface =
-    [ HP.style "display: -ms-inline-flexbox"
-    , HP.style "display: inline-flex"
-    , HP.style "-ms-flex-pack: distribute"
-    , HP.style "justify-content: space-around"
-    , HP.style "min-height: 100px"
-    , HP.style "min-width: 200px"
-    , HP.style "-ms-flex-align: center"
-    , HP.style "align-items: center"
-    , HP.style "width: 120px"
-    , HP.style "height: 48px"
-    , HP.style "margin: 24px"
-    , HP.style "background-color: #212121"
-    , HP.style "color: #f0f0f0"
+    [ HP.style "display: -ms-inline-flexbox; display: inline-flex; -ms-flex-pack: distribute; justify-content: space-around; min-height: 100px; min-width: 200px; -ms-flex-align: center; align-items: center; width: 120px; height: 48px; margin: 24px; background-color: #212121; color: #f0f0f0"
     ]
 
 demoContainer :: Array (HH.Attribute w i)
 demoContainer =
     [ HP.class_ elevation_demo_container
-    , HP.style "display: flex"
-    , HP.style "flex-flow: row wrap"
-    , HP.style "justify-content: space-between"
+    , HP.style "display: flex; flex-flow: row wrap; justify-content: space-between"
     ]
 
 demoSurface :: Array (HH.Attribute w i)
 demoSurface =
-    [ HP.style "display: -ms-inline-flexbox"
-    , HP.style "display: inline-flex"
-    , HP.style "-ms-flex-pack: distribute"
-    , HP.style "justify-content: space-around"
-    , HP.style "min-height: 100px"
-    , HP.style "min-width: 200px"
-    , HP.style "margin: 15px"
-    , HP.style "-ms-flex-align: center"
-    , HP.style "align-items: center"
+    [ HP.style "display: -ms-inline-flexbox; display: inline-flex; -ms-flex-pack: distribute; justify-content: space-around; min-height: 100px; min-width: 200px; margin: 15px; -ms-flex-align: center; align-items: center"
     ]

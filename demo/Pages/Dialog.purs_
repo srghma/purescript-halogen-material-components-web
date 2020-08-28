@@ -100,8 +100,7 @@ simpleDialog model =
             List.Item.listItem
                 (List.Item.defaultConfig # List.Item.setOnClick Close)
                 [ List.Item.graphic
-                    [ HP.style "background-color: rgba(0,0,0,.3)"
-                    , HP.style "color: #fff"
+                    [ HP.style "background-color: rgba(0,0,0,.3); color: #fff"
                     ]
                     [ Icon.icon [] icon ]
                 , HH.text label

@@ -72,9 +72,7 @@ masonryImageList =
         (ImageList.defaultConfig
             # ImageList.setMasonry true
             # ImageList.setAttributes
-                [ HP.style "max-width: 900px"
-                , HP.style "column-count: 5"
-                , HP.style "column-gap: 16px"
+                [ HP.style "max-width: 900px; column-count: 5; column-gap: 16px"
                 ]
         )
         (map masonryItem masonryImages)
@@ -84,8 +82,7 @@ imageListHeroItem =
     ImageList.Item.imageListItem
         (ImageList.Item.defaultConfig
             # ImageList.Item.setAttributes
-                [ HP.style "width: calc(100% / 5 - 4.2px)"
-                , HP.style "margin: 2px"
+                [ HP.style "width: calc(100% / 5 - 4.2px); margin: 2px"
                 ]
         )
         "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAABNJREFUCB1jZGBg+A/EDEwgAgQADigBA//q6GsAAAAASUVORK5CYII%3D"
@@ -99,8 +96,7 @@ standardItem route =
         (ImageList.Item.defaultConfig
             # ImageList.Item.setLabel (Just "Text label")
             # ImageList.Item.setAttributes
-                [ HP.style "width: calc(100% / 5 - 4.2px)"
-                , HP.style "margin: 2px"
+                [ HP.style "width: calc(100% / 5 - 4.2px); margin: 2px"
                 ]
         )
         route

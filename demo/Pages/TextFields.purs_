@@ -302,14 +302,7 @@ focusTextField =
 heroTextFieldContainer :: Array (HH.Attribute w i)
 heroTextFieldContainer =
     [ HP.class_ hero_text_field_container
-    , HP.style "display: -ms-flexbox"
-    , HP.style "display: flex"
-    , HP.style "-ms-flex: 1 1 100%"
-    , HP.style "flex: 1 1 100%"
-    , HP.style "-ms-flex-pack: distribute"
-    , HP.style "justify-content: space-around"
-    , HP.style "-ms-flex-wrap: wrap"
-    , HP.style "flex-wrap: wrap"
+    , HP.style "display: -ms-flexbox; display: flex; -ms-flex: 1 1 100%; flex: 1 1 100%; -ms-flex-pack: distribute; justify-content: space-around; -ms-flex-wrap: wrap; flex-wrap: wrap"
     ]
 
 textFieldContainerHero :: Array (HH.Attribute w i)
@@ -325,10 +318,7 @@ textFieldContainer =
 textFieldRow :: Array (HH.Attribute w i)
 textFieldRow =
     [ HP.class_ text_field_row
-    , HP.style "display: flex"
-    , HP.style "align-items: flex-start"
-    , HP.style "justify-content: space-between"
-    , HP.style "flex-wrap: wrap"
+    , HP.style "display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap"
     ]
 
 textFieldRowFullwidth :: Array (HH.Attribute w i)

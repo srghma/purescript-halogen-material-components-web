@@ -71,8 +71,7 @@ view model =
             [ Fab.fab
                 (Fab.defaultConfig
                     # Fab.setAttributes
-                        [ HP.style "border-radius: 50% 0"
-                        , HP.style "margin-right: 24px"
+                        [ HP.style "border-radius: 50% 0; margin-right: 24px"
                         ]
                 )
                 "favorite_border"
@@ -80,8 +79,7 @@ view model =
                 (Fab.defaultConfig
                     # Fab.setMini true
                     # Fab.setAttributes
-                        [ HP.style "border-radius: 8px"
-                        , HP.style "margin-right: 24px"
+                        [ HP.style "border-radius: 8px; margin-right: 24px"
                         ]
                 )
                 "favorite_border"

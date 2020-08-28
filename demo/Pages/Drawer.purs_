@@ -94,14 +94,7 @@ heroDrawer =
 iframe :: String -> String -> HH.HTML w i
 iframe label route =
     HH.div
-        [ HP.style "display: inline-block"
-        , HP.style "-ms-flex: 1 1 80%"
-        , HP.style "flex: 1 1 80%"
-        , HP.style "-ms-flex-pack: distribute"
-        , HP.style "justify-content: space-around"
-        , HP.style "min-height: 400px"
-        , HP.style "min-width: 400px"
-        , HP.style "padding: 15px"
+        [ HP.style "display: inline-block; -ms-flex: 1 1 80%; flex: 1 1 80%; -ms-flex-pack: distribute; justify-content: space-around; min-height: 400px; min-width: 400px; padding: 15px"
         ]
         [ HH.div []
             [ HH.a
@@ -112,9 +105,7 @@ iframe label route =
             ]
         , HH.iframe
             [ HP.src route
-            , HP.style "height: 400px"
-            , HP.style "width: 100vw"
-            , HP.style "max-width: 780px"
+            , HP.style "height: 400px; width: 100vw; max-width: 780px"
             ]
             []
         ]
