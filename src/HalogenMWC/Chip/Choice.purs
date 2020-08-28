@@ -18,8 +18,7 @@ type Config i =
   , additionalAttributes :: Array (IProp I.HTMLdiv i)
   }
 
-data Chip a i
-  = Chip (Config i) a
+data Chip a i = Chip (Config i) a
 
 defaultConfig :: forall i . Config i
 defaultConfig =

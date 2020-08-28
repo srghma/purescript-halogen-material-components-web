@@ -16,88 +16,81 @@ import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import MaterialIconsFont.Classes
+import HalogenMWC.Chip.Choice as Chip.Choice
 
-type Config a i
-  = { selected :: Maybe a
-    , onChange :: Maybe (a -> i)
-    , toLabel :: a -> String
-    , additionalAttributes :: Array (IProp I.HTMLdiv i)
-    }
+type Config a i =
+  { selected :: Maybe a
+  , onChange :: Maybe (a -> i)
+  , toLabel :: a -> String
+  , additionalAttributes :: Array (IProp I.HTMLdiv i)
+  }
 
-config :: { toLabel :: a -> String } -> Config a i
-config { toLabel } =
+defaultConfig :: forall a i . { toLabel :: a -> String } -> Config a i
+defaultConfig { toLabel } =
   { selected: Nothing
   , onChange: Nothing
   , toLabel: toLabel
   , additionalAttributes: []
   }
 
-chipSet :: Config a i -> Array (Chip a r i) -> HH.HTML w i
+chipSet :: forall a w i . Eq a => Config a i -> Array (Chip a i) -> HH.HTML w i
 chipSet config chips =
   HH.element (ElemName "mdc-chip-set")
-    ([ HP.classes [ mdc_chip_set, mdc_chip_set____choice ], gridRole ] <> config.additionalAttributes)
+    ( [ HP.classes [ mdc_chip_set, mdc_chip_set____choice ]
+      , HP.attr (AttrName "role") "grid"
+      ] <> config.additionalAttributes
+      )
     (map (chip config.selected config.onChange config.toLabel) chips)
 
-chip :: Maybe a -> Maybe (a -> i) -> (a -> String) -> Chip a r i -> HH.HTML w i
+chip :: forall a w i . Eq a => Maybe a -> Maybe (a -> i) -> (a -> String) -> Chip a i -> HH.HTML w i
 chip selected onChange toLabel (Chip config value) =
   HH.div
     [ HP.class_ mdc_touch_target_wrapper ]
     [ HH.element (ElemName "mdc-chip")
-        ( Array.catMaybes
-            [ mdc_chip
-            , mdc_chip____touch
-            , HP.attr (AttrName "role") "row"
-            , HP.prop (PropName "selected") (Just value == selected)
-            , interactionHandler (map ((#) value) onChange)
-            ]
-            <> config.additionalAttributes
+        ( [ HP.classes [ mdc_chip, mdc_chip____touch ]
+          , HP.attr (AttrName "role") "row"
+          , HP.prop (PropName "selected") (Just value == selected)
+          ]
+          <> Array.catMaybes
+          [ interactionHandler (map (\f _event -> f value) onChange)
+          ]
+          <> config.additionalAttributes
         )
         ( Array.catMaybes
-            [ rippleElt
+            [ Just rippleElt
             , leadingIconElt config
-            , primaryActionElt (toLabel value)
+            , Just $ primaryActionElt (toLabel value)
             ]
         )
     ]
 
-gridRole :: IProp r i
-gridRole = HP.attr (AttrName "role") "grid"
-
-chipTextCs :: IProp r i
-chipTextCs = HP.class_ mdc_chip__text
-
-chipPrimaryActionCs :: IProp r i
-chipPrimaryActionCs = HP.class_ mdc_chip__primary_action
-
-buttonRole :: IProp r i
+buttonRole :: forall r i . IProp r i
 buttonRole = HP.attr (AttrName "role") "button"
 
-gridcellRole :: IProp r i
+gridcellRole :: forall  r i . IProp r i
 gridcellRole = HP.attr (AttrName "role") "gridcell"
 
-interactionHandler :: Maybe (Event -> i) -> Maybe (IProp I.HTMLdiv i)
-interactionHandler r i = map (HE.handler (EventType "MDCChip:interaction")) r i
+interactionHandler :: forall i . Maybe (Event -> i) -> Maybe (IProp I.HTMLdiv i)
+interactionHandler = map (HE.handler (EventType "MDCChip:interaction"))
 
-rippleElt :: Maybe (HH.HTML w i)
-rippleElt = Just (HH.div [ HP.class_ mdc_chip__ripple ] [])
+rippleElt :: forall w i . HH.HTML w i
+rippleElt = HH.div [ HP.class_ mdc_chip__ripple ] []
 
-leadingIconElt :: Config i -> Maybe (HH.HTML w i)
-leadingIconElt { icon } =
+leadingIconElt :: forall w i . Chip.Choice.Config i -> Maybe (HH.HTML w i)
+leadingIconElt config =
   map
     ( \iconName ->
-        HH.i [ HP.classes [material_icons, mdc_chip__icon, mdc_chip__icon____leading] ]
+        HH.i
+          [ HP.classes [material_icons, mdc_chip__icon, mdc_chip__icon____leading] ]
           [ HH.text iconName ]
     )
-    icon
+    config.icon
 
-primaryActionElt :: String -> Maybe (HH.HTML w i)
-primaryActionElt label =
-  Just
-    $ HH.span [ chipPrimaryActionCs, gridcellRole ]
-        (Array.catMaybes [ textElt label, touchElt ])
+primaryActionElt :: forall w i . String -> HH.HTML w i
+primaryActionElt label = HH.span [ HP.class_ mdc_chip__primary_action, gridcellRole ] [ textElt label, touchElt ]
 
-textElt :: String -> Maybe (HH.HTML w i)
-textElt label = Just (HH.span [ chipTextCs, buttonRole ] [ HH.text label ])
+textElt :: forall w i . String -> HH.HTML w i
+textElt label = HH.span [ HP.class_ mdc_chip__text, buttonRole ] [ HH.text label ]
 
-touchElt :: Maybe (HH.HTML w i)
-touchElt = Just (HH.div [ HP.class_ mdc_chip__touch ] [])
+touchElt :: forall w i . HH.HTML w i
+touchElt = HH.div [ HP.class_ mdc_chip__touch ] []

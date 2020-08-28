@@ -16,7 +16,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Material.Classes.Chips
 import HalogenMWC.Chip.Action
 
-chipSet :: Array (IProp I.HTMLdiv i) -> Array (Chip i) -> HH.HTML w i
+chipSet :: forall w i . Array (IProp I.HTMLdiv i) -> Array (Chip i) -> HH.HTML w i
 chipSet additionalAttributes chips =
   HH.element (ElemName "mdc-chip-set")
     ( [ HP.classes [ mdc_chip_set ]
@@ -26,21 +26,25 @@ chipSet additionalAttributes chips =
     )
     (map chip chips)
 
-chip :: Chip i -> HH.HTML w i
+chip :: forall w i . Chip i -> HH.HTML w i
 chip (Chip config label) =
   HH.div [ HP.class_ mdc_touch_target_wrapper ]
     [ HH.element (ElemName "mdc-chip")
         ( [ HP.classes [ mdc_chip, mdc_chip____touch ]
           , HP.attr (AttrName "role") "row"
-          -- | , interactionHandler config
+          ]
+          <> Array.catMaybes
+          [ interactionHandler config.onClick
           ]
           <> config.additionalAttributes
         )
         ( [ HH.div
             [ HP.class_ mdc_chip__ripple ]
-            (  [ rippleElt ]
-            <> leadingIconElt config.icon
-            <> [ primaryActionElt label ]
+            ( Array.catMaybes
+              [ Just rippleElt
+              , leadingIconElt config.icon
+              , Just $ primaryActionElt label
+              ]
             )
           ]
         )
@@ -49,19 +53,20 @@ chip (Chip config label) =
 rippleElt :: forall w i . HH.HTML w i
 rippleElt = HH.div [ HP.class_ mdc_chip__ripple ] []
 
--- | interactionHandler :: Config i -> Maybe (IProp r i)
--- | interactionHandler { onClick } = map (HE.handler (EventType "MDCChip:interaction")) onClick
+interactionHandler :: forall r i . Maybe (Event -> i) -> Maybe (IProp r i)
+interactionHandler = map (HE.handler (EventType "MDCChip:interaction"))
 
-leadingIconElt :: Maybe String -> Array (HH.HTML w i)
-leadingIconElt Nothing = []
-leadingIconElt (Just iconName) =
-  HH.i
-  [ HP.classes [ material_icons, mdc_chip__icon, mdc_chip__icon____leading ]
-  ]
-  [ HH.text iconName
-  ]
+leadingIconElt :: forall w i . Maybe String -> Maybe (HH.HTML w i)
+leadingIconElt = map
+  (\iconName ->
+    HH.i
+    [ HP.classes [ material_icons, mdc_chip__icon, mdc_chip__icon____leading ]
+    ]
+    [ HH.text iconName
+    ]
+  )
 
-primaryActionElt :: String -> HH.HTML w i
+primaryActionElt :: forall w i . String -> HH.HTML w i
 primaryActionElt label =
   HH.span
     [ HP.class_ mdc_chip__primary_action
@@ -73,7 +78,7 @@ primaryActionElt label =
       []
     ]
 
-textElt :: String -> HH.HTML w i
+textElt :: forall w i . String -> HH.HTML w i
 textElt label =
   HH.span
   [ HP.class_ mdc_chip__text

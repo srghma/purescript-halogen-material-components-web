@@ -32,28 +32,23 @@ chip (Chip config label) =
   HH.div
     [ HP.class_ mdc_touch_target_wrapper ]
     [ HH.element (ElemName "mdc-chip")
-        ( Array.catMaybes
-            [ HP.classes [ mdc_chip, mdc_chip____touch ]
-            , HP.attr (AttrName "role") "row"
-            , selectedProp config
-            , interactionHandler config
-            ]
-            <> config.additionalAttributes
+        ( [ HP.classes [ mdc_chip, mdc_chip____touch ]
+          , HP.attr (AttrName "role") "row"
+          , HP.prop (PropName "selected") config.selected
+          ]
+          <> Array.catMaybes
+          [ map (HE.handler (EventType "MDCChip:interaction")) config.onChange
+          ]
+          <> config.additionalAttributes
         )
         ( Array.catMaybes
-            [ rippleElt
+            [ Just rippleElt
             , leadingIconElt config
-            , checkmarkElt
-            , primaryActionElt label
+            , Just checkmarkElt
+            , Just $ primaryActionElt label
             ]
         )
     ]
-
-selectedProp :: forall r i . Chip.Config i -> IProp r i
-selectedProp config = HP.prop (PropName "selected") config.selected
-
-interactionHandler :: forall r i . Chip.Config i -> Maybe (IProp r i)
-interactionHandler config = map (HE.handler (EventType "MDCChip:interaction")) config.onChange
 
 rippleElt :: forall w i . HH.HTML w i
 rippleElt = HH.div [ HP.class_ mdc_chip__ripple ] []
@@ -80,10 +75,9 @@ checkmarkElt =
       [ Halogen.SVG.Elements.path
           [ Halogen.SVG.Attributes.class_ mdc_chip__checkmark_path
           , HP.attr (AttrName "fill") "none"
-          , Halogen.SVG.Attributes.stroke "black"
+          , HP.attr (AttrName "stroke") "black"
           , HP.attr (AttrName "d") "M1.73,12.91 8.1,19.28 22.79,4.59"
           ]
-          []
       ]
     ]
 
