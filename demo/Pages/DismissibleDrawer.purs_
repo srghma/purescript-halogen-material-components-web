@@ -7,27 +7,23 @@ module Demo.Pages.DismissibleDrawer
     )
 
 import Demo.DrawerPage as DrawerPage
-import Material.Drawer.Dismissible as DismissibleDrawer
-
+import HalogenMWC.Drawer.Dismissible as DismissibleDrawer
 
 data Model =
     { open :: Boolean
     , selectedIndex :: Int
     }
 
-
 defaultModel :: Model
 defaultModel =
-    { open = False
+    { open = false
     , selectedIndex = 0
     }
-
 
 data Msg
     = ToggleDrawer
     | CloseDrawer
     | SetSelectedIndex Int
-
 
 update :: Msg -> Model -> Model
 update msg model =
@@ -36,20 +32,19 @@ update msg model =
             { model | open = not model.open }
 
         CloseDrawer ->
-            { model | open = False }
+            { model | open = false }
 
         SetSelectedIndex index ->
             { model | selectedIndex = index }
-
 
 view :: Model -> DrawerPage Msg
 view model =
     { title = "Dismissible Drawer"
     , drawer =
         DismissibleDrawer.drawer
-            (DismissibleDrawer.config
-                |> DismissibleDrawer.setOpen model.open
-                |> DismissibleDrawer.setOnClose CloseDrawer
+            (DismissibleDrawer.defaultConfig
+                # DismissibleDrawer.setOpen model.open
+                # DismissibleDrawer.setOnClose CloseDrawer
             )
             (DrawerPage.drawerBody SetSelectedIndex model.selectedIndex)
     , onMenuClick = Just ToggleDrawer

@@ -1,21 +1,17 @@
 module Demo.Pages.PermanentDrawer
 
 import Demo.DrawerPage as DrawerPage
-import Material.Drawer.Permanent as PermanentDrawer
-
+import HalogenMWC.Drawer.Permanent as PermanentDrawer
 
 data Model =
     { selectedIndex :: Int }
-
 
 defaultModel :: Model
 defaultModel =
     { selectedIndex = 0 }
 
-
 data Msg
     = SetSelectedIndex Int
-
 
 update :: Msg -> Model -> Model
 update msg model =
@@ -23,12 +19,11 @@ update msg model =
         SetSelectedIndex index ->
             { model | selectedIndex = index }
 
-
 view :: Model -> DrawerPage Msg
 view model =
     { title = "Permanent Drawer"
     , drawer =
-        PermanentDrawer.drawer PermanentDrawer.config
+        PermanentDrawer.drawer PermanentDrawer.defaultConfig
             (DrawerPage.drawerBody SetSelectedIndex model.selectedIndex)
     , scrim = Nothing
     , onMenuClick = Nothing

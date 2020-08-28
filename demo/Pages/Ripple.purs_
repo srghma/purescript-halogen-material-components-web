@@ -1,30 +1,33 @@
 module Demo.Pages.Ripple
 
 import Demo.CatalogPage
-import Html
-import Html.Attributes
-import Material.Elevation as Elevation
-import Material.Ripple as Ripple
-import Material.Typography as Typography
-
+import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
+import Halogen
+import Halogen as H
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import HalogenMWC.Elevation as Elevation
+import HalogenMWC.Ripple as Ripple
+import HalogenMWC.Typography as Typography
 
 data Model =
     {}
-
 
 defaultModel :: Model
 defaultModel =
     {}
 
-
 data Msg
     = NoOp
-
 
 update :: Msg -> Model -> Model
 update msg model =
     model
-
 
 view :: Model -> CatalogPage Msg
 view model =
@@ -35,33 +38,32 @@ view model =
         , documentation = Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Ripple"
         , sourceCode = Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-ripple"
         }
-    , hero = [ Html.div demoBox [ text "Click here!", Ripple.bounded Ripple.config ] ]
+    , hero = [ HH.div demoBox [ HH.text "Click here!", Ripple.bounded Ripple.defaultConfig ] ]
     , content =
-        [ Html.h3 [ Typography.subtitle1 ] [ text "Bounded Ripple" ]
-        , Html.div demoBox
-            [ text "Interact with me!"
-            , Ripple.bounded Ripple.config
+        [ HH.h3 [ Typography.subtitle1 ] [ HH.text "Bounded Ripple" ]
+        , HH.div demoBox
+            [ HH.text "Interact with me!"
+            , Ripple.bounded Ripple.defaultConfig
             ]
-        , Html.h3 [ Typography.subtitle1 ] [ text "Unbounded Ripple" ]
-        , Html.div demoIcon
-            [ text "favorite"
-            , Ripple.unbounded Ripple.config
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Unbounded Ripple" ]
+        , HH.div demoIcon
+            [ HH.text "favorite"
+            , Ripple.unbounded Ripple.defaultConfig
             ]
-        , Html.h3 [ Typography.subtitle1 ] [ text "Theme Color: Primary" ]
-        , Html.div demoBox
-            [ text "Primary"
-            , Ripple.bounded (Ripple.config |> Ripple.setColor (Just Ripple.primary))
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Theme Color: Primary" ]
+        , HH.div demoBox
+            [ HH.text "Primary"
+            , Ripple.bounded (Ripple.defaultConfig # Ripple.setColor (Just Ripple.primary))
             ]
-        , Html.h3 [ Typography.subtitle1 ] [ text "Theme Color: Secondary" ]
-        , Html.div demoBox
-            [ text "Secondary"
-            , Ripple.bounded (Ripple.config |> Ripple.setColor (Just Ripple.accent))
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Theme Color: Secondary" ]
+        , HH.div demoBox
+            [ HH.text "Secondary"
+            , Ripple.bounded (Ripple.defaultConfig # Ripple.setColor (Just Ripple.accent))
             ]
         ]
     }
 
-
-demoBox :: Array (Html.Attribute msg)
+demoBox :: Array (HH.Attribute msg)
 demoBox =
     [ style "display" "flex"
     , style "align-items" "center"
@@ -75,13 +77,12 @@ demoBox =
     , style "overflow" "hidden"
     , style "position" "relative"
     , Elevation.z2
-    , Html.Attributes.tabindex 0
+    , HP.tabindex 0
     ]
 
-
-demoIcon :: Array (Html.Attribute msg)
+demoIcon :: Array (HH.Attribute msg)
 demoIcon =
-    [ class "material-icons"
+    [ HP.class_ material_icons
     , style "width" "24px"
     , style "height" "24px"
     , style "padding" "12px"

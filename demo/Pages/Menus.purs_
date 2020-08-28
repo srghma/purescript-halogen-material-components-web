@@ -1,39 +1,42 @@
 module Demo.Pages.Menus
 
 import Demo.CatalogPage
-import Html
-import Html.Attributes
-import Material.Button as Button
-import Material.List as List
-import Material.List.Divider as ListDivider
-import Material.List.Item as ListItem
-import Material.Menu as Menu
-import Material.Typography as Typography
-
+import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
+import Halogen
+import Halogen as H
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import HalogenMWC.Button as Button
+import HalogenMWC.List as List
+import HalogenMWC.List.Divider as ListDivider
+import HalogenMWC.List.Item as ListItem
+import HalogenMWC.Menu as Menu
+import HalogenMWC.Typography as Typography
 
 data Model =
     { open :: Boolean }
 
-
 defaultModel :: Model
 defaultModel =
-    { open = False }
-
+    { open = false }
 
 data Msg
     = Open
     | Close
 
-
 update :: Msg -> Model -> Model
 update msg model =
     case msg of
         Open ->
-            { model | open = True }
+            { model | open = true }
 
         Close ->
-            { model | open = False }
-
+            { model | open = false }
 
 view :: Model -> CatalogPage Msg
 view model =
@@ -46,24 +49,24 @@ view model =
         }
     , hero = [ heroMenu model ]
     , content =
-        [ Html.h3 [ Typography.subtitle1 ] [ text "Anchored menu" ]
-        , Html.div [ Menu.surfaceAnchor ]
-            [ Button.text (Button.config |> Button.setOnClick Open) "Open menu"
+        [ HH.h3 [ Typography.subtitle1 ] [ HH.text "Anchored menu" ]
+        , HH.div [ Menu.surfaceAnchor ]
+            [ Button.text (Button.defaultConfig # Button.setOnClick Open) "Open menu"
             , Menu.menu
-                (Menu.config
-                    |> Menu.setOpen model.open
-                    |> Menu.setOnClose Close
+                (Menu.defaultConfig
+                    # Menu.setOpen model.open
+                    # Menu.setOnClose Close
                 )
-                [ Array.list (List.config |> Array.setWrapFocus True)
+                [ Array.list (List.defaultConfig # Array.setWrapFocus true)
                     (listItem "Passionfruit")
                     (List.concat
-                        [ Array.map listItem
+                        [ map listItem
                             [ "Orange"
                             , "Guava"
                             , "Pitaya"
                             ]
-                        , [ ListDivider.listItem ListDivider.config ]
-                        , Array.map listItem
+                        , [ ListDivider.listItem ListDivider.defaultConfig ]
+                        , map listItem
                             [ "Pineapple"
                             , "Mango"
                             , "Papaya"
@@ -76,24 +79,22 @@ view model =
         ]
     }
 
-
 listItem :: String -> ListItem Msg
 listItem label =
-    ListItem.listItem (ListItem.config |> ListItem.setOnClick Close) [ text label ]
-
+    ListItem.listItem (ListItem.defaultConfig # ListItem.setOnClick Close) [ HH.text label ]
 
 heroMenu :: Model -> Html msg
 heroMenu model =
-    Html.div
-        [ class "mdc-menu-surface mdc-menu-surface--open"
+    HH.div
+        [ HP.class_ "mdc-menu-surface mdc-menu-surface--open"
         , style "position" "relative"
         , style "transform-origin" "left top 0px"
         , style "left" "0px"
         , style "top" "0px"
         , style "z-index" "0"
         ]
-        [ Array.list Array.config
-            (ListItem.listItem ListItem.config [ text "A Menu Item" ])
-            [ ListItem.listItem ListItem.config [ text "Another Menu Item" ]
+        [ Array.list Array.defaultConfig
+            (ListItem.listItem ListItem.defaultConfig [ HH.text "A Menu Item" ])
+            [ ListItem.listItem ListItem.defaultConfig [ HH.text "Another Menu Item" ]
             ]
         ]

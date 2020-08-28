@@ -1,53 +1,60 @@
 module Demo.Pages.Startpage
 
 import Demo.Url as Url
-import Html
-import Html.Attributes
-import Material.IconButton as IconButton
-import Material.ImageList as ImageList
-import Material.ImageList.Item as ImageListItem
-import Material.TopAppBar as TopAppBar
-
+import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
+import Halogen
+import Halogen as H
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import HalogenMWC.IconButton as IconButton
+import HalogenMWC.ImageList as ImageList
+import HalogenMWC.ImageList.Item as ImageListItem
+import HalogenMWC.TopAppBar as TopAppBar
 
 view :: Html msg
 view =
-    Html.div []
-        [ TopAppBar.regular TopAppBar.config
+    HH.div []
+        [ TopAppBar.regular TopAppBar.defaultConfig
             [ TopAppBar.row []
                 [ TopAppBar.section [ TopAppBar.alignStart ]
                     [ IconButton.custom
-                        (IconButton.config
-                            |> IconButton.setAttributes [ TopAppBar.navigationIcon ]
+                        (IconButton.defaultConfig
+                            # IconButton.setAttributes [ TopAppBar.navigationIcon ]
                         )
-                        [ Html.img
-                            [ Html.Attributes.src "images/ic_component_24px_white.svg"
+                        [ HH.img
+                            [ HP.src "images/ic_component_24px_white.svg"
                             ]
                             []
                         ]
-                    , Html.span
+                    , HH.span
                         [ TopAppBar.title
                         , style "text-transform" "uppercase"
                         , style "font-weight" "400"
                         ]
-                        [ text "Material Components for Elm" ]
+                        [ HH.text "Material Components for Elm" ]
                     ]
                 ]
             ]
         , ImageList.imageList
-            (ImageList.config
-                |> ImageList.setAttributes
+            (ImageList.defaultConfig
+                # ImageList.setAttributes
                     [ style "max-width" "900px"
                     , style "padding-top" "128px"
                     , style "padding-bottom" "100px"
                     ]
             )
-            (List.map
+            (map
                 (\{ url, title, icon } ->
                     ImageListItem.imageListItem
-                        (ImageListItem.config
-                            |> ImageListItem.setLabel (Just title)
-                            |> ImageListItem.setHref (Just (Url.toString url))
-                            |> ImageListItem.setAttributes
+                        (ImageListItem.defaultConfig
+                            # ImageListItem.setLabel (Just title)
+                            # ImageListItem.setHref (Just (Url.toString url))
+                            # ImageListItem.setAttributes
                                 [ style "width" "calc(100% / 4 - 8.25px)"
                                 , style "margin" "4px"
                                 ]
@@ -57,7 +64,6 @@ view =
                 imageListItems
             )
         ]
-
 
 imageListItems :: Array { url :: Url, icon :: String, title :: String, subtitle :: String }
 imageListItems =

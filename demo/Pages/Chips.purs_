@@ -2,23 +2,39 @@ module Demo.Pages.Chips
 
 import Browser.Dom
 import Demo.CatalogPage
-import Html
-import Html.Attributes
-import Html.Events
-import Json.Decode as Decode
-import Material.Button as Button
-import Material.Chip.Action as ActionChip
-import Material.Chip.Choice as ChoiceChip
-import Material.Chip.Filter as FilterChip
-import Material.Chip.Input as InputChip
-import Material.ChipSet.Action as ActionChipSet
-import Material.ChipSet.Choice as ChoiceChipSet
-import Material.ChipSet.Filter as FilterChipSet
-import Material.ChipSet.Input as InputChipSet
-import Material.Typography as Typography
+import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
+import Halogen
+import Halogen as H
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
+import Halogen
+import Halogen as H
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+
+import HalogenMWC.Button as Button
+import HalogenMWC.Chip.Action as ActionChip
+import HalogenMWC.Chip.Choice as ChoiceChip
+import HalogenMWC.Chip.Filter as FilterChip
+import HalogenMWC.Chip.Input as InputChip
+import HalogenMWC.ChipSet.Action as ActionChipSet
+import HalogenMWC.ChipSet.Choice as ChoiceChipSet
+import HalogenMWC.ChipSet.Filter as FilterChipSet
+import HalogenMWC.ChipSet.Input as InputChipSet
+import HalogenMWC.Typography as Typography
 import Set
 import Task
-
 
 data Model =
     { chip :: Maybe String
@@ -29,7 +45,6 @@ data Model =
     , contacts :: Set String
     , focus :: String
     }
-
 
 defaultModel :: Model
 defaultModel =
@@ -42,14 +57,12 @@ defaultModel =
     , focus = "One"
     }
 
-
 data Size
     = ExtraSmall
     | Small
     | Medium
     | Large
     | ExtraLarge
-
 
 data Msg
     = ChipChanged String
@@ -62,7 +75,6 @@ data Msg
     | FocusChanged String
     | Focus String
     | Focused (Result Browser.Dom.Error ())
-
 
 update :: Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -125,7 +137,7 @@ update msg model =
                     | input = ""
                     , inputChips =
                         if not (List.member trimmedInput model.inputChips) then
-                            model.inputChips ++ [ trimmedInput ]
+                            model.inputChips <> [ trimmedInput ]
 
                         else
                             model.inputChips
@@ -154,7 +166,6 @@ update msg model =
         Focused _ ->
             ( model, Cmd.none )
 
-
 view :: Model -> CatalogPage Msg
 view model =
     { title = "Chips"
@@ -166,39 +177,37 @@ view model =
         }
     , hero = heroChips model
     , content =
-        [ Html.h2 [ Typography.subtitle1 ] [ text "Choice Chips" ]
+        [ HH.h2 [ Typography.subtitle1 ] [ HH.text "Choice Chips" ]
         , choiceChips model
-        , Html.h2 [ Typography.subtitle1 ] [ text "Filter Chips" ]
-        , Html.h3 [ Typography.body2 ] [ text "No leading icon" ]
+        , HH.h2 [ Typography.subtitle1 ] [ HH.text "Filter Chips" ]
+        , HH.h3 [ Typography.body2 ] [ HH.text "No leading icon" ]
         , filterChips1 model
-        , Html.h3 [ Typography.body2 ] [ text "With leading icon" ]
+        , HH.h3 [ Typography.body2 ] [ HH.text "With leading icon" ]
         , filterChips2 model
-        , Html.h2 [ Typography.subtitle1 ] [ text "Action Chips" ]
+        , HH.h2 [ Typography.subtitle1 ] [ HH.text "Action Chips" ]
         , actionChips model
-        , Html.h2 [ Typography.subtitle1 ] [ text "Shaped Chips" ]
+        , HH.h2 [ Typography.subtitle1 ] [ HH.text "Shaped Chips" ]
         , shapedChips model
-        , Html.h2 [ Typography.subtitle1 ] [ text "Input Chips" ]
+        , HH.h2 [ Typography.subtitle1 ] [ HH.text "Input Chips" ]
         , inputChips model
-        , Html.h2 [ Typography.subtitle1 ] [ text "Focus Chips" ]
+        , HH.h2 [ Typography.subtitle1 ] [ HH.text "Focus Chips" ]
         , focusChips model
         ]
     }
 
-
 heroChips :: Model -> Array (Html Msg)
 heroChips model =
     [ ChoiceChipSet.chipSet
-        (ChoiceChipSet.config { toLabel = identity }
-            |> ChoiceChipSet.setSelected model.chip
-            |> ChoiceChipSet.setOnChange ChipChanged
+        (ChoiceChipSet.defaultConfig { toLabel = identity }
+            # ChoiceChipSet.setSelected model.chip
+            # ChoiceChipSet.setOnChange ChipChanged
         )
-        [ ChoiceChip.chip ChoiceChip.config "Chip One"
-        , ChoiceChip.chip ChoiceChip.config "Chip Two"
-        , ChoiceChip.chip ChoiceChip.config "Chip Three"
-        , ChoiceChip.chip ChoiceChip.config "Chip Four"
+        [ ChoiceChip.chip ChoiceChip.defaultConfig "Chip One"
+        , ChoiceChip.chip ChoiceChip.defaultConfig "Chip Two"
+        , ChoiceChip.chip ChoiceChip.defaultConfig "Chip Three"
+        , ChoiceChip.chip ChoiceChip.defaultConfig "Chip Four"
         ]
     ]
-
 
 choiceChips :: Model -> Html Msg
 choiceChips model =
@@ -221,59 +230,57 @@ choiceChips model =
                     "Extra Large"
     in
     ChoiceChipSet.chipSet
-        (ChoiceChipSet.config { toLabel = toLabel }
-            |> ChoiceChipSet.setSelected (Just model.size)
-            |> ChoiceChipSet.setOnChange SizeChanged
+        (ChoiceChipSet.defaultConfig { toLabel = toLabel }
+            # ChoiceChipSet.setSelected (Just model.size)
+            # ChoiceChipSet.setOnChange SizeChanged
         )
-        [ ChoiceChip.chip ChoiceChip.config ExtraSmall
-        , ChoiceChip.chip ChoiceChip.config Small
-        , ChoiceChip.chip ChoiceChip.config Medium
-        , ChoiceChip.chip ChoiceChip.config Large
-        , ChoiceChip.chip ChoiceChip.config ExtraLarge
+        [ ChoiceChip.chip ChoiceChip.defaultConfig ExtraSmall
+        , ChoiceChip.chip ChoiceChip.defaultConfig Small
+        , ChoiceChip.chip ChoiceChip.defaultConfig Medium
+        , ChoiceChip.chip ChoiceChip.defaultConfig Large
+        , ChoiceChip.chip ChoiceChip.defaultConfig ExtraLarge
         ]
-
 
 inputChips :: Model -> Html Msg
 inputChips model =
-    Html.div
+    HH.div
         [ style "position" "relative"
         , style "display" "flex"
         ]
         [ InputChipSet.chipSet []
-            (List.map
+            (map
                 (\label ->
                     ( label
                     , InputChip.chip
-                        (InputChip.config
-                            |> InputChip.setOnDelete (InputChipDeleted label)
+                        (InputChip.defaultConfig
+                            # InputChip.setOnDelete (InputChipDeleted label)
                         )
                         label
                     )
                 )
                 model.inputChips
             )
-        , Html.input
-            [ Html.Attributes.value model.input
-            , Html.Events.onInput InputChanged
-            , Html.Events.on "keydown" (Decode.map KeyPressed Html.Events.keyCode)
+        , HH.input
+            [ HP.value model.input
+            , HH.Events.onInput InputChanged
+            , HH.Events.on "keydown" (Decode.map KeyPressed HH.Events.keyCode)
             ]
             []
         ]
-
 
 filterChips1 :: Model -> Html Msg
 filterChips1 model =
     let
         chip accessory =
             FilterChip.chip
-                (FilterChip.config
-                    |> FilterChip.setSelected (Set.member accessory model.accessories)
-                    |> FilterChip.setOnChange (AccessoriesChanged accessory)
+                (FilterChip.defaultConfig
+                    # FilterChip.setSelected (Set.member accessory model.accessories)
+                    # FilterChip.setOnChange (AccessoriesChanged accessory)
                 )
                 accessory
     in
     FilterChipSet.chipSet []
-        (List.map chip
+        (map chip
             [ "Tops"
             , "Bottoms"
             , "Shoes"
@@ -281,21 +288,20 @@ filterChips1 model =
             ]
         )
 
-
 filterChips2 :: Model -> Html Msg
 filterChips2 model =
     let
         chip label =
             FilterChip.chip
-                (FilterChip.config
-                    |> FilterChip.setSelected (Set.member label model.contacts)
-                    |> FilterChip.setIcon (Just "face")
-                    |> FilterChip.setOnChange (ContactChanged label)
+                (FilterChip.defaultConfig
+                    # FilterChip.setSelected (Set.member label model.contacts)
+                    # FilterChip.setIcon (Just "face")
+                    # FilterChip.setOnChange (ContactChanged label)
                 )
                 label
     in
     FilterChipSet.chipSet []
-        (List.map chip
+        (map chip
             [ "Alice"
             , "Bob"
             , "Charlie"
@@ -303,19 +309,18 @@ filterChips2 model =
             ]
         )
 
-
 actionChips :: Model -> Html Msg
 actionChips model =
     let
         chip ( icon, label ) =
             ActionChip.chip
-                (ActionChip.config
-                    |> ActionChip.setIcon (Just icon)
+                (ActionChip.defaultConfig
+                    # ActionChip.setIcon (Just icon)
                 )
                 label
     in
     ActionChipSet.chipSet []
-        (List.map chip
+        (map chip
             [ ( "event", "Add to calendar" )
             , ( "bookmark", "Bookmark" )
             , ( "alarm", "Set alarm" )
@@ -323,19 +328,18 @@ actionChips model =
             ]
         )
 
-
 shapedChips :: Model -> Html msg
 shapedChips model =
     let
         chip label =
             ActionChip.chip
-                (ActionChip.config
-                    |> ActionChip.setAttributes [ style "border-radius" "4px" ]
+                (ActionChip.defaultConfig
+                    # ActionChip.setAttributes [ style "border-radius" "4px" ]
                 )
                 label
     in
     ActionChipSet.chipSet []
-        (List.map chip
+        (map chip
             [ "Bookcase"
             , "TV Stand"
             , "Sofas"
@@ -343,23 +347,22 @@ shapedChips model =
             ]
         )
 
-
 focusChips :: Model -> Html Msg
 focusChips model =
-    Html.div []
+    HH.div []
         [ ChoiceChipSet.chipSet
-            (ChoiceChipSet.config { toLabel = identity }
-                |> ChoiceChipSet.setSelected (Just model.focus)
-                |> ChoiceChipSet.setOnChange FocusChanged
-                |> ChoiceChipSet.setAttributes [ Html.Attributes.id "my-chips" ]
+            (ChoiceChipSet.defaultConfig { toLabel = identity }
+                # ChoiceChipSet.setSelected (Just model.focus)
+                # ChoiceChipSet.setOnChange FocusChanged
+                # ChoiceChipSet.setAttributes [ HP.id "my-chips" ]
             )
-            [ ChoiceChip.chip ChoiceChip.config "One"
-            , ChoiceChip.chip ChoiceChip.config "Two"
+            [ ChoiceChip.chip ChoiceChip.defaultConfig "One"
+            , ChoiceChip.chip ChoiceChip.defaultConfig "Two"
             ]
-        , text "\u{00A0}"
+        , HH.text "\u{00A0}"
         , Button.raised
-            (Button.config
-                |> Button.setOnClick (Focus "my-chips")
+            (Button.defaultConfig
+                # Button.setOnClick (Focus "my-chips")
             )
             "Focus"
         ]

@@ -2,14 +2,21 @@ module Demo.Pages.Selects
 
 import Browser.Dom
 import Demo.CatalogPage
-import Html
-import Html.Attributes
-import Material.Button as Button
-import Material.Select as Select
-import Material.Select.Item as SelectItem
-import Material.Typography as Typography
+import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
+import Halogen
+import Halogen as H
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import HalogenMWC.Button as Button
+import HalogenMWC.Select as Select
+import HalogenMWC.Select.Item as SelectItem
+import HalogenMWC.Typography as Typography
 import Task
-
 
 data Model =
     { hero :: Maybe Fruit
@@ -19,7 +26,6 @@ data Model =
     , outlinedWithIcon :: Maybe Fruit
     , focused :: Maybe Fruit
     }
-
 
 defaultModel :: Model
 defaultModel =
@@ -31,12 +37,10 @@ defaultModel =
     , focused = Nothing
     }
 
-
 data Fruit
     = Apple
     | Orange
     | Banana
-
 
 data Msg
     = HeroChanged (Maybe Fruit)
@@ -47,7 +51,6 @@ data Msg
     | FocusedChanged (Maybe Fruit)
     | Focus String
     | Focused (Result Browser.Dom.Error ())
-
 
 update :: Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -76,7 +79,6 @@ update msg model =
         Focused _ ->
             ( model, Cmd.none )
 
-
 view :: Model -> CatalogPage Msg
 view model =
     { title = "Select"
@@ -88,119 +90,111 @@ view model =
         }
     , hero = [ heroSelect model ]
     , content =
-        [ Html.h3 [ Typography.subtitle1 ] [ text "Filled" ]
+        [ HH.h3 [ Typography.subtitle1 ] [ HH.text "Filled" ]
         , filledSelect model
-        , Html.h3 [ Typography.subtitle1 ] [ text "Outlined" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Outlined" ]
         , outlinedSelect model
-        , Html.h3 [ Typography.subtitle1 ] [ text "Filled with Icon" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Filled with Icon" ]
         , filledWithIconSelect model
-        , Html.h3 [ Typography.subtitle1 ] [ text "Outlined with Icon" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Outlined with Icon" ]
         , outlinedWithIconSelect model
-        , Html.h3 [ Typography.subtitle1 ] [ text "Focus Select" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Focus Select" ]
         , focusSelect model
         ]
     }
 
-
 heroSelect :: Model -> Html Msg
 heroSelect model =
     Select.filled
-        (Select.config
-            |> Select.setLabel (Just "Fruit")
-            |> Select.setSelected (Just model.hero)
-            |> Select.setOnChange HeroChanged
+        (Select.defaultConfig
+            # Select.setLabel (Just "Fruit")
+            # Select.setSelected (Just model.hero)
+            # Select.setOnChange HeroChanged
         )
         firstItem
         remainingItems
-
 
 firstItem :: SelectItem (Maybe a) msg
 firstItem =
     SelectItem.selectItem
-        (SelectItem.config { value = Nothing })
-        [ text "" ]
-
+        (SelectItem.defaultConfig { value = Nothing })
+        [ HH.text "" ]
 
 remainingItems :: Array (SelectItem (Maybe Fruit) msg)
 remainingItems =
     [ SelectItem.selectItem
-        (SelectItem.config { value = Just Apple })
-        [ text "Apple" ]
+        (SelectItem.defaultConfig { value = Just Apple })
+        [ HH.text "Apple" ]
     , SelectItem.selectItem
-        (SelectItem.config { value = Just Orange })
-        [ text "Orange" ]
+        (SelectItem.defaultConfig { value = Just Orange })
+        [ HH.text "Orange" ]
     , SelectItem.selectItem
-        (SelectItem.config { value = Just Banana })
-        [ text "Banana" ]
+        (SelectItem.defaultConfig { value = Just Banana })
+        [ HH.text "Banana" ]
     ]
-
 
 filledSelect :: Model -> Html Msg
 filledSelect model =
     Select.filled
-        (Select.config
-            |> Select.setLabel (Just "Fruit")
-            |> Select.setSelected (Just model.filled)
-            |> Select.setOnChange FilledChanged
+        (Select.defaultConfig
+            # Select.setLabel (Just "Fruit")
+            # Select.setSelected (Just model.filled)
+            # Select.setOnChange FilledChanged
         )
         firstItem
         remainingItems
-
 
 outlinedSelect :: Model -> Html Msg
 outlinedSelect model =
     Select.outlined
-        (Select.config
-            |> Select.setLabel (Just "Fruit")
-            |> Select.setSelected (Just model.outlined)
-            |> Select.setOnChange OutlinedChanged
+        (Select.defaultConfig
+            # Select.setLabel (Just "Fruit")
+            # Select.setSelected (Just model.outlined)
+            # Select.setOnChange OutlinedChanged
         )
         firstItem
         remainingItems
-
 
 filledWithIconSelect :: Model -> Html Msg
 filledWithIconSelect model =
     Select.filled
-        (Select.config
-            |> Select.setLabel (Just "Fruit")
-            |> Select.setSelected (Just model.filledWithIcon)
-            |> Select.setLeadingIcon (Just (Select.icon [] "favorite"))
-            |> Select.setOnChange FilledWithIconChanged
+        (Select.defaultConfig
+            # Select.setLabel (Just "Fruit")
+            # Select.setSelected (Just model.filledWithIcon)
+            # Select.setLeadingIcon (Just (Select.icon [] "favorite"))
+            # Select.setOnChange FilledWithIconChanged
         )
         firstItem
         remainingItems
-
 
 outlinedWithIconSelect :: Model -> Html Msg
 outlinedWithIconSelect model =
     Select.outlined
-        (Select.config
-            |> Select.setLabel (Just "Fruit")
-            |> Select.setSelected (Just model.outlinedWithIcon)
-            |> Select.setLeadingIcon (Just (Select.icon [] "favorite"))
-            |> Select.setOnChange OutlinedWithIconChanged
+        (Select.defaultConfig
+            # Select.setLabel (Just "Fruit")
+            # Select.setSelected (Just model.outlinedWithIcon)
+            # Select.setLeadingIcon (Just (Select.icon [] "favorite"))
+            # Select.setOnChange OutlinedWithIconChanged
         )
         firstItem
         remainingItems
 
-
 focusSelect :: Model -> Html Msg
 focusSelect model =
-    Html.div
+    HH.div
         [ style "display" "flex"
         , style "align-items" "center"
         ]
         [ Select.filled
-            (Select.config
-                |> Select.setSelected (Just model.focused)
-                |> Select.setOnChange FocusedChanged
-                |> Select.setAttributes [ Html.Attributes.id "my-select" ]
+            (Select.defaultConfig
+                # Select.setSelected (Just model.focused)
+                # Select.setOnChange FocusedChanged
+                # Select.setAttributes [ HP.id "my-select" ]
             )
             firstItem
             remainingItems
-        , text "\u{00A0}"
+        , HH.text "\u{00A0}"
         , Button.raised
-            (Button.config |> Button.setOnClick (Focus "my-select"))
+            (Button.defaultConfig # Button.setOnClick (Focus "my-select"))
             "Focus"
         ]

@@ -3,17 +3,23 @@ module Demo.Pages.Slider
 import Browser.Dom
 import Demo.CatalogPage
 import Dict
-import Html
-import Html.Attributes
-import Material.Button as Button
-import Material.Slider as Slider
-import Material.Typography as Typography
+import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
+import Halogen
+import Halogen as H
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import HalogenMWC.Button as Button
+import HalogenMWC.Slider as Slider
+import HalogenMWC.Typography as Typography
 import Task
-
 
 data Model =
     { sliders :: Dict String Float }
-
 
 defaultModel :: Model
 defaultModel =
@@ -26,12 +32,10 @@ defaultModel =
             ]
     }
 
-
 data Msg
     = Changed String Float
     | Focus String
     | Focused (Result Browser.Dom.Error ())
-
 
 update :: Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -45,7 +49,6 @@ update msg model =
         Focused _ ->
             ( model, Cmd.none )
 
-
 view :: Model -> CatalogPage Msg
 view model =
     { title = "Slider"
@@ -57,17 +60,16 @@ view model =
         }
     , hero = [ heroSlider model ]
     , content =
-        [ Html.h3 [ Typography.subtitle1 ] [ text "Continuous" ]
+        [ HH.h3 [ Typography.subtitle1 ] [ HH.text "Continuous" ]
         , continuousSlider model
-        , Html.h3 [ Typography.subtitle1 ] [ text "Discrete" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Discrete" ]
         , discreteSlider model
-        , Html.h3 [ Typography.subtitle1 ] [ text "Discrete with Tick Marks" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Discrete with Tick Marks" ]
         , discreteSliderWithTickMarks model
-        , Html.h3 [ Typography.subtitle1 ] [ text "Focus Slider" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Focus Slider" ]
         , focusSlider model
         ]
     }
-
 
 heroSlider :: Model -> Html Msg
 heroSlider model =
@@ -76,11 +78,10 @@ heroSlider model =
             "hero-slider"
     in
     Slider.slider
-        (Slider.config
-            |> Slider.setValue (Dict.get id model.sliders)
-            |> Slider.setOnInput (Changed id)
+        (Slider.defaultConfig
+            # Slider.setValue (Dict.get id model.sliders)
+            # Slider.setOnInput (Changed id)
         )
-
 
 continuousSlider :: Model -> Html Msg
 continuousSlider model =
@@ -89,13 +90,12 @@ continuousSlider model =
             "continuous-slider"
     in
     Slider.slider
-        (Slider.config
-            |> Slider.setValue (Dict.get id model.sliders)
-            |> Slider.setOnInput (Changed id)
-            |> Slider.setMin (Just 0)
-            |> Slider.setMax (Just 50)
+        (Slider.defaultConfig
+            # Slider.setValue (Dict.get id model.sliders)
+            # Slider.setOnInput (Changed id)
+            # Slider.setMin (Just 0)
+            # Slider.setMax (Just 50)
         )
-
 
 discreteSlider :: Model -> Html Msg
 discreteSlider model =
@@ -104,15 +104,14 @@ discreteSlider model =
             "discrete-slider"
     in
     Slider.slider
-        (Slider.config
-            |> Slider.setValue (Dict.get id model.sliders)
-            |> Slider.setOnInput (Changed id)
-            |> Slider.setDiscrete True
-            |> Slider.setMin (Just 0)
-            |> Slider.setMax (Just 50)
-            |> Slider.setStep (Just 1)
+        (Slider.defaultConfig
+            # Slider.setValue (Dict.get id model.sliders)
+            # Slider.setOnInput (Changed id)
+            # Slider.setDiscrete true
+            # Slider.setMin (Just 0)
+            # Slider.setMax (Just 50)
+            # Slider.setStep (Just 1)
         )
-
 
 discreteSliderWithTickMarks :: Model -> Html Msg
 discreteSliderWithTickMarks model =
@@ -121,16 +120,15 @@ discreteSliderWithTickMarks model =
             "discrete-slider-with-tick-marks"
     in
     Slider.slider
-        (Slider.config
-            |> Slider.setValue (Dict.get id model.sliders)
-            |> Slider.setOnInput (Changed id)
-            |> Slider.setDiscrete True
-            |> Slider.setMin (Just 0)
-            |> Slider.setMax (Just 50)
-            |> Slider.setStep (Just 1)
-            |> Slider.setDisplayMarkers True
+        (Slider.defaultConfig
+            # Slider.setValue (Dict.get id model.sliders)
+            # Slider.setOnInput (Changed id)
+            # Slider.setDiscrete true
+            # Slider.setMin (Just 0)
+            # Slider.setMax (Just 50)
+            # Slider.setStep (Just 1)
+            # Slider.setDisplayMarkers true
         )
-
 
 focusSlider :: Model -> Html Msg
 focusSlider model =
@@ -138,15 +136,15 @@ focusSlider model =
         id =
             "my-slider"
     in
-    Html.div []
+    HH.div []
         [ Slider.slider
-            (Slider.config
-                |> Slider.setValue (Dict.get id model.sliders)
-                |> Slider.setOnInput (Changed id)
-                |> Slider.setAttributes [ Html.Attributes.id id ]
+            (Slider.defaultConfig
+                # Slider.setValue (Dict.get id model.sliders)
+                # Slider.setOnInput (Changed id)
+                # Slider.setAttributes [ HP.id id ]
             )
-        , text "\u{00A0}"
+        , HH.text "\u{00A0}"
         , Button.raised
-            (Button.config |> Button.setOnClick (Focus id))
+            (Button.defaultConfig # Button.setOnClick (Focus id))
             "Focus"
         ]

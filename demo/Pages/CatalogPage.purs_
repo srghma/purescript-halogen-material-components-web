@@ -1,15 +1,22 @@
 module Demo.Pages.CatalogPage
 
 import Demo.Url as Url
-import Html
-import Html.Attributes
-import Material.Drawer.Dismissible as DismissibleDrawer
-import Material.IconButton as IconButton
-import Material.List as List
-import Material.List.Item as ListItem
-import Material.TopAppBar as TopAppBar
-import Material.Typography as Typography
-
+import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
+import Halogen
+import Halogen as H
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import HalogenMWC.Drawer.Dismissible as DismissibleDrawer
+import HalogenMWC.IconButton as IconButton
+import HalogenMWC.List as List
+import HalogenMWC.List.Item as ListItem
+import HalogenMWC.TopAppBar as TopAppBar
+import HalogenMWC.Typography as Typography
 
 data CatalogPage msg =
     { title :: String
@@ -19,13 +26,11 @@ data CatalogPage msg =
     , content :: Array (Html msg)
     }
 
-
 data CatalogPageResources =
     { materialDesignGuidelines :: Maybe String
     , documentation :: Maybe String
     , sourceCode :: Maybe String
     }
-
 
 data CatalogPageConfig topMsg =
     { openDrawer :: topMsg
@@ -33,7 +38,6 @@ data CatalogPageConfig topMsg =
     , drawerOpen :: Boolean
     , url :: Url
     }
-
 
 view :: (msg -> topMsg) -> CatalogPageConfig topMsg -> CatalogPage msg -> Html topMsg
 view lift catalogPageConfig catalogPage =
@@ -45,130 +49,128 @@ view lift catalogPageConfig catalogPage =
             else
                 catalogPageConfig.openDrawer
     in
-    Html.div catalogPageContainer
-        [ TopAppBar.regular TopAppBar.config
+    HH.div catalogPageContainer
+        [ TopAppBar.regular TopAppBar.defaultConfig
             [ TopAppBar.row []
                 [ TopAppBar.section [ TopAppBar.alignStart ]
                     [ IconButton.iconButton
-                        (IconButton.config
-                            |> IconButton.setAttributes [ TopAppBar.navigationIcon ]
-                            |> IconButton.setOnClick toggleCatalogDrawer
+                        (IconButton.defaultConfig
+                            # IconButton.setAttributes [ TopAppBar.navigationIcon ]
+                            # IconButton.setOnClick toggleCatalogDrawer
                         )
                         "menu"
-                    , Html.span
+                    , HH.span
                         [ TopAppBar.title
                         , style "text-transform" "uppercase"
                         , style "font-weight" "400"
                         ]
-                        [ text "Material Components for Elm" ]
+                        [ HH.text "Material Components for Elm" ]
                     ]
                 ]
             ]
-        , Html.div demoPanel
+        , HH.div demoPanel
             [ DismissibleDrawer.drawer
-                (DismissibleDrawer.config
-                    |> DismissibleDrawer.setOpen catalogPageConfig.drawerOpen
-                    |> DismissibleDrawer.setAttributes
+                (DismissibleDrawer.defaultConfig
+                    # DismissibleDrawer.setOpen catalogPageConfig.drawerOpen
+                    # DismissibleDrawer.setAttributes
                         [ TopAppBar.fixedAdjust
                         , style "z-index" "1"
                         ]
                 )
                 [ DismissibleDrawer.content []
                     [ case
-                        Array.map
+                        map
                             (\{ url, label } ->
                                 ListItem.listItem
-                                    (ListItem.config
-                                        |> ListItem.setSelected
+                                    (ListItem.defaultConfig
+                                        # ListItem.setSelected
                                             (if catalogPageConfig.url == url then
                                                 Just ListItem.activated
 
                                              else
                                                 Nothing
                                             )
-                                        |> ListItem.setHref (Just (Url.toString url))
+                                        # ListItem.setHref (Just (Url.toString url))
                                     )
-                                    [ text label ]
+                                    [ HH.text label ]
                             )
                             catalogDrawerItems
                       of
                         listItem :: listItems ->
-                            Array.list Array.config listItem listItems
+                            Array.list Array.defaultConfig listItem listItems
 
                         [] ->
                             text ""
                     ]
                 ]
-            , Html.map lift <|
-                Html.div
+            , HH.map lift $
+                HH.div
                     (TopAppBar.fixedAdjust
                         :: DismissibleDrawer.appContent
                         :: demoContent
                     )
-                    [ Html.div demoContentTransition
-                        (Html.h1 [ Typography.headline5 ] [ text catalogPage.title ]
-                            :: Html.p [ Typography.body1 ] [ text catalogPage.prelude ]
-                            :: Html.div hero catalogPage.hero
-                            :: Html.h2 (Typography.headline6 :: demoTitle)
-                                [ text "Resources" ]
+                    [ HH.div demoContentTransition
+                        (HH.h1 [ Typography.headline5 ] [ HH.text catalogPage.title ]
+                            :: HH.p [ Typography.body1 ] [ HH.text catalogPage.prelude ]
+                            :: HH.div hero catalogPage.hero
+                            :: HH.h2 (Typography.headline6 :: demoTitle)
+                                [ HH.text "Resources" ]
                             :: resourcesList catalogPage.resources
-                            :: Html.h2 (Typography.headline6 :: demoTitle)
-                                [ text "Demos" ]
+                            :: HH.h2 (Typography.headline6 :: demoTitle)
+                                [ HH.text "Demos" ]
                             :: catalogPage.content
                         )
                     ]
             ]
         ]
 
-
 resourcesList :: CatalogPageResources -> Html msg
 resourcesList { materialDesignGuidelines, documentation, sourceCode } =
-    Array.list Array.config
+    Array.list Array.defaultConfig
         (ListItem.listItem
-            (ListItem.config
-                |> ListItem.setHref materialDesignGuidelines
-                |> ListItem.setTarget (Just "_blank")
+            (ListItem.defaultConfig
+                # ListItem.setHref materialDesignGuidelines
+                # ListItem.setTarget (Just "_blank")
             )
             [ ListItem.graphic resourcesGraphic
-                [ Html.img
-                    (Html.Attributes.src "images/ic_material_design_24px.svg"
+                [ HH.img
+                    (HP.src "images/ic_material_design_24px.svg"
                         :: resourcesGraphic
                     )
                     []
                 ]
-            , text "Material Design Guidelines"
+            , HH.text "Material Design Guidelines"
             ]
         )
         [ ListItem.listItem
-            (ListItem.config
-                |> ListItem.setHref documentation
-                |> ListItem.setTarget (Just "_blank")
+            (ListItem.defaultConfig
+                # ListItem.setHref documentation
+                # ListItem.setTarget (Just "_blank")
             )
             [ ListItem.graphic resourcesGraphic
-                [ Html.img
-                    (Html.Attributes.src "images/ic_drive_document_24px.svg"
+                [ HH.img
+                    (HP.src "images/ic_drive_document_24px.svg"
                         :: resourcesGraphic
                     )
                     []
                 ]
-            , text "Documentation"
+            , HH.text "Documentation"
             ]
         , ListItem.listItem
-            (ListItem.config
-                |> ListItem.setHref sourceCode
-                |> ListItem.setTarget (Just "_blank")
+            (ListItem.defaultConfig
+                # ListItem.setHref sourceCode
+                # ListItem.setTarget (Just "_blank")
             )
             [ ListItem.graphic resourcesGraphic
-                [ Html.img
-                    (Html.Attributes.src "images/ic_code_24px.svg"
+                [ HH.img
+                    (HP.src "images/ic_code_24px.svg"
                         :: resourcesGraphic
                     )
                     []
                 ]
-            , text "Source Code"
+            , HH.text "Source Code"
             ]
         ]
-
 
 catalogDrawerItems :: Array { label :: String, url :: Url }
 catalogDrawerItems =
@@ -201,15 +203,13 @@ catalogDrawerItems =
     , { label = "Typography", url = Url.Typography }
     ]
 
-
-catalogPageContainer :: Array (Html.Attribute msg)
+catalogPageContainer :: Array (HH.Attribute msg)
 catalogPageContainer =
     [ style "position" "relative"
     , Typography.typography
     ]
 
-
-demoPanel :: Array (Html.Attribute msg)
+demoPanel :: Array (HH.Attribute msg)
 demoPanel =
     [ style "display" "-ms-flexbox"
     , style "display" "flex"
@@ -218,10 +218,9 @@ demoPanel =
     , style "overflow" "hidden"
     ]
 
-
-demoContent :: Array (Html.Attribute msg)
+demoContent :: Array (HH.Attribute msg)
 demoContent =
-    [ Html.Attributes.id "demo-content"
+    [ HP.id "demo-content"
     , style "height" "100%"
     , style "-webkit-box-sizing" "border-box"
     , style "box-sizing" "border-box"
@@ -241,15 +240,13 @@ demoContent =
     , style "justify-content" "flex-start"
     ]
 
-
-demoContentTransition :: Array (Html.Attribute msg)
+demoContentTransition :: Array (HH.Attribute msg)
 demoContentTransition =
     [ style "max-width" "900px"
     , style "width" "100%"
     ]
 
-
-hero :: Array (Html.Attribute msg)
+hero :: Array (HH.Attribute msg)
 hero =
     [ style "display" "-ms-flexbox"
     , style "display" "flex"
@@ -264,14 +261,12 @@ hero =
     , style "background-color" "#f2f2f2"
     ]
 
-
-demoTitle :: Array (Html.Attribute msg)
+demoTitle :: Array (HH.Attribute msg)
 demoTitle =
     [ style "border-bottom" "1px solid rgba(0,0,0,.87)"
     ]
 
-
-resourcesGraphic :: Array (Html.Attribute msg)
+resourcesGraphic :: Array (HH.Attribute msg)
 resourcesGraphic =
     [ style "width" "30px"
     , style "height" "30px"

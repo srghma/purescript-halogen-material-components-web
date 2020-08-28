@@ -1,27 +1,30 @@
 module Demo.Pages.Typography
 
 import Demo.CatalogPage
-import Html
-import Material.Typography as Typography
-
+import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
+import Halogen
+import Halogen as H
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 data Model =
     {}
-
 
 defaultModel :: Model
 defaultModel =
     {}
 
-
 data Msg
     = NoOp
-
 
 update :: Msg -> Model -> Model
 update msg model =
     model
-
 
 view :: Model -> CatalogPage Msg
 view model =
@@ -32,28 +35,26 @@ view model =
         , documentation = Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Typography"
         , sourceCode = Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-typography"
         }
-    , hero = [ Html.h1 [ Typography.headline1 ] [ text "Typography" ] ]
+    , hero = [ HH.h1 [ Typography.headline1 ] [ HH.text "Typography" ] ]
     , content =
-        [ Html.h1 [ Typography.headline1 ] [ text "Headline 1" ]
-        , Html.h2 [ Typography.headline2 ] [ text "Headline 2" ]
-        , Html.h3 [ Typography.headline3 ] [ text "Headline 3" ]
-        , Html.h4 [ Typography.headline4 ] [ text "Headline 4" ]
-        , Html.h5 [ Typography.headline5 ] [ text "Headline 5" ]
-        , Html.h6 [ Typography.headline6 ] [ text "Headline 6" ]
-        , Html.h6 [ Typography.subtitle1 ] [ text "Subtitle 1" ]
-        , Html.h6 [ Typography.subtitle2 ] [ text "Subtitle 2" ]
-        , Html.p [ Typography.body1 ] [ text body1Paragraph ]
-        , Html.p [ Typography.body2 ] [ text body2Paragraph ]
-        , Html.div [ Typography.button ] [ text "Button text" ]
-        , Html.div [ Typography.caption ] [ text "Caption text" ]
-        , Html.div [ Typography.overline ] [ text "Overline text" ]
+        [ HH.h1 [ Typography.headline1 ] [ HH.text "Headline 1" ]
+        , HH.h2 [ Typography.headline2 ] [ HH.text "Headline 2" ]
+        , HH.h3 [ Typography.headline3 ] [ HH.text "Headline 3" ]
+        , HH.h4 [ Typography.headline4 ] [ HH.text "Headline 4" ]
+        , HH.h5 [ Typography.headline5 ] [ HH.text "Headline 5" ]
+        , HH.h6 [ Typography.headline6 ] [ HH.text "Headline 6" ]
+        , HH.h6 [ Typography.subtitle1 ] [ HH.text "Subtitle 1" ]
+        , HH.h6 [ Typography.subtitle2 ] [ HH.text "Subtitle 2" ]
+        , HH.p [ Typography.body1 ] [ HH.text body1Paragraph ]
+        , HH.p [ Typography.body2 ] [ HH.text body2Paragraph ]
+        , HH.div [ Typography.button ] [ HH.text "Button text" ]
+        , HH.div [ Typography.caption ] [ HH.text "Caption text" ]
+        , HH.div [ Typography.overline ] [ HH.text "Overline text" ]
         ]
     }
 
-
 body1Paragraph =
     "Body 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam."
-
 
 body2Paragraph =
     "Body 2. Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate aliquid ad quas sunt voluptatum officia dolorum cumque, possimus nihil molestias sapiente necessitatibus dolor saepe inventore, soluta id accusantium voluptas beatae."

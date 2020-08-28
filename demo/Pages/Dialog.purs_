@@ -1,15 +1,22 @@
 module Demo.Pages.Dialog
 
 import Demo.CatalogPage
-import Html
-import Html.Attributes
-import Material.Button as Button
-import Material.Dialog as Dialog
-import Material.Icon as Icon
-import Material.List as List
-import Material.List.Item as ListItem
-import Material.Radio as Radio
-
+import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
+import Halogen
+import Halogen as H
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import HalogenMWC.Button as Button
+import HalogenMWC.Dialog as Dialog
+import HalogenMWC.Icon as Icon
+import HalogenMWC.List as List
+import HalogenMWC.List.Item as ListItem
+import HalogenMWC.Radio as Radio
 
 data Dialog
     = AlertDialog
@@ -17,20 +24,16 @@ data Dialog
     | ScrollableDialog
     | SimpleDialog
 
-
 data Model =
     { open :: Maybe Dialog }
-
 
 defaultModel :: Model
 defaultModel =
     { open = Nothing }
 
-
 data Msg
     = Close
     | Show Dialog
-
 
 update :: Msg -> Model -> Model
 update msg model =
@@ -40,7 +43,6 @@ update msg model =
 
         Show id ->
             { model | open = Just id }
-
 
 view :: Model -> CatalogPage Msg
 view model =
@@ -54,21 +56,21 @@ view model =
     , hero = heroDialog
     , content =
         [ Button.text
-            (Button.config |> Button.setOnClick (Show AlertDialog))
+            (Button.defaultConfig # Button.setOnClick (Show AlertDialog))
             "Alert"
-        , text " "
+        , HH.text " "
         , Button.text
-            (Button.config |> Button.setOnClick (Show SimpleDialog))
+            (Button.defaultConfig # Button.setOnClick (Show SimpleDialog))
             "Simple"
-        , text " "
+        , HH.text " "
         , Button.text
-            (Button.config |> Button.setOnClick (Show ConfirmationDialog))
+            (Button.defaultConfig # Button.setOnClick (Show ConfirmationDialog))
             "Confirmation"
-        , text " "
+        , HH.text " "
         , Button.text
-            (Button.config |> Button.setOnClick (Show ScrollableDialog))
+            (Button.defaultConfig # Button.setOnClick (Show ScrollableDialog))
             "Scrollable"
-        , text " "
+        , HH.text " "
         , alertDialog model
         , simpleDialog model
         , confirmationDialog model
@@ -76,47 +78,45 @@ view model =
         ]
     }
 
-
 alertDialog :: Model -> Html Msg
 alertDialog model =
     Dialog.dialog
-        (Dialog.config
-            |> Dialog.setOpen (model.open == Just AlertDialog)
-            |> Dialog.setOnClose Close
+        (Dialog.defaultConfig
+            # Dialog.setOpen (model.open == Just AlertDialog)
+            # Dialog.setOnClose Close
         )
         { title = Nothing
-        , content = [ text "Discard draft?" ]
+        , content = [ HH.text "Discard draft?" ]
         , actions =
-            [ Button.text (Button.config |> Button.setOnClick Close) "Cancel"
-            , Button.text (Button.config |> Button.setOnClick Close) "Discard"
+            [ Button.text (Button.defaultConfig # Button.setOnClick Close) "Cancel"
+            , Button.text (Button.defaultConfig # Button.setOnClick Close) "Discard"
             ]
         }
-
 
 simpleDialog :: Model -> Html Msg
 simpleDialog model =
     let
         listItem ( icon, label ) =
             ListItem.listItem
-                (ListItem.config |> ListItem.setOnClick Close)
+                (ListItem.defaultConfig # ListItem.setOnClick Close)
                 [ ListItem.graphic
                     [ style "background-color" "rgba(0,0,0,.3)"
                     , style "color" "#fff"
                     ]
                     [ Icon.icon [] icon ]
-                , text label
+                , HH.text label
                 ]
     in
     Dialog.dialog
-        (Dialog.config
-            |> Dialog.setOpen (model.open == Just SimpleDialog)
-            |> Dialog.setOnClose Close
+        (Dialog.defaultConfig
+            # Dialog.setOpen (model.open == Just SimpleDialog)
+            # Dialog.setOnClose Close
         )
         { title = Just "Select an account"
         , content =
-            [ Array.list (List.config |> Array.setAvatarList True)
+            [ Array.list (List.defaultConfig # Array.setAvatarList true)
                 (listItem ( "person", "user1@example.com" ))
-                (List.map listItem
+                (map listItem
                     [ ( "person", "user2@example.com" )
                     , ( "add", "Add account" )
                     ]
@@ -125,50 +125,48 @@ simpleDialog model =
         , actions = []
         }
 
-
 confirmationDialog :: Model -> Html Msg
 confirmationDialog model =
     let
         listItem ( checked, label ) =
-            ListItem.listItem ListItem.config
+            ListItem.listItem ListItem.defaultConfig
                 [ ListItem.graphic []
-                    [ Radio.radio (Radio.config |> Radio.setChecked checked) ]
-                , text label
+                    [ Radio.radio (Radio.defaultConfig # Radio.setChecked checked) ]
+                , HH.text label
                 ]
     in
     Dialog.dialog
-        (Dialog.config
-            |> Dialog.setOpen (model.open == Just ConfirmationDialog)
-            |> Dialog.setOnClose Close
+        (Dialog.defaultConfig
+            # Dialog.setOpen (model.open == Just ConfirmationDialog)
+            # Dialog.setOnClose Close
         )
         { title = Just "Phone ringtone"
         , content =
-            [ Array.list (List.config |> Array.setAvatarList True)
-                (listItem ( True, "Never Gonna Give You Up" ))
-                (List.map listItem
-                    [ ( False, "Hot Cross Buns" )
-                    , ( False, "None" )
+            [ Array.list (List.defaultConfig # Array.setAvatarList true)
+                (listItem ( true, "Never Gonna Give You Up" ))
+                (map listItem
+                    [ ( false, "Hot Cross Buns" )
+                    , ( false, "None" )
                     ]
                 )
             ]
         , actions =
-            [ Button.text (Button.config |> Button.setOnClick Close) "Cancel"
-            , Button.text (Button.config |> Button.setOnClick Close) "OK"
+            [ Button.text (Button.defaultConfig # Button.setOnClick Close) "Cancel"
+            , Button.text (Button.defaultConfig # Button.setOnClick Close) "OK"
             ]
         }
-
 
 scrollableDialog :: Model -> Html Msg
 scrollableDialog model =
     Dialog.dialog
-        (Dialog.config
-            |> Dialog.setOpen (model.open == Just ScrollableDialog)
-            |> Dialog.setOnClose Close
+        (Dialog.defaultConfig
+            # Dialog.setOpen (model.open == Just ScrollableDialog)
+            # Dialog.setOnClose Close
         )
         { title = Just "The Wonderful Wizard of Oz"
         , content =
-            [ Html.p []
-                [ text """
+            [ HH.p []
+                [ HH.text """
                     Dorothy lived in the midst of the great Kansas prairies,
                     with Uncle Henry, who was a farmer, and Aunt Em, who was
                     the farmer's wife. Their house was small, for the lumber to
@@ -186,8 +184,8 @@ scrollableDialog model =
                     led down into the small, dark hole.
                   """
                 ]
-            , Html.p []
-                [ text """
+            , HH.p []
+                [ HH.text """
                     When Dorothy stood in the doorway and looked around, she
                     could see nothing but the great gray prairie on every side.
                     Not a tree nor a house broke the broad sweep of flat
@@ -201,8 +199,8 @@ scrollableDialog model =
                     the house was as dull and gray as everything else.
                   """
                 ]
-            , Html.p []
-                [ text """
+            , HH.p []
+                [ HH.text """
                     When Aunt Em came there to live she was a young, pretty
                     wife. The sun and wind had changed her, too. They had taken
                     the sparkle from her eyes and left them a sober gray; they
@@ -216,16 +214,16 @@ scrollableDialog model =
                     laugh at.
                   """
                 ]
-            , Html.p []
-                [ text """
+            , HH.p []
+                [ HH.text """
                     Uncle Henry never laughed. He worked hard from morning till
                     night and did not know what joy was. He was gray also, from
                     his long beard to his rough boots, and he looked stern and
                     solemn, and rarely spoke.
                   """
                 ]
-            , Html.p []
-                [ text """
+            , HH.p []
+                [ HH.text """
                     It was Toto that made Dorothy laugh, and saved her from
                     growing as gray as her other surroundings. Toto was not
                     gray; he was a little black dog, with long silky hair and
@@ -234,8 +232,8 @@ scrollableDialog model =
                     played with him, and loved him dearly.
                   """
                 ]
-            , Html.p []
-                [ text """
+            , HH.p []
+                [ HH.text """
                     Today, however, they were not playing. Uncle Henry sat upon
                     the doorstep and looked anxiously at the sky, which was
                     even grayer than usual. Dorothy stood in the door with Toto
@@ -243,8 +241,8 @@ scrollableDialog model =
                     the dishes.
                   """
                 ]
-            , Html.p []
-                [ text """
+            , HH.p []
+                [ HH.text """
                     From the far north they heard a low wail of the wind, and
                     Uncle Henry and Dorothy could see where the long grass
                     bowed in waves before the coming storm.  There now came a
@@ -255,26 +253,25 @@ scrollableDialog model =
                 ]
             ]
         , actions =
-            [ Button.text (Button.config |> Button.setOnClick Close) "Decline"
-            , Button.text (Button.config |> Button.setOnClick Close) "Continue"
+            [ Button.text (Button.defaultConfig # Button.setOnClick Close) "Decline"
+            , Button.text (Button.defaultConfig # Button.setOnClick Close) "Continue"
             ]
         }
 
-
 heroDialog :: Array (Html Msg)
 heroDialog =
-    [ Html.div
-        [ class "mdc-dialog mdc-dialog--open"
+    [ HH.div
+        [ HP.class_ "mdc-dialog mdc-dialog--open"
         , style "position" "relative"
         ]
-        [ Html.div
-            [ class "mdc-dialog__surface" ]
-            [ Html.div [ class "mdc-dialog__title" ] [ text "Get this party started?" ]
-            , Html.div [ class "mdc-dialog__content" ]
-                [ text "Turn up the jams and have a good time." ]
-            , Html.div [ class "mdc-dialog__actions" ]
-                [ Button.text Button.config "Decline"
-                , Button.text Button.config "Accept"
+        [ HH.div
+            [ HP.class_ mdc_dialog__surface ]
+            [ HH.div [ HP.class_ mdc_dialog__title ] [ HH.text "Get this party started?" ]
+            , HH.div [ HP.class_ mdc_dialog__content ]
+                [ HH.text "Turn up the jams and have a good time." ]
+            , HH.div [ HP.class_ mdc_dialog__actions ]
+                [ Button.text Button.defaultConfig "Decline"
+                , Button.text Button.defaultConfig "Accept"
                 ]
             ]
         ]

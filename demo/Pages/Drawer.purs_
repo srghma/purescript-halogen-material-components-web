@@ -7,32 +7,35 @@ module Demo.Pages.Drawer
     )
 
 import Demo.CatalogPage
-import Html
-import Html.Attributes
-import Material.Drawer.Permanent as PermanentDrawer
-import Material.Icon as Icon
-import Material.List as List
-import Material.List.Item as ListItem
-import Material.Typography as Typography
-
+import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
+import Halogen
+import Halogen as H
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import HalogenMWC.Drawer.Permanent as PermanentDrawer
+import HalogenMWC.Icon as Icon
+import HalogenMWC.List as List
+import HalogenMWC.List.Item as ListItem
+import HalogenMWC.Typography as Typography
 
 data Model =
     {}
-
 
 defaultModel :: Model
 defaultModel =
     {}
 
-
 data Msg
     = NoOp
-
 
 update :: Msg -> Model -> Model
 update msg model =
     model
-
 
 view :: Model -> CatalogPage Msg
 view model =
@@ -51,48 +54,46 @@ view model =
         ]
     }
 
-
 heroDrawer :: Array (Html msg)
 heroDrawer =
     let
         listItem ( activated, icon, label ) =
             ListItem.listItem
-                (ListItem.config
-                    |> ListItem.setSelected
+                (ListItem.defaultConfig
+                    # ListItem.setSelected
                         (if activated then
                             Just ListItem.activated
 
                          else
                             Nothing
                         )
-                    |> ListItem.setAttributes [ Html.Attributes.href "#drawer" ]
+                    # ListItem.setAttributes [ HP.href "#drawer" ]
                 )
                 [ ListItem.graphic [] [ Icon.icon [] icon ]
-                , text label
+                , HH.text label
                 ]
     in
-    [ PermanentDrawer.drawer PermanentDrawer.config
+    [ PermanentDrawer.drawer PermanentDrawer.defaultConfig
         [ PermanentDrawer.header []
-            [ Html.h3 [ PermanentDrawer.title ] [ text "Title" ]
-            , Html.h6 [ PermanentDrawer.subtitle ] [ text "Subtitle" ]
+            [ HH.h3 [ PermanentDrawer.title ] [ HH.text "Title" ]
+            , HH.h6 [ PermanentDrawer.subtitle ] [ HH.text "Subtitle" ]
             ]
         , PermanentDrawer.content []
-            [ Array.list Array.config
-                (listItem ( True, "inbox", "Inbox" ))
-                (List.map listItem
-                    [ ( False, "star", "Star" )
-                    , ( False, "send", "Sent Mail" )
-                    , ( False, "drafts", "Drafts" )
+            [ Array.list Array.defaultConfig
+                (listItem ( true, "inbox", "Inbox" ))
+                (map listItem
+                    [ ( false, "star", "Star" )
+                    , ( false, "send", "Sent Mail" )
+                    , ( false, "drafts", "Drafts" )
                     ]
                 )
             ]
         ]
     ]
 
-
 iframe :: String -> String -> Html msg
 iframe label url =
-    Html.div
+    HH.div
         [ style "display" "inline-block"
         , style "-ms-flex" "1 1 80%"
         , style "flex" "1 1 80%"
@@ -102,15 +103,15 @@ iframe label url =
         , style "min-width" "400px"
         , style "padding" "15px"
         ]
-        [ Html.div []
-            [ Html.a
-                [ Html.Attributes.href url
-                , Html.Attributes.target "_blank"
+        [ HH.div []
+            [ HH.a
+                [ HP.href url
+                , HP.target "_blank"
                 ]
-                [ Html.h3 [ Typography.subtitle1 ] [ text label ] ]
+                [ HH.h3 [ Typography.subtitle1 ] [ HH.text label ] ]
             ]
-        , Html.iframe
-            [ Html.Attributes.src url
+        , HH.iframe
+            [ HP.src url
             , style "height" "400px"
             , style "width" "100vw"
             , style "max-width" "780px"

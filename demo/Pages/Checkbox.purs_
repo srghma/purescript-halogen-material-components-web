@@ -3,17 +3,23 @@ module Demo.Pages.Checkbox
 import Browser.Dom
 import Demo.CatalogPage
 import Dict
-import Html
-import Html.Attributes
-import Material.Button as Button
-import Material.Checkbox as Checkbox
-import Material.Typography as Typography
+import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
+import Halogen
+import Halogen as H
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import HalogenMWC.Button as Button
+import HalogenMWC.Checkbox as Checkbox
+import HalogenMWC.Typography as Typography
 import Task
-
 
 data Model =
     { checkboxes :: Dict String Checkbox.State }
-
 
 defaultModel :: Model
 defaultModel =
@@ -26,12 +32,10 @@ defaultModel =
             ]
     }
 
-
 data Msg
     = Changed String
     | Focus String
     | Focused (Result Browser.Dom.Error ())
-
 
 update :: Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -57,7 +61,6 @@ update msg model =
         Focused _ ->
             ( model, Cmd.none )
 
-
 view :: Model -> CatalogPage Msg
 view model =
     { title = "Checkbox"
@@ -69,17 +72,16 @@ view model =
         }
     , hero = heroCheckboxes model
     , content =
-        [ Html.h3 [ Typography.subtitle1 ] [ text "Unchecked" ]
+        [ HH.h3 [ Typography.subtitle1 ] [ HH.text "Unchecked" ]
         , checkbox "unchecked-checkbox" model []
-        , Html.h3 [ Typography.subtitle1 ] [ text "Indeterminate" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Indeterminate" ]
         , checkbox "indeterminate-checkbox" model []
-        , Html.h3 [ Typography.subtitle1 ] [ text "Checked" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Checked" ]
         , checkbox "checked-checkbox" model []
-        , Html.h3 [ Typography.subtitle1 ] [ text "Focus Checkbox" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Focus Checkbox" ]
         , focusCheckbox
         ]
     }
-
 
 heroCheckboxes :: Model -> Array (Html Msg)
 heroCheckboxes model =
@@ -87,35 +89,32 @@ heroCheckboxes model =
     , checkbox "unchecked-hero-checkbox" model heroMargin
     ]
 
-
-checkbox :: String -> Model -> Array (Html.Attribute Msg) -> Html Msg
+checkbox :: String -> Model -> Array (HH.Attribute Msg) -> Html Msg
 checkbox index model attributes =
     let
         state =
             Dict.get index model.checkboxes
-                |> Maybe.withDefault Checkbox.indeterminate
+                # Maybe.fromMaybe Checkbox.indeterminate
     in
     Checkbox.checkbox
-        (Checkbox.config
-            |> Checkbox.setState (Just state)
-            |> Checkbox.setOnChange (Changed index)
-            |> Checkbox.setAttributes attributes
+        (Checkbox.defaultConfig
+            # Checkbox.setState (Just state)
+            # Checkbox.setOnChange (Changed index)
+            # Checkbox.setAttributes attributes
         )
-
 
 focusCheckbox :: Html Msg
 focusCheckbox =
-    Html.div []
+    HH.div []
         [ Checkbox.checkbox
-            (Checkbox.config
-                |> Checkbox.setAttributes [ Html.Attributes.id "my-checkbox" ]
+            (Checkbox.defaultConfig
+                # Checkbox.setAttributes [ HP.id "my-checkbox" ]
             )
-        , text "\u{00A0}"
-        , Button.raised (Button.config |> Button.setOnClick (Focus "my-checkbox"))
+        , HH.text "\u{00A0}"
+        , Button.raised (Button.defaultConfig # Button.setOnClick (Focus "my-checkbox"))
             "Focus"
         ]
 
-
-heroMargin :: Array (Html.Attribute msg)
+heroMargin :: Array (HH.Attribute msg)
 heroMargin =
     [ style "margin" "8px 16px" ]

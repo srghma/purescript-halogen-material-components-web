@@ -2,29 +2,33 @@ module Demo.Pages.Cards
 
 import Browser.Dom
 import Demo.CatalogPage
-import Html
-import Html.Attributes
-import Material.Button as Button
-import Material.Card as Card
-import Material.IconButton as IconButton
-import Material.Theme as Theme
-import Material.Typography as Typography
+import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
+import Halogen
+import Halogen as H
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import HalogenMWC.Button as Button
+import HalogenMWC.Card as Card
+import HalogenMWC.IconButton as IconButton
+import HalogenMWC.Theme as Theme
+import HalogenMWC.Typography as Typography
 import Task
-
 
 data Model =
     {}
-
 
 defaultModel :: Model
 defaultModel =
     {}
 
-
 data Msg
     = Focus String
     | Focused (Result Browser.Dom.Error ())
-
 
 update :: Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -34,7 +38,6 @@ update msg model =
 
         Focused _ ->
             ( model, Cmd.none )
-
 
 view :: Model -> CatalogPage Msg
 view model =
@@ -54,12 +57,11 @@ view model =
         ]
     }
 
-
 heroCard :: Array (Html msg)
 heroCard =
     [ Card.card
-        (Card.config
-            |> Card.setAttributes [ style "width" "350px" ]
+        (Card.defaultConfig
+            # Card.setAttributes [ style "width" "350px" ]
         )
         { blocks =
             Card.primaryAction []
@@ -71,12 +73,11 @@ heroCard =
         }
     ]
 
-
 exampleCard1 :: Html msg
 exampleCard1 =
     Card.card
-        (Card.config
-            |> Card.setAttributes
+        (Card.defaultConfig
+            # Card.setAttributes
                 [ style "margin" "48px 0"
                 , style "width" "350px"
                 ]
@@ -90,12 +91,11 @@ exampleCard1 =
         , actions = Nothing
         }
 
-
 exampleCard2 :: Html msg
 exampleCard2 =
     Card.card
-        (Card.config
-            |> Card.setAttributes
+        (Card.defaultConfig
+            # Card.setAttributes
                 [ style "margin" "48px 0"
                 , style "width" "350px"
                 ]
@@ -108,12 +108,11 @@ exampleCard2 =
         , actions = Just demoActions
         }
 
-
 exampleCard3 :: Html msg
 exampleCard3 =
     Card.card
-        (Card.config
-            |> Card.setAttributes
+        (Card.defaultConfig
+            # Card.setAttributes
                 [ style "margin" "48px 0"
                 , style "width" "350px"
                 , style "border-radius" "24px 8px"
@@ -127,14 +126,13 @@ exampleCard3 =
         , actions = Just demoActions
         }
 
-
 focusCard :: Html Msg
 focusCard =
-    Html.div []
+    HH.div []
         [ Card.card
-            (Card.config
-                |> Card.setAttributes
-                    [ Html.Attributes.id "my-card"
+            (Card.defaultConfig
+                # Card.setAttributes
+                    [ HP.id "my-card"
                     , style "margin" "48px 0"
                     , style "width" "350px"
                     ]
@@ -146,63 +144,59 @@ focusCard =
                     ]
             , actions = Just demoActions
             }
-        , text "\u{00A0}"
+        , HH.text "\u{00A0}"
         , Button.raised
-            (Button.config |> Button.setOnClick (Focus "my-card"))
+            (Button.defaultConfig # Button.setOnClick (Focus "my-card"))
             "Focus"
         ]
-
 
 demoMedia :: Card.Block msg
 demoMedia =
     Card.sixteenToNineMedia [] "images/photos/3x2/2.jpg"
 
-
 demoTitle :: Card.Block msg
 demoTitle =
-    Card.block <|
-        Html.div
+    Card.block $
+        HH.div
             [ style "padding" "1rem" ]
-            [ Html.h2
+            [ HH.h2
                 [ Typography.headline6
                 , style "margin" "0"
                 ]
-                [ text "Our Changing Planet" ]
-            , Html.h3
+                [ HH.text "Our Changing Planet" ]
+            , HH.h3
                 [ Typography.subtitle2
                 , Theme.textSecondaryOnBackground
                 , style "margin" "0"
                 ]
-                [ text "by Kurt Wagner" ]
+                [ HH.text "by Kurt Wagner" ]
             ]
-
 
 demoBody :: Card.Block msg
 demoBody =
-    Card.block <|
-        Html.div
+    Card.block $
+        HH.div
             [ Typography.body2
             , Theme.textSecondaryOnBackground
             , style "padding" "0 1rem 0.5rem 1rem"
             ]
-            [ text
+            [ HH.text
                 """
                 Visit ten places on our planet that are undergoing the biggest
                 changes today.
                 """
             ]
 
-
 demoActions :: Card.Actions msg
 demoActions =
     Card.actions
         { buttons =
-            [ Card.button Button.config "Read"
-            , Card.button Button.config "Bookmark"
+            [ Card.button Button.defaultConfig "Read"
+            , Card.button Button.defaultConfig "Bookmark"
             ]
         , icons =
-            [ Card.icon IconButton.config "favorite_border"
-            , Card.icon IconButton.config "share"
-            , Card.icon IconButton.config "more_vert"
+            [ Card.icon IconButton.defaultConfig "favorite_border"
+            , Card.icon IconButton.defaultConfig "share"
+            , Card.icon IconButton.defaultConfig "more_vert"
             ]
         }

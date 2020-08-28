@@ -2,14 +2,21 @@ module Demo.Pages.TabBar
 
 import Browser.Dom
 import Demo.CatalogPage
-import Html
-import Html.Attributes
-import Material.Button as Button
-import Material.Tab as Tab
-import Material.TabBar as TabBar
-import Material.Typography as Typography
+import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
+import Halogen
+import Halogen as H
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import HalogenMWC.Button as Button
+import HalogenMWC.Tab as Tab
+import HalogenMWC.TabBar as TabBar
+import HalogenMWC.Typography as Typography
 import Task
-
 
 data Model =
     { activeHeroTab :: Int
@@ -17,7 +24,6 @@ data Model =
     , activeStackedTab :: Int
     , activeScrollingTab :: Int
     }
-
 
 defaultModel :: Model
 defaultModel =
@@ -27,7 +33,6 @@ defaultModel =
     , activeScrollingTab = 0
     }
 
-
 data Msg
     = SetActiveHeroTab Int
     | SetActiveIconTab Int
@@ -35,7 +40,6 @@ data Msg
     | SetActiveScrollingTab Int
     | Focus String
     | Focused (Result Browser.Dom.Error ())
-
 
 update :: Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -58,7 +62,6 @@ update msg model =
         Focused _ ->
             ( model, Cmd.none )
 
-
 view :: Model -> CatalogPage Msg
 view model =
     { title = "Tab Bar"
@@ -70,122 +73,117 @@ view model =
         }
     , hero = [ heroTabs model "tabs-hero-tabs" ]
     , content =
-        [ Html.h3 [ Typography.subtitle1 ] [ text "Tabs with icons next to labels" ]
+        [ HH.h3 [ Typography.subtitle1 ] [ HH.text "Tabs with icons next to labels" ]
         , tabsWithIcons model
-        , Html.h3 [ Typography.subtitle1 ]
-            [ text "Tabs with icons above labels and indicators restricted to content" ]
+        , HH.h3 [ Typography.subtitle1 ]
+            [ HH.text "Tabs with icons above labels and indicators restricted to content" ]
         , tabsWithStackedIcons model
-        , Html.h3 [ Typography.subtitle1 ] [ text "Scrolling tabs" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Scrolling tabs" ]
         , scrollingTabs model
-        , Html.h3 [ Typography.subtitle1 ] [ text "Focus tabs" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Focus tabs" ]
         , focusTabs model
         ]
     }
 
-
 heroTabs :: Model -> String -> Html Msg
 heroTabs model index =
-    TabBar.tabBar TabBar.config
+    TabBar.tabBar TabBar.defaultConfig
         [ Tab.tab
-            (Tab.config
-                |> Tab.setActive (model.activeHeroTab == 0)
-                |> Tab.setOnClick (SetActiveHeroTab 0)
+            (Tab.defaultConfig
+                # Tab.setActive (model.activeHeroTab == 0)
+                # Tab.setOnClick (SetActiveHeroTab 0)
             )
             { label = "Home", icon = Nothing }
         , Tab.tab
-            (Tab.config
-                |> Tab.setActive (model.activeHeroTab == 1)
-                |> Tab.setOnClick (SetActiveHeroTab 1)
+            (Tab.defaultConfig
+                # Tab.setActive (model.activeHeroTab == 1)
+                # Tab.setOnClick (SetActiveHeroTab 1)
             )
             { label = "Merchandise", icon = Nothing }
         , Tab.tab
-            (Tab.config
-                |> Tab.setActive (model.activeHeroTab == 2)
-                |> Tab.setOnClick (SetActiveHeroTab 2)
+            (Tab.defaultConfig
+                # Tab.setActive (model.activeHeroTab == 2)
+                # Tab.setOnClick (SetActiveHeroTab 2)
             )
             { label = "About Us", icon = Nothing }
         ]
-
 
 tabsWithIcons :: Model -> Html Msg
 tabsWithIcons model =
     let
         config index =
-            Tab.config
-                |> Tab.setActive (model.activeIconTab == index)
-                |> Tab.setOnClick (SetActiveIconTab index)
+            Tab.defaultConfig
+                # Tab.setActive (model.activeIconTab == index)
+                # Tab.setOnClick (SetActiveIconTab index)
     in
-    TabBar.tabBar TabBar.config
+    TabBar.tabBar TabBar.defaultConfig
         [ Tab.tab (config 0) { label = "Recents", icon = Just "access_time" }
         , Tab.tab (config 1) { label = "Nearby", icon = Just "near_me" }
         , Tab.tab (config 2) { label = "Favorites", icon = Just "favorite" }
         ]
-
 
 tabsWithStackedIcons :: Model -> Html Msg
 tabsWithStackedIcons model =
     let
         config index =
-            Tab.config
-                |> Tab.setActive (model.activeStackedTab == index)
-                |> Tab.setOnClick (SetActiveStackedTab index)
+            Tab.defaultConfig
+                # Tab.setActive (model.activeStackedTab == index)
+                # Tab.setOnClick (SetActiveStackedTab index)
     in
     TabBar.tabBar
-        (TabBar.config
-            |> TabBar.setStacked True
-            |> TabBar.setIndicatorSpansContent True
+        (TabBar.defaultConfig
+            # TabBar.setStacked true
+            # TabBar.setIndicatorSpansContent true
         )
         [ Tab.tab (config 0) { label = "Recents", icon = Just "access_time" }
         , Tab.tab (config 1) { label = "Nearby", icon = Just "near_me" }
         , Tab.tab (config 2) { label = "Favorites", icon = Just "favorite" }
         ]
 
-
 scrollingTabs :: Model -> Html Msg
 scrollingTabs model =
     let
         config index =
-            Tab.config
-                |> Tab.setActive (model.activeScrollingTab == index)
-                |> Tab.setOnClick (SetActiveScrollingTab index)
+            Tab.defaultConfig
+                # Tab.setActive (model.activeScrollingTab == index)
+                # Tab.setOnClick (SetActiveScrollingTab index)
     in
-    TabBar.tabBar TabBar.config
+    TabBar.tabBar TabBar.defaultConfig
         (List.indexedMap
             (\index label ->
-                Tab.tab (config index) { label = "Tab " ++ label, icon = Nothing }
+                Tab.tab (config index) { label = "Tab " <> label, icon = Nothing }
             )
             [ "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight" ]
         )
 
-
 focusTabs :: Model -> Html Msg
 focusTabs model =
-    Html.div []
+    HH.div []
         [ TabBar.tabBar
-            (TabBar.config
-                |> TabBar.setAttributes [ Html.Attributes.id "my-tabs" ]
+            (TabBar.defaultConfig
+                # TabBar.setAttributes [ HP.id "my-tabs" ]
             )
             [ Tab.tab
-                (Tab.config
-                    |> Tab.setActive (model.activeHeroTab == 0)
-                    |> Tab.setOnClick (SetActiveHeroTab 0)
+                (Tab.defaultConfig
+                    # Tab.setActive (model.activeHeroTab == 0)
+                    # Tab.setOnClick (SetActiveHeroTab 0)
                 )
                 { label = "Home", icon = Nothing }
             , Tab.tab
-                (Tab.config
-                    |> Tab.setActive (model.activeHeroTab == 1)
-                    |> Tab.setOnClick (SetActiveHeroTab 1)
+                (Tab.defaultConfig
+                    # Tab.setActive (model.activeHeroTab == 1)
+                    # Tab.setOnClick (SetActiveHeroTab 1)
                 )
                 { label = "Merchandise", icon = Nothing }
             , Tab.tab
-                (Tab.config
-                    |> Tab.setActive (model.activeHeroTab == 2)
-                    |> Tab.setOnClick (SetActiveHeroTab 2)
+                (Tab.defaultConfig
+                    # Tab.setActive (model.activeHeroTab == 2)
+                    # Tab.setOnClick (SetActiveHeroTab 2)
                 )
                 { label = "About Us", icon = Nothing }
             ]
-        , text "\u{00A0}"
+        , HH.text "\u{00A0}"
         , Button.raised
-            (Button.config |> Button.setOnClick (Focus "my-tabs"))
+            (Button.defaultConfig # Button.setOnClick (Focus "my-tabs"))
             "Focus"
         ]

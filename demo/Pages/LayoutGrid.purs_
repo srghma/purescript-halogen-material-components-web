@@ -7,29 +7,32 @@ module Demo.Pages.LayoutGrid
     )
 
 import Demo.CatalogPage
-import Html
-import Html.Attributes
-import Material.LayoutGrid as LayoutGrid
-import Material.Typography as Typography
-
+import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
+import Halogen
+import Halogen as H
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import HalogenMWC.LayoutGrid as LayoutGrid
+import HalogenMWC.Typography as Typography
 
 data Model =
     {}
-
 
 defaultModel :: Model
 defaultModel =
     {}
 
-
 data Msg
     = NoOp
-
 
 update :: Msg -> Model -> Model
 update msg model =
     model
-
 
 view :: Model -> CatalogPage Msg
 view model =
@@ -42,28 +45,27 @@ view model =
         }
     , hero = heroGrid
     , content =
-        [ Html.h3 [ Typography.subtitle1 ] [ text "Columns" ]
+        [ HH.h3 [ Typography.subtitle1 ] [ HH.text "Columns" ]
         , columnsGrid
-        , Html.h3 [ Typography.subtitle1 ] [ text "Grid Left Alignment" ]
-        , Html.p
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Grid Left Alignment" ]
+        , HH.p
             [ Typography.body1 ]
-            [ text "This requires a max-width on the top-level grid element." ]
+            [ HH.text "This requires a max-width on the top-level grid element." ]
         , leftAlignedGrid
-        , Html.h3 [ Typography.subtitle1 ] [ text "Grid Right Alignment" ]
-        , Html.p
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Grid Right Alignment" ]
+        , HH.p
             [ Typography.body1 ]
-            [ text "This requires a max-width on the top-level grid element." ]
+            [ HH.text "This requires a max-width on the top-level grid element." ]
         , rightAlignedGrid
-        , Html.h3 [ Typography.subtitle1 ] [ text "Cell Alignment" ]
-        , Html.p
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Cell Alignment" ]
+        , HH.p
             [ Typography.body1 ]
-            [ text "Cell alignment requires a cell height smaller than the inner height of the grid." ]
+            [ HH.text "Cell alignment requires a cell height smaller than the inner height of the grid." ]
         , cellAlignmentGrid
         ]
     }
 
-
-demoGrid :: Array (Html.Attribute msg) -> Array (Html msg) -> Html msg
+demoGrid :: Array (HH.Attribute msg) -> Array (Html msg) -> Html msg
 demoGrid options =
     LayoutGrid.layoutGrid
         (style "background" "rgba(0,0,0,.2)"
@@ -71,8 +73,7 @@ demoGrid options =
             :: options
         )
 
-
-demoCell :: Array (Html.Attribute msg) -> Html msg
+demoCell :: Array (HH.Attribute msg) -> Html msg
 demoCell options =
     LayoutGrid.cell
         (style "background" "rgba(0,0,0,.2)"
@@ -81,11 +82,9 @@ demoCell options =
         )
         []
 
-
 heroGrid :: Array (Html msg)
 heroGrid =
     [ demoGrid [] [ LayoutGrid.inner [] (List.repeat 3 (demoCell [])) ] ]
-
 
 columnsGrid :: Html msg
 columnsGrid =
@@ -101,7 +100,6 @@ columnsGrid =
             ]
         ]
 
-
 leftAlignedGrid :: Html msg
 leftAlignedGrid =
     demoGrid
@@ -115,7 +113,6 @@ leftAlignedGrid =
             ]
         ]
 
-
 rightAlignedGrid :: Html msg
 rightAlignedGrid =
     demoGrid
@@ -124,7 +121,6 @@ rightAlignedGrid =
         ]
         [ LayoutGrid.inner [] (List.repeat 3 (demoCell []))
         ]
-
 
 cellAlignmentGrid :: Html msg
 cellAlignmentGrid =

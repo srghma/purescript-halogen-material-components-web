@@ -1,28 +1,32 @@
 module Demo.Pages.DataTable
 
 import Demo.CatalogPage
-import Html
-import Material.Checkbox as Checkbox
-import Material.DataTable as DataTable
-import Material.Typography as Typography
+import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
+import Halogen
+import Halogen as H
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import HalogenMWC.DataTable as DataTable
+import HalogenMWC.Typography as Typography
 import Set
-
 
 data Model =
     { selected :: Set String }
 
-
 defaultModel :: Model
 defaultModel =
     { selected = Set.empty }
-
 
 data Msg
     = NoOp
     | ItemSelected String
     | AllSelected
     | AllUnselected
-
 
 update :: Msg -> Model -> Model
 update msg model =
@@ -50,7 +54,6 @@ update msg model =
         AllUnselected ->
             { model | selected = Set.empty }
 
-
 view :: Model -> CatalogPage Msg
 view model =
     { title = "Data Table"
@@ -62,18 +65,16 @@ view model =
         }
     , hero = heroDataTable
     , content =
-        [ Html.h3 [ Typography.subtitle1 ] [ text "Data Table Standard" ]
+        [ HH.h3 [ Typography.subtitle1 ] [ HH.text "Data Table Standard" ]
         , standardDataTable
-        , Html.h3 [ Typography.subtitle1 ] [ text "Data Table with Row Selection" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Data Table with Row Selection" ]
         , dataTableWithRowSelection model
         ]
     }
 
-
 heroDataTable :: Array (Html msg)
 heroDataTable =
     [ standardDataTable ]
-
 
 label :: { desert :: String, carbs :: String, protein :: String, comments :: String }
 label =
@@ -82,7 +83,6 @@ label =
     , protein = "Protein (g)"
     , comments = "Comments"
     }
-
 
 data :: Array { desert :: String, carbs :: String, protein :: String, comments :: String }
 data =
@@ -103,23 +103,21 @@ data =
       }
     ]
 
-
 standardDataTable :: Html msg
 standardDataTable =
     let
         row { desert, carbs, protein, comments } =
             DataTable.row []
-                [ DataTable.cell [] [ text desert ]
-                , DataTable.numericCell [] [ text carbs ]
-                , DataTable.numericCell [] [ text protein ]
-                , DataTable.cell [] [ text comments ]
+                [ DataTable.cell [] [ HH.text desert ]
+                , DataTable.numericCell [] [ HH.text carbs ]
+                , DataTable.numericCell [] [ HH.text protein ]
+                , DataTable.cell [] [ HH.text comments ]
                 ]
     in
-    DataTable.dataTable DataTable.config
+    DataTable.dataTable DataTable.defaultConfig
         { thead = [ row label ]
-        , tbody = Array.map row data
+        , tbody = map row data
         }
-
 
 dataTableWithRowSelection :: Model -> Html Msg
 dataTableWithRowSelection model =
@@ -133,14 +131,14 @@ dataTableWithRowSelection model =
         headerRow { onChange, state } { desert, carbs, protein, comments } =
             [ DataTable.row []
                 [ DataTable.checkboxCell []
-                    (Checkbox.config
-                        |> Checkbox.setState (Just state)
-                        |> Checkbox.setOnChange onChange
+                    (Checkbox.defaultConfig
+                        # Checkbox.setState (Just state)
+                        # Checkbox.setOnChange onChange
                     )
-                , DataTable.cell [] [ text desert ]
-                , DataTable.numericCell [] [ text carbs ]
-                , DataTable.numericCell [] [ text protein ]
-                , DataTable.cell [] [ text comments ]
+                , DataTable.cell [] [ HH.text desert ]
+                , DataTable.numericCell [] [ HH.text carbs ]
+                , DataTable.numericCell [] [ HH.text protein ]
+                , DataTable.cell [] [ HH.text comments ]
                 ]
             ]
 
@@ -153,8 +151,8 @@ dataTableWithRowSelection model =
                     []
                 )
                 [ DataTable.checkboxCell []
-                    (Checkbox.config
-                        |> Checkbox.setState
+                    (Checkbox.defaultConfig
+                        # Checkbox.setState
                             (Just
                                 (if selected then
                                     Checkbox.checked
@@ -163,15 +161,15 @@ dataTableWithRowSelection model =
                                     Checkbox.unchecked
                                 )
                             )
-                        |> Checkbox.setOnChange onChange
+                        # Checkbox.setOnChange onChange
                     )
-                , DataTable.cell [] [ text desert ]
-                , DataTable.numericCell [] [ text carbs ]
-                , DataTable.numericCell [] [ text protein ]
-                , DataTable.cell [] [ text comments ]
+                , DataTable.cell [] [ HH.text desert ]
+                , DataTable.numericCell [] [ HH.text carbs ]
+                , DataTable.numericCell [] [ HH.text protein ]
+                , DataTable.cell [] [ HH.text comments ]
                 ]
     in
-    DataTable.dataTable DataTable.config
+    DataTable.dataTable DataTable.defaultConfig
         { thead =
             headerRow
                 { onChange =
@@ -192,7 +190,7 @@ dataTableWithRowSelection model =
                 }
                 label
         , tbody =
-            Array.map
+            map
                 (\({ desert } as data_) ->
                     row
                         { onChange = ItemSelected desert

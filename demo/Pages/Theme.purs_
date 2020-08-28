@@ -1,31 +1,34 @@
 module Demo.Pages.Theme
 
 import Demo.CatalogPage
-import Html
-import Html.Attributes
-import Material.Button as Button
-import Material.Elevation as Elevation
-import Material.Theme as Theme
-import Material.Typography as Typography
-
+import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
+import Halogen
+import Halogen as H
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import HalogenMWC.Button as Button
+import HalogenMWC.Elevation as Elevation
+import HalogenMWC.Theme as Theme
+import HalogenMWC.Typography as Typography
 
 data Model =
     {}
-
 
 defaultModel :: Model
 defaultModel =
     {}
 
-
 data Msg
     = NoOp
-
 
 update :: Msg -> Model -> Model
 update msg model =
     model
-
 
 view :: Model -> CatalogPage Msg
 view model =
@@ -37,145 +40,135 @@ view model =
         , sourceCode = Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-theme"
         }
     , hero =
-        [ Button.text (Button.config |> Button.setAttributes heroMargin) "Text"
-        , Button.raised (Button.config |> Button.setAttributes heroMargin) "Raised"
-        , Button.outlined (Button.config |> Button.setAttributes heroMargin) "Outlined"
+        [ Button.text (Button.defaultConfig # Button.setAttributes heroMargin) "Text"
+        , Button.raised (Button.defaultConfig # Button.setAttributes heroMargin) "Raised"
+        , Button.outlined (Button.defaultConfig # Button.setAttributes heroMargin) "Outlined"
         ]
     , content =
-        [ Html.legend [ Typography.subtitle1 ] [ text "Theme colors as text" ]
+        [ HH.legend [ Typography.subtitle1 ] [ HH.text "Theme colors as text" ]
         , themeColorsAsText
-        , Html.legend [ Typography.subtitle1 ] [ text "Theme colors as background" ]
+        , HH.legend [ Typography.subtitle1 ] [ HH.text "Theme colors as background" ]
         , themeColorsAsBackground
-        , Html.legend [ Typography.subtitle1 ] [ text "Text on background" ]
+        , HH.legend [ Typography.subtitle1 ] [ HH.text "Text on background" ]
         , textOnBackground
-        , Html.legend [ Typography.subtitle1 ] [ text "Text on primary" ]
+        , HH.legend [ Typography.subtitle1 ] [ HH.text "Text on primary" ]
         , textOnPrimary
-        , Html.legend [ Typography.subtitle1 ] [ text "Text on secondary" ]
+        , HH.legend [ Typography.subtitle1 ] [ HH.text "Text on secondary" ]
         , textOnSecondary
-        , Html.legend [ Typography.subtitle1 ]
-            [ text "Text on user-defined light background" ]
+        , HH.legend [ Typography.subtitle1 ]
+            [ HH.text "Text on user-defined light background" ]
         , textOnLightBackground
-        , Html.legend [ Typography.subtitle1 ]
-            [ text "Text on user-defined dark background" ]
+        , HH.legend [ Typography.subtitle1 ]
+            [ HH.text "Text on user-defined dark background" ]
         , textOnDarkBackground
         ]
     }
 
-
 themeColorsAsText :: Html msg
 themeColorsAsText =
-    Html.div demoThemeColorGroup
-        [ Html.div (Theme.primary :: demoThemeColorSwatches)
-            [ Html.div demoThemeColorSwatch [ text "Primary" ] ]
-        , Html.div (Theme.secondary :: demoThemeColorSwatches)
-            [ Html.div demoThemeColorSwatch [ text "Secondary" ] ]
+    HH.div demoThemeColorGroup
+        [ HH.div (Theme.primary :: demoThemeColorSwatches)
+            [ HH.div demoThemeColorSwatch [ HH.text "Primary" ] ]
+        , HH.div (Theme.secondary :: demoThemeColorSwatches)
+            [ HH.div demoThemeColorSwatch [ HH.text "Secondary" ] ]
         ]
-
 
 themeColorsAsBackground :: Html msg
 themeColorsAsBackground =
-    Html.div demoThemeColorGroup
-        [ Html.div
+    HH.div demoThemeColorGroup
+        [ HH.div
             (Theme.primaryBg :: Theme.onPrimary :: demoThemeColorSwatches)
-            [ Html.div demoThemeColorSwatch [ text "Primary" ] ]
-        , Html.div
+            [ HH.div demoThemeColorSwatch [ HH.text "Primary" ] ]
+        , HH.div
             (Theme.secondaryBg :: Theme.onSecondary :: demoThemeColorSwatches)
-            [ Html.div demoThemeColorSwatch [ text "Secondary" ] ]
-        , Html.div
+            [ HH.div demoThemeColorSwatch [ HH.text "Secondary" ] ]
+        , HH.div
             (Theme.background :: Theme.textPrimaryOnBackground :: demoThemeColorSwatches)
-            [ Html.div demoThemeColorSwatch [ text "Background" ] ]
+            [ HH.div demoThemeColorSwatch [ HH.text "Background" ] ]
         ]
-
 
 textOnBackground :: Html msg
 textOnBackground =
-    Html.div demoThemeColorGroup
-        [ Html.div (Theme.background :: demoThemeTextRow)
-            [ Html.span (Theme.textPrimaryOnBackground :: demoThemeTextStyle)
-                [ text "Primary" ]
-            , Html.span (Theme.textSecondaryOnBackground :: demoThemeTextStyle)
-                [ text "Secondary" ]
-            , Html.span (Theme.textHintOnBackground :: demoThemeTextStyle)
-                [ text "Hint" ]
-            , Html.span (Theme.textDisabledOnBackground :: demoThemeTextStyle)
-                [ text "Disabled" ]
-            , Html.span (Theme.textIconOnBackground :: demoThemeIconStyle)
-                [ text "favorite" ]
+    HH.div demoThemeColorGroup
+        [ HH.div (Theme.background :: demoThemeTextRow)
+            [ HH.span (Theme.textPrimaryOnBackground :: demoThemeTextStyle)
+                [ HH.text "Primary" ]
+            , HH.span (Theme.textSecondaryOnBackground :: demoThemeTextStyle)
+                [ HH.text "Secondary" ]
+            , HH.span (Theme.textHintOnBackground :: demoThemeTextStyle)
+                [ HH.text "Hint" ]
+            , HH.span (Theme.textDisabledOnBackground :: demoThemeTextStyle)
+                [ HH.text "Disabled" ]
+            , HH.span (Theme.textIconOnBackground :: demoThemeIconStyle)
+                [ HH.text "favorite" ]
             ]
         ]
-
 
 textOnPrimary :: Html msg
 textOnPrimary =
-    Html.div demoThemeColorGroup
-        [ Html.div (Theme.primaryBg :: demoThemeTextRow)
-            [ Html.span (Theme.onPrimary :: demoThemeTextStyle)
-                [ text "Text" ]
-            , Html.span (Theme.onPrimary :: demoThemeIconStyle)
-                [ text "favorite" ]
+    HH.div demoThemeColorGroup
+        [ HH.div (Theme.primaryBg :: demoThemeTextRow)
+            [ HH.span (Theme.onPrimary :: demoThemeTextStyle)
+                [ HH.text "Text" ]
+            , HH.span (Theme.onPrimary :: demoThemeIconStyle)
+                [ HH.text "favorite" ]
             ]
         ]
-
 
 textOnSecondary :: Html msg
 textOnSecondary =
-    Html.div demoThemeColorGroup
-        [ Html.div (Theme.secondaryBg :: demoThemeTextRow)
-            [ Html.span (Theme.onSecondary :: demoThemeTextStyle)
-                [ text "Text" ]
-            , Html.span (Theme.onSecondary :: demoThemeIconStyle)
-                [ text "favorite" ]
+    HH.div demoThemeColorGroup
+        [ HH.div (Theme.secondaryBg :: demoThemeTextRow)
+            [ HH.span (Theme.onSecondary :: demoThemeTextStyle)
+                [ HH.text "Text" ]
+            , HH.span (Theme.onSecondary :: demoThemeIconStyle)
+                [ HH.text "favorite" ]
             ]
         ]
-
 
 textOnLightBackground :: Html msg
 textOnLightBackground =
-    Html.div demoThemeColorGroup
-        [ Html.div (demoThemeBgCustomLight ++ demoThemeTextRow)
-            [ Html.span (Theme.textPrimaryOnLight :: demoThemeTextStyle)
-                [ text "Primary" ]
-            , Html.span (Theme.textSecondaryOnLight :: demoThemeTextStyle)
-                [ text "Secondary" ]
-            , Html.span (Theme.textHintOnLight :: demoThemeTextStyle)
-                [ text "Hint" ]
-            , Html.span (Theme.textDisabledOnLight :: demoThemeTextStyle)
-                [ text "Disabled" ]
-            , Html.span (Theme.textIconOnLight :: demoThemeIconStyle)
-                [ text "favorite" ]
+    HH.div demoThemeColorGroup
+        [ HH.div (demoThemeBgCustomLight <> demoThemeTextRow)
+            [ HH.span (Theme.textPrimaryOnLight :: demoThemeTextStyle)
+                [ HH.text "Primary" ]
+            , HH.span (Theme.textSecondaryOnLight :: demoThemeTextStyle)
+                [ HH.text "Secondary" ]
+            , HH.span (Theme.textHintOnLight :: demoThemeTextStyle)
+                [ HH.text "Hint" ]
+            , HH.span (Theme.textDisabledOnLight :: demoThemeTextStyle)
+                [ HH.text "Disabled" ]
+            , HH.span (Theme.textIconOnLight :: demoThemeIconStyle)
+                [ HH.text "favorite" ]
             ]
         ]
-
 
 textOnDarkBackground :: Html msg
 textOnDarkBackground =
-    Html.div demoThemeColorGroup
-        [ Html.div (demoThemeBgCustomDark ++ demoThemeTextRow)
-            [ Html.span (Theme.textPrimaryOnDark :: demoThemeTextStyle)
-                [ text "Primary" ]
-            , Html.span (Theme.textSecondaryOnDark :: demoThemeTextStyle)
-                [ text "Secondary" ]
-            , Html.span (Theme.textHintOnDark :: demoThemeTextStyle)
-                [ text "Hint" ]
-            , Html.span (Theme.textDisabledOnDark :: demoThemeTextStyle)
-                [ text "Disabled" ]
-            , Html.span (Theme.textIconOnDark :: demoThemeIconStyle)
-                [ text "favorite" ]
+    HH.div demoThemeColorGroup
+        [ HH.div (demoThemeBgCustomDark <> demoThemeTextRow)
+            [ HH.span (Theme.textPrimaryOnDark :: demoThemeTextStyle)
+                [ HH.text "Primary" ]
+            , HH.span (Theme.textSecondaryOnDark :: demoThemeTextStyle)
+                [ HH.text "Secondary" ]
+            , HH.span (Theme.textHintOnDark :: demoThemeTextStyle)
+                [ HH.text "Hint" ]
+            , HH.span (Theme.textDisabledOnDark :: demoThemeTextStyle)
+                [ HH.text "Disabled" ]
+            , HH.span (Theme.textIconOnDark :: demoThemeIconStyle)
+                [ HH.text "favorite" ]
             ]
         ]
 
-
-heroMargin :: Array (Html.Attribute msg)
+heroMargin :: Array (HH.Attribute msg)
 heroMargin =
     [ style "margin" "16px 32px" ]
 
-
-demoThemeColorGroup :: Array (Html.Attribute msg)
+demoThemeColorGroup :: Array (HH.Attribute msg)
 demoThemeColorGroup =
     [ style "padding" "16px 0" ]
 
-
-demoThemeColorSwatches :: Array (Html.Attribute msg)
+demoThemeColorSwatches :: Array (HH.Attribute msg)
 demoThemeColorSwatches =
     [ style "display" "-ms-inline-flexbox"
     , style "display" "inline-flex"
@@ -185,8 +178,7 @@ demoThemeColorSwatches =
     , Elevation.z2
     ]
 
-
-demoThemeColorSwatch :: Array (Html.Attribute msg)
+demoThemeColorSwatch :: Array (HH.Attribute msg)
 demoThemeColorSwatch =
     [ style "display" "inline-block"
     , style "-webkit-box-sizing" "border-box"
@@ -199,8 +191,7 @@ demoThemeColorSwatch =
     , style "border-radius" "4px"
     ]
 
-
-demoThemeTextRow :: Array (Html.Attribute msg)
+demoThemeTextRow :: Array (HH.Attribute msg)
 demoThemeTextRow =
     [ style "display" "-ms-inline-flexbox"
     , style "display" "inline-flex"
@@ -214,22 +205,18 @@ demoThemeTextRow =
     , style "flex-direction" "row"
     ]
 
-
-demoThemeTextStyle :: Array (Html.Attribute msg)
+demoThemeTextStyle :: Array (HH.Attribute msg)
 demoThemeTextStyle =
     [ style "padding" "0 16px" ]
 
-
-demoThemeIconStyle :: Array (Html.Attribute msg)
+demoThemeIconStyle :: Array (HH.Attribute msg)
 demoThemeIconStyle =
-    class "material-icons" :: demoThemeTextStyle
+    HP.class_ material_icons :: demoThemeTextStyle
 
-
-demoThemeBgCustomLight :: Array (Html.Attribute msg)
+demoThemeBgCustomLight :: Array (HH.Attribute msg)
 demoThemeBgCustomLight =
     [ style "background-color" "#ddd" ]
 
-
-demoThemeBgCustomDark :: Array (Html.Attribute msg)
+demoThemeBgCustomDark :: Array (HH.Attribute msg)
 demoThemeBgCustomDark =
     [ style "background-color" "#d1d1d1" ]

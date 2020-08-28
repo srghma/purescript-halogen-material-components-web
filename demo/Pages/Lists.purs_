@@ -2,18 +2,25 @@ module Demo.Pages.Lists
 
 import Browser.Dom
 import Demo.CatalogPage
-import Html
-import Html.Attributes
-import Material.Button as Button
-import Material.Checkbox as Checkbox
-import Material.Icon as Icon
-import Material.List as List
-import Material.List.Item as ListItem
-import Material.Radio as Radio
-import Material.Typography as Typography
+import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
+import Halogen
+import Halogen as H
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import HalogenMWC.Button as Button
+import HalogenMWC.Checkbox as Checkbox
+import HalogenMWC.Icon as Icon
+import HalogenMWC.List as List
+import HalogenMWC.List.Item as ListItem
+import HalogenMWC.Radio as Radio
+import HalogenMWC.Typography as Typography
 import Set
 import Task
-
 
 data Model =
     { checkboxes :: Set String
@@ -21,7 +28,6 @@ data Model =
     , activated :: String
     , shapedActivated :: String
     }
-
 
 defaultModel :: Model
 defaultModel =
@@ -31,7 +37,6 @@ defaultModel =
     , shapedActivated = "Star"
     }
 
-
 data Msg
     = ToggleCheckbox String
     | SetRadio String
@@ -39,7 +44,6 @@ data Msg
     | SetShapedActivated String
     | Focus String
     | Focused (Result Browser.Dom.Error ())
-
 
 update :: Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -71,7 +75,6 @@ update msg model =
         Focused _ ->
             ( model, Cmd.none )
 
-
 view :: Model -> CatalogPage Msg
 view model =
     { title = "List"
@@ -83,210 +86,199 @@ view model =
         }
     , hero = heroList
     , content =
-        [ Html.h3 [ Typography.subtitle1 ] [ text "Single-Line" ]
+        [ HH.h3 [ Typography.subtitle1 ] [ HH.text "Single-Line" ]
         , singleLineList
-        , Html.h3 [ Typography.subtitle1 ] [ text "Two-Line" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Two-Line" ]
         , twoLineList
-        , Html.h3 [ Typography.subtitle1 ] [ text "Leading Icon" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Leading Icon" ]
         , leadingIconList
-        , Html.h3 [ Typography.subtitle1 ] [ text "List with activated item" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "List with activated item" ]
         , activatedItemList model
-        , Html.h3 [ Typography.subtitle1 ] [ text "List with shaped activated item" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "List with shaped activated item" ]
         , shapedActivatedItemList model
-        , Html.h3 [ Typography.subtitle1 ] [ text "Trailing Icon" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Trailing Icon" ]
         , trailingIconList
-        , Html.h3 [ Typography.subtitle1 ]
-            [ text "Two-Line with Leading and Trailing Icon and Divider" ]
+        , HH.h3 [ Typography.subtitle1 ]
+            [ HH.text "Two-Line with Leading and Trailing Icon and Divider" ]
         , folderList
-        , Html.h3 [ Typography.subtitle1 ] [ text "List with Trailing Checkbox" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "List with Trailing Checkbox" ]
         , listWithTrailingCheckbox model
-        , Html.h3 [ Typography.subtitle1 ] [ text "List with Trailing Radio Buttons" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "List with Trailing Radio Buttons" ]
         , listWithTrailingRadioButton model
-        , Html.h3 [ Typography.subtitle1 ] [ text "Focus List" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Focus List" ]
         , focusList
         ]
     }
 
-
-demoList :: Array (Html.Attribute msg)
+demoList :: Array (HH.Attribute msg)
 demoList =
     [ style "max-width" "600px"
     , style "border" "1px solid rgba(0,0,0,.1)"
     ]
 
-
 heroList :: Array (Html msg)
 heroList =
     let
         listItem =
-            ListItem.listItem ListItem.config [ text "Line item" ]
+            ListItem.listItem ListItem.defaultConfig [ HH.text "Line item" ]
     in
     [ Array.list
-        (List.config |> Array.setAttributes (style "background" "#fff" :: demoList))
+        (List.defaultConfig # Array.setAttributes (style "background" "#fff" :: demoList))
         listItem
         (List.repeat 2 listItem)
     ]
-
 
 singleLineList :: Html msg
 singleLineList =
     let
         listItem =
-            ListItem.listItem ListItem.config [ text "Line item" ]
+            ListItem.listItem ListItem.defaultConfig [ HH.text "Line item" ]
     in
-    Array.list (List.config |> Array.setAttributes demoList)
+    Array.list (List.defaultConfig # Array.setAttributes demoList)
         listItem
         (List.repeat 2 listItem)
-
 
 twoLineList :: Html msg
 twoLineList =
     let
         listItem =
-            ListItem.listItem ListItem.config
+            ListItem.listItem ListItem.defaultConfig
                 [ ListItem.text []
-                    { primary = [ text "Line item" ]
-                    , secondary = [ text "Secondary text" ]
+                    { primary = [ HH.text "Line item" ]
+                    , secondary = [ HH.text "Secondary text" ]
                     }
                 ]
     in
     Array.list
-        (List.config
-            |> Array.setTwoLine True
-            |> Array.setAttributes demoList
+        (List.defaultConfig
+            # Array.setTwoLine true
+            # Array.setAttributes demoList
         )
         listItem
         (List.repeat 2 listItem)
-
 
 leadingIconList :: Html msg
 leadingIconList =
     let
         listItem icon =
-            ListItem.listItem ListItem.config
+            ListItem.listItem ListItem.defaultConfig
                 [ ListItem.graphic [] [ Icon.icon [] icon ]
-                , text "Line item"
+                , HH.text "Line item"
                 ]
     in
-    Array.list (List.config |> Array.setAttributes demoList)
+    Array.list (List.defaultConfig # Array.setAttributes demoList)
         (listItem "wifi")
-        (List.map listItem [ "bluetooth", "data_usage" ])
-
+        (map listItem [ "bluetooth", "data_usage" ])
 
 trailingIconList :: Html msg
 trailingIconList =
     let
         listItem =
-            ListItem.listItem ListItem.config
-                [ text "Line item"
+            ListItem.listItem ListItem.defaultConfig
+                [ HH.text "Line item"
                 , ListItem.meta [] [ Icon.icon [] "info" ]
                 ]
     in
-    Array.list (List.config |> Array.setAttributes demoList)
+    Array.list (List.defaultConfig # Array.setAttributes demoList)
         listItem
         (List.repeat 2 listItem)
-
 
 activatedItemList :: Model -> Html Msg
 activatedItemList model =
     let
         listItem ( icon, label ) =
             ListItem.listItem
-                (ListItem.config
-                    |> ListItem.setSelected
+                (ListItem.defaultConfig
+                    # ListItem.setSelected
                         (if model.activated == label then
                             Just ListItem.activated
 
                          else
                             Nothing
                         )
-                    |> ListItem.setOnClick (SetActivated label)
+                    # ListItem.setOnClick (SetActivated label)
                 )
-                [ ListItem.graphic [] [ Icon.icon [] icon ], text label ]
+                [ ListItem.graphic [] [ Icon.icon [] icon ], HH.text label ]
     in
-    Array.list (List.config |> Array.setAttributes demoList)
+    Array.list (List.defaultConfig # Array.setAttributes demoList)
         (listItem ( "inbox", "Inbox" ))
-        (List.map listItem
+        (map listItem
             [ ( "star", "Star" )
             , ( "send", "Sent" )
             , ( "drafts", "Drafts" )
             ]
         )
-
 
 shapedActivatedItemList :: Model -> Html Msg
 shapedActivatedItemList model =
     let
         listItem ( icon, label ) =
             ListItem.listItem
-                (ListItem.config
-                    |> ListItem.setSelected
+                (ListItem.defaultConfig
+                    # ListItem.setSelected
                         (if model.shapedActivated == label then
                             Just ListItem.activated
 
                          else
                             Nothing
                         )
-                    |> ListItem.setOnClick (SetShapedActivated label)
-                    |> ListItem.setAttributes [ style "border-radius" "0 32px 32px 0" ]
+                    # ListItem.setOnClick (SetShapedActivated label)
+                    # ListItem.setAttributes [ style "border-radius" "0 32px 32px 0" ]
                 )
-                [ ListItem.graphic [] [ Icon.icon [] icon ], text label ]
+                [ ListItem.graphic [] [ Icon.icon [] icon ], HH.text label ]
     in
-    Array.list (List.config |> Array.setAttributes demoList)
+    Array.list (List.defaultConfig # Array.setAttributes demoList)
         (listItem ( "inbox", "Inbox" ))
-        (List.map listItem
+        (map listItem
             [ ( "star", "Star" )
             , ( "send", "Sent" )
             , ( "drafts", "Drafts" )
             ]
         )
 
-
-demoIcon :: Array (Html.Attribute msg)
+demoIcon :: Array (HH.Attribute msg)
 demoIcon =
     [ style "background" "rgba(0,0,0,.3)"
     , style "border-radius" "50%"
     , style "color" "#fff"
     ]
 
-
 folderList :: Html msg
 folderList =
     let
         listItem { primary, secondary } =
-            ListItem.listItem ListItem.config
+            ListItem.listItem ListItem.defaultConfig
                 [ ListItem.graphic demoIcon [ Icon.icon [] "folder" ]
                 , ListItem.text []
-                    { primary = [ text primary ]
-                    , secondary = [ text secondary ]
+                    { primary = [ HH.text primary ]
+                    , secondary = [ HH.text secondary ]
                     }
                 , ListItem.meta [] [ Icon.icon [] "info" ]
                 ]
     in
     Array.list
-        (List.config
-            |> Array.setAvatarList True
-            |> Array.setTwoLine True
-            |> Array.setAttributes demoList
+        (List.defaultConfig
+            # Array.setAvatarList true
+            # Array.setTwoLine true
+            # Array.setAttributes demoList
         )
         (listItem
             { primary = "Dog Photos", secondary = "9 Jan 2018" }
         )
-        (List.map listItem
+        (map listItem
             [ { primary = "Cat Photos", secondary = "22 Dec 2017" }
             , { primary = "Potatoes", secondary = "30 Noc 2017" }
             , { primary = "Carrots", secondary = "17 Oct 2017" }
             ]
         )
 
-
 listWithTrailingCheckbox :: Model -> Html Msg
 listWithTrailingCheckbox model =
     let
         listItem label =
             ListItem.listItem
-                (ListItem.config
-                    |> ListItem.setSelected
+                (ListItem.defaultConfig
+                    # ListItem.setSelected
                         (if Set.member label model.checkboxes then
                             Just ListItem.selected
 
@@ -294,12 +286,12 @@ listWithTrailingCheckbox model =
                             Nothing
                         )
                 )
-                [ text "Dog Photos"
+                [ HH.text "Dog Photos"
                 , ListItem.meta []
                     [ Checkbox.checkbox
-                        (Checkbox.config
-                            |> Checkbox.setOnChange (ToggleCheckbox label)
-                            |> Checkbox.setState
+                        (Checkbox.defaultConfig
+                            # Checkbox.setOnChange (ToggleCheckbox label)
+                            # Checkbox.setState
                                 (Just
                                     (if Set.member label model.checkboxes then
                                         Checkbox.checked
@@ -313,28 +305,27 @@ listWithTrailingCheckbox model =
                 ]
     in
     Array.list
-        (List.config
-            |> Array.setAttributes
-                (Html.Attributes.attribute "role" "group"
+        (List.defaultConfig
+            # Array.setAttributes
+                (HP.attr (AttrName "role") "group"
                     :: demoList
                 )
         )
         (listItem "Dog Photos")
-        (List.map listItem
+        (map listItem
             [ "Cat Photos"
             , "Potatoes"
             , "Carrots"
             ]
         )
 
-
 listWithTrailingRadioButton :: Model -> Html Msg
 listWithTrailingRadioButton model =
     let
         listItem label =
             ListItem.listItem
-                (ListItem.config
-                    |> ListItem.setSelected
+                (ListItem.defaultConfig
+                    # ListItem.setSelected
                         (if model.radio == Just label then
                             Just ListItem.selected
 
@@ -342,37 +333,36 @@ listWithTrailingRadioButton model =
                             Nothing
                         )
                 )
-                [ text label
+                [ HH.text label
                 , ListItem.meta []
                     [ Radio.radio
-                        (Radio.config
-                            |> Radio.setChecked (model.radio == Just label)
-                            |> Radio.setOnChange (SetRadio label)
+                        (Radio.defaultConfig
+                            # Radio.setChecked (model.radio == Just label)
+                            # Radio.setOnChange (SetRadio label)
                         )
                     ]
                 ]
     in
-    Array.list (List.config |> Array.setAttributes demoList)
+    Array.list (List.defaultConfig # Array.setAttributes demoList)
         (listItem "Dog Photos")
-        (List.map listItem
+        (map listItem
             [ "Cat Photos"
             , "Potatoes"
             , "Carrots"
             ]
         )
 
-
 focusList :: Html Msg
 focusList =
-    Html.div []
+    HH.div []
         [ Array.list
-            (List.config
-                |> Array.setAttributes (demoList ++ [ Html.Attributes.id "my-list" ])
+            (List.defaultConfig
+                # Array.setAttributes (demoList <> [ HP.id "my-list" ])
             )
-            (ListItem.listItem ListItem.config [ text "Line item" ])
-            (List.repeat 2 <| ListItem.listItem ListItem.config [ text "Line item" ])
-        , text "\u{00A0}"
+            (ListItem.listItem ListItem.defaultConfig [ HH.text "Line item" ])
+            (List.repeat 2 $ ListItem.listItem ListItem.defaultConfig [ HH.text "Line item" ])
+        , HH.text "\u{00A0}"
         , Button.raised
-            (Button.config |> Button.setOnClick (Focus "my-list"))
+            (Button.defaultConfig # Button.setOnClick (Focus "my-list"))
             "Focus"
         ]

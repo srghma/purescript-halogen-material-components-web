@@ -3,18 +3,24 @@ module Demo.Pages.RadioButtons
 import Browser.Dom
 import Demo.CatalogPage
 import Dict
-import Html
-import Html.Attributes
-import Material.Button as Button
-import Material.FormField as FormField
-import Material.Radio as Radio
-import Material.Typography as Typography
+import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
+import Halogen
+import Halogen as H
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import HalogenMWC.Button as Button
+import HalogenMWC.FormField as FormField
+import HalogenMWC.Radio as Radio
+import HalogenMWC.Typography as Typography
 import Task
-
 
 data Model =
     { radios :: Dict String String }
-
 
 defaultModel :: Model
 defaultModel =
@@ -25,12 +31,10 @@ defaultModel =
             ]
     }
 
-
 data Msg
     = Set String String
     | Focus String
     | Focused (Result Browser.Dom.Error ())
-
 
 update :: Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -44,13 +48,11 @@ update msg model =
         Focused _ ->
             ( model, Cmd.none )
 
-
 isSelected :: String -> String -> Model -> Boolean
 isSelected group index model =
     Dict.get group model.radios
-        |> Maybe.map ((==) index)
-        |> Maybe.withDefault False
-
+        # map ((==) index)
+        # Maybe.fromMaybe false
 
 view :: Model -> CatalogPage Msg
 view model =
@@ -63,64 +65,59 @@ view model =
         }
     , hero = [ heroRadioGroup model ]
     , content =
-        [ Html.h3 [ Typography.subtitle1 ] [ text "Radio Buttons" ]
+        [ HH.h3 [ Typography.subtitle1 ] [ HH.text "Radio Buttons" ]
         , exampleRadioGroup model
-        , Html.h3 [ Typography.subtitle1 ] [ text "Focus Radio Button" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Focus Radio Button" ]
         , focusRadio
         ]
     }
 
-
 heroRadio :: Model -> String -> String -> Html Msg
 heroRadio model group index =
     Radio.radio
-        (Radio.config
-            |> Radio.setChecked (isSelected group index model)
-            |> Radio.setOnChange (Set group index)
-            |> Radio.setAttributes [ style "margin" "0 10px" ]
+        (Radio.defaultConfig
+            # Radio.setChecked (isSelected group index model)
+            # Radio.setOnChange (Set group index)
+            # Radio.setAttributes [ style "margin" "0 10px" ]
         )
-
 
 heroRadioGroup :: Model -> Html Msg
 heroRadioGroup model =
-    Html.div []
+    HH.div []
         [ heroRadio model "hero" "radio-buttons-hero-radio-1"
         , heroRadio model "hero" "radio-buttons-hero-radio-2"
         ]
 
-
 radio :: Model -> String -> String -> String -> Html Msg
 radio model group index label =
     FormField.formField
-        (FormField.config
-            |> FormField.setLabel (Just label)
-            |> FormField.setFor (Just index)
-            |> FormField.setOnClick (Set group index)
-            |> FormField.setAttributes [ style "margin" "0 10px" ]
+        (FormField.defaultConfig
+            # FormField.setLabel (Just label)
+            # FormField.setFor (Just index)
+            # FormField.setOnClick (Set group index)
+            # FormField.setAttributes [ style "margin" "0 10px" ]
         )
         [ Radio.radio
-            (Radio.config
-                |> Radio.setChecked (isSelected group index model)
-                |> Radio.setOnChange (Set group index)
+            (Radio.defaultConfig
+                # Radio.setChecked (isSelected group index model)
+                # Radio.setOnChange (Set group index)
             )
         ]
 
-
 exampleRadioGroup :: Model -> Html Msg
 exampleRadioGroup model =
-    Html.div []
+    HH.div []
         [ radio model "example" "radio-buttons-example-radio-1" "Radio 1"
         , radio model "example" "radio-buttons-example-radio-2" "Radio 2"
         ]
 
-
 focusRadio :: Html Msg
 focusRadio =
-    Html.div []
+    HH.div []
         [ Radio.radio
-            (Radio.config |> Radio.setAttributes [ Html.Attributes.id "my-radio" ])
-        , text "\u{00A0}"
+            (Radio.defaultConfig # Radio.setAttributes [ HP.id "my-radio" ])
+        , HH.text "\u{00A0}"
         , Button.raised
-            (Button.config |> Button.setOnClick (Focus "my-radio"))
+            (Button.defaultConfig # Button.setOnClick (Focus "my-radio"))
             "Focus"
         ]

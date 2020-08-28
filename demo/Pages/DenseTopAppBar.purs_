@@ -1,59 +1,62 @@
 module Demo.Pages.DenseTopAppBar
 
 import Demo.TopAppBarPage
-import Html
-import Material.IconButton as IconButton
-import Material.TopAppBar as TopAppBar
-
+import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
+import Halogen
+import Halogen as H
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import HalogenMWC.TopAppBar as TopAppBar
 
 data Model =
     {}
-
 
 defaultModel :: Model
 defaultModel =
     {}
 
-
 data Msg
     = NoOp
-
 
 update :: Msg -> Model -> Model
 update msg model =
     model
 
-
 view :: Model -> TopAppBarPage Msg
 view model =
     { fixedAdjust = TopAppBar.denseFixedAdjust
     , topAppBar =
-        TopAppBar.regular (TopAppBar.config |> TopAppBar.setDense True)
+        TopAppBar.regular (TopAppBar.defaultConfig # TopAppBar.setDense true)
             [ TopAppBar.row []
                 [ TopAppBar.section
                     [ TopAppBar.alignStart ]
                     [ IconButton.iconButton
-                        (IconButton.config
-                            |> IconButton.setAttributes [ TopAppBar.navigationIcon ]
+                        (IconButton.defaultConfig
+                            # IconButton.setAttributes [ TopAppBar.navigationIcon ]
                         )
                         "menu"
-                    , Html.span [ TopAppBar.title ] [ text "Dense" ]
+                    , HH.span [ TopAppBar.title ] [ HH.text "Dense" ]
                     ]
                 , TopAppBar.section
                     [ TopAppBar.alignEnd ]
                     [ IconButton.iconButton
-                        (IconButton.config
-                            |> IconButton.setAttributes [ TopAppBar.actionItem ]
+                        (IconButton.defaultConfig
+                            # IconButton.setAttributes [ TopAppBar.actionItem ]
                         )
                         "file_download"
                     , IconButton.iconButton
-                        (IconButton.config
-                            |> IconButton.setAttributes [ TopAppBar.actionItem ]
+                        (IconButton.defaultConfig
+                            # IconButton.setAttributes [ TopAppBar.actionItem ]
                         )
                         "print"
                     , IconButton.iconButton
-                        (IconButton.config
-                            |> IconButton.setAttributes [ TopAppBar.actionItem ]
+                        (IconButton.defaultConfig
+                            # IconButton.setAttributes [ TopAppBar.actionItem ]
                         )
                         "bookmark"
                     ]

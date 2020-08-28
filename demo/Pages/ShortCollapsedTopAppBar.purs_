@@ -1,47 +1,42 @@
 module Demo.Pages.ShortCollapsedTopAppBar
 
 import Demo.TopAppBarPage
-import Material.IconButton as IconButton
-import Material.TopAppBar as TopAppBar
-
+import HalogenMWC.IconButton as IconButton
+import HalogenMWC.TopAppBar as TopAppBar
 
 data Model =
     {}
-
 
 defaultModel :: Model
 defaultModel =
     {}
 
-
 data Msg
     = NoOp
-
 
 update :: Msg -> Model -> Model
 update msg model =
     model
 
-
 view :: Model -> TopAppBarPage Msg
 view model =
     { fixedAdjust = TopAppBar.shortFixedAdjust
     , topAppBar =
-        TopAppBar.shortCollapsed TopAppBar.config
+        TopAppBar.shortCollapsed TopAppBar.defaultConfig
             [ TopAppBar.row []
                 [ TopAppBar.section
                     [ TopAppBar.alignStart ]
                     [ IconButton.iconButton
-                        (IconButton.config
-                            |> IconButton.setAttributes [ TopAppBar.navigationIcon ]
+                        (IconButton.defaultConfig
+                            # IconButton.setAttributes [ TopAppBar.navigationIcon ]
                         )
                         "menu"
                     ]
                 , TopAppBar.section
                     [ TopAppBar.alignEnd ]
                     [ IconButton.iconButton
-                        (IconButton.config
-                            |> IconButton.setAttributes [ TopAppBar.actionItem ]
+                        (IconButton.defaultConfig
+                            # IconButton.setAttributes [ TopAppBar.actionItem ]
                         )
                         "file_download"
                     ]

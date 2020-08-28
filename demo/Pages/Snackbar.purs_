@@ -1,21 +1,26 @@
 module Demo.Pages.Snackbar
 
 import Demo.CatalogPage
-import Html
-import Html.Attributes
-import Material.Button as Button
-import Material.Snackbar as Snackbar
+import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
+import Halogen
+import Halogen as H
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import HalogenMWC.Button as Button
+import HalogenMWC.Snackbar as Snackbar
 import Platform.Cmd
-
 
 data Model =
     { queue :: Snackbar.Queue Msg }
 
-
 defaultModel :: Model
 defaultModel =
     { queue = Snackbar.initialQueue }
-
 
 data Msg
     = ShowBaseline
@@ -23,7 +28,6 @@ data Msg
     | ShowStacked
     | SnackbarClosed Snackbar.MessageId
     | Click Snackbar.MessageId
-
 
 update :: Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -49,32 +53,28 @@ update msg model =
         Click messageId ->
             ( model, Cmd.none )
 
-
 baselineMessage :: Snackbar.Message Msg
 baselineMessage =
     Snackbar.message "Can't send photo. Retry in 5 seconds."
-        |> Snackbar.setActionButton (Just "Retry")
-        |> Snackbar.setOnActionButtonClick Click
-        |> Snackbar.setActionIcon (Just "close")
-
+        # Snackbar.setActionButton (Just "Retry")
+        # Snackbar.setOnActionButtonClick Click
+        # Snackbar.setActionIcon (Just "close")
 
 leadingMessage :: Snackbar.Message Msg
 leadingMessage =
     Snackbar.message "Your photo has been archived."
-        |> Snackbar.setLeading True
-        |> Snackbar.setActionButton (Just "Undo")
-        |> Snackbar.setOnActionButtonClick Click
-        |> Snackbar.setActionIcon (Just "close")
-
+        # Snackbar.setLeading true
+        # Snackbar.setActionButton (Just "Undo")
+        # Snackbar.setOnActionButtonClick Click
+        # Snackbar.setActionIcon (Just "close")
 
 stackedMessage :: Snackbar.Message Msg
 stackedMessage =
     Snackbar.message "This item already has the label \"travel\". You can add a new label."
-        |> Snackbar.setStacked True
-        |> Snackbar.setActionButton (Just "Add a new label")
-        |> Snackbar.setOnActionButtonClick Click
-        |> Snackbar.setActionIcon (Just "close")
-
+        # Snackbar.setStacked true
+        # Snackbar.setActionButton (Just "Add a new label")
+        # Snackbar.setOnActionButtonClick Click
+        # Snackbar.setActionIcon (Just "close")
 
 view :: Model -> CatalogPage Msg
 view model =
@@ -88,70 +88,68 @@ view model =
     , hero = [ heroMessage ]
     , content =
         [ Button.raised
-            (Button.config
-                |> Button.setOnClick ShowBaseline
-                |> Button.setAttributes buttonMargin
+            (Button.defaultConfig
+                # Button.setOnClick ShowBaseline
+                # Button.setAttributes buttonMargin
             )
             "Baseline"
-        , text " "
+        , HH.text " "
         , Button.raised
-            (Button.config
-                |> Button.setOnClick ShowLeading
-                |> Button.setAttributes buttonMargin
+            (Button.defaultConfig
+                # Button.setOnClick ShowLeading
+                # Button.setAttributes buttonMargin
             )
             "Leading"
-        , text " "
+        , HH.text " "
         , Button.raised
-            (Button.config
-                |> Button.setOnClick ShowStacked
-                |> Button.setAttributes buttonMargin
+            (Button.defaultConfig
+                # Button.setOnClick ShowStacked
+                # Button.setAttributes buttonMargin
             )
             "Stacked"
         , Snackbar.snackbar
-            (Snackbar.config { onClosed = SnackbarClosed }
-                |> Snackbar.setCloseOnEscape True
+            (Snackbar.defaultConfig { onClosed = SnackbarClosed }
+                # Snackbar.setCloseOnEscape true
             )
             model.queue
         ]
     }
 
-
-buttonMargin :: Array (Html.Attribute msg)
+buttonMargin :: Array (HH.Attribute msg)
 buttonMargin =
     [ style "margin" "14px" ]
 
-
 heroMessage :: Html msg
 heroMessage =
-    Html.div
-        [ class "mdc-snackbar mdc-snackbar--open"
+    HH.div
+        [ HP.class_ "mdc-snackbar mdc-snackbar--open"
         , style "position" "relative"
         , style "left" "0"
         , style "transform" "none"
         ]
-        [ Html.div
-            [ class "mdc-snackbar__surface" ]
-            [ Html.div
-                [ class "mdc-snackbar__label"
+        [ HH.div
+            [ HP.class_ mdc_snackbar__surface ]
+            [ HH.div
+                [ HP.class_ mdc_snackbar__label
                 , style "color" "hsla(0,0%,100%,.87)"
-                , Html.Attributes.attribute "role" "status"
-                , Html.Attributes.attribute "aria-live" "polite"
+                , HP.attr (AttrName "role") "status"
+                , HP.attr (AttrName "aria-live") "polite"
                 ]
-                [ text "Can't send photo. Retry in 5 seconds." ]
-            , Html.div
-                [ class "mdc-snackbar__actions" ]
-                [ Html.button
-                    [ class "mdc-button"
-                    , class "mdc-snackbar__action"
-                    , Html.Attributes.type_ "button"
+                [ HH.text "Can't send photo. Retry in 5 seconds." ]
+            , HH.div
+                [ HP.class_ mdc_snackbar__actions ]
+                [ HH.button
+                    [ HP.class_ mdc_button
+                    , HP.class_ mdc_snackbar__action
+                    , HP.type_ "button"
                     ]
-                    [ text "Retry" ]
-                , Html.button
-                    [ class "mdc-icon-button"
-                    , class "mdc-snackbar__dismiss"
-                    , class "material-icons"
+                    [ HH.text "Retry" ]
+                , HH.button
+                    [ HP.class_ mdc_icon_button
+                    , HP.class_ mdc_snackbar__dismiss
+                    , HP.class_ material_icons
                     ]
-                    [ text "close" ]
+                    [ HH.text "close" ]
                 ]
             ]
         ]

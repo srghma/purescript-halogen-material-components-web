@@ -7,7 +7,6 @@ module Demo.Pages.Url
 
 import Url
 
-
 data Url
     = StartPage
     | Button
@@ -46,7 +45,6 @@ data Url
     | Typography
     | DataTable
     | Error404 String
-
 
 toString :: Url -> String
 toString url =
@@ -162,11 +160,9 @@ toString url =
         Error404 requestedHash ->
             requestedHash
 
-
 fromUrl :: Url.Url -> Url
 fromUrl url =
-    fromString (Maybe.withDefault "" url.fragment)
-
+    fromString (Maybe.fromMaybe "" url.fragment)
 
 fromString :: String -> Url
 fromString url =

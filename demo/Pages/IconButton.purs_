@@ -2,30 +2,34 @@ module Demo.Pages.IconButton
 
 import Browser.Dom
 import Demo.CatalogPage
-import Html
-import Html.Attributes
-import Material.Button as Button
-import Material.IconButton as IconButton
-import Material.IconToggle as IconToggle
-import Material.Typography as Typography
+import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
+import Halogen
+import Halogen as H
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import HalogenMWC.Button as Button
+import HalogenMWC.IconButton as IconButton
+import HalogenMWC.IconToggle as IconToggle
+import HalogenMWC.Typography as Typography
 import Set
 import Task
 
-
 data Model =
     { ons :: Set String }
-
 
 defaultModel :: Model
 defaultModel =
     { ons = Set.empty }
 
-
 data Msg
     = Toggle String
     | Focus String
     | Focused (Result Browser.Dom.Error ())
-
 
 update :: Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -48,7 +52,6 @@ update msg model =
         Focused _ ->
             ( model, Cmd.none )
 
-
 view :: Model -> CatalogPage Msg
 view model =
     { title = "Icon Button"
@@ -60,52 +63,52 @@ view model =
         }
     , hero =
         [ IconToggle.iconToggle
-            (IconToggle.config
-                |> IconToggle.setOn (Set.member "icon-button-hero" model.ons)
-                |> IconToggle.setOnChange (Toggle "icon-button-hero")
+            (IconToggle.defaultConfig
+                # IconToggle.setOn (Set.member "icon-button-hero" model.ons)
+                # IconToggle.setOnChange (Toggle "icon-button-hero")
             )
             { offIcon = "favorite_border"
             , onIcon = "favorite"
             }
         ]
     , content =
-        [ Html.h3 [ Typography.subtitle1 ] [ text "Icon Button" ]
-        , IconButton.iconButton IconButton.config "wifi"
-        , Html.h3 [ Typography.subtitle1 ] [ text "Icon Toggle" ]
+        [ HH.h3 [ Typography.subtitle1 ] [ HH.text "Icon Button" ]
+        , IconButton.iconButton IconButton.defaultConfig "wifi"
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Icon Toggle" ]
         , IconToggle.iconToggle
-            (IconToggle.config
-                |> IconToggle.setOn (Set.member "icon-button-toggle" model.ons)
-                |> IconToggle.setOnChange (Toggle "icon-button-toggle")
+            (IconToggle.defaultConfig
+                # IconToggle.setOn (Set.member "icon-button-toggle" model.ons)
+                # IconToggle.setOnChange (Toggle "icon-button-toggle")
             )
             { offIcon = "favorite_border"
             , onIcon = "favorite"
             }
-        , Html.h3 [ Typography.subtitle1 ] [ text "Focus Icon Button" ]
-        , Html.div []
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Focus Icon Button" ]
+        , HH.div []
             [ IconButton.iconButton
-                (IconButton.config
-                    |> IconButton.setAttributes [ Html.Attributes.id "my-icon-button" ]
+                (IconButton.defaultConfig
+                    # IconButton.setAttributes [ HP.id "my-icon-button" ]
                 )
                 "wifi"
-            , text "\u{00A0}"
+            , HH.text "\u{00A0}"
             , Button.raised
-                (Button.config |> Button.setOnClick (Focus "my-icon-button"))
+                (Button.defaultConfig # Button.setOnClick (Focus "my-icon-button"))
                 "Focus"
             ]
-        , Html.h3 [ Typography.subtitle1 ] [ text "Focus Icon Toggle" ]
-        , Html.div []
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Focus Icon Toggle" ]
+        , HH.div []
             [ IconToggle.iconToggle
-                (IconToggle.config
-                    |> IconToggle.setOn (Set.member "icon-button-toggle" model.ons)
-                    |> IconToggle.setOnChange (Toggle "icon-button-toggle")
-                    |> IconToggle.setAttributes [ Html.Attributes.id "my-icon-toggle" ]
+                (IconToggle.defaultConfig
+                    # IconToggle.setOn (Set.member "icon-button-toggle" model.ons)
+                    # IconToggle.setOnChange (Toggle "icon-button-toggle")
+                    # IconToggle.setAttributes [ HP.id "my-icon-toggle" ]
                 )
                 { offIcon = "favorite_border"
                 , onIcon = "favorite"
                 }
-            , text "\u{00A0}"
+            , HH.text "\u{00A0}"
             , Button.raised
-                (Button.config |> Button.setOnClick (Focus "my-icon-toggle"))
+                (Button.defaultConfig # Button.setOnClick (Focus "my-icon-toggle"))
                 "Focus"
             ]
         ]

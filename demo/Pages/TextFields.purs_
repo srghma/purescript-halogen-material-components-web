@@ -2,29 +2,33 @@ module Demo.Pages.TextFields
 
 import Browser.Dom
 import Demo.CatalogPage
-import Html
-import Html.Attributes
-import Material.Button as Button
-import Material.HelperText as HelperText
-import Material.TextArea as TextArea
-import Material.TextField as TextField
-import Material.Typography as Typography
+import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
+import Halogen
+import Halogen as H
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import HalogenMWC.Button as Button
+import HalogenMWC.HelperText as HelperText
+import HalogenMWC.TextArea as TextArea
+import HalogenMWC.TextField as TextField
+import HalogenMWC.Typography as Typography
 import Task
-
 
 data Model =
     { value :: String }
-
 
 defaultModel :: Model
 defaultModel =
     { value = "" }
 
-
 data Msg
     = Focus String
     | Focused (Result Browser.Dom.Error ())
-
 
 update :: Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -34,7 +38,6 @@ update msg model =
 
         Focused _ ->
             ( model, Cmd.none )
-
 
 view :: Model -> CatalogPage Msg
 view model =
@@ -47,270 +50,258 @@ view model =
         }
     , hero = [ heroTextFields model ]
     , content =
-        [ Html.h3 [ Typography.subtitle1 ] [ text "Filled" ]
+        [ HH.h3 [ Typography.subtitle1 ] [ HH.text "Filled" ]
         , filledTextFields model
-        , Html.h3 [ Typography.subtitle1 ] [ text "Shaped Filled" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Shaped Filled" ]
         , shapedFilledTextFields model
-        , Html.h3 [ Typography.subtitle1 ] [ text "Outlined" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Outlined" ]
         , outlinedTextFields model
-        , Html.h3 [ Typography.subtitle1 ] [ text "Shaped Outlined (TODO)" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Shaped Outlined (TODO)" ]
         , shapedOutlinedTextFields model
-        , Html.h3 [ Typography.subtitle1 ] [ text "Text Fields without Label" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Text Fields without Label" ]
         , textFieldsWithoutLabel model
-        , Html.h3 [ Typography.subtitle1 ] [ text "Text Fields with Character Counter" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Text Fields with Character Counter" ]
         , textFieldsWithCharacterCounter model
-        , Html.h3 [ Typography.subtitle1 ] [ text "Textarea" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Textarea" ]
         , textareaTextField model
-        , Html.h3 [ Typography.subtitle1 ] [ text "Full Width" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Full Width" ]
         , fullwidthTextField model
-        , Html.h3 [ Typography.subtitle1 ] [ text "Full Width Textarea" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Full Width Textarea" ]
         , fullwidthTextareaTextField model
-        , Html.h3 [ Typography.subtitle1 ] [ text "Focus Text Field" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Focus Text Field" ]
         , focusTextField
         ]
     }
 
-
 heroTextFields :: Model -> Html Msg
 heroTextFields model =
-    Html.div heroTextFieldContainer
-        [ Html.div textFieldContainerHero
+    HH.div heroTextFieldContainer
+        [ HH.div textFieldContainerHero
             [ TextField.filled
-                (TextField.config
-                    |> TextField.setLabel (Just "Standard")
+                (TextField.defaultConfig
+                    # TextField.setLabel (Just "Standard")
                 )
             ]
-        , Html.div textFieldContainerHero
+        , HH.div textFieldContainerHero
             [ TextField.outlined
-                (TextField.config
-                    |> TextField.setLabel (Just "Standard")
+                (TextField.defaultConfig
+                    # TextField.setLabel (Just "Standard")
                 )
             ]
         ]
-
 
 filledTextFields :: Model -> Html msg
 filledTextFields model =
-    Html.div textFieldRow
-        [ Html.div textFieldContainer
+    HH.div textFieldRow
+        [ HH.div textFieldContainer
             [ TextField.filled
-                (TextField.config
-                    |> TextField.setLabel (Just "Standard")
+                (TextField.defaultConfig
+                    # TextField.setLabel (Just "Standard")
                 )
             , demoHelperText
             ]
-        , Html.div textFieldContainer
+        , HH.div textFieldContainer
             [ TextField.filled
-                (TextField.config
-                    |> TextField.setLabel (Just "Standard")
-                    |> TextField.setLeadingIcon (Just (TextField.icon [] "event"))
+                (TextField.defaultConfig
+                    # TextField.setLabel (Just "Standard")
+                    # TextField.setLeadingIcon (Just (TextField.icon [] "event"))
                 )
             , demoHelperText
             ]
-        , Html.div textFieldContainer
+        , HH.div textFieldContainer
             [ TextField.filled
-                (TextField.config
-                    |> TextField.setLabel (Just "Standard")
-                    |> TextField.setTrailingIcon (Just (TextField.icon [] "delete"))
+                (TextField.defaultConfig
+                    # TextField.setLabel (Just "Standard")
+                    # TextField.setTrailingIcon (Just (TextField.icon [] "delete"))
                 )
             , demoHelperText
             ]
         ]
-
 
 shapedFilledTextFields :: Model -> Html msg
 shapedFilledTextFields model =
-    Html.div textFieldRow
-        [ Html.div textFieldContainer
+    HH.div textFieldRow
+        [ HH.div textFieldContainer
             [ TextField.filled
-                (TextField.config
-                    |> TextField.setLabel (Just "Standard")
-                    |> TextField.setAttributes [ style "border-radius" "16px 16px 0 0" ]
+                (TextField.defaultConfig
+                    # TextField.setLabel (Just "Standard")
+                    # TextField.setAttributes [ style "border-radius" "16px 16px 0 0" ]
                 )
             , demoHelperText
             ]
-        , Html.div textFieldContainer
+        , HH.div textFieldContainer
             [ TextField.filled
-                (TextField.config
-                    |> TextField.setLabel (Just "Standard")
-                    |> TextField.setLeadingIcon (Just (TextField.icon [] "event"))
-                    |> TextField.setAttributes [ style "border-radius" "16px 16px 0 0" ]
+                (TextField.defaultConfig
+                    # TextField.setLabel (Just "Standard")
+                    # TextField.setLeadingIcon (Just (TextField.icon [] "event"))
+                    # TextField.setAttributes [ style "border-radius" "16px 16px 0 0" ]
                 )
             , demoHelperText
             ]
-        , Html.div textFieldContainer
+        , HH.div textFieldContainer
             [ TextField.filled
-                (TextField.config
-                    |> TextField.setLabel (Just "Standard")
-                    |> TextField.setTrailingIcon (Just (TextField.icon [] "delete"))
-                    |> TextField.setAttributes [ style "border-radius" "16px 16px 0 0" ]
+                (TextField.defaultConfig
+                    # TextField.setLabel (Just "Standard")
+                    # TextField.setTrailingIcon (Just (TextField.icon [] "delete"))
+                    # TextField.setAttributes [ style "border-radius" "16px 16px 0 0" ]
                 )
             , demoHelperText
             ]
         ]
-
 
 outlinedTextFields :: Model -> Html msg
 outlinedTextFields model =
-    Html.div textFieldRow
-        [ Html.div textFieldContainer
+    HH.div textFieldRow
+        [ HH.div textFieldContainer
             [ TextField.outlined
-                (TextField.config
-                    |> TextField.setLabel (Just "Standard")
+                (TextField.defaultConfig
+                    # TextField.setLabel (Just "Standard")
                 )
             , demoHelperText
             ]
-        , Html.div textFieldContainer
+        , HH.div textFieldContainer
             [ TextField.outlined
-                (TextField.config
-                    |> TextField.setLabel (Just "Standard")
-                    |> TextField.setLeadingIcon (Just (TextField.icon [] "event"))
+                (TextField.defaultConfig
+                    # TextField.setLabel (Just "Standard")
+                    # TextField.setLeadingIcon (Just (TextField.icon [] "event"))
                 )
             , demoHelperText
             ]
-        , Html.div textFieldContainer
+        , HH.div textFieldContainer
             [ TextField.outlined
-                (TextField.config
-                    |> TextField.setLabel (Just "Standard")
-                    |> TextField.setTrailingIcon (Just (TextField.icon [] "delete"))
+                (TextField.defaultConfig
+                    # TextField.setLabel (Just "Standard")
+                    # TextField.setTrailingIcon (Just (TextField.icon [] "delete"))
                 )
             , demoHelperText
             ]
         ]
-
 
 shapedOutlinedTextFields :: Model -> Html msg
 shapedOutlinedTextFields model =
-    Html.div textFieldRow
-        [ Html.div textFieldContainer
+    HH.div textFieldRow
+        [ HH.div textFieldContainer
             [ TextField.outlined
-                (TextField.config
-                    |> TextField.setLabel (Just "Standard")
+                (TextField.defaultConfig
+                    # TextField.setLabel (Just "Standard")
                 )
             , demoHelperText
             ]
-        , Html.div textFieldContainer
+        , HH.div textFieldContainer
             [ TextField.outlined
-                (TextField.config
-                    |> TextField.setLabel (Just "Standard")
-                    |> TextField.setLeadingIcon (Just (TextField.icon [] "event"))
+                (TextField.defaultConfig
+                    # TextField.setLabel (Just "Standard")
+                    # TextField.setLeadingIcon (Just (TextField.icon [] "event"))
                 )
             , demoHelperText
             ]
-        , Html.div textFieldContainer
+        , HH.div textFieldContainer
             [ TextField.outlined
-                (TextField.config
-                    |> TextField.setLabel (Just "Standard")
-                    |> TextField.setTrailingIcon (Just (TextField.icon [] "delete"))
+                (TextField.defaultConfig
+                    # TextField.setLabel (Just "Standard")
+                    # TextField.setTrailingIcon (Just (TextField.icon [] "delete"))
                 )
             , demoHelperText
             ]
         ]
-
 
 textFieldsWithoutLabel :: Model -> Html msg
 textFieldsWithoutLabel model =
-    Html.div textFieldRow
-        [ Html.div textFieldContainer
-            [ TextField.outlined TextField.config
+    HH.div textFieldRow
+        [ HH.div textFieldContainer
+            [ TextField.outlined TextField.defaultConfig
             , demoHelperText
             ]
-        , Html.div textFieldContainer
+        , HH.div textFieldContainer
             [ TextField.outlined
-                (TextField.config
-                    |> TextField.setLeadingIcon (Just (TextField.icon [] "event"))
+                (TextField.defaultConfig
+                    # TextField.setLeadingIcon (Just (TextField.icon [] "event"))
                 )
             , demoHelperText
             ]
-        , Html.div textFieldContainer
+        , HH.div textFieldContainer
             [ TextField.outlined
-                (TextField.config
-                    |> TextField.setTrailingIcon (Just (TextField.icon [] "delete"))
+                (TextField.defaultConfig
+                    # TextField.setTrailingIcon (Just (TextField.icon [] "delete"))
                 )
             , demoHelperText
             ]
         ]
-
 
 textFieldsWithCharacterCounter :: Model -> Html msg
 textFieldsWithCharacterCounter model =
-    Html.div textFieldRow
-        [ Html.div textFieldContainer
+    HH.div textFieldRow
+        [ HH.div textFieldContainer
             [ TextField.outlined
-                (TextField.config |> TextField.setMaxLength (Just 18))
+                (TextField.defaultConfig # TextField.setMaxLength (Just 18))
             , demoHelperTextWithCharacterCounter
             ]
-        , Html.div textFieldContainer
+        , HH.div textFieldContainer
             [ TextField.outlined
-                (TextField.config
-                    |> TextField.setLeadingIcon (Just (TextField.icon [] "event"))
-                    |> TextField.setMaxLength (Just 18)
+                (TextField.defaultConfig
+                    # TextField.setLeadingIcon (Just (TextField.icon [] "event"))
+                    # TextField.setMaxLength (Just 18)
                 )
             , demoHelperTextWithCharacterCounter
             ]
-        , Html.div textFieldContainer
+        , HH.div textFieldContainer
             [ TextField.outlined
-                (TextField.config
-                    |> TextField.setTrailingIcon (Just (TextField.icon [] "delete"))
-                    |> TextField.setMaxLength (Just 18)
+                (TextField.defaultConfig
+                    # TextField.setTrailingIcon (Just (TextField.icon [] "delete"))
+                    # TextField.setMaxLength (Just 18)
                 )
             , demoHelperTextWithCharacterCounter
             ]
         ]
-
 
 textareaTextField :: Model -> Html msg
 textareaTextField model =
-    Html.div textFieldContainer
+    HH.div textFieldContainer
         [ TextArea.outlined
-            (TextArea.config |> TextArea.setLabel (Just "Standard"))
+            (TextArea.defaultConfig # TextArea.setLabel (Just "Standard"))
         , demoHelperText
         ]
 
-
 fullwidthTextField :: Model -> Html msg
 fullwidthTextField model =
-    Html.div textFieldContainer
+    HH.div textFieldContainer
         [ TextField.filled
-            (TextField.config
-                |> TextField.setPlaceholder (Just "Standard")
-                |> TextField.setFullwidth True
+            (TextField.defaultConfig
+                # TextField.setPlaceholder (Just "Standard")
+                # TextField.setFullwidth true
             )
         , demoHelperText
         ]
 
-
 fullwidthTextareaTextField :: Model -> Html msg
 fullwidthTextareaTextField model =
-    Html.div textFieldRowFullwidth
-        [ Html.div textFieldContainer
+    HH.div textFieldRowFullwidth
+        [ HH.div textFieldContainer
             [ TextArea.outlined
-                (TextArea.config
-                    |> TextArea.setLabel (Just "Standard")
-                    |> TextArea.setFullwidth True
+                (TextArea.defaultConfig
+                    # TextArea.setLabel (Just "Standard")
+                    # TextArea.setFullwidth true
                 )
             , demoHelperText
             ]
         ]
 
-
 focusTextField :: Html Msg
 focusTextField =
-    Html.div []
+    HH.div []
         [ TextField.filled
-            (TextField.config
-                |> TextField.setAttributes [ Html.Attributes.id "my-text-field" ]
+            (TextField.defaultConfig
+                # TextField.setAttributes [ HP.id "my-text-field" ]
             )
-        , text "\u{00A0}"
+        , HH.text "\u{00A0}"
         , Button.raised
-            (Button.config |> Button.setOnClick (Focus "my-text-field"))
+            (Button.defaultConfig # Button.setOnClick (Focus "my-text-field"))
             "Focus"
         ]
 
-
-heroTextFieldContainer :: Array (Html.Attribute msg)
+heroTextFieldContainer :: Array (HH.Attribute msg)
 heroTextFieldContainer =
-    [ class "hero-text-field-container"
+    [ HP.class_ hero_text_field_container
     , style "display" "-ms-flexbox"
     , style "display" "flex"
     , style "-ms-flex" "1 1 100%"
@@ -321,50 +312,44 @@ heroTextFieldContainer =
     , style "flex-wrap" "wrap"
     ]
 
-
-textFieldContainerHero :: Array (Html.Attribute msg)
+textFieldContainerHero :: Array (HH.Attribute msg)
 textFieldContainerHero =
     style "padding" "20px" :: textFieldContainer
 
-
-textFieldContainer :: Array (Html.Attribute msg)
+textFieldContainer :: Array (HH.Attribute msg)
 textFieldContainer =
-    [ class "text-field-container"
+    [ HP.class_ text_field_container
     , style "min-width" "200px"
     ]
 
-
-textFieldRow :: Array (Html.Attribute msg)
+textFieldRow :: Array (HH.Attribute msg)
 textFieldRow =
-    [ class "text-field-row"
+    [ HP.class_ text_field_row
     , style "display" "flex"
     , style "align-items" "flex-start"
     , style "justify-content" "space-between"
     , style "flex-wrap" "wrap"
     ]
 
-
-textFieldRowFullwidth :: Array (Html.Attribute msg)
+textFieldRowFullwidth :: Array (HH.Attribute msg)
 textFieldRowFullwidth =
-    [ class "text-field-row text-field-row--fullwidth"
+    [ HP.class_ "text-field-row text-field-row--fullwidth"
     , style "display" "block"
     ]
-
 
 demoHelperText :: Html msg
 demoHelperText =
     HelperText.helperLine []
         [ HelperText.helperText
-            (HelperText.config |> HelperText.setPersistent True)
+            (HelperText.defaultConfig # HelperText.setPersistent true)
             "Helper Text"
         ]
-
 
 demoHelperTextWithCharacterCounter :: Html msg
 demoHelperTextWithCharacterCounter =
     HelperText.helperLine []
         [ HelperText.helperText
-            (HelperText.config |> HelperText.setPersistent True)
+            (HelperText.defaultConfig # HelperText.setPersistent true)
             "Helper Text"
         , HelperText.characterCounter []
         ]

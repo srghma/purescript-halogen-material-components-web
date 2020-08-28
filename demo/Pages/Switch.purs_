@@ -3,29 +3,33 @@ module Demo.Pages.Switch
 import Browser.Dom
 import Demo.CatalogPage
 import Dict
-import Html
-import Html.Attributes
-import Material.Button as Button
-import Material.FormField as FormField
-import Material.Switch as Switch
-import Material.Typography as Typography
+import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
+import Halogen
+import Halogen as H
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import HalogenMWC.Button as Button
+import HalogenMWC.FormField as FormField
+import HalogenMWC.Switch as Switch
+import HalogenMWC.Typography as Typography
 import Task
-
 
 data Model =
     { switches :: Dict String Boolean }
 
-
 defaultModel :: Model
 defaultModel =
-    { switches = Dict.fromList [ ( "hero-switch", True ) ] }
-
+    { switches = Dict.fromList [ ( "hero-switch", true ) ] }
 
 data Msg
     = Toggle String
     | Focus String
     | Focused (Result Browser.Dom.Error ())
-
 
 update :: Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -34,7 +38,7 @@ update msg model =
             ( { model
                 | switches =
                     Dict.update id
-                        (\state -> Just (not (Maybe.withDefault False state)))
+                        (\state -> Just (not (Maybe.fromMaybe false state)))
                         model.switches
               }
             , Cmd.none
@@ -46,11 +50,9 @@ update msg model =
         Focused _ ->
             ( model, Cmd.none )
 
-
 isChecked :: String -> Model -> Boolean
 isChecked id model =
-    Maybe.withDefault False (Dict.get id model.switches)
-
+    Maybe.fromMaybe false (Dict.get id model.switches)
 
 view :: Model -> CatalogPage Msg
 view model =
@@ -63,13 +65,12 @@ view model =
         }
     , hero = heroSwitch model
     , content =
-        [ Html.h3 [ Typography.subtitle1 ] [ text "Switch" ]
+        [ HH.h3 [ Typography.subtitle1 ] [ HH.text "Switch" ]
         , demoSwitch model
-        , Html.h3 [ Typography.subtitle1 ] [ text "Focus Switch" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Focus Switch" ]
         , focusSwitch model
         ]
     }
-
 
 heroSwitch :: Model -> Array (Html Msg)
 heroSwitch model =
@@ -78,19 +79,18 @@ heroSwitch model =
             "hero-switch"
     in
     [ FormField.formField
-        (FormField.config
-            |> FormField.setLabel (Just "off/on")
-            |> FormField.setFor (Just id)
-            |> FormField.setOnClick (Toggle id)
+        (FormField.defaultConfig
+            # FormField.setLabel (Just "off/on")
+            # FormField.setFor (Just id)
+            # FormField.setOnClick (Toggle id)
         )
         [ Switch.switch
-            (Switch.config
-                |> Switch.setChecked (isChecked id model)
-                |> Switch.setOnChange (Toggle id)
+            (Switch.defaultConfig
+                # Switch.setChecked (isChecked id model)
+                # Switch.setOnChange (Toggle id)
             )
         ]
     ]
-
 
 demoSwitch :: Model -> Html Msg
 demoSwitch model =
@@ -99,18 +99,17 @@ demoSwitch model =
             "demo-switch"
     in
     FormField.formField
-        (FormField.config
-            |> FormField.setLabel (Just "off/on")
-            |> FormField.setFor (Just id)
-            |> FormField.setOnClick (Toggle id)
+        (FormField.defaultConfig
+            # FormField.setLabel (Just "off/on")
+            # FormField.setFor (Just id)
+            # FormField.setOnClick (Toggle id)
         )
         [ Switch.switch
-            (Switch.config
-                |> Switch.setChecked (isChecked id model)
-                |> Switch.setOnChange (Toggle id)
+            (Switch.defaultConfig
+                # Switch.setChecked (isChecked id model)
+                # Switch.setOnChange (Toggle id)
             )
         ]
-
 
 focusSwitch :: Model -> Html Msg
 focusSwitch model =
@@ -118,26 +117,26 @@ focusSwitch model =
         id =
             "my-switch"
     in
-    Html.div []
+    HH.div []
         [ FormField.formField
-            (FormField.config
-                |> FormField.setLabel (Just "off/on")
-                |> FormField.setFor (Just id)
-                |> FormField.setOnClick (Toggle id)
-                |> FormField.setAttributes [ Html.Attributes.id "my-form-field" ]
+            (FormField.defaultConfig
+                # FormField.setLabel (Just "off/on")
+                # FormField.setFor (Just id)
+                # FormField.setOnClick (Toggle id)
+                # FormField.setAttributes [ HP.id "my-form-field" ]
             )
             [ Switch.switch
-                (Switch.config
-                    |> Switch.setChecked (isChecked id model)
-                    |> Switch.setOnChange (Toggle id)
-                    |> Switch.setAttributes [ Html.Attributes.id id ]
+                (Switch.defaultConfig
+                    # Switch.setChecked (isChecked id model)
+                    # Switch.setOnChange (Toggle id)
+                    # Switch.setAttributes [ HP.id id ]
                 )
             ]
-        , text "\u{00A0}"
+        , HH.text "\u{00A0}"
         , Button.raised
-            (Button.config |> Button.setOnClick (Focus "my-switch"))
+            (Button.defaultConfig # Button.setOnClick (Focus "my-switch"))
             "Focus switch"
         , Button.raised
-            (Button.config |> Button.setOnClick (Focus "my-form-field"))
+            (Button.defaultConfig # Button.setOnClick (Focus "my-form-field"))
             "Focus form field"
         ]

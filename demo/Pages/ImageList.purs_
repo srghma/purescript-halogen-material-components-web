@@ -1,30 +1,33 @@
 module Demo.Pages.ImageList
 
 import Demo.CatalogPage
-import Html
-import Html.Attributes
-import Material.ImageList as ImageList
-import Material.ImageList.Item as ImageListItem
-import Material.Typography as Typography
-
+import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
+import Halogen
+import Halogen as H
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import HalogenMWC.ImageList as ImageList
+import HalogenMWC.ImageList.Item as ImageListItem
+import HalogenMWC.Typography as Typography
 
 data Model =
     {}
-
 
 defaultModel :: Model
 defaultModel =
     {}
 
-
 data Msg
     = NoOp
-
 
 update :: Msg -> Model -> Model
 update msg model =
     model
-
 
 view :: Model -> CatalogPage Msg
 view model =
@@ -37,59 +40,55 @@ view model =
         }
     , hero =
         [ ImageList.imageList
-            (ImageList.config
-                |> ImageList.setAttributes [ style "width" "300px" ]
+            (ImageList.defaultConfig
+                # ImageList.setAttributes [ style "width" "300px" ]
             )
             (List.repeat 15 imageListHeroItem)
         ]
     , content =
-        [ Html.h3
+        [ HH.h3
             [ Typography.subtitle1 ]
-            [ text "Standard Image Array with Text Protection" ]
+            [ HH.text "Standard Image Array with Text Protection" ]
         , standardImageList
-        , Html.h3
+        , HH.h3
             [ Typography.subtitle1 ]
-            [ text "Masonry Image List" ]
+            [ HH.text "Masonry Image List" ]
         , masonryImageList
         ]
     }
 
-
 standardImageList :: Html msg
 standardImageList =
     ImageList.imageList
-        (ImageList.config
-            |> ImageList.setWithTextProtection True
-            |> ImageList.setAttributes [ style "max-width" "900px" ]
+        (ImageList.defaultConfig
+            # ImageList.setWithTextProtection true
+            # ImageList.setAttributes [ style "max-width" "900px" ]
         )
-        (List.map standardItem standardImages)
-
+        (map standardItem standardImages)
 
 masonryImageList :: Html msg
 masonryImageList =
     ImageList.imageList
-        (ImageList.config
-            |> ImageList.setMasonry True
-            |> ImageList.setAttributes
+        (ImageList.defaultConfig
+            # ImageList.setMasonry true
+            # ImageList.setAttributes
                 [ style "max-width" "900px"
                 , style "column-count" "5"
                 , style "column-gap" "16px"
                 ]
         )
-        (List.map masonryItem masonryImages)
-
+        (map masonryItem masonryImages)
 
 imageListHeroItem :: ImageListItem msg
 imageListHeroItem =
     ImageListItem.imageListItem
-        (ImageListItem.config
-            |> ImageListItem.setAttributes
+        (ImageListItem.defaultConfig
+            # ImageListItem.setAttributes
                 [ style "width" "calc(100% / 5 - 4.2px)"
                 , style "margin" "2px"
                 ]
         )
         "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAABNJREFUCB1jZGBg+A/EDEwgAgQADigBA//q6GsAAAAASUVORK5CYII%3D"
-
 
 standardItem :: String -> ImageListItem msg
 standardItem url =
@@ -97,25 +96,23 @@ standardItem url =
     -- ImageList.imageAspectContainer
     --   [ style "padding-bottom" "66.66667%" ]
     ImageListItem.imageListItem
-        (ImageListItem.config
-            |> ImageListItem.setLabel (Just "Text label")
-            |> ImageListItem.setAttributes
+        (ImageListItem.defaultConfig
+            # ImageListItem.setLabel (Just "Text label")
+            # ImageListItem.setAttributes
                 [ style "width" "calc(100% / 5 - 4.2px)"
                 , style "margin" "2px"
                 ]
         )
         url
 
-
 masonryItem :: String -> ImageListItem msg
 masonryItem url =
     ImageListItem.imageListItem
-        (ImageListItem.config
-            |> ImageListItem.setLabel (Just "Text label")
-            |> ImageListItem.setAttributes [ style "margin-bottom" "16px" ]
+        (ImageListItem.defaultConfig
+            # ImageListItem.setLabel (Just "Text label")
+            # ImageListItem.setAttributes [ style "margin-bottom" "16px" ]
         )
         url
-
 
 standardImages :: Array String
 standardImages =
@@ -135,7 +132,6 @@ standardImages =
     , "images/photos/3x2/14.jpg"
     , "images/photos/3x2/15.jpg"
     ]
-
 
 masonryImages :: Array String
 masonryImages =

@@ -1,28 +1,31 @@
 module Demo.Pages.LinearProgress
 
 import Demo.CatalogPage
-import Html
-import Material.LinearProgress as LinearProgress
-import Material.Typography as Typography
-
+import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
+import Halogen
+import Halogen as H
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import HalogenMWC.Typography as Typography
 
 data Model =
     {}
-
 
 defaultModel :: Model
 defaultModel =
     {}
 
-
 data Msg
     = NoOp
-
 
 update :: Msg -> Model -> Model
 update msg model =
     model
-
 
 view :: Model -> CatalogPage Msg
 view model =
@@ -33,18 +36,18 @@ view model =
         , documentation = Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-LinearProgress"
         , sourceCode = Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-linear-progress"
         }
-    , hero = [ LinearProgress.determinate LinearProgress.config { progress = 0.5 } ]
+    , hero = [ LinearProgress.determinate LinearProgress.defaultConfig { progress = 0.5 } ]
     , content =
-        [ Html.h3 [ Typography.subtitle1 ] [ text "Buffered" ]
-        , LinearProgress.buffered LinearProgress.config { progress = 0.5, buffered = 0.75 }
-        , Html.h3 [ Typography.subtitle1 ] [ text "Indeterminate" ]
-        , LinearProgress.indeterminate LinearProgress.config
-        , Html.h3 [ Typography.subtitle1 ] [ text "Reversed" ]
+        [ HH.h3 [ Typography.subtitle1 ] [ HH.text "Buffered" ]
+        , LinearProgress.buffered LinearProgress.defaultConfig { progress = 0.5, buffered = 0.75 }
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Indeterminate" ]
+        , LinearProgress.indeterminate LinearProgress.defaultConfig
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Reversed" ]
         , LinearProgress.determinate
-            (LinearProgress.config |> LinearProgress.setReverse True)
+            (LinearProgress.defaultConfig # LinearProgress.setReverse true)
             { progress = 0.5 }
-        , Html.h3 [ Typography.subtitle1 ] [ text "Reversed Buffered" ]
-        , LinearProgress.buffered (LinearProgress.config |> LinearProgress.setReverse True)
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Reversed Buffered" ]
+        , LinearProgress.buffered (LinearProgress.defaultConfig # LinearProgress.setReverse true)
             { progress = 0.5, buffered = 0.75 }
         ]
     }

@@ -1,8 +1,8 @@
 module Demo.Pages.Index where
 
-import Material.Classes.TopAppBar
 import Protolude
 
+import Material.Classes.TopAppBar
 import Data.Const (Const(..))
 import Halogen as H
 import Halogen.HTML as HH

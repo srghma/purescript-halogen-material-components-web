@@ -1,16 +1,32 @@
 module Demo.Pages.DrawerPage
 
-import Html
-import Html.Attributes
-import Html.Events
-import Material.Drawer.Dismissible as DismissibleDrawer
-import Material.Drawer.Permanent as PermanentDrawer
-import Material.Icon as Icon
-import Material.List as List
-import Material.List.Divider as ListDivider
-import Material.List.Item as ListItem
-import Material.TopAppBar as TopAppBar
-
+import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
+import Halogen
+import Halogen as H
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
+import Halogen
+import Halogen as H
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import HalogenMWC.Drawer.Dismissible as DismissibleDrawer
+import HalogenMWC.Drawer.Permanent as PermanentDrawer
+import HalogenMWC.Icon as Icon
+import HalogenMWC.List as List
+import HalogenMWC.List.Divider as ListDivider
+import HalogenMWC.List.Item as ListItem
+import HalogenMWC.TopAppBar as TopAppBar
 
 data DrawerPage msg =
     { title :: String
@@ -19,28 +35,27 @@ data DrawerPage msg =
     , onMenuClick :: Maybe msg
     }
 
-
 view :: (msg -> topMsg) -> DrawerPage msg -> Html topMsg
 view lift { title, drawer, scrim, onMenuClick } =
-    Html.map lift <|
-        Html.div drawerFrameRoot
+    HH.map lift $
+        HH.div drawerFrameRoot
             [ drawer
-            , Maybe.withDefault (text "") scrim
-            , Html.div [ DismissibleDrawer.appContent ]
-                [ TopAppBar.regular TopAppBar.config
+            , Maybe.fromMaybe (text "") scrim
+            , HH.div [ DismissibleDrawer.appContent ]
+                [ TopAppBar.regular TopAppBar.defaultConfig
                     [ TopAppBar.row []
                         [ TopAppBar.section [ TopAppBar.alignStart ]
                             [ case onMenuClick of
                                 Just handleClick ->
                                     Icon.icon
                                         [ TopAppBar.navigationIcon
-                                        , Html.Events.onClick handleClick
+                                        , HH.Events.onClick handleClick
                                         ]
                                         "menu"
 
                                 Nothing ->
                                     text ""
-                            , Html.span [ TopAppBar.title ] [ text title ]
+                            , HH.span [ TopAppBar.title ] [ HH.text title ]
                             ]
                         ]
                     ]
@@ -48,80 +63,78 @@ view lift { title, drawer, scrim, onMenuClick } =
                 ]
             ]
 
-
 drawerBody :: (Int -> msg) -> Int -> Array (Html msg)
 drawerBody setSelectedIndex selectedIndex =
     let
         listItemConfig index =
-            ListItem.config
-                |> ListItem.setSelected
+            ListItem.defaultConfig
+                # ListItem.setSelected
                     (if selectedIndex == index then
                         Just ListItem.activated
 
                      else
                         Nothing
                     )
-                |> ListItem.setOnClick (setSelectedIndex index)
+                # ListItem.setOnClick (setSelectedIndex index)
     in
     [ PermanentDrawer.header []
-        [ Html.h3 [ PermanentDrawer.title ] [ text "Mail" ]
-        , Html.h6 [ PermanentDrawer.subtitle ] [ text "email@material.io" ]
+        [ HH.h3 [ PermanentDrawer.title ] [ HH.text "Mail" ]
+        , HH.h6 [ PermanentDrawer.subtitle ] [ HH.text "email@material.io" ]
         ]
     , PermanentDrawer.content []
         [ Array.group []
-            [ Array.list Array.config
+            [ Array.list Array.defaultConfig
                 (ListItem.listItem (listItemConfig 0)
                     [ ListItem.graphic [] [ Icon.icon [] "inbox" ]
-                    , text "Inbox"
+                    , HH.text "Inbox"
                     ]
                 )
                 [ ListItem.listItem (listItemConfig 1)
                     [ ListItem.graphic [] [ Icon.icon [] "star" ]
-                    , text "Star"
+                    , HH.text "Star"
                     ]
                 , ListItem.listItem (listItemConfig 2)
                     [ ListItem.graphic [] [ Icon.icon [] "send" ]
-                    , text "Sent Mail"
+                    , HH.text "Sent Mail"
                     ]
                 , ListItem.listItem (listItemConfig 3)
                     [ ListItem.graphic [] [ Icon.icon [] "drafts" ]
-                    , text "Drafts"
+                    , HH.text "Drafts"
                     ]
                 ]
             , ListDivider.group []
-            , Array.subheader [] [ text "Labels" ]
-            , Array.list Array.config
+            , Array.subheader [] [ HH.text "Labels" ]
+            , Array.list Array.defaultConfig
                 (ListItem.listItem (listItemConfig 4)
                     [ ListItem.graphic [] [ Icon.icon [] "bookmark" ]
-                    , text "Family"
+                    , HH.text "Family"
                     ]
                 )
                 [ ListItem.listItem (listItemConfig 5)
                     [ ListItem.graphic [] [ Icon.icon [] "bookmark" ]
-                    , text "Friends"
+                    , HH.text "Friends"
                     ]
                 , ListItem.listItem (listItemConfig 6)
                     [ ListItem.graphic [] [ Icon.icon [] "bookmark" ]
-                    , text "Work"
+                    , HH.text "Work"
                     ]
-                , ListDivider.listItem ListDivider.config
+                , ListDivider.listItem ListDivider.defaultConfig
                 , ListItem.listItem (listItemConfig 7)
                     [ ListItem.graphic [] [ Icon.icon [] "settings" ]
-                    , text "Settings"
+                    , HH.text "Settings"
                     ]
                 , ListItem.listItem (listItemConfig 8)
                     [ ListItem.graphic [] [ Icon.icon [] "announcement" ]
-                    , text "Help & feedback"
+                    , HH.text "Help & feedback"
                     ]
                 ]
             ]
         ]
     ]
 
-
 mainContent :: Html msg
 mainContent =
-    Html.div
+    HH.div
         [ style "padding-left" "18px"
         , style "padding-right" "18px"
         , style "overflow" "auto"
@@ -130,15 +143,13 @@ mainContent =
         , TopAppBar.fixedAdjust
         , DismissibleDrawer.appContent
         ]
-        (List.repeat 4 <| Html.p [] [ text loremIpsum ])
-
+        (List.repeat 4 $ HH.p [] [ HH.text loremIpsum ])
 
 loremIpsum :: String
 loremIpsum =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
-
-drawerFrameRoot :: Array (Html.Attribute msg)
+drawerFrameRoot :: Array (HH.Attribute msg)
 drawerFrameRoot =
     [ style "display" "-ms-flexbox"
     , style "display" "flex"

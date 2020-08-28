@@ -2,26 +2,30 @@ module Demo.Pages.Buttons
 
 import Browser.Dom
 import Demo.CatalogPage
-import Html
-import Html.Attributes
-import Material.Button as Button
-import Material.Typography as Typography
+import Protolude
+import Data.Array as Array
+import Data.Maybe as Maybe
+import Halogen
+import Halogen as H
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Properties as HP
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import HalogenMWC.Button as Button
+import HalogenMWC.Typography as Typography
 import Task
-
 
 data Model =
     {}
-
 
 defaultModel :: Model
 defaultModel =
     {}
 
-
 data Msg
     = Focus String
     | Focused (Result Browser.Dom.Error ())
-
 
 update :: Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -31,7 +35,6 @@ update msg model =
 
         Focused _ ->
             ( model, Cmd.none )
-
 
 view :: Model -> CatalogPage Msg
 view model =
@@ -44,29 +47,28 @@ view model =
         }
     , hero = heroButtons
     , content =
-        [ Html.h3 [ Typography.subtitle1 ] [ text "Text Button" ]
+        [ HH.h3 [ Typography.subtitle1 ] [ HH.text "Text Button" ]
         , textButtons
-        , Html.h3 [ Typography.subtitle1 ] [ text "Raised Button" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Raised Button" ]
         , raisedButtons
-        , Html.h3 [ Typography.subtitle1 ] [ text "Unelevated Button" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Unelevated Button" ]
         , unelevatedButtons
-        , Html.h3 [ Typography.subtitle1 ] [ text "Outlined Button" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Outlined Button" ]
         , outlinedButtons
-        , Html.h3 [ Typography.subtitle1 ] [ text "Shaped Button" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Shaped Button" ]
         , shapedButtons
-        , Html.h3 [ Typography.subtitle1 ] [ text "Link Button" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Link Button" ]
         , linkButtons
-        , Html.h3 [ Typography.subtitle1 ] [ text "Focus Button" ]
+        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Focus Button" ]
         , focusButton
         ]
     }
-
 
 heroButtons :: Array (Html msg)
 heroButtons =
     let
         config =
-            Button.config |> Button.setAttributes [ heroMargin ]
+            Button.defaultConfig # Button.setAttributes [ heroMargin ]
     in
     [ Button.text config "Text"
     , Button.raised config "Raised"
@@ -74,80 +76,70 @@ heroButtons =
     , Button.outlined config "Outlined"
     ]
 
-
 textButtons :: Html msg
 textButtons =
     buttonsRow Button.text []
-
 
 raisedButtons :: Html msg
 raisedButtons =
     buttonsRow Button.raised []
 
-
 unelevatedButtons :: Html msg
 unelevatedButtons =
     buttonsRow Button.unelevated []
-
 
 outlinedButtons :: Html msg
 outlinedButtons =
     buttonsRow Button.outlined []
 
-
 shapedButtons :: Html msg
 shapedButtons =
     buttonsRow Button.unelevated [ style "border-radius" "18px" ]
 
-
 linkButtons :: Html msg
 linkButtons =
     buttonsRow
-        (\config label -> Button.text (config |> Button.setHref (Just "#")) label)
+        (\config label -> Button.text (config # Button.setHref (Just "#")) label)
         []
-
 
 focusButton :: Html Msg
 focusButton =
-    Html.div []
+    HH.div []
         [ Button.raised
-            (Button.config
-                |> Button.setAttributes [ Html.Attributes.id "my-button" ]
+            (Button.defaultConfig
+                # Button.setAttributes [ HP.id "my-button" ]
             )
             "Button"
-        , text "\u{00A0}"
-        , Button.raised (Button.config |> Button.setOnClick (Focus "my-button")) "Focus"
-        , text "\u{00A0}"
+        , HH.text "\u{00A0}"
+        , Button.raised (Button.defaultConfig # Button.setOnClick (Focus "my-button")) "Focus"
+        , HH.text "\u{00A0}"
         , Button.raised
-            (Button.config
-                |> Button.setHref (Just "#")
-                |> Button.setAttributes [ Html.Attributes.id "my-link-button" ]
+            (Button.defaultConfig
+                # Button.setHref (Just "#")
+                # Button.setAttributes [ HP.id "my-link-button" ]
             )
             "Link button"
-        , text "\u{00A0}"
-        , Button.raised (Button.config |> Button.setOnClick (Focus "my-link-button")) "Focus"
+        , HH.text "\u{00A0}"
+        , Button.raised (Button.defaultConfig # Button.setOnClick (Focus "my-link-button")) "Focus"
         ]
 
-
-buttonsRow :: (Button.Config msg -> String -> Html msg) -> Array (Html.Attribute msg) -> Html msg
+buttonsRow :: (Button.Config msg -> String -> Html msg) -> Array (HH.Attribute msg) -> Html msg
 buttonsRow button additionalAttributes =
     let
         config =
-            Button.config
-                |> Button.setAttributes (rowMargin :: additionalAttributes)
+            Button.defaultConfig
+                # Button.setAttributes (rowMargin :: additionalAttributes)
     in
-    Html.div []
+    HH.div []
         [ button config "Default"
-        , button (config |> Button.setDense True) "Dense"
-        , button (config |> Button.setIcon (Just "favorite")) "Icon"
+        , button (config # Button.setDense true) "Dense"
+        , button (config # Button.setIcon (Just "favorite")) "Icon"
         ]
 
-
-heroMargin :: Html.Attribute msg
+heroMargin :: HH.Attribute msg
 heroMargin =
     style "margin" "16px 32px"
 
-
-rowMargin :: Html.Attribute msg
+rowMargin :: HH.Attribute msg
 rowMargin =
     style "margin" "8px 16px"
