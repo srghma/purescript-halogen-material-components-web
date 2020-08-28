@@ -16,7 +16,7 @@ import HalogenMWC.ImageList as ImageList
 import HalogenMWC.ImageList.Item as ImageListItem
 import HalogenMWC.TopAppBar as TopAppBar
 
-view :: Html msg
+view :: Html w i
 view =
     HH.div []
         [ TopAppBar.regular TopAppBar.defaultConfig

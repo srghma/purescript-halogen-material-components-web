@@ -12,12 +12,12 @@ import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Typography as Typography
 
-data TopAppBarPage msg =
-    { fixedAdjust :: HH.Attribute msg
-    , topAppBar :: Html msg
+data TopAppBarPage w i =
+    { fixedAdjust :: HH.Attribute w i
+    , topAppBar :: Html w i
     }
 
-view :: (msg -> topMsg) -> TopAppBarPage msg -> Html topMsg
+view :: (w i -> topMsg) -> TopAppBarPage w i -> Html topMsg
 view lift { topAppBar, fixedAdjust } =
     HH.map lift $
         HH.div

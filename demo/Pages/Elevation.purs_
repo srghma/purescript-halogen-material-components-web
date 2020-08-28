@@ -24,7 +24,7 @@ data Msg
     = NoOp
 
 update :: Msg -> Model -> Model
-update msg model =
+update w i model =
     model
 
 view :: Model -> CatalogPage Msg
@@ -68,14 +68,14 @@ view model =
         ]
     }
 
-heroElevation :: Array (Html msg)
+heroElevation :: Array (Html w i)
 heroElevation =
     [ HH.div (Elevation.z0 :: heroSurface) [ HH.text "Flat 0dp" ]
     , HH.div (Elevation.z8 :: heroSurface) [ HH.text "Raised 8dp" ]
     , HH.div (Elevation.z16 :: heroSurface) [ HH.text "Raised 16dp" ]
     ]
 
-heroSurface :: Array (HH.Attribute msg)
+heroSurface :: Array (HH.Attribute w i)
 heroSurface =
     [ style "display" "-ms-inline-flexbox"
     , style "display" "inline-flex"
@@ -92,7 +92,7 @@ heroSurface =
     , style "color" "#f0f0f0"
     ]
 
-demoContainer :: Array (HH.Attribute msg)
+demoContainer :: Array (HH.Attribute w i)
 demoContainer =
     [ HP.class_ elevation_demo_container
     , style "display" "flex"
@@ -100,7 +100,7 @@ demoContainer =
     , style "justify-content" "space-between"
     ]
 
-demoSurface :: Array (HH.Attribute msg)
+demoSurface :: Array (HH.Attribute w i)
 demoSurface =
     [ style "display" "-ms-inline-flexbox"
     , style "display" "inline-flex"

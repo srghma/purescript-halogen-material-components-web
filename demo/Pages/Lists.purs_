@@ -46,8 +46,8 @@ data Msg
     | Focused (Result Browser.Dom.Error ())
 
 update :: Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    case msg of
+update w i model =
+    case w i of
         ToggleCheckbox id ->
             ( { model
                 | checkboxes =
@@ -110,13 +110,13 @@ view model =
         ]
     }
 
-demoList :: Array (HH.Attribute msg)
+demoList :: Array (HH.Attribute w i)
 demoList =
     [ style "max-width" "600px"
     , style "border" "1px solid rgba(0,0,0,.1)"
     ]
 
-heroList :: Array (Html msg)
+heroList :: Array (Html w i)
 heroList =
     let
         listItem =
@@ -128,7 +128,7 @@ heroList =
         (List.repeat 2 listItem)
     ]
 
-singleLineList :: Html msg
+singleLineList :: Html w i
 singleLineList =
     let
         listItem =
@@ -138,7 +138,7 @@ singleLineList =
         listItem
         (List.repeat 2 listItem)
 
-twoLineList :: Html msg
+twoLineList :: Html w i
 twoLineList =
     let
         listItem =
@@ -157,7 +157,7 @@ twoLineList =
         listItem
         (List.repeat 2 listItem)
 
-leadingIconList :: Html msg
+leadingIconList :: Html w i
 leadingIconList =
     let
         listItem icon =
@@ -170,7 +170,7 @@ leadingIconList =
         (listItem "wifi")
         (map listItem [ "bluetooth", "data_usage" ])
 
-trailingIconList :: Html msg
+trailingIconList :: Html w i
 trailingIconList =
     let
         listItem =
@@ -236,14 +236,14 @@ shapedActivatedItemList model =
             ]
         )
 
-demoIcon :: Array (HH.Attribute msg)
+demoIcon :: Array (HH.Attribute w i)
 demoIcon =
     [ style "background" "rgba(0,0,0,.3)"
     , style "border-radius" "50%"
     , style "color" "#fff"
     ]
 
-folderList :: Html msg
+folderList :: Html w i
 folderList =
     let
         listItem { primary, secondary } =

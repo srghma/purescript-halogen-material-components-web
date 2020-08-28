@@ -23,7 +23,7 @@ data Msg
     = NoOp
 
 update :: Msg -> Model -> Model
-update msg model =
+update w i model =
     model
 
 view :: Model -> CatalogPage Msg

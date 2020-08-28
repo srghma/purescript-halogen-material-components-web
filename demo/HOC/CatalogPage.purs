@@ -18,12 +18,12 @@ import HalogenMWC.List.Item as List.Item
 import HalogenMWC.TopAppBar as TopAppBar
 import HalogenMWC.Typography as Typography
 
-data CatalogPage msg =
+data CatalogPage w i =
     { title :: String
     , prelude :: String
     , resources :: CatalogPageResources
-    , hero :: Array (Html msg)
-    , content :: Array (Html msg)
+    , hero :: Array (Html w i)
+    , content :: Array (Html w i)
     }
 
 data CatalogPageResources =
@@ -39,7 +39,7 @@ data CatalogPageConfig topMsg =
     , url :: Url
     }
 
-view :: (msg -> topMsg) -> CatalogPageConfig topMsg -> CatalogPage msg -> Html topMsg
+view :: (w i -> topMsg) -> CatalogPageConfig topMsg -> CatalogPage w i -> Html topMsg
 view lift catalogPageConfig catalogPage =
     let
         toggleCatalogDrawer =
@@ -124,7 +124,7 @@ view lift catalogPageConfig catalogPage =
             ]
         ]
 
-resourcesList :: CatalogPageResources -> Html msg
+resourcesList :: CatalogPageResources -> Html w i
 resourcesList { materialDesignGuidelines, documentation, sourceCode } =
     Array.list Array.defaultConfig
         (List.Item.listItem
@@ -203,13 +203,13 @@ catalogDrawerItems =
     , { label = "Typography", url = Url.Typography }
     ]
 
-catalogPageContainer :: Array (HH.Attribute msg)
+catalogPageContainer :: Array (HH.Attribute w i)
 catalogPageContainer =
     [ style "position" "relative"
     , Typography.typography
     ]
 
-demoPanel :: Array (HH.Attribute msg)
+demoPanel :: Array (HH.Attribute w i)
 demoPanel =
     [ style "display" "-ms-flexbox"
     , style "display" "flex"
@@ -218,7 +218,7 @@ demoPanel =
     , style "overflow" "hidden"
     ]
 
-demoContent :: Array (HH.Attribute msg)
+demoContent :: Array (HH.Attribute w i)
 demoContent =
     [ HP.id "demo-content"
     , style "height" "100%"
@@ -240,13 +240,13 @@ demoContent =
     , style "justify-content" "flex-start"
     ]
 
-demoContentTransition :: Array (HH.Attribute msg)
+demoContentTransition :: Array (HH.Attribute w i)
 demoContentTransition =
     [ style "max-width" "900px"
     , style "width" "100%"
     ]
 
-hero :: Array (HH.Attribute msg)
+hero :: Array (HH.Attribute w i)
 hero =
     [ style "display" "-ms-flexbox"
     , style "display" "flex"
@@ -261,12 +261,12 @@ hero =
     , style "background-color" "#f2f2f2"
     ]
 
-demoTitle :: Array (HH.Attribute msg)
+demoTitle :: Array (HH.Attribute w i)
 demoTitle =
     [ style "border-bottom" "1px solid rgba(0,0,0,.87)"
     ]
 
-resourcesGraphic :: Array (HH.Attribute msg)
+resourcesGraphic :: Array (HH.Attribute w i)
 resourcesGraphic =
     [ style "width" "30px"
     , style "height" "30px"

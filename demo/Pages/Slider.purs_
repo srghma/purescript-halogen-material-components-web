@@ -38,8 +38,8 @@ data Msg
     | Focused (Result Browser.Dom.Error ())
 
 update :: Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    case msg of
+update w i model =
+    case w i of
         Changed id value ->
             ( { model | sliders = Dict.insert id value model.sliders }, Cmd.none )
 

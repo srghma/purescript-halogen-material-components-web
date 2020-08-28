@@ -26,8 +26,8 @@ data Msg
     | SetSelectedIndex Int
 
 update :: Msg -> Model -> Model
-update msg model =
-    case msg of
+update w i model =
+    case w i of
         ToggleDrawer ->
             { model | open = not model.open }
 

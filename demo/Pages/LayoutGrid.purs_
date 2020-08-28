@@ -31,7 +31,7 @@ data Msg
     = NoOp
 
 update :: Msg -> Model -> Model
-update msg model =
+update w i model =
     model
 
 view :: Model -> CatalogPage Msg
@@ -65,7 +65,7 @@ view model =
         ]
     }
 
-demoGrid :: Array (HH.Attribute msg) -> Array (Html msg) -> Html msg
+demoGrid :: Array (HH.Attribute w i) -> Array (Html w i) -> Html w i
 demoGrid options =
     LayoutGrid.layoutGrid
         (style "background" "rgba(0,0,0,.2)"
@@ -73,7 +73,7 @@ demoGrid options =
             :: options
         )
 
-demoCell :: Array (HH.Attribute msg) -> Html msg
+demoCell :: Array (HH.Attribute w i) -> Html w i
 demoCell options =
     LayoutGrid.cell
         (style "background" "rgba(0,0,0,.2)"
@@ -82,11 +82,11 @@ demoCell options =
         )
         []
 
-heroGrid :: Array (Html msg)
+heroGrid :: Array (Html w i)
 heroGrid =
     [ demoGrid [] [ LayoutGrid.inner [] (List.repeat 3 (demoCell [])) ] ]
 
-columnsGrid :: Html msg
+columnsGrid :: Html w i
 columnsGrid =
     demoGrid []
         [ LayoutGrid.inner []
@@ -100,7 +100,7 @@ columnsGrid =
             ]
         ]
 
-leftAlignedGrid :: Html msg
+leftAlignedGrid :: Html w i
 leftAlignedGrid =
     demoGrid
         [ LayoutGrid.alignLeft
@@ -113,7 +113,7 @@ leftAlignedGrid =
             ]
         ]
 
-rightAlignedGrid :: Html msg
+rightAlignedGrid :: Html w i
 rightAlignedGrid =
     demoGrid
         [ LayoutGrid.alignRight
@@ -122,7 +122,7 @@ rightAlignedGrid =
         [ LayoutGrid.inner [] (List.repeat 3 (demoCell []))
         ]
 
-cellAlignmentGrid :: Html msg
+cellAlignmentGrid :: Html w i
 cellAlignmentGrid =
     let
         innerHeight =

@@ -53,8 +53,8 @@ data Msg
     | Focused (Result Browser.Dom.Error ())
 
 update :: Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    case msg of
+update w i model =
+    case w i of
         HeroChanged hero ->
             ( { model | hero = hero }, Cmd.none )
 
@@ -114,13 +114,13 @@ heroSelect model =
         firstItem
         remainingItems
 
-firstItem :: SelectItem (Maybe a) msg
+firstItem :: SelectItem (Maybe a) w i
 firstItem =
     SelectItem.selectItem
         (SelectItem.defaultConfig { value = Nothing })
         [ HH.text "" ]
 
-remainingItems :: Array (SelectItem (Maybe Fruit) msg)
+remainingItems :: Array (SelectItem (Maybe Fruit) w i)
 remainingItems =
     [ SelectItem.selectItem
         (SelectItem.defaultConfig { value = Just Apple })

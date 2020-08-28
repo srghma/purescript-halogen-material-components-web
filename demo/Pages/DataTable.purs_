@@ -29,8 +29,8 @@ data Msg
     | AllUnselected
 
 update :: Msg -> Model -> Model
-update msg model =
-    case msg of
+update w i model =
+    case w i of
         NoOp ->
             model
 
@@ -72,7 +72,7 @@ view model =
         ]
     }
 
-heroDataTable :: Array (Html msg)
+heroDataTable :: Array (Html w i)
 heroDataTable =
     [ standardDataTable ]
 
@@ -103,7 +103,7 @@ data =
       }
     ]
 
-standardDataTable :: Html msg
+standardDataTable :: Html w i
 standardDataTable =
     let
         row { desert, carbs, protein, comments } =

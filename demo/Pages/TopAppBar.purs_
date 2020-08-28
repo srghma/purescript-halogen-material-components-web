@@ -27,7 +27,7 @@ data Msg
     = NoOp
 
 update :: Msg -> Model -> Model
-update msg model =
+update w i model =
     model
 
 view :: Model -> CatalogPage Msg
@@ -94,7 +94,7 @@ view model =
         ]
     }
 
-iframe :: String -> Url -> Html msg
+iframe :: String -> Url -> Html w i
 iframe title url =
     let
         stringUrl =

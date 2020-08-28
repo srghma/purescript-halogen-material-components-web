@@ -31,8 +31,8 @@ data Msg
     | Focused (Result Browser.Dom.Error ())
 
 update :: Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    case msg of
+update w i model =
+    case w i of
         Focus id ->
             ( model, Task.attempt Focused (Browser.Dom.focus id) )
 
@@ -90,7 +90,7 @@ heroTextFields model =
             ]
         ]
 
-filledTextFields :: Model -> Html msg
+filledTextFields :: Model -> Html w i
 filledTextFields model =
     HH.div textFieldRow
         [ HH.div textFieldContainer
@@ -118,7 +118,7 @@ filledTextFields model =
             ]
         ]
 
-shapedFilledTextFields :: Model -> Html msg
+shapedFilledTextFields :: Model -> Html w i
 shapedFilledTextFields model =
     HH.div textFieldRow
         [ HH.div textFieldContainer
@@ -149,7 +149,7 @@ shapedFilledTextFields model =
             ]
         ]
 
-outlinedTextFields :: Model -> Html msg
+outlinedTextFields :: Model -> Html w i
 outlinedTextFields model =
     HH.div textFieldRow
         [ HH.div textFieldContainer
@@ -177,7 +177,7 @@ outlinedTextFields model =
             ]
         ]
 
-shapedOutlinedTextFields :: Model -> Html msg
+shapedOutlinedTextFields :: Model -> Html w i
 shapedOutlinedTextFields model =
     HH.div textFieldRow
         [ HH.div textFieldContainer
@@ -205,7 +205,7 @@ shapedOutlinedTextFields model =
             ]
         ]
 
-textFieldsWithoutLabel :: Model -> Html msg
+textFieldsWithoutLabel :: Model -> Html w i
 textFieldsWithoutLabel model =
     HH.div textFieldRow
         [ HH.div textFieldContainer
@@ -228,7 +228,7 @@ textFieldsWithoutLabel model =
             ]
         ]
 
-textFieldsWithCharacterCounter :: Model -> Html msg
+textFieldsWithCharacterCounter :: Model -> Html w i
 textFieldsWithCharacterCounter model =
     HH.div textFieldRow
         [ HH.div textFieldContainer
@@ -254,7 +254,7 @@ textFieldsWithCharacterCounter model =
             ]
         ]
 
-textareaTextField :: Model -> Html msg
+textareaTextField :: Model -> Html w i
 textareaTextField model =
     HH.div textFieldContainer
         [ TextArea.outlined
@@ -262,7 +262,7 @@ textareaTextField model =
         , demoHelperText
         ]
 
-fullwidthTextField :: Model -> Html msg
+fullwidthTextField :: Model -> Html w i
 fullwidthTextField model =
     HH.div textFieldContainer
         [ TextField.filled
@@ -273,7 +273,7 @@ fullwidthTextField model =
         , demoHelperText
         ]
 
-fullwidthTextareaTextField :: Model -> Html msg
+fullwidthTextareaTextField :: Model -> Html w i
 fullwidthTextareaTextField model =
     HH.div textFieldRowFullwidth
         [ HH.div textFieldContainer
@@ -299,7 +299,7 @@ focusTextField =
             "Focus"
         ]
 
-heroTextFieldContainer :: Array (HH.Attribute msg)
+heroTextFieldContainer :: Array (HH.Attribute w i)
 heroTextFieldContainer =
     [ HP.class_ hero_text_field_container
     , style "display" "-ms-flexbox"
@@ -312,17 +312,17 @@ heroTextFieldContainer =
     , style "flex-wrap" "wrap"
     ]
 
-textFieldContainerHero :: Array (HH.Attribute msg)
+textFieldContainerHero :: Array (HH.Attribute w i)
 textFieldContainerHero =
     style "padding" "20px" :: textFieldContainer
 
-textFieldContainer :: Array (HH.Attribute msg)
+textFieldContainer :: Array (HH.Attribute w i)
 textFieldContainer =
     [ HP.class_ text_field_container
     , style "min-width" "200px"
     ]
 
-textFieldRow :: Array (HH.Attribute msg)
+textFieldRow :: Array (HH.Attribute w i)
 textFieldRow =
     [ HP.class_ text_field_row
     , style "display" "flex"
@@ -331,13 +331,13 @@ textFieldRow =
     , style "flex-wrap" "wrap"
     ]
 
-textFieldRowFullwidth :: Array (HH.Attribute msg)
+textFieldRowFullwidth :: Array (HH.Attribute w i)
 textFieldRowFullwidth =
     [ HP.class_ "text-field-row text-field-row--fullwidth"
     , style "display" "block"
     ]
 
-demoHelperText :: Html msg
+demoHelperText :: Html w i
 demoHelperText =
     HelperText.helperLine []
         [ HelperText.helperText
@@ -345,7 +345,7 @@ demoHelperText =
             "Helper Text"
         ]
 
-demoHelperTextWithCharacterCounter :: Html msg
+demoHelperTextWithCharacterCounter :: Html w i
 demoHelperTextWithCharacterCounter =
     HelperText.helperLine []
         [ HelperText.helperText

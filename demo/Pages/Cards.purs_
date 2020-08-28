@@ -31,8 +31,8 @@ data Msg
     | Focused (Result Browser.Dom.Error ())
 
 update :: Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    case msg of
+update w i model =
+    case w i of
         Focus id ->
             ( model, Task.attempt Focused (Browser.Dom.focus id) )
 
@@ -57,7 +57,7 @@ view model =
         ]
     }
 
-heroCard :: Array (Html msg)
+heroCard :: Array (Html w i)
 heroCard =
     [ Card.card
         (Card.defaultConfig
@@ -73,7 +73,7 @@ heroCard =
         }
     ]
 
-exampleCard1 :: Html msg
+exampleCard1 :: Html w i
 exampleCard1 =
     Card.card
         (Card.defaultConfig
@@ -91,7 +91,7 @@ exampleCard1 =
         , actions = Nothing
         }
 
-exampleCard2 :: Html msg
+exampleCard2 :: Html w i
 exampleCard2 =
     Card.card
         (Card.defaultConfig
@@ -108,7 +108,7 @@ exampleCard2 =
         , actions = Just demoActions
         }
 
-exampleCard3 :: Html msg
+exampleCard3 :: Html w i
 exampleCard3 =
     Card.card
         (Card.defaultConfig
@@ -150,11 +150,11 @@ focusCard =
             "Focus"
         ]
 
-demoMedia :: Card.Block msg
+demoMedia :: Card.Block w i
 demoMedia =
     Card.sixteenToNineMedia [] "images/photos/3x2/2.jpg"
 
-demoTitle :: Card.Block msg
+demoTitle :: Card.Block w i
 demoTitle =
     Card.block $
         HH.div
@@ -172,7 +172,7 @@ demoTitle =
                 [ HH.text "by Kurt Wagner" ]
             ]
 
-demoBody :: Card.Block msg
+demoBody :: Card.Block w i
 demoBody =
     Card.block $
         HH.div
@@ -187,7 +187,7 @@ demoBody =
                 """
             ]
 
-demoActions :: Card.Actions msg
+demoActions :: Card.Actions w i
 demoActions =
     Card.actions
         { buttons =

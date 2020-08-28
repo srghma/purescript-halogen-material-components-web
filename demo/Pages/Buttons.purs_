@@ -28,8 +28,8 @@ data Msg
     | Focused (Result Browser.Dom.Error ())
 
 update :: Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    case msg of
+update w i model =
+    case w i of
         Focus id ->
             ( model, Task.attempt Focused (Browser.Dom.focus id) )
 
@@ -64,7 +64,7 @@ view model =
         ]
     }
 
-heroButtons :: Array (Html msg)
+heroButtons :: Array (Html w i)
 heroButtons =
     let
         config =
@@ -76,27 +76,27 @@ heroButtons =
     , Button.outlined config "Outlined"
     ]
 
-textButtons :: Html msg
+textButtons :: Html w i
 textButtons =
     buttonsRow Button.text []
 
-raisedButtons :: Html msg
+raisedButtons :: Html w i
 raisedButtons =
     buttonsRow Button.raised []
 
-unelevatedButtons :: Html msg
+unelevatedButtons :: Html w i
 unelevatedButtons =
     buttonsRow Button.unelevated []
 
-outlinedButtons :: Html msg
+outlinedButtons :: Html w i
 outlinedButtons =
     buttonsRow Button.outlined []
 
-shapedButtons :: Html msg
+shapedButtons :: Html w i
 shapedButtons =
     buttonsRow Button.unelevated [ style "border-radius" "18px" ]
 
-linkButtons :: Html msg
+linkButtons :: Html w i
 linkButtons =
     buttonsRow
         (\config label -> Button.text (config # Button.setHref (Just "#")) label)
@@ -123,7 +123,7 @@ focusButton =
         , Button.raised (Button.defaultConfig # Button.setOnClick (Focus "my-link-button")) "Focus"
         ]
 
-buttonsRow :: (Button.Config msg -> String -> Html msg) -> Array (HH.Attribute msg) -> Html msg
+buttonsRow :: (Button.Config w i -> String -> Html w i) -> Array (HH.Attribute w i) -> Html w i
 buttonsRow button additionalAttributes =
     let
         config =
@@ -136,10 +136,10 @@ buttonsRow button additionalAttributes =
         , button (config # Button.setIcon (Just "favorite")) "Icon"
         ]
 
-heroMargin :: HH.Attribute msg
+heroMargin :: HH.Attribute w i
 heroMargin =
     style "margin" "16px 32px"
 
-rowMargin :: HH.Attribute msg
+rowMargin :: HH.Attribute w i
 rowMargin =
     style "margin" "8px 16px"

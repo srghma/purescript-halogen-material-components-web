@@ -18,7 +18,7 @@ view :
     , icon :: String
     , altText :: String
     }
-    -> ListItem msg
+    -> ListItem w i
 view { link, title, icon, altText } =
     List.Item.listItem
         (List.Item.defaultConfig

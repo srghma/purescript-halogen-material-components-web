@@ -38,8 +38,8 @@ data Msg
     | Focused (Result Browser.Dom.Error ())
 
 update :: Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    case msg of
+update w i model =
+    case w i of
         Changed index ->
             let
                 checkboxes =
@@ -115,6 +115,6 @@ focusCheckbox =
             "Focus"
         ]
 
-heroMargin :: Array (HH.Attribute msg)
+heroMargin :: Array (HH.Attribute w i)
 heroMargin =
     [ style "margin" "8px 16px" ]

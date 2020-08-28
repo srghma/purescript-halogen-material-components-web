@@ -26,7 +26,7 @@ data Msg
     = NoOp
 
 update :: Msg -> Model -> Model
-update msg model =
+update w i model =
     model
 
 view :: Model -> CatalogPage Msg
@@ -57,7 +57,7 @@ view model =
         ]
     }
 
-standardImageList :: Html msg
+standardImageList :: Html w i
 standardImageList =
     ImageList.imageList
         (ImageList.defaultConfig
@@ -66,7 +66,7 @@ standardImageList =
         )
         (map standardItem standardImages)
 
-masonryImageList :: Html msg
+masonryImageList :: Html w i
 masonryImageList =
     ImageList.imageList
         (ImageList.defaultConfig
@@ -79,7 +79,7 @@ masonryImageList =
         )
         (map masonryItem masonryImages)
 
-imageListHeroItem :: ImageListItem msg
+imageListHeroItem :: ImageListItem w i
 imageListHeroItem =
     ImageList.Item.imageListItem
         (ImageList.Item.defaultConfig
@@ -90,7 +90,7 @@ imageListHeroItem =
         )
         "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAABNJREFUCB1jZGBg+A/EDEwgAgQADigBA//q6GsAAAAASUVORK5CYII%3D"
 
-standardItem :: String -> ImageListItem msg
+standardItem :: String -> ImageListItem w i
 standardItem url =
     -- TODO:
     -- ImageList.imageAspectContainer
@@ -105,7 +105,7 @@ standardItem url =
         )
         url
 
-masonryItem :: String -> ImageListItem msg
+masonryItem :: String -> ImageListItem w i
 masonryItem url =
     ImageList.Item.imageListItem
         (ImageList.Item.defaultConfig

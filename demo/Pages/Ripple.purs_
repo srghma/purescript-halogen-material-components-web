@@ -26,7 +26,7 @@ data Msg
     = NoOp
 
 update :: Msg -> Model -> Model
-update msg model =
+update w i model =
     model
 
 view :: Model -> CatalogPage Msg
@@ -63,7 +63,7 @@ view model =
         ]
     }
 
-demoBox :: Array (HH.Attribute msg)
+demoBox :: Array (HH.Attribute w i)
 demoBox =
     [ style "display" "flex"
     , style "align-items" "center"
@@ -80,7 +80,7 @@ demoBox =
     , HP.tabindex 0
     ]
 
-demoIcon :: Array (HH.Attribute msg)
+demoIcon :: Array (HH.Attribute w i)
 demoIcon =
     [ HP.class_ material_icons
     , style "width" "24px"

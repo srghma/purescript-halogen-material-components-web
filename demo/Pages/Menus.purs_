@@ -30,8 +30,8 @@ data Msg
     | Close
 
 update :: Msg -> Model -> Model
-update msg model =
-    case msg of
+update w i model =
+    case w i of
         Open ->
             { model | open = true }
 
@@ -83,7 +83,7 @@ listItem :: String -> ListItem Msg
 listItem label =
     List.Item.listItem (List.Item.defaultConfig # List.Item.setOnClick Close) [ HH.text label ]
 
-heroMenu :: Model -> Html msg
+heroMenu :: Model -> Html w i
 heroMenu model =
     HH.div
         [ HP.class_ "mdc-menu-surface mdc-menu-surface--open"

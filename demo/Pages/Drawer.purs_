@@ -34,7 +34,7 @@ data Msg
     = NoOp
 
 update :: Msg -> Model -> Model
-update msg model =
+update w i model =
     model
 
 view :: Model -> CatalogPage Msg
@@ -54,7 +54,7 @@ view model =
         ]
     }
 
-heroDrawer :: Array (Html msg)
+heroDrawer :: Array (Html w i)
 heroDrawer =
     let
         listItem ( activated, icon, label ) =
@@ -91,7 +91,7 @@ heroDrawer =
         ]
     ]
 
-iframe :: String -> String -> Html msg
+iframe :: String -> String -> Html w i
 iframe label url =
     HH.div
         [ style "display" "inline-block"

@@ -27,7 +27,7 @@ data Msg
     = NoOp
 
 update :: Msg -> Model -> Model
-update msg model =
+update w i model =
     model
 
 view :: Model -> CatalogPage Msg
@@ -64,7 +64,7 @@ view model =
         ]
     }
 
-themeColorsAsText :: Html msg
+themeColorsAsText :: Html w i
 themeColorsAsText =
     HH.div demoThemeColorGroup
         [ HH.div (Theme.primary :: demoThemeColorSwatches)
@@ -73,7 +73,7 @@ themeColorsAsText =
             [ HH.div demoThemeColorSwatch [ HH.text "Secondary" ] ]
         ]
 
-themeColorsAsBackground :: Html msg
+themeColorsAsBackground :: Html w i
 themeColorsAsBackground =
     HH.div demoThemeColorGroup
         [ HH.div
@@ -87,7 +87,7 @@ themeColorsAsBackground =
             [ HH.div demoThemeColorSwatch [ HH.text "Background" ] ]
         ]
 
-textOnBackground :: Html msg
+textOnBackground :: Html w i
 textOnBackground =
     HH.div demoThemeColorGroup
         [ HH.div (Theme.background :: demoThemeTextRow)
@@ -104,7 +104,7 @@ textOnBackground =
             ]
         ]
 
-textOnPrimary :: Html msg
+textOnPrimary :: Html w i
 textOnPrimary =
     HH.div demoThemeColorGroup
         [ HH.div (Theme.primaryBg :: demoThemeTextRow)
@@ -115,7 +115,7 @@ textOnPrimary =
             ]
         ]
 
-textOnSecondary :: Html msg
+textOnSecondary :: Html w i
 textOnSecondary =
     HH.div demoThemeColorGroup
         [ HH.div (Theme.secondaryBg :: demoThemeTextRow)
@@ -126,7 +126,7 @@ textOnSecondary =
             ]
         ]
 
-textOnLightBackground :: Html msg
+textOnLightBackground :: Html w i
 textOnLightBackground =
     HH.div demoThemeColorGroup
         [ HH.div (demoThemeBgCustomLight <> demoThemeTextRow)
@@ -143,7 +143,7 @@ textOnLightBackground =
             ]
         ]
 
-textOnDarkBackground :: Html msg
+textOnDarkBackground :: Html w i
 textOnDarkBackground =
     HH.div demoThemeColorGroup
         [ HH.div (demoThemeBgCustomDark <> demoThemeTextRow)
@@ -160,15 +160,15 @@ textOnDarkBackground =
             ]
         ]
 
-heroMargin :: Array (HH.Attribute msg)
+heroMargin :: Array (HH.Attribute w i)
 heroMargin =
     [ style "margin" "16px 32px" ]
 
-demoThemeColorGroup :: Array (HH.Attribute msg)
+demoThemeColorGroup :: Array (HH.Attribute w i)
 demoThemeColorGroup =
     [ style "padding" "16px 0" ]
 
-demoThemeColorSwatches :: Array (HH.Attribute msg)
+demoThemeColorSwatches :: Array (HH.Attribute w i)
 demoThemeColorSwatches =
     [ style "display" "-ms-inline-flexbox"
     , style "display" "inline-flex"
@@ -178,7 +178,7 @@ demoThemeColorSwatches =
     , Elevation.z2
     ]
 
-demoThemeColorSwatch :: Array (HH.Attribute msg)
+demoThemeColorSwatch :: Array (HH.Attribute w i)
 demoThemeColorSwatch =
     [ style "display" "inline-block"
     , style "-webkit-box-sizing" "border-box"
@@ -191,7 +191,7 @@ demoThemeColorSwatch =
     , style "border-radius" "4px"
     ]
 
-demoThemeTextRow :: Array (HH.Attribute msg)
+demoThemeTextRow :: Array (HH.Attribute w i)
 demoThemeTextRow =
     [ style "display" "-ms-inline-flexbox"
     , style "display" "inline-flex"
@@ -205,18 +205,18 @@ demoThemeTextRow =
     , style "flex-direction" "row"
     ]
 
-demoThemeTextStyle :: Array (HH.Attribute msg)
+demoThemeTextStyle :: Array (HH.Attribute w i)
 demoThemeTextStyle =
     [ style "padding" "0 16px" ]
 
-demoThemeIconStyle :: Array (HH.Attribute msg)
+demoThemeIconStyle :: Array (HH.Attribute w i)
 demoThemeIconStyle =
     HP.class_ material_icons :: demoThemeTextStyle
 
-demoThemeBgCustomLight :: Array (HH.Attribute msg)
+demoThemeBgCustomLight :: Array (HH.Attribute w i)
 demoThemeBgCustomLight =
     [ style "background-color" "#ddd" ]
 
-demoThemeBgCustomDark :: Array (HH.Attribute msg)
+demoThemeBgCustomDark :: Array (HH.Attribute w i)
 demoThemeBgCustomDark =
     [ style "background-color" "#d1d1d1" ]

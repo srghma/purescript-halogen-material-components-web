@@ -30,8 +30,8 @@ data Msg
     | Click Snackbar.MessageId
 
 update :: Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    case msg of
+update w i model =
+    case w i of
         ShowBaseline ->
             ( { model | queue = Snackbar.addMessage baselineMessage model.queue }
             , Cmd.none
@@ -115,11 +115,11 @@ view model =
         ]
     }
 
-buttonMargin :: Array (HH.Attribute msg)
+buttonMargin :: Array (HH.Attribute w i)
 buttonMargin =
     [ style "margin" "14px" ]
 
-heroMessage :: Html msg
+heroMessage :: Html w i
 heroMessage =
     HH.div
         [ HP.class_ "mdc-snackbar mdc-snackbar--open"

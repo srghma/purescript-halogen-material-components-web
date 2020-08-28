@@ -28,14 +28,14 @@ import HalogenMWC.List.Divider as ListDivider
 import HalogenMWC.List.Item as List.Item
 import HalogenMWC.TopAppBar as TopAppBar
 
-data DrawerPage msg =
+data DrawerPage w i =
     { title :: String
-    , drawer :: Html msg
-    , scrim :: Maybe (Html msg)
-    , onMenuClick :: Maybe msg
+    , drawer :: Html w i
+    , scrim :: Maybe (Html w i)
+    , onMenuClick :: Maybe w i
     }
 
-view :: (msg -> topMsg) -> DrawerPage msg -> Html topMsg
+view :: (w i -> topMsg) -> DrawerPage w i -> Html topMsg
 view lift { title, drawer, scrim, onMenuClick } =
     HH.map lift $
         HH.div drawerFrameRoot
@@ -63,7 +63,7 @@ view lift { title, drawer, scrim, onMenuClick } =
                 ]
             ]
 
-drawerBody :: (Int -> msg) -> Int -> Array (Html msg)
+drawerBody :: (Int -> w i) -> Int -> Array (Html w i)
 drawerBody setSelectedIndex selectedIndex =
     let
         listItemConfig index =
@@ -132,7 +132,7 @@ drawerBody setSelectedIndex selectedIndex =
         ]
     ]
 
-mainContent :: Html msg
+mainContent :: Html w i
 mainContent =
     HH.div
         [ style "padding-left" "18px"
@@ -149,7 +149,7 @@ loremIpsum :: String
 loremIpsum =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
-drawerFrameRoot :: Array (HH.Attribute msg)
+drawerFrameRoot :: Array (HH.Attribute w i)
 drawerFrameRoot =
     [ style "display" "-ms-flexbox"
     , style "display" "flex"

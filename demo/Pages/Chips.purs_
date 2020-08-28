@@ -77,8 +77,8 @@ data Msg
     | Focused (Result Browser.Dom.Error ())
 
 update :: Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    case msg of
+update w i model =
+    case w i of
         ChipChanged chip ->
             ( { model | chip = Just chip }, Cmd.none )
 
@@ -328,7 +328,7 @@ actionChips model =
             ]
         )
 
-shapedChips :: Model -> Html msg
+shapedChips :: Model -> Html w i
 shapedChips model =
     let
         chip label =
