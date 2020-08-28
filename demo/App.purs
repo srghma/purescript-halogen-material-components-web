@@ -1,6 +1,6 @@
 -- from https://github.com/rnons/purescript-halogen-storybook/
 
-module UIGuide.App where
+module Demo.App where
 
 import Protolude
 import Data.Const (Const)
@@ -18,8 +18,8 @@ import Halogen.VDom.Driver as H
 import Routing.Hash as Routing
 import Web.HTML.HTMLElement (HTMLElement)
 import Debug.Trace
-import UIGuide.Route
-import UIGuide.RouteToPage
+import Demo.Route
+import Demo.RouteToPage
 
 data Query a = Navigate Route a
 

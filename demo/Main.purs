@@ -2,8 +2,8 @@ module Main where
 
 import Debug.Trace
 import Protolude
-import UIGuide.App
-import UIGuide.Route
+import Demo.App
+import Demo.Route
 
 import Data.Const (Const)
 import Data.Functor (mapFlipped)

@@ -26,7 +26,7 @@ import * as path from 'path'
     })
 
   require('webpack-spago-loader/watcher-job')({
-    additionalWatchGlobs: ['(app|src)/**/*.(css|sass|scss)'],
+    additionalWatchGlobs: ['(demo|src)/**/*.(css|sass|scss)'],
     options: require('./lib/spago-options'),
     onStart: () => {},
     onError: () => {},
@@ -34,7 +34,7 @@ import * as path from 'path'
       // clear cache, e.g. `template.js`
       for (const cachePath in require.cache) {
         if (
-          cachePath.startsWith(path.resolve(root, "app")) ||
+          cachePath.startsWith(path.resolve(root, "demo")) ||
           cachePath.startsWith(path.resolve(root, "src"))
         ) {
           console.log('clearing cachePath', cachePath)

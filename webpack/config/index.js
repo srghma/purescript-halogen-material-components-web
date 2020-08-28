@@ -23,7 +23,7 @@ export default async function({
       publicPath: '/',
     },
 
-    entry: { main: path.resolve(root, "app", "index.js") },
+    entry: { main: path.resolve(root, "demo", "index.js") },
 
     bail: true,
     profile: false,
@@ -59,7 +59,7 @@ export default async function({
         minify: false,
         inject: false, // dont inject headTags and bodyTags after template is generated - we will do that ourselves
         templateContent: (options) => {
-          return require(path.resolve(root, 'app', 'template')).template({
+          return require(path.resolve(root, 'demo', 'template')).template({
             headTags: options.htmlWebpackPlugin.tags.headTags.toString(),
             bodyTags: options.htmlWebpackPlugin.tags.bodyTags.toString(),
           })

@@ -1,4 +1,4 @@
-module UIGuide.Pages.Index where
+module Demo.Pages.Index where
 
 import Material.Classes.TopAppBar
 import Protolude
@@ -11,7 +11,7 @@ import HalogenMWC.IconButton as IconButton
 import HalogenMWC.ImageList as ImageList
 import HalogenMWC.ImageList.Item as ImageList.Item
 import HalogenMWC.TopAppBar as TopAppBar
-import UIGuide.Route
+import Demo.Route
 import Routing.Duplex as Routing.Duplex
 
 type State

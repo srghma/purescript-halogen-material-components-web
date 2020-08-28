@@ -28,6 +28,6 @@
 , sources =
   [ "src/**/*.purs"
   , "test/**/*.purs"
-  , "app/**/*.purs"
+  , "demo/**/*.purs"
   ]
 }

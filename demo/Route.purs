@@ -1,4 +1,4 @@
-module UIGuide.Route where
+module Demo.Route where
 
 import Prelude
 

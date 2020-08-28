@@ -7,7 +7,7 @@ module.exports = {
     //   production ?
     //     {
     //       '@fullhuman/postcss-purgecss': {
-    //         content: ['./app/**/*.js'],
+    //         content: ['./demo/**/*.js'],
     //         defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
     //       }
     //     } :
