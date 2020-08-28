@@ -103,7 +103,7 @@ iframe title route =
                 [ HP.href stringUrl
                 , HP.target "_blank"
                 ]
-                [ HH.h3 [ Typography.subtitle1 ] [ HH.text title ]
+                [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text title ]
                 ]
             ]
         , HH.iframe

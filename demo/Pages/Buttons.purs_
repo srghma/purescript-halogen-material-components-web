@@ -47,19 +47,19 @@ view model =
         }
     , hero: heroButtons
     , content =
-        [ HH.h3 [ Typography.subtitle1 ] [ HH.text "Text Button" ]
+        [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Text Button" ]
         , textButtons
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Raised Button" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Raised Button" ]
         , raisedButtons
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Unelevated Button" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Unelevated Button" ]
         , unelevatedButtons
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Outlined Button" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Outlined Button" ]
         , outlinedButtons
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Shaped Button" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Shaped Button" ]
         , shapedButtons
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Link Button" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Link Button" ]
         , linkButtons
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Focus Button" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Focus Button" ]
         , focusButton
         ]
     }

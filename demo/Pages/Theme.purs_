@@ -45,20 +45,20 @@ view model =
         , Button.outlined (Button.defaultConfig # Button.setAttributes heroMargin) "Outlined"
         ]
     , content =
-        [ HH.legend [ Typography.subtitle1 ] [ HH.text "Theme colors as text" ]
+        [ HH.legend [ mdc_typography____subtitle1 ] [ HH.text "Theme colors as text" ]
         , themeColorsAsText
-        , HH.legend [ Typography.subtitle1 ] [ HH.text "Theme colors as background" ]
+        , HH.legend [ mdc_typography____subtitle1 ] [ HH.text "Theme colors as background" ]
         , themeColorsAsBackground
-        , HH.legend [ Typography.subtitle1 ] [ HH.text "Text on background" ]
+        , HH.legend [ mdc_typography____subtitle1 ] [ HH.text "Text on background" ]
         , textOnBackground
-        , HH.legend [ Typography.subtitle1 ] [ HH.text "Text on primary" ]
+        , HH.legend [ mdc_typography____subtitle1 ] [ HH.text "Text on primary" ]
         , textOnPrimary
-        , HH.legend [ Typography.subtitle1 ] [ HH.text "Text on secondary" ]
+        , HH.legend [ mdc_typography____subtitle1 ] [ HH.text "Text on secondary" ]
         , textOnSecondary
-        , HH.legend [ Typography.subtitle1 ]
+        , HH.legend [ mdc_typography____subtitle1 ]
             [ HH.text "Text on user-defined light background" ]
         , textOnLightBackground
-        , HH.legend [ Typography.subtitle1 ]
+        , HH.legend [ mdc_typography____subtitle1 ]
             [ HH.text "Text on user-defined dark background" ]
         , textOnDarkBackground
         ]

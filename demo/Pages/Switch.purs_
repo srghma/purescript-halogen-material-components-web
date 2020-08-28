@@ -65,9 +65,9 @@ view model =
         }
     , hero: heroSwitch model
     , content =
-        [ HH.h3 [ Typography.subtitle1 ] [ HH.text "Switch" ]
+        [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Switch" ]
         , demoSwitch model
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Focus Switch" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Focus Switch" ]
         , focusSwitch model
         ]
     }

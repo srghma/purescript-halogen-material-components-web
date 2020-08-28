@@ -45,21 +45,21 @@ view model =
         }
     , hero: heroGrid
     , content =
-        [ HH.h3 [ Typography.subtitle1 ] [ HH.text "Columns" ]
+        [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Columns" ]
         , columnsGrid
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Grid Left Alignment" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Grid Left Alignment" ]
         , HH.p
-            [ Typography.body1 ]
+            [ mdc_typography____body1 ]
             [ HH.text "This requires a max-width on the top-level grid element." ]
         , leftAlignedGrid
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Grid Right Alignment" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Grid Right Alignment" ]
         , HH.p
-            [ Typography.body1 ]
+            [ mdc_typography____body1 ]
             [ HH.text "This requires a max-width on the top-level grid element." ]
         , rightAlignedGrid
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Cell Alignment" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Cell Alignment" ]
         , HH.p
-            [ Typography.body1 ]
+            [ mdc_typography____body1 ]
             [ HH.text "Cell alignment requires a cell height smaller than the inner height of the grid." ]
         , cellAlignmentGrid
         ]

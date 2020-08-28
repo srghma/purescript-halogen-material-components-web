@@ -40,22 +40,22 @@ view model =
         }
     , hero: [ HH.div demoBox [ HH.text "Click here!", Ripple.bounded Ripple.defaultConfig ] ]
     , content =
-        [ HH.h3 [ Typography.subtitle1 ] [ HH.text "Bounded Ripple" ]
+        [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Bounded Ripple" ]
         , HH.div demoBox
             [ HH.text "Interact with me!"
             , Ripple.bounded Ripple.defaultConfig
             ]
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Unbounded Ripple" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Unbounded Ripple" ]
         , HH.div demoIcon
             [ HH.text "favorite"
             , Ripple.unbounded Ripple.defaultConfig
             ]
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Theme Color: Primary" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Theme Color: Primary" ]
         , HH.div demoBox
             [ HH.text "Primary"
             , Ripple.bounded (Ripple.defaultConfig # Ripple.setColor (Just Ripple.primary))
             ]
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Theme Color: Secondary" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Theme Color: Secondary" ]
         , HH.div demoBox
             [ HH.text "Secondary"
             , Ripple.bounded (Ripple.defaultConfig # Ripple.setColor (Just Ripple.accent))

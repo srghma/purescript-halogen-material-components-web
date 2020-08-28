@@ -49,14 +49,14 @@ view model =
         }
     , hero: [ Fab.fab Fab.defaultConfig "favorite_border" ]
     , content =
-        [ HH.h3 [ Typography.subtitle1 ] [ HH.text "Standard Floating Action Button" ]
+        [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Standard Floating Action Button" ]
         , Fab.fab Fab.defaultConfig "favorite_border"
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Mini Floating Action Button" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Mini Floating Action Button" ]
         , Fab.fab (Fab.defaultConfig # Fab.setMini true) "favorite_border"
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Extended FAB" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Extended FAB" ]
         , ExtendedFab.fab (ExtendedFab.defaultConfig # ExtendedFab.setIcon (Just "add"))
             "Create"
-        , HH.h3 [ Typography.subtitle1 ]
+        , HH.h3 [ mdc_typography____subtitle1 ]
             [ HH.text "Extended FAB (Text label followed by icon)" ]
         , ExtendedFab.fab
             (ExtendedFab.defaultConfig
@@ -64,9 +64,9 @@ view model =
                 # ExtendedFab.setTrailingIcon true
             )
             "Create"
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Extended FAB (without icon)" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Extended FAB (without icon)" ]
         , ExtendedFab.fab ExtendedFab.defaultConfig "Create"
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "FAB (Shaped)" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "FAB (Shaped)" ]
         , HH.div [ HP.style "display: flex" ]
             [ Fab.fab
                 (Fab.defaultConfig
@@ -86,7 +86,7 @@ view model =
             , ExtendedFab.fab (ExtendedFab.defaultConfig # ExtendedFab.setIcon (Just "add"))
                 "Create"
             ]
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Focus FAB" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Focus FAB" ]
         , HH.div [ HP.style "display: flex" ]
             [ Fab.fab
                 (Fab.defaultConfig # Fab.setAttributes [ HP.id "my-fab" ])

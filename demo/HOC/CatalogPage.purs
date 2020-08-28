@@ -107,12 +107,12 @@ view lift catalogPageConfig catalogPage =
                 HH.div
                     [ TopAppBar.fixedAdjust, DismissibleDrawer.appContent, demoContent ]
                     [ HH.div demoContentTransition
-                        [ HH.h1 [ Typography.headline5 ] [ HH.text catalogPage.title ]
-                        , HH.p [ Typography.body1 ] [ HH.text catalogPage.prelude ]
+                        [ HH.h1 [ mdc_typography____headline5 ] [ HH.text catalogPage.title ]
+                        , HH.p [ mdc_typography____body1 ] [ HH.text catalogPage.prelude ]
                         , HH.div hero catalogPage.hero
-                        , HH.h2 [ Typography.headline6, demoTitle ] [ HH.text "Resources" ]
+                        , HH.h2 [ mdc_typography____headline6, demoTitle ] [ HH.text "Resources" ]
                         , resourcesList catalogPage.resources
-                        , HH.h2 [ Typography.headline6, demoTitle ] [ HH.text "Demos" ]
+                        , HH.h2 [ mdc_typography____headline6, demoTitle ] [ HH.text "Demos" ]
                         , catalogPage.content
                         ]
                     ]
@@ -201,7 +201,7 @@ catalogDrawerItems =
 catalogPageContainer :: Array (HH.Attribute w i)
 catalogPageContainer =
     [ HP.style "position: relative"
-    , Typography.typography
+    , mdc_typography____typography
     ]
 
 demoPanel :: Array (HH.Attribute w i)

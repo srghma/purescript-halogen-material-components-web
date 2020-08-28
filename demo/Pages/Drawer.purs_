@@ -101,7 +101,7 @@ iframe label route =
                 [ HP.href route
                 , HP.target "_blank"
                 ]
-                [ HH.h3 [ Typography.subtitle1 ] [ HH.text label ] ]
+                [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text label ] ]
             ]
         , HH.iframe
             [ HP.src route

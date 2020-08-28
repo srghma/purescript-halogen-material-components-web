@@ -73,14 +73,14 @@ view model =
         }
     , hero: [ heroTabs model "tabs-hero-tabs" ]
     , content =
-        [ HH.h3 [ Typography.subtitle1 ] [ HH.text "Tabs with icons next to labels" ]
+        [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Tabs with icons next to labels" ]
         , tabsWithIcons model
-        , HH.h3 [ Typography.subtitle1 ]
+        , HH.h3 [ mdc_typography____subtitle1 ]
             [ HH.text "Tabs with icons above labels and indicators restricted to content" ]
         , tabsWithStackedIcons model
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Scrolling tabs" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Scrolling tabs" ]
         , scrollingTabs model
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Focus tabs" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Focus tabs" ]
         , focusTabs model
         ]
     }

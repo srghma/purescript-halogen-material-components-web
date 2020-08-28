@@ -177,20 +177,20 @@ view model =
         }
     , hero: heroChips model
     , content =
-        [ HH.h2 [ Typography.subtitle1 ] [ HH.text "Choice Chips" ]
+        [ HH.h2 [ mdc_typography____subtitle1 ] [ HH.text "Choice Chips" ]
         , choiceChips model
-        , HH.h2 [ Typography.subtitle1 ] [ HH.text "Filter Chips" ]
-        , HH.h3 [ Typography.body2 ] [ HH.text "No leading icon" ]
+        , HH.h2 [ mdc_typography____subtitle1 ] [ HH.text "Filter Chips" ]
+        , HH.h3 [ mdc_typography____body2 ] [ HH.text "No leading icon" ]
         , filterChips1 model
-        , HH.h3 [ Typography.body2 ] [ HH.text "With leading icon" ]
+        , HH.h3 [ mdc_typography____body2 ] [ HH.text "With leading icon" ]
         , filterChips2 model
-        , HH.h2 [ Typography.subtitle1 ] [ HH.text "Action Chips" ]
+        , HH.h2 [ mdc_typography____subtitle1 ] [ HH.text "Action Chips" ]
         , actionChips model
-        , HH.h2 [ Typography.subtitle1 ] [ HH.text "Shaped Chips" ]
+        , HH.h2 [ mdc_typography____subtitle1 ] [ HH.text "Shaped Chips" ]
         , shapedChips model
-        , HH.h2 [ Typography.subtitle1 ] [ HH.text "Input Chips" ]
+        , HH.h2 [ mdc_typography____subtitle1 ] [ HH.text "Input Chips" ]
         , inputChips model
-        , HH.h2 [ Typography.subtitle1 ] [ HH.text "Focus Chips" ]
+        , HH.h2 [ mdc_typography____subtitle1 ] [ HH.text "Focus Chips" ]
         , focusChips model
         ]
     }

@@ -72,9 +72,9 @@ view model =
             }
         ]
     , content =
-        [ HH.h3 [ Typography.subtitle1 ] [ HH.text "Icon Button" ]
+        [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Icon Button" ]
         , IconButton.iconButton IconButton.defaultConfig "wifi"
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Icon Toggle" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Icon Toggle" ]
         , IconToggle.iconToggle
             (IconToggle.defaultConfig
                 # IconToggle.setOn (Set.member "icon-button-toggle" model.ons)
@@ -83,7 +83,7 @@ view model =
             { offIcon: "favorite_border"
             , onIcon: "favorite"
             }
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Focus Icon Button" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Focus Icon Button" ]
         , HH.div []
             [ IconButton.iconButton
                 (IconButton.defaultConfig
@@ -95,7 +95,7 @@ view model =
                 (Button.defaultConfig # Button.setOnClick (Focus "my-icon-button"))
                 "Focus"
             ]
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Focus Icon Toggle" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Focus Icon Toggle" ]
         , HH.div []
             [ IconToggle.iconToggle
                 (IconToggle.defaultConfig

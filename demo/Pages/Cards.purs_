@@ -155,12 +155,12 @@ demoTitle =
         HH.div
             [ HP.style "padding: 1rem" ]
             [ HH.h2
-                [ Typography.headline6
+                [ mdc_typography____headline6
                 , HP.style "margin: 0"
                 ]
                 [ HH.text "Our Changing Planet" ]
             , HH.h3
-                [ Typography.subtitle2
+                [ mdc_typography____subtitle2
                 , Theme.textSecondaryOnBackground
                 , HP.style "margin: 0"
                 ]
@@ -171,7 +171,7 @@ demoBody :: Card.Block w i
 demoBody =
     Card.block $
         HH.div
-            [ Typography.body2
+            [ mdc_typography____body2
             , Theme.textSecondaryOnBackground
             , HP.style "padding: 0 1rem 0.5rem 1rem"
             ]

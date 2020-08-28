@@ -50,25 +50,25 @@ view model =
         }
     , hero: [ heroTextFields model ]
     , content =
-        [ HH.h3 [ Typography.subtitle1 ] [ HH.text "Filled" ]
+        [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Filled" ]
         , filledTextFields model
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Shaped Filled" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Shaped Filled" ]
         , shapedFilledTextFields model
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Outlined" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Outlined" ]
         , outlinedTextFields model
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Shaped Outlined (TODO)" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Shaped Outlined (TODO)" ]
         , shapedOutlinedTextFields model
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Text Fields without Label" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Text Fields without Label" ]
         , textFieldsWithoutLabel model
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Text Fields with Character Counter" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Text Fields with Character Counter" ]
         , textFieldsWithCharacterCounter model
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Textarea" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Textarea" ]
         , textareaTextField model
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Full Width" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Full Width" ]
         , fullwidthTextField model
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Full Width Textarea" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Full Width Textarea" ]
         , fullwidthTextareaTextField model
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Focus Text Field" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Focus Text Field" ]
         , focusTextField
         ]
     }

@@ -65,9 +65,9 @@ view model =
         }
     , hero: heroDataTable
     , content =
-        [ HH.h3 [ Typography.subtitle1 ] [ HH.text "Data Table Standard" ]
+        [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Data Table Standard" ]
         , standardDataTable
-        , HH.h3 [ Typography.subtitle1 ] [ HH.text "Data Table with Row Selection" ]
+        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Data Table with Row Selection" ]
         , dataTableWithRowSelection model
         ]
     }
