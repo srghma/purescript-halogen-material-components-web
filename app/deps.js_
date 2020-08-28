@@ -1,0 +1,30 @@
+// from https://github.com/aforemny/material-components-web-elm/src/blob/master/src/material-components-web-elm/src.js
+
+import "@webcomponents/custom-elements";
+import "material-components-web-elm/src/button/custom-element";
+import "material-components-web-elm/src/card/custom-element";
+import "material-components-web-elm/src/checkbox/custom-element";
+import "material-components-web-elm/src/chip/custom-element";
+import "material-components-web-elm/src/chip-set/custom-element";
+import "material-components-web-elm/src/data-table/custom-element";
+import "material-components-web-elm/src/dialog/custom-element";
+import "material-components-web-elm/src/drawer/custom-element";
+import "material-components-web-elm/src/fab/custom-element";
+import "material-components-web-elm/src/form-field/custom-element";
+import "material-components-web-elm/src/icon-button/custom-element";
+import "material-components-web-elm/src/image-list/custom-element";
+import "material-components-web-elm/src/image-list-item/custom-element";
+import "material-components-web-elm/src/layout-grid/custom-element";
+import "material-components-web-elm/src/linear-progress/custom-element";
+import "material-components-web-elm/src/list/custom-element";
+import "material-components-web-elm/src/list-item/custom-element";
+import "material-components-web-elm/src/menu/custom-element";
+import "material-components-web-elm/src/radio/custom-element";
+import "material-components-web-elm/src/ripple/custom-element";
+import "material-components-web-elm/src/select/custom-element";
+import "material-components-web-elm/src/slider/custom-element";
+import "material-components-web-elm/src/snackbar/custom-element";
+import "material-components-web-elm/src/switch/custom-element";
+import "material-components-web-elm/src/tab-bar/custom-element";
+import "material-components-web-elm/src/text-field/custom-element";
+import "material-components-web-elm/src/top-app-bar/custom-element";

@@ -24,7 +24,7 @@ import webpackGetError from './lib/webpackGetError'
     })
 
   require('webpack-spago-loader/watcher-job')({
-    additionalWatchGlobs: ['app/**/*.css'],
+    additionalWatchGlobs: ['(app|src)/**/*.(css|sass|scss)'],
     options: require('./lib/spago-options'),
     onStart: () => {},
     onError: () => {},

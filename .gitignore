@@ -11,4 +11,4 @@ yarn.lock
 package-lock.json
 
 # temporary enabled
-/dist
+dist/*

@@ -85,6 +85,10 @@
     "@material/top-app-bar": "^7.0.0",
     "@material/touch-target": "^7.0.0",
     "@material/typography": "^7.0.0",
+    "@webcomponents/custom-elements": "^1.4.2",
+    "material-components-web-elm": "^4.0.0",
+    "sass": "^1.26.10",
+    "sass-loader": "^10.0.1",
     "xhr2": "^0.2.0"
   }
 }
