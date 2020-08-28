@@ -21,7 +21,7 @@ import Task
 data Model =
     { sliders :: Dict String Float }
 
-defaultModel :: Model
+defaultModel :: forall r w i . Model
 defaultModel =
     { sliders =
         Dict.fromList
@@ -37,7 +37,7 @@ data Msg
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: Msg -> Model -> ( Model, Cmd Msg )
+update :: forall r w i . Msg -> Model -> ( Model, Cmd Msg )
 update w i model =
     case w i of
         Changed id value ->
@@ -49,7 +49,7 @@ update w i model =
         Focused _ ->
             ( model, Cmd.none )
 
-view :: Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Msg
 view model =
     { title: "Slider"
     , prelude: "Sliders let users select from a range of values by moving the slider thumb."
@@ -71,7 +71,7 @@ view model =
         ]
     }
 
-heroSlider :: Model -> HH.HTML Msg
+heroSlider :: forall r w i . Model -> HH.HTML Msg
 heroSlider model =
     let
         id =
@@ -83,7 +83,7 @@ heroSlider model =
             # Slider.setOnInput (Changed id)
         )
 
-continuousSlider :: Model -> HH.HTML Msg
+continuousSlider :: forall r w i . Model -> HH.HTML Msg
 continuousSlider model =
     let
         id =
@@ -97,7 +97,7 @@ continuousSlider model =
             # Slider.setMax (Just 50)
         )
 
-discreteSlider :: Model -> HH.HTML Msg
+discreteSlider :: forall r w i . Model -> HH.HTML Msg
 discreteSlider model =
     let
         id =
@@ -113,7 +113,7 @@ discreteSlider model =
             # Slider.setStep (Just 1)
         )
 
-discreteSliderWithTickMarks :: Model -> HH.HTML Msg
+discreteSliderWithTickMarks :: forall r w i . Model -> HH.HTML Msg
 discreteSliderWithTickMarks model =
     let
         id =
@@ -130,7 +130,7 @@ discreteSliderWithTickMarks model =
             # Slider.setDisplayMarkers true
         )
 
-focusSlider :: Model -> HH.HTML Msg
+focusSlider :: forall r w i . Model -> HH.HTML Msg
 focusSlider model =
     let
         id =

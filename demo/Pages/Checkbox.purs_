@@ -21,7 +21,7 @@ import Task
 data Model =
     { checkboxes :: Dict String Checkbox.State }
 
-defaultModel :: Model
+defaultModel :: forall r w i . Model
 defaultModel =
     { checkboxes =
         Dict.fromList
@@ -37,7 +37,7 @@ data Msg
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: Msg -> Model -> ( Model, Cmd Msg )
+update :: forall r w i . Msg -> Model -> ( Model, Cmd Msg )
 update w i model =
     case w i of
         Changed index ->
@@ -61,7 +61,7 @@ update w i model =
         Focused _ ->
             ( model, Cmd.none )
 
-view :: Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Msg
 view model =
     { title: "Checkbox"
     , prelude: "Checkboxes allow the user to select multiple options from a set."
@@ -83,13 +83,13 @@ view model =
         ]
     }
 
-heroCheckboxes :: Model -> Array (HH.HTML Msg)
+heroCheckboxes :: forall r w i . Model -> Array (HH.HTML Msg)
 heroCheckboxes model =
     [ checkbox "checked-hero-checkbox" model heroMargin
     , checkbox "unchecked-hero-checkbox" model heroMargin
     ]
 
-checkbox :: String -> Model -> Array (HH.Attribute Msg) -> HH.HTML Msg
+checkbox :: forall r w i . String -> Model -> Array (HH.Attribute Msg) -> HH.HTML Msg
 checkbox index model attributes =
     let
         state =
@@ -103,7 +103,7 @@ checkbox index model attributes =
             # Checkbox.setAttributes attributes
         )
 
-focusCheckbox :: HH.HTML Msg
+focusCheckbox :: forall r w i . HH.HTML Msg
 focusCheckbox =
     HH.div []
         [ Checkbox.checkbox
@@ -115,6 +115,6 @@ focusCheckbox =
             "Focus"
         ]
 
-heroMargin :: Array (IProp r i)
+heroMargin :: forall r w i . Array (IProp r i)
 heroMargin =
     [ HP.style "margin: 8px 16px" ]

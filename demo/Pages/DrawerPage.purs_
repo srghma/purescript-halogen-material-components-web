@@ -35,7 +35,7 @@ data DrawerPage w i =
     , onMenuClick :: Maybe w i
     }
 
-view :: (w i -> topMsg) -> DrawerPage w i -> HH.HTML topMsg
+view :: forall r w i . (w i -> topMsg) -> DrawerPage w i -> HH.HTML topMsg
 view lift { title, drawer, scrim, onMenuClick } =
     HH.map lift $
         HH.div drawerFrameRoot
@@ -63,7 +63,7 @@ view lift { title, drawer, scrim, onMenuClick } =
                 ]
             ]
 
-drawerBody :: (Int -> w i) -> Int -> Array (HH.HTML w i)
+drawerBody :: forall r w i . (Int -> w i) -> Int -> Array (HH.HTML w i)
 drawerBody setSelectedIndex selectedIndex =
     let
         listItemConfig index =
@@ -132,7 +132,7 @@ drawerBody setSelectedIndex selectedIndex =
         ]
     ]
 
-mainContent :: HH.HTML w i
+mainContent :: forall r w i . HH.HTML w i
 mainContent =
     HH.div
         [ HP.style "padding-left: 18px; padding-right: 18px; overflow: auto; height: 100%; box-sizing: border-box"
@@ -141,11 +141,11 @@ mainContent =
         ]
         (List.repeat 4 $ HH.p [] [ HH.text loremIpsum ])
 
-loremIpsum :: String
+loremIpsum :: forall r w i . String
 loremIpsum =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
-drawerFrameRoot :: Array (IProp r i)
+drawerFrameRoot :: forall r w i . Array (IProp r i)
 drawerFrameRoot =
     [ HP.style "display: -ms-flexbox; display: flex; height: 100vh"
     ]

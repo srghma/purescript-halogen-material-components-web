@@ -35,7 +35,7 @@ type Slots = ( child :: H.Slot (Const Void) Void Route )
 
 _child = SProxy :: SProxy "child"
 
-app :: H.Component Query Input Output Aff
+app :: forall r w i . H.Component Query Input Output Aff
 app =
   H.mkComponent
     { initialState: const Index
@@ -43,7 +43,7 @@ app =
     , eval: H.mkEval $ H.defaultEval { handleQuery = handleQuery }
     }
   where
-  render :: State -> H.ComponentHTML Action Slots Aff
+  render :: forall r w i . State -> H.ComponentHTML Action Slots Aff
   render state = HH.slot _child state (routeToPage (spy "render" state)) unit absurd
 
   handleQuery :: forall a. Query a -> H.HalogenM State Action Slots Output Aff (Maybe a)

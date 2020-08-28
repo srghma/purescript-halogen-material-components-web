@@ -22,7 +22,7 @@ import Task
 data Model =
     { ons :: Set String }
 
-defaultModel :: Model
+defaultModel :: forall r w i . Model
 defaultModel =
     { ons: Set.empty }
 
@@ -31,7 +31,7 @@ data Msg
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: Msg -> Model -> ( Model, Cmd Msg )
+update :: forall r w i . Msg -> Model -> ( Model, Cmd Msg )
 update w i model =
     case w i of
         Toggle id ->
@@ -52,7 +52,7 @@ update w i model =
         Focused _ ->
             ( model, Cmd.none )
 
-view :: Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Msg
 view model =
     { title: "Icon Button"
     , prelude: "Icons are appropriate for buttons that allow a user to take actions or make a selection, such as adding or removing a star to an item."

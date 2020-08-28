@@ -17,7 +17,7 @@ data TopAppBarPage w i =
     , topAppBar :: HH.HTML w i
     }
 
-view :: (w i -> topMsg) -> TopAppBarPage w i -> HH.HTML topMsg
+view :: forall r w i . (w i -> topMsg) -> TopAppBarPage w i -> HH.HTML topMsg
 view lift { topAppBar, fixedAdjust } =
     HH.map lift $
         HH.div
@@ -29,7 +29,7 @@ view lift { topAppBar, fixedAdjust } =
                 (List.repeat 4 (HH.p [] [ HH.text demoParagraph ]))
             ]
 
-demoParagraph :: String
+demoParagraph :: forall r w i . String
 demoParagraph =
     """
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod

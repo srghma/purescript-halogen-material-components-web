@@ -22,7 +22,7 @@ import Task
 data Model =
     { value :: String }
 
-defaultModel :: Model
+defaultModel :: forall r w i . Model
 defaultModel =
     { value: "" }
 
@@ -30,7 +30,7 @@ data Msg
     = Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: Msg -> Model -> ( Model, Cmd Msg )
+update :: forall r w i . Msg -> Model -> ( Model, Cmd Msg )
 update w i model =
     case w i of
         Focus id ->
@@ -39,7 +39,7 @@ update w i model =
         Focused _ ->
             ( model, Cmd.none )
 
-view :: Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Msg
 view model =
     { title: "Text Field"
     , prelude: "Text fields allow users to input, edit, and select text. Text fields typically reside in forms but can appear in other places, like dialog boxes and search."
@@ -73,7 +73,7 @@ view model =
         ]
     }
 
-heroTextFields :: Model -> HH.HTML Msg
+heroTextFields :: forall r w i . Model -> HH.HTML Msg
 heroTextFields model =
     HH.div heroTextFieldContainer
         [ HH.div textFieldContainerHero
@@ -90,7 +90,7 @@ heroTextFields model =
             ]
         ]
 
-filledTextFields :: Model -> HH.HTML w i
+filledTextFields :: forall r w i . Model -> HH.HTML w i
 filledTextFields model =
     HH.div textFieldRow
         [ HH.div textFieldContainer
@@ -118,7 +118,7 @@ filledTextFields model =
             ]
         ]
 
-shapedFilledTextFields :: Model -> HH.HTML w i
+shapedFilledTextFields :: forall r w i . Model -> HH.HTML w i
 shapedFilledTextFields model =
     HH.div textFieldRow
         [ HH.div textFieldContainer
@@ -149,7 +149,7 @@ shapedFilledTextFields model =
             ]
         ]
 
-outlinedTextFields :: Model -> HH.HTML w i
+outlinedTextFields :: forall r w i . Model -> HH.HTML w i
 outlinedTextFields model =
     HH.div textFieldRow
         [ HH.div textFieldContainer
@@ -177,7 +177,7 @@ outlinedTextFields model =
             ]
         ]
 
-shapedOutlinedTextFields :: Model -> HH.HTML w i
+shapedOutlinedTextFields :: forall r w i . Model -> HH.HTML w i
 shapedOutlinedTextFields model =
     HH.div textFieldRow
         [ HH.div textFieldContainer
@@ -205,7 +205,7 @@ shapedOutlinedTextFields model =
             ]
         ]
 
-textFieldsWithoutLabel :: Model -> HH.HTML w i
+textFieldsWithoutLabel :: forall r w i . Model -> HH.HTML w i
 textFieldsWithoutLabel model =
     HH.div textFieldRow
         [ HH.div textFieldContainer
@@ -228,7 +228,7 @@ textFieldsWithoutLabel model =
             ]
         ]
 
-textFieldsWithCharacterCounter :: Model -> HH.HTML w i
+textFieldsWithCharacterCounter :: forall r w i . Model -> HH.HTML w i
 textFieldsWithCharacterCounter model =
     HH.div textFieldRow
         [ HH.div textFieldContainer
@@ -254,7 +254,7 @@ textFieldsWithCharacterCounter model =
             ]
         ]
 
-textareaTextField :: Model -> HH.HTML w i
+textareaTextField :: forall r w i . Model -> HH.HTML w i
 textareaTextField model =
     HH.div textFieldContainer
         [ TextArea.outlined
@@ -262,7 +262,7 @@ textareaTextField model =
         , demoHelperText
         ]
 
-fullwidthTextField :: Model -> HH.HTML w i
+fullwidthTextField :: forall r w i . Model -> HH.HTML w i
 fullwidthTextField model =
     HH.div textFieldContainer
         [ TextField.filled
@@ -273,7 +273,7 @@ fullwidthTextField model =
         , demoHelperText
         ]
 
-fullwidthTextareaTextField :: Model -> HH.HTML w i
+fullwidthTextareaTextField :: forall r w i . Model -> HH.HTML w i
 fullwidthTextareaTextField model =
     HH.div textFieldRowFullwidth
         [ HH.div textFieldContainer
@@ -286,7 +286,7 @@ fullwidthTextareaTextField model =
             ]
         ]
 
-focusTextField :: HH.HTML Msg
+focusTextField :: forall r w i . HH.HTML Msg
 focusTextField =
     HH.div []
         [ TextField.filled
@@ -299,35 +299,35 @@ focusTextField =
             "Focus"
         ]
 
-heroTextFieldContainer :: Array (IProp r i)
+heroTextFieldContainer :: forall r w i . Array (IProp r i)
 heroTextFieldContainer =
     [ HP.class_ hero_text_field_container
     , HP.style "display: -ms-flexbox; display: flex; -ms-flex: 1 1 100%; flex: 1 1 100%; -ms-flex-pack: distribute; justify-content: space-around; -ms-flex-wrap: wrap; flex-wrap: wrap"
     ]
 
-textFieldContainerHero :: Array (IProp r i)
+textFieldContainerHero :: forall r w i . Array (IProp r i)
 textFieldContainerHero =
     HP.style "padding: 20px" :: textFieldContainer
 
-textFieldContainer :: Array (IProp r i)
+textFieldContainer :: forall r w i . Array (IProp r i)
 textFieldContainer =
     [ HP.class_ text_field_container
     , HP.style "min-width: 200px"
     ]
 
-textFieldRow :: Array (IProp r i)
+textFieldRow :: forall r w i . Array (IProp r i)
 textFieldRow =
     [ HP.class_ text_field_row
     , HP.style "display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap"
     ]
 
-textFieldRowFullwidth :: Array (IProp r i)
+textFieldRowFullwidth :: forall r w i . Array (IProp r i)
 textFieldRowFullwidth =
     [ HP.class_ "text-field-row text-field-row--fullwidth"
     , HP.style "display: block"
     ]
 
-demoHelperText :: HH.HTML w i
+demoHelperText :: forall r w i . HH.HTML w i
 demoHelperText =
     HelperText.helperLine []
         [ HelperText.helperText
@@ -335,7 +335,7 @@ demoHelperText =
             "Helper Text"
         ]
 
-demoHelperTextWithCharacterCounter :: HH.HTML w i
+demoHelperTextWithCharacterCounter :: forall r w i . HH.HTML w i
 demoHelperTextWithCharacterCounter =
     HelperText.helperLine []
         [ HelperText.helperText

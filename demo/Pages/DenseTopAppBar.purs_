@@ -16,18 +16,18 @@ import HalogenMWC.TopAppBar as TopAppBar
 data Model =
     {}
 
-defaultModel :: Model
+defaultModel :: forall r w i . Model
 defaultModel =
     {}
 
 data Msg
     = NoOp
 
-update :: Msg -> Model -> Model
+update :: forall r w i . Msg -> Model -> Model
 update w i model =
     model
 
-view :: Model -> TopAppBarPage Msg
+view :: forall r w i . Model -> TopAppBarPage Msg
 view model =
     { fixedAdjust: TopAppBar.denseFixedAdjust
     , topAppBar =

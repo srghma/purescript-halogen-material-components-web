@@ -18,7 +18,7 @@ import Set
 data Model =
     { selected :: Set String }
 
-defaultModel :: Model
+defaultModel :: forall r w i . Model
 defaultModel =
     { selected: Set.empty }
 
@@ -28,7 +28,7 @@ data Msg
     | AllSelected
     | AllUnselected
 
-update :: Msg -> Model -> Model
+update :: forall r w i . Msg -> Model -> Model
 update w i model =
     case w i of
         NoOp ->
@@ -54,7 +54,7 @@ update w i model =
         AllUnselected ->
             { model | selected = Set.empty }
 
-view :: Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Msg
 view model =
     { title: "Data Table"
     , prelude: "Data tables display information in a way that’s easy to scan, so that users can look for patterns and insights."
@@ -72,11 +72,11 @@ view model =
         ]
     }
 
-heroDataTable :: Array (HH.HTML w i)
+heroDataTable :: forall r w i . Array (HH.HTML w i)
 heroDataTable =
     [ standardDataTable ]
 
-label :: { desert :: String, carbs :: String, protein :: String, comments :: String }
+label :: forall r w i . { desert :: String, carbs :: String, protein :: String, comments :: String }
 label =
     { desert: "Desert"
     , carbs: "Carbs (g)"
@@ -84,7 +84,7 @@ label =
     , comments: "Comments"
     }
 
-data :: Array { desert :: String, carbs :: String, protein :: String, comments :: String }
+data :: forall r w i . Array { desert :: String, carbs :: String, protein :: String, comments :: String }
 data =
     [ { desert: "Frozen yogurt"
       , carbs: "24"
@@ -103,7 +103,7 @@ data =
       }
     ]
 
-standardDataTable :: HH.HTML w i
+standardDataTable :: forall r w i . HH.HTML w i
 standardDataTable =
     let
         row { desert, carbs, protein, comments } =
@@ -119,7 +119,7 @@ standardDataTable =
         , tbody: map row data
         }
 
-dataTableWithRowSelection :: Model -> HH.HTML Msg
+dataTableWithRowSelection :: forall r w i . Model -> HH.HTML Msg
 dataTableWithRowSelection model =
     let
         allSelected =

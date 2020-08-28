@@ -14,7 +14,7 @@ data Model =
     , selectedIndex :: Int
     }
 
-defaultModel :: Model
+defaultModel :: forall r w i . Model
 defaultModel =
     { open: false
     , selectedIndex: 0
@@ -25,7 +25,7 @@ data Msg
     | CloseDrawer
     | SetSelectedIndex Int
 
-update :: Msg -> Model -> Model
+update :: forall r w i . Msg -> Model -> Model
 update w i model =
     case w i of
         OpenDrawer ->
@@ -37,7 +37,7 @@ update w i model =
         SetSelectedIndex index ->
             { model | selectedIndex = index }
 
-view :: Model -> DrawerPage Msg
+view :: forall r w i . Model -> DrawerPage Msg
 view model =
     { title: "Modal Drawer"
     , drawer =

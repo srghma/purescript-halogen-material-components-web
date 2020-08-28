@@ -22,7 +22,7 @@ import Task
 data Model =
     {}
 
-defaultModel :: Model
+defaultModel :: forall r w i . Model
 defaultModel =
     {}
 
@@ -30,7 +30,7 @@ data Msg
     = Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: Msg -> Model -> ( Model, Cmd Msg )
+update :: forall r w i . Msg -> Model -> ( Model, Cmd Msg )
 update w i model =
     case w i of
         Focus id ->
@@ -39,7 +39,7 @@ update w i model =
         Focused _ ->
             ( model, Cmd.none )
 
-view :: Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Msg
 view model =
     { title: "Card"
     , prelude: "Cards contain content and actions about a single subject."
@@ -57,7 +57,7 @@ view model =
         ]
     }
 
-heroCard :: Array (HH.HTML w i)
+heroCard :: forall r w i . Array (HH.HTML w i)
 heroCard =
     [ Card.card
         (Card.defaultConfig
@@ -73,7 +73,7 @@ heroCard =
         }
     ]
 
-exampleCard1 :: HH.HTML w i
+exampleCard1 :: forall r w i . HH.HTML w i
 exampleCard1 =
     Card.card
         (Card.defaultConfig
@@ -90,7 +90,7 @@ exampleCard1 =
         , actions: Nothing
         }
 
-exampleCard2 :: HH.HTML w i
+exampleCard2 :: forall r w i . HH.HTML w i
 exampleCard2 =
     Card.card
         (Card.defaultConfig
@@ -106,7 +106,7 @@ exampleCard2 =
         , actions: Just demoActions
         }
 
-exampleCard3 :: HH.HTML w i
+exampleCard3 :: forall r w i . HH.HTML w i
 exampleCard3 =
     Card.card
         (Card.defaultConfig
@@ -122,7 +122,7 @@ exampleCard3 =
         , actions: Just demoActions
         }
 
-focusCard :: HH.HTML Msg
+focusCard :: forall r w i . HH.HTML Msg
 focusCard =
     HH.div []
         [ Card.card
@@ -145,11 +145,11 @@ focusCard =
             "Focus"
         ]
 
-demoMedia :: Card.Block w i
+demoMedia :: forall r w i . Card.Block w i
 demoMedia =
     Card.sixteenToNineMedia [] "images/photos/3x2/2.jpg"
 
-demoTitle :: Card.Block w i
+demoTitle :: forall r w i . Card.Block w i
 demoTitle =
     Card.block $
         HH.div
@@ -167,7 +167,7 @@ demoTitle =
                 [ HH.text "by Kurt Wagner" ]
             ]
 
-demoBody :: Card.Block w i
+demoBody :: forall r w i . Card.Block w i
 demoBody =
     Card.block $
         HH.div
@@ -182,7 +182,7 @@ demoBody =
                 """
             ]
 
-demoActions :: Card.Actions w i
+demoActions :: forall r w i . Card.Actions w i
 demoActions =
     Card.actions
         { buttons =

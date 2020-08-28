@@ -16,18 +16,18 @@ import HalogenMWC.Elevation as Elevation
 data Model =
     {}
 
-defaultModel :: Model
+defaultModel :: forall r w i . Model
 defaultModel =
     {}
 
 data Msg
     = NoOp
 
-update :: Msg -> Model -> Model
+update :: forall r w i . Msg -> Model -> Model
 update w i model =
     model
 
-view :: Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Msg
 view model =
     { title: "Elevation"
     , prelude: "Elevation is the relative depth, or distance, between two surfaces along the z-axis."
@@ -68,25 +68,25 @@ view model =
         ]
     }
 
-heroElevation :: Array (HH.HTML w i)
+heroElevation :: forall r w i . Array (HH.HTML w i)
 heroElevation =
     [ HH.div (Elevation.z0 :: heroSurface) [ HH.text "Flat 0dp" ]
     , HH.div (Elevation.z8 :: heroSurface) [ HH.text "Raised 8dp" ]
     , HH.div (Elevation.z16 :: heroSurface) [ HH.text "Raised 16dp" ]
     ]
 
-heroSurface :: Array (IProp r i)
+heroSurface :: forall r w i . Array (IProp r i)
 heroSurface =
     [ HP.style "display: -ms-inline-flexbox; display: inline-flex; -ms-flex-pack: distribute; justify-content: space-around; min-height: 100px; min-width: 200px; -ms-flex-align: center; align-items: center; width: 120px; height: 48px; margin: 24px; background-color: #212121; color: #f0f0f0"
     ]
 
-demoContainer :: Array (IProp r i)
+demoContainer :: forall r w i . Array (IProp r i)
 demoContainer =
     [ HP.class_ elevation_demo_container
     , HP.style "display: flex; flex-flow: row wrap; justify-content: space-between"
     ]
 
-demoSurface :: Array (IProp r i)
+demoSurface :: forall r w i . Array (IProp r i)
 demoSurface =
     [ HP.style "display: -ms-inline-flexbox; display: inline-flex; -ms-flex-pack: distribute; justify-content: space-around; min-height: 100px; min-width: 200px; margin: 15px; -ms-flex-align: center; align-items: center"
     ]

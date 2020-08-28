@@ -6,20 +6,20 @@ import HalogenMWC.Drawer.Permanent as PermanentDrawer
 data Model =
     { selectedIndex :: Int }
 
-defaultModel :: Model
+defaultModel :: forall r w i . Model
 defaultModel =
     { selectedIndex: 0 }
 
 data Msg
     = SetSelectedIndex Int
 
-update :: Msg -> Model -> Model
+update :: forall r w i . Msg -> Model -> Model
 update w i model =
     case w i of
         SetSelectedIndex index ->
             { model | selectedIndex = index }
 
-view :: Model -> DrawerPage Msg
+view :: forall r w i . Model -> DrawerPage Msg
 view model =
     { title: "Permanent Drawer"
     , drawer =

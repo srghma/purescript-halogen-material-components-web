@@ -40,7 +40,7 @@ component =
     , eval: H.mkEval H.defaultEval
     }
   where
-  render :: State -> H.ComponentHTML Action () m
+  render :: forall r w i . State -> H.ComponentHTML Action () m
   render _ =
     HH.div_
     [ TopAppBar.topAppBar TopAppBar.defaultConfig
@@ -90,7 +90,7 @@ component =
         )
     ]
 
-imageListItems :: Array { route :: Route, icon :: String, title :: String, subtitle :: String }
+imageListItems :: forall r w i . Array { route :: Route, icon :: String, title :: String, subtitle :: String }
 imageListItems =
   [ { route: Button
     , icon: "images/buttons_180px.svg"

@@ -18,7 +18,7 @@ import Platform.Cmd
 data Model =
     { queue :: Snackbar.Queue Msg }
 
-defaultModel :: Model
+defaultModel :: forall r w i . Model
 defaultModel =
     { queue: Snackbar.initialQueue }
 
@@ -29,7 +29,7 @@ data Msg
     | SnackbarClosed Snackbar.MessageId
     | Click Snackbar.MessageId
 
-update :: Msg -> Model -> ( Model, Cmd Msg )
+update :: forall r w i . Msg -> Model -> ( Model, Cmd Msg )
 update w i model =
     case w i of
         ShowBaseline ->
@@ -53,14 +53,14 @@ update w i model =
         Click messageId ->
             ( model, Cmd.none )
 
-baselineMessage :: Snackbar.Message Msg
+baselineMessage :: forall r w i . Snackbar.Message Msg
 baselineMessage =
     Snackbar.message "Can't send photo. Retry in 5 seconds."
         # Snackbar.setActionButton (Just "Retry")
         # Snackbar.setOnActionButtonClick Click
         # Snackbar.setActionIcon (Just "close")
 
-leadingMessage :: Snackbar.Message Msg
+leadingMessage :: forall r w i . Snackbar.Message Msg
 leadingMessage =
     Snackbar.message "Your photo has been archived."
         # Snackbar.setLeading true
@@ -68,7 +68,7 @@ leadingMessage =
         # Snackbar.setOnActionButtonClick Click
         # Snackbar.setActionIcon (Just "close")
 
-stackedMessage :: Snackbar.Message Msg
+stackedMessage :: forall r w i . Snackbar.Message Msg
 stackedMessage =
     Snackbar.message "This item already has the label \"travel\". You can add a new label."
         # Snackbar.setStacked true
@@ -76,7 +76,7 @@ stackedMessage =
         # Snackbar.setOnActionButtonClick Click
         # Snackbar.setActionIcon (Just "close")
 
-view :: Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Msg
 view model =
     { title: "Snackbar"
     , prelude: "Snackbars provide brief feedback about an operation through a message at the bottom of the screen."
@@ -115,11 +115,11 @@ view model =
         ]
     }
 
-buttonMargin :: Array (IProp r i)
+buttonMargin :: forall r w i . Array (IProp r i)
 buttonMargin =
     [ HP.style "margin: 14px" ]
 
-heroMessage :: HH.HTML w i
+heroMessage :: forall r w i . HH.HTML w i
 heroMessage =
     HH.div
         [ HP.class_ "mdc-snackbar mdc-snackbar--open"

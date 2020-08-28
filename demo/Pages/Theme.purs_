@@ -19,18 +19,18 @@ import Material.Classes.Typography
 data Model =
     {}
 
-defaultModel :: Model
+defaultModel :: forall r w i . Model
 defaultModel =
     {}
 
 data Msg
     = NoOp
 
-update :: Msg -> Model -> Model
+update :: forall r w i . Msg -> Model -> Model
 update w i model =
     model
 
-view :: Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Msg
 view model =
     { title: "Theme"
     , prelude: "Color in Material Design is inspired by bold hues juxtaposed with muted environments, deep shadows, and bright highlights."
@@ -64,7 +64,7 @@ view model =
         ]
     }
 
-themeColorsAsText :: HH.HTML w i
+themeColorsAsText :: forall r w i . HH.HTML w i
 themeColorsAsText =
     HH.div demoThemeColorGroup
         [ HH.div (Theme.primary :: demoThemeColorSwatches)
@@ -73,21 +73,21 @@ themeColorsAsText =
             [ HH.div demoThemeColorSwatch [ HH.text "Secondary" ] ]
         ]
 
-themeColorsAsBackground :: HH.HTML w i
+themeColorsAsBackground :: forall r w i . HH.HTML w i
 themeColorsAsBackground =
     HH.div demoThemeColorGroup
         [ HH.div
-            (Theme.primaryBg :: Theme.onPrimary :: demoThemeColorSwatches)
+            (Theme.primaryBg :: forall r w i . Theme.onPrimary :: demoThemeColorSwatches)
             [ HH.div demoThemeColorSwatch [ HH.text "Primary" ] ]
         , HH.div
-            (Theme.secondaryBg :: Theme.onSecondary :: demoThemeColorSwatches)
+            (Theme.secondaryBg :: forall r w i . Theme.onSecondary :: demoThemeColorSwatches)
             [ HH.div demoThemeColorSwatch [ HH.text "Secondary" ] ]
         , HH.div
-            (Theme.background :: Theme.textPrimaryOnBackground :: demoThemeColorSwatches)
+            (Theme.background :: forall r w i . Theme.textPrimaryOnBackground :: demoThemeColorSwatches)
             [ HH.div demoThemeColorSwatch [ HH.text "Background" ] ]
         ]
 
-textOnBackground :: HH.HTML w i
+textOnBackground :: forall r w i . HH.HTML w i
 textOnBackground =
     HH.div demoThemeColorGroup
         [ HH.div (Theme.background :: demoThemeTextRow)
@@ -104,7 +104,7 @@ textOnBackground =
             ]
         ]
 
-textOnPrimary :: HH.HTML w i
+textOnPrimary :: forall r w i . HH.HTML w i
 textOnPrimary =
     HH.div demoThemeColorGroup
         [ HH.div (Theme.primaryBg :: demoThemeTextRow)
@@ -115,7 +115,7 @@ textOnPrimary =
             ]
         ]
 
-textOnSecondary :: HH.HTML w i
+textOnSecondary :: forall r w i . HH.HTML w i
 textOnSecondary =
     HH.div demoThemeColorGroup
         [ HH.div (Theme.secondaryBg :: demoThemeTextRow)
@@ -126,7 +126,7 @@ textOnSecondary =
             ]
         ]
 
-textOnLightBackground :: HH.HTML w i
+textOnLightBackground :: forall r w i . HH.HTML w i
 textOnLightBackground =
     HH.div demoThemeColorGroup
         [ HH.div (demoThemeBgCustomLight <> demoThemeTextRow)
@@ -143,7 +143,7 @@ textOnLightBackground =
             ]
         ]
 
-textOnDarkBackground :: HH.HTML w i
+textOnDarkBackground :: forall r w i . HH.HTML w i
 textOnDarkBackground =
     HH.div demoThemeColorGroup
         [ HH.div (demoThemeBgCustomDark <> demoThemeTextRow)
@@ -160,42 +160,42 @@ textOnDarkBackground =
             ]
         ]
 
-heroMargin :: Array (IProp r i)
+heroMargin :: forall r w i . Array (IProp r i)
 heroMargin =
     [ HP.style "margin: 16px 32px" ]
 
-demoThemeColorGroup :: Array (IProp r i)
+demoThemeColorGroup :: forall r w i . Array (IProp r i)
 demoThemeColorGroup =
     [ HP.style "padding: 16px 0" ]
 
-demoThemeColorSwatches :: Array (IProp r i)
+demoThemeColorSwatches :: forall r w i . Array (IProp r i)
 demoThemeColorSwatches =
     [ HP.style "display: -ms-inline-flexbox; display: inline-flex; -ms-flex-direction: column; flex-direction: column; margin-right: 16px"
     , Elevation.z2
     ]
 
-demoThemeColorSwatch :: Array (IProp r i)
+demoThemeColorSwatch :: forall r w i . Array (IProp r i)
 demoThemeColorSwatch =
     [ HP.style "display: inline-block; -webkit-box-sizing: border-box; box-sizing: border-box; width: 150px; height: 50px; line-height: 50px; text-align: center; margin-bottom: 8px; border-radius: 4px"
     ]
 
-demoThemeTextRow :: Array (IProp r i)
+demoThemeTextRow :: forall r w i . Array (IProp r i)
 demoThemeTextRow =
     [ HP.style "display: -ms-inline-flexbox; display: inline-flex; -webkit-box-sizing: border-box; box-sizing: border-box; padding: 16px; border: 1px solid #f0f0f0; -ms-flex-align: center; align-items: center; -ms-flex-direction: row; flex-direction: row"
     ]
 
-demoThemeTextStyle :: Array (IProp r i)
+demoThemeTextStyle :: forall r w i . Array (IProp r i)
 demoThemeTextStyle =
     [ HP.style "padding: 0 16px" ]
 
-demoThemeIconStyle :: Array (IProp r i)
+demoThemeIconStyle :: forall r w i . Array (IProp r i)
 demoThemeIconStyle =
     HP.class_ material_icons :: demoThemeTextStyle
 
-demoThemeBgCustomLight :: Array (IProp r i)
+demoThemeBgCustomLight :: forall r w i . Array (IProp r i)
 demoThemeBgCustomLight =
     [ HP.style "background-color: #ddd" ]
 
-demoThemeBgCustomDark :: Array (IProp r i)
+demoThemeBgCustomDark :: forall r w i . Array (IProp r i)
 demoThemeBgCustomDark =
     [ HP.style "background-color: #d1d1d1" ]

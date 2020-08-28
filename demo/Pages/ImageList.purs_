@@ -18,18 +18,18 @@ import Material.Classes.Typography
 data Model =
     {}
 
-defaultModel :: Model
+defaultModel :: forall r w i . Model
 defaultModel =
     {}
 
 data Msg
     = NoOp
 
-update :: Msg -> Model -> Model
+update :: forall r w i . Msg -> Model -> Model
 update w i model =
     model
 
-view :: Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Msg
 view model =
     { title: "Image List"
     , prelude: "Image lists display a collection of images in an organized grid."
@@ -57,7 +57,7 @@ view model =
         ]
     }
 
-standardImageList :: HH.HTML w i
+standardImageList :: forall r w i . HH.HTML w i
 standardImageList =
     ImageList.imageList
         (ImageList.defaultConfig
@@ -66,7 +66,7 @@ standardImageList =
         )
         (map standardItem standardImages)
 
-masonryImageList :: HH.HTML w i
+masonryImageList :: forall r w i . HH.HTML w i
 masonryImageList =
     ImageList.imageList
         (ImageList.defaultConfig
@@ -77,7 +77,7 @@ masonryImageList =
         )
         (map masonryItem masonryImages)
 
-imageListHeroItem :: ImageListItem w i
+imageListHeroItem :: forall r w i . ImageListItem w i
 imageListHeroItem =
     ImageList.Item.imageListItem
         (ImageList.Item.defaultConfig
@@ -87,7 +87,7 @@ imageListHeroItem =
         )
         "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAABNJREFUCB1jZGBg+A/EDEwgAgQADigBA//q6GsAAAAASUVORK5CYII%3D"
 
-standardItem :: String -> ImageListItem w i
+standardItem :: forall r w i . String -> ImageListItem w i
 standardItem route =
     -- TODO:
     -- ImageList.imageAspectContainer
@@ -101,7 +101,7 @@ standardItem route =
         )
         route
 
-masonryItem :: String -> ImageListItem w i
+masonryItem :: forall r w i . String -> ImageListItem w i
 masonryItem route =
     ImageList.Item.imageListItem
         (ImageList.Item.defaultConfig
@@ -110,7 +110,7 @@ masonryItem route =
         )
         route
 
-standardImages :: Array String
+standardImages :: forall r w i . Array String
 standardImages =
     [ "images/photos/3x2/1.jpg"
     , "images/photos/3x2/2.jpg"
@@ -129,7 +129,7 @@ standardImages =
     , "images/photos/3x2/15.jpg"
     ]
 
-masonryImages :: Array String
+masonryImages :: forall r w i . Array String
 masonryImages =
     [ "images/photos/3x2/16.jpg"
     , "images/photos/2x3/1.jpg"

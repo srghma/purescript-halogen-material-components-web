@@ -21,7 +21,7 @@ import Material.Classes.Typography
 data Model =
     { open :: Boolean }
 
-defaultModel :: Model
+defaultModel :: forall r w i . Model
 defaultModel =
     { open: false }
 
@@ -29,7 +29,7 @@ data Msg
     = Open
     | Close
 
-update :: Msg -> Model -> Model
+update :: forall r w i . Msg -> Model -> Model
 update w i model =
     case w i of
         Open ->
@@ -38,7 +38,7 @@ update w i model =
         Close ->
             { model | open = false }
 
-view :: Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Msg
 view model =
     { title: "Menu"
     , prelude: "Menus display a list of choices on a transient sheet of material."
@@ -79,11 +79,11 @@ view model =
         ]
     }
 
-listItem :: String -> ListItem Msg
+listItem :: forall r w i . String -> ListItem Msg
 listItem label =
     List.Item.listItem (List.Item.defaultConfig # List.Item.setOnClick Close) [ HH.text label ]
 
-heroMenu :: Model -> HH.HTML w i
+heroMenu :: forall r w i . Model -> HH.HTML w i
 heroMenu model =
     HH.div
         [ HP.class_ "mdc-menu-surface mdc-menu-surface--open"

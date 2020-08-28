@@ -29,7 +29,7 @@ data Model =
     , shapedActivated :: String
     }
 
-defaultModel :: Model
+defaultModel :: forall r w i . Model
 defaultModel =
     { checkboxes: Set.empty
     , radio: Nothing
@@ -45,7 +45,7 @@ data Msg
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: Msg -> Model -> ( Model, Cmd Msg )
+update :: forall r w i . Msg -> Model -> ( Model, Cmd Msg )
 update w i model =
     case w i of
         ToggleCheckbox id ->
@@ -75,7 +75,7 @@ update w i model =
         Focused _ ->
             ( model, Cmd.none )
 
-view :: Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Msg
 view model =
     { title: "List"
     , prelude: "Lists present multiple line items vertically as a single continuous element."
@@ -110,12 +110,12 @@ view model =
         ]
     }
 
-demoList :: Array (IProp r i)
+demoList :: forall r w i . Array (IProp r i)
 demoList =
     [ HP.style "max-width: 600px; border: 1px solid rgba(0,0,0,.1)"
     ]
 
-heroList :: Array (HH.HTML w i)
+heroList :: forall r w i . Array (HH.HTML w i)
 heroList =
     let
         listItem =
@@ -127,7 +127,7 @@ heroList =
         (List.repeat 2 listItem)
     ]
 
-singleLineList :: HH.HTML w i
+singleLineList :: forall r w i . HH.HTML w i
 singleLineList =
     let
         listItem =
@@ -137,7 +137,7 @@ singleLineList =
         listItem
         (List.repeat 2 listItem)
 
-twoLineList :: HH.HTML w i
+twoLineList :: forall r w i . HH.HTML w i
 twoLineList =
     let
         listItem =
@@ -156,7 +156,7 @@ twoLineList =
         listItem
         (List.repeat 2 listItem)
 
-leadingIconList :: HH.HTML w i
+leadingIconList :: forall r w i . HH.HTML w i
 leadingIconList =
     let
         listItem icon =
@@ -169,7 +169,7 @@ leadingIconList =
         (listItem "wifi")
         (map listItem [ "bluetooth", "data_usage" ])
 
-trailingIconList :: HH.HTML w i
+trailingIconList :: forall r w i . HH.HTML w i
 trailingIconList =
     let
         listItem =
@@ -182,7 +182,7 @@ trailingIconList =
         listItem
         (List.repeat 2 listItem)
 
-activatedItemList :: Model -> HH.HTML Msg
+activatedItemList :: forall r w i . Model -> HH.HTML Msg
 activatedItemList model =
     let
         listItem ( icon, label ) =
@@ -208,7 +208,7 @@ activatedItemList model =
             ]
         )
 
-shapedActivatedItemList :: Model -> HH.HTML Msg
+shapedActivatedItemList :: forall r w i . Model -> HH.HTML Msg
 shapedActivatedItemList model =
     let
         listItem ( icon, label ) =
@@ -235,12 +235,12 @@ shapedActivatedItemList model =
             ]
         )
 
-demoIcon :: Array (IProp r i)
+demoIcon :: forall r w i . Array (IProp r i)
 demoIcon =
     [ HP.style "background: rgba(0,0,0,.3); border-radius: 50%; color: #fff"
     ]
 
-folderList :: HH.HTML w i
+folderList :: forall r w i . HH.HTML w i
 folderList =
     let
         listItem { primary, secondary } =
@@ -269,7 +269,7 @@ folderList =
             ]
         )
 
-listWithTrailingCheckbox :: Model -> HH.HTML Msg
+listWithTrailingCheckbox :: forall r w i . Model -> HH.HTML Msg
 listWithTrailingCheckbox model =
     let
         listItem label =
@@ -316,7 +316,7 @@ listWithTrailingCheckbox model =
             ]
         )
 
-listWithTrailingRadioButton :: Model -> HH.HTML Msg
+listWithTrailingRadioButton :: forall r w i . Model -> HH.HTML Msg
 listWithTrailingRadioButton model =
     let
         listItem label =
@@ -349,7 +349,7 @@ listWithTrailingRadioButton model =
             ]
         )
 
-focusList :: HH.HTML Msg
+focusList :: forall r w i . HH.HTML Msg
 focusList =
     HH.div []
         [ Array.list

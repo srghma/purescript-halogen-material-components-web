@@ -22,7 +22,7 @@ import Task
 data Model =
     { switches :: Dict String Boolean }
 
-defaultModel :: Model
+defaultModel :: forall r w i . Model
 defaultModel =
     { switches: Dict.fromList [ ( "hero-switch", true ) ] }
 
@@ -31,7 +31,7 @@ data Msg
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: Msg -> Model -> ( Model, Cmd Msg )
+update :: forall r w i . Msg -> Model -> ( Model, Cmd Msg )
 update w i model =
     case w i of
         Toggle id ->
@@ -50,11 +50,11 @@ update w i model =
         Focused _ ->
             ( model, Cmd.none )
 
-isChecked :: String -> Model -> Boolean
+isChecked :: forall r w i . String -> Model -> Boolean
 isChecked id model =
     Maybe.fromMaybe false (Dict.get id model.switches)
 
-view :: Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Msg
 view model =
     { title: "Switch"
     , prelude: "Switches communicate an action a user can take. They are typically placed throughout your UI, in places like dialogs, forms, cards, and toolbars."
@@ -72,7 +72,7 @@ view model =
         ]
     }
 
-heroSwitch :: Model -> Array (HH.HTML Msg)
+heroSwitch :: forall r w i . Model -> Array (HH.HTML Msg)
 heroSwitch model =
     let
         id =
@@ -92,7 +92,7 @@ heroSwitch model =
         ]
     ]
 
-demoSwitch :: Model -> HH.HTML Msg
+demoSwitch :: forall r w i . Model -> HH.HTML Msg
 demoSwitch model =
     let
         id =
@@ -111,7 +111,7 @@ demoSwitch model =
             )
         ]
 
-focusSwitch :: Model -> HH.HTML Msg
+focusSwitch :: forall r w i . Model -> HH.HTML Msg
 focusSwitch model =
     let
         id =

@@ -40,7 +40,7 @@ type CatalogPageConfig topMsg =
     , route :: Route
     }
 
-view :: (w i -> topMsg) -> CatalogPageConfig topMsg -> CatalogPage w i -> HH.HTML topMsg
+view :: forall r w i . (w i -> topMsg) -> CatalogPageConfig topMsg -> CatalogPage w i -> HH.HTML topMsg
 view lift catalogPageConfig catalogPage =
     let
         toggleCatalogDrawer =
@@ -119,7 +119,7 @@ view lift catalogPageConfig catalogPage =
             ]
         ]
 
-resourcesList :: CatalogPageResources -> HH.HTML w i
+resourcesList :: forall r w i . CatalogPageResources -> HH.HTML w i
 resourcesList { materialDesignGuidelines, documentation, sourceCode } =
     Array.list Array.defaultConfig
         (List.Item.listItem
@@ -167,7 +167,7 @@ resourcesList { materialDesignGuidelines, documentation, sourceCode } =
             ]
         ]
 
-catalogDrawerItems :: Array { label :: String, route :: Route }
+catalogDrawerItems :: forall r w i . Array { label :: String, route :: Route }
 catalogDrawerItems =
     [ { label: "Home", route: Route.StartPage }
     , { label: "Button", route: Route.Button }
@@ -198,39 +198,39 @@ catalogDrawerItems =
     , { label: "Typography", route: Route.Typography }
     ]
 
-catalogPageContainer :: Array (IProp r i)
+catalogPageContainer :: forall r w i . Array (IProp r i)
 catalogPageContainer =
     [ HP.style "position: relative"
     , mdc_typography____typography
     ]
 
-demoPanel :: Array (IProp r i)
+demoPanel :: forall r w i . Array (IProp r i)
 demoPanel =
     [ HP.style "display: -ms-flexbox; display: flex; position: relative; height: 100vh; overflow: hidden"
     ]
 
-demoContent :: Array (IProp r i)
+demoContent :: forall r w i . Array (IProp r i)
 demoContent =
     [ HP.id "demo-content"
     , HP.style "height: 100%; -webkit-box-sizing: border-box; box-sizing: border-box; max-width: 100%; padding-left: 16px; padding-right: 16px; padding-bottom: 100px; width: 100%; overflow: auto; display: -ms-flexbox; display: flex; -ms-flex-direction: column; flex-direction: column; -ms-flex-align: center; align-items: center; -ms-flex-pack: start; justify-content: flex-start"
     ]
 
-demoContentTransition :: Array (IProp r i)
+demoContentTransition :: forall r w i . Array (IProp r i)
 demoContentTransition =
     [ HP.style "max-width: 900px; width: 100%"
     ]
 
-hero :: Array (IProp r i)
+hero :: forall r w i . Array (IProp r i)
 hero =
     [ HP.style "display: -ms-flexbox; display: flex; -ms-flex-flow: row nowrap; flex-flow: row nowrap; -ms-flex-align: center; align-items: center; -ms-flex-pack: center; justify-content: center; min-height: 360px; padding: 24px; background-color: #f2f2f2"
     ]
 
-demoTitle :: Array (IProp r i)
+demoTitle :: forall r w i . Array (IProp r i)
 demoTitle =
     [ HP.style "border-bottom: 1px solid rgba(0,0,0,.87)"
     ]
 
-resourcesGraphic :: Array (IProp r i)
+resourcesGraphic :: forall r w i . Array (IProp r i)
 resourcesGraphic =
     [ HP.style "width: 30px; height: 30px"
     ]

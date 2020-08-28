@@ -25,7 +25,7 @@ import Routing.Hash (matchesWith)
 import Routing.Hash as Routing
 import Web.HTML.HTMLElement (HTMLElement)
 
-main :: Effect Unit
+main :: forall r w i . Effect Unit
 main =
   HA.runHalogenAff do
     body <- HA.awaitBody

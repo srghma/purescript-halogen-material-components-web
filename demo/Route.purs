@@ -37,7 +37,7 @@ type PagesRec a =
   }
 
 -- NOTE: without a `Routing.Duplex.root $` to allow hashed routing
-routeCodec :: Routing.Duplex.RouteDuplex' Route
+routeCodec :: forall r w i . Routing.Duplex.RouteDuplex' Route
 routeCodec = Routing.Duplex.sum
   { "Index":  Routing.Duplex.noArgs
   , "Button": "button" / Routing.Duplex.noArgs

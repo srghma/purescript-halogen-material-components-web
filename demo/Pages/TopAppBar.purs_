@@ -19,18 +19,18 @@ import Material.Classes.Typography
 data Model =
     {}
 
-defaultModel :: Model
+defaultModel :: forall r w i . Model
 defaultModel =
     {}
 
 data Msg
     = NoOp
 
-update :: Msg -> Model -> Model
+update :: forall r w i . Msg -> Model -> Model
 update w i model =
     model
 
-view :: Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Msg
 view model =
     { title: "Top App Bar"
     , prelude: "Top App Bars are a container for items such as application title, navigation icon, and action items."
@@ -89,7 +89,7 @@ view model =
         ]
     }
 
-iframe :: String -> Url -> HH.HTML w i
+iframe :: forall r w i . String -> Url -> HH.HTML w i
 iframe title route =
     let
         stringUrl =

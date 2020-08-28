@@ -19,7 +19,7 @@ import Task
 data Model =
     {}
 
-defaultModel :: Model
+defaultModel :: forall r w i . Model
 defaultModel =
     {}
 
@@ -27,7 +27,7 @@ data Msg
     = Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: Msg -> Model -> ( Model, Cmd Msg )
+update :: forall r w i . Msg -> Model -> ( Model, Cmd Msg )
 update w i model =
     case w i of
         Focus id ->
@@ -36,7 +36,7 @@ update w i model =
         Focused _ ->
             ( model, Cmd.none )
 
-view :: Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Msg
 view model =
     { title: "Button"
     , prelude: "Buttons communicate an action a user can take. They are typically placed throughout your UI, in places like dialogs, forms, cards, and toolbars."
@@ -64,7 +64,7 @@ view model =
         ]
     }
 
-heroButtons :: Array (HH.HTML w i)
+heroButtons :: forall r w i . Array (HH.HTML w i)
 heroButtons =
     let
         config =
@@ -76,33 +76,33 @@ heroButtons =
     , Button.outlined config "Outlined"
     ]
 
-textButtons :: HH.HTML w i
+textButtons :: forall r w i . HH.HTML w i
 textButtons =
     buttonsRow Button.text []
 
-raisedButtons :: HH.HTML w i
+raisedButtons :: forall r w i . HH.HTML w i
 raisedButtons =
     buttonsRow Button.raised []
 
-unelevatedButtons :: HH.HTML w i
+unelevatedButtons :: forall r w i . HH.HTML w i
 unelevatedButtons =
     buttonsRow Button.unelevated []
 
-outlinedButtons :: HH.HTML w i
+outlinedButtons :: forall r w i . HH.HTML w i
 outlinedButtons =
     buttonsRow Button.outlined []
 
-shapedButtons :: HH.HTML w i
+shapedButtons :: forall r w i . HH.HTML w i
 shapedButtons =
     buttonsRow Button.unelevated [ HP.style "border-radius: 18px" ]
 
-linkButtons :: HH.HTML w i
+linkButtons :: forall r w i . HH.HTML w i
 linkButtons =
     buttonsRow
         (\config label -> Button.text (config # Button.setHref (Just "#")) label)
         []
 
-focusButton :: HH.HTML Msg
+focusButton :: forall r w i . HH.HTML Msg
 focusButton =
     HH.div []
         [ Button.raised
@@ -123,7 +123,7 @@ focusButton =
         , Button.raised (Button.defaultConfig # Button.setOnClick (Focus "my-link-button")) "Focus"
         ]
 
-buttonsRow :: (Button.Config w i -> String -> HH.HTML w i) -> Array (IProp r i) -> HH.HTML w i
+buttonsRow :: forall r w i . (Button.Config w i -> String -> HH.HTML w i) -> Array (IProp r i) -> HH.HTML w i
 buttonsRow button additionalAttributes =
     let
         config =
@@ -136,10 +136,10 @@ buttonsRow button additionalAttributes =
         , button (config # Button.setIcon (Just "favorite")) "Icon"
         ]
 
-heroMargin :: IProp r i
+heroMargin :: forall r w i . IProp r i
 heroMargin =
     HP.style "margin: 16px 32px"
 
-rowMargin :: IProp r i
+rowMargin :: forall r w i . IProp r i
 rowMargin =
     HP.style "margin: 8px 16px"

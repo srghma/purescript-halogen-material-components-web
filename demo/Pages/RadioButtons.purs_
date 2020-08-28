@@ -22,7 +22,7 @@ import Task
 data Model =
     { radios :: Dict String String }
 
-defaultModel :: Model
+defaultModel :: forall r w i . Model
 defaultModel =
     { radios =
         Dict.fromList
@@ -36,7 +36,7 @@ data Msg
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: Msg -> Model -> ( Model, Cmd Msg )
+update :: forall r w i . Msg -> Model -> ( Model, Cmd Msg )
 update w i model =
     case w i of
         Set group index ->
@@ -48,13 +48,13 @@ update w i model =
         Focused _ ->
             ( model, Cmd.none )
 
-isSelected :: String -> String -> Model -> Boolean
+isSelected :: forall r w i . String -> String -> Model -> Boolean
 isSelected group index model =
     Dict.get group model.radios
         # map ((==) index)
         # Maybe.fromMaybe false
 
-view :: Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Msg
 view model =
     { title: "Radio Button"
     , prelude: "Buttons communicate an action a user can take. They are typically placed throughout your UI, in places like dialogs, forms, cards, and toolbars."
@@ -72,7 +72,7 @@ view model =
         ]
     }
 
-heroRadio :: Model -> String -> String -> HH.HTML Msg
+heroRadio :: forall r w i . Model -> String -> String -> HH.HTML Msg
 heroRadio model group index =
     Radio.radio
         (Radio.defaultConfig
@@ -81,14 +81,14 @@ heroRadio model group index =
             # Radio.setAttributes [ HP.style "margin: 0 10px" ]
         )
 
-heroRadioGroup :: Model -> HH.HTML Msg
+heroRadioGroup :: forall r w i . Model -> HH.HTML Msg
 heroRadioGroup model =
     HH.div []
         [ heroRadio model "hero" "radio-buttons-hero-radio-1"
         , heroRadio model "hero" "radio-buttons-hero-radio-2"
         ]
 
-radio :: Model -> String -> String -> String -> HH.HTML Msg
+radio :: forall r w i . Model -> String -> String -> String -> HH.HTML Msg
 radio model group index label =
     FormField.formField
         (FormField.defaultConfig
@@ -104,14 +104,14 @@ radio model group index label =
             )
         ]
 
-exampleRadioGroup :: Model -> HH.HTML Msg
+exampleRadioGroup :: forall r w i . Model -> HH.HTML Msg
 exampleRadioGroup model =
     HH.div []
         [ radio model "example" "radio-buttons-example-radio-1" "Radio 1"
         , radio model "example" "radio-buttons-example-radio-2" "Radio 2"
         ]
 
-focusRadio :: HH.HTML Msg
+focusRadio :: forall r w i . HH.HTML Msg
 focusRadio =
     HH.div []
         [ Radio.radio

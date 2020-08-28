@@ -16,7 +16,7 @@ import HalogenMWC.ImageList as ImageList
 import HalogenMWC.ImageList.Item as ImageListItem
 import HalogenMWC.TopAppBar as TopAppBar
 
-view :: HH.HTML w i
+view :: forall r w i . HH.HTML w i
 view =
     HH.div []
         [ TopAppBar.regular TopAppBar.defaultConfig
@@ -61,7 +61,7 @@ view =
             )
         ]
 
-imageListItems :: Array { route :: Route, icon :: String, title :: String, subtitle :: String }
+imageListItems :: forall r w i . Array { route :: Route, icon :: String, title :: String, subtitle :: String }
 imageListItems =
     [ { route: Button
       , icon: "images/buttons_180px.svg"

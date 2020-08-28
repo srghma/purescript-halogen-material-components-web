@@ -23,18 +23,18 @@ import Material.Classes.Typography
 data Model =
     {}
 
-defaultModel :: Model
+defaultModel :: forall r w i . Model
 defaultModel =
     {}
 
 data Msg
     = NoOp
 
-update :: Msg -> Model -> Model
+update :: forall r w i . Msg -> Model -> Model
 update w i model =
     model
 
-view :: Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Msg
 view model =
     { title: "Layout Grid"
     , prelude: "Material design’s responsive UI is based on a 12-column grid layout."
@@ -65,7 +65,7 @@ view model =
         ]
     }
 
-demoGrid :: Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
+demoGrid :: forall r w i . Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
 demoGrid options =
     LayoutGrid.layoutGrid
         (HP.style "background: rgba(0,0,0,.2)"
@@ -73,7 +73,7 @@ demoGrid options =
             :: options
         )
 
-demoCell :: Array (IProp r i) -> HH.HTML w i
+demoCell :: forall r w i . Array (IProp r i) -> HH.HTML w i
 demoCell options =
     LayoutGrid.cell
         (HP.style "background: rgba(0,0,0,.2)"
@@ -82,11 +82,11 @@ demoCell options =
         )
         []
 
-heroGrid :: Array (HH.HTML w i)
+heroGrid :: forall r w i . Array (HH.HTML w i)
 heroGrid =
     [ demoGrid [] [ LayoutGrid.inner [] (List.repeat 3 (demoCell [])) ] ]
 
-columnsGrid :: HH.HTML w i
+columnsGrid :: forall r w i . HH.HTML w i
 columnsGrid =
     demoGrid []
         [ LayoutGrid.inner []
@@ -100,7 +100,7 @@ columnsGrid =
             ]
         ]
 
-leftAlignedGrid :: HH.HTML w i
+leftAlignedGrid :: forall r w i . HH.HTML w i
 leftAlignedGrid =
     demoGrid
         [ LayoutGrid.alignLeft
@@ -113,7 +113,7 @@ leftAlignedGrid =
             ]
         ]
 
-rightAlignedGrid :: HH.HTML w i
+rightAlignedGrid :: forall r w i . HH.HTML w i
 rightAlignedGrid =
     demoGrid
         [ LayoutGrid.alignRight
@@ -122,7 +122,7 @@ rightAlignedGrid =
         [ LayoutGrid.inner [] (List.repeat 3 (demoCell []))
         ]
 
-cellAlignmentGrid :: HH.HTML w i
+cellAlignmentGrid :: forall r w i . HH.HTML w i
 cellAlignmentGrid =
     let
         innerHeight =

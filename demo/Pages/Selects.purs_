@@ -27,7 +27,7 @@ data Model =
     , focused :: Maybe Fruit
     }
 
-defaultModel :: Model
+defaultModel :: forall r w i . Model
 defaultModel =
     { hero: Nothing
     , filled: Nothing
@@ -52,7 +52,7 @@ data Msg
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: Msg -> Model -> ( Model, Cmd Msg )
+update :: forall r w i . Msg -> Model -> ( Model, Cmd Msg )
 update w i model =
     case w i of
         HeroChanged hero ->
@@ -79,7 +79,7 @@ update w i model =
         Focused _ ->
             ( model, Cmd.none )
 
-view :: Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Msg
 view model =
     { title: "Select"
     , prelude: "Selects allow users to select from a single-option menu."
@@ -103,7 +103,7 @@ view model =
         ]
     }
 
-heroSelect :: Model -> HH.HTML Msg
+heroSelect :: forall r w i . Model -> HH.HTML Msg
 heroSelect model =
     Select.filled
         (Select.defaultConfig
@@ -114,13 +114,13 @@ heroSelect model =
         firstItem
         remainingItems
 
-firstItem :: SelectItem (Maybe a) w i
+firstItem :: forall r w i . SelectItem (Maybe a) w i
 firstItem =
     SelectItem.selectItem
         (SelectItem.defaultConfig { value: Nothing })
         [ HH.text "" ]
 
-remainingItems :: Array (SelectItem (Maybe Fruit) w i)
+remainingItems :: forall r w i . Array (SelectItem (Maybe Fruit) w i)
 remainingItems =
     [ SelectItem.selectItem
         (SelectItem.defaultConfig { value: Just Apple })
@@ -133,7 +133,7 @@ remainingItems =
         [ HH.text "Banana" ]
     ]
 
-filledSelect :: Model -> HH.HTML Msg
+filledSelect :: forall r w i . Model -> HH.HTML Msg
 filledSelect model =
     Select.filled
         (Select.defaultConfig
@@ -144,7 +144,7 @@ filledSelect model =
         firstItem
         remainingItems
 
-outlinedSelect :: Model -> HH.HTML Msg
+outlinedSelect :: forall r w i . Model -> HH.HTML Msg
 outlinedSelect model =
     Select.outlined
         (Select.defaultConfig
@@ -155,7 +155,7 @@ outlinedSelect model =
         firstItem
         remainingItems
 
-filledWithIconSelect :: Model -> HH.HTML Msg
+filledWithIconSelect :: forall r w i . Model -> HH.HTML Msg
 filledWithIconSelect model =
     Select.filled
         (Select.defaultConfig
@@ -167,7 +167,7 @@ filledWithIconSelect model =
         firstItem
         remainingItems
 
-outlinedWithIconSelect :: Model -> HH.HTML Msg
+outlinedWithIconSelect :: forall r w i . Model -> HH.HTML Msg
 outlinedWithIconSelect model =
     Select.outlined
         (Select.defaultConfig
@@ -179,7 +179,7 @@ outlinedWithIconSelect model =
         firstItem
         remainingItems
 
-focusSelect :: Model -> HH.HTML Msg
+focusSelect :: forall r w i . Model -> HH.HTML Msg
 focusSelect model =
     HH.div
         [ HP.style "display: flex; align-items: center"

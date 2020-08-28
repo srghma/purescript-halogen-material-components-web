@@ -26,18 +26,18 @@ import Material.Classes.Typography
 data Model =
     {}
 
-defaultModel :: Model
+defaultModel :: forall r w i . Model
 defaultModel =
     {}
 
 data Msg
     = NoOp
 
-update :: Msg -> Model -> Model
+update :: forall r w i . Msg -> Model -> Model
 update w i model =
     model
 
-view :: Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Msg
 view model =
     { title: "Drawer"
     , prelude: "The navigation drawer slides in from the left and contains the navigation destinations for your app."
@@ -54,7 +54,7 @@ view model =
         ]
     }
 
-heroDrawer :: Array (HH.HTML w i)
+heroDrawer :: forall r w i . Array (HH.HTML w i)
 heroDrawer =
     let
         listItem ( activated, icon, label ) =
@@ -91,7 +91,7 @@ heroDrawer =
         ]
     ]
 
-iframe :: String -> String -> HH.HTML w i
+iframe :: forall r w i . String -> String -> HH.HTML w i
 iframe label route =
     HH.div
         [ HP.style "display: inline-block; -ms-flex: 1 1 80%; flex: 1 1 80%; -ms-flex-pack: distribute; justify-content: space-around; min-height: 400px; min-width: 400px; padding: 15px"
