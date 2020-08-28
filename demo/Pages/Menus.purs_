@@ -57,7 +57,7 @@ view model =
                     # Menu.setOpen model.open
                     # Menu.setOnClose Close
                 )
-                [ Array.list (List.defaultConfig # Array.setWrapFocus true)
+                [ List.list (List.defaultConfig # Array.setWrapFocus true)
                     (listItem "Passionfruit")
                     (List.concat
                         [ map listItem
@@ -89,7 +89,7 @@ heroMenu model =
         [ HP.class_ "mdc-menu-surface mdc-menu-surface--open"
         , HP.style "position: relative; transform-origin: left top 0px; left: 0px; top: 0px; z-index: 0"
         ]
-        [ Array.list Array.defaultConfig
+        [ List.list Array.defaultConfig
             (List.Item.listItem List.Item.defaultConfig [ HH.text "A Menu Item" ])
             [ List.Item.listItem List.Item.defaultConfig [ HH.text "Another Menu Item" ]
             ]

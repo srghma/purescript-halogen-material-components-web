@@ -121,7 +121,7 @@ heroList =
         listItem =
             List.Item.listItem List.Item.defaultConfig [ HH.text "Line item" ]
     in
-    [ Array.list
+    [ List.list
         (List.defaultConfig # Array.setAttributes (HP.style "background: #fff" :: demoList))
         listItem
         (List.repeat 2 listItem)
@@ -133,7 +133,7 @@ singleLineList =
         listItem =
             List.Item.listItem List.Item.defaultConfig [ HH.text "Line item" ]
     in
-    Array.list (List.defaultConfig # Array.setAttributes demoList)
+    List.list (List.defaultConfig # Array.setAttributes demoList)
         listItem
         (List.repeat 2 listItem)
 
@@ -148,7 +148,7 @@ twoLineList =
                     }
                 ]
     in
-    Array.list
+    List.list
         (List.defaultConfig
             # Array.setTwoLine true
             # Array.setAttributes demoList
@@ -165,7 +165,7 @@ leadingIconList =
                 , HH.text "Line item"
                 ]
     in
-    Array.list (List.defaultConfig # Array.setAttributes demoList)
+    List.list (List.defaultConfig # Array.setAttributes demoList)
         (listItem "wifi")
         (map listItem [ "bluetooth", "data_usage" ])
 
@@ -178,7 +178,7 @@ trailingIconList =
                 , List.Item.meta [] [ Icon.icon [] "info" ]
                 ]
     in
-    Array.list (List.defaultConfig # Array.setAttributes demoList)
+    List.list (List.defaultConfig # Array.setAttributes demoList)
         listItem
         (List.repeat 2 listItem)
 
@@ -199,7 +199,7 @@ activatedItemList model =
                 )
                 [ List.Item.graphic [] [ Icon.icon [] icon ], HH.text label ]
     in
-    Array.list (List.defaultConfig # Array.setAttributes demoList)
+    List.list (List.defaultConfig # Array.setAttributes demoList)
         (listItem ( "inbox", "Inbox" ))
         (map listItem
             [ ( "star", "Star" )
@@ -226,7 +226,7 @@ shapedActivatedItemList model =
                 )
                 [ List.Item.graphic [] [ Icon.icon [] icon ], HH.text label ]
     in
-    Array.list (List.defaultConfig # Array.setAttributes demoList)
+    List.list (List.defaultConfig # Array.setAttributes demoList)
         (listItem ( "inbox", "Inbox" ))
         (map listItem
             [ ( "star", "Star" )
@@ -253,7 +253,7 @@ folderList =
                 , List.Item.meta [] [ Icon.icon [] "info" ]
                 ]
     in
-    Array.list
+    List.list
         (List.defaultConfig
             # Array.setAvatarList true
             # Array.setTwoLine true
@@ -301,7 +301,7 @@ listWithTrailingCheckbox model =
                     ]
                 ]
     in
-    Array.list
+    List.list
         (List.defaultConfig
             # Array.setAttributes
                 (HP.attr (AttrName "role") "group"
@@ -340,7 +340,7 @@ listWithTrailingRadioButton model =
                     ]
                 ]
     in
-    Array.list (List.defaultConfig # Array.setAttributes demoList)
+    List.list (List.defaultConfig # Array.setAttributes demoList)
         (listItem "Dog Photos")
         (map listItem
             [ "Cat Photos"
@@ -352,7 +352,7 @@ listWithTrailingRadioButton model =
 focusList :: forall r w i . HH.HTML Msg
 focusList =
     HH.div []
-        [ Array.list
+        [ List.list
             (List.defaultConfig
                 # Array.setAttributes (demoList <> [ HP.id "my-list" ])
             )

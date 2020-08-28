@@ -83,7 +83,7 @@ drawerBody setSelectedIndex selectedIndex =
         ]
     , PermanentDrawer.content []
         [ Array.group []
-            [ Array.list Array.defaultConfig
+            [ List.list Array.defaultConfig
                 (List.Item.listItem (listItemConfig 0)
                     [ List.Item.graphic [] [ Icon.icon [] "inbox" ]
                     , HH.text "Inbox"
@@ -104,7 +104,7 @@ drawerBody setSelectedIndex selectedIndex =
                 ]
             , ListDivider.group []
             , Array.subheader [] [ HH.text "Labels" ]
-            , Array.list Array.defaultConfig
+            , List.list Array.defaultConfig
                 (List.Item.listItem (listItemConfig 4)
                     [ List.Item.graphic [] [ Icon.icon [] "bookmark" ]
                     , HH.text "Family"

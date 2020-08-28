@@ -97,7 +97,7 @@ view lift catalogPageConfig catalogPage =
                             catalogDrawerItems
                       of
                         [ listItem, listItems ] ->
-                            Array.list Array.defaultConfig listItem listItems
+                            List.list Array.defaultConfig listItem listItems
 
                         _ ->
                             text ""
@@ -121,7 +121,7 @@ view lift catalogPageConfig catalogPage =
 
 resourcesList :: forall r w i . CatalogPageResources -> HH.HTML w i
 resourcesList { materialDesignGuidelines, documentation, sourceCode } =
-    Array.list Array.defaultConfig
+    List.list Array.defaultConfig
         (List.Item.listItem
             (List.Item.defaultConfig
                 # List.Item.setHref materialDesignGuidelines

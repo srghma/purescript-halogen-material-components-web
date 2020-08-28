@@ -113,7 +113,7 @@ simpleDialog model =
         )
         { title: Just "Select an account"
         , content =
-            [ Array.list (List.defaultConfig # Array.setAvatarList true)
+            [ List.list (List.defaultConfig # Array.setAvatarList true)
                 (listItem ( "person", "user1@example.com" ))
                 (map listItem
                     [ ( "person", "user2@example.com" )
@@ -141,7 +141,7 @@ confirmationDialog model =
         )
         { title: Just "Phone ringtone"
         , content =
-            [ Array.list (List.defaultConfig # Array.setAvatarList true)
+            [ List.list (List.defaultConfig # Array.setAvatarList true)
                 (listItem ( true, "Never Gonna Give You Up" ))
                 (map listItem
                     [ ( false, "Hot Cross Buns" )

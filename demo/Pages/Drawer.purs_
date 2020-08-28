@@ -79,7 +79,7 @@ heroDrawer =
             , HH.h6 [ PermanentDrawer.subtitle ] [ HH.text "Subtitle" ]
             ]
         , PermanentDrawer.content []
-            [ Array.list Array.defaultConfig
+            [ List.list Array.defaultConfig
                 (listItem ( true, "inbox", "Inbox" ))
                 (map listItem
                     [ ( false, "star", "Star" )
