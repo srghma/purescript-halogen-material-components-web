@@ -1,4 +1,4 @@
-module Demo.Pages.PermanentDrawer
+module Demo.Pages.PermanentDrawer where
 
 import Demo.DrawerPage as DrawerPage
 import HalogenMWC.Drawer.Permanent as PermanentDrawer

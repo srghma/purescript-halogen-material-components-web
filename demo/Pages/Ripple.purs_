@@ -1,4 +1,4 @@
-module Demo.Pages.Ripple
+module Demo.Pages.Ripple where
 
 import Demo.HOC.CatalogPage
 import Protolude

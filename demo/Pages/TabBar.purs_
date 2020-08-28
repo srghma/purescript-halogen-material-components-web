@@ -1,4 +1,4 @@
-module Demo.Pages.TabBar
+module Demo.Pages.TabBar where
 
 import Browser.Dom
 import Demo.HOC.CatalogPage

@@ -1,4 +1,4 @@
-module Demo.Pages.Drawer
+module Demo.Pages.Drawer where
     ( Model
     , Msg(..)
     , defaultModel

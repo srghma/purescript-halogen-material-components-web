@@ -1,4 +1,4 @@
-module Demo.Pages.DismissibleDrawer
+module Demo.Pages.DismissibleDrawer where
     ( Model
     , Msg(..)
     , defaultModel

@@ -1,4 +1,4 @@
-module Demo.Pages.Slider
+module Demo.Pages.Slider where
 
 import Browser.Dom
 import Demo.HOC.CatalogPage

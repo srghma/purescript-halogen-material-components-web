@@ -1,4 +1,4 @@
-module Demo.Pages.TopAppBar
+module Demo.Pages.TopAppBar where
 
 import Demo.HOC.CatalogPage
 import Demo.Route

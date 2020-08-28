@@ -1,4 +1,4 @@
-module Demo.Pages.Dialog
+module Demo.Pages.Dialog where
 
 import Demo.HOC.CatalogPage
 import Protolude

@@ -1,4 +1,4 @@
-module Demo.Pages.LayoutGrid
+module Demo.Pages.LayoutGrid where
     ( Model
     , Msg(..)
     , defaultModel

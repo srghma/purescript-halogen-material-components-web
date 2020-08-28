@@ -1,4 +1,4 @@
-module Demo.Pages.Elevation
+module Demo.Pages.Elevation where
 
 import Demo.HOC.CatalogPage
 import Protolude

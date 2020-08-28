@@ -1,4 +1,4 @@
-module Demo.Pages.Chips
+module Demo.Pages.Chips where
 
 import Browser.Dom
 import Demo.HOC.CatalogPage

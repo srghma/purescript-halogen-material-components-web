@@ -1,4 +1,4 @@
-module Demo.Pages.DataTable
+module Demo.Pages.DataTable where
 
 import Demo.HOC.CatalogPage
 import Protolude

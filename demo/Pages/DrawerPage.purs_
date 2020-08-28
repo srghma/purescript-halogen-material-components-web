@@ -1,4 +1,4 @@
-module Demo.Pages.DrawerPage
+module Demo.Pages.DrawerPage where
 
 import Protolude
 import Data.Array as Array

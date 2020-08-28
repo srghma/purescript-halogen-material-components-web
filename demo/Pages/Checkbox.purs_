@@ -1,4 +1,4 @@
-module Demo.Pages.Checkbox
+module Demo.Pages.Checkbox where
 
 import Browser.Dom
 import Demo.HOC.CatalogPage

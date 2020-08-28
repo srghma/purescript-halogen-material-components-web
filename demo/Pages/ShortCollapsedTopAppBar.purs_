@@ -1,4 +1,4 @@
-module Demo.Pages.ShortCollapsedTopAppBar
+module Demo.Pages.ShortCollapsedTopAppBar where
 
 import Demo.TopAppBarPage
 import HalogenMWC.IconButton as IconButton

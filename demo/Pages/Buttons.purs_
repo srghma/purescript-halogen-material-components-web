@@ -1,4 +1,4 @@
-module Demo.Pages.Buttons
+module Demo.Pages.Buttons where
 
 import Browser.Dom
 import Demo.HOC.CatalogPage

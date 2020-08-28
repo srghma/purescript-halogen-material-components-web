@@ -1,4 +1,4 @@
-module Demo.Pages.ImageList
+module Demo.Pages.ImageList where
 
 import Demo.HOC.CatalogPage
 import Protolude

@@ -1,4 +1,4 @@
-module Demo.Pages.Helper.ResourceLink
+module Demo.Pages.Helper.ResourceLink where
 
 import Protolude
 import Data.Array as Array

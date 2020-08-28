@@ -1,4 +1,4 @@
-module Demo.Pages.TextFields
+module Demo.Pages.TextFields where
 
 import Browser.Dom
 import Demo.HOC.CatalogPage

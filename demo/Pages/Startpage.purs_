@@ -1,4 +1,4 @@
-module Demo.Pages.Startpage
+module Demo.Pages.Startpage where
 
 import Demo.Route
 import Protolude

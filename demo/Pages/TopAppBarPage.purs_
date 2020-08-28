@@ -1,4 +1,4 @@
-module Demo.Pages.TopAppBarPage
+module Demo.Pages.TopAppBarPage where
 
 import Protolude
 import Data.Array as Array

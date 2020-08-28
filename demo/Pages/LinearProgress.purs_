@@ -1,4 +1,4 @@
-module Demo.Pages.LinearProgress
+module Demo.Pages.LinearProgress where
 
 import Demo.HOC.CatalogPage
 import Protolude

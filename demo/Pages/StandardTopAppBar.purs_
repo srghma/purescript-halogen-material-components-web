@@ -1,4 +1,4 @@
-module Demo.Pages.StandardTopAppBar
+module Demo.Pages.StandardTopAppBar where
 
 import Demo.TopAppBarPage
 import Protolude

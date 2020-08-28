@@ -1,4 +1,4 @@
-module Demo.Pages.Selects
+module Demo.Pages.Selects where
 
 import Browser.Dom
 import Demo.HOC.CatalogPage

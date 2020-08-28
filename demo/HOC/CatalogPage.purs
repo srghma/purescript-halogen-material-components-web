@@ -1,4 +1,4 @@
-module Demo.HOC.CatalogPage
+module Demo.HOC.CatalogPage where
 
 import Demo.Route
 import Protolude

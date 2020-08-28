@@ -1,4 +1,4 @@
-module Demo.Pages.Switch
+module Demo.Pages.Switch where
 
 import Browser.Dom
 import Demo.HOC.CatalogPage

@@ -1,4 +1,4 @@
-module Demo.Pages.Typography
+module Demo.Pages.Typography where
 
 import Demo.HOC.CatalogPage
 import Protolude

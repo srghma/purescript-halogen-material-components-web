@@ -1,4 +1,4 @@
-module Demo.Pages.ModalDrawer
+module Demo.Pages.ModalDrawer where
     ( Model
     , Msg(..)
     , defaultModel
