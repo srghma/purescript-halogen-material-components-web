@@ -56,8 +56,8 @@ view lift catalogPageConfig catalogPage =
                 [ TopAppBar.section [ TopAppBar.alignStart ]
                     [ IconButton.iconButton
                         (IconButton.defaultConfig
-                            # IconButton.setAttributes [ TopAppBar.navigationIcon ]
-                            # IconButton.setOnClick toggleCatalogDrawer
+                            { additionalAttributes = [ TopAppBar.navigationIcon ]
+                            , onClick = toggleCatalogDrawer
                         )
                         "menu"
                     , HH.span
@@ -71,8 +71,8 @@ view lift catalogPageConfig catalogPage =
         , HH.div demoPanel
             [ DismissibleDrawer.drawer
                 (DismissibleDrawer.defaultConfig
-                    # DismissibleDrawer.setOpen catalogPageConfig.drawerOpen
-                    # DismissibleDrawer.setAttributes
+                    { open = catalogPageConfig.drawerOpen
+                    , additionalAttributes =
                         [ TopAppBar.fixedAdjust
                         , HP.style "z-index: 1"
                         ]
@@ -83,14 +83,14 @@ view lift catalogPageConfig catalogPage =
                             (\{ route, label } ->
                                 List.Item.listItem
                                     (List.Item.defaultConfig
-                                        # List.Item.setSelected
+                                        { selected =
                                             (if catalogPageConfig.route == route then
                                                 Just List.Item.activated
 
                                              else
                                                 Nothing
                                             )
-                                        # List.Item.setHref (Just (Route.toString route))
+                                        , href = (Just (Route.toString route))
                                     )
                                     [ HH.text label ]
                             )
@@ -124,8 +124,8 @@ resourcesList { materialDesignGuidelines, documentation, sourceCode } =
     List.list Array.defaultConfig
         (List.Item.listItem
             (List.Item.defaultConfig
-                # List.Item.setHref materialDesignGuidelines
-                # List.Item.setTarget (Just "_blank")
+                { href = materialDesignGuidelines
+                , target = (Just "_blank")
             )
             [ List.Item.graphic resourcesGraphic
                 [ HH.img
@@ -139,8 +139,8 @@ resourcesList { materialDesignGuidelines, documentation, sourceCode } =
         )
         [ List.Item.listItem
             (List.Item.defaultConfig
-                # List.Item.setHref documentation
-                # List.Item.setTarget (Just "_blank")
+                { href = documentation
+                , target = (Just "_blank")
             )
             [ List.Item.graphic resourcesGraphic
                 [ HH.img
@@ -153,8 +153,8 @@ resourcesList { materialDesignGuidelines, documentation, sourceCode } =
             ]
         , List.Item.listItem
             (List.Item.defaultConfig
-                # List.Item.setHref sourceCode
-                # List.Item.setTarget (Just "_blank")
+                { href = sourceCode
+                , target = (Just "_blank")
             )
             [ List.Item.graphic resourcesGraphic
                 [ HH.img

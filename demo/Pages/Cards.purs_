@@ -61,7 +61,7 @@ heroCard :: forall r w i . Array (HH.HTML w i)
 heroCard =
     [ Card.card
         (Card.defaultConfig
-            # Card.setAttributes [ HP.style "width: 350px" ]
+            { additionalAttributes = [ HP.style "width: 350px" ]
         )
         { blocks =
             Card.primaryAction []
@@ -77,7 +77,7 @@ exampleCard1 :: forall r w i . HH.HTML w i
 exampleCard1 =
     Card.card
         (Card.defaultConfig
-            # Card.setAttributes
+            { additionalAttributes =
                 [ HP.style "margin: 48px 0; width: 350px"
                 ]
         )
@@ -94,7 +94,7 @@ exampleCard2 :: forall r w i . HH.HTML w i
 exampleCard2 =
     Card.card
         (Card.defaultConfig
-            # Card.setAttributes
+            { additionalAttributes =
                 [ HP.style "margin: 48px 0; width: 350px"
                 ]
         )
@@ -110,7 +110,7 @@ exampleCard3 :: forall r w i . HH.HTML w i
 exampleCard3 =
     Card.card
         (Card.defaultConfig
-            # Card.setAttributes
+            { additionalAttributes =
                 [ HP.style "margin: 48px 0; width: 350px; border-radius: 24px 8px"
                 ]
         )
@@ -127,7 +127,7 @@ focusCard =
     HH.div []
         [ Card.card
             (Card.defaultConfig
-                # Card.setAttributes
+                { additionalAttributes =
                     [ HP.id "my-card"
                     , HP.style "margin: 48px 0; width: 350px"
                     ]
@@ -141,7 +141,7 @@ focusCard =
             }
         , HH.text "\u{00A0}"
         , Button.raised
-            (Button.defaultConfig # Button.setOnClick (Focus "my-card"))
+            (Button.defaultConfig { onClick = (Focus "my-card"))
             "Focus"
         ]
 

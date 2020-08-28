@@ -98,9 +98,9 @@ checkbox index model attributes =
     in
     Checkbox.checkbox
         (Checkbox.defaultConfig
-            # Checkbox.setState (Just state)
-            # Checkbox.setOnChange (Changed index)
-            # Checkbox.setAttributes attributes
+            { state = (Just state)
+            , onChange = (Changed index)
+            , additionalAttributes = attributes
         )
 
 focusCheckbox :: forall r w i . HH.HTML Msg
@@ -108,10 +108,10 @@ focusCheckbox =
     HH.div []
         [ Checkbox.checkbox
             (Checkbox.defaultConfig
-                # Checkbox.setAttributes [ HP.id "my-checkbox" ]
+                { additionalAttributes = [ HP.id "my-checkbox" ]
             )
         , HH.text "\u{00A0}"
-        , Button.raised (Button.defaultConfig # Button.setOnClick (Focus "my-checkbox"))
+        , Button.raised (Button.defaultConfig { onClick = (Focus "my-checkbox"))
             "Focus"
         ]
 

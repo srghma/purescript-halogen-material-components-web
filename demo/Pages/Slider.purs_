@@ -79,8 +79,8 @@ heroSlider model =
     in
     Slider.slider
         (Slider.defaultConfig
-            # Slider.setValue (Dict.get id model.sliders)
-            # Slider.setOnInput (Changed id)
+            { value = (Dict.get id model.sliders)
+            , onInput = (Changed id)
         )
 
 continuousSlider :: forall r w i . Model -> HH.HTML Msg
@@ -91,10 +91,10 @@ continuousSlider model =
     in
     Slider.slider
         (Slider.defaultConfig
-            # Slider.setValue (Dict.get id model.sliders)
-            # Slider.setOnInput (Changed id)
-            # Slider.setMin (Just 0)
-            # Slider.setMax (Just 50)
+            { value = (Dict.get id model.sliders)
+            , onInput = (Changed id)
+            , min = (Just 0)
+            , max = (Just 50)
         )
 
 discreteSlider :: forall r w i . Model -> HH.HTML Msg
@@ -105,12 +105,12 @@ discreteSlider model =
     in
     Slider.slider
         (Slider.defaultConfig
-            # Slider.setValue (Dict.get id model.sliders)
-            # Slider.setOnInput (Changed id)
-            # Slider.setDiscrete true
-            # Slider.setMin (Just 0)
-            # Slider.setMax (Just 50)
-            # Slider.setStep (Just 1)
+            { value = (Dict.get id model.sliders)
+            , onInput = (Changed id)
+            , discrete = true
+            , min = (Just 0)
+            , max = (Just 50)
+            , step = (Just 1)
         )
 
 discreteSliderWithTickMarks :: forall r w i . Model -> HH.HTML Msg
@@ -121,13 +121,13 @@ discreteSliderWithTickMarks model =
     in
     Slider.slider
         (Slider.defaultConfig
-            # Slider.setValue (Dict.get id model.sliders)
-            # Slider.setOnInput (Changed id)
-            # Slider.setDiscrete true
-            # Slider.setMin (Just 0)
-            # Slider.setMax (Just 50)
-            # Slider.setStep (Just 1)
-            # Slider.setDisplayMarkers true
+            { value = (Dict.get id model.sliders)
+            , onInput = (Changed id)
+            , discrete = true
+            , min = (Just 0)
+            , max = (Just 50)
+            , step = (Just 1)
+            , displayMarkers = true
         )
 
 focusSlider :: forall r w i . Model -> HH.HTML Msg
@@ -139,12 +139,12 @@ focusSlider model =
     HH.div []
         [ Slider.slider
             (Slider.defaultConfig
-                # Slider.setValue (Dict.get id model.sliders)
-                # Slider.setOnInput (Changed id)
-                # Slider.setAttributes [ HP.id id ]
+                { value = (Dict.get id model.sliders)
+                , onInput = (Changed id)
+                , additionalAttributes = [ HP.id id ]
             )
         , HH.text "\u{00A0}"
         , Button.raised
-            (Button.defaultConfig # Button.setOnClick (Focus id))
+            (Button.defaultConfig { onClick = (Focus id))
             "Focus"
         ]

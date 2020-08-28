@@ -40,9 +40,9 @@ view model =
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-theme"
         }
     , hero =
-        [ Button.text (Button.defaultConfig # Button.setAttributes heroMargin) "Text"
-        , Button.raised (Button.defaultConfig # Button.setAttributes heroMargin) "Raised"
-        , Button.outlined (Button.defaultConfig # Button.setAttributes heroMargin) "Outlined"
+        [ Button.text (Button.defaultConfig { additionalAttributes = heroMargin) "Text"
+        , Button.raised (Button.defaultConfig { additionalAttributes = heroMargin) "Raised"
+        , Button.outlined (Button.defaultConfig { additionalAttributes = heroMargin) "Outlined"
         ]
     , content =
         [ HH.legend [ mdc_typography____subtitle1 ] [ HH.text "Theme colors as text" ]

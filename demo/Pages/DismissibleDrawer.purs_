@@ -43,8 +43,8 @@ view model =
     , drawer =
         DismissibleDrawer.drawer
             (DismissibleDrawer.defaultConfig
-                # DismissibleDrawer.setOpen model.open
-                # DismissibleDrawer.setOnClose CloseDrawer
+                { open = model.open
+                , onClose = CloseDrawer
             )
             (DrawerPage.drawerBody SetSelectedIndex model.selectedIndex)
     , onMenuClick: Just ToggleDrawer

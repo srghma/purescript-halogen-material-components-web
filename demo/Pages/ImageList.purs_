@@ -41,7 +41,7 @@ view model =
     , hero =
         [ ImageList.imageList
             (ImageList.defaultConfig
-                # ImageList.setAttributes [ HP.style "width: 300px" ]
+                { additionalAttributes = [ HP.style "width: 300px" ]
             )
             (List.repeat 15 imageListHeroItem)
         ]
@@ -61,8 +61,8 @@ standardImageList :: forall r w i . HH.HTML w i
 standardImageList =
     ImageList.imageList
         (ImageList.defaultConfig
-            # ImageList.setWithTextProtection true
-            # ImageList.setAttributes [ HP.style "max-width: 900px" ]
+            { withTextProtection = true
+            , additionalAttributes = [ HP.style "max-width: 900px" ]
         )
         (map standardItem standardImages)
 
@@ -70,8 +70,8 @@ masonryImageList :: forall r w i . HH.HTML w i
 masonryImageList =
     ImageList.imageList
         (ImageList.defaultConfig
-            # ImageList.setMasonry true
-            # ImageList.setAttributes
+            { masonry = true
+            , additionalAttributes =
                 [ HP.style "max-width: 900px; column-count: 5; column-gap: 16px"
                 ]
         )
@@ -81,7 +81,7 @@ imageListHeroItem :: forall r w i . ImageListItem w i
 imageListHeroItem =
     ImageList.Item.imageListItem
         (ImageList.Item.defaultConfig
-            # ImageList.Item.setAttributes
+            { additionalAttributes =
                 [ HP.style "width: calc(100% / 5 - 4.2px); margin: 2px"
                 ]
         )
@@ -94,8 +94,8 @@ standardItem route =
     --   [ HP.style "padding-bottom: 66.66667%" ]
     ImageList.Item.imageListItem
         (ImageList.Item.defaultConfig
-            # ImageList.Item.setLabel (Just "Text label")
-            # ImageList.Item.setAttributes
+            { label = (Just "Text label")
+            , additionalAttributes =
                 [ HP.style "width: calc(100% / 5 - 4.2px); margin: 2px"
                 ]
         )
@@ -105,8 +105,8 @@ masonryItem :: forall r w i . String -> ImageListItem w i
 masonryItem route =
     ImageList.Item.imageListItem
         (ImageList.Item.defaultConfig
-            # ImageList.Item.setLabel (Just "Text label")
-            # ImageList.Item.setAttributes [ HP.style "margin-bottom: 16px" ]
+            { label = (Just "Text label")
+            , additionalAttributes = [ HP.style "margin-bottom: 16px" ]
         )
         route
 

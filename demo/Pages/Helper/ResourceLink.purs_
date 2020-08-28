@@ -22,7 +22,7 @@ view :
 view { link, title, icon, altText } =
     List.Item.listItem
         (List.Item.defaultConfig
-            # List.Item.setAttributes
+            { additionalAttributes =
                 [ HP.href link
                 , HP.target "_blank"
                 ]

@@ -132,8 +132,8 @@ dataTableWithRowSelection model =
             [ DataTable.row []
                 [ DataTable.checkboxCell []
                     (Checkbox.defaultConfig
-                        # Checkbox.setState (Just state)
-                        # Checkbox.setOnChange onChange
+                        { state = (Just state)
+                        , onChange = onChange
                     )
                 , DataTable.cell [] [ HH.text desert ]
                 , DataTable.numericCell [] [ HH.text carbs ]
@@ -152,7 +152,7 @@ dataTableWithRowSelection model =
                 )
                 [ DataTable.checkboxCell []
                     (Checkbox.defaultConfig
-                        # Checkbox.setState
+                        { state =
                             (Just
                                 (if selected then
                                     Checkbox.checked
@@ -161,7 +161,7 @@ dataTableWithRowSelection model =
                                     Checkbox.unchecked
                                 )
                             )
-                        # Checkbox.setOnChange onChange
+                        , onChange = onChange
                     )
                 , DataTable.cell [] [ HH.text desert ]
                 , DataTable.numericCell [] [ HH.text carbs ]

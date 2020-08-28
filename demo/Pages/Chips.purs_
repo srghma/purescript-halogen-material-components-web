@@ -199,8 +199,8 @@ heroChips :: forall r w i . Model -> Array (HH.HTML Msg)
 heroChips model =
     [ ChoiceChipSet.chipSet
         (ChoiceChipSet.defaultConfig { toLabel: identity }
-            # ChoiceChipSet.setSelected model.chip
-            # ChoiceChipSet.setOnChange ChipChanged
+            , selected = model.chip
+            , onChange = ChipChanged
         )
         [ ChoiceChip.chip ChoiceChip.defaultConfig "Chip One"
         , ChoiceChip.chip ChoiceChip.defaultConfig "Chip Two"
@@ -231,8 +231,8 @@ choiceChips model =
     in
     ChoiceChipSet.chipSet
         (ChoiceChipSet.defaultConfig { toLabel: toLabel }
-            # ChoiceChipSet.setSelected (Just model.size)
-            # ChoiceChipSet.setOnChange SizeChanged
+            , selected = (Just model.size)
+            , onChange = SizeChanged
         )
         [ ChoiceChip.chip ChoiceChip.defaultConfig ExtraSmall
         , ChoiceChip.chip ChoiceChip.defaultConfig Small
@@ -252,7 +252,7 @@ inputChips model =
                     ( label
                     , InputChip.chip
                         (InputChip.defaultConfig
-                            # InputChip.setOnDelete (InputChipDeleted label)
+                            { onDelete = (InputChipDeleted label)
                         )
                         label
                     )
@@ -273,8 +273,8 @@ filterChips1 model =
         chip accessory =
             FilterChip.chip
                 (FilterChip.defaultConfig
-                    # FilterChip.setSelected (Set.member accessory model.accessories)
-                    # FilterChip.setOnChange (AccessoriesChanged accessory)
+                    { selected = (Set.member accessory model.accessories)
+                    , onChange = (AccessoriesChanged accessory)
                 )
                 accessory
     in
@@ -293,9 +293,9 @@ filterChips2 model =
         chip label =
             FilterChip.chip
                 (FilterChip.defaultConfig
-                    # FilterChip.setSelected (Set.member label model.contacts)
-                    # FilterChip.setIcon (Just "face")
-                    # FilterChip.setOnChange (ContactChanged label)
+                    { selected = (Set.member label model.contacts)
+                    , icon = (Just "face")
+                    , onChange = (ContactChanged label)
                 )
                 label
     in
@@ -314,7 +314,7 @@ actionChips model =
         chip ( icon, label ) =
             ActionChip.chip
                 (ActionChip.defaultConfig
-                    # ActionChip.setIcon (Just icon)
+                    { icon = (Just icon)
                 )
                 label
     in
@@ -333,7 +333,7 @@ shapedChips model =
         chip label =
             ActionChip.chip
                 (ActionChip.defaultConfig
-                    # ActionChip.setAttributes [ HP.style "border-radius: 4px" ]
+                    { additionalAttributes = [ HP.style "border-radius: 4px" ]
                 )
                 label
     in
@@ -351,9 +351,9 @@ focusChips model =
     HH.div []
         [ ChoiceChipSet.chipSet
             (ChoiceChipSet.defaultConfig { toLabel: identity }
-                # ChoiceChipSet.setSelected (Just model.focus)
-                # ChoiceChipSet.setOnChange FocusChanged
-                # ChoiceChipSet.setAttributes [ HP.id "my-chips" ]
+                , selected = (Just model.focus)
+                , onChange = FocusChanged
+                , additionalAttributes = [ HP.id "my-chips" ]
             )
             [ ChoiceChip.chip ChoiceChip.defaultConfig "One"
             , ChoiceChip.chip ChoiceChip.defaultConfig "Two"
@@ -361,7 +361,7 @@ focusChips model =
         , HH.text "\u{00A0}"
         , Button.raised
             (Button.defaultConfig
-                # Button.setOnClick (Focus "my-chips")
+                { onClick = (Focus "my-chips")
             )
             "Focus"
         ]

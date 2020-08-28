@@ -68,7 +68,7 @@ heroButtons :: forall r w i . Array (HH.HTML w i)
 heroButtons =
     let
         config =
-            Button.defaultConfig # Button.setAttributes [ heroMargin ]
+            Button.defaultConfig { additionalAttributes = [ heroMargin ]
     in
     [ Button.text config "Text"
     , Button.raised config "Raised"
@@ -99,7 +99,7 @@ shapedButtons =
 linkButtons :: forall r w i . HH.HTML w i
 linkButtons =
     buttonsRow
-        (\config label -> Button.text (config # Button.setHref (Just "#")) label)
+        (\config label -> Button.text (config , href = (Just "#")) label)
         []
 
 focusButton :: forall r w i . HH.HTML Msg
@@ -107,33 +107,33 @@ focusButton =
     HH.div []
         [ Button.raised
             (Button.defaultConfig
-                # Button.setAttributes [ HP.id "my-button" ]
+                { additionalAttributes = [ HP.id "my-button" ]
             )
             "Button"
         , HH.text "\u{00A0}"
-        , Button.raised (Button.defaultConfig # Button.setOnClick (Focus "my-button")) "Focus"
+        , Button.raised (Button.defaultConfig { onClick = (Focus "my-button")) "Focus"
         , HH.text "\u{00A0}"
         , Button.raised
             (Button.defaultConfig
-                # Button.setHref (Just "#")
-                # Button.setAttributes [ HP.id "my-link-button" ]
+                { href = (Just "#")
+                , additionalAttributes = [ HP.id "my-link-button" ]
             )
             "Link button"
         , HH.text "\u{00A0}"
-        , Button.raised (Button.defaultConfig # Button.setOnClick (Focus "my-link-button")) "Focus"
+        , Button.raised (Button.defaultConfig { onClick = (Focus "my-link-button")) "Focus"
         ]
 
 buttonsRow :: forall r w i . (Button.Config w i -> String -> HH.HTML w i) -> Array (IProp r i) -> HH.HTML w i
-buttonsRow button additionalAttributes =
+buttonsRow button additionaladditionalAttributes =
     let
         config =
             Button.defaultConfig
-                # Button.setAttributes (rowMargin :: additionalAttributes)
+                { additionalAttributes = (rowMargin :: additionalAttributes)
     in
     HH.div []
         [ button config "Default"
-        , button (config # Button.setDense true) "Dense"
-        , button (config # Button.setIcon (Just "favorite")) "Icon"
+        , button (config , dense = true) "Dense"
+        , button (config , icon = (Just "favorite")) "Icon"
         ]
 
 heroMargin :: forall r w i . IProp r i

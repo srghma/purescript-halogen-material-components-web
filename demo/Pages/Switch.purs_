@@ -80,14 +80,14 @@ heroSwitch model =
     in
     [ FormField.formField
         (FormField.defaultConfig
-            # FormField.setLabel (Just "off/on")
-            # FormField.setFor (Just id)
-            # FormField.setOnClick (Toggle id)
+            { label = (Just "off/on")
+            , for = (Just id)
+            , onClick = (Toggle id)
         )
         [ Switch.switch
             (Switch.defaultConfig
-                # Switch.setChecked (isChecked id model)
-                # Switch.setOnChange (Toggle id)
+                { checked = (isChecked id model)
+                , onChange = (Toggle id)
             )
         ]
     ]
@@ -100,14 +100,14 @@ demoSwitch model =
     in
     FormField.formField
         (FormField.defaultConfig
-            # FormField.setLabel (Just "off/on")
-            # FormField.setFor (Just id)
-            # FormField.setOnClick (Toggle id)
+            { label = (Just "off/on")
+            , for = (Just id)
+            , onClick = (Toggle id)
         )
         [ Switch.switch
             (Switch.defaultConfig
-                # Switch.setChecked (isChecked id model)
-                # Switch.setOnChange (Toggle id)
+                { checked = (isChecked id model)
+                , onChange = (Toggle id)
             )
         ]
 
@@ -120,23 +120,23 @@ focusSwitch model =
     HH.div []
         [ FormField.formField
             (FormField.defaultConfig
-                # FormField.setLabel (Just "off/on")
-                # FormField.setFor (Just id)
-                # FormField.setOnClick (Toggle id)
-                # FormField.setAttributes [ HP.id "my-form-field" ]
+                { label = (Just "off/on")
+                , for = (Just id)
+                , onClick = (Toggle id)
+                , additionalAttributes = [ HP.id "my-form-field" ]
             )
             [ Switch.switch
                 (Switch.defaultConfig
-                    # Switch.setChecked (isChecked id model)
-                    # Switch.setOnChange (Toggle id)
-                    # Switch.setAttributes [ HP.id id ]
+                    { checked = (isChecked id model)
+                    , onChange = (Toggle id)
+                    , additionalAttributes = [ HP.id id ]
                 )
             ]
         , HH.text "\u{00A0}"
         , Button.raised
-            (Button.defaultConfig # Button.setOnClick (Focus "my-switch"))
+            (Button.defaultConfig { onClick = (Focus "my-switch"))
             "Focus switch"
         , Button.raised
-            (Button.defaultConfig # Button.setOnClick (Focus "my-form-field"))
+            (Button.defaultConfig { onClick = (Focus "my-form-field"))
             "Focus form field"
         ]

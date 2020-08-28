@@ -28,7 +28,7 @@ view model =
                     [ TopAppBar.alignStart ]
                     [ IconButton.iconButton
                         (IconButton.defaultConfig
-                            # IconButton.setAttributes [ TopAppBar.navigationIcon ]
+                            { additionalAttributes = [ TopAppBar.navigationIcon ]
                         )
                         "menu"
                     ]
@@ -36,7 +36,7 @@ view model =
                     [ TopAppBar.alignEnd ]
                     [ IconButton.iconButton
                         (IconButton.defaultConfig
-                            # IconButton.setAttributes [ TopAppBar.actionItem ]
+                            { additionalAttributes = [ TopAppBar.actionItem ]
                         )
                         "file_download"
                     ]

@@ -43,8 +43,8 @@ view model =
     , drawer =
         ModalDrawer.drawer
             (ModalDrawer.defaultConfig
-                # ModalDrawer.setOpen model.open
-                # ModalDrawer.setOnClose CloseDrawer
+                { open = model.open
+                , onClose = CloseDrawer
             )
             (DrawerPage.drawerBody SetSelectedIndex model.selectedIndex)
     , scrim: Just (ModalDrawer.scrim [] [])

@@ -60,14 +60,14 @@ heroDrawer =
         listItem ( activated, icon, label ) =
             List.Item.listItem
                 (List.Item.defaultConfig
-                    # List.Item.setSelected
+                    { selected =
                         (if activated then
                             Just List.Item.activated
 
                          else
                             Nothing
                         )
-                    # List.Item.setAttributes [ HP.href "#drawer" ]
+                    , additionalAttributes = [ HP.href "#drawer" ]
                 )
                 [ List.Item.graphic [] [ Icon.icon [] icon ]
                 , HH.text label

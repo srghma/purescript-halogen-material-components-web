@@ -31,13 +31,13 @@ view :: forall r w i . Model -> TopAppBarPage Msg
 view model =
     { fixedAdjust: TopAppBar.denseFixedAdjust
     , topAppBar =
-        TopAppBar.regular (TopAppBar.defaultConfig # TopAppBar.setDense true)
+        TopAppBar.regular (TopAppBar.defaultConfig { dense = true)
             [ TopAppBar.row []
                 [ TopAppBar.section
                     [ TopAppBar.alignStart ]
                     [ IconButton.iconButton
                         (IconButton.defaultConfig
-                            # IconButton.setAttributes [ TopAppBar.navigationIcon ]
+                            { additionalAttributes = [ TopAppBar.navigationIcon ]
                         )
                         "menu"
                     , HH.span [ TopAppBar.title ] [ HH.text "Dense" ]
@@ -46,17 +46,17 @@ view model =
                     [ TopAppBar.alignEnd ]
                     [ IconButton.iconButton
                         (IconButton.defaultConfig
-                            # IconButton.setAttributes [ TopAppBar.actionItem ]
+                            { additionalAttributes = [ TopAppBar.actionItem ]
                         )
                         "file_download"
                     , IconButton.iconButton
                         (IconButton.defaultConfig
-                            # IconButton.setAttributes [ TopAppBar.actionItem ]
+                            { additionalAttributes = [ TopAppBar.actionItem ]
                         )
                         "print"
                     , IconButton.iconButton
                         (IconButton.defaultConfig
-                            # IconButton.setAttributes [ TopAppBar.actionItem ]
+                            { additionalAttributes = [ TopAppBar.actionItem ]
                         )
                         "bookmark"
                     ]

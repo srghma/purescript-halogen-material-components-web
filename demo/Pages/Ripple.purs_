@@ -53,12 +53,12 @@ view model =
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Theme Color: Primary" ]
         , HH.div demoBox
             [ HH.text "Primary"
-            , Ripple.bounded (Ripple.defaultConfig # Ripple.setColor (Just Ripple.primary))
+            , Ripple.bounded (Ripple.defaultConfig { color = (Just Ripple.primary))
             ]
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Theme Color: Secondary" ]
         , HH.div demoBox
             [ HH.text "Secondary"
-            , Ripple.bounded (Ripple.defaultConfig # Ripple.setColor (Just Ripple.accent))
+            , Ripple.bounded (Ripple.defaultConfig { color = (Just Ripple.accent))
             ]
         ]
     }

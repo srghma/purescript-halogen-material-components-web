@@ -37,7 +37,7 @@ view model =
                     [ TopAppBar.alignStart ]
                     [ IconButton.iconButton
                         (IconButton.defaultConfig
-                            # IconButton.setAttributes [ TopAppBar.navigationIcon ]
+                            { additionalAttributes = [ TopAppBar.navigationIcon ]
                         )
                         "menu"
                     , HH.span [ TopAppBar.title ] [ HH.text "Standard" ]
@@ -46,17 +46,17 @@ view model =
                     [ TopAppBar.alignEnd ]
                     [ IconButton.iconButton
                         (IconButton.defaultConfig
-                            # IconButton.setAttributes [ TopAppBar.actionItem ]
+                            { additionalAttributes = [ TopAppBar.actionItem ]
                         )
                         "file_download"
                     , IconButton.iconButton
                         (IconButton.defaultConfig
-                            # IconButton.setAttributes [ TopAppBar.actionItem ]
+                            { additionalAttributes = [ TopAppBar.actionItem ]
                         )
                         "print"
                     , IconButton.iconButton
                         (IconButton.defaultConfig
-                            # IconButton.setAttributes [ TopAppBar.actionItem ]
+                            { additionalAttributes = [ TopAppBar.actionItem ]
                         )
                         "bookmark"
                     ]

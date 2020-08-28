@@ -122,7 +122,7 @@ heroList =
             List.Item.listItem List.Item.defaultConfig [ HH.text "Line item" ]
     in
     [ List.list
-        (List.defaultConfig # Array.setAttributes (HP.style "background: #fff" :: demoList))
+        (List.defaultConfig { additionalAttributes = (HP.style "background: #fff" :: demoList))
         listItem
         (List.repeat 2 listItem)
     ]
@@ -133,7 +133,7 @@ singleLineList =
         listItem =
             List.Item.listItem List.Item.defaultConfig [ HH.text "Line item" ]
     in
-    List.list (List.defaultConfig # Array.setAttributes demoList)
+    List.list (List.defaultConfig { additionalAttributes = demoList)
         listItem
         (List.repeat 2 listItem)
 
@@ -150,8 +150,8 @@ twoLineList =
     in
     List.list
         (List.defaultConfig
-            # Array.setTwoLine true
-            # Array.setAttributes demoList
+            { twoLine = true
+            , additionalAttributes = demoList
         )
         listItem
         (List.repeat 2 listItem)
@@ -165,7 +165,7 @@ leadingIconList =
                 , HH.text "Line item"
                 ]
     in
-    List.list (List.defaultConfig # Array.setAttributes demoList)
+    List.list (List.defaultConfig { additionalAttributes = demoList)
         (listItem "wifi")
         (map listItem [ "bluetooth", "data_usage" ])
 
@@ -178,7 +178,7 @@ trailingIconList =
                 , List.Item.meta [] [ Icon.icon [] "info" ]
                 ]
     in
-    List.list (List.defaultConfig # Array.setAttributes demoList)
+    List.list (List.defaultConfig { additionalAttributes = demoList)
         listItem
         (List.repeat 2 listItem)
 
@@ -188,18 +188,18 @@ activatedItemList model =
         listItem ( icon, label ) =
             List.Item.listItem
                 (List.Item.defaultConfig
-                    # List.Item.setSelected
+                    { selected =
                         (if model.activated == label then
                             Just List.Item.activated
 
                          else
                             Nothing
                         )
-                    # List.Item.setOnClick (SetActivated label)
+                    , onClick = (SetActivated label)
                 )
                 [ List.Item.graphic [] [ Icon.icon [] icon ], HH.text label ]
     in
-    List.list (List.defaultConfig # Array.setAttributes demoList)
+    List.list (List.defaultConfig { additionalAttributes = demoList)
         (listItem ( "inbox", "Inbox" ))
         (map listItem
             [ ( "star", "Star" )
@@ -214,19 +214,19 @@ shapedActivatedItemList model =
         listItem ( icon, label ) =
             List.Item.listItem
                 (List.Item.defaultConfig
-                    # List.Item.setSelected
+                    { selected =
                         (if model.shapedActivated == label then
                             Just List.Item.activated
 
                          else
                             Nothing
                         )
-                    # List.Item.setOnClick (SetShapedActivated label)
-                    # List.Item.setAttributes [ HP.style "border-radius: 0 32px 32px 0" ]
+                    , onClick = (SetShapedActivated label)
+                    , additionalAttributes = [ HP.style "border-radius: 0 32px 32px 0" ]
                 )
                 [ List.Item.graphic [] [ Icon.icon [] icon ], HH.text label ]
     in
-    List.list (List.defaultConfig # Array.setAttributes demoList)
+    List.list (List.defaultConfig { additionalAttributes = demoList)
         (listItem ( "inbox", "Inbox" ))
         (map listItem
             [ ( "star", "Star" )
@@ -255,9 +255,9 @@ folderList =
     in
     List.list
         (List.defaultConfig
-            # Array.setAvatarList true
-            # Array.setTwoLine true
-            # Array.setAttributes demoList
+            { avatarList = true
+            , twoLine = true
+            , additionalAttributes = demoList
         )
         (listItem
             { primary: "Dog Photos", secondary: "9 Jan 2018" }
@@ -275,7 +275,7 @@ listWithTrailingCheckbox model =
         listItem label =
             List.Item.listItem
                 (List.Item.defaultConfig
-                    # List.Item.setSelected
+                    { selected =
                         (if Set.member label model.checkboxes then
                             Just List.Item.selected
 
@@ -287,8 +287,8 @@ listWithTrailingCheckbox model =
                 , List.Item.meta []
                     [ Checkbox.checkbox
                         (Checkbox.defaultConfig
-                            # Checkbox.setOnChange (ToggleCheckbox label)
-                            # Checkbox.setState
+                            { onChange = (ToggleCheckbox label)
+                            , state =
                                 (Just
                                     (if Set.member label model.checkboxes then
                                         Checkbox.checked
@@ -303,7 +303,7 @@ listWithTrailingCheckbox model =
     in
     List.list
         (List.defaultConfig
-            # Array.setAttributes
+            { additionalAttributes =
                 (HP.attr (AttrName "role") "group"
                     :: demoList
                 )
@@ -322,7 +322,7 @@ listWithTrailingRadioButton model =
         listItem label =
             List.Item.listItem
                 (List.Item.defaultConfig
-                    # List.Item.setSelected
+                    { selected =
                         (if model.radio == Just label then
                             Just List.Item.selected
 
@@ -334,13 +334,13 @@ listWithTrailingRadioButton model =
                 , List.Item.meta []
                     [ Radio.radio
                         (Radio.defaultConfig
-                            # Radio.setChecked (model.radio == Just label)
-                            # Radio.setOnChange (SetRadio label)
+                            { checked = (model.radio == Just label)
+                            , onChange = (SetRadio label)
                         )
                     ]
                 ]
     in
-    List.list (List.defaultConfig # Array.setAttributes demoList)
+    List.list (List.defaultConfig { additionalAttributes = demoList)
         (listItem "Dog Photos")
         (map listItem
             [ "Cat Photos"
@@ -354,12 +354,12 @@ focusList =
     HH.div []
         [ List.list
             (List.defaultConfig
-                # Array.setAttributes (demoList <> [ HP.id "my-list" ])
+                { additionalAttributes = (demoList <> [ HP.id "my-list" ])
             )
             (List.Item.listItem List.Item.defaultConfig [ HH.text "Line item" ])
             (List.repeat 2 $ List.Item.listItem List.Item.defaultConfig [ HH.text "Line item" ])
         , HH.text "\u{00A0}"
         , Button.raised
-            (Button.defaultConfig # Button.setOnClick (Focus "my-list"))
+            (Button.defaultConfig { onClick = (Focus "my-list"))
             "Focus"
         ]

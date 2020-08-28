@@ -52,16 +52,16 @@ view model =
         [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Standard Floating Action Button" ]
         , Fab.fab Fab.defaultConfig "favorite_border"
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Mini Floating Action Button" ]
-        , Fab.fab (Fab.defaultConfig # Fab.setMini true) "favorite_border"
+        , Fab.fab (Fab.defaultConfig { mini = true) "favorite_border"
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Extended FAB" ]
-        , ExtendedFab.fab (ExtendedFab.defaultConfig # ExtendedFab.setIcon (Just "add"))
+        , ExtendedFab.fab (ExtendedFab.defaultConfig { icon = (Just "add"))
             "Create"
         , HH.h3 [ mdc_typography____subtitle1 ]
             [ HH.text "Extended FAB (Text label followed by icon)" ]
         , ExtendedFab.fab
             (ExtendedFab.defaultConfig
-                # ExtendedFab.setIcon (Just "add")
-                # ExtendedFab.setTrailingIcon true
+                { icon = (Just "add")
+                , trailingIcon = true
             )
             "Create"
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Extended FAB (without icon)" ]
@@ -70,30 +70,30 @@ view model =
         , HH.div [ HP.style "display: flex" ]
             [ Fab.fab
                 (Fab.defaultConfig
-                    # Fab.setAttributes
+                    { additionalAttributes =
                         [ HP.style "border-radius: 50% 0; margin-right: 24px"
                         ]
                 )
                 "favorite_border"
             , Fab.fab
                 (Fab.defaultConfig
-                    # Fab.setMini true
-                    # Fab.setAttributes
+                    { mini = true
+                    , additionalAttributes =
                         [ HP.style "border-radius: 8px; margin-right: 24px"
                         ]
                 )
                 "favorite_border"
-            , ExtendedFab.fab (ExtendedFab.defaultConfig # ExtendedFab.setIcon (Just "add"))
+            , ExtendedFab.fab (ExtendedFab.defaultConfig { icon = (Just "add"))
                 "Create"
             ]
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Focus FAB" ]
         , HH.div [ HP.style "display: flex" ]
             [ Fab.fab
-                (Fab.defaultConfig # Fab.setAttributes [ HP.id "my-fab" ])
+                (Fab.defaultConfig { additionalAttributes = [ HP.id "my-fab" ])
                 "favorite_border"
             , HH.text "\u{00A0}"
             , Button.raised
-                (Button.defaultConfig # Button.setOnClick (Focus "my-fab"))
+                (Button.defaultConfig { onClick = (Focus "my-fab"))
                 "Focus"
             ]
         ]

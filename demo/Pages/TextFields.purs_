@@ -79,13 +79,13 @@ heroTextFields model =
         [ HH.div textFieldContainerHero
             [ TextField.filled
                 (TextField.defaultConfig
-                    # TextField.setLabel (Just "Standard")
+                    { label = (Just "Standard")
                 )
             ]
         , HH.div textFieldContainerHero
             [ TextField.outlined
                 (TextField.defaultConfig
-                    # TextField.setLabel (Just "Standard")
+                    { label = (Just "Standard")
                 )
             ]
         ]
@@ -96,23 +96,23 @@ filledTextFields model =
         [ HH.div textFieldContainer
             [ TextField.filled
                 (TextField.defaultConfig
-                    # TextField.setLabel (Just "Standard")
+                    { label = (Just "Standard")
                 )
             , demoHelperText
             ]
         , HH.div textFieldContainer
             [ TextField.filled
                 (TextField.defaultConfig
-                    # TextField.setLabel (Just "Standard")
-                    # TextField.setLeadingIcon (Just (TextField.icon [] "event"))
+                    { label = (Just "Standard")
+                    , leadingIcon = (Just (TextField.icon [] "event"))
                 )
             , demoHelperText
             ]
         , HH.div textFieldContainer
             [ TextField.filled
                 (TextField.defaultConfig
-                    # TextField.setLabel (Just "Standard")
-                    # TextField.setTrailingIcon (Just (TextField.icon [] "delete"))
+                    { label = (Just "Standard")
+                    , trailingIcon = (Just (TextField.icon [] "delete"))
                 )
             , demoHelperText
             ]
@@ -124,26 +124,26 @@ shapedFilledTextFields model =
         [ HH.div textFieldContainer
             [ TextField.filled
                 (TextField.defaultConfig
-                    # TextField.setLabel (Just "Standard")
-                    # TextField.setAttributes [ HP.style "border-radius: 16px 16px 0 0" ]
+                    { label = (Just "Standard")
+                    , additionalAttributes = [ HP.style "border-radius: 16px 16px 0 0" ]
                 )
             , demoHelperText
             ]
         , HH.div textFieldContainer
             [ TextField.filled
                 (TextField.defaultConfig
-                    # TextField.setLabel (Just "Standard")
-                    # TextField.setLeadingIcon (Just (TextField.icon [] "event"))
-                    # TextField.setAttributes [ HP.style "border-radius: 16px 16px 0 0" ]
+                    { label = (Just "Standard")
+                    , leadingIcon = (Just (TextField.icon [] "event"))
+                    , additionalAttributes = [ HP.style "border-radius: 16px 16px 0 0" ]
                 )
             , demoHelperText
             ]
         , HH.div textFieldContainer
             [ TextField.filled
                 (TextField.defaultConfig
-                    # TextField.setLabel (Just "Standard")
-                    # TextField.setTrailingIcon (Just (TextField.icon [] "delete"))
-                    # TextField.setAttributes [ HP.style "border-radius: 16px 16px 0 0" ]
+                    { label = (Just "Standard")
+                    , trailingIcon = (Just (TextField.icon [] "delete"))
+                    , additionalAttributes = [ HP.style "border-radius: 16px 16px 0 0" ]
                 )
             , demoHelperText
             ]
@@ -155,23 +155,23 @@ outlinedTextFields model =
         [ HH.div textFieldContainer
             [ TextField.outlined
                 (TextField.defaultConfig
-                    # TextField.setLabel (Just "Standard")
+                    { label = (Just "Standard")
                 )
             , demoHelperText
             ]
         , HH.div textFieldContainer
             [ TextField.outlined
                 (TextField.defaultConfig
-                    # TextField.setLabel (Just "Standard")
-                    # TextField.setLeadingIcon (Just (TextField.icon [] "event"))
+                    { label = (Just "Standard")
+                    , leadingIcon = (Just (TextField.icon [] "event"))
                 )
             , demoHelperText
             ]
         , HH.div textFieldContainer
             [ TextField.outlined
                 (TextField.defaultConfig
-                    # TextField.setLabel (Just "Standard")
-                    # TextField.setTrailingIcon (Just (TextField.icon [] "delete"))
+                    { label = (Just "Standard")
+                    , trailingIcon = (Just (TextField.icon [] "delete"))
                 )
             , demoHelperText
             ]
@@ -183,23 +183,23 @@ shapedOutlinedTextFields model =
         [ HH.div textFieldContainer
             [ TextField.outlined
                 (TextField.defaultConfig
-                    # TextField.setLabel (Just "Standard")
+                    { label = (Just "Standard")
                 )
             , demoHelperText
             ]
         , HH.div textFieldContainer
             [ TextField.outlined
                 (TextField.defaultConfig
-                    # TextField.setLabel (Just "Standard")
-                    # TextField.setLeadingIcon (Just (TextField.icon [] "event"))
+                    { label = (Just "Standard")
+                    , leadingIcon = (Just (TextField.icon [] "event"))
                 )
             , demoHelperText
             ]
         , HH.div textFieldContainer
             [ TextField.outlined
                 (TextField.defaultConfig
-                    # TextField.setLabel (Just "Standard")
-                    # TextField.setTrailingIcon (Just (TextField.icon [] "delete"))
+                    { label = (Just "Standard")
+                    , trailingIcon = (Just (TextField.icon [] "delete"))
                 )
             , demoHelperText
             ]
@@ -210,19 +210,19 @@ textFieldsWithoutLabel model =
     HH.div textFieldRow
         [ HH.div textFieldContainer
             [ TextField.outlined TextField.defaultConfig
-            , demoHelperText
+            { demoHelperText
             ]
         , HH.div textFieldContainer
             [ TextField.outlined
                 (TextField.defaultConfig
-                    # TextField.setLeadingIcon (Just (TextField.icon [] "event"))
+                    { leadingIcon = (Just (TextField.icon [] "event"))
                 )
             , demoHelperText
             ]
         , HH.div textFieldContainer
             [ TextField.outlined
                 (TextField.defaultConfig
-                    # TextField.setTrailingIcon (Just (TextField.icon [] "delete"))
+                    { trailingIcon = (Just (TextField.icon [] "delete"))
                 )
             , demoHelperText
             ]
@@ -233,22 +233,22 @@ textFieldsWithCharacterCounter model =
     HH.div textFieldRow
         [ HH.div textFieldContainer
             [ TextField.outlined
-                (TextField.defaultConfig # TextField.setMaxLength (Just 18))
+                (TextField.defaultConfig { maxLength = (Just 18))
             , demoHelperTextWithCharacterCounter
             ]
         , HH.div textFieldContainer
             [ TextField.outlined
                 (TextField.defaultConfig
-                    # TextField.setLeadingIcon (Just (TextField.icon [] "event"))
-                    # TextField.setMaxLength (Just 18)
+                    { leadingIcon = (Just (TextField.icon [] "event"))
+                    , maxLength = (Just 18)
                 )
             , demoHelperTextWithCharacterCounter
             ]
         , HH.div textFieldContainer
             [ TextField.outlined
                 (TextField.defaultConfig
-                    # TextField.setTrailingIcon (Just (TextField.icon [] "delete"))
-                    # TextField.setMaxLength (Just 18)
+                    { trailingIcon = (Just (TextField.icon [] "delete"))
+                    , maxLength = (Just 18)
                 )
             , demoHelperTextWithCharacterCounter
             ]
@@ -258,7 +258,7 @@ textareaTextField :: forall r w i . Model -> HH.HTML w i
 textareaTextField model =
     HH.div textFieldContainer
         [ TextArea.outlined
-            (TextArea.defaultConfig # TextArea.setLabel (Just "Standard"))
+            (TextArea.defaultConfig { label = (Just "Standard"))
         , demoHelperText
         ]
 
@@ -267,8 +267,8 @@ fullwidthTextField model =
     HH.div textFieldContainer
         [ TextField.filled
             (TextField.defaultConfig
-                # TextField.setPlaceholder (Just "Standard")
-                # TextField.setFullwidth true
+                { placeholder = (Just "Standard")
+                , fullwidth = true
             )
         , demoHelperText
         ]
@@ -279,8 +279,8 @@ fullwidthTextareaTextField model =
         [ HH.div textFieldContainer
             [ TextArea.outlined
                 (TextArea.defaultConfig
-                    # TextArea.setLabel (Just "Standard")
-                    # TextArea.setFullwidth true
+                    { label = (Just "Standard")
+                    , fullwidth = true
                 )
             , demoHelperText
             ]
@@ -291,11 +291,11 @@ focusTextField =
     HH.div []
         [ TextField.filled
             (TextField.defaultConfig
-                # TextField.setAttributes [ HP.id "my-text-field" ]
+                { additionalAttributes = [ HP.id "my-text-field" ]
             )
         , HH.text "\u{00A0}"
         , Button.raised
-            (Button.defaultConfig # Button.setOnClick (Focus "my-text-field"))
+            (Button.defaultConfig { onClick = (Focus "my-text-field"))
             "Focus"
         ]
 
@@ -331,7 +331,7 @@ demoHelperText :: forall r w i . HH.HTML w i
 demoHelperText =
     HelperText.helperLine []
         [ HelperText.helperText
-            (HelperText.defaultConfig # HelperText.setPersistent true)
+            (HelperText.defaultConfig { persistent = true)
             "Helper Text"
         ]
 
@@ -339,7 +339,7 @@ demoHelperTextWithCharacterCounter :: forall r w i . HH.HTML w i
 demoHelperTextWithCharacterCounter =
     HelperText.helperLine []
         [ HelperText.helperText
-            (HelperText.defaultConfig # HelperText.setPersistent true)
+            (HelperText.defaultConfig { persistent = true)
             "Helper Text"
         , HelperText.characterCounter []
         ]

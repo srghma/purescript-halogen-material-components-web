@@ -44,12 +44,12 @@ view model =
             [ HP.style "width: 480px; height: 72px"
             ]
             [ TopAppBar.regular
-                (TopAppBar.defaultConfig # TopAppBar.setAttributes [ HP.style "position: static" ])
+                (TopAppBar.defaultConfig { additionalAttributes = [ HP.style "position: static" ])
                 [ TopAppBar.section
                     [ TopAppBar.alignStart ]
                     [ IconButton.iconButton
                         (IconButton.defaultConfig
-                            # IconButton.setAttributes [ TopAppBar.navigationIcon ]
+                            { additionalAttributes = [ TopAppBar.navigationIcon ]
                         )
                         "menu"
                     , HH.span [ TopAppBar.title ] [ HH.text "Title" ]
@@ -58,17 +58,17 @@ view model =
                     [ TopAppBar.alignEnd ]
                     [ IconButton.iconButton
                         (IconButton.defaultConfig
-                            # IconButton.setAttributes [ TopAppBar.actionItem ]
+                            { additionalAttributes = [ TopAppBar.actionItem ]
                         )
                         "file_download"
                     , IconButton.iconButton
                         (IconButton.defaultConfig
-                            # IconButton.setAttributes [ TopAppBar.actionItem ]
+                            { additionalAttributes = [ TopAppBar.actionItem ]
                         )
                         "print"
                     , IconButton.iconButton
                         (IconButton.defaultConfig
-                            # IconButton.setAttributes [ TopAppBar.actionItem ]
+                            { additionalAttributes = [ TopAppBar.actionItem ]
                         )
                         "more_vert"
                     ]

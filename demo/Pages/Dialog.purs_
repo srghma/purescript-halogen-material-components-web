@@ -56,19 +56,19 @@ view model =
     , hero: heroDialog
     , content =
         [ Button.text
-            (Button.defaultConfig # Button.setOnClick (Show AlertDialog))
+            (Button.defaultConfig { onClick = (Show AlertDialog))
             "Alert"
         , HH.text " "
         , Button.text
-            (Button.defaultConfig # Button.setOnClick (Show SimpleDialog))
+            (Button.defaultConfig { onClick = (Show SimpleDialog))
             "Simple"
         , HH.text " "
         , Button.text
-            (Button.defaultConfig # Button.setOnClick (Show ConfirmationDialog))
+            (Button.defaultConfig { onClick = (Show ConfirmationDialog))
             "Confirmation"
         , HH.text " "
         , Button.text
-            (Button.defaultConfig # Button.setOnClick (Show ScrollableDialog))
+            (Button.defaultConfig { onClick = (Show ScrollableDialog))
             "Scrollable"
         , HH.text " "
         , alertDialog model
@@ -82,14 +82,14 @@ alertDialog :: forall r w i . Model -> HH.HTML Msg
 alertDialog model =
     Dialog.dialog
         (Dialog.defaultConfig
-            # Dialog.setOpen (model.open == Just AlertDialog)
-            # Dialog.setOnClose Close
+            { open = (model.open == Just AlertDialog)
+            , onClose = Close
         )
         { title: Nothing
         , content: [ HH.text "Discard draft?" ]
         , actions =
-            [ Button.text (Button.defaultConfig # Button.setOnClick Close) "Cancel"
-            , Button.text (Button.defaultConfig # Button.setOnClick Close) "Discard"
+            [ Button.text (Button.defaultConfig { onClick = Close) "Cancel"
+            , Button.text (Button.defaultConfig { onClick = Close) "Discard"
             ]
         }
 
@@ -98,7 +98,7 @@ simpleDialog model =
     let
         listItem ( icon, label ) =
             List.Item.listItem
-                (List.Item.defaultConfig # List.Item.setOnClick Close)
+                (List.Item.defaultConfig { onClick = Close)
                 [ List.Item.graphic
                     [ HP.style "background-color: rgba(0,0,0,.3); color: #fff"
                     ]
@@ -108,12 +108,12 @@ simpleDialog model =
     in
     Dialog.dialog
         (Dialog.defaultConfig
-            # Dialog.setOpen (model.open == Just SimpleDialog)
-            # Dialog.setOnClose Close
+            { open = (model.open == Just SimpleDialog)
+            , onClose = Close
         )
         { title: Just "Select an account"
         , content =
-            [ List.list (List.defaultConfig # Array.setAvatarList true)
+            [ List.list (List.defaultConfig { avatarList = true)
                 (listItem ( "person", "user1@example.com" ))
                 (map listItem
                     [ ( "person", "user2@example.com" )
@@ -130,18 +130,18 @@ confirmationDialog model =
         listItem ( checked, label ) =
             List.Item.listItem List.Item.defaultConfig
                 [ List.Item.graphic []
-                    [ Radio.radio (Radio.defaultConfig # Radio.setChecked checked) ]
+                    [ Radio.radio (Radio.defaultConfig { checked = checked) ]
                 , HH.text label
                 ]
     in
     Dialog.dialog
         (Dialog.defaultConfig
-            # Dialog.setOpen (model.open == Just ConfirmationDialog)
-            # Dialog.setOnClose Close
+            { open = (model.open == Just ConfirmationDialog)
+            , onClose = Close
         )
         { title: Just "Phone ringtone"
         , content =
-            [ List.list (List.defaultConfig # Array.setAvatarList true)
+            [ List.list (List.defaultConfig { avatarList = true)
                 (listItem ( true, "Never Gonna Give You Up" ))
                 (map listItem
                     [ ( false, "Hot Cross Buns" )
@@ -150,8 +150,8 @@ confirmationDialog model =
                 )
             ]
         , actions =
-            [ Button.text (Button.defaultConfig # Button.setOnClick Close) "Cancel"
-            , Button.text (Button.defaultConfig # Button.setOnClick Close) "OK"
+            [ Button.text (Button.defaultConfig { onClick = Close) "Cancel"
+            , Button.text (Button.defaultConfig { onClick = Close) "OK"
             ]
         }
 
@@ -159,8 +159,8 @@ scrollableDialog :: forall r w i . Model -> HH.HTML Msg
 scrollableDialog model =
     Dialog.dialog
         (Dialog.defaultConfig
-            # Dialog.setOpen (model.open == Just ScrollableDialog)
-            # Dialog.setOnClose Close
+            { open = (model.open == Just ScrollableDialog)
+            , onClose = Close
         )
         { title: Just "The Wonderful Wizard of Oz"
         , content =
@@ -252,8 +252,8 @@ scrollableDialog model =
                 ]
             ]
         , actions =
-            [ Button.text (Button.defaultConfig # Button.setOnClick Close) "Decline"
-            , Button.text (Button.defaultConfig # Button.setOnClick Close) "Continue"
+            [ Button.text (Button.defaultConfig { onClick = Close) "Decline"
+            , Button.text (Button.defaultConfig { onClick = Close) "Continue"
             ]
         }
 

@@ -68,14 +68,14 @@ drawerBody setSelectedIndex selectedIndex =
     let
         listItemConfig index =
             List.Item.defaultConfig
-                # List.Item.setSelected
+                { selected =
                     (if selectedIndex == index then
                         Just List.Item.activated
 
                      else
                         Nothing
                     )
-                # List.Item.setOnClick (setSelectedIndex index)
+                , onClick = (setSelectedIndex index)
     in
     [ PermanentDrawer.header []
         [ HH.h3 [ PermanentDrawer.title ] [ HH.text "Mail" ]
@@ -119,7 +119,7 @@ drawerBody setSelectedIndex selectedIndex =
                     , HH.text "Work"
                     ]
                 , ListDivider.listItem ListDivider.defaultConfig
-                , List.Item.listItem (listItemConfig 7)
+                { List.Item.listItem (listItemConfig 7)
                     [ List.Item.graphic [] [ Icon.icon [] "settings" ]
                     , HH.text "Settings"
                     ]

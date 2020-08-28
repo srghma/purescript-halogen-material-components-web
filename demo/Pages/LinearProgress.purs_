@@ -42,12 +42,12 @@ view model =
         , LinearProgress.buffered LinearProgress.defaultConfig { progress: 0.5, buffered: 0.75 }
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Indeterminate" ]
         , LinearProgress.indeterminate LinearProgress.defaultConfig
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Reversed" ]
+        { HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Reversed" ]
         , LinearProgress.determinate
-            (LinearProgress.defaultConfig # LinearProgress.setReverse true)
+            (LinearProgress.defaultConfig { reverse = true)
             { progress: 0.5 }
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Reversed Buffered" ]
-        , LinearProgress.buffered (LinearProgress.defaultConfig # LinearProgress.setReverse true)
+        , LinearProgress.buffered (LinearProgress.defaultConfig { reverse = true)
             { progress: 0.5, buffered: 0.75 }
         ]
     }

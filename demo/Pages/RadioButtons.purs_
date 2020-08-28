@@ -76,9 +76,9 @@ heroRadio :: forall r w i . Model -> String -> String -> HH.HTML Msg
 heroRadio model group index =
     Radio.radio
         (Radio.defaultConfig
-            # Radio.setChecked (isSelected group index model)
-            # Radio.setOnChange (Set group index)
-            # Radio.setAttributes [ HP.style "margin: 0 10px" ]
+            { checked = (isSelected group index model)
+            , onChange = (Set group index)
+            , additionalAttributes = [ HP.style "margin: 0 10px" ]
         )
 
 heroRadioGroup :: forall r w i . Model -> HH.HTML Msg
@@ -92,15 +92,15 @@ radio :: forall r w i . Model -> String -> String -> String -> HH.HTML Msg
 radio model group index label =
     FormField.formField
         (FormField.defaultConfig
-            # FormField.setLabel (Just label)
-            # FormField.setFor (Just index)
-            # FormField.setOnClick (Set group index)
-            # FormField.setAttributes [ HP.style "margin: 0 10px" ]
+            { label = (Just label)
+            , for = (Just index)
+            , onClick = (Set group index)
+            , additionalAttributes = [ HP.style "margin: 0 10px" ]
         )
         [ Radio.radio
             (Radio.defaultConfig
-                # Radio.setChecked (isSelected group index model)
-                # Radio.setOnChange (Set group index)
+                { checked = (isSelected group index model)
+                , onChange = (Set group index)
             )
         ]
 
@@ -115,9 +115,9 @@ focusRadio :: forall r w i . HH.HTML Msg
 focusRadio =
     HH.div []
         [ Radio.radio
-            (Radio.defaultConfig # Radio.setAttributes [ HP.id "my-radio" ])
+            (Radio.defaultConfig { additionalAttributes = [ HP.id "my-radio" ])
         , HH.text "\u{00A0}"
         , Button.raised
-            (Button.defaultConfig # Button.setOnClick (Focus "my-radio"))
+            (Button.defaultConfig { onClick = (Focus "my-radio"))
             "Focus"
         ]

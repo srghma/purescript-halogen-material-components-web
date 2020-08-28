@@ -51,13 +51,13 @@ view model =
     , content =
         [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Anchored menu" ]
         , HH.div [ Menu.surfaceAnchor ]
-            [ Button.text (Button.defaultConfig # Button.setOnClick Open) "Open menu"
+            [ Button.text (Button.defaultConfig { onClick = Open) "Open menu"
             , Menu.menu
                 (Menu.defaultConfig
-                    # Menu.setOpen model.open
-                    # Menu.setOnClose Close
+                    { open = model.open
+                    , onClose = Close
                 )
-                [ List.list (List.defaultConfig # Array.setWrapFocus true)
+                [ List.list (List.defaultConfig { wrapFocus = true)
                     (listItem "Passionfruit")
                     (List.concat
                         [ map listItem
@@ -81,7 +81,7 @@ view model =
 
 listItem :: forall r w i . String -> ListItem Msg
 listItem label =
-    List.Item.listItem (List.Item.defaultConfig # List.Item.setOnClick Close) [ HH.text label ]
+    List.Item.listItem (List.Item.defaultConfig { onClick = Close) [ HH.text label ]
 
 heroMenu :: forall r w i . Model -> HH.HTML w i
 heroMenu model =

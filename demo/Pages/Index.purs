@@ -69,7 +69,7 @@ component =
       ]
     , ImageList.imageList
         (ImageList.defaultConfig
-          { additionalAttributes =
+          { additionaladditionalAttributes =
             [ HP.style "max-width: 900px; padding-top: 128px; padding-bottom: 100px;"
             ]
           }

@@ -90,20 +90,20 @@ heroTabs model index =
     TabBar.tabBar TabBar.defaultConfig
         [ Tab.tab
             (Tab.defaultConfig
-                # Tab.setActive (model.activeHeroTab == 0)
-                # Tab.setOnClick (SetActiveHeroTab 0)
+                { active = (model.activeHeroTab == 0)
+                , onClick = (SetActiveHeroTab 0)
             )
             { label: "Home", icon: Nothing }
         , Tab.tab
             (Tab.defaultConfig
-                # Tab.setActive (model.activeHeroTab == 1)
-                # Tab.setOnClick (SetActiveHeroTab 1)
+                { active = (model.activeHeroTab == 1)
+                , onClick = (SetActiveHeroTab 1)
             )
             { label: "Merchandise", icon: Nothing }
         , Tab.tab
             (Tab.defaultConfig
-                # Tab.setActive (model.activeHeroTab == 2)
-                # Tab.setOnClick (SetActiveHeroTab 2)
+                { active = (model.activeHeroTab == 2)
+                , onClick = (SetActiveHeroTab 2)
             )
             { label: "About Us", icon: Nothing }
         ]
@@ -113,8 +113,8 @@ tabsWithIcons model =
     let
         config index =
             Tab.defaultConfig
-                # Tab.setActive (model.activeIconTab == index)
-                # Tab.setOnClick (SetActiveIconTab index)
+                { active = (model.activeIconTab == index)
+                , onClick = (SetActiveIconTab index)
     in
     TabBar.tabBar TabBar.defaultConfig
         [ Tab.tab (config 0) { label: "Recents", icon: Just "access_time" }
@@ -127,13 +127,13 @@ tabsWithStackedIcons model =
     let
         config index =
             Tab.defaultConfig
-                # Tab.setActive (model.activeStackedTab == index)
-                # Tab.setOnClick (SetActiveStackedTab index)
+                { active = (model.activeStackedTab == index)
+                , onClick = (SetActiveStackedTab index)
     in
     TabBar.tabBar
         (TabBar.defaultConfig
-            # TabBar.setStacked true
-            # TabBar.setIndicatorSpansContent true
+            { stacked = true
+            , indicatorSpansContent = true
         )
         [ Tab.tab (config 0) { label: "Recents", icon: Just "access_time" }
         , Tab.tab (config 1) { label: "Nearby", icon: Just "near_me" }
@@ -145,8 +145,8 @@ scrollingTabs model =
     let
         config index =
             Tab.defaultConfig
-                # Tab.setActive (model.activeScrollingTab == index)
-                # Tab.setOnClick (SetActiveScrollingTab index)
+                { active = (model.activeScrollingTab == index)
+                , onClick = (SetActiveScrollingTab index)
     in
     TabBar.tabBar TabBar.defaultConfig
         (List.indexedMap
@@ -161,29 +161,29 @@ focusTabs model =
     HH.div []
         [ TabBar.tabBar
             (TabBar.defaultConfig
-                # TabBar.setAttributes [ HP.id "my-tabs" ]
+                { additionalAttributes = [ HP.id "my-tabs" ]
             )
             [ Tab.tab
                 (Tab.defaultConfig
-                    # Tab.setActive (model.activeHeroTab == 0)
-                    # Tab.setOnClick (SetActiveHeroTab 0)
+                    { active = (model.activeHeroTab == 0)
+                    , onClick = (SetActiveHeroTab 0)
                 )
                 { label: "Home", icon: Nothing }
             , Tab.tab
                 (Tab.defaultConfig
-                    # Tab.setActive (model.activeHeroTab == 1)
-                    # Tab.setOnClick (SetActiveHeroTab 1)
+                    { active = (model.activeHeroTab == 1)
+                    , onClick = (SetActiveHeroTab 1)
                 )
                 { label: "Merchandise", icon: Nothing }
             , Tab.tab
                 (Tab.defaultConfig
-                    # Tab.setActive (model.activeHeroTab == 2)
-                    # Tab.setOnClick (SetActiveHeroTab 2)
+                    { active = (model.activeHeroTab == 2)
+                    , onClick = (SetActiveHeroTab 2)
                 )
                 { label: "About Us", icon: Nothing }
             ]
         , HH.text "\u{00A0}"
         , Button.raised
-            (Button.defaultConfig # Button.setOnClick (Focus "my-tabs"))
+            (Button.defaultConfig { onClick = (Focus "my-tabs"))
             "Focus"
         ]

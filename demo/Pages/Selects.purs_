@@ -107,9 +107,9 @@ heroSelect :: forall r w i . Model -> HH.HTML Msg
 heroSelect model =
     Select.filled
         (Select.defaultConfig
-            # Select.setLabel (Just "Fruit")
-            # Select.setSelected (Just model.hero)
-            # Select.setOnChange HeroChanged
+            { label = (Just "Fruit")
+            , selected = (Just model.hero)
+            , onChange = HeroChanged
         )
         firstItem
         remainingItems
@@ -137,9 +137,9 @@ filledSelect :: forall r w i . Model -> HH.HTML Msg
 filledSelect model =
     Select.filled
         (Select.defaultConfig
-            # Select.setLabel (Just "Fruit")
-            # Select.setSelected (Just model.filled)
-            # Select.setOnChange FilledChanged
+            { label = (Just "Fruit")
+            , selected = (Just model.filled)
+            , onChange = FilledChanged
         )
         firstItem
         remainingItems
@@ -148,9 +148,9 @@ outlinedSelect :: forall r w i . Model -> HH.HTML Msg
 outlinedSelect model =
     Select.outlined
         (Select.defaultConfig
-            # Select.setLabel (Just "Fruit")
-            # Select.setSelected (Just model.outlined)
-            # Select.setOnChange OutlinedChanged
+            { label = (Just "Fruit")
+            , selected = (Just model.outlined)
+            , onChange = OutlinedChanged
         )
         firstItem
         remainingItems
@@ -159,10 +159,10 @@ filledWithIconSelect :: forall r w i . Model -> HH.HTML Msg
 filledWithIconSelect model =
     Select.filled
         (Select.defaultConfig
-            # Select.setLabel (Just "Fruit")
-            # Select.setSelected (Just model.filledWithIcon)
-            # Select.setLeadingIcon (Just (Select.icon [] "favorite"))
-            # Select.setOnChange FilledWithIconChanged
+            { label = (Just "Fruit")
+            , selected = (Just model.filledWithIcon)
+            , leadingIcon = (Just (Select.icon [] "favorite"))
+            , onChange = FilledWithIconChanged
         )
         firstItem
         remainingItems
@@ -171,10 +171,10 @@ outlinedWithIconSelect :: forall r w i . Model -> HH.HTML Msg
 outlinedWithIconSelect model =
     Select.outlined
         (Select.defaultConfig
-            # Select.setLabel (Just "Fruit")
-            # Select.setSelected (Just model.outlinedWithIcon)
-            # Select.setLeadingIcon (Just (Select.icon [] "favorite"))
-            # Select.setOnChange OutlinedWithIconChanged
+            { label = (Just "Fruit")
+            , selected = (Just model.outlinedWithIcon)
+            , leadingIcon = (Just (Select.icon [] "favorite"))
+            , onChange = OutlinedWithIconChanged
         )
         firstItem
         remainingItems
@@ -186,14 +186,14 @@ focusSelect model =
         ]
         [ Select.filled
             (Select.defaultConfig
-                # Select.setSelected (Just model.focused)
-                # Select.setOnChange FocusedChanged
-                # Select.setAttributes [ HP.id "my-select" ]
+                { selected = (Just model.focused)
+                , onChange = FocusedChanged
+                , additionalAttributes = [ HP.id "my-select" ]
             )
             firstItem
             remainingItems
         , HH.text "\u{00A0}"
         , Button.raised
-            (Button.defaultConfig # Button.setOnClick (Focus "my-select"))
+            (Button.defaultConfig { onClick = (Focus "my-select"))
             "Focus"
         ]

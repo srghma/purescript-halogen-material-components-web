@@ -56,25 +56,25 @@ update w i model =
 baselineMessage :: forall r w i . Snackbar.Message Msg
 baselineMessage =
     Snackbar.message "Can't send photo. Retry in 5 seconds."
-        # Snackbar.setActionButton (Just "Retry")
-        # Snackbar.setOnActionButtonClick Click
-        # Snackbar.setActionIcon (Just "close")
+        , actionButton = (Just "Retry")
+        , onActionButtonClick = Click
+        , actionIcon = (Just "close")
 
 leadingMessage :: forall r w i . Snackbar.Message Msg
 leadingMessage =
     Snackbar.message "Your photo has been archived."
-        # Snackbar.setLeading true
-        # Snackbar.setActionButton (Just "Undo")
-        # Snackbar.setOnActionButtonClick Click
-        # Snackbar.setActionIcon (Just "close")
+        , leading = true
+        , actionButton = (Just "Undo")
+        , onActionButtonClick = Click
+        , actionIcon = (Just "close")
 
 stackedMessage :: forall r w i . Snackbar.Message Msg
 stackedMessage =
     Snackbar.message "This item already has the label \"travel\". You can add a new label."
-        # Snackbar.setStacked true
-        # Snackbar.setActionButton (Just "Add a new label")
-        # Snackbar.setOnActionButtonClick Click
-        # Snackbar.setActionIcon (Just "close")
+        , stacked = true
+        , actionButton = (Just "Add a new label")
+        , onActionButtonClick = Click
+        , actionIcon = (Just "close")
 
 view :: forall r w i . Model -> CatalogPage Msg
 view model =
@@ -89,27 +89,27 @@ view model =
     , content =
         [ Button.raised
             (Button.defaultConfig
-                # Button.setOnClick ShowBaseline
-                # Button.setAttributes buttonMargin
+                { onClick = ShowBaseline
+                , additionalAttributes = buttonMargin
             )
             "Baseline"
         , HH.text " "
         , Button.raised
             (Button.defaultConfig
-                # Button.setOnClick ShowLeading
-                # Button.setAttributes buttonMargin
+                { onClick = ShowLeading
+                , additionalAttributes = buttonMargin
             )
             "Leading"
         , HH.text " "
         , Button.raised
             (Button.defaultConfig
-                # Button.setOnClick ShowStacked
-                # Button.setAttributes buttonMargin
+                { onClick = ShowStacked
+                , additionalAttributes = buttonMargin
             )
             "Stacked"
         , Snackbar.snackbar
             (Snackbar.defaultConfig { onClosed: SnackbarClosed }
-                # Snackbar.setCloseOnEscape true
+                , closeOnEscape = true
             )
             model.queue
         ]
