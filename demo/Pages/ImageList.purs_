@@ -91,7 +91,7 @@ imageListHeroItem =
         "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAABNJREFUCB1jZGBg+A/EDEwgAgQADigBA//q6GsAAAAASUVORK5CYII%3D"
 
 standardItem :: String -> ImageListItem w i
-standardItem url =
+standardItem route =
     -- TODO:
     -- ImageList.imageAspectContainer
     --   [ style "padding-bottom" "66.66667%" ]
@@ -103,16 +103,16 @@ standardItem url =
                 , style "margin" "2px"
                 ]
         )
-        url
+        route
 
 masonryItem :: String -> ImageListItem w i
-masonryItem url =
+masonryItem route =
     ImageList.Item.imageListItem
         (ImageList.Item.defaultConfig
             # ImageList.Item.setLabel (Just "Text label")
             # ImageList.Item.setAttributes [ style "margin-bottom" "16px" ]
         )
-        url
+        route
 
 standardImages :: Array String
 standardImages =

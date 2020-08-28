@@ -92,7 +92,7 @@ heroDrawer =
     ]
 
 iframe :: String -> String -> HH.HTML w i
-iframe label url =
+iframe label route =
     HH.div
         [ style "display" "inline-block"
         , style "-ms-flex" "1 1 80%"
@@ -105,13 +105,13 @@ iframe label url =
         ]
         [ HH.div []
             [ HH.a
-                [ HP.href url
+                [ HP.href route
                 , HP.target "_blank"
                 ]
                 [ HH.h3 [ Typography.subtitle1 ] [ HH.text label ] ]
             ]
         , HH.iframe
-            [ HP.src url
+            [ HP.src route
             , style "height" "400px"
             , style "width" "100vw"
             , style "max-width" "780px"

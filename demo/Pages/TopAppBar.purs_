@@ -84,21 +84,21 @@ view model =
             , style "flex-wrap" "wrap"
             , style "min-height" "200px"
             ]
-            [ iframe "Standard" Url.StandardTopAppBar
-            , iframe "Fixed" Url.FixedTopAppBar
-            , iframe "Dense" Url.DenseTopAppBar
-            , iframe "Prominent" Url.ProminentTopAppBar
-            , iframe "Short" Url.ShortTopAppBar
-            , iframe "Short - Always Collapsed" Url.ShortCollapsedTopAppBar
+            [ iframe "Standard" Route.StandardTopAppBar
+            , iframe "Fixed" Route.FixedTopAppBar
+            , iframe "Dense" Route.DenseTopAppBar
+            , iframe "Prominent" Route.ProminentTopAppBar
+            , iframe "Short" Route.ShortTopAppBar
+            , iframe "Short - Always Collapsed" Route.ShortCollapsedTopAppBar
             ]
         ]
     }
 
 iframe :: String -> Url -> HH.HTML w i
-iframe title url =
+iframe title route =
     let
         stringUrl =
-            Url.toString url
+            Route.toString route
     in
     HH.div
         [ style "display" "inline-block"

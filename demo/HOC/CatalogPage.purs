@@ -1,6 +1,7 @@
 module Demo.HOC.CatalogPage where
 
-import Demo.Route
+import Demo.Route as Route
+import Demo.Route (Route)
 import Protolude
 import Data.Array as Array
 import Data.Maybe as Maybe
@@ -36,7 +37,7 @@ data CatalogPageConfig topMsg =
     { openDrawer :: topMsg
     , closeDrawer :: topMsg
     , drawerOpen :: Boolean
-    , url :: Url
+    , route :: Route
     }
 
 view :: (w i -> topMsg) -> CatalogPageConfig topMsg -> CatalogPage w i -> HH.HTML topMsg
@@ -80,17 +81,17 @@ view lift catalogPageConfig catalogPage =
                 [ DismissibleDrawer.content []
                     [ case
                         map
-                            (\{ url, label } ->
+                            (\{ route, label } ->
                                 List.Item.listItem
                                     (List.Item.defaultConfig
                                         # List.Item.setSelected
-                                            (if catalogPageConfig.url == url then
+                                            (if catalogPageConfig.route == route then
                                                 Just List.Item.activated
 
                                              else
                                                 Nothing
                                             )
-                                        # List.Item.setHref (Just (Url.toString url))
+                                        # List.Item.setHref (Just (Route.toString route))
                                     )
                                     [ HH.text label ]
                             )
@@ -172,35 +173,35 @@ resourcesList { materialDesignGuidelines, documentation, sourceCode } =
             ]
         ]
 
-catalogDrawerItems :: Array { label :: String, url :: Url }
+catalogDrawerItems :: Array { label :: String, route :: Route }
 catalogDrawerItems =
-    [ { label = "Home", url = Url.StartPage }
-    , { label = "Button", url = Url.Button }
-    , { label = "Card", url = Url.Card }
-    , { label = "Checkbox", url = Url.Checkbox }
-    , { label = "Chips", url = Url.Chips }
-    , { label = "DataTable", url = Url.DataTable }
-    , { label = "Dialog", url = Url.Dialog }
-    , { label = "Drawer", url = Url.Drawer }
-    , { label = "Elevation", url = Url.Elevation }
-    , { label = "FAB", url = Url.Fab }
-    , { label = "Icon Button", url = Url.IconButton }
-    , { label = "Image List", url = Url.ImageList }
-    , { label = "Layout Grid", url = Url.LayoutGrid }
-    , { label = "Linear Progress Indicator", url = Url.LinearProgress }
-    , { label = "List", url = Url.List }
-    , { label = "Menu", url = Url.Menu }
-    , { label = "Radio Button", url = Url.RadioButton }
-    , { label = "Ripple", url = Url.Ripple }
-    , { label = "Select", url = Url.Select }
-    , { label = "Slider", url = Url.Slider }
-    , { label = "Snackbar", url = Url.Snackbar }
-    , { label = "Switch", url = Url.Switch }
-    , { label = "Tab Bar", url = Url.TabBar }
-    , { label = "Text Field", url = Url.TextField }
-    , { label = "Theme", url = Url.Theme }
-    , { label = "Top App Bar", url = Url.TopAppBar }
-    , { label = "Typography", url = Url.Typography }
+    [ { label = "Home", route = Route.StartPage }
+    , { label = "Button", route = Route.Button }
+    , { label = "Card", route = Route.Card }
+    , { label = "Checkbox", route = Route.Checkbox }
+    , { label = "Chips", route = Route.Chips }
+    , { label = "DataTable", route = Route.DataTable }
+    , { label = "Dialog", route = Route.Dialog }
+    , { label = "Drawer", route = Route.Drawer }
+    , { label = "Elevation", route = Route.Elevation }
+    , { label = "FAB", route = Route.Fab }
+    , { label = "Icon Button", route = Route.IconButton }
+    , { label = "Image List", route = Route.ImageList }
+    , { label = "Layout Grid", route = Route.LayoutGrid }
+    , { label = "Linear Progress Indicator", route = Route.LinearProgress }
+    , { label = "List", route = Route.List }
+    , { label = "Menu", route = Route.Menu }
+    , { label = "Radio Button", route = Route.RadioButton }
+    , { label = "Ripple", route = Route.Ripple }
+    , { label = "Select", route = Route.Select }
+    , { label = "Slider", route = Route.Slider }
+    , { label = "Snackbar", route = Route.Snackbar }
+    , { label = "Switch", route = Route.Switch }
+    , { label = "Tab Bar", route = Route.TabBar }
+    , { label = "Text Field", route = Route.TextField }
+    , { label = "Theme", route = Route.Theme }
+    , { label = "Top App Bar", route = Route.TopAppBar }
+    , { label = "Typography", route = Route.Typography }
     ]
 
 catalogPageContainer :: Array (HH.Attribute w i)
