@@ -15,10 +15,10 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 type Config i =
   { icon :: Maybe String
-    , additionalAttributes :: Array (IProp I.HTMLdiv i)
-    }
+  , additionalAttributes :: Array (IProp I.HTMLdiv i)
+  }
 
-data Chip r i
+data Chip i
   = Chip (Config i) String
 
 defaultConfig :: forall r i . Config i

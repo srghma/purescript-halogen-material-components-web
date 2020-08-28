@@ -16,17 +16,17 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Material.Classes.Chips
 import HalogenMWC.Chip.Action
 
-chipSet :: Array (IProp r i) -> Array (Chip r i) -> HH.HTML w i
+chipSet :: Array (IProp I.HTMLdiv i) -> Array (Chip i) -> HH.HTML w i
 chipSet additionalAttributes chips =
   HH.element (ElemName "mdc-chip-set")
-    ( [ HP.classes [ mdc_chip_set, mdc_chip_set____action ]
+    ( [ HP.classes [ mdc_chip_set ]
       , HP.attr (AttrName "role") "grid"
       ]
-      <> config.additionalAttributes
+      <> additionalAttributes
     )
     (map chip chips)
 
-chip :: Chip r i -> HH.HTML w i
+chip :: Chip i -> HH.HTML w i
 chip (Chip config label) =
   HH.div [ HP.class_ mdc_touch_target_wrapper ]
     [ HH.element (ElemName "mdc-chip")

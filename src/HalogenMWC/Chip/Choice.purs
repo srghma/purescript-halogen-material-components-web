@@ -1,4 +1,4 @@
-module HalogenMWC.Chip.Filter where
+module HalogenMWC.Chip.Choice where
 
 import Protolude
 import DOM.HTML.Indexed as I
@@ -15,18 +15,14 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 type Config i =
   { icon :: Maybe String
-    , selected :: Boolean
-    , additionalAttributes :: Array (IProp I.HTMLdiv i)
-    , onChange :: Maybe (Event -> i)
-    }
+  , additionalAttributes :: Array (IProp I.HTMLdiv i)
+  }
 
-data Chip r i
-  = Chip (Config i) String
+data Chip a i
+  = Chip (Config i) a
 
 defaultConfig :: forall i . Config i
 defaultConfig =
-  { selected: false
-  , icon: Nothing
-  , onChange: Nothing
+  { icon: Nothing
   , additionalAttributes: []
   }
