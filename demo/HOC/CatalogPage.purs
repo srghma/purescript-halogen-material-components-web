@@ -19,7 +19,7 @@ import HalogenMWC.List.Item as List.Item
 import HalogenMWC.TopAppBar as TopAppBar
 import HalogenMWC.Typography as Typography
 
-data CatalogPage w i =
+type CatalogPage w i =
     { title :: String
     , prelude :: String
     , resources :: CatalogPageResources
@@ -27,13 +27,13 @@ data CatalogPage w i =
     , content :: Array (HH.HTML w i)
     }
 
-data CatalogPageResources =
+type CatalogPageResources =
     { materialDesignGuidelines :: Maybe String
     , documentation :: Maybe String
     , sourceCode :: Maybe String
     }
 
-data CatalogPageConfig topMsg =
+type CatalogPageConfig topMsg =
     { openDrawer :: topMsg
     , closeDrawer :: topMsg
     , drawerOpen :: Boolean
@@ -97,30 +97,25 @@ view lift catalogPageConfig catalogPage =
                             )
                             catalogDrawerItems
                       of
-                        listItem :: listItems ->
+                        [ listItem, listItems ] ->
                             Array.list Array.defaultConfig listItem listItems
 
-                        [] ->
+                        _ ->
                             text ""
                     ]
                 ]
             , HH.map lift $
                 HH.div
-                    (TopAppBar.fixedAdjust
-                        :: DismissibleDrawer.appContent
-                        :: demoContent
-                    )
+                    [ TopAppBar.fixedAdjust, DismissibleDrawer.appContent, demoContent ]
                     [ HH.div demoContentTransition
-                        (HH.h1 [ Typography.headline5 ] [ HH.text catalogPage.title ]
-                            :: HH.p [ Typography.body1 ] [ HH.text catalogPage.prelude ]
-                            :: HH.div hero catalogPage.hero
-                            :: HH.h2 (Typography.headline6 :: demoTitle)
-                                [ HH.text "Resources" ]
-                            :: resourcesList catalogPage.resources
-                            :: HH.h2 (Typography.headline6 :: demoTitle)
-                                [ HH.text "Demos" ]
-                            :: catalogPage.content
-                        )
+                        [ HH.h1 [ Typography.headline5 ] [ HH.text catalogPage.title ]
+                        , HH.p [ Typography.body1 ] [ HH.text catalogPage.prelude ]
+                        , HH.div hero catalogPage.hero
+                        , HH.h2 [ Typography.headline6, demoTitle ] [ HH.text "Resources" ]
+                        , resourcesList catalogPage.resources
+                        , HH.h2 [ Typography.headline6, demoTitle ] [ HH.text "Demos" ]
+                        , catalogPage.content
+                        ]
                     ]
             ]
         ]
