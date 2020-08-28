@@ -15,7 +15,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Button as Button
 import HalogenMWC.Select as Select
 import HalogenMWC.Select.Item as SelectItem
-import HalogenMWC.Typography as Typography
+import Material.Classes.Typography
 import Task
 
 data Model =

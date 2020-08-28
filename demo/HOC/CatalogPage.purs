@@ -17,7 +17,7 @@ import HalogenMWC.IconButton as IconButton
 import HalogenMWC.List as List
 import HalogenMWC.List.Item as List.Item
 import HalogenMWC.TopAppBar as TopAppBar
-import HalogenMWC.Typography as Typography
+import Material.Classes.Typography
 
 type CatalogPage w i =
     { title :: String

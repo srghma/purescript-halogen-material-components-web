@@ -18,7 +18,7 @@ import HalogenMWC.Icon as Icon
 import HalogenMWC.List as List
 import HalogenMWC.List.Item as List.Item
 import HalogenMWC.Radio as Radio
-import HalogenMWC.Typography as Typography
+import Material.Classes.Typography
 import Set
 import Task
 

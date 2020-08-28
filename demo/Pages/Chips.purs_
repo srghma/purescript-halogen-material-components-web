@@ -32,7 +32,7 @@ import HalogenMWC.ChipSet.Action as ActionChipSet
 import HalogenMWC.ChipSet.Choice as ChoiceChipSet
 import HalogenMWC.ChipSet.Filter as FilterChipSet
 import HalogenMWC.ChipSet.Input as InputChipSet
-import HalogenMWC.Typography as Typography
+import Material.Classes.Typography
 import Set
 import Task
 

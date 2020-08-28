@@ -16,7 +16,7 @@ import HalogenMWC.Button as Button
 import HalogenMWC.Card as Card
 import HalogenMWC.IconButton as IconButton
 import HalogenMWC.Theme as Theme
-import HalogenMWC.Typography as Typography
+import Material.Classes.Typography
 import Task
 
 data Model =

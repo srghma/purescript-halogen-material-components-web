@@ -16,7 +16,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Button as Button
 import HalogenMWC.FormField as FormField
 import HalogenMWC.Radio as Radio
-import HalogenMWC.Typography as Typography
+import Material.Classes.Typography
 import Task
 
 data Model =

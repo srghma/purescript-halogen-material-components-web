@@ -13,7 +13,7 @@ import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Elevation as Elevation
 import HalogenMWC.Ripple as Ripple
-import HalogenMWC.Typography as Typography
+import Material.Classes.Typography
 
 data Model =
     {}
