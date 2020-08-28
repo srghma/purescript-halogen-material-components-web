@@ -27,8 +27,8 @@ defaultConfig =
   , additionalAttributes: []
   }
 
-imageArray :: forall w i. Config i -> Array (ImageListItem w i) -> HH.HTML w i
-imageArray config listItems =
+imageList :: forall w i. Config i -> Array (ImageListItem w i) -> HH.HTML w i
+imageList config listItems =
   HH.element (ElemName "mdc-image-list")
     ( [ HP.classes
           $ Array.catMaybes

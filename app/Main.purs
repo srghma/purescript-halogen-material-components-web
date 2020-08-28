@@ -31,5 +31,4 @@ main =
     body <- HA.awaitBody
     halogenIO <- H.runUI app unit body
     liftEffect $ void $ matchesWith (\url -> traceId (parse routeCodec (traceId url))) \oldRoute newRoute ->
-      when (oldRoute /= Just newRoute) $
-      launchAff_ $ halogenIO.query (H.mkTell $ Navigate newRoute)
+      when (oldRoute /= Just newRoute) $ launchAff_ $ halogenIO.query (H.mkTell $ Navigate newRoute)

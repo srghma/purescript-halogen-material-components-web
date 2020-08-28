@@ -4,6 +4,8 @@ import serveHandler from 'serve-handler'
 
 import createConfig from './config'
 import webpackGetError from './lib/webpackGetError'
+import root from './lib/root'
+import * as path from 'path'
 
 (async function () {
   const config = await createConfig({ production: false })
@@ -29,6 +31,18 @@ import webpackGetError from './lib/webpackGetError'
     onStart: () => {},
     onError: () => {},
     onSuccess: async () => {
+      // clear cache, e.g. `template.js`
+      for (const cachePath in require.cache) {
+        if (
+          cachePath.startsWith(path.resolve(root, "app")) ||
+          cachePath.startsWith(path.resolve(root, "src"))
+        ) {
+          console.log('clearing cachePath', cachePath)
+          delete require.cache[cachePath]
+        }
+      }
+
+      // recompile
       const compiler = webpack(config)
 
       console.log('[webpack] Compiling...')

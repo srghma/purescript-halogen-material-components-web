@@ -117,10 +117,7 @@ button config =
         }
     )
 
-icon :: forall w i. IconButton.Config i -> String -> HH.HTML w i
+icon :: forall w i. IconButton.Config i -> Array (HH.HTML w i) -> HH.HTML w i
 icon config =
   IconButton.iconButton
-    ( config
-        { additionalClasses = [ mdc_card__action, mdc_card__action____icon ] <> config.additionalClasses
-        }
-    )
+  (config { additionalClasses = [ mdc_card__action, mdc_card__action____icon ] <> config.additionalClasses })

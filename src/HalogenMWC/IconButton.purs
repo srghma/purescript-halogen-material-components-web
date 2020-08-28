@@ -29,15 +29,14 @@ defaultConfig =
   , onClick: Nothing
   }
 
-iconButton :: forall w i. Config i -> String -> HH.HTML w i
-iconButton config iconName =
+iconButton :: forall w i. Config i -> Array (HH.HTML w i) -> HH.HTML w i
+iconButton config =
   HH.element (ElemName "mdc-icon-button")
-    ( [ HP.classes $ [ mdc_icon_button, material_icons ] <> config.additionalClasses
+    ( [ HP.classes $ [ mdc_icon_button ] <> config.additionalClasses
       , HP.tabIndex 0
       ]
-        <> case config.onClick of
-            Nothing -> []
-            Just onClick -> [ HE.onClick onClick ]
-        <> config.additionalAttributes
+      <> case config.onClick of
+          Nothing -> []
+          Just onClick -> [ HE.onClick onClick ]
+      <> config.additionalAttributes
     )
-    [ HH.text iconName ]
