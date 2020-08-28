@@ -4,6 +4,7 @@ import Data.FoldableWithIndex (findMapWithIndex)
 import Halogen (AttrName(..), ElemName(..), PropName(..))
 import Material.Classes.Select (mdc_floating_label, mdc_line_ripple, mdc_notched_outline, mdc_notched_outline__leading, mdc_notched_outline__notch, mdc_notched_outline__trailing, mdc_select, mdc_select____outlined, mdc_select____with_leading_icon, mdc_select__anchor, mdc_select__dropdown_icon, mdc_select__icon, mdc_select__menu, mdc_select__selected_text)
 import Prelude
+import Data.Maybe (Maybe(..))
 import DOM.HTML.Indexed as I
 import Data.Array as Array
 import Data.Maybe as Maybe

@@ -38,7 +38,7 @@ squareToClassName false = []
 avatarImage ::
   forall w i.
   { size :: Size
-  , url :: Url
+  , url :: String
   , name :: String
   , square :: Boolean
   , contain :: Boolean
@@ -59,7 +59,7 @@ avatarImage config =
     ]
     [ HH.div
         [ HP.classes [ rmwc_avatar__icon ]
-        , HP.attr (AttrName "style") $ "background-image: url(" <> Url.unUrl config.url <> "); background-size: " <> containToStyle config.contain <> ";"
+        , HP.attr (AttrName "style") $ "background-image: url(" <> config.url <> "); background-size: " <> containToStyle config.contain <> ";"
         ]
         []
     , HH.div

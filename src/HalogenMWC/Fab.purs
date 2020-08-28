@@ -1,6 +1,7 @@
 module HalogenMWC.Fab where
 
 import Prelude
+import Data.Maybe (Maybe(..))
 import DOM.HTML.Indexed as I
 import MaterialIconsFont.Classes (material_icons)
 import Data.Array as Array

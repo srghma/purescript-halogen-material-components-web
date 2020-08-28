@@ -1,6 +1,7 @@
 module HalogenMWC.Drawer.Dismissible where
 
 import Prelude
+import Data.Maybe (Maybe(..))
 import DOM.HTML.Indexed as I
 import Web.Event.Event (Event, EventType(..))
 import Data.Array as Array

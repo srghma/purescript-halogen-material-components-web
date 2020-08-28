@@ -1,6 +1,6 @@
 module HalogenMWC.Tab where
 
-import Prelude
+import Data.Maybe (Maybe(..))
 import Web.Event.Event (Event)
 import DOM.HTML.Indexed as I
 import Halogen.HTML (IProp)

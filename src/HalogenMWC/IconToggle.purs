@@ -3,6 +3,7 @@ module HalogenMWC.IconToggle where
 import Material.Classes.IconButton (mdc_icon_button, mdc_icon_button__icon, mdc_icon_button__icon____on)
 import MaterialIconsFont.Classes (material_icons)
 import Prelude
+import Data.Maybe (Maybe(..))
 import DOM.HTML.Indexed as I
 import Web.Event.Event (Event, EventType(..))
 import Data.Array as Array
@@ -11,7 +12,6 @@ import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Material.Classes.IconButton (mdc_icon_button, mdc_icon_button__icon, mdc_icon_button__icon____on)
 
 type Config i
   = { on :: Boolean

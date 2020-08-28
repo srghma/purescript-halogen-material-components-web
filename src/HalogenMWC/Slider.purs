@@ -3,6 +3,7 @@ module HalogenMWC.Slider where
 import Halogen (AttrName(..), ElemName(..), PropName(..))
 import Material.Classes.Slider (mdc_slider, mdc_slider____discrete, mdc_slider____display_markers, mdc_slider__focus_ring, mdc_slider__pin, mdc_slider__pin_value_marker, mdc_slider__thumb, mdc_slider__thumb_container, mdc_slider__track, mdc_slider__track_container, mdc_slider__track_marker_container)
 import Prelude
+import Data.Maybe (Maybe(..))
 import Web.Event.Event (EventType(..))
 import DOM.HTML.Indexed as I
 import Data.Array as Array

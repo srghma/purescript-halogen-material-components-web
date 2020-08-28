@@ -2,9 +2,10 @@ module HalogenMWC.FormField where
 
 import Material.Classes.FormField (mdc_form_field, mdc_form_field____align_end)
 import Prelude
+import Data.Maybe (Maybe(..))
 import DOM.HTML.Indexed (HTMLdiv) as I
 import Data.Array as Array
-import Halogen
+import Halogen (ElemName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE

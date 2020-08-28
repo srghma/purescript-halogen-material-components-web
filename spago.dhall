@@ -16,10 +16,18 @@
   , "tuples"
   , "either"
   , "foldable-traversable"
+  ----
+  , "protolude"
+  , "routing-duplex"
+  , "generics-rep"
+  , "argonaut-codecs"
+  , "argonaut-generic"
+  , "routing"
   ]
 , packages = ./packages.dhall
 , sources =
   [ "src/**/*.purs"
   , "test/**/*.purs"
+  , "app/**/*.purs"
   ]
 }

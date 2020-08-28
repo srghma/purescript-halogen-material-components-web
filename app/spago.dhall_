@@ -1,0 +1,5 @@
+{ name = "app"
+, dependencies = (../spago.dhall).dependencies # ["protolude", "routing"]
+, packages = (../spago.dhall).packages
+, sources = (../spago.dhall).sources # ["app/**/*.purs"]
+}

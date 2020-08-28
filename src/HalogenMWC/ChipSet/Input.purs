@@ -1,6 +1,8 @@
 module HalogenMWC.ChipSet.Input where
 
 import Prelude
+import Data.Tuple (Tuple)
+import Data.Maybe (Maybe(..))
 import DOM.HTML.Indexed as I
 import MaterialIconsFont.Classes (material_icons)
 import Web.Event.Event (EventType(..))

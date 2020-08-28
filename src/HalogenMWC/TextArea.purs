@@ -3,6 +3,7 @@ module HalogenMWC.TextArea where
 import Halogen (AttrName(..), ElemName(..), PropName(..))
 import Material.Classes.Textfield (mdc_floating_label, mdc_floating_label____float_above, mdc_notched_outline, mdc_notched_outline__leading, mdc_notched_outline__notch, mdc_notched_outline__trailing, mdc_text_field, mdc_text_field____disabled, mdc_text_field____fullwidth, mdc_text_field____no_label, mdc_text_field____outlined, mdc_text_field____textarea, mdc_text_field__input)
 import Prelude
+import Data.Maybe (Maybe(..))
 import Data.Array as Array
 import Data.Maybe as Maybe
 import Halogen.HTML (IProp)

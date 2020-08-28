@@ -1,6 +1,6 @@
 module HalogenMWC.Chip.Filter where
 
-import Prelude
+import Data.Maybe (Maybe(..))
 import DOM.HTML.Indexed as I
 import Web.Event.Event (Event)
 import Halogen.HTML (IProp)

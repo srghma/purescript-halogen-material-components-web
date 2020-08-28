@@ -28,8 +28,8 @@ defaultConfig =
   , additionalAttributes: []
   }
 
-genericTopAppBar :: forall i w. Variant -> Config i -> Array (HH.HTML w i) -> HH.HTML w i
-genericTopAppBar variant config =
+topAppBar :: forall i w. Variant -> Config i -> Array (HH.HTML w i) -> HH.HTML w i
+topAppBar variant config =
   HH.element (ElemName "mdc-top-app-bar")
     ( [ HP.classes
           $ Array.concat
@@ -42,29 +42,17 @@ genericTopAppBar variant config =
         <> config.additionalAttributes
     )
 
-------------
-regular :: forall w i. Config i -> Array (HH.HTML w i) -> HH.HTML w i
-regular config nodes = genericTopAppBar Regular config nodes
-
-short :: forall w i. Config i -> Array (HH.HTML w i) -> HH.HTML w i
-short config nodes = genericTopAppBar Short config nodes
-
-shortCollapsed :: forall w i. Config i -> Array (HH.HTML w i) -> HH.HTML w i
-shortCollapsed config nodes = genericTopAppBar ShortCollapsed config nodes
-
-prominent :: forall w i. Config i -> Array (HH.HTML w i) -> HH.HTML w i
-prominent config nodes = genericTopAppBar Prominent config nodes
-
-------------
-row :: forall w i. Array (IProp I.HTMLsection i) -> Array (HH.HTML w i) -> HH.HTML w i
-row attributes nodes = HH.section ([ HP.class_ mdc_top_app_bar__row ] <> attributes) nodes
-
-section :: forall w i. Array (IProp I.HTMLsection i) -> Array (HH.HTML w i) -> HH.HTML w i
-section attributes nodes = HH.section ([ HP.class_ mdc_top_app_bar__section ] <> attributes) nodes
-
 variantCs :: Variant -> Array ClassName
 variantCs variant = case variant of
   Regular -> []
   Short -> [ mdc_top_app_bar____short ]
   ShortCollapsed -> [ mdc_top_app_bar____short, mdc_top_app_bar____short_collapsed ]
   Prominent -> [ mdc_top_app_bar____prominent ]
+
+------------
+
+row :: forall w i. Array (HH.HTML w i) -> HH.HTML w i
+row = HH.section [ HP.class_ mdc_top_app_bar__row ]
+
+section :: forall w i. Array (HH.HTML w i) -> HH.HTML w i
+section = HH.section [ HP.class_ mdc_top_app_bar__section ]

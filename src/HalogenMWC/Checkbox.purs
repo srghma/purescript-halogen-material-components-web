@@ -3,6 +3,7 @@ module HalogenMWC.Checkbox where
 import Halogen (AttrName(..), ElemName(..), PropName(..))
 import Material.Classes.Checkbox (mdc_checkbox, mdc_checkbox____touch, mdc_checkbox__background, mdc_checkbox__checkmark, mdc_checkbox__checkmark_path, mdc_checkbox__mixedmark, mdc_checkbox__native_control, mdc_touch_target_wrapper)
 import Prelude
+import Data.Maybe (Maybe(..))
 import Web.Event.Event (Event)
 import DOM.HTML.Indexed as I
 import DOM.HTML.Indexed.InputType (InputType(..))

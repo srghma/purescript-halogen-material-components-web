@@ -1,6 +1,6 @@
 module HalogenMWC.Chip.Choice where
 
-import Prelude
+import Data.Maybe (Maybe(..))
 import DOM.HTML.Indexed as I
 import Halogen.HTML (IProp)
 

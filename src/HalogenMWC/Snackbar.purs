@@ -5,6 +5,8 @@ import Material.Classes.Button (mdc_button)
 import Material.Classes.Snackbar (mdc_snackbar, mdc_snackbar____leading, mdc_snackbar____stacked, mdc_snackbar__action, mdc_snackbar__actions, mdc_snackbar__dismiss, mdc_snackbar__label, mdc_snackbar__surface)
 import MaterialIconsFont.Classes (material_icons)
 import Prelude
+import Data.Tuple (Tuple(..))
+import Data.Maybe (Maybe(..))
 import Web.Event.Event (EventType(..))
 import DOM.HTML.Indexed as I
 import Data.Array as Array
@@ -14,6 +16,7 @@ import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Material.Classes.IconButton (mdc_icon_button)
+import Control.Bind (bindFlipped)
 
 type Queue i
   = { messages :: Array (Tuple MessageId (Message i))
@@ -83,9 +86,9 @@ snackbar config queue =
         , HP.prop (PropName "closeOnEscape") config.closeOnEscape
         , HP.prop (PropName "messageId") currentMessageId
         , timeoutMsProp currentMessage
+        , closedHandler (MessageId currentMessageId) config
         ]
-          <> Array.catMaybes [ closedHandler (MessageId currentMessageId) config ]
-          <> config.additionalAttributes
+        <> config.additionalAttributes
       )
       [ surfaceElt (MessageId currentMessageId) (Maybe.fromMaybe (defaultMessage "") currentMessage) ]
 
@@ -141,13 +144,13 @@ timeoutMsProp message =
 
     normalizedTimeoutMs =
       message
-        # bindFlipped (\(Message message) -> map (clamp 4000 10000) message.timeoutMs)
+        # bindFlipped (\(Message message') -> map (clamp 4000 10000) message'.timeoutMs)
         # Maybe.fromMaybe indefiniteTimeout
   in
     HP.prop (PropName "timeoutMs") normalizedTimeoutMs
 
-closedHandler :: forall r i. MessageId -> Config i -> Maybe (IProp r i)
-closedHandler messageId config = Just (HE.handler (EventType "MDCSnackbar:closed") (\_ -> config.onClosed messageId))
+closedHandler :: forall r i. MessageId -> Config i -> IProp r i
+closedHandler messageId config = HE.handler (EventType "MDCSnackbar:closed") (\_ -> config.onClosed messageId)
 
 surfaceElt :: forall w i. MessageId -> Message i -> HH.HTML w i
 surfaceElt messageId message =

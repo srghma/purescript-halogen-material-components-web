@@ -1,6 +1,7 @@
 module HalogenMWC.Utils where
 
 import Prelude
+import Data.Maybe (Maybe(..))
 import Control.Monad.Except (runExcept)
 import Data.Either (either)
 import Data.Either (hush) as Either

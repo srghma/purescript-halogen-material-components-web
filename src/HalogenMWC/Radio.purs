@@ -1,6 +1,6 @@
 module HalogenMWC.Radio where
 
-import Halogen
+import Halogen (ElemName(..))
 import DOM.HTML.Indexed as I
 import Data.Array as Array
 import Halogen.HTML (IProp)
@@ -10,6 +10,7 @@ import Halogen.HTML.Properties as HP
 import HalogenMWC.Utils (checkboxChangeHandler) as Utils
 import Material.Classes.Radio (mdc_radio, mdc_radio____touch, mdc_radio__background, mdc_radio__inner_circle, mdc_radio__native_control, mdc_radio__outer_circle, mdc_radio__ripple, mdc_touch_target_wrapper)
 import Prelude
+import Data.Maybe (Maybe(..))
 import Web.Event.Event (Event)
 
 type Config i

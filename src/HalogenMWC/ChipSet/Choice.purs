@@ -3,6 +3,7 @@ module HalogenMWC.ChipSet.Choice where
 import HalogenMWC.Chip.Choice (Chip(..))
 import Material.Classes.Chips (mdc_chip, mdc_chip____touch, mdc_chip__icon, mdc_chip__icon____leading, mdc_chip__primary_action, mdc_chip__ripple, mdc_chip__text, mdc_chip__touch, mdc_chip_set, mdc_chip_set____choice, mdc_touch_target_wrapper)
 import Prelude
+import Data.Maybe (Maybe(..))
 import DOM.HTML.Indexed as I
 import MaterialIconsFont.Classes (material_icons)
 import Web.Event.Event (Event, EventType(..))

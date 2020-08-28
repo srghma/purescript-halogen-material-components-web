@@ -1,6 +1,7 @@
 module HalogenMWC.List.Divider where
 
 import Prelude
+import Data.Maybe (Maybe(..))
 import DOM.HTML.Indexed as I
 import Data.Array as Array
 import Halogen (AttrName(..))

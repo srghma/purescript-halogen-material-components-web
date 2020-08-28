@@ -3,6 +3,7 @@ module HalogenMWC.List where
 import Halogen (ElemName(..), PropName(..))
 import Material.Classes.List (mdc_list, mdc_list____avatar_list, mdc_list____dense, mdc_list____two_line, mdc_list_group, mdc_list_group__subheader)
 import Prelude
+import Data.Maybe (Maybe(..))
 import Web.Event.Event (Event, EventType(..))
 import DOM.HTML.Indexed as I
 import Data.Array as Array
@@ -15,6 +16,7 @@ import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import HalogenMWC.List.Item as ListItem
 import HalogenMWC.Utils as Utils
+import Control.Monad.Except (runExcept)
 
 type Config i
   = { dense :: Boolean
@@ -63,6 +65,9 @@ list config firstListItem remainingListItems =
           listItems
       )
 
+readDetailIndex :: Event -> Maybe Int
+readDetailIndex event = Foreign.unsafeToForeign event # (\f -> Foreign.readProp "detail" f >>= Foreign.readProp "index" >>= Foreign.readInt) # runExcept # Either.hush
+
 clickHandler :: forall w i r. Array (ListItem.ListItem w i) -> IProp r i
 clickHandler listItems =
   let
@@ -76,11 +81,8 @@ clickHandler listItems =
       listItems
         # map getListItemConfigs
         # Array.catMaybes
-        # (\listItems -> Array.index listItems index)
+        # (\listItems' -> Array.index listItems' index)
         # map (_.onClick)
-
-    readDetailIndex :: Event -> Maybe Int
-    readDetailIndex event = Foreign.unsafeToForeign event # (\f -> Foreign.readProp "detail" f >>= Foreign.readProp "index" >>= Foreign.readInt) # runExcept # Either.hush
 
     mergedClickHandler :: Event -> Maybe i
     mergedClickHandler event = case readDetailIndex event >>= nthOnClick >>> join of

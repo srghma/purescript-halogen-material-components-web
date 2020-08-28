@@ -4,6 +4,7 @@ import Halogen (ClassName, ElemName(..))
 import Material.Classes.IconButton (mdc_icon_button)
 import MaterialIconsFont.Classes (material_icons)
 import Prelude
+import Data.Maybe (Maybe(..))
 import DOM.HTML.Indexed as I
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH

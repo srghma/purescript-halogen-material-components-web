@@ -4,6 +4,7 @@ import Halogen (ElemName(..), PropName(..))
 import Material.Classes.Fab (mdc_fab, mdc_fab____exited, mdc_fab____extended, mdc_fab__icon, mdc_fab__label, mdc_fab__ripple)
 import MaterialIconsFont.Classes (material_icons)
 import Prelude
+import Data.Maybe (Maybe(..))
 import DOM.HTML.Indexed as I
 import Data.Array as Array
 import Halogen.HTML (IProp)
