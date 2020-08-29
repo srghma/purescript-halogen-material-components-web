@@ -30,8 +30,8 @@ view :: forall r w i . State -> TopAppBarPage Action
 view model =
     { fixedAdjust: TopAppBar.fixedAdjust
     , topAppBar =
-        TopAppBar.regular TopAppBar.defaultConfig
-            [ TopAppBar.row []
+        TopAppBar.topAppBar TopAppBar.defaultConfig
+            [ HH.section [ HP.class_ mdc_top_app_bar__row ] []
                 [ TopAppBar.section
                     [ TopAppBar.alignStart ]
                     [ IconButton.iconButton

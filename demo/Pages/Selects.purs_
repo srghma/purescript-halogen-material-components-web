@@ -186,7 +186,7 @@ focusSelect model =
             (Select.defaultConfig
                 { selected = (Just model.focused)
                 , onChange = FocusedChanged
-                , additionalAttributes = [ HP.id "my-select" ]
+                , additionalAttributes = [ HP.id_ "my-select" ]
             )
             firstItem
             remainingItems

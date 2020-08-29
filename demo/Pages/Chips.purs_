@@ -351,7 +351,7 @@ focusChips model =
             (ChoiceChipSet.defaultConfig { toLabel: identity }
                 , selected = (Just model.focus)
                 , onChange = FocusChanged
-                , additionalAttributes = [ HP.id "my-chips" ]
+                , additionalAttributes = [ HP.id_ "my-chips" ]
             )
             [ ChoiceChip.chip ChoiceChip.defaultConfig "One"
             , ChoiceChip.chip ChoiceChip.defaultConfig "Two"

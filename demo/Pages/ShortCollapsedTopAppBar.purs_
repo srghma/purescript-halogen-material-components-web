@@ -22,7 +22,7 @@ view model =
     { fixedAdjust: TopAppBar.shortFixedAdjust
     , topAppBar =
         TopAppBar.shortCollapsed TopAppBar.defaultConfig
-            [ TopAppBar.row []
+            [ HH.section [ HP.class_ mdc_top_app_bar__row ] []
                 [ TopAppBar.section
                     [ TopAppBar.alignStart ]
                     [ IconButton.iconButton

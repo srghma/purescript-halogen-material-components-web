@@ -31,7 +31,7 @@ view model =
     { fixedAdjust: TopAppBar.fixedAdjust
     , topAppBar =
         TopAppBar.regular (TopAppBar.defaultConfig { fixed = true)
-            [ TopAppBar.row []
+            [ HH.section [ HP.class_ mdc_top_app_bar__row ] []
                 [ TopAppBar.section
                     [ TopAppBar.alignStart ]
                     [ IconButton.iconButton

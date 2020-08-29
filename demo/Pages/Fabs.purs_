@@ -86,7 +86,7 @@ view model =
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Focus FAB" ]
         , HH.div [ HP.style "display: flex;" ]
             [ Fab.fab
-                (Fab.defaultConfig { additionalAttributes = [ HP.id "my-fab" ])
+                (Fab.defaultConfig { additionalAttributes = [ HP.id_ "my-fab" ])
                 "favorite_border"
             , HH.text "\u{00A0}"
             , Button.raised

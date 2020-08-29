@@ -352,7 +352,7 @@ focusList =
     HH.div []
         [ List.list
             (List.defaultConfig
-                { additionalAttributes = (demoList <> [ HP.id "my-list" ])
+                { additionalAttributes = (demoList <> [ HP.id_ "my-list" ])
             )
             (List.Item.listItem List.Item.defaultConfig [ HH.text "Line item" ])
             (List.repeat 2 $ List.Item.listItem List.Item.defaultConfig [ HH.text "Line item" ])

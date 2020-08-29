@@ -19,9 +19,9 @@ import HalogenMWC.TopAppBar as TopAppBar
 view :: forall r w i . HH.HTML w i
 view =
     HH.div []
-        [ TopAppBar.regular TopAppBar.defaultConfig
-            [ TopAppBar.row []
-                [ TopAppBar.section [ TopAppBar.alignStart ]
+        [ TopAppBar.topAppBar TopAppBar.defaultConfig
+            [ HH.section [ HP.class_ mdc_top_app_bar__row ] []
+                [ HH.section [ HP.classes [ mdc_top_app_bar__section, mdc_top_app_bar__section____align_start ] ]
                     [ IconButton.custom
                         (IconButton.defaultConfig
                             { additionalAttributes = [ TopAppBar.navigationIcon ]

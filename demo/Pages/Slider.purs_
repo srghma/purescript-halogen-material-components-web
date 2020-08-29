@@ -139,7 +139,7 @@ focusSlider model =
             (Slider.defaultConfig
                 { value = (Dict.get id model.sliders)
                 , onInput = (Changed id)
-                , additionalAttributes = [ HP.id id ]
+                , additionalAttributes = [ HP.id_ id ]
             )
         , HH.text "\u{00A0}"
         , Button.raised

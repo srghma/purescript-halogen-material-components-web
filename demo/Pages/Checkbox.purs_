@@ -106,7 +106,7 @@ focusCheckbox =
     HH.div []
         [ Checkbox.checkbox
             (Checkbox.defaultConfig
-                { additionalAttributes = [ HP.id "my-checkbox" ]
+                { additionalAttributes = [ HP.id_ "my-checkbox" ]
             )
         , HH.text "\u{00A0}"
         , Button.raised (Button.defaultConfig { onClick = (Focus "my-checkbox"))

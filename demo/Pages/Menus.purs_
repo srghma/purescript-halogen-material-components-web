@@ -89,7 +89,7 @@ heroMenu model =
         [ HP.class_ "mdc-menu-surface mdc-menu-surface--open"
         , HP.style "position: relative; transform-origin: left top 0px; left: 0px; top: 0px; z-index: 0;"
         ]
-        [ List.list Array.defaultConfig
+        [ List.list List.defaultConfig
             (List.Item.listItem List.Item.defaultConfig [ HH.text "A Menu Item" ])
             [ List.Item.listItem List.Item.defaultConfig [ HH.text "Another Menu Item" ]
             ]

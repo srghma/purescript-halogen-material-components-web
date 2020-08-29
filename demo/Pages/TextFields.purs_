@@ -289,7 +289,7 @@ focusTextField =
     HH.div []
         [ TextField.filled
             (TextField.defaultConfig
-                { additionalAttributes = [ HP.id "my-text-field" ]
+                { additionalAttributes = [ HP.id_ "my-text-field" ]
             )
         , HH.text "\u{00A0}"
         , Button.raised

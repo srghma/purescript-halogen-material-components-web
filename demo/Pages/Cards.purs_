@@ -125,7 +125,7 @@ focusCard =
         [ Card.card
             (Card.defaultConfig
                 { additionalAttributes =
-                    [ HP.id "my-card"
+                    [ HP.id_ "my-card"
                     , HP.style "margin: 48px 0; width: 350px;"
                     ]
             )

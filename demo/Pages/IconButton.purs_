@@ -85,7 +85,7 @@ view model =
         , HH.div []
             [ IconButton.iconButton
                 (IconButton.defaultConfig
-                    { additionalAttributes = [ HP.id "my-icon-button" ]
+                    { additionalAttributes = [ HP.id_ "my-icon-button" ]
                 )
                 "wifi"
             , HH.text "\u{00A0}"
@@ -99,7 +99,7 @@ view model =
                 (IconToggle.defaultConfig
                     { on = (Set.member "icon-button-toggle" model.ons)
                     , onChange = (Toggle "icon-button-toggle")
-                    , additionalAttributes = [ HP.id "my-icon-toggle" ]
+                    , additionalAttributes = [ HP.id_ "my-icon-toggle" ]
                 )
                 { offIcon: "favorite_border"
                 , onIcon: "favorite"

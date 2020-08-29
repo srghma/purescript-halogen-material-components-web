@@ -159,7 +159,7 @@ focusTabs model =
     HH.div []
         [ TabBar.tabBar
             (TabBar.defaultConfig
-                { additionalAttributes = [ HP.id "my-tabs" ]
+                { additionalAttributes = [ HP.id_ "my-tabs" ]
             )
             [ Tab.tab
                 (Tab.defaultConfig

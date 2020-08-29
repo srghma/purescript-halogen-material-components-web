@@ -22,7 +22,7 @@ view lift { topAppBar, fixedAdjust } =
     HH.map lift $
         HH.div
             [ HP.style "height: 200vh;"
-            , mdc_typography____typography
+            , mdc_typography
             ]
             [ topAppBar
             , HH.div [ fixedAdjust ]

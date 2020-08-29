@@ -121,13 +121,13 @@ focusSwitch model =
                 { label = (Just "off/on")
                 , for = (Just id)
                 , onClick = (Toggle id)
-                , additionalAttributes = [ HP.id "my-form-field" ]
+                , additionalAttributes = [ HP.id_ "my-form-field" ]
             )
             [ Switch.switch
                 (Switch.defaultConfig
                     { checked = (isChecked id model)
                     , onChange = (Toggle id)
-                    , additionalAttributes = [ HP.id id ]
+                    , additionalAttributes = [ HP.id_ id ]
                 )
             ]
         , HH.text "\u{00A0}"

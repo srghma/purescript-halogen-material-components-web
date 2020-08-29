@@ -79,7 +79,7 @@ component =
                 ImageList.Item.ImageListItem
                 ( { label: Just title
                   , href: Just ("#" <> Routing.Duplex.print routeCodec route)
-                  , image: "https://aforemny.github.io/material-components-web-elm/" <> icon
+                  , image: icon
                   , additionalAttributes:
                     [ HP.style "width: calc(100% / 4 - 8.25px); margin: 4px;"
                     ]

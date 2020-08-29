@@ -1,23 +1,24 @@
 module Demo.HOC.CatalogPage where
 
-import Demo.Route as Route
-import Demo.Route (Route)
+import Halogen
+import Material.Classes.Typography
 import Protolude
+
 import Data.Array as Array
 import Data.Maybe as Maybe
-import Halogen
+import Demo.Route (Route)
+import Demo.Route as Route
 import Halogen as H
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
-import Halogen.HTML.Properties as HP
 import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Drawer.Dismissible as DismissibleDrawer
 import HalogenMWC.IconButton as IconButton
 import HalogenMWC.List as List
 import HalogenMWC.List.Item as List.Item
 import HalogenMWC.TopAppBar as TopAppBar
-import Material.Classes.Typography
 
 type CatalogPage w i =
     { title :: String
@@ -51,9 +52,9 @@ view lift catalogPageConfig catalogPage =
                 catalogPageConfig.openDrawer
     in
     HH.div catalogPageContainer
-        [ TopAppBar.regular TopAppBar.defaultConfig
-            [ TopAppBar.row []
-                [ TopAppBar.section [ TopAppBar.alignStart ]
+        [ TopAppBar.topAppBar TopAppBar.defaultConfig
+            [ HH.section [ HP.class_ mdc_top_app_bar__row ] []
+                [ HH.section [ HP.classes [ mdc_top_app_bar__section, mdc_top_app_bar__section____align_start ] ]
                     [ IconButton.iconButton
                         (IconButton.defaultConfig
                             { additionalAttributes = [ TopAppBar.navigationIcon ]
@@ -97,7 +98,7 @@ view lift catalogPageConfig catalogPage =
                             catalogDrawerItems
                       of
                         [ listItem, listItems ] ->
-                            List.list Array.defaultConfig listItem listItems
+                            List.list List.defaultConfig listItem listItems
 
                         _ ->
                             text ""
@@ -121,7 +122,7 @@ view lift catalogPageConfig catalogPage =
 
 resourcesList :: forall r w i . CatalogPageResources -> HH.HTML w i
 resourcesList { materialDesignGuidelines, documentation, sourceCode } =
-    List.list Array.defaultConfig
+    List.list List.defaultConfig
         (List.Item.listItem
             ( List.Item.defaultConfig
                 { href = materialDesignGuidelines
@@ -202,7 +203,7 @@ catalogDrawerItems =
 catalogPageContainer :: forall r w i . Array (IProp r i)
 catalogPageContainer =
     [ HP.style "position: relative;"
-    , mdc_typography____typography
+    , mdc_typography
     ]
 
 demoPanel :: forall r w i . Array (IProp r i)
@@ -212,7 +213,7 @@ demoPanel =
 
 demoContent :: forall r w i . Array (IProp r i)
 demoContent =
-    [ HP.id "demo-content"
+    [ HP.id_ "demo-content"
     , HP.style "height: 100%; -webkit-box-sizing: border-box; box-sizing: border-box; max-width: 100%; padding-left: 16px; padding-right: 16px; padding-bottom: 100px; width: 100%; overflow: auto; display: -ms-flexbox; display: flex; -ms-flex-direction: column; flex-direction: column; -ms-flex-align: center; align-items: center; -ms-flex-pack: start; justify-content: flex-start;"
     ]
 

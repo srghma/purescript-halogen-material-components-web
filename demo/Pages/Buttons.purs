@@ -101,7 +101,7 @@ focusButton =
     HH.div []
         [ Button.raised
             (Button.defaultConfig
-                { additionalAttributes = [ HP.id "my-button" ]
+                { additionalAttributes = [ HP.id_ "my-button" ]
             )
             "Button"
         , HH.text "\u{00A0}"
@@ -110,7 +110,7 @@ focusButton =
         , Button.raised
             (Button.defaultConfig
                 { href = (Just "#")
-                , additionalAttributes = [ HP.id "my-link-button" ]
+                , additionalAttributes = [ HP.id_ "my-link-button" ]
             )
             "Link button"
         , HH.text "\u{00A0}"
