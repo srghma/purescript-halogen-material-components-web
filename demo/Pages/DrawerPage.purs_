@@ -41,7 +41,7 @@ view lift { title, drawer, scrim, onMenuClick } =
         HH.div drawerFrameRoot
             [ drawer
             , Maybe.fromMaybe (text "") scrim
-            , HH.div [ Drawer.Dismissible.appContent ]
+            , HH.div [ mdc_drawer_app_content ]
                 [ TopAppBar.topAppBar TopAppBar.defaultConfig
                     [ HH.section [ HP.class_ mdc_top_app_bar__row ] []
                         [ HH.section [ HP.classes [ mdc_top_app_bar__section, mdc_top_app_bar__section____align_start ] ]
@@ -78,8 +78,8 @@ drawerBody setSelectedIndex selectedIndex =
                 , onClick = (setSelectedIndex index)
     in
     [ Drawer.Permanent.header []
-        [ HH.h3 [ Drawer.Permanent.title ] [ HH.text "Mail" ]
-        , HH.h6 [ Drawer.Permanent.subtitle ] [ HH.text "email@material.io" ]
+        [ HH.h3 [ mdc_drawer__title ] [ HH.text "Mail" ]
+        , HH.h6 [ mdc_drawer__subtitle ] [ HH.text "email@material.io" ]
         ]
     , Drawer.Permanent.content []
         [ Array.group []
@@ -137,7 +137,7 @@ mainContent =
     HH.div
         [ HP.style "padding-left: 18px; padding-right: 18px; overflow: auto; height: 100%; box-sizing: border-box;"
         , mdc_top_app_bar____fixed_adjust
-        , Drawer.Dismissible.appContent
+        , mdc_drawer_app_content
         ]
         (List.repeat 4 $ HH.p [] [ HH.text loremIpsum ])
 

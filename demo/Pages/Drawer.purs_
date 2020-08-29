@@ -74,8 +74,8 @@ heroDrawer =
     in
     [ Drawer.Permanent.drawer Drawer.Permanent.defaultConfig
         [ Drawer.Permanent.header []
-            [ HH.h3 [ Drawer.Permanent.title ] [ HH.text "Title" ]
-            , HH.h6 [ Drawer.Permanent.subtitle ] [ HH.text "Subtitle" ]
+            [ HH.h3 [ mdc_drawer__title ] [ HH.text "Title" ]
+            , HH.h6 [ mdc_drawer__subtitle ] [ HH.text "Subtitle" ]
             ]
         , Drawer.Permanent.content []
             [ List.list List.defaultConfig

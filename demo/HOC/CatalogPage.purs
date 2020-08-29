@@ -107,7 +107,7 @@ view lift catalogPageConfig catalogPage =
                 ]
             , HH.map lift $
                 HH.div
-                    [ mdc_top_app_bar____fixed_adjust, Drawer.Dismissible.appContent, demoContent ]
+                    [ mdc_top_app_bar____fixed_adjust, mdc_drawer_app_content, demoContent ]
                     [ HH.div demoContentTransition
                         [ HH.h1 [ mdc_typography____headline5 ] [ HH.text catalogPage.title ]
                         , HH.p [ mdc_typography____body1 ] [ HH.text catalogPage.prelude ]
