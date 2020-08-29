@@ -20,14 +20,14 @@ defaultModel :: forall r w i . Model
 defaultModel =
     {}
 
-data Msg
+data Action
     = NoOp
 
-update :: forall r w i . Msg -> Model -> Model
+update :: forall r w i . Action -> Model -> Model
 update w i model =
     model
 
-view :: forall r w i . Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Action
 view model =
     { title: "Elevation"
     , prelude: "Elevation is the relative depth, or distance, between two surfaces along the z-axis."

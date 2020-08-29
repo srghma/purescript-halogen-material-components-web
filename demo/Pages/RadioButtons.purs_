@@ -31,12 +31,12 @@ defaultModel =
             ]
     }
 
-data Msg
+data Action
     = Set String String
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: forall r w i . Msg -> Model -> ( Model, Cmd Msg )
+update :: forall r w i . Action -> Model -> ( Model, Cmd Action )
 update w i model =
     case w i of
         Set group index ->
@@ -54,7 +54,7 @@ isSelected group index model =
         # map ((==) index)
         # Maybe.fromMaybe false
 
-view :: forall r w i . Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Action
 view model =
     { title: "Radio Button"
     , prelude: "Buttons communicate an action a user can take. They are typically placed throughout your UI, in places like dialogs, forms, cards, and toolbars."
@@ -72,7 +72,7 @@ view model =
         ]
     }
 
-heroRadio :: forall r w i . Model -> String -> String -> HH.HTML Msg
+heroRadio :: forall r w i . Model -> String -> String -> HH.HTML Action
 heroRadio model group index =
     Radio.radio
         (Radio.defaultConfig
@@ -81,14 +81,14 @@ heroRadio model group index =
             , additionalAttributes = [ HP.style "margin: 0 10px" ]
         )
 
-heroRadioGroup :: forall r w i . Model -> HH.HTML Msg
+heroRadioGroup :: forall r w i . Model -> HH.HTML Action
 heroRadioGroup model =
     HH.div []
         [ heroRadio model "hero" "radio-buttons-hero-radio-1"
         , heroRadio model "hero" "radio-buttons-hero-radio-2"
         ]
 
-radio :: forall r w i . Model -> String -> String -> String -> HH.HTML Msg
+radio :: forall r w i . Model -> String -> String -> String -> HH.HTML Action
 radio model group index label =
     FormField.formField
         (FormField.defaultConfig
@@ -104,14 +104,14 @@ radio model group index label =
             )
         ]
 
-exampleRadioGroup :: forall r w i . Model -> HH.HTML Msg
+exampleRadioGroup :: forall r w i . Model -> HH.HTML Action
 exampleRadioGroup model =
     HH.div []
         [ radio model "example" "radio-buttons-example-radio-1" "Radio 1"
         , radio model "example" "radio-buttons-example-radio-2" "Radio 2"
         ]
 
-focusRadio :: forall r w i . HH.HTML Msg
+focusRadio :: forall r w i . HH.HTML Action
 focusRadio =
     HH.div []
         [ Radio.radio

@@ -33,7 +33,7 @@ defaultModel =
     , activeScrollingTab: 0
     }
 
-data Msg
+data Action
     = SetActiveHeroTab Int
     | SetActiveIconTab Int
     | SetActiveStackedTab Int
@@ -41,7 +41,7 @@ data Msg
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: forall r w i . Msg -> Model -> ( Model, Cmd Msg )
+update :: forall r w i . Action -> Model -> ( Model, Cmd Action )
 update w i model =
     case w i of
         SetActiveHeroTab index ->
@@ -62,7 +62,7 @@ update w i model =
         Focused _ ->
             ( model, Cmd.none )
 
-view :: forall r w i . Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Action
 view model =
     { title: "Tab Bar"
     , prelude: "Tabs organize and allow navigation between groups of content that are related and at the same level of hierarchy. The Tab Bar contains the Tab Scroller and Tab components."
@@ -85,7 +85,7 @@ view model =
         ]
     }
 
-heroTabs :: forall r w i . Model -> String -> HH.HTML Msg
+heroTabs :: forall r w i . Model -> String -> HH.HTML Action
 heroTabs model index =
     TabBar.tabBar TabBar.defaultConfig
         [ Tab.tab
@@ -108,7 +108,7 @@ heroTabs model index =
             { label: "About Us", icon: Nothing }
         ]
 
-tabsWithIcons :: forall r w i . Model -> HH.HTML Msg
+tabsWithIcons :: forall r w i . Model -> HH.HTML Action
 tabsWithIcons model =
     let
         config index =
@@ -122,7 +122,7 @@ tabsWithIcons model =
         , Tab.tab (config 2) { label: "Favorites", icon: Just "favorite" }
         ]
 
-tabsWithStackedIcons :: forall r w i . Model -> HH.HTML Msg
+tabsWithStackedIcons :: forall r w i . Model -> HH.HTML Action
 tabsWithStackedIcons model =
     let
         config index =
@@ -140,7 +140,7 @@ tabsWithStackedIcons model =
         , Tab.tab (config 2) { label: "Favorites", icon: Just "favorite" }
         ]
 
-scrollingTabs :: forall r w i . Model -> HH.HTML Msg
+scrollingTabs :: forall r w i . Model -> HH.HTML Action
 scrollingTabs model =
     let
         config index =
@@ -156,7 +156,7 @@ scrollingTabs model =
             [ "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight" ]
         )
 
-focusTabs :: forall r w i . Model -> HH.HTML Msg
+focusTabs :: forall r w i . Model -> HH.HTML Action
 focusTabs model =
     HH.div []
         [ TabBar.tabBar

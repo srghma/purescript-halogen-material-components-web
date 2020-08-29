@@ -33,14 +33,14 @@ type CatalogPageResources =
     , sourceCode :: Maybe String
     }
 
-type CatalogPageConfig topMsg =
-    { openDrawer :: topMsg
-    , closeDrawer :: topMsg
+type CatalogPageConfig topAction =
+    { openDrawer :: topAction
+    , closeDrawer :: topAction
     , drawerOpen :: Boolean
     , route :: Route
     }
 
-view :: forall r w i . (w i -> topMsg) -> CatalogPageConfig topMsg -> CatalogPage w i -> HH.HTML topMsg
+view :: forall r w i . (w i -> topAction) -> CatalogPageConfig topAction -> CatalogPage w i -> HH.HTML topAction
 view lift catalogPageConfig catalogPage =
     let
         toggleCatalogDrawer =
@@ -123,9 +123,10 @@ resourcesList :: forall r w i . CatalogPageResources -> HH.HTML w i
 resourcesList { materialDesignGuidelines, documentation, sourceCode } =
     List.list Array.defaultConfig
         (List.Item.listItem
-            (List.Item.defaultConfig
+            ( List.Item.defaultConfig
                 { href = materialDesignGuidelines
-                , target = (Just "_blank")
+                , target = Just "_blank"
+                }
             )
             [ List.Item.graphic resourcesGraphic
                 [ HH.img

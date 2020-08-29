@@ -26,11 +26,11 @@ defaultModel :: forall r w i . Model
 defaultModel =
     { value: "" }
 
-data Msg
+data Action
     = Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: forall r w i . Msg -> Model -> ( Model, Cmd Msg )
+update :: forall r w i . Action -> Model -> ( Model, Cmd Action )
 update w i model =
     case w i of
         Focus id ->
@@ -39,7 +39,7 @@ update w i model =
         Focused _ ->
             ( model, Cmd.none )
 
-view :: forall r w i . Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Action
 view model =
     { title: "Text Field"
     , prelude: "Text fields allow users to input, edit, and select text. Text fields typically reside in forms but can appear in other places, like dialog boxes and search."
@@ -73,7 +73,7 @@ view model =
         ]
     }
 
-heroTextFields :: forall r w i . Model -> HH.HTML Msg
+heroTextFields :: forall r w i . Model -> HH.HTML Action
 heroTextFields model =
     HH.div heroTextFieldContainer
         [ HH.div textFieldContainerHero
@@ -286,7 +286,7 @@ fullwidthTextareaTextField model =
             ]
         ]
 
-focusTextField :: forall r w i . HH.HTML Msg
+focusTextField :: forall r w i . HH.HTML Action
 focusTextField =
     HH.div []
         [ TextField.filled

@@ -17,7 +17,7 @@ data TopAppBarPage w i =
     , topAppBar :: HH.HTML w i
     }
 
-view :: forall r w i . (w i -> topMsg) -> TopAppBarPage w i -> HH.HTML topMsg
+view :: forall r w i . (w i -> topAction) -> TopAppBarPage w i -> HH.HTML topAction
 view lift { topAppBar, fixedAdjust } =
     HH.map lift $
         HH.div

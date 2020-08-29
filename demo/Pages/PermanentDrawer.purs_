@@ -10,16 +10,16 @@ defaultModel :: forall r w i . Model
 defaultModel =
     { selectedIndex: 0 }
 
-data Msg
+data Action
     = SetSelectedIndex Int
 
-update :: forall r w i . Msg -> Model -> Model
+update :: forall r w i . Action -> Model -> Model
 update w i model =
     case w i of
         SetSelectedIndex index ->
             { model | selectedIndex = index }
 
-view :: forall r w i . Model -> DrawerPage Msg
+view :: forall r w i . Model -> DrawerPage Action
 view model =
     { title: "Permanent Drawer"
     , drawer =

@@ -31,11 +31,11 @@ defaultModel :: forall r w i . Model
 defaultModel =
     { open: Nothing }
 
-data Msg
+data Action
     = Close
     | Show Dialog
 
-update :: forall r w i . Msg -> Model -> Model
+update :: forall r w i . Action -> Model -> Model
 update w i model =
     case w i of
         Close ->
@@ -44,7 +44,7 @@ update w i model =
         Show id ->
             { model | open = Just id }
 
-view :: forall r w i . Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Action
 view model =
     { title: "Dialog"
     , prelude: "Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks."
@@ -78,7 +78,7 @@ view model =
         ]
     }
 
-alertDialog :: forall r w i . Model -> HH.HTML Msg
+alertDialog :: forall r w i . Model -> HH.HTML Action
 alertDialog model =
     Dialog.dialog
         (Dialog.defaultConfig
@@ -93,7 +93,7 @@ alertDialog model =
             ]
         }
 
-simpleDialog :: forall r w i . Model -> HH.HTML Msg
+simpleDialog :: forall r w i . Model -> HH.HTML Action
 simpleDialog model =
     let
         listItem ( icon, label ) =
@@ -124,7 +124,7 @@ simpleDialog model =
         , actions: []
         }
 
-confirmationDialog :: forall r w i . Model -> HH.HTML Msg
+confirmationDialog :: forall r w i . Model -> HH.HTML Action
 confirmationDialog model =
     let
         listItem ( checked, label ) =
@@ -155,7 +155,7 @@ confirmationDialog model =
             ]
         }
 
-scrollableDialog :: forall r w i . Model -> HH.HTML Msg
+scrollableDialog :: forall r w i . Model -> HH.HTML Action
 scrollableDialog model =
     Dialog.dialog
         (Dialog.defaultConfig
@@ -257,7 +257,7 @@ scrollableDialog model =
             ]
         }
 
-heroDialog :: forall r w i . Array (HH.HTML Msg)
+heroDialog :: forall r w i . Array (HH.HTML Action)
 heroDialog =
     [ HH.div
         [ HP.class_ "mdc-dialog mdc-dialog--open"

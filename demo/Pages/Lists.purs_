@@ -37,7 +37,7 @@ defaultModel =
     , shapedActivated: "Star"
     }
 
-data Msg
+data Action
     = ToggleCheckbox String
     | SetRadio String
     | SetActivated String
@@ -45,7 +45,7 @@ data Msg
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: forall r w i . Msg -> Model -> ( Model, Cmd Msg )
+update :: forall r w i . Action -> Model -> ( Model, Cmd Action )
 update w i model =
     case w i of
         ToggleCheckbox id ->
@@ -75,7 +75,7 @@ update w i model =
         Focused _ ->
             ( model, Cmd.none )
 
-view :: forall r w i . Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Action
 view model =
     { title: "List"
     , prelude: "Lists present multiple line items vertically as a single continuous element."
@@ -182,7 +182,7 @@ trailingIconList =
         listItem
         (List.repeat 2 listItem)
 
-activatedItemList :: forall r w i . Model -> HH.HTML Msg
+activatedItemList :: forall r w i . Model -> HH.HTML Action
 activatedItemList model =
     let
         listItem ( icon, label ) =
@@ -208,7 +208,7 @@ activatedItemList model =
             ]
         )
 
-shapedActivatedItemList :: forall r w i . Model -> HH.HTML Msg
+shapedActivatedItemList :: forall r w i . Model -> HH.HTML Action
 shapedActivatedItemList model =
     let
         listItem ( icon, label ) =
@@ -269,7 +269,7 @@ folderList =
             ]
         )
 
-listWithTrailingCheckbox :: forall r w i . Model -> HH.HTML Msg
+listWithTrailingCheckbox :: forall r w i . Model -> HH.HTML Action
 listWithTrailingCheckbox model =
     let
         listItem label =
@@ -316,7 +316,7 @@ listWithTrailingCheckbox model =
             ]
         )
 
-listWithTrailingRadioButton :: forall r w i . Model -> HH.HTML Msg
+listWithTrailingRadioButton :: forall r w i . Model -> HH.HTML Action
 listWithTrailingRadioButton model =
     let
         listItem label =
@@ -349,7 +349,7 @@ listWithTrailingRadioButton model =
             ]
         )
 
-focusList :: forall r w i . HH.HTML Msg
+focusList :: forall r w i . HH.HTML Action
 focusList =
     HH.div []
         [ List.list

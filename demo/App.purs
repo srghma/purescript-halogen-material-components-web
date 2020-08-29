@@ -44,9 +44,9 @@ app =
     }
   where
   render :: forall r w i . State -> H.ComponentHTML Action Slots Aff
-  render state = HH.slot _child state (routeToPage (spy "render" state)) unit absurd
+  render state = HH.slot _child state (routeToPage state) unit absurd
 
   handleQuery :: forall a. Query a -> H.HalogenM State Action Slots Output Aff (Maybe a)
   handleQuery (Navigate route next) = do
-    H.put (spy "queyr" route)
+    H.put route
     pure (Just next)

@@ -22,13 +22,13 @@ defaultModel :: forall r w i . Model
 defaultModel =
     { selected: Set.empty }
 
-data Msg
+data Action
     = NoOp
     | ItemSelected String
     | AllSelected
     | AllUnselected
 
-update :: forall r w i . Msg -> Model -> Model
+update :: forall r w i . Action -> Model -> Model
 update w i model =
     case w i of
         NoOp ->
@@ -54,7 +54,7 @@ update w i model =
         AllUnselected ->
             { model | selected = Set.empty }
 
-view :: forall r w i . Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Action
 view model =
     { title: "Data Table"
     , prelude: "Data tables display information in a way that’s easy to scan, so that users can look for patterns and insights."
@@ -119,7 +119,7 @@ standardDataTable =
         , tbody: map row data
         }
 
-dataTableWithRowSelection :: forall r w i . Model -> HH.HTML Msg
+dataTableWithRowSelection :: forall r w i . Model -> HH.HTML Action
 dataTableWithRowSelection model =
     let
         allSelected =

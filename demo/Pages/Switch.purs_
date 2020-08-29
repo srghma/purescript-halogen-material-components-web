@@ -26,12 +26,12 @@ defaultModel :: forall r w i . Model
 defaultModel =
     { switches: Dict.fromList [ ( "hero-switch", true ) ] }
 
-data Msg
+data Action
     = Toggle String
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: forall r w i . Msg -> Model -> ( Model, Cmd Msg )
+update :: forall r w i . Action -> Model -> ( Model, Cmd Action )
 update w i model =
     case w i of
         Toggle id ->
@@ -54,7 +54,7 @@ isChecked :: forall r w i . String -> Model -> Boolean
 isChecked id model =
     Maybe.fromMaybe false (Dict.get id model.switches)
 
-view :: forall r w i . Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Action
 view model =
     { title: "Switch"
     , prelude: "Switches communicate an action a user can take. They are typically placed throughout your UI, in places like dialogs, forms, cards, and toolbars."
@@ -72,7 +72,7 @@ view model =
         ]
     }
 
-heroSwitch :: forall r w i . Model -> Array (HH.HTML Msg)
+heroSwitch :: forall r w i . Model -> Array (HH.HTML Action)
 heroSwitch model =
     let
         id =
@@ -92,7 +92,7 @@ heroSwitch model =
         ]
     ]
 
-demoSwitch :: forall r w i . Model -> HH.HTML Msg
+demoSwitch :: forall r w i . Model -> HH.HTML Action
 demoSwitch model =
     let
         id =
@@ -111,7 +111,7 @@ demoSwitch model =
             )
         ]
 
-focusSwitch :: forall r w i . Model -> HH.HTML Msg
+focusSwitch :: forall r w i . Model -> HH.HTML Action
 focusSwitch model =
     let
         id =

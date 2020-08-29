@@ -20,7 +20,7 @@ import Routing.Duplex.Generic.Syntax ((/))
 
 data Route
   = Index
-  | Button
+  | Buttons
 
 derive instance genericRoute :: Generic Route _
 derive instance eqRoute :: Eq Route
@@ -33,16 +33,16 @@ instance decodeJsonRoute :: DecodeJson Route where decodeJson = genericDecodeJso
 -- pagesManifestRec
 type PagesRec a =
   { "Index"  :: a
-  , "Button" :: a
+  , "Buttons" :: a
   }
 
 -- NOTE: without a `Routing.Duplex.root $` to allow hashed routing
 routeCodec :: forall r w i . Routing.Duplex.RouteDuplex' Route
 routeCodec = Routing.Duplex.sum
   { "Index":  Routing.Duplex.noArgs
-  , "Button": "button" / Routing.Duplex.noArgs
+  , "Buttons": "buttons" / Routing.Duplex.noArgs
   }
 
 extractFromPagesRec :: forall a . Route -> PagesRec a -> a
 extractFromPagesRec Index  = _."Index"
-extractFromPagesRec Button = _."Button"
+extractFromPagesRec Buttons = _."Buttons"

@@ -16,20 +16,20 @@ import HalogenMWC.Snackbar as Snackbar
 import Platform.Cmd
 
 data Model =
-    { queue :: Snackbar.Queue Msg }
+    { queue :: Snackbar.Queue Action }
 
 defaultModel :: forall r w i . Model
 defaultModel =
     { queue: Snackbar.initialQueue }
 
-data Msg
+data Action
     = ShowBaseline
     | ShowLeading
     | ShowStacked
     | SnackbarClosed Snackbar.MessageId
     | Click Snackbar.MessageId
 
-update :: forall r w i . Msg -> Model -> ( Model, Cmd Msg )
+update :: forall r w i . Action -> Model -> ( Model, Cmd Action )
 update w i model =
     case w i of
         ShowBaseline ->
@@ -53,14 +53,14 @@ update w i model =
         Click messageId ->
             ( model, Cmd.none )
 
-baselineMessage :: forall r w i . Snackbar.Message Msg
+baselineMessage :: forall r w i . Snackbar.Message Action
 baselineMessage =
     Snackbar.message "Can't send photo. Retry in 5 seconds."
         , actionButton = (Just "Retry")
         , onActionButtonClick = Click
         , actionIcon = (Just "close")
 
-leadingMessage :: forall r w i . Snackbar.Message Msg
+leadingMessage :: forall r w i . Snackbar.Message Action
 leadingMessage =
     Snackbar.message "Your photo has been archived."
         , leading = true
@@ -68,7 +68,7 @@ leadingMessage =
         , onActionButtonClick = Click
         , actionIcon = (Just "close")
 
-stackedMessage :: forall r w i . Snackbar.Message Msg
+stackedMessage :: forall r w i . Snackbar.Message Action
 stackedMessage =
     Snackbar.message "This item already has the label \"travel\". You can add a new label."
         , stacked = true
@@ -76,7 +76,7 @@ stackedMessage =
         , onActionButtonClick = Click
         , actionIcon = (Just "close")
 
-view :: forall r w i . Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Action
 view model =
     { title: "Snackbar"
     , prelude: "Snackbars provide brief feedback about an operation through a message at the bottom of the screen."

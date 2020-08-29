@@ -25,11 +25,11 @@ defaultModel :: forall r w i . Model
 defaultModel =
     {}
 
-data Msg
+data Action
     = Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: forall r w i . Msg -> Model -> ( Model, Cmd Msg )
+update :: forall r w i . Action -> Model -> ( Model, Cmd Action )
 update w i model =
     case w i of
         Focus id ->
@@ -38,7 +38,7 @@ update w i model =
         Focused _ ->
             ( model, Cmd.none )
 
-view :: forall r w i . Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Action
 view model =
     { title: "Floating Action Button"
     , prelude: "Floating action buttons represents the primary action in an application. Only one floating action button is recommended per screen to represent the most common action."

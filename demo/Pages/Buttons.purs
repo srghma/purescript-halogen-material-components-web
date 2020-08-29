@@ -16,18 +16,15 @@ import HalogenMWC.Button as Button
 import Material.Classes.Typography
 import Task
 
-data Model =
-    {}
+data Model = {}
 
 defaultModel :: forall r w i . Model
 defaultModel =
     {}
 
-data Msg
-    = Focus String
-    | Focused (Result Browser.Dom.Error ())
+data Action = Focus String
 
-update :: forall r w i . Msg -> Model -> ( Model, Cmd Msg )
+update :: forall r w i . Action -> Model -> ( Model, Cmd Action )
 update w i model =
     case w i of
         Focus id ->
@@ -36,7 +33,7 @@ update w i model =
         Focused _ ->
             ( model, Cmd.none )
 
-view :: forall r w i . Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Action
 view model =
     { title: "Button"
     , prelude: "Buttons communicate an action a user can take. They are typically placed throughout your UI, in places like dialogs, forms, cards, and toolbars."
@@ -102,7 +99,7 @@ linkButtons =
         (\config label -> Button.text (config , href = (Just "#")) label)
         []
 
-focusButton :: forall r w i . HH.HTML Msg
+focusButton :: forall r w i . HH.HTML Action
 focusButton =
     HH.div []
         [ Button.raised

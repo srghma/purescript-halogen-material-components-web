@@ -26,11 +26,11 @@ defaultModel :: forall r w i . Model
 defaultModel =
     {}
 
-data Msg
+data Action
     = Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: forall r w i . Msg -> Model -> ( Model, Cmd Msg )
+update :: forall r w i . Action -> Model -> ( Model, Cmd Action )
 update w i model =
     case w i of
         Focus id ->
@@ -39,7 +39,7 @@ update w i model =
         Focused _ ->
             ( model, Cmd.none )
 
-view :: forall r w i . Model -> CatalogPage Msg
+view :: forall r w i . Model -> CatalogPage Action
 view model =
     { title: "Card"
     , prelude: "Cards contain content and actions about a single subject."
@@ -122,7 +122,7 @@ exampleCard3 =
         , actions: Just demoActions
         }
 
-focusCard :: forall r w i . HH.HTML Msg
+focusCard :: forall r w i . HH.HTML Action
 focusCard =
     HH.div []
         [ Card.card
