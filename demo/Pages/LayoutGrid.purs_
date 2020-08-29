@@ -67,17 +67,13 @@ view model =
 demoGrid :: forall r w i . Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
 demoGrid options =
     LayoutGrid.layoutGrid
-        (HP.style "background: rgba(0,0,0,.2);"
-            :: HP.style "min-width: 360px;"
-            :: options
+        ([ HP.style "background: rgba(0,0,0,.2);" ] <> [ HP.style "min-width: 360px;" ] <> options
         )
 
 demoCell :: forall r w i . Array (IProp r i) -> HH.HTML w i
 demoCell options =
     LayoutGrid.cell
-        (HP.style "background: rgba(0,0,0,.2);"
-            :: HP.style "height: 100px;"
-            :: options
+        ([ HP.style "background: rgba(0,0,0,.2);" ] <> [ HP.style "height: 100px;" ] <> options
         )
         []
 
