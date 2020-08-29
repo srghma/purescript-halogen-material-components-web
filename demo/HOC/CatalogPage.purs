@@ -59,6 +59,7 @@ view lift catalogPageConfig catalogPage =
                         (IconButton.defaultConfig
                             { additionalAttributes = [ TopAppBar.navigationIcon ]
                             , onClick = toggleCatalogDrawer
+                            }
                         )
                         "menu"
                     , HH.span
@@ -157,6 +158,7 @@ resourcesList { materialDesignGuidelines, documentation, sourceCode } =
             (List.Item.defaultConfig
                 { href = sourceCode
                 , target = (Just "_blank")
+                }
             )
             [ List.Item.graphic resourcesGraphic
                 [ HH.img
