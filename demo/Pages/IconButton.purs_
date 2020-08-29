@@ -88,7 +88,7 @@ view model =
                     { additionalAttributes = [ HP.id_ "my-icon-button" ]
                 )
                 "wifi"
-            , HH.text "\u{00A0}"
+            , HH.text \x00A0
             , Button.raised
                 (Button.defaultConfig { onClick = (Focus "my-icon-button"))
                 "Focus"
@@ -104,7 +104,7 @@ view model =
                 { offIcon: "favorite_border"
                 , onIcon: "favorite"
                 }
-            , HH.text "\u{00A0}"
+            , HH.text \x00A0
             , Button.raised
                 (Button.defaultConfig { onClick = (Focus "my-icon-toggle"))
                 "Focus"

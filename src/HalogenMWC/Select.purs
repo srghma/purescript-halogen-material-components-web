@@ -1,13 +1,14 @@
 module HalogenMWC.Select where
 
-import Data.FoldableWithIndex (findMapWithIndex)
-import Halogen (AttrName(..), ElemName(..), PropName(..))
-import Material.Classes.Select (mdc_floating_label, mdc_line_ripple, mdc_notched_outline, mdc_notched_outline__leading, mdc_notched_outline__notch, mdc_notched_outline__trailing, mdc_select, mdc_select____outlined, mdc_select____with_leading_icon, mdc_select__anchor, mdc_select__dropdown_icon, mdc_select__icon, mdc_select__menu, mdc_select__selected_text)
+import Material.Classes.Select
 import Prelude
-import Data.Maybe (Maybe(..))
+
 import DOM.HTML.Indexed as I
 import Data.Array as Array
+import Data.FoldableWithIndex (findMapWithIndex)
+import Data.Maybe (Maybe(..))
 import Data.Maybe as Maybe
+import Halogen (AttrName(..), ElemName(..), PropName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
@@ -16,6 +17,7 @@ import HalogenMWC.List as List
 import HalogenMWC.List.Item as List.Item
 import HalogenMWC.Menu as Menu
 import HalogenMWC.Select.Item as Select.Item
+import Material.Classes.List
 
 type Config a w i
   = { label :: Maybe String
@@ -149,7 +151,7 @@ listItem :: forall a w i. Boolean -> Maybe a -> Maybe (a -> i) -> Select.Item.Se
 listItem showLeadingIcon selected onChange (Select.Item.SelectItem config nodes) =
   List.Item.listItem
     (listItemConfig selected onChange config)
-    (if showLeadingIcon then [ List.Item.graphic nodes ] else nodes)
+    (if showLeadingIcon then [ HH.div [ HP.class_ mdc_list_item__graphic ] nodes ] else nodes)
 
 listItemConfig :: forall a i w. Maybe a -> Maybe (a -> i) -> Select.Item.Config a i -> List.Item.Config w i
 listItemConfig selectedValue onChange config =

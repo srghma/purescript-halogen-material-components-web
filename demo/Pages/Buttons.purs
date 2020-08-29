@@ -21,26 +21,17 @@ initialState = unit
 
 data Action = Focus String
 
-update :: forall r w i . Action -> State -> ( State, Cmd Action )
-update w i model =
-    case w i of
-        Focus id ->
-            ( model, Task.attempt Focused (Browser.Dom.focus id) )
-
-        Focused _ ->
-            ( model, Cmd.none )
-
 view :: forall r w i . State -> CatalogPage Action
 view model =
     { title: "Button"
     , prelude: "Buttons communicate an action a user can take. They are typically placed throughout your UI, in places like dialogs, forms, cards, and toolbars."
-    , resources =
+    , resources:
         { materialDesignGuidelines: Just "https://material.io/go/design-buttons"
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Button"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-button"
         }
     , hero: heroButtons
-    , content =
+    , content:
         [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Text Button" ]
         , textButtons
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Raised Button" ]
@@ -60,10 +51,9 @@ view model =
 
 heroButtons :: forall r w i . Array (HH.HTML w i)
 heroButtons =
-    let
-        config =
-            Button.defaultConfig { additionalAttributes = [ heroMargin ]
-    in
+  let
+    config = Button.defaultConfig { additionalAttributes = [ heroMargin ] }
+  in
     [ Button.text config "Text"
     , Button.raised config "Raised"
     , Button.unelevated config "Unelevated"
@@ -93,7 +83,7 @@ shapedButtons =
 linkButtons :: forall r w i . HH.HTML w i
 linkButtons =
     buttonsRow
-        (\config label -> Button.text (config , href = (Just "#")) label)
+        (\config label -> Button.text (config { href = (Just $ "#" <> label) }))
         []
 
 focusButton :: forall r w i . HH.HTML Action
@@ -102,18 +92,19 @@ focusButton =
         [ Button.raised
             (Button.defaultConfig
                 { additionalAttributes = [ HP.id_ "my-button" ]
+                }
             )
             "Button"
-        , HH.text "\u{00A0}"
+        , HH.text \x00A0
         , Button.raised (Button.defaultConfig { onClick = (Focus "my-button")) "Focus"
-        , HH.text "\u{00A0}"
+        , HH.text \x00A0
         , Button.raised
             (Button.defaultConfig
                 { href = (Just "#")
                 , additionalAttributes = [ HP.id_ "my-link-button" ]
             )
             "Link button"
-        , HH.text "\u{00A0}"
+        , HH.text \x00A0
         , Button.raised (Button.defaultConfig { onClick = (Focus "my-link-button")) "Focus"
         ]
 

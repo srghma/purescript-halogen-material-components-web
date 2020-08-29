@@ -136,7 +136,7 @@ focusCard =
                     ]
             , actions: Just demoActions
             }
-        , HH.text "\u{00A0}"
+        , HH.text \x00A0
         , Button.raised
             (Button.defaultConfig { onClick = (Focus "my-card"))
             "Focus"

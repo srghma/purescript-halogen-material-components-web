@@ -134,11 +134,10 @@ resourcesList { materialDesignGuidelines, documentation, sourceCode } =
                 , target = Just "_blank"
                 }
             )
-            [ List.Item.graphic resourcesGraphic
+            [ HH.div ([ HP.class_ mdc_list_item__graphic ] <> resourcesGraphic)
                 [ HH.img
                     ([ HP.src "https://aforemny.github.io/material-components-web-elm/images/ic_material_design_24px.svg" ] <> resourcesGraphic
                     )
-                    []
                 ]
             , HH.text "Material Design Guidelines"
             ]
@@ -149,11 +148,10 @@ resourcesList { materialDesignGuidelines, documentation, sourceCode } =
                 , target = (Just "_blank")
                 }
             )
-            [ List.Item.graphic resourcesGraphic
+            [ HH.div ([ HP.class_ mdc_list_item__graphic ] <> resourcesGraphic)
                 [ HH.img
                     ([ HP.src "https://aforemny.github.io/material-components-web-elm/images/ic_drive_document_24px.svg" ] <> resourcesGraphic
                     )
-                    []
                 ]
             , HH.text "Documentation"
             ]
@@ -163,11 +161,10 @@ resourcesList { materialDesignGuidelines, documentation, sourceCode } =
                 , target = (Just "_blank")
                 }
             )
-            [ List.Item.graphic resourcesGraphic
+            [ HH.div ([ HP.class_ mdc_list_item__graphic ] <> resourcesGraphic)
                 [ HH.img
                     ([ HP.src "https://aforemny.github.io/material-components-web-elm/images/ic_code_24px.svg" ] <> resourcesGraphic
                     )
-                    []
                 ]
             , HH.text "Source Code"
             ]
@@ -235,7 +232,7 @@ demoTitle =
     [ HP.style "border-bottom: 1px solid rgba(0,0,0,.87);"
     ]
 
-resourcesGraphic :: forall r w i . Array (IProp r i)
+resourcesGraphic :: forall r w i . Array (IProp ( style :: String | r ) i)
 resourcesGraphic =
     [ HP.style "width: 30px; height: 30px;"
     ]

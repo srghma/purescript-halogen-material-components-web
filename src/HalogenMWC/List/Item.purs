@@ -81,9 +81,3 @@ text additionalAttributes { primary, secondary } =
     [ HH.div [ HP.class_ mdc_list_item__primary_text ] primary
     , HH.div [ HP.class_ mdc_list_item__secondary_text ] secondary
     ]
-
-graphic :: forall w i. Array (HH.HTML w i) -> HH.HTML w i
-graphic = HH.div [ HP.class_ mdc_list_item__graphic ]
-
-meta :: forall w i. Array (HH.HTML w i) -> HH.HTML w i
-meta = HH.div [ HP.class_ mdc_list_item__meta ]

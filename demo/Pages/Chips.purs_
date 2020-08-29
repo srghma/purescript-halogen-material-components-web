@@ -356,7 +356,7 @@ focusChips model =
             [ Chip.Choice.chip Chip.Choice.defaultConfig "One"
             , Chip.Choice.chip Chip.Choice.defaultConfig "Two"
             ]
-        , HH.text "\u{00A0}"
+        , HH.text \x00A0
         , Button.raised
             (Button.defaultConfig
                 { onClick = (Focus "my-chips")
