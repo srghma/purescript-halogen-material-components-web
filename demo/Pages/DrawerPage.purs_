@@ -85,20 +85,20 @@ drawerBody setSelectedIndex selectedIndex =
         [ Array.group []
             [ List.list List.defaultConfig
                 (List.Item.listItem (listItemConfig 0)
-                    [ List.Item.graphic [] [ Icon.icon [] "inbox" ]
+                    [ HH.div [ HP.class_ mdc_list_item__graphic ] [ Icon.icon [] "inbox" ]
                     , HH.text "Inbox"
                     ]
                 )
                 [ List.Item.listItem (listItemConfig 1)
-                    [ List.Item.graphic [] [ Icon.icon [] "star" ]
+                    [ HH.div [ HP.class_ mdc_list_item__graphic ] [ Icon.icon [] "star" ]
                     , HH.text "Star"
                     ]
                 , List.Item.listItem (listItemConfig 2)
-                    [ List.Item.graphic [] [ Icon.icon [] "send" ]
+                    [ HH.div [ HP.class_ mdc_list_item__graphic ] [ Icon.icon [] "send" ]
                     , HH.text "Sent Mail"
                     ]
                 , List.Item.listItem (listItemConfig 3)
-                    [ List.Item.graphic [] [ Icon.icon [] "drafts" ]
+                    [ HH.div [ HP.class_ mdc_list_item__graphic ] [ Icon.icon [] "drafts" ]
                     , HH.text "Drafts"
                     ]
                 ]
@@ -106,25 +106,25 @@ drawerBody setSelectedIndex selectedIndex =
             , Array.subheader [] [ HH.text "Labels" ]
             , List.list List.defaultConfig
                 (List.Item.listItem (listItemConfig 4)
-                    [ List.Item.graphic [] [ Icon.icon [] "bookmark" ]
+                    [ HH.div [ HP.class_ mdc_list_item__graphic ] [ Icon.icon [] "bookmark" ]
                     , HH.text "Family"
                     ]
                 )
                 [ List.Item.listItem (listItemConfig 5)
-                    [ List.Item.graphic [] [ Icon.icon [] "bookmark" ]
+                    [ HH.div [ HP.class_ mdc_list_item__graphic ] [ Icon.icon [] "bookmark" ]
                     , HH.text "Friends"
                     ]
                 , List.Item.listItem (listItemConfig 6)
-                    [ List.Item.graphic [] [ Icon.icon [] "bookmark" ]
+                    [ HH.div [ HP.class_ mdc_list_item__graphic ] [ Icon.icon [] "bookmark" ]
                     , HH.text "Work"
                     ]
                 , List.Divider.listItem List.Divider.defaultConfig
                 { List.Item.listItem (listItemConfig 7)
-                    [ List.Item.graphic [] [ Icon.icon [] "settings" ]
+                    [ HH.div [ HP.class_ mdc_list_item__graphic ] [ Icon.icon [] "settings" ]
                     , HH.text "Settings"
                     ]
                 , List.Item.listItem (listItemConfig 8)
-                    [ List.Item.graphic [] [ Icon.icon [] "announcement" ]
+                    [ HH.div [ HP.class_ mdc_list_item__graphic ] [ Icon.icon [] "announcement" ]
                     , HH.text "Help & feedback"
                     ]
                 ]

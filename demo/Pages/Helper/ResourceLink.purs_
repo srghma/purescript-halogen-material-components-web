@@ -27,7 +27,7 @@ view { link, title, icon, altText } =
                 , HP.target "_blank"
                 ]
         )
-        [ List.Item.graphic []
+        [ HH.div [ HP.class_ mdc_list_item__graphic ]
             [ HH.img
                 [ HP.class_ resources_icon
                 , HP.src icon

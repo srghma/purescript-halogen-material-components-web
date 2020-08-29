@@ -159,7 +159,7 @@ leadingIconList =
     let
         listItem icon =
             List.Item.listItem List.Item.defaultConfig
-                [ List.Item.graphic [] [ Icon.icon [] icon ]
+                [ HH.div [ HP.class_ mdc_list_item__graphic ] [ Icon.icon [] icon ]
                 , HH.text "Line item"
                 ]
     in
@@ -173,7 +173,7 @@ trailingIconList =
         listItem =
             List.Item.listItem List.Item.defaultConfig
                 [ HH.text "Line item"
-                , List.Item.meta [] [ Icon.icon [] "info" ]
+                , HH.div [ HP.class_ mdc_list_item__meta ] [ Icon.icon [] "info" ]
                 ]
     in
     List.list (List.defaultConfig { additionalAttributes = demoList)
@@ -195,7 +195,7 @@ activatedItemList model =
                         )
                     , onClick = (SetActivated label)
                 )
-                [ List.Item.graphic [] [ Icon.icon [] icon ], HH.text label ]
+                [ HH.div [ HP.class_ mdc_list_item__graphic ] [ Icon.icon [] icon ], HH.text label ]
     in
     List.list (List.defaultConfig { additionalAttributes = demoList)
         (listItem ( "inbox", "Inbox" ))
@@ -222,7 +222,7 @@ shapedActivatedItemList model =
                     , onClick = (SetShapedActivated label)
                     , additionalAttributes = [ HP.style "border-radius: 0 32px 32px 0;" ]
                 )
-                [ List.Item.graphic [] [ Icon.icon [] icon ], HH.text label ]
+                [ HH.div [ HP.class_ mdc_list_item__graphic ] [ Icon.icon [] icon ], HH.text label ]
     in
     List.list (List.defaultConfig { additionalAttributes = demoList)
         (listItem ( "inbox", "Inbox" ))
@@ -248,7 +248,7 @@ folderList =
                     { primary: [ HH.text primary ]
                     , secondary: [ HH.text secondary ]
                     }
-                , List.Item.meta [] [ Icon.icon [] "info" ]
+                , HH.div [ HP.class_ mdc_list_item__meta ] [ Icon.icon [] "info" ]
                 ]
     in
     List.list
@@ -282,7 +282,7 @@ listWithTrailingCheckbox model =
                         )
                 )
                 [ HH.text "Dog Photos"
-                , List.Item.meta []
+                , HH.div [ HP.class_ mdc_list_item__meta ]
                     [ Checkbox.checkbox
                         (Checkbox.defaultConfig
                             { onChange = (ToggleCheckbox label)
@@ -329,7 +329,7 @@ listWithTrailingRadioButton model =
                         )
                 )
                 [ HH.text label
-                , List.Item.meta []
+                , HH.div [ HP.class_ mdc_list_item__meta ]
                     [ Radio.radio
                         (Radio.defaultConfig
                             { checked = (model.radio == Just label)

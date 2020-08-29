@@ -129,7 +129,7 @@ confirmationDialog model =
     let
         listItem ( checked, label ) =
             List.Item.listItem List.Item.defaultConfig
-                [ List.Item.graphic []
+                [ HH.div [ HP.class_ mdc_list_item__graphic ]
                     [ Radio.radio (Radio.defaultConfig { checked = checked) ]
                 , HH.text label
                 ]
