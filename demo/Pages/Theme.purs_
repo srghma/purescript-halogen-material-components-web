@@ -66,9 +66,9 @@ view model =
 themeColorsAsText :: forall r w i . HH.HTML w i
 themeColorsAsText =
     HH.div demoThemeColorGroup
-        [ HH.div (Theme.primary :: demoThemeColorSwatches)
+        [ HH.div (mdc_theme____primary :: demoThemeColorSwatches)
             [ HH.div demoThemeColorSwatch [ HH.text "Primary" ] ]
-        , HH.div (Theme.secondary :: demoThemeColorSwatches)
+        , HH.div (mdc_theme____secondary :: demoThemeColorSwatches)
             [ HH.div demoThemeColorSwatch [ HH.text "Secondary" ] ]
         ]
 
@@ -76,29 +76,29 @@ themeColorsAsBackground :: forall r w i . HH.HTML w i
 themeColorsAsBackground =
     HH.div demoThemeColorGroup
         [ HH.div
-            (Theme.primaryBg :: forall r w i . Theme.onPrimary :: demoThemeColorSwatches)
+            (mdc_theme____primaryBg :: forall r w i . mdc_theme____on_primary :: demoThemeColorSwatches)
             [ HH.div demoThemeColorSwatch [ HH.text "Primary" ] ]
         , HH.div
-            (Theme.secondaryBg :: forall r w i . Theme.onSecondary :: demoThemeColorSwatches)
+            (mdc_theme____secondaryBg :: forall r w i . mdc_theme____on_secondary :: demoThemeColorSwatches)
             [ HH.div demoThemeColorSwatch [ HH.text "Secondary" ] ]
         , HH.div
-            (Theme.background :: forall r w i . Theme.textPrimaryOnBackground :: demoThemeColorSwatches)
+            (mdc_theme____background :: forall r w i . mdc_theme____text_primary_on_background :: demoThemeColorSwatches)
             [ HH.div demoThemeColorSwatch [ HH.text "Background" ] ]
         ]
 
 textOnBackground :: forall r w i . HH.HTML w i
 textOnBackground =
     HH.div demoThemeColorGroup
-        [ HH.div (Theme.background :: demoThemeTextRow)
-            [ HH.span (Theme.textPrimaryOnBackground :: demoThemeTextStyle)
+        [ HH.div (mdc_theme____background :: demoThemeTextRow)
+            [ HH.span (mdc_theme____text_primary_on_background :: demoThemeTextStyle)
                 [ HH.text "Primary" ]
-            , HH.span (Theme.textSecondaryOnBackground :: demoThemeTextStyle)
+            , HH.span (mdc_theme____text_secondary_on_background :: demoThemeTextStyle)
                 [ HH.text "Secondary" ]
-            , HH.span (Theme.textHintOnBackground :: demoThemeTextStyle)
+            , HH.span (mdc_theme____text_hint_on_background :: demoThemeTextStyle)
                 [ HH.text "Hint" ]
-            , HH.span (Theme.textDisabledOnBackground :: demoThemeTextStyle)
+            , HH.span (mdc_theme____text_disabled_on_background :: demoThemeTextStyle)
                 [ HH.text "Disabled" ]
-            , HH.span (Theme.textIconOnBackground :: demoThemeIconStyle)
+            , HH.span (mdc_theme____text_icon_on_background :: demoThemeIconStyle)
                 [ HH.text "favorite" ]
             ]
         ]
@@ -106,10 +106,10 @@ textOnBackground =
 textOnPrimary :: forall r w i . HH.HTML w i
 textOnPrimary =
     HH.div demoThemeColorGroup
-        [ HH.div (Theme.primaryBg :: demoThemeTextRow)
-            [ HH.span (Theme.onPrimary :: demoThemeTextStyle)
+        [ HH.div (mdc_theme____primaryBg :: demoThemeTextRow)
+            [ HH.span (mdc_theme____on_primary :: demoThemeTextStyle)
                 [ HH.text "Text" ]
-            , HH.span (Theme.onPrimary :: demoThemeIconStyle)
+            , HH.span (mdc_theme____on_primary :: demoThemeIconStyle)
                 [ HH.text "favorite" ]
             ]
         ]
@@ -117,10 +117,10 @@ textOnPrimary =
 textOnSecondary :: forall r w i . HH.HTML w i
 textOnSecondary =
     HH.div demoThemeColorGroup
-        [ HH.div (Theme.secondaryBg :: demoThemeTextRow)
-            [ HH.span (Theme.onSecondary :: demoThemeTextStyle)
+        [ HH.div (mdc_theme____secondaryBg :: demoThemeTextRow)
+            [ HH.span (mdc_theme____on_secondary :: demoThemeTextStyle)
                 [ HH.text "Text" ]
-            , HH.span (Theme.onSecondary :: demoThemeIconStyle)
+            , HH.span (mdc_theme____on_secondary :: demoThemeIconStyle)
                 [ HH.text "favorite" ]
             ]
         ]
@@ -129,15 +129,15 @@ textOnLightBackground :: forall r w i . HH.HTML w i
 textOnLightBackground =
     HH.div demoThemeColorGroup
         [ HH.div (demoThemeBgCustomLight <> demoThemeTextRow)
-            [ HH.span (Theme.textPrimaryOnLight :: demoThemeTextStyle)
+            [ HH.span (mdc_theme____text_primary_on_light :: demoThemeTextStyle)
                 [ HH.text "Primary" ]
-            , HH.span (Theme.textSecondaryOnLight :: demoThemeTextStyle)
+            , HH.span (mdc_theme____text_secondary_on_light :: demoThemeTextStyle)
                 [ HH.text "Secondary" ]
-            , HH.span (Theme.textHintOnLight :: demoThemeTextStyle)
+            , HH.span (mdc_theme____text_hint_on_light :: demoThemeTextStyle)
                 [ HH.text "Hint" ]
-            , HH.span (Theme.textDisabledOnLight :: demoThemeTextStyle)
+            , HH.span (mdc_theme____text_disabled_on_light :: demoThemeTextStyle)
                 [ HH.text "Disabled" ]
-            , HH.span (Theme.textIconOnLight :: demoThemeIconStyle)
+            , HH.span (mdc_theme____text_icon_on_light :: demoThemeIconStyle)
                 [ HH.text "favorite" ]
             ]
         ]
@@ -146,15 +146,15 @@ textOnDarkBackground :: forall r w i . HH.HTML w i
 textOnDarkBackground =
     HH.div demoThemeColorGroup
         [ HH.div (demoThemeBgCustomDark <> demoThemeTextRow)
-            [ HH.span (Theme.textPrimaryOnDark :: demoThemeTextStyle)
+            [ HH.span (mdc_theme____text_primary_on_dark :: demoThemeTextStyle)
                 [ HH.text "Primary" ]
-            , HH.span (Theme.textSecondaryOnDark :: demoThemeTextStyle)
+            , HH.span (mdc_theme____text_secondary_on_dark :: demoThemeTextStyle)
                 [ HH.text "Secondary" ]
-            , HH.span (Theme.textHintOnDark :: demoThemeTextStyle)
+            , HH.span (mdc_theme____text_hint_on_dark :: demoThemeTextStyle)
                 [ HH.text "Hint" ]
-            , HH.span (Theme.textDisabledOnDark :: demoThemeTextStyle)
+            , HH.span (mdc_theme____text_disabled_on_dark :: demoThemeTextStyle)
                 [ HH.text "Disabled" ]
-            , HH.span (Theme.textIconOnDark :: demoThemeIconStyle)
+            , HH.span (mdc_theme____text_icon_on_dark :: demoThemeIconStyle)
                 [ HH.text "favorite" ]
             ]
         ]

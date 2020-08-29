@@ -57,13 +57,13 @@ view lift catalogPageConfig catalogPage =
                 [ HH.section [ HP.classes [ mdc_top_app_bar__section, mdc_top_app_bar__section____align_start ] ]
                     [ IconButton.iconButton
                         (IconButton.defaultConfig
-                            { additionalAttributes = [ TopAppBar.navigationIcon ]
+                            { additionalAttributes = [ mdc_top_app_bar__navigation_icon ]
                             , onClick = toggleCatalogDrawer
                             }
                         )
                         "menu"
                     , HH.span
-                        [ TopAppBar.title
+                        [ mdc_top_app_bar__title
                         , HP.style "text-transform: uppercase; font-weight: 400;"
                         ]
                         [ HH.text "Material Components for Elm" ]
@@ -75,7 +75,7 @@ view lift catalogPageConfig catalogPage =
                 (DismissibleDrawer.defaultConfig
                     { open = catalogPageConfig.drawerOpen
                     , additionalAttributes =
-                        [ TopAppBar.fixedAdjust
+                        [ mdc_top_app_bar____fixed_adjust
                         , HP.style "z-index: 1;"
                         ]
                 )
@@ -107,7 +107,7 @@ view lift catalogPageConfig catalogPage =
                 ]
             , HH.map lift $
                 HH.div
-                    [ TopAppBar.fixedAdjust, DismissibleDrawer.appContent, demoContent ]
+                    [ mdc_top_app_bar____fixed_adjust, DismissibleDrawer.appContent, demoContent ]
                     [ HH.div demoContentTransition
                         [ HH.h1 [ mdc_typography____headline5 ] [ HH.text catalogPage.title ]
                         , HH.p [ mdc_typography____body1 ] [ HH.text catalogPage.prelude ]

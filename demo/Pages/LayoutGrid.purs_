@@ -98,7 +98,7 @@ columnsGrid =
 leftAlignedGrid :: forall r w i . HH.HTML w i
 leftAlignedGrid =
     demoGrid
-        [ LayoutGrid.alignLeft
+        [ mdc_layout_grid____align_left
         , HP.style "max-width: 800px;"
         ]
         [ LayoutGrid.inner []
@@ -111,7 +111,7 @@ leftAlignedGrid =
 rightAlignedGrid :: forall r w i . HH.HTML w i
 rightAlignedGrid =
     demoGrid
-        [ LayoutGrid.alignRight
+        [ mdc_layout_grid____align_right
         , HP.style "max-width: 800px;"
         ]
         [ LayoutGrid.inner [] (List.repeat 3 (demoCell []))
@@ -130,8 +130,8 @@ cellAlignmentGrid =
         [ HP.style "min-height: 200px;"
         ]
         [ LayoutGrid.inner innerHeight
-            [ demoCell [ LayoutGrid.alignTop, cellHeight ]
-            , demoCell [ LayoutGrid.alignMiddle, cellHeight ]
-            , demoCell [ LayoutGrid.alignBottom, cellHeight ]
+            [ demoCell [ mdc_layout_grid__cell____align_top, cellHeight ]
+            , demoCell [ mdc_layout_grid__cell____align_middle, cellHeight ]
+            , demoCell [ mdc_layout_grid__cell____align_bottom, cellHeight ]
             ]
         ]

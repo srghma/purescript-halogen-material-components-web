@@ -48,14 +48,14 @@ view lift { title, drawer, scrim, onMenuClick } =
                             [ case onMenuClick of
                                 Just handleClick ->
                                     Icon.icon
-                                        [ TopAppBar.navigationIcon
+                                        [ mdc_top_app_bar__navigation_icon
                                         , HH.Events.onClick handleClick
                                         ]
                                         "menu"
 
                                 Nothing ->
                                     text ""
-                            , HH.span [ TopAppBar.title ] [ HH.text title ]
+                            , HH.span [ mdc_top_app_bar__title ] [ HH.text title ]
                             ]
                         ]
                     ]
@@ -136,7 +136,7 @@ mainContent :: forall r w i . HH.HTML w i
 mainContent =
     HH.div
         [ HP.style "padding-left: 18px; padding-right: 18px; overflow: auto; height: 100%; box-sizing: border-box;"
-        , TopAppBar.fixedAdjust
+        , mdc_top_app_bar____fixed_adjust
         , DismissibleDrawer.appContent
         ]
         (List.repeat 4 $ HH.p [] [ HH.text loremIpsum ])

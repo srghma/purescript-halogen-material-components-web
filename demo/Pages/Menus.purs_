@@ -50,7 +50,7 @@ view model =
     , hero: [ heroMenu model ]
     , content =
         [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Anchored menu" ]
-        , HH.div [ Menu.surfaceAnchor ]
+        , HH.div [ mdc_menu_surface____anchor ]
             [ Button.text (Button.defaultConfig { onClick = Open) "Open menu"
             , Menu.menu
                 (Menu.defaultConfig

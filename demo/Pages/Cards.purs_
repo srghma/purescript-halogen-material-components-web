@@ -158,7 +158,7 @@ demoTitle =
                 [ HH.text "Our Changing Planet" ]
             , HH.h3
                 [ mdc_typography____subtitle2
-                , Theme.textSecondaryOnBackground
+                , mdc_theme____text_secondary_on_background
                 , HP.style "margin: 0;"
                 ]
                 [ HH.text "by Kurt Wagner" ]
@@ -169,7 +169,7 @@ demoBody =
     Card.block $
         HH.div
             [ mdc_typography____body2
-            , Theme.textSecondaryOnBackground
+            , mdc_theme____text_secondary_on_background
             , HP.style "padding: 0 1rem 0.5rem 1rem;"
             ]
             [ HH.text

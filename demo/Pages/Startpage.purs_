@@ -24,7 +24,7 @@ view =
                 [ HH.section [ HP.classes [ mdc_top_app_bar__section, mdc_top_app_bar__section____align_start ] ]
                     [ IconButton.custom
                         (IconButton.defaultConfig
-                            { additionalAttributes = [ TopAppBar.navigationIcon ]
+                            { additionalAttributes = [ mdc_top_app_bar__navigation_icon ]
                         )
                         [ HH.img
                             [ HP.src "https://aforemny.github.io/material-components-web-elm/images/ic_component_24px_white.svg"
@@ -32,7 +32,7 @@ view =
                             []
                         ]
                     , HH.span
-                        [ TopAppBar.title
+                        [ mdc_top_app_bar__title
                         , HP.style "text-transform: uppercase; font-weight: 400;"
                         ]
                         [ HH.text "Material Components for Elm" ]
