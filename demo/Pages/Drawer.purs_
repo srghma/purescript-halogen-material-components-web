@@ -3,7 +3,7 @@ module Demo.Pages.Drawer where
     , Action(..)
     , initialState
     , update
-    , view
+    , render
     )
 
 import Demo.HOC.CatalogPage
@@ -36,8 +36,8 @@ update :: forall r w i . Action -> State -> State
 update w i model =
     model
 
-view :: forall r w i . State -> CatalogPage Action
-view model =
+render :: forall r w i . State -> CatalogPage Action
+render model =
     { title: "Drawer"
     , prelude: "The navigation drawer slides in from the left and contains the navigation destinations for your app."
     , resources =

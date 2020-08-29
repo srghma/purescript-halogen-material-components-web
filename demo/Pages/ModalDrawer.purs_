@@ -3,7 +3,7 @@ module Demo.Pages.Drawer.Modal where
     , Action(..)
     , initialState
     , update
-    , view
+    , render
     )
 
 import Demo.DrawerPage as DrawerPage
@@ -37,8 +37,8 @@ update w i model =
         SetSelectedIndex index ->
             { model | selectedIndex = index }
 
-view :: forall r w i . State -> DrawerPage Action
-view model =
+render :: forall r w i . State -> DrawerPage Action
+render model =
     { title: "Modal Drawer"
     , drawer =
         Drawer.Modal.drawer

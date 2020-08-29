@@ -17,8 +17,8 @@ data TopAppBarPage w i =
     , topAppBar :: HH.HTML w i
     }
 
-view :: forall r w i . (w i -> topAction) -> TopAppBarPage w i -> HH.HTML topAction
-view lift { topAppBar, fixedAdjust } =
+render :: forall r w i . (w i -> topAction) -> TopAppBarPage w i -> HH.HTML topAction
+render lift { topAppBar, fixedAdjust } =
     HH.map lift $
         HH.div
             [ HP.style "height: 200vh;"

@@ -24,28 +24,28 @@ import HalogenMWC.List.Item as List.Item
 import HalogenMWC.TopAppBar as TopAppBar
 
 type CatalogPage w i =
-    { title :: String
-    , prelude :: String
-    , resources :: CatalogPageResources
-    , hero :: Array (HH.HTML w i)
-    , content :: Array (HH.HTML w i)
-    }
+  { title :: String
+  , prelude :: String
+  , resources :: CatalogPageResources
+  , hero :: Array (HH.HTML w i)
+  , content :: Array (HH.HTML w i)
+  }
 
 type CatalogPageResources =
-    { materialDesignGuidelines :: Maybe String
-    , documentation :: Maybe String
-    , sourceCode :: Maybe String
-    }
+  { materialDesignGuidelines :: Maybe String
+  , documentation :: Maybe String
+  , sourceCode :: Maybe String
+  }
 
 type CatalogPageConfig topAction =
-    { openDrawer :: topAction
-    , closeDrawer :: topAction
-    , drawerOpen :: Boolean
-    , route :: Route
-    }
+  { openDrawer :: topAction
+  , closeDrawer :: topAction
+  , drawerOpen :: Boolean
+  , route :: Route
+  }
 
-view :: forall r w i . (w i -> topAction) -> CatalogPageConfig topAction -> CatalogPage w i -> HH.HTML topAction
-view lift catalogPageConfig catalogPage =
+render :: forall r w i . (w i -> topAction) -> CatalogPageConfig topAction -> CatalogPage w i -> HH.HTML topAction
+render catalogPageConfig catalogPage =
     let
         toggleCatalogDrawer =
             if catalogPageConfig.drawerOpen then
@@ -109,19 +109,18 @@ view lift catalogPageConfig catalogPage =
                             HH.text ""
                     ]
                 ]
-            , HH.map lift $
-                HH.div
-                    [ mdc_top_app_bar____fixed_adjust, mdc_drawer_app_content, demoContent ]
-                    [ HH.div demoContentTransition
-                        [ HH.h1 [ mdc_typography____headline5 ] [ HH.text catalogPage.title ]
-                        , HH.p [ mdc_typography____body1 ] [ HH.text catalogPage.prelude ]
-                        , HH.div hero catalogPage.hero
-                        , HH.h2 [ mdc_typography____headline6, demoTitle ] [ HH.text "Resources" ]
-                        , resourcesList catalogPage.resources
-                        , HH.h2 [ mdc_typography____headline6, demoTitle ] [ HH.text "Demos" ]
-                        , catalogPage.content
-                        ]
+            , HH.div
+                [ mdc_top_app_bar____fixed_adjust, mdc_drawer_app_content, demoContent ]
+                [ HH.div demoContentTransition
+                    [ HH.h1 [ mdc_typography____headline5 ] [ HH.text catalogPage.title ]
+                    , HH.p [ mdc_typography____body1 ] [ HH.text catalogPage.prelude ]
+                    , HH.div hero catalogPage.hero
+                    , HH.h2 [ mdc_typography____headline6, demoTitle ] [ HH.text "Resources" ]
+                    , resourcesList catalogPage.resources
+                    , HH.h2 [ mdc_typography____headline6, demoTitle ] [ HH.text "Demos" ]
+                    , catalogPage.content
                     ]
+                ]
             ]
         ]
 

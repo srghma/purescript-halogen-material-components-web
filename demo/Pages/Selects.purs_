@@ -77,8 +77,8 @@ update w i model =
         Focused _ ->
             ( model, Cmd.none )
 
-view :: forall r w i . State -> CatalogPage Action
-view model =
+render :: forall r w i . State -> CatalogPage Action
+render model =
     { title: "Select"
     , prelude: "Selects allow users to select from a single-option menu."
     , resources =

@@ -44,8 +44,8 @@ update w i model =
         Show id ->
             { model | open = Just id }
 
-view :: forall r w i . State -> CatalogPage Action
-view model =
+render :: forall r w i . State -> CatalogPage Action
+render model =
     { title: "Dialog"
     , prelude: "Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks."
     , resources =

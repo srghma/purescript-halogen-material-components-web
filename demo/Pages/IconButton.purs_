@@ -50,8 +50,8 @@ update w i model =
         Focused _ ->
             ( model, Cmd.none )
 
-view :: forall r w i . State -> CatalogPage Action
-view model =
+render :: forall r w i . State -> CatalogPage Action
+render model =
     { title: "Icon Button"
     , prelude: "Icons are appropriate for buttons that allow a user to take actions or make a selection, such as adding or removing a star to an item."
     , resources =

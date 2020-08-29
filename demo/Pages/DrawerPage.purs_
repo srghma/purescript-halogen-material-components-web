@@ -35,8 +35,8 @@ data DrawerPage w i =
     , onMenuClick :: Maybe w i
     }
 
-view :: forall r w i . (w i -> topAction) -> DrawerPage w i -> HH.HTML topAction
-view lift { title, drawer, scrim, onMenuClick } =
+render :: forall r w i . (w i -> topAction) -> DrawerPage w i -> HH.HTML topAction
+render lift { title, drawer, scrim, onMenuClick } =
     HH.map lift $
         HH.div drawerFrameRoot
             [ drawer

@@ -25,8 +25,8 @@ update :: forall r w i . Action -> State -> State
 update w i model =
     model
 
-view :: forall r w i . State -> CatalogPage Action
-view model =
+render :: forall r w i . State -> CatalogPage Action
+render model =
     { title: "Typography"
     , prelude: "Roboto is the standard typeface on Android and Chrome."
     , resources =

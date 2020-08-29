@@ -17,8 +17,8 @@ update :: forall r w i . Action -> State -> State
 update w i model =
     model
 
-view :: forall r w i . State -> TopAppBarPage Action
-view model =
+render :: forall r w i . State -> TopAppBarPage Action
+render model =
     { fixedAdjust: mdc_top_app_bar____short_fixed_adjust
     , topAppBar =
         TopAppBar.shortCollapsed TopAppBar.defaultConfig

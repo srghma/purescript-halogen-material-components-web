@@ -29,8 +29,8 @@ update :: forall r w i . Action -> State -> State
 update w i model =
     model
 
-view :: forall r w i . State -> CatalogPage Action
-view model =
+render :: forall r w i . State -> CatalogPage Action
+render model =
     { title: "Top App Bar"
     , prelude: "Top App Bars are a container for items such as application title, navigation icon, and action items."
     , resources =

@@ -76,8 +76,8 @@ stackedMessage =
         , onActionButtonClick = Click
         , actionIcon = (Just "close")
 
-view :: forall r w i . State -> CatalogPage Action
-view model =
+render :: forall r w i . State -> CatalogPage Action
+render model =
     { title: "Snackbar"
     , prelude: "Snackbars provide brief feedback about an operation through a message at the bottom of the screen."
     , resources =

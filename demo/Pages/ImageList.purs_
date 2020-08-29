@@ -28,8 +28,8 @@ update :: forall r w i . Action -> State -> State
 update w i model =
     model
 
-view :: forall r w i . State -> CatalogPage Action
-view model =
+render :: forall r w i . State -> CatalogPage Action
+render model =
     { title: "Image List"
     , prelude: "Image lists display a collection of images in an organized grid."
     , resources =

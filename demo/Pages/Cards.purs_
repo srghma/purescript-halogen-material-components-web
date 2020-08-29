@@ -36,8 +36,8 @@ update w i model =
         Focused _ ->
             ( model, Cmd.none )
 
-view :: forall r w i . State -> CatalogPage Action
-view model =
+render :: forall r w i . State -> CatalogPage Action
+render model =
     { title: "Card"
     , prelude: "Cards contain content and actions about a single subject."
     , resources =

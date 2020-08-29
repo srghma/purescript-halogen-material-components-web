@@ -52,8 +52,8 @@ isSelected group index model =
         # map ((==) index)
         # Maybe.fromMaybe false
 
-view :: forall r w i . State -> CatalogPage Action
-view model =
+render :: forall r w i . State -> CatalogPage Action
+render model =
     { title: "Radio Button"
     , prelude: "Buttons communicate an action a user can take. They are typically placed throughout your UI, in places like dialogs, forms, cards, and toolbars."
     , resources =

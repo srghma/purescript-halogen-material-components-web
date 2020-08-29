@@ -21,8 +21,8 @@ initialState = unit
 
 data Action = Focus String
 
-view :: forall r w i . State -> CatalogPage Action
-view model =
+render :: forall r w i . State -> CatalogPage Action
+render model =
     { title: "Button"
     , prelude: "Buttons communicate an action a user can take. They are typically placed throughout your UI, in places like dialogs, forms, cards, and toolbars."
     , resources:
@@ -96,29 +96,28 @@ focusButton =
             )
             "Button"
         , HH.text "\x00A0"
-        , Button.raised (Button.defaultConfig { onClick = (Focus "my-button")) "Focus"
+        , Button.raised (Button.defaultConfig { onClick = Focus "my-button" }) "Focus"
         , HH.text "\x00A0"
         , Button.raised
             (Button.defaultConfig
                 { href = (Just "#")
                 , additionalAttributes = [ HP.id_ "my-link-button" ]
+                }
             )
             "Link button"
         , HH.text "\x00A0"
-        , Button.raised (Button.defaultConfig { onClick = (Focus "my-link-button")) "Focus"
+        , Button.raised (Button.defaultConfig { onClick = Focus "my-link-button" }) "Focus"
         ]
 
 buttonsRow :: forall r w i . (Button.Config w i -> String -> HH.HTML w i) -> Array (IProp r i) -> HH.HTML w i
 buttonsRow button additionalClasses =
     let
-        config =
-            Button.defaultConfig
-                { additionalAttributes = (rowMargin :: additionalAttributes)
+        config = Button.defaultConfig { additionalAttributes = [ rowMargin ] <> additionalAttributes }
     in
     HH.div []
         [ button config "Default"
-        , button (config , dense = true) "Dense"
-        , button (config , icon = (Just "favorite")) "Icon"
+        , button (config { dense = true }) "Dense"
+        , button (config { icon = Just "favorite" }) "Icon"
         ]
 
 heroMargin :: forall r w i . IProp r i

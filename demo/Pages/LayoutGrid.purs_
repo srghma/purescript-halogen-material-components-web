@@ -3,7 +3,7 @@ module Demo.Pages.LayoutGrid where
     , Action(..)
     , initialState
     , update
-    , view
+    , render
     )
 
 import Demo.HOC.CatalogPage
@@ -33,8 +33,8 @@ update :: forall r w i . Action -> State -> State
 update w i model =
     model
 
-view :: forall r w i . State -> CatalogPage Action
-view model =
+render :: forall r w i . State -> CatalogPage Action
+render model =
     { title: "Layout Grid"
     , prelude: "Material design’s responsive UI is based on a 12-column grid layout."
     , resources =

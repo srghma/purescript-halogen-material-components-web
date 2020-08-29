@@ -19,8 +19,8 @@ update w i model =
         SetSelectedIndex index ->
             { model | selectedIndex = index }
 
-view :: forall r w i . State -> DrawerPage Action
-view model =
+render :: forall r w i . State -> DrawerPage Action
+render model =
     { title: "Permanent Drawer"
     , drawer =
         Drawer.Permanent.drawer Drawer.Permanent.defaultConfig

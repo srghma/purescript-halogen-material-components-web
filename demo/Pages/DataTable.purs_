@@ -54,8 +54,8 @@ update w i model =
         AllUnselected ->
             { model | selected = Set.empty }
 
-view :: forall r w i . State -> CatalogPage Action
-view model =
+render :: forall r w i . State -> CatalogPage Action
+render model =
     { title: "Data Table"
     , prelude: "Data tables display information in a way that’s easy to scan, so that users can look for patterns and insights."
     , resources =

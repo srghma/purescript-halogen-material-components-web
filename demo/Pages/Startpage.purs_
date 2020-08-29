@@ -16,8 +16,8 @@ import HalogenMWC.ImageList as ImageList
 import HalogenMWC.ImageList.Item as ImageList.Item
 import HalogenMWC.TopAppBar as TopAppBar
 
-view :: forall r w i . HH.HTML w i
-view =
+render :: forall r w i . HH.HTML w i
+render =
     HH.div []
         [ TopAppBar.topAppBar TopAppBar.defaultConfig
             [ HH.section [ HP.class_ mdc_top_app_bar__row ] []

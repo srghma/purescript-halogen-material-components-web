@@ -12,14 +12,14 @@ import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.List.Item as List.Item
 
-view :
+render :
     { link :: String
     , title :: String
     , icon :: String
     , altText :: String
     }
     -> ListItem w i
-view { link, title, icon, altText } =
+render { link, title, icon, altText } =
     List.Item.listItem
         (List.Item.defaultConfig
             { additionalAttributes =

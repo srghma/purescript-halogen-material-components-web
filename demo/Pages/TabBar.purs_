@@ -60,8 +60,8 @@ update w i model =
         Focused _ ->
             ( model, Cmd.none )
 
-view :: forall r w i . State -> CatalogPage Action
-view model =
+render :: forall r w i . State -> CatalogPage Action
+render model =
     { title: "Tab Bar"
     , prelude: "Tabs organize and allow navigation between groups of content that are related and at the same level of hierarchy. The Tab Bar contains the Tab Scroller and Tab components."
     , resources =
