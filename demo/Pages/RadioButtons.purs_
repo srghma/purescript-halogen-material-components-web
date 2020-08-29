@@ -17,11 +17,11 @@ import HalogenMWC.FormField as FormField
 import HalogenMWC.Radio as Radio
 import Material.Classes.Typography
 
-data Model =
+data State =
     { radios :: Dict String String }
 
-defaultModel :: forall r w i . Model
-defaultModel =
+initialState :: forall r w i . State
+initialState =
     { radios =
         Dict.fromList
             [ ( "hero", "radio-buttons-hero-radio-1" )
@@ -34,7 +34,7 @@ data Action
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: forall r w i . Action -> Model -> ( Model, Cmd Action )
+update :: forall r w i . Action -> State -> ( State, Cmd Action )
 update w i model =
     case w i of
         Set group index ->
@@ -46,13 +46,13 @@ update w i model =
         Focused _ ->
             ( model, Cmd.none )
 
-isSelected :: forall r w i . String -> String -> Model -> Boolean
+isSelected :: forall r w i . String -> String -> State -> Boolean
 isSelected group index model =
     Dict.get group model.radios
         # map ((==) index)
         # Maybe.fromMaybe false
 
-view :: forall r w i . Model -> CatalogPage Action
+view :: forall r w i . State -> CatalogPage Action
 view model =
     { title: "Radio Button"
     , prelude: "Buttons communicate an action a user can take. They are typically placed throughout your UI, in places like dialogs, forms, cards, and toolbars."
@@ -70,7 +70,7 @@ view model =
         ]
     }
 
-heroRadio :: forall r w i . Model -> String -> String -> HH.HTML Action
+heroRadio :: forall r w i . State -> String -> String -> HH.HTML Action
 heroRadio model group index =
     Radio.radio
         (Radio.defaultConfig
@@ -79,14 +79,14 @@ heroRadio model group index =
             , additionalAttributes = [ HP.style "margin: 0 10px;" ]
         )
 
-heroRadioGroup :: forall r w i . Model -> HH.HTML Action
+heroRadioGroup :: forall r w i . State -> HH.HTML Action
 heroRadioGroup model =
     HH.div []
         [ heroRadio model "hero" "radio-buttons-hero-radio-1"
         , heroRadio model "hero" "radio-buttons-hero-radio-2"
         ]
 
-radio :: forall r w i . Model -> String -> String -> String -> HH.HTML Action
+radio :: forall r w i . State -> String -> String -> String -> HH.HTML Action
 radio model group index label =
     FormField.formField
         (FormField.defaultConfig
@@ -102,7 +102,7 @@ radio model group index label =
             )
         ]
 
-exampleRadioGroup :: forall r w i . Model -> HH.HTML Action
+exampleRadioGroup :: forall r w i . State -> HH.HTML Action
 exampleRadioGroup model =
     HH.div []
         [ radio model "example" "radio-buttons-example-radio-1" "Radio 1"

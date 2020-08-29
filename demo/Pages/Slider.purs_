@@ -16,11 +16,11 @@ import HalogenMWC.Button as Button
 import HalogenMWC.Slider as Slider
 import Material.Classes.Typography
 
-data Model =
+data State =
     { sliders :: Dict String Float }
 
-defaultModel :: forall r w i . Model
-defaultModel =
+initialState :: forall r w i . State
+initialState =
     { sliders =
         Dict.fromList
             [ ( "hero-slider", 25 )
@@ -35,7 +35,7 @@ data Action
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: forall r w i . Action -> Model -> ( Model, Cmd Action )
+update :: forall r w i . Action -> State -> ( State, Cmd Action )
 update w i model =
     case w i of
         Changed id value ->
@@ -47,7 +47,7 @@ update w i model =
         Focused _ ->
             ( model, Cmd.none )
 
-view :: forall r w i . Model -> CatalogPage Action
+view :: forall r w i . State -> CatalogPage Action
 view model =
     { title: "Slider"
     , prelude: "Sliders let users select from a range of values by moving the slider thumb."
@@ -69,7 +69,7 @@ view model =
         ]
     }
 
-heroSlider :: forall r w i . Model -> HH.HTML Action
+heroSlider :: forall r w i . State -> HH.HTML Action
 heroSlider model =
     let
         id =
@@ -81,7 +81,7 @@ heroSlider model =
             , onInput = (Changed id)
         )
 
-continuousSlider :: forall r w i . Model -> HH.HTML Action
+continuousSlider :: forall r w i . State -> HH.HTML Action
 continuousSlider model =
     let
         id =
@@ -95,7 +95,7 @@ continuousSlider model =
             , max = (Just 50)
         )
 
-discreteSlider :: forall r w i . Model -> HH.HTML Action
+discreteSlider :: forall r w i . State -> HH.HTML Action
 discreteSlider model =
     let
         id =
@@ -111,7 +111,7 @@ discreteSlider model =
             , step = (Just 1)
         )
 
-discreteSliderWithTickMarks :: forall r w i . Model -> HH.HTML Action
+discreteSliderWithTickMarks :: forall r w i . State -> HH.HTML Action
 discreteSliderWithTickMarks model =
     let
         id =
@@ -128,7 +128,7 @@ discreteSliderWithTickMarks model =
             , displayMarkers = true
         )
 
-focusSlider :: forall r w i . Model -> HH.HTML Action
+focusSlider :: forall r w i . State -> HH.HTML Action
 focusSlider model =
     let
         id =

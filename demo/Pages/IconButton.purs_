@@ -17,11 +17,11 @@ import HalogenMWC.IconToggle as IconToggle
 import Material.Classes.Typography
 import Set
 
-data Model =
+data State =
     { ons :: Set String }
 
-defaultModel :: forall r w i . Model
-defaultModel =
+initialState :: forall r w i . State
+initialState =
     { ons: Set.empty }
 
 data Action
@@ -29,7 +29,7 @@ data Action
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: forall r w i . Action -> Model -> ( Model, Cmd Action )
+update :: forall r w i . Action -> State -> ( State, Cmd Action )
 update w i model =
     case w i of
         Toggle id ->
@@ -50,7 +50,7 @@ update w i model =
         Focused _ ->
             ( model, Cmd.none )
 
-view :: forall r w i . Model -> CatalogPage Action
+view :: forall r w i . State -> CatalogPage Action
 view model =
     { title: "Icon Button"
     , prelude: "Icons are appropriate for buttons that allow a user to take actions or make a selection, such as adding or removing a star to an item."

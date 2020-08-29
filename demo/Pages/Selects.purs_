@@ -16,7 +16,7 @@ import HalogenMWC.Select as Select
 import HalogenMWC.Select.Item as SelectItem
 import Material.Classes.Typography
 
-data Model =
+data State =
     { hero :: Maybe Fruit
     , filled :: Maybe Fruit
     , outlined :: Maybe Fruit
@@ -25,8 +25,8 @@ data Model =
     , focused :: Maybe Fruit
     }
 
-defaultModel :: forall r w i . Model
-defaultModel =
+initialState :: forall r w i . State
+initialState =
     { hero: Nothing
     , filled: Nothing
     , outlined: Nothing
@@ -50,7 +50,7 @@ data Action
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: forall r w i . Action -> Model -> ( Model, Cmd Action )
+update :: forall r w i . Action -> State -> ( State, Cmd Action )
 update w i model =
     case w i of
         HeroChanged hero ->
@@ -77,7 +77,7 @@ update w i model =
         Focused _ ->
             ( model, Cmd.none )
 
-view :: forall r w i . Model -> CatalogPage Action
+view :: forall r w i . State -> CatalogPage Action
 view model =
     { title: "Select"
     , prelude: "Selects allow users to select from a single-option menu."
@@ -101,7 +101,7 @@ view model =
         ]
     }
 
-heroSelect :: forall r w i . Model -> HH.HTML Action
+heroSelect :: forall r w i . State -> HH.HTML Action
 heroSelect model =
     Select.filled
         (Select.defaultConfig
@@ -131,7 +131,7 @@ remainingItems =
         [ HH.text "Banana" ]
     ]
 
-filledSelect :: forall r w i . Model -> HH.HTML Action
+filledSelect :: forall r w i . State -> HH.HTML Action
 filledSelect model =
     Select.filled
         (Select.defaultConfig
@@ -142,7 +142,7 @@ filledSelect model =
         firstItem
         remainingItems
 
-outlinedSelect :: forall r w i . Model -> HH.HTML Action
+outlinedSelect :: forall r w i . State -> HH.HTML Action
 outlinedSelect model =
     Select.outlined
         (Select.defaultConfig
@@ -153,7 +153,7 @@ outlinedSelect model =
         firstItem
         remainingItems
 
-filledWithIconSelect :: forall r w i . Model -> HH.HTML Action
+filledWithIconSelect :: forall r w i . State -> HH.HTML Action
 filledWithIconSelect model =
     Select.filled
         (Select.defaultConfig
@@ -165,7 +165,7 @@ filledWithIconSelect model =
         firstItem
         remainingItems
 
-outlinedWithIconSelect :: forall r w i . Model -> HH.HTML Action
+outlinedWithIconSelect :: forall r w i . State -> HH.HTML Action
 outlinedWithIconSelect model =
     Select.outlined
         (Select.defaultConfig
@@ -177,7 +177,7 @@ outlinedWithIconSelect model =
         firstItem
         remainingItems
 
-focusSelect :: forall r w i . Model -> HH.HTML Action
+focusSelect :: forall r w i . State -> HH.HTML Action
 focusSelect model =
     HH.div
         [ HP.style "display: flex; align-items: center;"

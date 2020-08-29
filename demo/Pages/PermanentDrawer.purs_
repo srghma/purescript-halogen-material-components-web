@@ -3,23 +3,23 @@ module Demo.Pages.PermanentDrawer where
 import Demo.DrawerPage as DrawerPage
 import HalogenMWC.Drawer.Permanent as PermanentDrawer
 
-data Model =
+data State =
     { selectedIndex :: Int }
 
-defaultModel :: forall r w i . Model
-defaultModel =
+initialState :: forall r w i . State
+initialState =
     { selectedIndex: 0 }
 
 data Action
     = SetSelectedIndex Int
 
-update :: forall r w i . Action -> Model -> Model
+update :: forall r w i . Action -> State -> State
 update w i model =
     case w i of
         SetSelectedIndex index ->
             { model | selectedIndex = index }
 
-view :: forall r w i . Model -> DrawerPage Action
+view :: forall r w i . State -> DrawerPage Action
 view model =
     { title: "Permanent Drawer"
     , drawer =

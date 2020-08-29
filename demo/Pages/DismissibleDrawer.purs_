@@ -1,7 +1,7 @@
 module Demo.Pages.DismissibleDrawer where
-    ( Model
+    ( State
     , Action(..)
-    , defaultModel
+    , initialState
     , update
     , view
     )
@@ -9,13 +9,13 @@ module Demo.Pages.DismissibleDrawer where
 import Demo.DrawerPage as DrawerPage
 import HalogenMWC.Drawer.Dismissible as DismissibleDrawer
 
-data Model =
+data State =
     { open :: Boolean
     , selectedIndex :: Int
     }
 
-defaultModel :: forall r w i . Model
-defaultModel =
+initialState :: forall r w i . State
+initialState =
     { open: false
     , selectedIndex: 0
     }
@@ -25,7 +25,7 @@ data Action
     | CloseDrawer
     | SetSelectedIndex Int
 
-update :: forall r w i . Action -> Model -> Model
+update :: forall r w i . Action -> State -> State
 update w i model =
     case w i of
         ToggleDrawer ->
@@ -37,7 +37,7 @@ update w i model =
         SetSelectedIndex index ->
             { model | selectedIndex = index }
 
-view :: forall r w i . Model -> DrawerPage Action
+view :: forall r w i . State -> DrawerPage Action
 view model =
     { title: "Dismissible Drawer"
     , drawer =

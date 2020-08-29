@@ -1,7 +1,7 @@
 module Demo.Pages.Drawer where
-    ( Model
+    ( State
     , Action(..)
-    , defaultModel
+    , initialState
     , update
     , view
     )
@@ -23,21 +23,20 @@ import HalogenMWC.List as List
 import HalogenMWC.List.Item as List.Item
 import Material.Classes.Typography
 
-data Model =
-    {}
+data State =
+    Unit
 
-defaultModel :: forall r w i . Model
-defaultModel =
-    {}
+initialState :: forall r w i . State
+initialState = unit
 
 data Action
     = NoOp
 
-update :: forall r w i . Action -> Model -> Model
+update :: forall r w i . Action -> State -> State
 update w i model =
     model
 
-view :: forall r w i . Model -> CatalogPage Action
+view :: forall r w i . State -> CatalogPage Action
 view model =
     { title: "Drawer"
     , prelude: "The navigation drawer slides in from the left and contains the navigation destinations for your app."

@@ -130,7 +130,7 @@ resourcesList { materialDesignGuidelines, documentation, sourceCode } =
             )
             [ List.Item.graphic resourcesGraphic
                 [ HH.img
-                    (HP.src "images/ic_material_design_24px.svg"
+                    (HP.src "https://aforemny.github.io/material-components-web-elm/images/ic_material_design_24px.svg"
                         :: resourcesGraphic
                     )
                     []
@@ -145,7 +145,7 @@ resourcesList { materialDesignGuidelines, documentation, sourceCode } =
             )
             [ List.Item.graphic resourcesGraphic
                 [ HH.img
-                    (HP.src "images/ic_drive_document_24px.svg"
+                    (HP.src "https://aforemny.github.io/material-components-web-elm/images/ic_drive_document_24px.svg"
                         :: resourcesGraphic
                     )
                     []
@@ -159,7 +159,7 @@ resourcesList { materialDesignGuidelines, documentation, sourceCode } =
             )
             [ List.Item.graphic resourcesGraphic
                 [ HH.img
-                    (HP.src "images/ic_code_24px.svg"
+                    (HP.src "https://aforemny.github.io/material-components-web-elm/images/ic_code_24px.svg"
                         :: resourcesGraphic
                     )
                     []

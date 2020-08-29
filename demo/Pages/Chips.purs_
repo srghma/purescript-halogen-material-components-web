@@ -34,7 +34,7 @@ import HalogenMWC.ChipSet.Input as InputChipSet
 import Material.Classes.Typography
 import Set
 
-data Model =
+data State =
     { chip :: Maybe String
     , size :: Size
     , inputChips :: Array String
@@ -44,8 +44,8 @@ data Model =
     , focus :: String
     }
 
-defaultModel :: forall r w i . Model
-defaultModel =
+initialState :: forall r w i . State
+initialState =
     { chip: Just "Chip One"
     , size: Small
     , inputChips: [ "Portland", "Biking" ]
@@ -74,7 +74,7 @@ data Action
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: forall r w i . Action -> Model -> ( Model, Cmd Action )
+update :: forall r w i . Action -> State -> ( State, Cmd Action )
 update w i model =
     case w i of
         ChipChanged chip ->
@@ -164,7 +164,7 @@ update w i model =
         Focused _ ->
             ( model, Cmd.none )
 
-view :: forall r w i . Model -> CatalogPage Action
+view :: forall r w i . State -> CatalogPage Action
 view model =
     { title: "Chips"
     , prelude: "Chips are compact elements that allow users to enter information, select a choice, filter content, or trigger an action."
@@ -193,7 +193,7 @@ view model =
         ]
     }
 
-heroChips :: forall r w i . Model -> Array (HH.HTML Action)
+heroChips :: forall r w i . State -> Array (HH.HTML Action)
 heroChips model =
     [ ChoiceChipSet.chipSet
         (ChoiceChipSet.defaultConfig { toLabel: identity }
@@ -207,7 +207,7 @@ heroChips model =
         ]
     ]
 
-choiceChips :: forall r w i . Model -> HH.HTML Action
+choiceChips :: forall r w i . State -> HH.HTML Action
 choiceChips model =
     let
         toLabel size =
@@ -239,7 +239,7 @@ choiceChips model =
         , ChoiceChip.chip ChoiceChip.defaultConfig ExtraLarge
         ]
 
-inputChips :: forall r w i . Model -> HH.HTML Action
+inputChips :: forall r w i . State -> HH.HTML Action
 inputChips model =
     HH.div
         [ HP.style "position: relative; display: flex;"
@@ -265,7 +265,7 @@ inputChips model =
             []
         ]
 
-filterChips1 :: forall r w i . Model -> HH.HTML Action
+filterChips1 :: forall r w i . State -> HH.HTML Action
 filterChips1 model =
     let
         chip accessory =
@@ -285,7 +285,7 @@ filterChips1 model =
             ]
         )
 
-filterChips2 :: forall r w i . Model -> HH.HTML Action
+filterChips2 :: forall r w i . State -> HH.HTML Action
 filterChips2 model =
     let
         chip label =
@@ -306,7 +306,7 @@ filterChips2 model =
             ]
         )
 
-actionChips :: forall r w i . Model -> HH.HTML Action
+actionChips :: forall r w i . State -> HH.HTML Action
 actionChips model =
     let
         chip ( icon, label ) =
@@ -325,7 +325,7 @@ actionChips model =
             ]
         )
 
-shapedChips :: forall r w i . Model -> HH.HTML w i
+shapedChips :: forall r w i . State -> HH.HTML w i
 shapedChips model =
     let
         chip label =
@@ -344,7 +344,7 @@ shapedChips model =
             ]
         )
 
-focusChips :: forall r w i . Model -> HH.HTML Action
+focusChips :: forall r w i . State -> HH.HTML Action
 focusChips model =
     HH.div []
         [ ChoiceChipSet.chipSet

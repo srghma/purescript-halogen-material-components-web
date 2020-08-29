@@ -18,18 +18,18 @@ import HalogenMWC.List.Item as List.Item
 import HalogenMWC.Menu as Menu
 import Material.Classes.Typography
 
-data Model =
+data State =
     { open :: Boolean }
 
-defaultModel :: forall r w i . Model
-defaultModel =
+initialState :: forall r w i . State
+initialState =
     { open: false }
 
 data Action
     = Open
     | Close
 
-update :: forall r w i . Action -> Model -> Model
+update :: forall r w i . Action -> State -> State
 update w i model =
     case w i of
         Open ->
@@ -38,7 +38,7 @@ update w i model =
         Close ->
             { model | open = false }
 
-view :: forall r w i . Model -> CatalogPage Action
+view :: forall r w i . State -> CatalogPage Action
 view model =
     { title: "Menu"
     , prelude: "Menus display a list of choices on a transient sheet of material."
@@ -83,7 +83,7 @@ listItem :: forall r w i . String -> ListItem Action
 listItem label =
     List.Item.listItem (List.Item.defaultConfig { onClick = Close) [ HH.text label ]
 
-heroMenu :: forall r w i . Model -> HH.HTML w i
+heroMenu :: forall r w i . State -> HH.HTML w i
 heroMenu model =
     HH.div
         [ HP.class_ "mdc-menu-surface mdc-menu-surface--open"

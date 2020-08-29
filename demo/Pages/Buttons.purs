@@ -14,15 +14,14 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Button as Button
 import Material.Classes.Typography
 
-data Model = {}
+data State = Unit
 
-defaultModel :: forall r w i . Model
-defaultModel =
-    {}
+initialState :: forall r w i . State
+initialState = unit
 
 data Action = Focus String
 
-update :: forall r w i . Action -> Model -> ( Model, Cmd Action )
+update :: forall r w i . Action -> State -> ( State, Cmd Action )
 update w i model =
     case w i of
         Focus id ->
@@ -31,7 +30,7 @@ update w i model =
         Focused _ ->
             ( model, Cmd.none )
 
-view :: forall r w i . Model -> CatalogPage Action
+view :: forall r w i . State -> CatalogPage Action
 view model =
     { title: "Button"
     , prelude: "Buttons communicate an action a user can take. They are typically placed throughout your UI, in places like dialogs, forms, cards, and toolbars."

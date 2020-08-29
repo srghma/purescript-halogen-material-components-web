@@ -17,18 +17,18 @@ import HalogenMWC.TextArea as TextArea
 import HalogenMWC.TextField as TextField
 import Material.Classes.Typography
 
-data Model =
+data State =
     { value :: String }
 
-defaultModel :: forall r w i . Model
-defaultModel =
+initialState :: forall r w i . State
+initialState =
     { value: "" }
 
 data Action
     = Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: forall r w i . Action -> Model -> ( Model, Cmd Action )
+update :: forall r w i . Action -> State -> ( State, Cmd Action )
 update w i model =
     case w i of
         Focus id ->
@@ -37,7 +37,7 @@ update w i model =
         Focused _ ->
             ( model, Cmd.none )
 
-view :: forall r w i . Model -> CatalogPage Action
+view :: forall r w i . State -> CatalogPage Action
 view model =
     { title: "Text Field"
     , prelude: "Text fields allow users to input, edit, and select text. Text fields typically reside in forms but can appear in other places, like dialog boxes and search."
@@ -71,7 +71,7 @@ view model =
         ]
     }
 
-heroTextFields :: forall r w i . Model -> HH.HTML Action
+heroTextFields :: forall r w i . State -> HH.HTML Action
 heroTextFields model =
     HH.div heroTextFieldContainer
         [ HH.div textFieldContainerHero
@@ -88,7 +88,7 @@ heroTextFields model =
             ]
         ]
 
-filledTextFields :: forall r w i . Model -> HH.HTML w i
+filledTextFields :: forall r w i . State -> HH.HTML w i
 filledTextFields model =
     HH.div textFieldRow
         [ HH.div textFieldContainer
@@ -116,7 +116,7 @@ filledTextFields model =
             ]
         ]
 
-shapedFilledTextFields :: forall r w i . Model -> HH.HTML w i
+shapedFilledTextFields :: forall r w i . State -> HH.HTML w i
 shapedFilledTextFields model =
     HH.div textFieldRow
         [ HH.div textFieldContainer
@@ -147,7 +147,7 @@ shapedFilledTextFields model =
             ]
         ]
 
-outlinedTextFields :: forall r w i . Model -> HH.HTML w i
+outlinedTextFields :: forall r w i . State -> HH.HTML w i
 outlinedTextFields model =
     HH.div textFieldRow
         [ HH.div textFieldContainer
@@ -175,7 +175,7 @@ outlinedTextFields model =
             ]
         ]
 
-shapedOutlinedTextFields :: forall r w i . Model -> HH.HTML w i
+shapedOutlinedTextFields :: forall r w i . State -> HH.HTML w i
 shapedOutlinedTextFields model =
     HH.div textFieldRow
         [ HH.div textFieldContainer
@@ -203,7 +203,7 @@ shapedOutlinedTextFields model =
             ]
         ]
 
-textFieldsWithoutLabel :: forall r w i . Model -> HH.HTML w i
+textFieldsWithoutLabel :: forall r w i . State -> HH.HTML w i
 textFieldsWithoutLabel model =
     HH.div textFieldRow
         [ HH.div textFieldContainer
@@ -226,7 +226,7 @@ textFieldsWithoutLabel model =
             ]
         ]
 
-textFieldsWithCharacterCounter :: forall r w i . Model -> HH.HTML w i
+textFieldsWithCharacterCounter :: forall r w i . State -> HH.HTML w i
 textFieldsWithCharacterCounter model =
     HH.div textFieldRow
         [ HH.div textFieldContainer
@@ -252,7 +252,7 @@ textFieldsWithCharacterCounter model =
             ]
         ]
 
-textareaTextField :: forall r w i . Model -> HH.HTML w i
+textareaTextField :: forall r w i . State -> HH.HTML w i
 textareaTextField model =
     HH.div textFieldContainer
         [ TextArea.outlined
@@ -260,7 +260,7 @@ textareaTextField model =
         , demoHelperText
         ]
 
-fullwidthTextField :: forall r w i . Model -> HH.HTML w i
+fullwidthTextField :: forall r w i . State -> HH.HTML w i
 fullwidthTextField model =
     HH.div textFieldContainer
         [ TextField.filled
@@ -271,7 +271,7 @@ fullwidthTextField model =
         , demoHelperText
         ]
 
-fullwidthTextareaTextField :: forall r w i . Model -> HH.HTML w i
+fullwidthTextareaTextField :: forall r w i . State -> HH.HTML w i
 fullwidthTextareaTextField model =
     HH.div textFieldRowFullwidth
         [ HH.div textFieldContainer

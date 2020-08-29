@@ -13,21 +13,20 @@ import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.TopAppBar as TopAppBar
 
-data Model =
-    {}
+data State =
+    Unit
 
-defaultModel :: forall r w i . Model
-defaultModel =
-    {}
+initialState :: forall r w i . State
+initialState = unit
 
 data Action
     = NoOp
 
-update :: forall r w i . Action -> Model -> Model
+update :: forall r w i . Action -> State -> State
 update w i model =
     model
 
-view :: forall r w i . Model -> TopAppBarPage Action
+view :: forall r w i . State -> TopAppBarPage Action
 view model =
     { fixedAdjust: TopAppBar.shortFixedAdjust
     , topAppBar =

@@ -20,15 +20,15 @@ import HalogenMWC.Radio as Radio
 import Material.Classes.Typography
 import Set
 
-data Model =
+data State =
     { checkboxes :: Set String
     , radio :: Maybe String
     , activated :: String
     , shapedActivated :: String
     }
 
-defaultModel :: forall r w i . Model
-defaultModel =
+initialState :: forall r w i . State
+initialState =
     { checkboxes: Set.empty
     , radio: Nothing
     , activated: "Star"
@@ -43,7 +43,7 @@ data Action
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: forall r w i . Action -> Model -> ( Model, Cmd Action )
+update :: forall r w i . Action -> State -> ( State, Cmd Action )
 update w i model =
     case w i of
         ToggleCheckbox id ->
@@ -73,7 +73,7 @@ update w i model =
         Focused _ ->
             ( model, Cmd.none )
 
-view :: forall r w i . Model -> CatalogPage Action
+view :: forall r w i . State -> CatalogPage Action
 view model =
     { title: "List"
     , prelude: "Lists present multiple line items vertically as a single continuous element."
@@ -180,7 +180,7 @@ trailingIconList =
         listItem
         (List.repeat 2 listItem)
 
-activatedItemList :: forall r w i . Model -> HH.HTML Action
+activatedItemList :: forall r w i . State -> HH.HTML Action
 activatedItemList model =
     let
         listItem ( icon, label ) =
@@ -206,7 +206,7 @@ activatedItemList model =
             ]
         )
 
-shapedActivatedItemList :: forall r w i . Model -> HH.HTML Action
+shapedActivatedItemList :: forall r w i . State -> HH.HTML Action
 shapedActivatedItemList model =
     let
         listItem ( icon, label ) =
@@ -267,7 +267,7 @@ folderList =
             ]
         )
 
-listWithTrailingCheckbox :: forall r w i . Model -> HH.HTML Action
+listWithTrailingCheckbox :: forall r w i . State -> HH.HTML Action
 listWithTrailingCheckbox model =
     let
         listItem label =
@@ -314,7 +314,7 @@ listWithTrailingCheckbox model =
             ]
         )
 
-listWithTrailingRadioButton :: forall r w i . Model -> HH.HTML Action
+listWithTrailingRadioButton :: forall r w i . State -> HH.HTML Action
 listWithTrailingRadioButton model =
     let
         listItem label =

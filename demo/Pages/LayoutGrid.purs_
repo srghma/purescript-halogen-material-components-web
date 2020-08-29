@@ -1,7 +1,7 @@
 module Demo.Pages.LayoutGrid where
-    ( Model
+    ( State
     , Action(..)
-    , defaultModel
+    , initialState
     , update
     , view
     )
@@ -20,21 +20,20 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.LayoutGrid as LayoutGrid
 import Material.Classes.Typography
 
-data Model =
-    {}
+data State =
+    Unit
 
-defaultModel :: forall r w i . Model
-defaultModel =
-    {}
+initialState :: forall r w i . State
+initialState = unit
 
 data Action
     = NoOp
 
-update :: forall r w i . Action -> Model -> Model
+update :: forall r w i . Action -> State -> State
 update w i model =
     model
 
-view :: forall r w i . Model -> CatalogPage Action
+view :: forall r w i . State -> CatalogPage Action
 view model =
     { title: "Layout Grid"
     , prelude: "Material design’s responsive UI is based on a 12-column grid layout."

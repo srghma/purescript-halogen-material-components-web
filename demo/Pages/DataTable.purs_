@@ -15,11 +15,11 @@ import HalogenMWC.DataTable as DataTable
 import Material.Classes.Typography
 import Set
 
-data Model =
+data State =
     { selected :: Set String }
 
-defaultModel :: forall r w i . Model
-defaultModel =
+initialState :: forall r w i . State
+initialState =
     { selected: Set.empty }
 
 data Action
@@ -28,7 +28,7 @@ data Action
     | AllSelected
     | AllUnselected
 
-update :: forall r w i . Action -> Model -> Model
+update :: forall r w i . Action -> State -> State
 update w i model =
     case w i of
         NoOp ->
@@ -54,7 +54,7 @@ update w i model =
         AllUnselected ->
             { model | selected = Set.empty }
 
-view :: forall r w i . Model -> CatalogPage Action
+view :: forall r w i . State -> CatalogPage Action
 view model =
     { title: "Data Table"
     , prelude: "Data tables display information in a way that’s easy to scan, so that users can look for patterns and insights."
@@ -119,7 +119,7 @@ standardDataTable =
         , tbody: map row data
         }
 
-dataTableWithRowSelection :: forall r w i . Model -> HH.HTML Action
+dataTableWithRowSelection :: forall r w i . State -> HH.HTML Action
 dataTableWithRowSelection model =
     let
         allSelected =

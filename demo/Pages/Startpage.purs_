@@ -27,7 +27,7 @@ view =
                             { additionalAttributes = [ TopAppBar.navigationIcon ]
                         )
                         [ HH.img
-                            [ HP.src "images/ic_component_24px_white.svg"
+                            [ HP.src "https://aforemny.github.io/material-components-web-elm/images/ic_component_24px_white.svg"
                             ]
                             []
                         ]

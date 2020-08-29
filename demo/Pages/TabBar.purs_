@@ -16,15 +16,15 @@ import HalogenMWC.Tab as Tab
 import HalogenMWC.TabBar as TabBar
 import Material.Classes.Typography
 
-data Model =
+data State =
     { activeHeroTab :: Int
     , activeIconTab :: Int
     , activeStackedTab :: Int
     , activeScrollingTab :: Int
     }
 
-defaultModel :: forall r w i . Model
-defaultModel =
+initialState :: forall r w i . State
+initialState =
     { activeHeroTab: 0
     , activeIconTab: 0
     , activeStackedTab: 0
@@ -39,7 +39,7 @@ data Action
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: forall r w i . Action -> Model -> ( Model, Cmd Action )
+update :: forall r w i . Action -> State -> ( State, Cmd Action )
 update w i model =
     case w i of
         SetActiveHeroTab index ->
@@ -60,7 +60,7 @@ update w i model =
         Focused _ ->
             ( model, Cmd.none )
 
-view :: forall r w i . Model -> CatalogPage Action
+view :: forall r w i . State -> CatalogPage Action
 view model =
     { title: "Tab Bar"
     , prelude: "Tabs organize and allow navigation between groups of content that are related and at the same level of hierarchy. The Tab Bar contains the Tab Scroller and Tab components."
@@ -83,7 +83,7 @@ view model =
         ]
     }
 
-heroTabs :: forall r w i . Model -> String -> HH.HTML Action
+heroTabs :: forall r w i . State -> String -> HH.HTML Action
 heroTabs model index =
     TabBar.tabBar TabBar.defaultConfig
         [ Tab.tab
@@ -106,7 +106,7 @@ heroTabs model index =
             { label: "About Us", icon: Nothing }
         ]
 
-tabsWithIcons :: forall r w i . Model -> HH.HTML Action
+tabsWithIcons :: forall r w i . State -> HH.HTML Action
 tabsWithIcons model =
     let
         config index =
@@ -120,7 +120,7 @@ tabsWithIcons model =
         , Tab.tab (config 2) { label: "Favorites", icon: Just "favorite" }
         ]
 
-tabsWithStackedIcons :: forall r w i . Model -> HH.HTML Action
+tabsWithStackedIcons :: forall r w i . State -> HH.HTML Action
 tabsWithStackedIcons model =
     let
         config index =
@@ -138,7 +138,7 @@ tabsWithStackedIcons model =
         , Tab.tab (config 2) { label: "Favorites", icon: Just "favorite" }
         ]
 
-scrollingTabs :: forall r w i . Model -> HH.HTML Action
+scrollingTabs :: forall r w i . State -> HH.HTML Action
 scrollingTabs model =
     let
         config index =
@@ -154,7 +154,7 @@ scrollingTabs model =
             [ "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight" ]
         )
 
-focusTabs :: forall r w i . Model -> HH.HTML Action
+focusTabs :: forall r w i . State -> HH.HTML Action
 focusTabs model =
     HH.div []
         [ TabBar.tabBar

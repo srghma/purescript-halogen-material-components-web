@@ -17,11 +17,11 @@ import HalogenMWC.FormField as FormField
 import HalogenMWC.Switch as Switch
 import Material.Classes.Typography
 
-data Model =
+data State =
     { switches :: Dict String Boolean }
 
-defaultModel :: forall r w i . Model
-defaultModel =
+initialState :: forall r w i . State
+initialState =
     { switches: Dict.fromList [ ( "hero-switch", true ) ] }
 
 data Action
@@ -29,7 +29,7 @@ data Action
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: forall r w i . Action -> Model -> ( Model, Cmd Action )
+update :: forall r w i . Action -> State -> ( State, Cmd Action )
 update w i model =
     case w i of
         Toggle id ->
@@ -48,11 +48,11 @@ update w i model =
         Focused _ ->
             ( model, Cmd.none )
 
-isChecked :: forall r w i . String -> Model -> Boolean
+isChecked :: forall r w i . String -> State -> Boolean
 isChecked id model =
     Maybe.fromMaybe false (Dict.get id model.switches)
 
-view :: forall r w i . Model -> CatalogPage Action
+view :: forall r w i . State -> CatalogPage Action
 view model =
     { title: "Switch"
     , prelude: "Switches communicate an action a user can take. They are typically placed throughout your UI, in places like dialogs, forms, cards, and toolbars."
@@ -70,7 +70,7 @@ view model =
         ]
     }
 
-heroSwitch :: forall r w i . Model -> Array (HH.HTML Action)
+heroSwitch :: forall r w i . State -> Array (HH.HTML Action)
 heroSwitch model =
     let
         id =
@@ -90,7 +90,7 @@ heroSwitch model =
         ]
     ]
 
-demoSwitch :: forall r w i . Model -> HH.HTML Action
+demoSwitch :: forall r w i . State -> HH.HTML Action
 demoSwitch model =
     let
         id =
@@ -109,7 +109,7 @@ demoSwitch model =
             )
         ]
 
-focusSwitch :: forall r w i . Model -> HH.HTML Action
+focusSwitch :: forall r w i . State -> HH.HTML Action
 focusSwitch model =
     let
         id =

@@ -15,11 +15,11 @@ import HalogenMWC.Button as Button
 import HalogenMWC.Snackbar as Snackbar
 import Platform.Cmd
 
-data Model =
+data State =
     { queue :: Snackbar.Queue Action }
 
-defaultModel :: forall r w i . Model
-defaultModel =
+initialState :: forall r w i . State
+initialState =
     { queue: Snackbar.initialQueue }
 
 data Action
@@ -29,7 +29,7 @@ data Action
     | SnackbarClosed Snackbar.MessageId
     | Click Snackbar.MessageId
 
-update :: forall r w i . Action -> Model -> ( Model, Cmd Action )
+update :: forall r w i . Action -> State -> ( State, Cmd Action )
 update w i model =
     case w i of
         ShowBaseline ->
@@ -76,7 +76,7 @@ stackedMessage =
         , onActionButtonClick = Click
         , actionIcon = (Just "close")
 
-view :: forall r w i . Model -> CatalogPage Action
+view :: forall r w i . State -> CatalogPage Action
 view model =
     { title: "Snackbar"
     , prelude: "Snackbars provide brief feedback about an operation through a message at the bottom of the screen."
