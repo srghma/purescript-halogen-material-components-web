@@ -76,7 +76,7 @@ component =
         )
         (map
             (\{ route, title, icon } ->
-                ImageList.Item.ImageListItem
+                ImageList.Item.ImageList.Item
                 ( { label: Just title
                   , href: Just ("#" <> Routing.Duplex.print routeCodec route)
                   , image: icon

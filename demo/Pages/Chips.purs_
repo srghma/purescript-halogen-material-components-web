@@ -23,14 +23,14 @@ import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 import HalogenMWC.Button as Button
-import HalogenMWC.Chip.Action as ActionChip
-import HalogenMWC.Chip.Choice as ChoiceChip
-import HalogenMWC.Chip.Filter as FilterChip
-import HalogenMWC.Chip.Input as InputChip
-import HalogenMWC.ChipSet.Action as ActionChipSet
-import HalogenMWC.ChipSet.Choice as ChoiceChipSet
-import HalogenMWC.ChipSet.Filter as FilterChipSet
-import HalogenMWC.ChipSet.Input as InputChipSet
+import HalogenMWC.Chip.Action as Chip.Action
+import HalogenMWC.Chip.Choice as Chip.Choice
+import HalogenMWC.Chip.Filter as Chip.Filter
+import HalogenMWC.Chip.Input as Chip.Input
+import HalogenMWC.ChipSet.Action as ChipSet.Action
+import HalogenMWC.ChipSet.Choice as ChipSet.Choice
+import HalogenMWC.ChipSet.Filter as ChipSet.Filter
+import HalogenMWC.ChipSet.Input as ChipSet.Input
 import Material.Classes.Typography
 import Set
 
@@ -68,7 +68,7 @@ data Action
     | AccessoriesChanged String
     | ContactChanged String
     | InputChanged String
-    | InputChipDeleted String
+    | Chip.InputDeleted String
     | KeyPressed Int
     | FocusChanged String
     | Focus String
@@ -114,7 +114,7 @@ update w i model =
             , Cmd.none
             )
 
-        InputChipDeleted inputChip ->
+        Chip.InputDeleted inputChip ->
             ( { model | inputChips = Array.filter ((/=) inputChip) model.inputChips }
             , Cmd.none
             )
@@ -195,15 +195,15 @@ view model =
 
 heroChips :: forall r w i . State -> Array (HH.HTML Action)
 heroChips model =
-    [ ChoiceChipSet.chipSet
-        (ChoiceChipSet.defaultConfig { toLabel: identity }
+    [ Chip.ChoiceSet.chipSet
+        (Chip.ChoiceSet.defaultConfig { toLabel: identity }
             , selected = model.chip
             , onChange = ChipChanged
         )
-        [ ChoiceChip.chip ChoiceChip.defaultConfig "Chip One"
-        , ChoiceChip.chip ChoiceChip.defaultConfig "Chip Two"
-        , ChoiceChip.chip ChoiceChip.defaultConfig "Chip Three"
-        , ChoiceChip.chip ChoiceChip.defaultConfig "Chip Four"
+        [ Chip.Choice.chip Chip.Choice.defaultConfig "Chip One"
+        , Chip.Choice.chip Chip.Choice.defaultConfig "Chip Two"
+        , Chip.Choice.chip Chip.Choice.defaultConfig "Chip Three"
+        , Chip.Choice.chip Chip.Choice.defaultConfig "Chip Four"
         ]
     ]
 
@@ -227,16 +227,16 @@ choiceChips model =
                 ExtraLarge ->
                     "Extra Large"
     in
-    ChoiceChipSet.chipSet
-        (ChoiceChipSet.defaultConfig { toLabel: toLabel }
+    Chip.ChoiceSet.chipSet
+        (Chip.ChoiceSet.defaultConfig { toLabel: toLabel }
             , selected = (Just model.size)
             , onChange = SizeChanged
         )
-        [ ChoiceChip.chip ChoiceChip.defaultConfig ExtraSmall
-        , ChoiceChip.chip ChoiceChip.defaultConfig Small
-        , ChoiceChip.chip ChoiceChip.defaultConfig Medium
-        , ChoiceChip.chip ChoiceChip.defaultConfig Large
-        , ChoiceChip.chip ChoiceChip.defaultConfig ExtraLarge
+        [ Chip.Choice.chip Chip.Choice.defaultConfig ExtraSmall
+        , Chip.Choice.chip Chip.Choice.defaultConfig Small
+        , Chip.Choice.chip Chip.Choice.defaultConfig Medium
+        , Chip.Choice.chip Chip.Choice.defaultConfig Large
+        , Chip.Choice.chip Chip.Choice.defaultConfig ExtraLarge
         ]
 
 inputChips :: forall r w i . State -> HH.HTML Action
@@ -244,13 +244,13 @@ inputChips model =
     HH.div
         [ HP.style "position: relative; display: flex;"
         ]
-        [ InputChipSet.chipSet []
+        [ Chip.InputSet.chipSet []
             (map
                 (\label ->
                     ( label
-                    , InputChip.chip
-                        (InputChip.defaultConfig
-                            { onDelete = (InputChipDeleted label)
+                    , Chip.Input.chip
+                        (Chip.Input.defaultConfig
+                            { onDelete = (Chip.InputDeleted label)
                         )
                         label
                     )
@@ -269,14 +269,14 @@ filterChips1 :: forall r w i . State -> HH.HTML Action
 filterChips1 model =
     let
         chip accessory =
-            FilterChip.chip
-                (FilterChip.defaultConfig
+            Chip.Filter.chip
+                (Chip.Filter.defaultConfig
                     { selected = (Set.member accessory model.accessories)
                     , onChange = (AccessoriesChanged accessory)
                 )
                 accessory
     in
-    FilterChipSet.chipSet []
+    Chip.FilterSet.chipSet []
         (map chip
             [ "Tops"
             , "Bottoms"
@@ -289,15 +289,15 @@ filterChips2 :: forall r w i . State -> HH.HTML Action
 filterChips2 model =
     let
         chip label =
-            FilterChip.chip
-                (FilterChip.defaultConfig
+            Chip.Filter.chip
+                (Chip.Filter.defaultConfig
                     { selected = (Set.member label model.contacts)
                     , icon = (Just "face")
                     , onChange = (ContactChanged label)
                 )
                 label
     in
-    FilterChipSet.chipSet []
+    Chip.FilterSet.chipSet []
         (map chip
             [ "Alice"
             , "Bob"
@@ -310,13 +310,13 @@ actionChips :: forall r w i . State -> HH.HTML Action
 actionChips model =
     let
         chip ( icon, label ) =
-            ActionChip.chip
-                (ActionChip.defaultConfig
+            Chip.Action.chip
+                (Chip.Action.defaultConfig
                     { icon = (Just icon)
                 )
                 label
     in
-    ActionChipSet.chipSet []
+    Chip.ActionSet.chipSet []
         (map chip
             [ ( "event", "Add to calendar" )
             , ( "bookmark", "Bookmark" )
@@ -329,13 +329,13 @@ shapedChips :: forall r w i . State -> HH.HTML w i
 shapedChips model =
     let
         chip label =
-            ActionChip.chip
-                (ActionChip.defaultConfig
+            Chip.Action.chip
+                (Chip.Action.defaultConfig
                     { additionalAttributes = [ HP.style "border-radius: 4px;" ]
                 )
                 label
     in
-    ActionChipSet.chipSet []
+    Chip.ActionSet.chipSet []
         (map chip
             [ "Bookcase"
             , "TV Stand"
@@ -347,14 +347,14 @@ shapedChips model =
 focusChips :: forall r w i . State -> HH.HTML Action
 focusChips model =
     HH.div []
-        [ ChoiceChipSet.chipSet
-            (ChoiceChipSet.defaultConfig { toLabel: identity }
+        [ Chip.ChoiceSet.chipSet
+            (Chip.ChoiceSet.defaultConfig { toLabel: identity }
                 , selected = (Just model.focus)
                 , onChange = FocusChanged
                 , additionalAttributes = [ HP.id_ "my-chips" ]
             )
-            [ ChoiceChip.chip ChoiceChip.defaultConfig "One"
-            , ChoiceChip.chip ChoiceChip.defaultConfig "Two"
+            [ Chip.Choice.chip Chip.Choice.defaultConfig "One"
+            , Chip.Choice.chip Chip.Choice.defaultConfig "Two"
             ]
         , HH.text "\u{00A0}"
         , Button.raised

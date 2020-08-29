@@ -13,7 +13,7 @@ import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Button as Button
 import HalogenMWC.Fab as Fab
-import HalogenMWC.Fab.Extended as ExtendedFab
+import HalogenMWC.Fab.Extended as Fab.Extended
 import Material.Classes.Typography
 
 data State =
@@ -51,18 +51,18 @@ view model =
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Mini Floating Action Button" ]
         , Fab.fab (Fab.defaultConfig { mini = true) "favorite_border"
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Extended FAB" ]
-        , ExtendedFab.fab (ExtendedFab.defaultConfig { icon = (Just "add"))
+        , Fab.Extended.fab (Fab.Extended.defaultConfig { icon = (Just "add"))
             "Create"
         , HH.h3 [ mdc_typography____subtitle1 ]
             [ HH.text "Extended FAB (Text label followed by icon)" ]
-        , ExtendedFab.fab
-            (ExtendedFab.defaultConfig
+        , Fab.Extended.fab
+            (Fab.Extended.defaultConfig
                 { icon = (Just "add")
                 , trailingIcon = true
             )
             "Create"
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Extended FAB (without icon)" ]
-        , ExtendedFab.fab ExtendedFab.defaultConfig "Create"
+        , Fab.Extended.fab Fab.Extended.defaultConfig "Create"
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "FAB (Shaped)" ]
         , HH.div [ HP.style "display: flex;" ]
             [ Fab.fab
@@ -80,7 +80,7 @@ view model =
                         ]
                 )
                 "favorite_border"
-            , ExtendedFab.fab (ExtendedFab.defaultConfig { icon = (Just "add"))
+            , Fab.Extended.fab (Fab.Extended.defaultConfig { icon = (Just "add"))
                 "Create"
             ]
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Focus FAB" ]

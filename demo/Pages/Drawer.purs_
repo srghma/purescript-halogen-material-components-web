@@ -17,7 +17,7 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
-import HalogenMWC.Drawer.Permanent as PermanentDrawer
+import HalogenMWC.Drawer.Permanent as Drawer.Permanent
 import HalogenMWC.Icon as Icon
 import HalogenMWC.List as List
 import HalogenMWC.List.Item as List.Item
@@ -72,12 +72,12 @@ heroDrawer =
                 , HH.text label
                 ]
     in
-    [ PermanentDrawer.drawer PermanentDrawer.defaultConfig
-        [ PermanentDrawer.header []
-            [ HH.h3 [ PermanentDrawer.title ] [ HH.text "Title" ]
-            , HH.h6 [ PermanentDrawer.subtitle ] [ HH.text "Subtitle" ]
+    [ Drawer.Permanent.drawer Drawer.Permanent.defaultConfig
+        [ Drawer.Permanent.header []
+            [ HH.h3 [ Drawer.Permanent.title ] [ HH.text "Title" ]
+            , HH.h6 [ Drawer.Permanent.subtitle ] [ HH.text "Subtitle" ]
             ]
-        , PermanentDrawer.content []
+        , Drawer.Permanent.content []
             [ List.list List.defaultConfig
                 (listItem ( true, "inbox", "Inbox" ))
                 (map listItem

@@ -20,11 +20,11 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
-import HalogenMWC.Drawer.Dismissible as DismissibleDrawer
-import HalogenMWC.Drawer.Permanent as PermanentDrawer
+import HalogenMWC.Drawer.Dismissible as Drawer.Dismissible
+import HalogenMWC.Drawer.Permanent as Drawer.Permanent
 import HalogenMWC.Icon as Icon
 import HalogenMWC.List as List
-import HalogenMWC.List.Divider as ListDivider
+import HalogenMWC.List.Divider as List.Divider
 import HalogenMWC.List.Item as List.Item
 import HalogenMWC.TopAppBar as TopAppBar
 
@@ -41,7 +41,7 @@ view lift { title, drawer, scrim, onMenuClick } =
         HH.div drawerFrameRoot
             [ drawer
             , Maybe.fromMaybe (text "") scrim
-            , HH.div [ DismissibleDrawer.appContent ]
+            , HH.div [ Drawer.Dismissible.appContent ]
                 [ TopAppBar.topAppBar TopAppBar.defaultConfig
                     [ HH.section [ HP.class_ mdc_top_app_bar__row ] []
                         [ HH.section [ HP.classes [ mdc_top_app_bar__section, mdc_top_app_bar__section____align_start ] ]
@@ -77,11 +77,11 @@ drawerBody setSelectedIndex selectedIndex =
                     )
                 , onClick = (setSelectedIndex index)
     in
-    [ PermanentDrawer.header []
-        [ HH.h3 [ PermanentDrawer.title ] [ HH.text "Mail" ]
-        , HH.h6 [ PermanentDrawer.subtitle ] [ HH.text "email@material.io" ]
+    [ Drawer.Permanent.header []
+        [ HH.h3 [ Drawer.Permanent.title ] [ HH.text "Mail" ]
+        , HH.h6 [ Drawer.Permanent.subtitle ] [ HH.text "email@material.io" ]
         ]
-    , PermanentDrawer.content []
+    , Drawer.Permanent.content []
         [ Array.group []
             [ List.list List.defaultConfig
                 (List.Item.listItem (listItemConfig 0)
@@ -102,7 +102,7 @@ drawerBody setSelectedIndex selectedIndex =
                     , HH.text "Drafts"
                     ]
                 ]
-            , ListDivider.group []
+            , List.Divider.group []
             , Array.subheader [] [ HH.text "Labels" ]
             , List.list List.defaultConfig
                 (List.Item.listItem (listItemConfig 4)
@@ -118,7 +118,7 @@ drawerBody setSelectedIndex selectedIndex =
                     [ List.Item.graphic [] [ Icon.icon [] "bookmark" ]
                     , HH.text "Work"
                     ]
-                , ListDivider.listItem ListDivider.defaultConfig
+                , List.Divider.listItem List.Divider.defaultConfig
                 { List.Item.listItem (listItemConfig 7)
                     [ List.Item.graphic [] [ Icon.icon [] "settings" ]
                     , HH.text "Settings"
@@ -137,7 +137,7 @@ mainContent =
     HH.div
         [ HP.style "padding-left: 18px; padding-right: 18px; overflow: auto; height: 100%; box-sizing: border-box;"
         , mdc_top_app_bar____fixed_adjust
-        , DismissibleDrawer.appContent
+        , Drawer.Dismissible.appContent
         ]
         (List.repeat 4 $ HH.p [] [ HH.text loremIpsum ])
 

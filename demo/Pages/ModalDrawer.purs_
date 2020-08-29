@@ -1,4 +1,4 @@
-module Demo.Pages.ModalDrawer where
+module Demo.Pages.Drawer.Modal where
     ( State
     , Action(..)
     , initialState
@@ -7,7 +7,7 @@ module Demo.Pages.ModalDrawer where
     )
 
 import Demo.DrawerPage as DrawerPage
-import HalogenMWC.Drawer.Modal as ModalDrawer
+import HalogenMWC.Drawer.Modal as Drawer.Modal
 
 data State =
     { open :: Boolean
@@ -41,12 +41,12 @@ view :: forall r w i . State -> DrawerPage Action
 view model =
     { title: "Modal Drawer"
     , drawer =
-        ModalDrawer.drawer
-            (ModalDrawer.defaultConfig
+        Drawer.Modal.drawer
+            (Drawer.Modal.defaultConfig
                 { open = model.open
                 , onClose = CloseDrawer
             )
             (DrawerPage.drawerBody SetSelectedIndex model.selectedIndex)
-    , scrim: Just (ModalDrawer.scrim [] [])
+    , scrim: Just (Drawer.Modal.scrim [] [])
     , onMenuClick: Just OpenDrawer
     }

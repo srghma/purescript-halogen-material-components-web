@@ -13,7 +13,7 @@ import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Button as Button
 import HalogenMWC.List as List
-import HalogenMWC.List.Divider as ListDivider
+import HalogenMWC.List.Divider as List.Divider
 import HalogenMWC.List.Item as List.Item
 import HalogenMWC.Menu as Menu
 import Material.Classes.Typography
@@ -65,7 +65,7 @@ view model =
                             , "Guava"
                             , "Pitaya"
                             ]
-                        , [ ListDivider.listItem ListDivider.defaultConfig ]
+                        , [ List.Divider.listItem List.Divider.defaultConfig ]
                         , map listItem
                             [ "Pineapple"
                             , "Mango"

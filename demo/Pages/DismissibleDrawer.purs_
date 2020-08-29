@@ -1,4 +1,4 @@
-module Demo.Pages.DismissibleDrawer where
+module Demo.Pages.Drawer.Dismissible where
     ( State
     , Action(..)
     , initialState
@@ -7,7 +7,7 @@ module Demo.Pages.DismissibleDrawer where
     )
 
 import Demo.DrawerPage as DrawerPage
-import HalogenMWC.Drawer.Dismissible as DismissibleDrawer
+import HalogenMWC.Drawer.Dismissible as Drawer.Dismissible
 
 data State =
     { open :: Boolean
@@ -41,8 +41,8 @@ view :: forall r w i . State -> DrawerPage Action
 view model =
     { title: "Dismissible Drawer"
     , drawer =
-        DismissibleDrawer.drawer
-            (DismissibleDrawer.defaultConfig
+        Drawer.Dismissible.drawer
+            (Drawer.Dismissible.defaultConfig
                 { open = model.open
                 , onClose = CloseDrawer
             )

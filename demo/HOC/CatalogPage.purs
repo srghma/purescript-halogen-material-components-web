@@ -14,7 +14,7 @@ import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
-import HalogenMWC.Drawer.Dismissible as DismissibleDrawer
+import HalogenMWC.Drawer.Dismissible as Drawer.Dismissible
 import HalogenMWC.IconButton as IconButton
 import HalogenMWC.List as List
 import HalogenMWC.List.Item as List.Item
@@ -71,15 +71,15 @@ view lift catalogPageConfig catalogPage =
                 ]
             ]
         , HH.div demoPanel
-            [ DismissibleDrawer.drawer
-                (DismissibleDrawer.defaultConfig
+            [ Drawer.Dismissible.drawer
+                (Drawer.Dismissible.defaultConfig
                     { open = catalogPageConfig.drawerOpen
                     , additionalAttributes =
                         [ mdc_top_app_bar____fixed_adjust
                         , HP.style "z-index: 1;"
                         ]
                 )
-                [ DismissibleDrawer.content []
+                [ Drawer.Dismissible.content []
                     [ case
                         map
                             (\{ route, label } ->
@@ -107,7 +107,7 @@ view lift catalogPageConfig catalogPage =
                 ]
             , HH.map lift $
                 HH.div
-                    [ mdc_top_app_bar____fixed_adjust, DismissibleDrawer.appContent, demoContent ]
+                    [ mdc_top_app_bar____fixed_adjust, Drawer.Dismissible.appContent, demoContent ]
                     [ HH.div demoContentTransition
                         [ HH.h1 [ mdc_typography____headline5 ] [ HH.text catalogPage.title ]
                         , HH.p [ mdc_typography____body1 ] [ HH.text catalogPage.prelude ]

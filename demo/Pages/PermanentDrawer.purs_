@@ -1,7 +1,7 @@
-module Demo.Pages.PermanentDrawer where
+module Demo.Pages.Drawer.Permanent where
 
 import Demo.DrawerPage as DrawerPage
-import HalogenMWC.Drawer.Permanent as PermanentDrawer
+import HalogenMWC.Drawer.Permanent as Drawer.Permanent
 
 data State =
     { selectedIndex :: Int }
@@ -23,7 +23,7 @@ view :: forall r w i . State -> DrawerPage Action
 view model =
     { title: "Permanent Drawer"
     , drawer =
-        PermanentDrawer.drawer PermanentDrawer.defaultConfig
+        Drawer.Permanent.drawer Drawer.Permanent.defaultConfig
             (DrawerPage.drawerBody SetSelectedIndex model.selectedIndex)
     , scrim: Nothing
     , onMenuClick: Nothing
