@@ -14,7 +14,7 @@ import Data.Tuple (Tuple(..))
 import Effect.Aff (Aff)
 import Halogen as H
 import Halogen.HTML as HH
-import Routing.Duplex (RouteDuplex', root) as Routing.Duplex
+import Routing.Duplex as Routing.Duplex
 import Routing.Duplex.Generic (noArgs, sum) as Routing.Duplex
 import Routing.Duplex.Generic.Syntax ((/))
 
@@ -37,7 +37,7 @@ type PagesRec a =
   }
 
 -- NOTE: without a `Routing.Duplex.root $` to allow hashed routing
-routeCodec :: forall r w i . Routing.Duplex.RouteDuplex' Route
+routeCodec :: Routing.Duplex.RouteDuplex' Route
 routeCodec = Routing.Duplex.sum
   { "Index":  Routing.Duplex.noArgs
   , "Buttons": "buttons" / Routing.Duplex.noArgs
@@ -46,3 +46,6 @@ routeCodec = Routing.Duplex.sum
 extractFromPagesRec :: forall a . Route -> PagesRec a -> a
 extractFromPagesRec Index  = _."Index"
 extractFromPagesRec Buttons = _."Buttons"
+
+toString :: Route -> String
+toString route = "#" <> Routing.Duplex.print routeCodec route

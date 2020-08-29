@@ -54,7 +54,7 @@ view lift { title, drawer, scrim, onMenuClick } =
                                         "menu"
 
                                 Nothing ->
-                                    text ""
+                                    HH.text ""
                             , HH.span [ mdc_top_app_bar__title ] [ HH.text title ]
                             ]
                         ]
@@ -70,7 +70,7 @@ drawerBody setSelectedIndex selectedIndex =
             List.Item.defaultConfig
                 { selected =
                     (if selectedIndex == index then
-                        Just List.Item.activated
+                        Just List.Item.Activated
 
                      else
                         Nothing

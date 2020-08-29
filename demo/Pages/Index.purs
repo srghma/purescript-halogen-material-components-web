@@ -11,7 +11,8 @@ import HalogenMWC.IconButton as IconButton
 import HalogenMWC.ImageList as ImageList
 import HalogenMWC.ImageList.Item as ImageList.Item
 import HalogenMWC.TopAppBar as TopAppBar
-import Demo.Route
+import Demo.Route (Route)
+import Demo.Route as Route
 import Routing.Duplex as Routing.Duplex
 
 type State
@@ -52,7 +53,7 @@ component =
           ]
           [ IconButton.iconButton
               ( IconButton.defaultConfig
-                { additionalClasses: [ mdc_top_app_bar__navigation_icon ]
+                { additionalClasses = [ mdc_top_app_bar__navigation_icon ]
                 }
               )
               [ HH.img
@@ -69,16 +70,16 @@ component =
       ]
     , ImageList.imageList
         (ImageList.defaultConfig
-          { additionaladditionalAttributes =
+          { additionalAttributes =
             [ HP.style "max-width: 900px; padding-top: 128px; padding-bottom: 100px;"
             ]
           }
         )
         (map
             (\{ route, title, icon } ->
-                ImageList.Item.ImageList.Item
+                ImageList.Item.ImageListItem
                 ( { label: Just title
-                  , href: Just ("#" <> Routing.Duplex.print routeCodec route)
+                  , href: Just (Route.toString route)
                   , image: icon
                   , additionalAttributes:
                     [ HP.style "width: calc(100% / 4 - 8.25px); margin: 4px;"
@@ -92,7 +93,7 @@ component =
 
 imageListItems :: forall r w i . Array { route :: Route, icon :: String, title :: String, subtitle :: String }
 imageListItems =
-  [ { route: Button
+  [ { route: Route.Buttons
     , icon: "https://aforemny.github.io/material-components-web-elm/images/buttons_180px.svg"
     , title: "Button"
     , subtitle: "Raised and flat buttons"

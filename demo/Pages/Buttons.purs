@@ -118,7 +118,7 @@ focusButton =
         ]
 
 buttonsRow :: forall r w i . (Button.Config w i -> String -> HH.HTML w i) -> Array (IProp r i) -> HH.HTML w i
-buttonsRow button additionaladditionalAttributes =
+buttonsRow button additionalClasses =
     let
         config =
             Button.defaultConfig

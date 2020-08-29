@@ -1,9 +1,12 @@
 module Demo.HOC.CatalogPage where
 
 import Halogen
+import Material.Classes.Drawer
+import Material.Classes.TopAppBar
 import Material.Classes.Typography
 import Protolude
 
+import DOM.HTML.Indexed as I
 import Data.Array as Array
 import Data.Maybe as Maybe
 import Demo.Route (Route)
@@ -78,8 +81,9 @@ view lift catalogPageConfig catalogPage =
                         [ mdc_top_app_bar____fixed_adjust
                         , HP.style "z-index: 1;"
                         ]
+                    }
                 )
-                [ Drawer.Dismissible.content []
+                [ HH.div [ HP.class_ mdc_drawer__content ]
                     [ case
                         map
                             (\{ route, label } ->
@@ -87,12 +91,12 @@ view lift catalogPageConfig catalogPage =
                                     (List.Item.defaultConfig
                                         { selected =
                                             (if catalogPageConfig.route == route then
-                                                Just List.Item.activated
-
+                                                Just List.Item.Activated
                                              else
                                                 Nothing
                                             )
                                         , href = (Just (Route.toString route))
+                                        }
                                     )
                                     [ HH.text label ]
                             )
@@ -102,7 +106,7 @@ view lift catalogPageConfig catalogPage =
                             List.list List.defaultConfig listItem listItems
 
                         _ ->
-                            text ""
+                            HH.text ""
                     ]
                 ]
             , HH.map lift $
@@ -143,6 +147,7 @@ resourcesList { materialDesignGuidelines, documentation, sourceCode } =
             (List.Item.defaultConfig
                 { href = documentation
                 , target = (Just "_blank")
+                }
             )
             [ List.Item.graphic resourcesGraphic
                 [ HH.img
@@ -170,63 +175,62 @@ resourcesList { materialDesignGuidelines, documentation, sourceCode } =
 
 catalogDrawerItems :: forall r w i . Array { label :: String, route :: Route }
 catalogDrawerItems =
-    [ { label: "Home", route: Route.StartPage }
-    , { label: "Button", route: Route.Button }
-    , { label: "Card", route: Route.Card }
-    , { label: "Checkbox", route: Route.Checkbox }
-    , { label: "Chips", route: Route.Chips }
-    , { label: "DataTable", route: Route.DataTable }
-    , { label: "Dialog", route: Route.Dialog }
-    , { label: "Drawer", route: Route.Drawer }
-    , { label: "Elevation", route: Route.Elevation }
-    , { label: "FAB", route: Route.Fab }
-    , { label: "Icon Button", route: Route.IconButton }
-    , { label: "Image List", route: Route.ImageList }
-    , { label: "Layout Grid", route: Route.LayoutGrid }
-    , { label: "Linear Progress Indicator", route: Route.LinearProgress }
-    , { label: "List", route: Route.List }
-    , { label: "Menu", route: Route.Menu }
-    , { label: "Radio Button", route: Route.RadioButton }
-    , { label: "Ripple", route: Route.Ripple }
-    , { label: "Select", route: Route.Select }
-    , { label: "Slider", route: Route.Slider }
-    , { label: "Snackbar", route: Route.Snackbar }
-    , { label: "Switch", route: Route.Switch }
-    , { label: "Tab Bar", route: Route.TabBar }
-    , { label: "Text Field", route: Route.TextField }
-    , { label: "Theme", route: Route.Theme }
-    , { label: "Top App Bar", route: Route.TopAppBar }
-    , { label: "Typography", route: Route.Typography }
+    [ { label: "Home", route: Route.Index }
+    , { label: "Button", route: Route.Buttons }
+    -- | , { label: "Card", route: Route.Card }
+    -- | , { label: "Checkbox", route: Route.Checkbox }
+    -- | , { label: "Chips", route: Route.Chips }
+    -- | , { label: "DataTable", route: Route.DataTable }
+    -- | , { label: "Dialog", route: Route.Dialog }
+    -- | , { label: "Drawer", route: Route.Drawer }
+    -- | , { label: "Elevation", route: Route.Elevation }
+    -- | , { label: "FAB", route: Route.Fab }
+    -- | , { label: "Icon Button", route: Route.IconButton }
+    -- | , { label: "Image List", route: Route.ImageList }
+    -- | , { label: "Layout Grid", route: Route.LayoutGrid }
+    -- | , { label: "Linear Progress Indicator", route: Route.LinearProgress }
+    -- | , { label: "List", route: Route.List }
+    -- | , { label: "Menu", route: Route.Menu }
+    -- | , { label: "Radio Button", route: Route.RadioButton }
+    -- | , { label: "Ripple", route: Route.Ripple }
+    -- | , { label: "Select", route: Route.Select }
+    -- | , { label: "Slider", route: Route.Slider }
+    -- | , { label: "Snackbar", route: Route.Snackbar }
+    -- | , { label: "Switch", route: Route.Switch }
+    -- | , { label: "Tab Bar", route: Route.TabBar }
+    -- | , { label: "Text Field", route: Route.TextField }
+    -- | , { label: "Theme", route: Route.Theme }
+    -- | , { label: "Top App Bar", route: Route.TopAppBar }
+    -- | , { label: "Typography", route: Route.Typography }
     ]
 
-catalogPageContainer :: forall r w i . Array (IProp r i)
+catalogPageContainer :: forall r w i . Array (IProp I.HTMLdiv i)
 catalogPageContainer =
     [ HP.style "position: relative;"
-    , mdc_typography
+    , HP.class_ mdc_typography
     ]
 
-demoPanel :: forall r w i . Array (IProp r i)
+demoPanel :: forall r w i . Array (IProp I.HTMLdiv i)
 demoPanel =
     [ HP.style "display: -ms-flexbox; display: flex; position: relative; height: 100vh; overflow: hidden;"
     ]
 
-demoContent :: forall r w i . Array (IProp r i)
+demoContent :: forall r w i . Array (IProp I.HTMLdiv i)
 demoContent =
-    [ HP.id_ "demo-content"
-    , HP.style "height: 100%; -webkit-box-sizing: border-box; box-sizing: border-box; max-width: 100%; padding-left: 16px; padding-right: 16px; padding-bottom: 100px; width: 100%; overflow: auto; display: -ms-flexbox; display: flex; -ms-flex-direction: column; flex-direction: column; -ms-flex-align: center; align-items: center; -ms-flex-pack: start; justify-content: flex-start;"
+    [ HP.style "height: 100%; -webkit-box-sizing: border-box; box-sizing: border-box; max-width: 100%; padding-left: 16px; padding-right: 16px; padding-bottom: 100px; width: 100%; overflow: auto; display: -ms-flexbox; display: flex; -ms-flex-direction: column; flex-direction: column; -ms-flex-align: center; align-items: center; -ms-flex-pack: start; justify-content: flex-start;"
     ]
 
-demoContentTransition :: forall r w i . Array (IProp r i)
+demoContentTransition :: forall r w i . Array (IProp I.HTMLdiv i)
 demoContentTransition =
     [ HP.style "max-width: 900px; width: 100%;"
     ]
 
-hero :: forall r w i . Array (IProp r i)
+hero :: forall r w i . Array (IProp I.HTMLdiv i)
 hero =
     [ HP.style "display: -ms-flexbox; display: flex; -ms-flex-flow: row nowrap; flex-flow: row nowrap; -ms-flex-align: center; align-items: center; -ms-flex-pack: center; justify-content: center; min-height: 360px; padding: 24px; background-color: #f2f2f2;"
     ]
 
-demoTitle :: forall r w i . Array (IProp r i)
+demoTitle :: forall r w i . Array (IProp I.HTMLh2 i)
 demoTitle =
     [ HP.style "border-bottom: 1px solid rgba(0,0,0,.87);"
     ]

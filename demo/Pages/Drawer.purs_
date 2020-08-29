@@ -61,7 +61,7 @@ heroDrawer =
                 (List.Item.defaultConfig
                     { selected =
                         (if activated then
-                            Just List.Item.activated
+                            Just List.Item.Activated
 
                          else
                             Nothing
