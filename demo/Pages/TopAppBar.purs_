@@ -41,10 +41,10 @@ view model =
         }
     , hero =
         [ HH.div
-            [ HP.style "width: 480px; height: 72px"
+            [ HP.style "width: 480px; height: 72px;"
             ]
             [ TopAppBar.regular
-                (TopAppBar.defaultConfig { additionalAttributes = [ HP.style "position: static" ])
+                (TopAppBar.defaultConfig { additionalAttributes = [ HP.style "position: static;" ])
                 [ TopAppBar.section
                     [ TopAppBar.alignStart ]
                     [ IconButton.iconButton
@@ -77,7 +77,7 @@ view model =
         ]
     , content =
         [ HH.div
-            [ HP.style "display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; min-height: 200px"
+            [ HP.style "display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; min-height: 200px;"
             ]
             [ iframe "Standard" Route.StandardTopAppBar
             , iframe "Fixed" Route.FixedTopAppBar
@@ -96,7 +96,7 @@ iframe title route =
             Route.toString route
     in
     HH.div
-        [ HP.style "display: inline-block; -ms-flex: 1 1 45%; flex: 1 1 45%; -ms-flex-pack: distribute; justify-content: space-around; min-height: 200px; min-width: 400px; padding: 15px"
+        [ HP.style "display: inline-block; -ms-flex: 1 1 45%; flex: 1 1 45%; -ms-flex-pack: distribute; justify-content: space-around; min-height: 200px; min-width: 400px; padding: 15px;"
         ]
         [ HH.div []
             [ HH.a
@@ -107,7 +107,7 @@ iframe title route =
                 ]
             ]
         , HH.iframe
-            [ HP.style "width: 100%; height: 200px"
+            [ HP.style "width: 100%; height: 200px;"
             , HP.src stringUrl
             ]
             []

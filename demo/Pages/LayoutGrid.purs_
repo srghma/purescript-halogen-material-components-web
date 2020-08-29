@@ -68,16 +68,16 @@ view model =
 demoGrid :: forall r w i . Array (IProp r i) -> Array (HH.HTML w i) -> HH.HTML w i
 demoGrid options =
     LayoutGrid.layoutGrid
-        (HP.style "background: rgba(0,0,0,.2)"
-            :: HP.style "min-width: 360px"
+        (HP.style "background: rgba(0,0,0,.2);"
+            :: HP.style "min-width: 360px;"
             :: options
         )
 
 demoCell :: forall r w i . Array (IProp r i) -> HH.HTML w i
 demoCell options =
     LayoutGrid.cell
-        (HP.style "background: rgba(0,0,0,.2)"
-            :: HP.style "height: 100px"
+        (HP.style "background: rgba(0,0,0,.2);"
+            :: HP.style "height: 100px;"
             :: options
         )
         []
@@ -104,7 +104,7 @@ leftAlignedGrid :: forall r w i . HH.HTML w i
 leftAlignedGrid =
     demoGrid
         [ LayoutGrid.alignLeft
-        , HP.style "max-width: 800px"
+        , HP.style "max-width: 800px;"
         ]
         [ LayoutGrid.inner []
             [ demoCell []
@@ -117,7 +117,7 @@ rightAlignedGrid :: forall r w i . HH.HTML w i
 rightAlignedGrid =
     demoGrid
         [ LayoutGrid.alignRight
-        , HP.style "max-width: 800px"
+        , HP.style "max-width: 800px;"
         ]
         [ LayoutGrid.inner [] (List.repeat 3 (demoCell []))
         ]
@@ -126,13 +126,13 @@ cellAlignmentGrid :: forall r w i . HH.HTML w i
 cellAlignmentGrid =
     let
         innerHeight =
-            [ HP.style "min-height: 200px" ]
+            [ HP.style "min-height: 200px;" ]
 
         cellHeight =
-            HP.style "max-height: 50px"
+            HP.style "max-height: 50px;"
     in
     demoGrid
-        [ HP.style "min-height: 200px"
+        [ HP.style "min-height: 200px;"
         ]
         [ LayoutGrid.inner innerHeight
             [ demoCell [ LayoutGrid.alignTop, cellHeight ]

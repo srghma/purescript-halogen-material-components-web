@@ -125,7 +125,7 @@ shapedFilledTextFields model =
             [ TextField.filled
                 (TextField.defaultConfig
                     { label = (Just "Standard")
-                    , additionalAttributes = [ HP.style "border-radius: 16px 16px 0 0" ]
+                    , additionalAttributes = [ HP.style "border-radius: 16px 16px 0 0;" ]
                 )
             , demoHelperText
             ]
@@ -134,7 +134,7 @@ shapedFilledTextFields model =
                 (TextField.defaultConfig
                     { label = (Just "Standard")
                     , leadingIcon = (Just (TextField.icon [] "event"))
-                    , additionalAttributes = [ HP.style "border-radius: 16px 16px 0 0" ]
+                    , additionalAttributes = [ HP.style "border-radius: 16px 16px 0 0;" ]
                 )
             , demoHelperText
             ]
@@ -143,7 +143,7 @@ shapedFilledTextFields model =
                 (TextField.defaultConfig
                     { label = (Just "Standard")
                     , trailingIcon = (Just (TextField.icon [] "delete"))
-                    , additionalAttributes = [ HP.style "border-radius: 16px 16px 0 0" ]
+                    , additionalAttributes = [ HP.style "border-radius: 16px 16px 0 0;" ]
                 )
             , demoHelperText
             ]
@@ -302,29 +302,29 @@ focusTextField =
 heroTextFieldContainer :: forall r w i . Array (IProp r i)
 heroTextFieldContainer =
     [ HP.class_ hero_text_field_container
-    , HP.style "display: -ms-flexbox; display: flex; -ms-flex: 1 1 100%; flex: 1 1 100%; -ms-flex-pack: distribute; justify-content: space-around; -ms-flex-wrap: wrap; flex-wrap: wrap"
+    , HP.style "display: -ms-flexbox; display: flex; -ms-flex: 1 1 100%; flex: 1 1 100%; -ms-flex-pack: distribute; justify-content: space-around; -ms-flex-wrap: wrap; flex-wrap: wrap;"
     ]
 
 textFieldContainerHero :: forall r w i . Array (IProp r i)
 textFieldContainerHero =
-    HP.style "padding: 20px" :: textFieldContainer
+    HP.style "padding: 20px;" :: textFieldContainer
 
 textFieldContainer :: forall r w i . Array (IProp r i)
 textFieldContainer =
     [ HP.class_ text_field_container
-    , HP.style "min-width: 200px"
+    , HP.style "min-width: 200px;"
     ]
 
 textFieldRow :: forall r w i . Array (IProp r i)
 textFieldRow =
     [ HP.class_ text_field_row
-    , HP.style "display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap"
+    , HP.style "display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap;"
     ]
 
 textFieldRowFullwidth :: forall r w i . Array (IProp r i)
 textFieldRowFullwidth =
     [ HP.class_ "text-field-row text-field-row--fullwidth"
-    , HP.style "display: block"
+    , HP.style "display: block;"
     ]
 
 demoHelperText :: forall r w i . HH.HTML w i

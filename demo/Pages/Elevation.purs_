@@ -77,16 +77,16 @@ heroElevation =
 
 heroSurface :: forall r w i . Array (IProp r i)
 heroSurface =
-    [ HP.style "display: -ms-inline-flexbox; display: inline-flex; -ms-flex-pack: distribute; justify-content: space-around; min-height: 100px; min-width: 200px; -ms-flex-align: center; align-items: center; width: 120px; height: 48px; margin: 24px; background-color: #212121; color: #f0f0f0"
+    [ HP.style "display: -ms-inline-flexbox; display: inline-flex; -ms-flex-pack: distribute; justify-content: space-around; min-height: 100px; min-width: 200px; -ms-flex-align: center; align-items: center; width: 120px; height: 48px; margin: 24px; background-color: #212121; color: #f0f0f0;"
     ]
 
 demoContainer :: forall r w i . Array (IProp r i)
 demoContainer =
     [ HP.class_ elevation_demo_container
-    , HP.style "display: flex; flex-flow: row wrap; justify-content: space-between"
+    , HP.style "display: flex; flex-flow: row wrap; justify-content: space-between;"
     ]
 
 demoSurface :: forall r w i . Array (IProp r i)
 demoSurface =
-    [ HP.style "display: -ms-inline-flexbox; display: inline-flex; -ms-flex-pack: distribute; justify-content: space-around; min-height: 100px; min-width: 200px; margin: 15px; -ms-flex-align: center; align-items: center"
+    [ HP.style "display: -ms-inline-flexbox; display: inline-flex; -ms-flex-pack: distribute; justify-content: space-around; min-height: 100px; min-width: 200px; margin: 15px; -ms-flex-align: center; align-items: center;"
     ]

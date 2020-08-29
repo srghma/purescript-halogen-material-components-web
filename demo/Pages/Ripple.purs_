@@ -65,7 +65,7 @@ view model =
 
 demoBox :: forall r w i . Array (IProp r i)
 demoBox =
-    [ HP.style "display: flex; align-items: center; justify-content: center; width: 200px; height: 100px; padding: 1rem; cursor: pointer; user-select: none; background-color: #fff; overflow: hidden; position: relative"
+    [ HP.style "display: flex; align-items: center; justify-content: center; width: 200px; height: 100px; padding: 1rem; cursor: pointer; user-select: none; background-color: #fff; overflow: hidden; position: relative;"
     , Elevation.z2
     , HP.tabindex 0
     ]
@@ -73,5 +73,5 @@ demoBox =
 demoIcon :: forall r w i . Array (IProp r i)
 demoIcon =
     [ HP.class_ material_icons
-    , HP.style "width: 24px; height: 24px; padding: 12px; border-radius: 50%; position: relative"
+    , HP.style "width: 24px; height: 24px; padding: 12px; border-radius: 50%; position: relative;"
     ]

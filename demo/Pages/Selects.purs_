@@ -182,7 +182,7 @@ outlinedWithIconSelect model =
 focusSelect :: forall r w i . Model -> HH.HTML Action
 focusSelect model =
     HH.div
-        [ HP.style "display: flex; align-items: center"
+        [ HP.style "display: flex; align-items: center;"
         ]
         [ Select.filled
             (Select.defaultConfig

@@ -112,7 +112,7 @@ view model =
 
 demoList :: forall r w i . Array (IProp r i)
 demoList =
-    [ HP.style "max-width: 600px; border: 1px solid rgba(0,0,0,.1)"
+    [ HP.style "max-width: 600px; border: 1px solid rgba(0,0,0,.1);"
     ]
 
 heroList :: forall r w i . Array (HH.HTML w i)
@@ -122,7 +122,7 @@ heroList =
             List.Item.listItem List.Item.defaultConfig [ HH.text "Line item" ]
     in
     [ List.list
-        (List.defaultConfig { additionalAttributes = (HP.style "background: #fff" :: demoList))
+        (List.defaultConfig { additionalAttributes = (HP.style "background: #fff;" :: demoList))
         listItem
         (List.repeat 2 listItem)
     ]
@@ -222,7 +222,7 @@ shapedActivatedItemList model =
                             Nothing
                         )
                     , onClick = (SetShapedActivated label)
-                    , additionalAttributes = [ HP.style "border-radius: 0 32px 32px 0" ]
+                    , additionalAttributes = [ HP.style "border-radius: 0 32px 32px 0;" ]
                 )
                 [ List.Item.graphic [] [ Icon.icon [] icon ], HH.text label ]
     in
@@ -237,7 +237,7 @@ shapedActivatedItemList model =
 
 demoIcon :: forall r w i . Array (IProp r i)
 demoIcon =
-    [ HP.style "background: rgba(0,0,0,.3); border-radius: 50%; color: #fff"
+    [ HP.style "background: rgba(0,0,0,.3); border-radius: 50%; color: #fff;"
     ]
 
 folderList :: forall r w i . HH.HTML w i

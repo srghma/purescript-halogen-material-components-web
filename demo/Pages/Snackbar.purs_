@@ -117,19 +117,19 @@ view model =
 
 buttonMargin :: forall r w i . Array (IProp r i)
 buttonMargin =
-    [ HP.style "margin: 14px" ]
+    [ HP.style "margin: 14px;" ]
 
 heroMessage :: forall r w i . HH.HTML w i
 heroMessage =
     HH.div
         [ HP.class_ "mdc-snackbar mdc-snackbar--open"
-        , HP.style "position: relative; left: 0; transform: none"
+        , HP.style "position: relative; left: 0; transform: none;"
         ]
         [ HH.div
             [ HP.class_ mdc_snackbar__surface ]
             [ HH.div
                 [ HP.class_ mdc_snackbar__label
-                , HP.style "color: hsla(0,0%,100%,.87)"
+                , HP.style "color: hsla(0,0%,100%,.87);"
                 , HP.attr (AttrName "role") "status"
                 , HP.attr (AttrName "aria-live") "polite"
                 ]

@@ -33,7 +33,7 @@ view =
                         ]
                     , HH.span
                         [ TopAppBar.title
-                        , HP.style "text-transform: uppercase; font-weight: 400"
+                        , HP.style "text-transform: uppercase; font-weight: 400;"
                         ]
                         [ HH.text "Material Components for Elm" ]
                     ]
@@ -42,7 +42,7 @@ view =
         , ImageList.imageList
             (ImageList.defaultConfig
                 { additionalAttributes =
-                    [ HP.style "max-width: 900px; padding-top: 128px; padding-bottom: 100px"
+                    [ HP.style "max-width: 900px; padding-top: 128px; padding-bottom: 100px;"
                     ]
             )
             (map
@@ -52,7 +52,7 @@ view =
                             { label = (Just title)
                             , href = (Just (Route.toString route))
                             , additionalAttributes =
-                                [ HP.style "width: calc(100% / 4 - 8.25px); margin: 4px"
+                                [ HP.style "width: calc(100% / 4 - 8.25px); margin: 4px;"
                                 ]
                         )
                         icon

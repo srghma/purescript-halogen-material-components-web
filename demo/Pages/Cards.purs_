@@ -61,7 +61,7 @@ heroCard :: forall r w i . Array (HH.HTML w i)
 heroCard =
     [ Card.card
         (Card.defaultConfig
-            { additionalAttributes = [ HP.style "width: 350px" ]
+            { additionalAttributes = [ HP.style "width: 350px;" ]
         )
         { blocks =
             Card.primaryAction []
@@ -78,7 +78,7 @@ exampleCard1 =
     Card.card
         (Card.defaultConfig
             { additionalAttributes =
-                [ HP.style "margin: 48px 0; width: 350px"
+                [ HP.style "margin: 48px 0; width: 350px;"
                 ]
         )
         { blocks =
@@ -95,7 +95,7 @@ exampleCard2 =
     Card.card
         (Card.defaultConfig
             { additionalAttributes =
-                [ HP.style "margin: 48px 0; width: 350px"
+                [ HP.style "margin: 48px 0; width: 350px;"
                 ]
         )
         { blocks =
@@ -111,7 +111,7 @@ exampleCard3 =
     Card.card
         (Card.defaultConfig
             { additionalAttributes =
-                [ HP.style "margin: 48px 0; width: 350px; border-radius: 24px 8px"
+                [ HP.style "margin: 48px 0; width: 350px; border-radius: 24px 8px;"
                 ]
         )
         { blocks =
@@ -129,7 +129,7 @@ focusCard =
             (Card.defaultConfig
                 { additionalAttributes =
                     [ HP.id "my-card"
-                    , HP.style "margin: 48px 0; width: 350px"
+                    , HP.style "margin: 48px 0; width: 350px;"
                     ]
             )
             { blocks =
@@ -153,16 +153,16 @@ demoTitle :: forall r w i . Card.Block w i
 demoTitle =
     Card.block $
         HH.div
-            [ HP.style "padding: 1rem" ]
+            [ HP.style "padding: 1rem;" ]
             [ HH.h2
                 [ mdc_typography____headline6
-                , HP.style "margin: 0"
+                , HP.style "margin: 0;"
                 ]
                 [ HH.text "Our Changing Planet" ]
             , HH.h3
                 [ mdc_typography____subtitle2
                 , Theme.textSecondaryOnBackground
-                , HP.style "margin: 0"
+                , HP.style "margin: 0;"
                 ]
                 [ HH.text "by Kurt Wagner" ]
             ]
@@ -173,7 +173,7 @@ demoBody =
         HH.div
             [ mdc_typography____body2
             , Theme.textSecondaryOnBackground
-            , HP.style "padding: 0 1rem 0.5rem 1rem"
+            , HP.style "padding: 0 1rem 0.5rem 1rem;"
             ]
             [ HH.text
                 """

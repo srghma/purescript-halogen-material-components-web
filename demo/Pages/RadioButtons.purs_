@@ -78,7 +78,7 @@ heroRadio model group index =
         (Radio.defaultConfig
             { checked = (isSelected group index model)
             , onChange = (Set group index)
-            , additionalAttributes = [ HP.style "margin: 0 10px" ]
+            , additionalAttributes = [ HP.style "margin: 0 10px;" ]
         )
 
 heroRadioGroup :: forall r w i . Model -> HH.HTML Action
@@ -95,7 +95,7 @@ radio model group index label =
             { label = (Just label)
             , for = (Just index)
             , onClick = (Set group index)
-            , additionalAttributes = [ HP.style "margin: 0 10px" ]
+            , additionalAttributes = [ HP.style "margin: 0 10px;" ]
         )
         [ Radio.radio
             (Radio.defaultConfig

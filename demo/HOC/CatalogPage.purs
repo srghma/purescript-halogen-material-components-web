@@ -62,7 +62,7 @@ view lift catalogPageConfig catalogPage =
                         "menu"
                     , HH.span
                         [ TopAppBar.title
-                        , HP.style "text-transform: uppercase; font-weight: 400"
+                        , HP.style "text-transform: uppercase; font-weight: 400;"
                         ]
                         [ HH.text "Material Components for Elm" ]
                     ]
@@ -74,7 +74,7 @@ view lift catalogPageConfig catalogPage =
                     { open = catalogPageConfig.drawerOpen
                     , additionalAttributes =
                         [ TopAppBar.fixedAdjust
-                        , HP.style "z-index: 1"
+                        , HP.style "z-index: 1;"
                         ]
                 )
                 [ DismissibleDrawer.content []
@@ -201,37 +201,37 @@ catalogDrawerItems =
 
 catalogPageContainer :: forall r w i . Array (IProp r i)
 catalogPageContainer =
-    [ HP.style "position: relative"
+    [ HP.style "position: relative;"
     , mdc_typography____typography
     ]
 
 demoPanel :: forall r w i . Array (IProp r i)
 demoPanel =
-    [ HP.style "display: -ms-flexbox; display: flex; position: relative; height: 100vh; overflow: hidden"
+    [ HP.style "display: -ms-flexbox; display: flex; position: relative; height: 100vh; overflow: hidden;"
     ]
 
 demoContent :: forall r w i . Array (IProp r i)
 demoContent =
     [ HP.id "demo-content"
-    , HP.style "height: 100%; -webkit-box-sizing: border-box; box-sizing: border-box; max-width: 100%; padding-left: 16px; padding-right: 16px; padding-bottom: 100px; width: 100%; overflow: auto; display: -ms-flexbox; display: flex; -ms-flex-direction: column; flex-direction: column; -ms-flex-align: center; align-items: center; -ms-flex-pack: start; justify-content: flex-start"
+    , HP.style "height: 100%; -webkit-box-sizing: border-box; box-sizing: border-box; max-width: 100%; padding-left: 16px; padding-right: 16px; padding-bottom: 100px; width: 100%; overflow: auto; display: -ms-flexbox; display: flex; -ms-flex-direction: column; flex-direction: column; -ms-flex-align: center; align-items: center; -ms-flex-pack: start; justify-content: flex-start;"
     ]
 
 demoContentTransition :: forall r w i . Array (IProp r i)
 demoContentTransition =
-    [ HP.style "max-width: 900px; width: 100%"
+    [ HP.style "max-width: 900px; width: 100%;"
     ]
 
 hero :: forall r w i . Array (IProp r i)
 hero =
-    [ HP.style "display: -ms-flexbox; display: flex; -ms-flex-flow: row nowrap; flex-flow: row nowrap; -ms-flex-align: center; align-items: center; -ms-flex-pack: center; justify-content: center; min-height: 360px; padding: 24px; background-color: #f2f2f2"
+    [ HP.style "display: -ms-flexbox; display: flex; -ms-flex-flow: row nowrap; flex-flow: row nowrap; -ms-flex-align: center; align-items: center; -ms-flex-pack: center; justify-content: center; min-height: 360px; padding: 24px; background-color: #f2f2f2;"
     ]
 
 demoTitle :: forall r w i . Array (IProp r i)
 demoTitle =
-    [ HP.style "border-bottom: 1px solid rgba(0,0,0,.87)"
+    [ HP.style "border-bottom: 1px solid rgba(0,0,0,.87);"
     ]
 
 resourcesGraphic :: forall r w i . Array (IProp r i)
 resourcesGraphic =
-    [ HP.style "width: 30px; height: 30px"
+    [ HP.style "width: 30px; height: 30px;"
     ]

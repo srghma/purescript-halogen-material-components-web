@@ -162,31 +162,31 @@ textOnDarkBackground =
 
 heroMargin :: forall r w i . Array (IProp r i)
 heroMargin =
-    [ HP.style "margin: 16px 32px" ]
+    [ HP.style "margin: 16px 32px;" ]
 
 demoThemeColorGroup :: forall r w i . Array (IProp r i)
 demoThemeColorGroup =
-    [ HP.style "padding: 16px 0" ]
+    [ HP.style "padding: 16px 0;" ]
 
 demoThemeColorSwatches :: forall r w i . Array (IProp r i)
 demoThemeColorSwatches =
-    [ HP.style "display: -ms-inline-flexbox; display: inline-flex; -ms-flex-direction: column; flex-direction: column; margin-right: 16px"
+    [ HP.style "display: -ms-inline-flexbox; display: inline-flex; -ms-flex-direction: column; flex-direction: column; margin-right: 16px;"
     , Elevation.z2
     ]
 
 demoThemeColorSwatch :: forall r w i . Array (IProp r i)
 demoThemeColorSwatch =
-    [ HP.style "display: inline-block; -webkit-box-sizing: border-box; box-sizing: border-box; width: 150px; height: 50px; line-height: 50px; text-align: center; margin-bottom: 8px; border-radius: 4px"
+    [ HP.style "display: inline-block; -webkit-box-sizing: border-box; box-sizing: border-box; width: 150px; height: 50px; line-height: 50px; text-align: center; margin-bottom: 8px; border-radius: 4px;"
     ]
 
 demoThemeTextRow :: forall r w i . Array (IProp r i)
 demoThemeTextRow =
-    [ HP.style "display: -ms-inline-flexbox; display: inline-flex; -webkit-box-sizing: border-box; box-sizing: border-box; padding: 16px; border: 1px solid #f0f0f0; -ms-flex-align: center; align-items: center; -ms-flex-direction: row; flex-direction: row"
+    [ HP.style "display: -ms-inline-flexbox; display: inline-flex; -webkit-box-sizing: border-box; box-sizing: border-box; padding: 16px; border: 1px solid #f0f0f0; -ms-flex-align: center; align-items: center; -ms-flex-direction: row; flex-direction: row;"
     ]
 
 demoThemeTextStyle :: forall r w i . Array (IProp r i)
 demoThemeTextStyle =
-    [ HP.style "padding: 0 16px" ]
+    [ HP.style "padding: 0 16px;" ]
 
 demoThemeIconStyle :: forall r w i . Array (IProp r i)
 demoThemeIconStyle =
@@ -194,8 +194,8 @@ demoThemeIconStyle =
 
 demoThemeBgCustomLight :: forall r w i . Array (IProp r i)
 demoThemeBgCustomLight =
-    [ HP.style "background-color: #ddd" ]
+    [ HP.style "background-color: #ddd;" ]
 
 demoThemeBgCustomDark :: forall r w i . Array (IProp r i)
 demoThemeBgCustomDark =
-    [ HP.style "background-color: #d1d1d1" ]
+    [ HP.style "background-color: #d1d1d1;" ]

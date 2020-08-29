@@ -117,4 +117,4 @@ focusCheckbox =
 
 heroMargin :: forall r w i . Array (IProp r i)
 heroMargin =
-    [ HP.style "margin: 8px 16px" ]
+    [ HP.style "margin: 8px 16px;" ]
