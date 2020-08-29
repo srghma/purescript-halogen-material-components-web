@@ -114,7 +114,7 @@ focusRadio =
     HH.div []
         [ Radio.radio
             (Radio.defaultConfig { additionalAttributes = [ HP.id_ "my-radio" ])
-        , HH.text \x00A0
+        , HH.text "\x00A0"
         , Button.raised
             (Button.defaultConfig { onClick = (Focus "my-radio"))
             "Focus"

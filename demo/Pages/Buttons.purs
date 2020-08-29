@@ -95,16 +95,16 @@ focusButton =
                 }
             )
             "Button"
-        , HH.text \x00A0
+        , HH.text "\x00A0"
         , Button.raised (Button.defaultConfig { onClick = (Focus "my-button")) "Focus"
-        , HH.text \x00A0
+        , HH.text "\x00A0"
         , Button.raised
             (Button.defaultConfig
                 { href = (Just "#")
                 , additionalAttributes = [ HP.id_ "my-link-button" ]
             )
             "Link button"
-        , HH.text \x00A0
+        , HH.text "\x00A0"
         , Button.raised (Button.defaultConfig { onClick = (Focus "my-link-button")) "Focus"
         ]
 

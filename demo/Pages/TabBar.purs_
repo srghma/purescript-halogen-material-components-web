@@ -180,7 +180,7 @@ focusTabs model =
                 )
                 { label: "About Us", icon: Nothing }
             ]
-        , HH.text \x00A0
+        , HH.text "\x00A0"
         , Button.raised
             (Button.defaultConfig { onClick = (Focus "my-tabs"))
             "Focus"

@@ -141,7 +141,7 @@ focusSlider model =
                 , onInput = (Changed id)
                 , additionalAttributes = [ HP.id_ id ]
             )
-        , HH.text \x00A0
+        , HH.text "\x00A0"
         , Button.raised
             (Button.defaultConfig { onClick = (Focus id))
             "Focus"
