@@ -144,7 +144,7 @@ focusCard =
 
 demoMedia :: forall r w i . Card.Block w i
 demoMedia =
-    Card.sixteenToNineMedia [] "images/photos/3x2/2.jpg"
+    Card.sixteenToNineMedia [] "https://aforemny.github.io/material-components-web-elm/images/photos/3x2/2.jpg"
 
 demoTitle :: forall r w i . Card.Block w i
 demoTitle =
