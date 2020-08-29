@@ -61,7 +61,7 @@ component =
               ]
           , HH.span
               [ HP.class_ mdc_top_app_bar__title
-              , HP.style "text-transform: uppercase; font-weight: 400;;"
+              , HP.style "text-transform: uppercase; font-weight: 400;"
               ]
               [ HH.text "Material Components for Halogen" ]
           ]
@@ -70,7 +70,7 @@ component =
     , ImageList.imageList
         (ImageList.defaultConfig
           { additionaladditionalAttributes =
-            [ HP.style "max-width: 900px; padding-top: 128px; padding-bottom: 100px;;"
+            [ HP.style "max-width: 900px; padding-top: 128px; padding-bottom: 100px;"
             ]
           }
         )
@@ -81,7 +81,7 @@ component =
                   , href: Just ("#" <> Routing.Duplex.print routeCodec route)
                   , image: "https://aforemny.github.io/material-components-web-elm/" <> icon
                   , additionalAttributes:
-                    [ HP.style "width: calc(100% / 4 - 8.25px); margin: 4px;;"
+                    [ HP.style "width: calc(100% / 4 - 8.25px); margin: 4px;"
                     ]
                   }
                 )
