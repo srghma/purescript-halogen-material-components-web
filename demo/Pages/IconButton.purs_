@@ -1,6 +1,5 @@
 module Demo.Pages.IconButton where
 
-import Browser.Dom
 import Demo.HOC.CatalogPage
 import Protolude
 import Data.Array as Array
@@ -17,7 +16,6 @@ import HalogenMWC.IconButton as IconButton
 import HalogenMWC.IconToggle as IconToggle
 import Material.Classes.Typography
 import Set
-import Task
 
 data Model =
     { ons :: Set String }

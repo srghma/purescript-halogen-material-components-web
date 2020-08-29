@@ -1,6 +1,5 @@
 module Demo.Pages.Fabs where
 
-import Browser.Dom
 import Demo.HOC.CatalogPage
 import Protolude
 import Data.Array as Array
@@ -16,7 +15,6 @@ import HalogenMWC.Button as Button
 import HalogenMWC.Fab as Fab
 import HalogenMWC.Fab.Extended as ExtendedFab
 import Material.Classes.Typography
-import Task
 
 data Model =
     {}

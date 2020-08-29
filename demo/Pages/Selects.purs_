@@ -1,6 +1,5 @@
 module Demo.Pages.Selects where
 
-import Browser.Dom
 import Demo.HOC.CatalogPage
 import Protolude
 import Data.Array as Array
@@ -16,7 +15,6 @@ import HalogenMWC.Button as Button
 import HalogenMWC.Select as Select
 import HalogenMWC.Select.Item as SelectItem
 import Material.Classes.Typography
-import Task
 
 data Model =
     { hero :: Maybe Fruit

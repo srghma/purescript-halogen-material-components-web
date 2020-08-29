@@ -1,6 +1,5 @@
 module Demo.Pages.Checkbox where
 
-import Browser.Dom
 import Demo.HOC.CatalogPage
 import Dict
 import Protolude
@@ -16,7 +15,6 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Button as Button
 import HalogenMWC.Checkbox as Checkbox
 import Material.Classes.Typography
-import Task
 
 data Model =
     { checkboxes :: Dict String Checkbox.State }

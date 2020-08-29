@@ -1,6 +1,5 @@
 module Demo.Pages.TextFields where
 
-import Browser.Dom
 import Demo.HOC.CatalogPage
 import Protolude
 import Data.Array as Array
@@ -17,7 +16,6 @@ import HalogenMWC.HelperText as HelperText
 import HalogenMWC.TextArea as TextArea
 import HalogenMWC.TextField as TextField
 import Material.Classes.Typography
-import Task
 
 data Model =
     { value :: String }

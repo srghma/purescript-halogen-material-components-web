@@ -1,6 +1,5 @@
 module Demo.Pages.Lists where
 
-import Browser.Dom
 import Demo.HOC.CatalogPage
 import Protolude
 import Data.Array as Array
@@ -20,7 +19,6 @@ import HalogenMWC.List.Item as List.Item
 import HalogenMWC.Radio as Radio
 import Material.Classes.Typography
 import Set
-import Task
 
 data Model =
     { checkboxes :: Set String

@@ -1,6 +1,5 @@
 module Demo.Pages.Switch where
 
-import Browser.Dom
 import Demo.HOC.CatalogPage
 import Dict
 import Protolude
@@ -17,7 +16,6 @@ import HalogenMWC.Button as Button
 import HalogenMWC.FormField as FormField
 import HalogenMWC.Switch as Switch
 import Material.Classes.Typography
-import Task
 
 data Model =
     { switches :: Dict String Boolean }

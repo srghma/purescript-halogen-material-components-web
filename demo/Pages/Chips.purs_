@@ -1,6 +1,5 @@
 module Demo.Pages.Chips where
 
-import Browser.Dom
 import Demo.HOC.CatalogPage
 import Protolude
 import Data.Array as Array
@@ -34,7 +33,6 @@ import HalogenMWC.ChipSet.Filter as FilterChipSet
 import HalogenMWC.ChipSet.Input as InputChipSet
 import Material.Classes.Typography
 import Set
-import Task
 
 data Model =
     { chip :: Maybe String

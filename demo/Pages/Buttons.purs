@@ -1,6 +1,5 @@
 module Demo.Pages.Buttons where
 
-import Browser.Dom
 import Demo.HOC.CatalogPage
 import Protolude
 import Data.Array as Array
@@ -14,7 +13,6 @@ import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Button as Button
 import Material.Classes.Typography
-import Task
 
 data Model = {}
 

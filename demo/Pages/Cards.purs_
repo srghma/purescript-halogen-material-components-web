@@ -1,6 +1,5 @@
 module Demo.Pages.Cards where
 
-import Browser.Dom
 import Demo.HOC.CatalogPage
 import Protolude
 import Data.Array as Array
@@ -17,7 +16,6 @@ import HalogenMWC.Card as Card
 import HalogenMWC.IconButton as IconButton
 import HalogenMWC.Theme as Theme
 import Material.Classes.Typography
-import Task
 
 data Model =
     {}
