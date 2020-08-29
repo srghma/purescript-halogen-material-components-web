@@ -89,7 +89,7 @@ render model =
                 (Fab.defaultConfig { additionalAttributes = [ HP.id_ "my-fab" ])
                 "favorite_border"
             , HH.text "\x00A0"
-            , Button.raised
+            , Button.button Button.Raised
                 (Button.defaultConfig { onClick = (Focus "my-fab"))
                 "Focus"
             ]

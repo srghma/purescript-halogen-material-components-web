@@ -357,7 +357,7 @@ focusList =
             (List.Item.listItem List.Item.defaultConfig [ HH.text "Line item" ])
             (List.repeat 2 $ List.Item.listItem List.Item.defaultConfig [ HH.text "Line item" ])
         , HH.text "\x00A0"
-        , Button.raised
+        , Button.button Button.Raised
             (Button.defaultConfig { onClick = (Focus "my-list"))
             "Focus"
         ]

@@ -87,21 +87,21 @@ render model =
         }
     , hero: [ heroMessage ]
     , content =
-        [ Button.raised
+        [ Button.button Button.Raised
             (Button.defaultConfig
                 { onClick = ShowBaseline
                 , additionalAttributes = buttonMargin
             )
             "Baseline"
         , HH.text " "
-        , Button.raised
+        , Button.button Button.Raised
             (Button.defaultConfig
                 { onClick = ShowLeading
                 , additionalAttributes = buttonMargin
             )
             "Leading"
         , HH.text " "
-        , Button.raised
+        , Button.button Button.Raised
             (Button.defaultConfig
                 { onClick = ShowStacked
                 , additionalAttributes = buttonMargin

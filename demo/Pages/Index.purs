@@ -30,8 +30,6 @@ type Input
 type Message
   = Void
 
-----------
--- HTML
 component ::
   ∀ m. H.Component Query Input Message m
 component =

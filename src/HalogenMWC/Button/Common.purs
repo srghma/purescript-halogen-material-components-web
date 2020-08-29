@@ -10,14 +10,14 @@ import MaterialIconsFont.Classes (material_icons)
 defaultConfig ::
   forall props.
   { disabled :: Boolean
-  , variant :: Variant
   , touch :: Boolean
+  , additionalClasses :: Array ClassName
   , additionalAttributes :: Array props
   }
 defaultConfig =
   { disabled: false
-  , variant: Text
   , touch: true
+  , additionalClasses: []
   , additionalAttributes: []
   }
 

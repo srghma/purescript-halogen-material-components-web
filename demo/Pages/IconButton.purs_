@@ -89,7 +89,7 @@ render model =
                 )
                 "wifi"
             , HH.text "\x00A0"
-            , Button.raised
+            , Button.button Button.Raised
                 (Button.defaultConfig { onClick = (Focus "my-icon-button"))
                 "Focus"
             ]
@@ -105,7 +105,7 @@ render model =
                 , onIcon: "favorite"
                 }
             , HH.text "\x00A0"
-            , Button.raised
+            , Button.button Button.Raised
                 (Button.defaultConfig { onClick = (Focus "my-icon-toggle"))
                 "Focus"
             ]

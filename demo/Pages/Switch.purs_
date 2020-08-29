@@ -131,10 +131,10 @@ focusSwitch model =
                 )
             ]
         , HH.text "\x00A0"
-        , Button.raised
+        , Button.button Button.Raised
             (Button.defaultConfig { onClick = (Focus "my-switch"))
             "Focus switch"
-        , Button.raised
+        , Button.button Button.Raised
             (Button.defaultConfig { onClick = (Focus "my-form-field"))
             "Focus form field"
         ]

@@ -292,7 +292,7 @@ focusTextField =
                 { additionalAttributes = [ HP.id_ "my-text-field" ]
             )
         , HH.text "\x00A0"
-        , Button.raised
+        , Button.button Button.Raised
             (Button.defaultConfig { onClick = (Focus "my-text-field"))
             "Focus"
         ]

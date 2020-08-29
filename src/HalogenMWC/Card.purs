@@ -110,10 +110,9 @@ primaryAction additionalAttributes =
 
 button :: forall w i. Button.Config I.HTMLbutton i -> Array (HH.HTML w i) -> HH.HTML w i
 button config =
-  Button.button
+  Button.button Button.Text
     ( config
-        { variant = Button.Text
-        , additionalClasses = [ mdc_card__action, mdc_card__action____button ] <> config.additionalClasses
+        { additionalClasses = [ mdc_card__action, mdc_card__action____button ] <> config.additionalClasses
         }
     )
 

@@ -191,7 +191,7 @@ focusSelect model =
             firstItem
             remainingItems
         , HH.text "\x00A0"
-        , Button.raised
+        , Button.button Button.Raised
             (Button.defaultConfig { onClick = (Focus "my-select"))
             "Focus"
         ]

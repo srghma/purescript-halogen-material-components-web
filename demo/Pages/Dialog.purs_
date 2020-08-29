@@ -55,19 +55,19 @@ render model =
         }
     , hero: heroDialog
     , content =
-        [ Button.text
+        [ Button.button Button.Text
             (Button.defaultConfig { onClick = (Show AlertDialog))
             "Alert"
         , HH.text " "
-        , Button.text
+        , Button.button Button.Text
             (Button.defaultConfig { onClick = (Show SimpleDialog))
             "Simple"
         , HH.text " "
-        , Button.text
+        , Button.button Button.Text
             (Button.defaultConfig { onClick = (Show ConfirmationDialog))
             "Confirmation"
         , HH.text " "
-        , Button.text
+        , Button.button Button.Text
             (Button.defaultConfig { onClick = (Show ScrollableDialog))
             "Scrollable"
         , HH.text " "
@@ -88,8 +88,8 @@ alertDialog model =
         { title: Nothing
         , content: [ HH.text "Discard draft?" ]
         , actions =
-            [ Button.text (Button.defaultConfig { onClick = Close) "Cancel"
-            , Button.text (Button.defaultConfig { onClick = Close) "Discard"
+            [ Button.button Button.Text (Button.defaultConfig { onClick = Close) "Cancel"
+            , Button.button Button.Text (Button.defaultConfig { onClick = Close) "Discard"
             ]
         }
 
@@ -150,8 +150,8 @@ confirmationDialog model =
                 )
             ]
         , actions =
-            [ Button.text (Button.defaultConfig { onClick = Close) "Cancel"
-            , Button.text (Button.defaultConfig { onClick = Close) "OK"
+            [ Button.button Button.Text (Button.defaultConfig { onClick = Close) "Cancel"
+            , Button.button Button.Text (Button.defaultConfig { onClick = Close) "OK"
             ]
         }
 
@@ -252,8 +252,8 @@ scrollableDialog model =
                 ]
             ]
         , actions =
-            [ Button.text (Button.defaultConfig { onClick = Close) "Decline"
-            , Button.text (Button.defaultConfig { onClick = Close) "Continue"
+            [ Button.button Button.Text (Button.defaultConfig { onClick = Close) "Decline"
+            , Button.button Button.Text (Button.defaultConfig { onClick = Close) "Continue"
             ]
         }
 
@@ -269,8 +269,8 @@ heroDialog =
             , HH.div [ HP.class_ mdc_dialog__content ]
                 [ HH.text "Turn up the jams and have a good time." ]
             , HH.div [ HP.class_ mdc_dialog__actions ]
-                [ Button.text Button.defaultConfig "Decline"
-                , Button.text Button.defaultConfig "Accept"
+                [ Button.button Button.Text Button.defaultConfig "Decline"
+                , Button.button Button.Text Button.defaultConfig "Accept"
                 ]
             ]
         ]
