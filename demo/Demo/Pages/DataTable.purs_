@@ -58,13 +58,13 @@ render :: forall r w i . State -> CatalogPage Action
 render model =
     { title: "Data Table"
     , prelude: "Data tables display information in a way that’s easy to scan, so that users can look for patterns and insights."
-    , resources =
+    , resources:
         { materialDesignGuidelines: Just "https://material.io/go/design-data-tables"
         , documentation: Just "https://material.io/components/web/catalog/data-tables/"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-data-table"
         }
     , hero: heroDataTable
-    , content =
+    , content:
         [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Data Table Standard" ]
         , standardDataTable
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Data Table with Row Selection" ]
@@ -103,7 +103,7 @@ data =
       }
     ]
 
-standardDataTable :: forall r w i . HH.HTML w i
+standardDataTable :: forall w i . HH.HTML w i
 standardDataTable =
     let
         row { desert, carbs, protein, comments } =

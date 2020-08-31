@@ -42,13 +42,13 @@ render :: forall r w i . State -> CatalogPage Action
 render model =
     { title: "Menu"
     , prelude: "Menus display a list of choices on a transient sheet of material."
-    , resources =
+    , resources:
         { materialDesignGuidelines: Just "https://material.io/go/design-menus"
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Menu"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-menu"
         }
     , hero: [ heroMenu model ]
-    , content =
+    , content:
         [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Anchored menu" ]
         , HH.div [ mdc_menu_surface____anchor ]
             [ Button.button Button.Text (Button.defaultConfig { onClick = Open) "Open menu"

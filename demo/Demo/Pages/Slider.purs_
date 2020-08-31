@@ -51,13 +51,13 @@ render :: forall r w i . State -> CatalogPage Action
 render model =
     { title: "Slider"
     , prelude: "Sliders let users select from a range of values by moving the slider thumb."
-    , resources =
+    , resources:
         { materialDesignGuidelines: Just "https://material.io/go/design-sliders"
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Slider"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-slider"
         }
     , hero: [ heroSlider model ]
-    , content =
+    , content:
         [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Continuous" ]
         , continuousSlider model
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Discrete" ]

@@ -41,13 +41,13 @@ render :: forall r w i . State -> CatalogPage Action
 render model =
     { title: "Text Field"
     , prelude: "Text fields allow users to input, edit, and select text. Text fields typically reside in forms but can appear in other places, like dialog boxes and search."
-    , resources =
+    , resources:
         { materialDesignGuidelines: Just "https://material.io/go/design-text-fields"
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-TextField"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-textfield"
         }
     , hero: [ heroTextFields model ]
-    , content =
+    , content:
         [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Filled" ]
         , filledTextFields model
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Shaped Filled" ]
@@ -325,7 +325,7 @@ textFieldRowFullwidth =
     , HP.style "display: block;"
     ]
 
-demoHelperText :: forall r w i . HH.HTML w i
+demoHelperText :: forall w i . HH.HTML w i
 demoHelperText =
     HelperText.helperLine []
         [ HelperText.helperText
@@ -333,7 +333,7 @@ demoHelperText =
             "Helper Text"
         ]
 
-demoHelperTextWithCharacterCounter :: forall r w i . HH.HTML w i
+demoHelperTextWithCharacterCounter :: forall w i . HH.HTML w i
 demoHelperTextWithCharacterCounter =
     HelperText.helperLine []
         [ HelperText.helperText

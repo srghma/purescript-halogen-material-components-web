@@ -81,13 +81,13 @@ render :: forall r w i . State -> CatalogPage Action
 render model =
     { title: "Select"
     , prelude: "Selects allow users to select from a single-option menu."
-    , resources =
+    , resources:
         { materialDesignGuidelines: Just "https://material.io/go/design-text-fields"
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Select"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-select"
         }
     , hero: [ heroSelect model ]
-    , content =
+    , content:
         [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Filled" ]
         , filledSelect model
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Outlined" ]

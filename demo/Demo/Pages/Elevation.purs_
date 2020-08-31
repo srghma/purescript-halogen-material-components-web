@@ -30,13 +30,13 @@ render :: forall r w i . State -> CatalogPage Action
 render model =
     { title: "Elevation"
     , prelude: "Elevation is the relative depth, or distance, between two surfaces along the z-axis."
-    , resources =
+    , resources:
         { materialDesignGuidelines: Just "https://material.io/go/design-elevation"
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Elevation"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-elevation"
         }
     , hero: heroElevation
-    , content =
+    , content:
         [ HH.div demoContainer
             [ HH.div (Elevation.z0 :: demoSurface) [ HH.text "0dp" ]
             , HH.div (Elevation.z1 :: demoSurface) [ HH.text "1dp" ]

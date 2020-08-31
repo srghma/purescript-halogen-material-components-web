@@ -32,7 +32,7 @@ render :: forall r w i . State -> CatalogPage Action
 render model =
     { title: "Image List"
     , prelude: "Image lists display a collection of images in an organized grid."
-    , resources =
+    , resources:
         { materialDesignGuidelines: Just "https://material.io/go/design-image-list"
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-ImageList"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-image-list"
@@ -44,7 +44,7 @@ render model =
             )
             (List.repeat 15 imageListHeroItem)
         ]
-    , content =
+    , content:
         [ HH.h3
             [ mdc_typography____subtitle1 ]
             [ HH.text "Standard Image Array with Text Protection" ]
@@ -56,7 +56,7 @@ render model =
         ]
     }
 
-standardImageList :: forall r w i . HH.HTML w i
+standardImageList :: forall w i . HH.HTML w i
 standardImageList =
     ImageList.imageList
         (ImageList.defaultConfig
@@ -65,7 +65,7 @@ standardImageList =
         )
         (map standardItem standardImages)
 
-masonryImageList :: forall r w i . HH.HTML w i
+masonryImageList :: forall w i . HH.HTML w i
 masonryImageList =
     ImageList.imageList
         (ImageList.defaultConfig

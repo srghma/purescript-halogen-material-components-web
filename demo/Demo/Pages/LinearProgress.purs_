@@ -30,13 +30,13 @@ render :: forall r w i . State -> CatalogPage Action
 render model =
     { title: "Linear Progress Indicator"
     , prelude: "Progress indicators display the length of a process or express an unspecified wait time."
-    , resources =
+    , resources:
         { materialDesignGuidelines: Just "https://material.io/go/design-progress-indicators"
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-LinearProgress"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-linear-progress"
         }
     , hero: [ LinearProgress.determinate LinearProgress.defaultConfig { progress: 0.5 } ]
-    , content =
+    , content:
         [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Buffered" ]
         , LinearProgress.buffered LinearProgress.defaultConfig { progress: 0.5, buffered: 0.75 }
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Indeterminate" ]

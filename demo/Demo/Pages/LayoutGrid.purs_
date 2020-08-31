@@ -37,13 +37,13 @@ render :: forall r w i . State -> CatalogPage Action
 render model =
     { title: "Layout Grid"
     , prelude: "Material design’s responsive UI is based on a 12-column grid layout."
-    , resources =
+    , resources:
         { materialDesignGuidelines: Nothing
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-LayoutGrid"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-layout-grid"
         }
     , hero: heroGrid
-    , content =
+    , content:
         [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Columns" ]
         , columnsGrid
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Grid Left Alignment" ]
@@ -81,7 +81,7 @@ heroGrid :: forall r w i . Array (HH.HTML w i)
 heroGrid =
     [ demoGrid [] [ LayoutGrid.inner [] (List.repeat 3 (demoCell [])) ] ]
 
-columnsGrid :: forall r w i . HH.HTML w i
+columnsGrid :: forall w i . HH.HTML w i
 columnsGrid =
     demoGrid []
         [ LayoutGrid.inner []
@@ -95,7 +95,7 @@ columnsGrid =
             ]
         ]
 
-leftAlignedGrid :: forall r w i . HH.HTML w i
+leftAlignedGrid :: forall w i . HH.HTML w i
 leftAlignedGrid =
     demoGrid
         [ mdc_layout_grid____align_left
@@ -108,7 +108,7 @@ leftAlignedGrid =
             ]
         ]
 
-rightAlignedGrid :: forall r w i . HH.HTML w i
+rightAlignedGrid :: forall w i . HH.HTML w i
 rightAlignedGrid =
     demoGrid
         [ mdc_layout_grid____align_right
@@ -117,7 +117,7 @@ rightAlignedGrid =
         [ LayoutGrid.inner [] (List.repeat 3 (demoCell []))
         ]
 
-cellAlignmentGrid :: forall r w i . HH.HTML w i
+cellAlignmentGrid :: forall w i . HH.HTML w i
 cellAlignmentGrid =
     let
         innerHeight =

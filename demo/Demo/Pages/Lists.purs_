@@ -77,13 +77,13 @@ render :: forall r w i . State -> CatalogPage Action
 render model =
     { title: "List"
     , prelude: "Lists present multiple line items vertically as a single continuous element."
-    , resources =
+    , resources:
         { materialDesignGuidelines: Just "https://material.io/go/design-lists"
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-List"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-list"
         }
     , hero: heroList
-    , content =
+    , content:
         [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Single-Line" ]
         , singleLineList
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Two-Line" ]
@@ -125,7 +125,7 @@ heroList =
         (List.repeat 2 listItem)
     ]
 
-singleLineList :: forall r w i . HH.HTML w i
+singleLineList :: forall w i . HH.HTML w i
 singleLineList =
     let
         listItem =
@@ -135,7 +135,7 @@ singleLineList =
         listItem
         (List.repeat 2 listItem)
 
-twoLineList :: forall r w i . HH.HTML w i
+twoLineList :: forall w i . HH.HTML w i
 twoLineList =
     let
         listItem =
@@ -154,7 +154,7 @@ twoLineList =
         listItem
         (List.repeat 2 listItem)
 
-leadingIconList :: forall r w i . HH.HTML w i
+leadingIconList :: forall w i . HH.HTML w i
 leadingIconList =
     let
         listItem icon =
@@ -167,7 +167,7 @@ leadingIconList =
         (listItem "wifi")
         (map listItem [ "bluetooth", "data_usage" ])
 
-trailingIconList :: forall r w i . HH.HTML w i
+trailingIconList :: forall w i . HH.HTML w i
 trailingIconList =
     let
         listItem =
@@ -238,7 +238,7 @@ demoIcon =
     [ HP.style "background: rgba(0,0,0,.3); border-radius: 50%; color: #fff;"
     ]
 
-folderList :: forall r w i . HH.HTML w i
+folderList :: forall w i . HH.HTML w i
 folderList =
     let
         listItem { primary, secondary } =

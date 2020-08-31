@@ -54,7 +54,7 @@ render :: forall r w i . State -> CatalogPage Action
 render model =
     { title: "Icon Button"
     , prelude: "Icons are appropriate for buttons that allow a user to take actions or make a selection, such as adding or removing a star to an item."
-    , resources =
+    , resources:
         { materialDesignGuidelines: Just "https://material.io/design/components/buttons.html#toggle-button"
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-IconButton"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-icon-button"
@@ -69,7 +69,7 @@ render model =
             , onIcon: "favorite"
             }
         ]
-    , content =
+    , content:
         [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Icon Button" ]
         , IconButton.iconButton IconButton.defaultConfig "wifi"
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Icon Toggle" ]

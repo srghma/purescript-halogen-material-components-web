@@ -48,13 +48,13 @@ render :: forall r w i . State -> CatalogPage Action
 render model =
     { title: "Dialog"
     , prelude: "Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks."
-    , resources =
+    , resources:
         { materialDesignGuidelines: Just "https://material.io/go/design-dialogs"
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Dialog"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-dialog"
         }
     , hero: heroDialog
-    , content =
+    , content:
         [ Button.button Button.Text
             (Button.defaultConfig { onClick = (Show AlertDialog))
             "Alert"
@@ -112,7 +112,7 @@ simpleDialog model =
             , onClose = Close
         )
         { title: Just "Select an account"
-        , content =
+        , content:
             [ List.list (List.defaultConfig { avatarList = true)
                 (listItem ( "person", "user1@example.com" ))
                 (map listItem
@@ -140,7 +140,7 @@ confirmationDialog model =
             , onClose = Close
         )
         { title: Just "Phone ringtone"
-        , content =
+        , content:
             [ List.list (List.defaultConfig { avatarList = true)
                 (listItem ( true, "Never Gonna Give You Up" ))
                 (map listItem
@@ -163,7 +163,7 @@ scrollableDialog model =
             , onClose = Close
         )
         { title: Just "The Wonderful Wizard of Oz"
-        , content =
+        , content:
             [ HH.p []
                 [ HH.text """
                     Dorothy lived in the midst of the great Kansas prairies,

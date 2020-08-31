@@ -39,13 +39,13 @@ render :: forall r w i . State -> CatalogPage Action
 render model =
     { title: "Floating Action Button"
     , prelude: "Floating action buttons represents the primary action in an application. Only one floating action button is recommended per screen to represent the most common action."
-    , resources =
+    , resources:
         { materialDesignGuidelines: Just "https://material.io/go/design-fab"
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Fab"
         , sourceCode: Just "https://github.com/material-components/material-components-web/blob/master/packages/mdc-fab/"
         }
     , hero: [ Fab.fab Fab.defaultConfig "favorite_border" ]
-    , content =
+    , content:
         [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Standard Floating Action Button" ]
         , Fab.fab Fab.defaultConfig "favorite_border"
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Mini Floating Action Button" ]

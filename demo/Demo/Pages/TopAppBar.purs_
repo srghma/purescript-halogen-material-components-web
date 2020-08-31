@@ -33,7 +33,7 @@ render :: forall r w i . State -> CatalogPage Action
 render model =
     { title: "Top App Bar"
     , prelude: "Top App Bars are a container for items such as application title, navigation icon, and action items."
-    , resources =
+    , resources:
         { materialDesignGuidelines: Just "https://material.io/go/design-app-bar-top"
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-TopAppBar"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-top-app-bar"
@@ -74,7 +74,7 @@ render model =
                 ]
             ]
         ]
-    , content =
+    , content:
         [ HH.div
             [ HP.style "display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; min-height: 200px;"
             ]

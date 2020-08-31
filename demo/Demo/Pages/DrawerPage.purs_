@@ -132,7 +132,7 @@ drawerBody setSelectedIndex selectedIndex =
         ]
     ]
 
-mainContent :: forall r w i . HH.HTML w i
+mainContent :: forall w i . HH.HTML w i
 mainContent =
     HH.div
         [ HP.style "padding-left: 18px; padding-right: 18px; overflow: auto; height: 100%; box-sizing: border-box;"

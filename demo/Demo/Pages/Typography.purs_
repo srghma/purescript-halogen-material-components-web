@@ -29,13 +29,13 @@ render :: forall r w i . State -> CatalogPage Action
 render model =
     { title: "Typography"
     , prelude: "Roboto is the standard typeface on Android and Chrome."
-    , resources =
+    , resources:
         { materialDesignGuidelines: Just "https://material.io/go/design-typography"
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Typography"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-typography"
         }
     , hero: [ HH.h1 [ mdc_typography____headline1 ] [ HH.text "Typography" ] ]
-    , content =
+    , content:
         [ HH.h1 [ mdc_typography____headline1 ] [ HH.text "Headline 1" ]
         , HH.h2 [ mdc_typography____headline2 ] [ HH.text "Headline 2" ]
         , HH.h3 [ mdc_typography____headline3 ] [ HH.text "Headline 3" ]

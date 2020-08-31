@@ -56,13 +56,13 @@ render :: forall r w i . State -> CatalogPage Action
 render model =
     { title: "Switch"
     , prelude: "Switches communicate an action a user can take. They are typically placed throughout your UI, in places like dialogs, forms, cards, and toolbars."
-    , resources =
+    , resources:
         { materialDesignGuidelines: Just "https://material.io/go/design-switches"
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Switch"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-switch"
         }
     , hero: heroSwitch model
-    , content =
+    , content:
         [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Switch" ]
         , demoSwitch model
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Focus Switch" ]
