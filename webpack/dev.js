@@ -26,7 +26,7 @@ import * as path from 'path'
     })
 
   require('webpack-spago-loader/watcher-job')({
-    additionalWatchGlobs: ['(demo|src)/**/*.(css|sass|scss)'],
+    additionalWatchGlobs: ['demo/**/*.scss', 'src/**/*.scss', 'demo/**/*.css', 'src/**/*.css'],
     options: require('./lib/spago-options'),
     onStart: () => {},
     onError: () => {},

@@ -4,5 +4,5 @@ module Demo.Pages.Buttons.Css (styles) where
 import Halogen.HTML (ClassName)
 
 foreign import styles ::
-  { my_button_dense_class :: ClassName
+  { my_button_dense :: ClassName
   }

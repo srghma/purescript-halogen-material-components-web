@@ -1,0 +1,9 @@
+@use "@material/button";
+
+.my_button_dense {
+  --mdc-theme-primary: #FEDBD0;
+  --mdc-theme-on-primary: #442C2E;
+
+  @include button.ink-color(#84565E);
+  @include button.density(-3);
+}

@@ -13,6 +13,7 @@ import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Button as Button
 import Material.Classes.Typography
+import Demo.Pages.Buttons.Css as Demo.Pages.Buttons.Css
 
 type State
   = Unit
@@ -147,7 +148,7 @@ buttonsRow button additionalAttributes =
     in
     HH.div []
         [ button config [ HH.text "Default" ]
-        -- | , button (config { additionalClasses = [ mdc_button___dense ] }) [ HH.text "Dense" ]
+        , button (config { additionalClasses = [ Demo.Pages.Buttons.Css.styles.my_button_dense ] }) [ HH.text "Dense" ]
         , button config [ Button.buttonIcon "favorite", HH.text "Icon" ]
         ]
 
