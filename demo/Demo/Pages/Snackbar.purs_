@@ -15,8 +15,7 @@ import HalogenMWC.Button as Button
 import HalogenMWC.Snackbar as Snackbar
 import Platform.Cmd
 
-data State =
-    { queue :: Snackbar.Queue Action }
+type State = { queue :: Snackbar.Queue Action }
 
 initialState :: forall r w i . State
 initialState =

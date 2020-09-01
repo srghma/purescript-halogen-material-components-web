@@ -17,8 +17,7 @@ import HalogenMWC.IconToggle as IconToggle
 import Material.Classes.Typography
 import Data.Set (Set)
 import Data.Set as Set
-data State =
-    { ons :: Set String }
+type State = { ons :: Set String }
 
 initialState :: forall r w i . State
 initialState =

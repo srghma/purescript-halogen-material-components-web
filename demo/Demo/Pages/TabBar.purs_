@@ -16,8 +16,7 @@ import HalogenMWC.Tab as Tab
 import HalogenMWC.TabBar as TabBar
 import Material.Classes.Typography
 
-data State =
-    { activeHeroTab :: Int
+type State = { activeHeroTab :: Int
     , activeIconTab :: Int
     , activeStackedTab :: Int
     , activeScrollingTab :: Int

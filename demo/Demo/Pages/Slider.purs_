@@ -17,17 +17,16 @@ import HalogenMWC.Button as Button
 import HalogenMWC.Slider as Slider
 import Material.Classes.Typography
 
-data State =
-    { sliders :: Map String Float }
+type State = { sliders :: Map String Float }
 
 initialState :: forall r w i . State
 initialState =
     { sliders =
         Map.fromList
-            [ ( "hero-slider", 25 )
-            , ( "continuous-slider", 25 )
-            , ( "discrete-slider", 25 )
-            , ( "discrete-slider-with-tick-marks", 25 )
+            [ ( "hero-slider" /\ "25" )
+            , ( "continuous-slider" /\ "25" )
+            , ( "discrete-slider" /\ "25" )
+            , ( "discrete-slider-with-tick-marks" /\ "25" )
             ]
     }
 

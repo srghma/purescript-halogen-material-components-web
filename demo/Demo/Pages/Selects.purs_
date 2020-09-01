@@ -16,8 +16,7 @@ import HalogenMWC.Select as Select
 import HalogenMWC.Select.Item as Select.Item
 import Material.Classes.Typography
 
-data State =
-    { hero :: Maybe Fruit
+type State = { hero :: Maybe Fruit
     , filled :: Maybe Fruit
     , outlined :: Maybe Fruit
     , filledWithIcon :: Maybe Fruit

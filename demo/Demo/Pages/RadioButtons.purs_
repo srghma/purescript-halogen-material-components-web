@@ -18,8 +18,7 @@ import HalogenMWC.FormField as FormField
 import HalogenMWC.Radio as Radio
 import Material.Classes.Typography
 
-data State =
-    { radios :: Map String String }
+type State = { radios :: Map String String }
 
 initialState :: forall r w i . State
 initialState =

@@ -3,8 +3,7 @@ module Demo.Pages.Drawer.Permanent where
 import Demo.DrawerPage as DrawerPage
 import HalogenMWC.Drawer.Permanent as Drawer.Permanent
 
-data State =
-    { selectedIndex :: Int }
+type State = { selectedIndex :: Int }
 
 initialState :: forall r w i . State
 initialState =
@@ -13,7 +12,7 @@ initialState =
 data Action
     = SetSelectedIndex Int
 
-handleAction :: forall r w i . Action -> State -> State
+handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
 handleAction =
     case _ of
         SetSelectedIndex index ->

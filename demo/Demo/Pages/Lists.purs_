@@ -20,8 +20,7 @@ import HalogenMWC.Radio as Radio
 import Material.Classes.Typography
 import Data.Set (Set)
 import Data.Set as Set
-data State =
-    { checkboxes :: Set String
+type State = { checkboxes :: Set String
     , radio :: Maybe String
     , activated :: String
     , shapedActivated :: String
@@ -242,7 +241,7 @@ folderList =
     let
         listItem { primary, secondary } =
             List.Item.listItem List.Item.defaultConfig
-                [ List.Item.graphic demoIcon [ Icon.icon [] "folder" ]
+                [ HH.div [ HP.class mdc_list_item__graphic ] demoIcon [ Icon.icon [] "folder" ]
                 , List.Item.text []
                     { primary: [ HH.text primary ]
                     , secondary: [ HH.text secondary ]

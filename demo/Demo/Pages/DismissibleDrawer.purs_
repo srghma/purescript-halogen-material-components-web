@@ -9,8 +9,7 @@ module Demo.Pages.Drawer.Dismissible where
 import Demo.DrawerPage as DrawerPage
 import HalogenMWC.Drawer.Dismissible as Drawer.Dismissible
 
-data State =
-    { open :: Boolean
+type State = { open :: Boolean
     , selectedIndex :: Int
     }
 
@@ -25,7 +24,7 @@ data Action
     | CloseDrawer
     | SetSelectedIndex Int
 
-handleAction :: forall r w i . Action -> State -> State
+handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
 handleAction =
     case _ of
         ToggleDrawer ->
@@ -44,7 +43,7 @@ catalogPage =
         Drawer.Dismissible.drawer
             (Drawer.Dismissible.defaultConfig
                 { open = state.open
-                , onClose = CloseDrawer
+                , onClose = Just $ const $ CloseDrawer
             )
             (DrawerPage.drawerBody SetSelectedIndex state.selectedIndex)
     , onMenuClick: Just ToggleDrawer

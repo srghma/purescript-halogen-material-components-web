@@ -18,8 +18,7 @@ import HalogenMWC.List.Item as List.Item
 import HalogenMWC.Menu as Menu
 import Material.Classes.Typography
 
-data State =
-    { open :: Boolean }
+type State = { open :: Boolean }
 
 initialState :: forall r w i . State
 initialState =
@@ -29,7 +28,7 @@ data Action
     = Open
     | Close
 
-handleAction :: forall r w i . Action -> State -> State
+handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
 handleAction =
     case _ of
         Open ->
@@ -55,7 +54,7 @@ catalogPage =
             , Menu.menu
                 (Menu.defaultConfig
                     { open = state.open
-                    , onClose = Close
+                    , onClose = Just $ const $ Close
                 )
                 [ List.list (List.defaultConfig { wrapFocus = true)
                     (listItem "Passionfruit")
@@ -81,7 +80,7 @@ catalogPage =
 
 listItem :: forall r w i . String -> ListItem Action
 listItem label =
-    List.Item.listItem (List.Item.defaultConfig { onClick = Close) [ HH.text label ]
+    List.Item.listItem (List.Item.defaultConfig { onClick = Just $ const $ Close } [ HH.text label ]
 
 heroMenu :: forall r w i . State -> HH.HTML w i
 heroMenu state =

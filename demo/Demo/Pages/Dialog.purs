@@ -1,15 +1,18 @@
 module Demo.Pages.Dialog where
 
 import Demo.HOC.CatalogPage
+import Demo.Utils
+import Halogen
+import Material.Classes.List
 import Protolude
+
 import Data.Array as Array
 import Data.Maybe as Maybe
-import Halogen
 import Halogen as H
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
-import Halogen.HTML.Properties as HP
 import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Button as Button
 import HalogenMWC.Dialog as Dialog
@@ -17,142 +20,155 @@ import HalogenMWC.Icon as Icon
 import HalogenMWC.List as List
 import HalogenMWC.List.Item as List.Item
 import HalogenMWC.Radio as Radio
+import Material.Classes.Dialog
 
 data Dialog
-    = AlertDialog
-    | ConfirmationDialog
-    | ScrollableDialog
-    | SimpleDialog
+  = AlertDialog
+  | ConfirmationDialog
+  | ScrollableDialog
+  | SimpleDialog
 
-data State =
-    { open :: Maybe Dialog }
+derive instance eqDialog :: Eq Dialog
 
-initialState :: forall r w i . State
-initialState =
-    { open: Nothing }
+type State = { open :: Maybe Dialog }
+
+initialState :: State
+initialState = { open: Nothing }
 
 data Action
     = Close
     | Show Dialog
 
-handleAction :: forall r w i . Action -> State -> State
+handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
 handleAction =
-    case _ of
-        Close ->
-            { open = Nothing }
-
-        Show id ->
-            { open = Just id }
+  case _ of
+    Close -> H.modify_ (_ { open = Nothing })
+    Show id -> H.modify_ (_ { open = Just id })
 
 catalogPage :: CatalogPage
 catalogPage =
-    { title: "Dialog"
-    , prelude: "Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks."
-    , resources:
-        { materialDesignGuidelines: Just "https://material.io/go/design-dialogs"
-        , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Dialog"
-        , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-dialog"
-        }
-    , hero: heroDialog
-    , content:
-        [ Button.button Button.Text
-            (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Show AlertDialog) ] })
-            [ HH.text "Alert" ]
-        , HH.text " "
-        , Button.button Button.Text
-            (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Show SimpleDialog) ] })
-            [ HH.text "Simple" ]
-        , HH.text " "
-        , Button.button Button.Text
-            (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Show ConfirmationDialog) ] })
-            [ HH.text "Confirmation" ]
-        , HH.text " "
-        , Button.button Button.Text
-            (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Show ScrollableDialog) ] })
-            [ HH.text "Scrollable" ]
-        , HH.text " "
-        , alertDialog state
-        , simpleDialog state
-        , confirmationDialog state
-        , scrollableDialog state
-        ]
-    }
+  { title: "Dialog"
+  , prelude: "Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks."
+  , resources:
+      { materialDesignGuidelines: Just "https://material.io/go/design-dialogs"
+      , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Dialog"
+      , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-dialog"
+      }
+  , hero: mkComponentStatic $ HH.div_ heroDialog
+  , content:
+      let
+        render :: forall w. State -> HH.HTML w Action
+        render state =
+          HH.div_
+            [ Button.button Button.Text
+                (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Show AlertDialog) ] })
+                [ HH.text "Alert" ]
+            , HH.text " "
+            , Button.button Button.Text
+                (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Show SimpleDialog) ] })
+                [ HH.text "Simple" ]
+            , HH.text " "
+            , Button.button Button.Text
+                (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Show ConfirmationDialog) ] })
+                [ HH.text "Confirmation" ]
+            , HH.text " "
+            , Button.button Button.Text
+                (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Show ScrollableDialog) ] })
+                [ HH.text "Scrollable" ]
+            , HH.text " "
+            , alertDialog state
+            , simpleDialog state
+            , confirmationDialog state
+            , scrollableDialog state
+            ]
+      in
+        H.mkComponent
+          { initialState: const initialState
+          , render
+          , eval: H.mkEval H.defaultEval { handleAction = handleAction }
+          }
+  }
 
 alertDialog :: forall r w i . State -> HH.HTML w Action
 alertDialog state =
-    Dialog.dialog
-        (Dialog.defaultConfig
-            { open = (state.open == Just AlertDialog)
-            , onClose = Close
-        )
-        { title: Nothing
-        , content: [ HH.text "Discard draft?" ]
-        , actions =
-            let
-              conf = Button.defaultConfig { additionalAttributes = [ HE.onClick (const Close) ] }
-            in
-            [ Button.button Button.Text conf [ HH.text "Cancel" ]
-            , Button.button Button.Text conf [ HH.text "Discard" ]
-            ]
+  Dialog.dialog
+    (Dialog.defaultConfig
+        { open = (state.open == Just AlertDialog)
+        , onClose = Just $ const $ Close
         }
+    )
+    { title: Nothing
+    , content: [ HH.text "Discard draft?" ]
+    , actions:
+        let
+          conf = Button.defaultConfig { additionalAttributes = [ HE.onClick (const Close) ] }
+        in
+        [ Button.button Button.Text conf [ HH.text "Cancel" ]
+        , Button.button Button.Text conf [ HH.text "Discard" ]
+        ]
+    }
 
 simpleDialog :: forall r w i . State -> HH.HTML w Action
 simpleDialog state =
     let
-        listItem ( icon /\ label ) =
-            List.Item.listItem
-                (List.Item.defaultConfig { onClick = Close)
-                [ List.Item.graphic
-                    [ HP.style "background-color: rgba(0,0,0,.3); color: #fff;"
-                    ]
-                    [ Icon.icon [] icon ]
-                , HH.text label
-                ]
+      listItem ( icon /\ label ) =
+        List.Item.listItem
+          (List.Item.defaultConfig { onClick = Just $ const $ Close })
+          [ HH.div
+              [ HP.style "background-color: rgba(0,0,0,.3); color: #fff;"
+              , HP.class_ mdc_list_item__graphic
+              ]
+              [ Icon.icon [] icon ]
+          , HH.text label
+          ]
     in
     Dialog.dialog
-        (Dialog.defaultConfig
-            { open = (state.open == Just SimpleDialog)
-            , onClose = Close
-        )
-        { title: Just "Select an account"
-        , content:
-            [ List.list (List.defaultConfig { avatarList = true)
-                (listItem ( "person" /\ "user1@example.com" ))
-                (map listItem
-                    [ ( "person" /\ "user2@example.com" )
-                    , ( "add" /\ "Add account" )
-                    ]
-                )
-            ]
-        , actions: []
-        }
+      (Dialog.defaultConfig
+          { open = (state.open == Just SimpleDialog)
+          , onClose = Just $ const $ Close
+          }
+      )
+      { title: Just "Select an account"
+      , content:
+          [ List.list (List.defaultConfig { avatarList = true })
+              (listItem ( "person" /\ "user1@example.com" ))
+              (map listItem
+                  [ ( "person" /\ "user2@example.com" )
+                  , ( "add" /\ "Add account" )
+                  ]
+              )
+          ]
+      , actions: []
+      }
 
 confirmationDialog :: forall r w i . State -> HH.HTML w Action
 confirmationDialog state =
     let
         listItem ( checked /\ label ) =
-            List.Item.listItem List.Item.defaultConfig
-                [ HH.div [ HP.class_ mdc_list_item__graphic ]
-                    [ Radio.radio (Radio.defaultConfig { checked = checked) ]
-                , HH.text label
-                ]
+          List.Item.listItem
+            List.Item.defaultConfig
+            [ HH.div [ HP.class_ mdc_list_item__graphic ]
+            [ Radio.radio (Radio.defaultConfig { checked = checked }) ]
+            , HH.text label
+            ]
     in
     Dialog.dialog
         (Dialog.defaultConfig
             { open = (state.open == Just ConfirmationDialog)
-            , onClose = Close
+            , onClose = Just $ const $ Close
+            }
         )
         { title: Just "Phone ringtone"
         , content:
-            [ List.list (List.defaultConfig { avatarList = true)
-                (listItem ( true, "Never Gonna Give You Up" ))
+            [ List.list (List.defaultConfig { avatarList = true })
+                (listItem ( true /\ "Never Gonna Give You Up" ))
                 (map listItem
-                    [ ( false, "Hot Cross Buns" )
+                    [ ( false /\ "Hot Cross Buns" )
                     , ( false /\ "None" )
                     ]
                 )
             ]
-        , actions =
+        , actions:
             let
               conf = Button.defaultConfig { additionalAttributes = [ HE.onClick (const Close) ] }
             in
@@ -165,8 +181,9 @@ scrollableDialog :: forall r w i . State -> HH.HTML w Action
 scrollableDialog state =
     Dialog.dialog
         (Dialog.defaultConfig
-            { open = (state.open == Just ScrollableDialog)
-            , onClose = Close
+            { open = state.open == Just ScrollableDialog
+            , onClose = Just $ const $ Close
+            }
         )
         { title: Just "The Wonderful Wizard of Oz"
         , content:
@@ -257,30 +274,30 @@ scrollableDialog state =
                   """
                 ]
             ]
-        , actions =
+        , actions:
             let
               conf = Button.defaultConfig { additionalAttributes = [ HE.onClick (const Close) ] }
             in
-            [ Button.button Button.Text conf "Decline"
-            , Button.button Button.Text conf "Continue"
+            [ Button.button Button.Text conf [ HH.text "Decline" ]
+            , Button.button Button.Text conf [ HH.text "Continue" ]
             ]
         }
 
 heroDialog :: forall r w i . Array (HH.HTML w Action)
 heroDialog =
+  [ HH.div
+    [ HP.classes [ mdc_dialog, mdc_dialog____open ]
+    , HP.style "position: relative;"
+    ]
     [ HH.div
-        [ HP.class_ "mdc-dialog mdc-dialog--open"
-        , HP.style "position: relative;"
-        ]
-        [ HH.div
-            [ HP.class_ mdc_dialog__surface ]
-            [ HH.div [ HP.class_ mdc_dialog__title ] [ HH.text "Get this party started?" ]
-            , HH.div [ HP.class_ mdc_dialog__content ]
-                [ HH.text "Turn up the jams and have a good time." ]
-            , HH.div [ HP.class_ mdc_dialog__actions ]
-                [ Button.button Button.Text Button.defaultConfig [ HH.text "Decline" ]
-                , Button.button Button.Text Button.defaultConfig [ HH.text "Accept" ]
-                ]
-            ]
+        [ HP.class_ mdc_dialog__surface ]
+        [ HH.div [ HP.class_ mdc_dialog__title ] [ HH.text "Get this party started?" ]
+        , HH.div [ HP.class_ mdc_dialog__content ] [ HH.text "Turn up the jams and have a good time." ]
+        , HH.div
+          [ HP.class_ mdc_dialog__actions ]
+          [ Button.button Button.Text Button.defaultConfig [ HH.text "Decline" ]
+          , Button.button Button.Text Button.defaultConfig [ HH.text "Accept" ]
+          ]
         ]
     ]
+  ]

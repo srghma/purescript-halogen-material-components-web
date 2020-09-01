@@ -18,12 +18,11 @@ import HalogenMWC.FormField as FormField
 import HalogenMWC.Switch as Switch
 import Material.Classes.Typography
 
-data State =
-    { switches :: Map String Boolean }
+type State = { switches :: Map String Boolean }
 
 initialState :: forall r w i . State
 initialState =
-    { switches: Map.fromList [ ( "hero-switch", true ) ] }
+    { switches: Map.fromList [ ( "hero-switch" /\ "true" ) ] }
 
 data Action
     = Toggle String

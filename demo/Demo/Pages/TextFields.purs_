@@ -17,8 +17,7 @@ import HalogenMWC.TextArea as TextArea
 import HalogenMWC.TextField as TextField
 import Material.Classes.Typography
 
-data State =
-    { value :: String }
+type State = { value :: String }
 
 initialState :: forall r w i . State
 initialState =
