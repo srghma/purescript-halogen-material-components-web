@@ -1,7 +1,8 @@
 module Demo.Pages.RadioButtons where
 
 import Demo.HOC.CatalogPage
-import Data.Map
+import Data.Map (Map)
+import Data.Map as Map
 import Protolude
 import Data.Array as Array
 import Data.Maybe as Maybe
@@ -24,8 +25,8 @@ initialState :: forall r w i . State
 initialState =
     { radios =
         Map.fromList
-            [ ( "hero", "radio-buttons-hero-radio-1" )
-            , ( "example", "radio-buttons-example-radio-1" )
+            [ ( "hero" /\ "radio-buttons-hero-radio-1" )
+            , ( "example" /\ "radio-buttons-example-radio-1" )
             ]
     }
 
@@ -63,14 +64,14 @@ catalogPage =
         }
     , hero: [ heroRadioGroup state ]
     , content:
-        [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Radio Buttons" ]
+        [ HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Radio Buttons" ]
         , exampleRadioGroup state
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Focus Radio Button" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Focus Radio Button" ]
         , focusRadio
         ]
     }
 
-heroRadio :: forall r w i . State -> String -> String -> HH.HTML Action
+heroRadio :: forall r w i . State -> String -> String -> HH.HTML w Action
 heroRadio state group index =
     Radio.radio
         (Radio.defaultConfig
@@ -79,14 +80,14 @@ heroRadio state group index =
             , additionalAttributes = [ HP.style "margin: 0 10px;" ]
         )
 
-heroRadioGroup :: forall r w i . State -> HH.HTML Action
+heroRadioGroup :: forall r w i . State -> HH.HTML w Action
 heroRadioGroup state =
     HH.div []
         [ heroRadio state "hero" "radio-buttons-hero-radio-1"
         , heroRadio state "hero" "radio-buttons-hero-radio-2"
         ]
 
-radio :: forall r w i . State -> String -> String -> String -> HH.HTML Action
+radio :: forall r w i . State -> String -> String -> String -> HH.HTML w Action
 radio state group index label =
     FormField.formField
         (FormField.defaultConfig
@@ -102,14 +103,14 @@ radio state group index label =
             )
         ]
 
-exampleRadioGroup :: forall r w i . State -> HH.HTML Action
+exampleRadioGroup :: forall r w i . State -> HH.HTML w Action
 exampleRadioGroup state =
     HH.div []
         [ radio state "example" "radio-buttons-example-radio-1" "Radio 1"
         , radio state "example" "radio-buttons-example-radio-2" "Radio 2"
         ]
 
-focusRadio :: forall r w i . HH.HTML Action
+focusRadio :: forall r w i . HH.HTML w Action
 focusRadio =
     HH.div []
         [ Radio.radio

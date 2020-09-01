@@ -78,7 +78,7 @@ catalogPage =
         ]
     }
 
-alertDialog :: forall r w i . State -> HH.HTML Action
+alertDialog :: forall r w i . State -> HH.HTML w Action
 alertDialog state =
     Dialog.dialog
         (Dialog.defaultConfig
@@ -96,10 +96,10 @@ alertDialog state =
             ]
         }
 
-simpleDialog :: forall r w i . State -> HH.HTML Action
+simpleDialog :: forall r w i . State -> HH.HTML w Action
 simpleDialog state =
     let
-        listItem ( icon, label ) =
+        listItem ( icon /\ label ) =
             List.Item.listItem
                 (List.Item.defaultConfig { onClick = Close)
                 [ List.Item.graphic
@@ -117,20 +117,20 @@ simpleDialog state =
         { title: Just "Select an account"
         , content:
             [ List.list (List.defaultConfig { avatarList = true)
-                (listItem ( "person", "user1@example.com" ))
+                (listItem ( "person" /\ "user1@example.com" ))
                 (map listItem
-                    [ ( "person", "user2@example.com" )
-                    , ( "add", "Add account" )
+                    [ ( "person" /\ "user2@example.com" )
+                    , ( "add" /\ "Add account" )
                     ]
                 )
             ]
         , actions: []
         }
 
-confirmationDialog :: forall r w i . State -> HH.HTML Action
+confirmationDialog :: forall r w i . State -> HH.HTML w Action
 confirmationDialog state =
     let
-        listItem ( checked, label ) =
+        listItem ( checked /\ label ) =
             List.Item.listItem List.Item.defaultConfig
                 [ HH.div [ HP.class_ mdc_list_item__graphic ]
                     [ Radio.radio (Radio.defaultConfig { checked = checked) ]
@@ -148,7 +148,7 @@ confirmationDialog state =
                 (listItem ( true, "Never Gonna Give You Up" ))
                 (map listItem
                     [ ( false, "Hot Cross Buns" )
-                    , ( false, "None" )
+                    , ( false /\ "None" )
                     ]
                 )
             ]
@@ -161,7 +161,7 @@ confirmationDialog state =
             ]
         }
 
-scrollableDialog :: forall r w i . State -> HH.HTML Action
+scrollableDialog :: forall r w i . State -> HH.HTML w Action
 scrollableDialog state =
     Dialog.dialog
         (Dialog.defaultConfig
@@ -266,7 +266,7 @@ scrollableDialog state =
             ]
         }
 
-heroDialog :: forall r w i . Array (HH.HTML Action)
+heroDialog :: forall r w i . Array (HH.HTML w Action)
 heroDialog =
     [ HH.div
         [ HP.class_ "mdc-dialog mdc-dialog--open"

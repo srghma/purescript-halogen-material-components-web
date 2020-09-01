@@ -71,10 +71,10 @@ render routeOfThisCatalogPage catalogPage state =
       [ HH.section
           [ HP.class_ mdc_top_app_bar__row ]
           [ HH.section
-              [ HP.classes [ mdc_top_app_bar__section, mdc_top_app_bar__section____align_start ] ]
+              [ HP.classes [ HP.class_ mdc_top_app_bar__section, mdc_top_app_bar__section____align_start ] ]
               [ IconButton.iconButton
                   (IconButton.defaultConfig
-                    { additionalClasses = [ mdc_top_app_bar__navigation_icon, material_icons ]
+                    { additionalClasses = [ HP.class_ mdc_top_app_bar__navigation_icon, material_icons ]
                     , additionalAttributes = [ HE.onClick (const Toggle) ]
                     }
                   )
@@ -91,7 +91,7 @@ render routeOfThisCatalogPage catalogPage state =
       [ Drawer.Dismissible.drawer
           (Drawer.Dismissible.defaultConfig
             { open = state.isDrawerOpen
-            , additionalClasses = [ mdc_top_app_bar____fixed_adjust ]
+            , additionalClasses = [ HP.class_ mdc_top_app_bar____fixed_adjust ]
             , additionalAttributes = [ HP.style "z-index: 1;" ]
             }
           )
@@ -112,7 +112,7 @@ render routeOfThisCatalogPage catalogPage state =
             ]
           ]
       , HH.div
-          ([ HP.classes [ mdc_top_app_bar____fixed_adjust, mdc_drawer_app_content ] ] <> demoContent)
+          ([ HP.classes [ HP.class_ mdc_top_app_bar____fixed_adjust, mdc_drawer_app_content ] ] <> demoContent)
           [ HH.div demoContentTransition
               [ HH.h1 [ HP.class_ mdc_typography____headline5 ] [ HH.text catalogPage.title ]
               , HH.p [ HP.class_ mdc_typography____body1 ] [ HH.text catalogPage.prelude ]

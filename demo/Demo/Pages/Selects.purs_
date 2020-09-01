@@ -88,20 +88,20 @@ catalogPage =
         }
     , hero: [ heroSelect state ]
     , content:
-        [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Filled" ]
+        [ HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Filled" ]
         , filledSelect state
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Outlined" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Outlined" ]
         , outlinedSelect state
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Filled with Icon" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Filled with Icon" ]
         , filledWithIconSelect state
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Outlined with Icon" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Outlined with Icon" ]
         , outlinedWithIconSelect state
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Focus Select" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Focus Select" ]
         , focusSelect state
         ]
     }
 
-heroSelect :: forall r w i . State -> HH.HTML Action
+heroSelect :: forall r w i . State -> HH.HTML w Action
 heroSelect state =
     Select.filled
         (Select.defaultConfig
@@ -131,7 +131,7 @@ remainingItems =
         [ HH.text "Banana" ]
     ]
 
-filledSelect :: forall r w i . State -> HH.HTML Action
+filledSelect :: forall r w i . State -> HH.HTML w Action
 filledSelect state =
     Select.filled
         (Select.defaultConfig
@@ -142,7 +142,7 @@ filledSelect state =
         firstItem
         remainingItems
 
-outlinedSelect :: forall r w i . State -> HH.HTML Action
+outlinedSelect :: forall r w i . State -> HH.HTML w Action
 outlinedSelect state =
     Select.outlined
         (Select.defaultConfig
@@ -153,7 +153,7 @@ outlinedSelect state =
         firstItem
         remainingItems
 
-filledWithIconSelect :: forall r w i . State -> HH.HTML Action
+filledWithIconSelect :: forall r w i . State -> HH.HTML w Action
 filledWithIconSelect state =
     Select.filled
         (Select.defaultConfig
@@ -165,7 +165,7 @@ filledWithIconSelect state =
         firstItem
         remainingItems
 
-outlinedWithIconSelect :: forall r w i . State -> HH.HTML Action
+outlinedWithIconSelect :: forall r w i . State -> HH.HTML w Action
 outlinedWithIconSelect state =
     Select.outlined
         (Select.defaultConfig
@@ -177,7 +177,7 @@ outlinedWithIconSelect state =
         firstItem
         remainingItems
 
-focusSelect :: forall r w i . State -> HH.HTML Action
+focusSelect :: forall r w i . State -> HH.HTML w Action
 focusSelect state =
     HH.div
         [ HP.style "display: flex; align-items: center;"

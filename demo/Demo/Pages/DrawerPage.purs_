@@ -41,21 +41,21 @@ render lift { title, drawer, scrim, onMenuClick } =
         HH.div drawerFrameRoot
             [ drawer
             , Maybe.fromMaybe (text "") scrim
-            , HH.div [ mdc_drawer_app_content ]
+            , HH.div [ HP.class_ mdc_drawer_app_content ]
                 [ TopAppBar.topAppBar TopAppBar.defaultConfig
                     [ HH.section [ HP.class_ mdc_top_app_bar__row ] []
-                        [ HH.section [ HP.classes [ mdc_top_app_bar__section, mdc_top_app_bar__section____align_start ] ]
+                        [ HH.section [ HP.classes [ HP.class_ mdc_top_app_bar__section, mdc_top_app_bar__section____align_start ] ]
                             [ case onMenuClick of
                                 Just handleClick ->
                                     Icon.icon
-                                        [ mdc_top_app_bar__navigation_icon
+                                        [ HP.class_ mdc_top_app_bar__navigation_icon
                                         , HE.onClick handleClick
                                         ]
                                         "menu"
 
                                 Nothing ->
                                     HH.text ""
-                            , HH.span [ mdc_top_app_bar__title ] [ HH.text title ]
+                            , HH.span [ HP.class_ mdc_top_app_bar__title ] [ HH.text title ]
                             ]
                         ]
                     ]
@@ -78,8 +78,8 @@ drawerBody setSelectedIndex selectedIndex =
                 , onClick = (setSelectedIndex index)
     in
     [ Drawer.Permanent.header []
-        [ HH.h3 [ mdc_drawer__title ] [ HH.text "Mail" ]
-        , HH.h6 [ mdc_drawer__subtitle ] [ HH.text "email@material.io" ]
+        [ HH.h3 [ HP.class_ mdc_drawer__title ] [ HH.text "Mail" ]
+        , HH.h6 [ HP.class_ mdc_drawer__subtitle ] [ HH.text "email@material.io" ]
         ]
     , Drawer.Permanent.content []
         [ Array.group []

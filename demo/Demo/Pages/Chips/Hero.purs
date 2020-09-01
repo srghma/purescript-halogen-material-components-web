@@ -1,4 +1,4 @@
-module Demo.Pages.Chips where
+module Demo.Pages.Chips.Hero where
 
 import Data.Set (Set)
 import Data.Set as Set
@@ -38,18 +38,46 @@ import Web.UIEvent.KeyboardEvent (KeyboardEvent)
 import Web.UIEvent.KeyboardEvent as Web.UIEvent.KeyboardEvent
 import Data.String as String
 import Demo.Utils
-import Demo.Pages.Chips.Hero as Hero
-import Demo.Pages.Chips.Content as Content
 
-catalogPage :: CatalogPage
-catalogPage =
-    { title: "Chips"
-    , prelude: "Chips are compact elements that allow users to enter information, select a choice, filter content, or trigger an action."
-    , resources:
-        { materialDesignGuidelines: Just "https://material.io/go/design-chips"
-        , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Chips"
-        , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-chips"
+type State =
+  { chip :: Maybe String
+  }
+
+type Input = Unit
+
+initialState :: State
+initialState =
+  { chip: Just "Chip One"
+  }
+
+data Action
+  = ChipChanged String
+
+render :: forall m . State -> HH.ComponentHTML Action ChildSlots m
+render state =
+  HH.div_
+  [ ChipSet.Choice.chipSet
+      ((ChipSet.Choice.defaultConfig { toLabel: identity })
+        { selected = state.chip
+        , onChange = Just ChipChanged
         }
-    , hero: Hero.component
-    , content: Content.component
+      )
+      [ Chip.Choice.Chip Chip.Choice.defaultConfig "Chip One"
+      , Chip.Choice.Chip Chip.Choice.defaultConfig "Chip Two"
+      , Chip.Choice.Chip Chip.Choice.defaultConfig "Chip Three"
+      , Chip.Choice.Chip Chip.Choice.defaultConfig "Chip Four"
+      ]
+  ]
+
+handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
+handleAction =
+  case _ of
+    ChipChanged chip -> H.modify_ (_ { chip = Just chip })
+
+component :: H.Component Query Input Message Aff
+component =
+  H.mkComponent
+    { initialState: const initialState
+    , render
+    , eval: H.mkEval H.defaultEval { handleAction = handleAction }
     }

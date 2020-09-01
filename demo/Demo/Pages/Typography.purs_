@@ -34,21 +34,21 @@ catalogPage =
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Typography"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-typography"
         }
-    , hero: [ HH.h1 [ mdc_typography____headline1 ] [ HH.text "Typography" ] ]
+    , hero: [ HH.h1 [ HP.class_ mdc_typography____headline1 ] [ HH.text "Typography" ] ]
     , content:
-        [ HH.h1 [ mdc_typography____headline1 ] [ HH.text "Headline 1" ]
-        , HH.h2 [ mdc_typography____headline2 ] [ HH.text "Headline 2" ]
-        , HH.h3 [ mdc_typography____headline3 ] [ HH.text "Headline 3" ]
-        , HH.h4 [ mdc_typography____headline4 ] [ HH.text "Headline 4" ]
-        , HH.h5 [ mdc_typography____headline5 ] [ HH.text "Headline 5" ]
-        , HH.h6 [ mdc_typography____headline6 ] [ HH.text "Headline 6" ]
-        , HH.h6 [ mdc_typography____subtitle1 ] [ HH.text "Subtitle 1" ]
-        , HH.h6 [ mdc_typography____subtitle2 ] [ HH.text "Subtitle 2" ]
-        , HH.p [ mdc_typography____body1 ] [ HH.text body1Paragraph ]
-        , HH.p [ mdc_typography____body2 ] [ HH.text body2Paragraph ]
-        , HH.div [ mdc_typography____button ] [ HH.text "Button.button Button.Text" ]
-        , HH.div [ mdc_typography____caption ] [ HH.text "Caption text" ]
-        , HH.div [ mdc_typography____overline ] [ HH.text "Overline text" ]
+        [ HH.h1 [ HP.class_ mdc_typography____headline1 ] [ HH.text "Headline 1" ]
+        , HH.h2 [ HP.class_ mdc_typography____headline2 ] [ HH.text "Headline 2" ]
+        , HH.h3 [ HP.class_ mdc_typography____headline3 ] [ HH.text "Headline 3" ]
+        , HH.h4 [ HP.class_ mdc_typography____headline4 ] [ HH.text "Headline 4" ]
+        , HH.h5 [ HP.class_ mdc_typography____headline5 ] [ HH.text "Headline 5" ]
+        , HH.h6 [ HP.class_ mdc_typography____headline6 ] [ HH.text "Headline 6" ]
+        , HH.h6 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Subtitle 1" ]
+        , HH.h6 [ HP.class_ mdc_typography____subtitle2 ] [ HH.text "Subtitle 2" ]
+        , HH.p [ HP.class_ mdc_typography____body1 ] [ HH.text body1Paragraph ]
+        , HH.p [ HP.class_ mdc_typography____body2 ] [ HH.text body2Paragraph ]
+        , HH.div [ HP.class_ mdc_typography____button ] [ HH.text "Button.button Button.Text" ]
+        , HH.div [ HP.class_ mdc_typography____caption ] [ HH.text "Caption text" ]
+        , HH.div [ HP.class_ mdc_typography____overline ] [ HH.text "Overline text" ]
         ]
     }
 

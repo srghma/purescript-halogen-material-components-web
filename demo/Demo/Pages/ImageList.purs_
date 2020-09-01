@@ -46,11 +46,11 @@ catalogPage =
         ]
     , content:
         [ HH.h3
-            [ mdc_typography____subtitle1 ]
+            [ HP.class_ mdc_typography____subtitle1 ]
             [ HH.text "Standard Image Array with Text Protection" ]
         , standardImageList
         , HH.h3
-            [ mdc_typography____subtitle1 ]
+            [ HP.class_ mdc_typography____subtitle1 ]
             [ HH.text "Masonry Image List" ]
         , masonryImageList
         ]

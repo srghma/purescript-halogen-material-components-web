@@ -1,7 +1,8 @@
 module Demo.Pages.Switch where
 
 import Demo.HOC.CatalogPage
-import Data.Map
+import Data.Map (Map)
+import Data.Map as Map
 import Protolude
 import Data.Array as Array
 import Data.Maybe as Maybe
@@ -63,14 +64,14 @@ catalogPage =
         }
     , hero: heroSwitch state
     , content:
-        [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Switch" ]
+        [ HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Switch" ]
         , demoSwitch state
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Focus Switch" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Focus Switch" ]
         , focusSwitch state
         ]
     }
 
-heroSwitch :: forall r w i . State -> Array (HH.HTML Action)
+heroSwitch :: forall r w i . State -> Array (HH.HTML w Action)
 heroSwitch state =
     let
         id =
@@ -90,7 +91,7 @@ heroSwitch state =
         ]
     ]
 
-demoSwitch :: forall r w i . State -> HH.HTML Action
+demoSwitch :: forall r w i . State -> HH.HTML w Action
 demoSwitch state =
     let
         id =
@@ -109,7 +110,7 @@ demoSwitch state =
             )
         ]
 
-focusSwitch :: forall r w i . State -> HH.HTML Action
+focusSwitch :: forall r w i . State -> HH.HTML w Action
 focusSwitch state =
     let
         id =

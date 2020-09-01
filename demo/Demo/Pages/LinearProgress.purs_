@@ -37,15 +37,15 @@ catalogPage =
         }
     , hero: [ LinearProgress.determinate LinearProgress.defaultConfig { progress: 0.5 } ]
     , content:
-        [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Buffered" ]
+        [ HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Buffered" ]
         , LinearProgress.buffered LinearProgress.defaultConfig { progress: 0.5, buffered: 0.75 }
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Indeterminate" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Indeterminate" ]
         , LinearProgress.indeterminate LinearProgress.defaultConfig
-        { HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Reversed" ]
+        { HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Reversed" ]
         , LinearProgress.determinate
             (LinearProgress.defaultConfig { reverse = true)
             { progress: 0.5 }
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Reversed Buffered" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Reversed Buffered" ]
         , LinearProgress.buffered (LinearProgress.defaultConfig { reverse = true)
             { progress: 0.5, buffered: 0.75 }
         ]

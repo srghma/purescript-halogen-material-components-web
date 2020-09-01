@@ -1,7 +1,8 @@
 module Demo.Pages.Checkbox where
 
 import Demo.HOC.CatalogPage
-import Data.Map
+import Data.Map (Map)
+import Data.Map as Map
 import Protolude
 import Data.Array as Array
 import Data.Maybe as Maybe

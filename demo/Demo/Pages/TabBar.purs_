@@ -71,19 +71,19 @@ catalogPage =
         }
     , hero: [ heroTabs state "tabs-hero-tabs" ]
     , content:
-        [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Tabs with icons next to labels" ]
+        [ HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Tabs with icons next to labels" ]
         , tabsWithIcons state
-        , HH.h3 [ mdc_typography____subtitle1 ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ]
             [ HH.text "Tabs with icons above labels and indicators restricted to content" ]
         , tabsWithStackedIcons state
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Scrolling tabs" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Scrolling tabs" ]
         , scrollingTabs state
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Focus tabs" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Focus tabs" ]
         , focusTabs state
         ]
     }
 
-heroTabs :: forall r w i . State -> String -> HH.HTML Action
+heroTabs :: forall r w i . State -> String -> HH.HTML w Action
 heroTabs state index =
     TabBar.tabBar TabBar.defaultConfig
         [ Tab.tab
@@ -106,7 +106,7 @@ heroTabs state index =
             { label: "About Us", icon: Nothing }
         ]
 
-tabsWithIcons :: forall r w i . State -> HH.HTML Action
+tabsWithIcons :: forall r w i . State -> HH.HTML w Action
 tabsWithIcons state =
     let
         config index =
@@ -120,7 +120,7 @@ tabsWithIcons state =
         , Tab.tab (config 2) { label: "Favorites", icon: Just "favorite" }
         ]
 
-tabsWithStackedIcons :: forall r w i . State -> HH.HTML Action
+tabsWithStackedIcons :: forall r w i . State -> HH.HTML w Action
 tabsWithStackedIcons state =
     let
         config index =
@@ -138,7 +138,7 @@ tabsWithStackedIcons state =
         , Tab.tab (config 2) { label: "Favorites", icon: Just "favorite" }
         ]
 
-scrollingTabs :: forall r w i . State -> HH.HTML Action
+scrollingTabs :: forall r w i . State -> HH.HTML w Action
 scrollingTabs state =
     let
         config index =
@@ -154,7 +154,7 @@ scrollingTabs state =
             [ "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight" ]
         )
 
-focusTabs :: forall r w i . State -> HH.HTML Action
+focusTabs :: forall r w i . State -> HH.HTML w Action
 focusTabs state =
     HH.div []
         [ TabBar.tabBar

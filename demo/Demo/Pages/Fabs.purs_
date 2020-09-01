@@ -46,14 +46,14 @@ catalogPage =
         }
     , hero: [ Fab.fab Fab.defaultConfig "favorite_border" ]
     , content:
-        [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Standard Floating Action Button" ]
+        [ HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Standard Floating Action Button" ]
         , Fab.fab Fab.defaultConfig "favorite_border"
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Mini Floating Action Button" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Mini Floating Action Button" ]
         , Fab.fab (Fab.defaultConfig { mini = true) "favorite_border"
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Extended FAB" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Extended FAB" ]
         , Fab.Extended.fab (Fab.Extended.defaultConfig { icon = (Just "add"))
             "Create"
-        , HH.h3 [ mdc_typography____subtitle1 ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ]
             [ HH.text "Extended FAB (Text label followed by icon)" ]
         , Fab.Extended.fab
             (Fab.Extended.defaultConfig
@@ -61,9 +61,9 @@ catalogPage =
                 , trailingIcon = true
             )
             "Create"
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Extended FAB (without icon)" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Extended FAB (without icon)" ]
         , Fab.Extended.fab Fab.Extended.defaultConfig "Create"
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "FAB (Shaped)" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "FAB (Shaped)" ]
         , HH.div [ HP.style "display: flex;" ]
             [ Fab.fab
                 (Fab.defaultConfig
@@ -83,7 +83,7 @@ catalogPage =
             , Fab.Extended.fab (Fab.Extended.defaultConfig { icon = (Just "add"))
                 "Create"
             ]
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Focus FAB" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Focus FAB" ]
         , HH.div [ HP.style "display: flex;" ]
             [ Fab.fab
                 (Fab.defaultConfig { additionalAttributes = [ HP.id_ "my-fab" ])

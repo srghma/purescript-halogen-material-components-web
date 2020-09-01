@@ -13,8 +13,8 @@ import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.DataTable as DataTable
 import Material.Classes.Typography
-import Data.Set
-
+import Data.Set (Set)
+import Data.Set as Set
 data State =
     { selected :: Set String }
 
@@ -38,7 +38,7 @@ handleAction =
             { state
                 | selected =
                     if Set.member key state.selected then
-                        Set.remove key state.selected
+                        Set.delete key state.selected
 
                     else
                         Set.insert key state.selected
@@ -65,9 +65,9 @@ catalogPage =
         }
     , hero: heroDataTable
     , content:
-        [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Data Table Standard" ]
+        [ HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Data Table Standard" ]
         , standardDataTable
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Data Table with Row Selection" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Data Table with Row Selection" ]
         , dataTableWithRowSelection state
         ]
     }
@@ -119,7 +119,7 @@ standardDataTable =
         , tbody: map row data
         }
 
-dataTableWithRowSelection :: forall r w i . State -> HH.HTML Action
+dataTableWithRowSelection :: forall r w i . State -> HH.HTML w Action
 dataTableWithRowSelection state =
     let
         allSelected =

@@ -1,6 +1,7 @@
 module Demo.Pages.Checkbox.Shared where
 
-import Data.Map
+import Data.Map (Map)
+import Data.Map as Map
 import Demo.Utils
 import Halogen
 import Material.Classes.Typography

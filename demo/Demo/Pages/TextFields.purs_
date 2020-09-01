@@ -48,30 +48,30 @@ catalogPage =
         }
     , hero: [ heroTextFields state ]
     , content:
-        [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Filled" ]
+        [ HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Filled" ]
         , filledTextFields state
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Shaped Filled" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Shaped Filled" ]
         , shapedFilledTextFields state
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Outlined" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Outlined" ]
         , outlinedTextFields state
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Shaped Outlined (TODO)" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Shaped Outlined (TODO)" ]
         , shapedOutlinedTextFields state
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Text Fields without Label" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Text Fields without Label" ]
         , textFieldsWithoutLabel state
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Text Fields with Character Counter" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Text Fields with Character Counter" ]
         , textFieldsWithCharacterCounter state
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Textarea" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Textarea" ]
         , textareaTextField state
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Full Width" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Full Width" ]
         , fullwidthTextField state
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Full Width Textarea" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Full Width Textarea" ]
         , fullwidthTextareaTextField state
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Focus Text Field" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Focus Text Field" ]
         , focusTextField
         ]
     }
 
-heroTextFields :: forall r w i . State -> HH.HTML Action
+heroTextFields :: forall r w i . State -> HH.HTML w Action
 heroTextFields state =
     HH.div heroTextFieldContainer
         [ HH.div textFieldContainerHero
@@ -284,7 +284,7 @@ fullwidthTextareaTextField state =
             ]
         ]
 
-focusTextField :: forall r w i . HH.HTML Action
+focusTextField :: forall r w i . HH.HTML w Action
 focusTextField =
     HH.div []
         [ TextField.filled

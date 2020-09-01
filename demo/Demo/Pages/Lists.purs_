@@ -18,8 +18,8 @@ import HalogenMWC.List as List
 import HalogenMWC.List.Item as List.Item
 import HalogenMWC.Radio as Radio
 import Material.Classes.Typography
-import Data.Set
-
+import Data.Set (Set)
+import Data.Set as Set
 data State =
     { checkboxes :: Set String
     , radio :: Maybe String
@@ -50,7 +50,7 @@ handleAction =
             ( { state
                 | checkboxes =
                     if Set.member id state.checkboxes then
-                        Set.remove id state.checkboxes
+                        Set.delete id state.checkboxes
 
                     else
                         Set.insert id state.checkboxes
@@ -84,26 +84,26 @@ catalogPage =
         }
     , hero: heroList
     , content:
-        [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Single-Line" ]
+        [ HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Single-Line" ]
         , singleLineList
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Two-Line" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Two-Line" ]
         , twoLineList
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Leading Icon" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Leading Icon" ]
         , leadingIconList
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "List with activated item" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "List with activated item" ]
         , activatedItemList state
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "List with shaped activated item" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "List with shaped activated item" ]
         , shapedActivatedItemList state
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Trailing Icon" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Trailing Icon" ]
         , trailingIconList
-        , HH.h3 [ mdc_typography____subtitle1 ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ]
             [ HH.text "Two-Line with Leading and Trailing Icon and Divider" ]
         , folderList
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "List with Trailing Checkbox" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "List with Trailing Checkbox" ]
         , listWithTrailingCheckbox state
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "List with Trailing Radio Buttons" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "List with Trailing Radio Buttons" ]
         , listWithTrailingRadioButton state
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Focus List" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Focus List" ]
         , focusList
         ]
     }
@@ -180,10 +180,10 @@ trailingIconList =
         listItem
         (List.repeat 2 listItem)
 
-activatedItemList :: forall r w i . State -> HH.HTML Action
+activatedItemList :: forall r w i . State -> HH.HTML w Action
 activatedItemList state =
     let
-        listItem ( icon, label ) =
+        listItem ( icon /\ label ) =
             List.Item.listItem
                 (List.Item.defaultConfig
                     { selected =
@@ -198,18 +198,18 @@ activatedItemList state =
                 [ HH.div [ HP.class_ mdc_list_item__graphic ] [ Icon.icon [] icon ], HH.text label ]
     in
     List.list (List.defaultConfig { additionalAttributes = demoList)
-        (listItem ( "inbox", "Inbox" ))
+        (listItem ( "inbox" /\ "Inbox" ))
         (map listItem
-            [ ( "star", "Star" )
-            , ( "send", "Sent" )
-            , ( "drafts", "Drafts" )
+            [ ( "star" /\ "Star" )
+            , ( "send" /\ "Sent" )
+            , ( "drafts" /\ "Drafts" )
             ]
         )
 
-shapedActivatedItemList :: forall r w i . State -> HH.HTML Action
+shapedActivatedItemList :: forall r w i . State -> HH.HTML w Action
 shapedActivatedItemList state =
     let
-        listItem ( icon, label ) =
+        listItem ( icon /\ label ) =
             List.Item.listItem
                 (List.Item.defaultConfig
                     { selected =
@@ -225,11 +225,11 @@ shapedActivatedItemList state =
                 [ HH.div [ HP.class_ mdc_list_item__graphic ] [ Icon.icon [] icon ], HH.text label ]
     in
     List.list (List.defaultConfig { additionalAttributes = demoList)
-        (listItem ( "inbox", "Inbox" ))
+        (listItem ( "inbox" /\ "Inbox" ))
         (map listItem
-            [ ( "star", "Star" )
-            , ( "send", "Sent" )
-            , ( "drafts", "Drafts" )
+            [ ( "star" /\ "Star" )
+            , ( "send" /\ "Sent" )
+            , ( "drafts" /\ "Drafts" )
             ]
         )
 
@@ -267,7 +267,7 @@ folderList =
             ]
         )
 
-listWithTrailingCheckbox :: forall r w i . State -> HH.HTML Action
+listWithTrailingCheckbox :: forall r w i . State -> HH.HTML w Action
 listWithTrailingCheckbox state =
     let
         listItem label =
@@ -314,7 +314,7 @@ listWithTrailingCheckbox state =
             ]
         )
 
-listWithTrailingRadioButton :: forall r w i . State -> HH.HTML Action
+listWithTrailingRadioButton :: forall r w i . State -> HH.HTML w Action
 listWithTrailingRadioButton state =
     let
         listItem label =
@@ -347,7 +347,7 @@ listWithTrailingRadioButton state =
             ]
         )
 
-focusList :: forall r w i . HH.HTML Action
+focusList :: forall r w i . HH.HTML w Action
 focusList =
     HH.div []
         [ List.list

@@ -74,8 +74,8 @@ heroDrawer =
     in
     [ Drawer.Permanent.drawer Drawer.Permanent.defaultConfig
         [ Drawer.Permanent.header []
-            [ HH.h3 [ mdc_drawer__title ] [ HH.text "Title" ]
-            , HH.h6 [ mdc_drawer__subtitle ] [ HH.text "Subtitle" ]
+            [ HH.h3 [ HP.class_ mdc_drawer__title ] [ HH.text "Title" ]
+            , HH.h6 [ HP.class_ mdc_drawer__subtitle ] [ HH.text "Subtitle" ]
             ]
         , Drawer.Permanent.content []
             [ List.list List.defaultConfig
@@ -100,7 +100,7 @@ iframe label route =
                 [ HP.href route
                 , HP.target "_blank"
                 ]
-                [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text label ] ]
+                [ HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text label ] ]
             ]
         , HH.iframe
             [ HP.src route

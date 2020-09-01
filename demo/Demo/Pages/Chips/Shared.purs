@@ -1,4 +1,4 @@
-module Demo.Pages.Chips where
+module Demo.Pages.Chips.Shared where
 
 import Data.Set (Set)
 import Data.Set as Set
@@ -38,18 +38,3 @@ import Web.UIEvent.KeyboardEvent (KeyboardEvent)
 import Web.UIEvent.KeyboardEvent as Web.UIEvent.KeyboardEvent
 import Data.String as String
 import Demo.Utils
-import Demo.Pages.Chips.Hero as Hero
-import Demo.Pages.Chips.Content as Content
-
-catalogPage :: CatalogPage
-catalogPage =
-    { title: "Chips"
-    , prelude: "Chips are compact elements that allow users to enter information, select a choice, filter content, or trigger an action."
-    , resources:
-        { materialDesignGuidelines: Just "https://material.io/go/design-chips"
-        , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Chips"
-        , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-chips"
-        }
-    , hero: Hero.component
-    , content: Content.component
-    }

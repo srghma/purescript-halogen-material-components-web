@@ -15,8 +15,8 @@ import HalogenMWC.Button as Button
 import HalogenMWC.IconButton as IconButton
 import HalogenMWC.IconToggle as IconToggle
 import Material.Classes.Typography
-import Data.Set
-
+import Data.Set (Set)
+import Data.Set as Set
 data State =
     { ons :: Set String }
 
@@ -36,7 +36,7 @@ handleAction =
             ( { state
                 | ons =
                     if Set.member id state.ons then
-                        Set.remove id state.ons
+                        Set.delete id state.ons
 
                     else
                         Set.insert id state.ons
@@ -70,9 +70,9 @@ catalogPage =
             }
         ]
     , content:
-        [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Icon Button" ]
+        [ HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Icon Button" ]
         , IconButton.iconButton IconButton.defaultConfig "wifi"
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Icon Toggle" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Icon Toggle" ]
         , IconToggle.iconToggle
             (IconToggle.defaultConfig
                 { on = (Set.member "icon-button-toggle" state.ons)
@@ -81,7 +81,7 @@ catalogPage =
             { offIcon: "favorite_border"
             , onIcon: "favorite"
             }
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Focus Icon Button" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Focus Icon Button" ]
         , HH.div []
             [ IconButton.iconButton
                 (IconButton.defaultConfig
@@ -93,7 +93,7 @@ catalogPage =
                 (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Focus "my-icon-button") ] })
                 [ HH.text "Focus" ]
             ]
-        , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Focus Icon Toggle" ]
+        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Focus Icon Toggle" ]
         , HH.div []
             [ IconToggle.iconToggle
                 (IconToggle.defaultConfig
