@@ -2,7 +2,6 @@ module Demo.Utils where
 
 import Protolude
 import Web.HTML
-
 import Halogen as H
 import Halogen.HTML as HH
 import Web.DOM.ParentNode (QuerySelector(..), querySelector)
@@ -19,13 +18,13 @@ selectElement query = do
 
 focusById :: String -> Effect Unit
 focusById id = do
-  (htmlElement :: HTMLElement) <- selectElement (QuerySelector ("#" <> id)) >>= maybe (throwError $ error $  "cannot find required element by id: " <> id) pure
+  (htmlElement :: HTMLElement) <- selectElement (QuerySelector ("#" <> id)) >>= maybe (throwError $ error $ "cannot find required element by id: " <> id) pure
   Web.HTML.HTMLElement.focus htmlElement
 
-mkComponentStatic :: forall query input output action slots m . HH.ComponentHTML action slots m -> H.Component query input output m
+mkComponentStatic :: forall query input output action slots m. HH.ComponentHTML action slots m -> H.Component query input output m
 mkComponentStatic render =
   H.mkComponent
-  { initialState: const unit
-  , render: const render
-  , eval: H.mkEval H.defaultEval
-  }
+    { initialState: const unit
+    , render: const render
+    , eval: H.mkEval H.defaultEval
+    }

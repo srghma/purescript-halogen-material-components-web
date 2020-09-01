@@ -2,7 +2,6 @@ module HalogenMWC.Select where
 
 import Material.Classes.Select
 import Prelude
-
 import DOM.HTML.Indexed as I
 import Data.Array as Array
 import Data.FoldableWithIndex (findMapWithIndex)

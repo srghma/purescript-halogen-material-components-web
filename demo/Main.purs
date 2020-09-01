@@ -4,7 +4,6 @@ import Debug.Trace
 import Protolude
 import Demo.App
 import Demo.Route
-
 import Data.Const (Const)
 import Data.Functor (mapFlipped)
 import Data.Map as Map
@@ -25,10 +24,11 @@ import Routing.Hash (matchesWith)
 import Routing.Hash as Routing
 import Web.HTML.HTMLElement (HTMLElement)
 
-main :: forall r w i . Effect Unit
+main :: Effect Unit
 main =
   HA.runHalogenAff do
     body <- HA.awaitBody
     halogenIO <- H.runUI app unit body
-    liftEffect $ void $ matchesWith (\route -> traceId (parse routeCodec (traceId route))) \oldRoute newRoute ->
-      when (oldRoute /= Just newRoute) $ launchAff_ $ halogenIO.query (H.mkTell $ Navigate newRoute)
+    liftEffect $ void
+      $ matchesWith (parse routeCodec) \oldRoute newRoute ->
+          when (oldRoute /= Just newRoute) $ launchAff_ $ halogenIO.query (H.mkTell $ Navigate newRoute)

@@ -1,7 +1,6 @@
 module HalogenMWC.Card where
 
 import Prelude
-
 import DOM.HTML.Indexed as I
 import Data.Array as Array
 import Data.Maybe (Maybe(..))
@@ -14,10 +13,10 @@ import HalogenMWC.IconButton (iconButtonMaterialIcons)
 import HalogenMWC.IconButton as IconButton
 import Material.Classes.Card (mdc_card, mdc_card____outlined, mdc_card__action, mdc_card__action____button, mdc_card__action____icon, mdc_card__action_buttons, mdc_card__action_icons, mdc_card__actions, mdc_card__actions____full_bleed, mdc_card__media, mdc_card__media____16_9, mdc_card__media____square, mdc_card__primary_action)
 
-type Content w i =
-  { blocks :: Array (HH.HTML w i)
-  , actions :: Maybe (Actions w i)
-  }
+type Content w i
+  = { blocks :: Array (HH.HTML w i)
+    , actions :: Maybe (Actions w i)
+    }
 
 data Aspect
   = Square
@@ -107,7 +106,7 @@ primaryAction additionalAttributes =
     ( [ HP.class_ mdc_card__primary_action
       , HP.prop (PropName "tabIndex") 0
       ]
-      <> additionalAttributes
+        <> additionalAttributes
     )
 
 button :: forall w i. Button.Config I.HTMLbutton i -> Array (HH.HTML w i) -> HH.HTML w i
@@ -121,4 +120,4 @@ button config =
 iconMaterialIcons :: forall w i. IconButton.Config i -> String -> HH.HTML w i
 iconMaterialIcons config =
   IconButton.iconButtonMaterialIcons
-  (config { additionalClasses = [ mdc_card__action, mdc_card__action____icon ] <> config.additionalClasses })
+    (config { additionalClasses = [ mdc_card__action, mdc_card__action____icon ] <> config.additionalClasses })

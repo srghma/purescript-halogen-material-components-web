@@ -1,7 +1,6 @@
 module HalogenMWC.IconButton where
 
 import Prelude
-
 import DOM.HTML.Indexed as I
 import Data.Maybe (Maybe(..))
 import Halogen (ClassName, ElemName(..))
@@ -32,7 +31,7 @@ iconButton config =
     ( [ HP.classes $ [ mdc_icon_button ] <> config.additionalClasses
       , HP.tabIndex 0
       ]
-      <> config.additionalAttributes
+        <> config.additionalAttributes
     )
 
 iconButtonMaterialIcons :: forall w i. Config i -> String -> HH.HTML w i
@@ -41,6 +40,6 @@ iconButtonMaterialIcons config iconName =
     ( [ HP.classes $ [ mdc_icon_button, material_icons ] <> config.additionalClasses
       , HP.tabIndex 0
       ]
-      <> config.additionalAttributes
+        <> config.additionalAttributes
     )
     [ HH.text iconName ]

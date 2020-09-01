@@ -1,7 +1,6 @@
 module Demo.Pages.Index where
 
 import Protolude
-
 import Material.Classes.TopAppBar
 import Data.Const (Const(..))
 import Halogen as H
@@ -39,57 +38,57 @@ component =
     , eval: H.mkEval H.defaultEval
     }
   where
-  render :: forall r w i . State -> H.ComponentHTML Action () m
+  render :: forall r w i. State -> H.ComponentHTML Action () m
   render _ =
     HH.div_
-    [ TopAppBar.topAppBar TopAppBar.defaultConfig
-      [ HH.section
-        [ HP.class_ mdc_top_app_bar__row
-        ]
-        [ HH.section
-          [ HP.classes [ mdc_top_app_bar__section, mdc_top_app_bar__section____align_start ]
-          ]
-          [ IconButton.iconButton
-              ( IconButton.defaultConfig
-                { additionalClasses = [ mdc_top_app_bar__navigation_icon ]
-                }
-              )
-              [ HH.img
-                  [ HP.src "https://material-components-web.appspot.com/images/ic_component_24px_white.svg"
+      [ TopAppBar.topAppBar TopAppBar.defaultConfig
+          [ HH.section
+              [ HP.class_ mdc_top_app_bar__row
+              ]
+              [ HH.section
+                  [ HP.classes [ mdc_top_app_bar__section, mdc_top_app_bar__section____align_start ]
+                  ]
+                  [ IconButton.iconButton
+                      ( IconButton.defaultConfig
+                          { additionalClasses = [ mdc_top_app_bar__navigation_icon ]
+                          }
+                      )
+                      [ HH.img
+                          [ HP.src "https://material-components-web.appspot.com/images/ic_component_24px_white.svg"
+                          ]
+                      ]
+                  , HH.span
+                      [ HP.class_ mdc_top_app_bar__title
+                      , HP.style "text-transform: uppercase; font-weight: 400;"
+                      ]
+                      [ HH.text "Material Components for Halogen" ]
                   ]
               ]
-          , HH.span
-              [ HP.class_ mdc_top_app_bar__title
-              , HP.style "text-transform: uppercase; font-weight: 400;"
-              ]
-              [ HH.text "Material Components for Halogen" ]
           ]
-        ]
+      , ImageList.imageList
+          ( ImageList.defaultConfig
+              { additionalAttributes =
+                [ HP.style "max-width: 900px; padding-top: 128px; padding-bottom: 100px;"
+                ]
+              }
+          )
+          ( map
+              ( \{ route, title, icon } ->
+                  ImageList.Item.ImageListItem
+                    ( { label: Just title
+                      , href: Just (Route.toString route)
+                      , image: icon
+                      , additionalAttributes:
+                        [ HP.style "width: calc(100% / 4 - 8.25px); margin: 4px;"
+                        ]
+                      }
+                    )
+              )
+              imageListItems
+          )
       ]
-    , ImageList.imageList
-        (ImageList.defaultConfig
-          { additionalAttributes =
-            [ HP.style "max-width: 900px; padding-top: 128px; padding-bottom: 100px;"
-            ]
-          }
-        )
-        (map
-            (\{ route, title, icon } ->
-                ImageList.Item.ImageListItem
-                ( { label: Just title
-                  , href: Just (Route.toString route)
-                  , image: icon
-                  , additionalAttributes:
-                    [ HP.style "width: calc(100% / 4 - 8.25px); margin: 4px;"
-                    ]
-                  }
-                )
-            )
-            imageListItems
-        )
-    ]
 
-imageListItems :: forall r w i . Array { route :: Route, icon :: String, title :: String, subtitle :: String }
+imageListItems :: forall r w i. Array { route :: Route, icon :: String, title :: String, subtitle :: String }
 imageListItems =
   [ { route: Route.Buttons
     , icon: "https://aforemny.github.io/material-components-web-elm/images/buttons_180px.svg"

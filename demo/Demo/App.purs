@@ -1,5 +1,4 @@
 -- from https://github.com/rnons/purescript-halogen-storybook/
-
 module Demo.App where
 
 import Protolude
@@ -21,21 +20,27 @@ import Debug.Trace
 import Demo.Route
 import Demo.RouteToPage
 
-data Query a = Navigate Route a
+data Query a
+  = Navigate Route a
 
-type State = Route
+type State
+  = Route
 
-type Action = Void
+type Action
+  = Void
 
-type Output = Void
+type Output
+  = Void
 
-type Input = Unit
+type Input
+  = Unit
 
-type Slots = ( child :: H.Slot (Const Void) Void Route )
+type Slots
+  = ( child :: H.Slot (Const Void) Void Route )
 
 _child = SProxy :: SProxy "child"
 
-app :: forall r w i . H.Component Query Input Output Aff
+app :: forall r w i. H.Component Query Input Output Aff
 app =
   H.mkComponent
     { initialState: const Index
@@ -43,7 +48,7 @@ app =
     , eval: H.mkEval $ H.defaultEval { handleQuery = handleQuery }
     }
   where
-  render :: forall r w i . State -> H.ComponentHTML Action Slots Aff
+  render :: forall r w i. State -> H.ComponentHTML Action Slots Aff
   render state = HH.slot _child state (routeToPage state) unit absurd
 
   handleQuery :: forall a. Query a -> H.HalogenM State Action Slots Output Aff (Maybe a)

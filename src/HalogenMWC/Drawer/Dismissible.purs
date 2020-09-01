@@ -1,7 +1,6 @@
 module HalogenMWC.Drawer.Dismissible where
 
 import Prelude
-
 import DOM.HTML.Indexed as I
 import Data.Array as Array
 import Data.Maybe (Maybe(..))
@@ -34,6 +33,6 @@ drawer config =
     ( [ HP.classes $ [ mdc_drawer, mdc_drawer____dismissible ] <> config.additionalClasses
       , HP.prop (PropName "open") config.open
       ]
-      <> Array.catMaybes [ map (HE.handler (EventType "MDCDrawer:close")) config.onClose ]
-      <> config.additionalAttributes
+        <> Array.catMaybes [ map (HE.handler (EventType "MDCDrawer:close")) config.onClose ]
+        <> config.additionalAttributes
     )

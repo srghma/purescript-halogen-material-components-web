@@ -21,26 +21,29 @@ import Data.Lens as Lens
 import Data.Lens.Record as Lens
 import Demo.Utils
 
-type State =
-  { "unchecked-checkbox"     :: Maybe Checkbox.State
-  , "indeterminate-checkbox" :: Maybe Checkbox.State
-  , "checked-checkbox"       :: Maybe Checkbox.State
-  }
+type State
+  = { "unchecked-checkbox" :: Maybe Checkbox.State
+    , "indeterminate-checkbox" :: Maybe Checkbox.State
+    , "checked-checkbox" :: Maybe Checkbox.State
+    }
 
-type Input = Unit
+type Input
+  = Unit
 
 initialState :: State
 initialState =
-  { "unchecked-checkbox":     Just Checkbox.Unchecked
+  { "unchecked-checkbox": Just Checkbox.Unchecked
   , "indeterminate-checkbox": Just Checkbox.Checked
-  , "checked-checkbox":       Just Checkbox.Checked
+  , "checked-checkbox": Just Checkbox.Checked
   }
 
-prop_unchecked_checkbox     = Lens.prop (SProxy :: SProxy "unchecked-checkbox")
-prop_indeterminate_checkbox = Lens.prop (SProxy :: SProxy "indeterminate-checkbox")
-prop_checked_checkbox       = Lens.prop (SProxy :: SProxy "checked-checkbox")
+prop_unchecked_checkbox = Lens.prop (SProxy :: SProxy "unchecked-checkbox")
 
-render :: forall m . State -> HH.ComponentHTML (Action State) ChildSlots m
+prop_indeterminate_checkbox = Lens.prop (SProxy :: SProxy "indeterminate-checkbox")
+
+prop_checked_checkbox = Lens.prop (SProxy :: SProxy "checked-checkbox")
+
+render :: forall m. State -> HH.ComponentHTML (Action State) ChildSlots m
 render state =
   HH.div_
     [ HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Unchecked" ]
@@ -53,20 +56,20 @@ render state =
     , focusCheckbox
     ]
 
-focusCheckbox :: forall w . HH.HTML w (Action State)
+focusCheckbox :: forall w. HH.HTML w (Action State)
 focusCheckbox =
-    HH.div []
-        [ Checkbox.checkbox
-            (Checkbox.defaultConfig
-                { additionalAttributes = [ HP.id_ "my-checkbox" ]
-                }
-            )
-        , HH.text "\x00A0"
-        , Button.button
-          Button.Raised
-          (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Focus "my-checkbox") ] })
-          [ HH.text "Focus" ]
-        ]
+  HH.div []
+    [ Checkbox.checkbox
+        ( Checkbox.defaultConfig
+            { additionalAttributes = [ HP.id_ "my-checkbox" ]
+            }
+        )
+    , HH.text "\x00A0"
+    , Button.button
+        Button.Raised
+        (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Focus "my-checkbox") ] })
+        [ HH.text "Focus" ]
+    ]
 
 component :: H.Component Query Input Message Aff
 component =
@@ -75,5 +78,3 @@ component =
     , render
     , eval: H.mkEval H.defaultEval { handleAction = handleAction }
     }
-
-

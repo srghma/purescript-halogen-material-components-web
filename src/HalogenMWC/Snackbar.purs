@@ -88,7 +88,7 @@ snackbar config queue =
         , timeoutMsProp currentMessage
         , closedHandler (MessageId currentMessageId) config
         ]
-        <> config.additionalAttributes
+          <> config.additionalAttributes
       )
       [ surfaceElt (MessageId currentMessageId) (Maybe.fromMaybe (defaultMessage "") currentMessage) ]
 

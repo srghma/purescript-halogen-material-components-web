@@ -21,12 +21,13 @@ import Data.Lens as Lens
 import Data.Lens.Record as Lens
 import Demo.Utils
 
-type State =
-  { "checked-hero-checkbox" :: Maybe Checkbox.State
-  , "unchecked-hero-checkbox" :: Maybe Checkbox.State
-  }
+type State
+  = { "checked-hero-checkbox" :: Maybe Checkbox.State
+    , "unchecked-hero-checkbox" :: Maybe Checkbox.State
+    }
 
-type Input = Unit
+type Input
+  = Unit
 
 initialState :: State
 initialState =
@@ -34,10 +35,11 @@ initialState =
   , "unchecked-hero-checkbox": Just Checkbox.Unchecked
   }
 
-prop_checked_hero_checkbox   = Lens.prop (SProxy :: SProxy "checked-hero-checkbox")
+prop_checked_hero_checkbox = Lens.prop (SProxy :: SProxy "checked-hero-checkbox")
+
 prop_unchecked_hero_checkbox = Lens.prop (SProxy :: SProxy "unchecked-hero-checkbox")
 
-render :: forall m . State -> HH.ComponentHTML (Action State) ChildSlots m
+render :: forall m. State -> HH.ComponentHTML (Action State) ChildSlots m
 render state =
   HH.div_
     [ checkbox prop_checked_hero_checkbox state heroMargin
@@ -52,6 +54,5 @@ component =
     , eval: H.mkEval H.defaultEval { handleAction = handleAction }
     }
 
-heroMargin :: forall r i . Array (IProp ( style :: String | r ) i)
-heroMargin =
-    [ HP.style "margin: 8px 16px;" ]
+heroMargin :: forall r i. Array (IProp ( style :: String | r ) i)
+heroMargin = [ HP.style "margin: 8px 16px;" ]

@@ -1,7 +1,6 @@
 module HalogenMWC.TopAppBar where
 
 import Prelude
-
 import DOM.HTML.Indexed as I
 import Data.Array as Array
 import Halogen (ClassName, ElemName(..))

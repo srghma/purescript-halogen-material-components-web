@@ -8,7 +8,6 @@ import Halogen
 import Material.Classes.Typography
 import Protolude
 import Protolude
-
 import Data.Array as Array
 import Data.Array as Array
 import Data.Maybe as Maybe
