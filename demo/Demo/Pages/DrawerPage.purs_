@@ -44,7 +44,7 @@ render lift { title, drawer, scrim, onMenuClick } =
             , HH.div [ HP.class_ mdc_drawer_app_content ]
                 [ TopAppBar.topAppBar TopAppBar.defaultConfig
                     [ HH.section [ HP.class_ mdc_top_app_bar__row ] []
-                        [ HH.section [ HP.classes [ HP.class_ mdc_top_app_bar__section, mdc_top_app_bar__section____align_start ] ]
+                        [ HH.section [ HP.classes [ mdc_top_app_bar__section, mdc_top_app_bar__section____align_start ] ]
                             [ case onMenuClick of
                                 Just handleClick ->
                                     Icon.icon

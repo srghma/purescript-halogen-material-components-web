@@ -149,7 +149,7 @@ demoTitle =
       ]
       [ HH.text "Our Changing Planet" ]
   , HH.h3
-      [ HP.classes [ HP.class_ mdc_typography____subtitle2, mdc_theme____text_secondary_on_background ]
+      [ HP.classes [ mdc_typography____subtitle2, mdc_theme____text_secondary_on_background ]
       , HP.style "margin: 0;"
       ]
       [ HH.text "by Kurt Wagner" ]
@@ -158,7 +158,7 @@ demoTitle =
 demoBody :: forall r w i . HH.HTML w i
 demoBody =
   HH.div
-  [ HP.classes [ HP.class_ mdc_typography____body2, mdc_theme____text_secondary_on_background ]
+  [ HP.classes [ mdc_typography____body2, mdc_theme____text_secondary_on_background ]
   , HP.style "padding: 0 1rem 0.5rem 1rem;"
   ]
   [ HH.text
