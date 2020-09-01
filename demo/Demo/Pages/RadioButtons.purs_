@@ -41,10 +41,10 @@ handleAction =
             ( { radios = Map.insert group index state.radios } )
 
         Focus id ->
-            ( state, Task.attempt Focused (Browser.Dom.focus id) )
+            H.liftEffect $ focusById id
 
-        Focused _ ->
-            ( state )
+        
+            
 
 isSelected :: forall r w i . String -> String -> State -> Boolean
 isSelected group index state =
@@ -81,7 +81,7 @@ heroRadio state group index =
 
 heroRadioGroup :: forall r w i . State -> HH.HTML w Action
 heroRadioGroup state =
-    HH.div []
+    HH.div_
         [ heroRadio state "hero" "radio-buttons-hero-radio-1"
         , heroRadio state "hero" "radio-buttons-hero-radio-2"
         ]
@@ -104,14 +104,14 @@ radio state group index label =
 
 exampleRadioGroup :: forall r w i . State -> HH.HTML w Action
 exampleRadioGroup state =
-    HH.div []
+    HH.div_
         [ radio state "example" "radio-buttons-example-radio-1" "Radio 1"
         , radio state "example" "radio-buttons-example-radio-2" "Radio 2"
         ]
 
 focusRadio :: forall r w i . HH.HTML w Action
 focusRadio =
-    HH.div []
+    HH.div_
         [ Radio.radio
             (Radio.defaultConfig { additionalAttributes = [ HP.id_ "my-radio" ])
         , HH.text "\x00A0"

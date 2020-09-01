@@ -52,7 +52,7 @@ render state =
 
 focusCheckbox :: forall w. HH.HTML w (Action State)
 focusCheckbox =
-  HH.div []
+  HH.div_
     [ Checkbox.checkbox
         ( Checkbox.defaultConfig
             { additionalAttributes = [ HP.id_ "my-checkbox" ]

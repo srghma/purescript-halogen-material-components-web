@@ -280,7 +280,7 @@ shapedChips =
 
 focusChips :: forall w. State -> HH.HTML w Action
 focusChips state =
-  HH.div []
+  HH.div_
     [ ChipSet.Choice.chipSet
         ( (ChipSet.Choice.defaultConfig { toLabel: identity })
             { selected = Just state.focus

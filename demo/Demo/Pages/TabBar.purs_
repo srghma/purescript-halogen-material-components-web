@@ -54,10 +54,10 @@ handleAction =
             ( { activeScrollingTab = index } )
 
         Focus id ->
-            ( state, Task.attempt Focused (Browser.Dom.focus id) )
+            H.liftEffect $ focusById id
 
-        Focused _ ->
-            ( state )
+        
+            
 
 catalogPage :: CatalogPage
 catalogPage =
@@ -155,7 +155,7 @@ scrollingTabs state =
 
 focusTabs :: forall r w i . State -> HH.HTML w Action
 focusTabs state =
-    HH.div []
+    HH.div_
         [ TabBar.tabBar
             (TabBar.defaultConfig
                 { additionalAttributes = [ HP.id_ "my-tabs" ]

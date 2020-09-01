@@ -118,7 +118,7 @@ exampleCard3 =
 
 focusCard :: forall r w i. HH.HTML w WithFocus.Action
 focusCard =
-  HH.div []
+  HH.div_
     [ Card.card
         ( Card.defaultConfig
             { additionalAttributes =

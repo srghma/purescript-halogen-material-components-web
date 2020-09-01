@@ -97,7 +97,7 @@ iframe title route =
     HH.div
         [ HP.style "display: inline-block; -ms-flex: 1 1 45%; flex: 1 1 45%; -ms-flex-pack: distribute; justify-content: space-around; min-height: 200px; min-width: 400px; padding: 15px;"
         ]
-        [ HH.div []
+        [ HH.div_
             [ HH.a
                 [ HP.href stringUrl
                 , HP.target "_blank"

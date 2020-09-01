@@ -42,10 +42,10 @@ handleAction =
             )
 
         Focus id ->
-            ( state, Task.attempt Focused (Browser.Dom.focus id) )
+            H.liftEffect $ focusById id
 
-        Focused _ ->
-            ( state )
+        
+            
 
 isChecked :: forall r w i . String -> State -> Boolean
 isChecked id state =
@@ -114,7 +114,7 @@ focusSwitch state =
         id =
             "my-switch"
     in
-    HH.div []
+    HH.div_
         [ FormField.formField
             (FormField.defaultConfig
                 { label = Just "off/on"

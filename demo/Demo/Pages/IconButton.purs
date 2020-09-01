@@ -17,36 +17,24 @@ import HalogenMWC.IconToggle as IconToggle
 import Material.Classes.Typography
 import Data.Set (Set)
 import Data.Set as Set
+import Demo.Utils
+
 type State = { ons :: Set String }
 
 initialState :: forall r w i . State
-initialState =
-    { ons: Set.empty }
+initialState = { ons: Set.empty }
 
 data Action
-    = Toggle String
-    | Focus String
-    | Focused (Result Browser.Dom.Error ())
+  = Toggle String
+  | Focus String
 
 handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
 handleAction =
-    case _ of
-        Toggle id ->
-            ( {  ons =
-                    if Set.member id state.ons then
-                        Set.delete id state.ons
-
-                    else
-                        Set.insert id state.ons
-              }
-            
-            )
-
-        Focus id ->
-            ( state, Task.attempt Focused (Browser.Dom.focus id) )
-
-        Focused _ ->
-            ( state )
+  case _ of
+      Toggle id -> H.modify_ \state -> state
+        { ons = if Set.member id state.ons then Set.delete id state.ons else Set.insert id state.ons
+        }
+      Focus id -> H.liftEffect $ focusById id
 
 catalogPage :: CatalogPage
 catalogPage =
@@ -57,11 +45,12 @@ catalogPage =
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-IconButton"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-icon-button"
         }
-    , hero =
+    , hero:
         [ IconToggle.iconToggle
             (IconToggle.defaultConfig
-                { on = (Set.member "icon-button-hero" state.ons)
-                , onChange = (Toggle "icon-button-hero")
+                { on = Set.member "icon-button-hero" state.ons
+                , onChange = Toggle "icon-button-hero"
+                }
             )
             { offIcon: "favorite_border"
             , onIcon: "favorite"
@@ -73,17 +62,19 @@ catalogPage =
         , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Icon Toggle" ]
         , IconToggle.iconToggle
             (IconToggle.defaultConfig
-                { on = (Set.member "icon-button-toggle" state.ons)
-                , onChange = (Toggle "icon-button-toggle")
+                { on = Set.member "icon-button-toggle" state.ons
+                , onChange = Toggle "icon-button-toggle"
+                }
             )
             { offIcon: "favorite_border"
             , onIcon: "favorite"
             }
         , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Focus Icon Button" ]
-        , HH.div []
+        , HH.div_
             [ IconButton.iconButton
                 (IconButton.defaultConfig
                     { additionalAttributes = [ HP.id_ "my-icon-button" ]
+                    }
                 )
                 "wifi"
             , HH.text "\x00A0"
@@ -92,19 +83,20 @@ catalogPage =
                 [ HH.text "Focus" ]
             ]
         , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Focus Icon Toggle" ]
-        , HH.div []
+        , HH.div_
             [ IconToggle.iconToggle
                 (IconToggle.defaultConfig
-                    { on = (Set.member "icon-button-toggle" state.ons)
-                    , onChange = (Toggle "icon-button-toggle")
+                    { on = Set.member "icon-button-toggle" state.ons
+                    , onChange = Toggle "icon-button-toggle"
                     , additionalAttributes = [ HP.id_ "my-icon-toggle" ]
+                    }
                 )
                 { offIcon: "favorite_border"
                 , onIcon: "favorite"
                 }
             , HH.text "\x00A0"
             , Button.button Button.Raised
-                (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Focus "my-icon-toggle") ] })
+                (Button.defaultConfig { additionalAttributes = [ HE.onClick $ const $ Focus "my-icon-toggle" ] })
                 [ HH.text "Focus" ]
             ]
         ]

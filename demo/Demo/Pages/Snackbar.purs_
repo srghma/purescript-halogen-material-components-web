@@ -50,7 +50,7 @@ handleAction =
             ( { queue = Snackbar.close messageId state.queue } )
 
         Click messageId ->
-            ( state )
+            
 
 baselineMessage :: forall r w i . Snackbar.Message Action
 baselineMessage =

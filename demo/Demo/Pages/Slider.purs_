@@ -42,10 +42,10 @@ handleAction =
             ( { sliders = Map.insert id value state.sliders } )
 
         Focus id ->
-            ( state, Task.attempt Focused (Browser.Dom.focus id) )
+            H.liftEffect $ focusById id
 
-        Focused _ ->
-            ( state )
+        
+            
 
 catalogPage :: CatalogPage
 catalogPage =
@@ -134,7 +134,7 @@ focusSlider state =
         id =
             "my-slider"
     in
-    HH.div []
+    HH.div_
         [ Slider.slider
             (Slider.defaultConfig
                 { value = (Map.get id state.sliders)

@@ -66,10 +66,10 @@ handleAction =
             ( { shapedActivated = id } )
 
         Focus id ->
-            ( state, Task.attempt Focused (Browser.Dom.focus id) )
+            H.liftEffect $ focusById id
 
-        Focused _ ->
-            ( state )
+        
+            
 
 catalogPage :: CatalogPage
 catalogPage =
@@ -347,7 +347,7 @@ listWithTrailingRadioButton state =
 
 focusList :: forall r w i . HH.HTML w Action
 focusList =
-    HH.div []
+    HH.div_
         [ List.list
             (List.defaultConfig
                 { additionalAttributes = (demoList <> [ HP.id_ "my-list" ])

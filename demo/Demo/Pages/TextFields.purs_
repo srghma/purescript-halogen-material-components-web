@@ -31,10 +31,10 @@ handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
 handleAction =
     case _ of
         Focus id ->
-            ( state, Task.attempt Focused (Browser.Dom.focus id) )
+            H.liftEffect $ focusById id
 
-        Focused _ ->
-            ( state )
+        
+            
 
 catalogPage :: CatalogPage
 catalogPage =
@@ -285,7 +285,7 @@ fullwidthTextareaTextField state =
 
 focusTextField :: forall r w i . HH.HTML w Action
 focusTextField =
-    HH.div []
+    HH.div_
         [ TextField.filled
             (TextField.defaultConfig
                 { additionalAttributes = [ HP.id_ "my-text-field" ]
