@@ -18,7 +18,7 @@ import HalogenMWC.List as List
 import HalogenMWC.List.Item as List.Item
 import HalogenMWC.Radio as Radio
 import Material.Classes.Typography
-import Set
+import Data.Set
 
 data State =
     { checkboxes :: Set String
@@ -43,38 +43,38 @@ data Action
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: forall r w i . Action -> State -> ( State, Cmd Action )
-update w i model =
-    case w i of
+handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
+handleAction =
+    case _ of
         ToggleCheckbox id ->
-            ( { model
+            ( { state
                 | checkboxes =
-                    if Set.member id model.checkboxes then
-                        Set.remove id model.checkboxes
+                    if Set.member id state.checkboxes then
+                        Set.remove id state.checkboxes
 
                     else
-                        Set.insert id model.checkboxes
+                        Set.insert id state.checkboxes
               }
-            , Cmd.none
+            
             )
 
         SetRadio id ->
-            ( { model | radio = Just id }, Cmd.none )
+            ( { state | radio = Just id } )
 
         SetActivated id ->
-            ( { model | activated = id }, Cmd.none )
+            ( { state | activated = id } )
 
         SetShapedActivated id ->
-            ( { model | shapedActivated = id }, Cmd.none )
+            ( { state | shapedActivated = id } )
 
         Focus id ->
-            ( model, Task.attempt Focused (Browser.Dom.focus id) )
+            ( state, Task.attempt Focused (Browser.Dom.focus id) )
 
         Focused _ ->
-            ( model, Cmd.none )
+            ( state )
 
-render :: forall r w i . State -> CatalogPage Action
-render model =
+catalogPage :: CatalogPage
+catalogPage =
     { title: "List"
     , prelude: "Lists present multiple line items vertically as a single continuous element."
     , resources:
@@ -91,18 +91,18 @@ render model =
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Leading Icon" ]
         , leadingIconList
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "List with activated item" ]
-        , activatedItemList model
+        , activatedItemList state
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "List with shaped activated item" ]
-        , shapedActivatedItemList model
+        , shapedActivatedItemList state
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Trailing Icon" ]
         , trailingIconList
         , HH.h3 [ mdc_typography____subtitle1 ]
             [ HH.text "Two-Line with Leading and Trailing Icon and Divider" ]
         , folderList
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "List with Trailing Checkbox" ]
-        , listWithTrailingCheckbox model
+        , listWithTrailingCheckbox state
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "List with Trailing Radio Buttons" ]
-        , listWithTrailingRadioButton model
+        , listWithTrailingRadioButton state
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Focus List" ]
         , focusList
         ]
@@ -181,13 +181,13 @@ trailingIconList =
         (List.repeat 2 listItem)
 
 activatedItemList :: forall r w i . State -> HH.HTML Action
-activatedItemList model =
+activatedItemList state =
     let
         listItem ( icon, label ) =
             List.Item.listItem
                 (List.Item.defaultConfig
                     { selected =
-                        (if model.activated == label then
+                        (if state.activated == label then
                             Just List.Item.Activated
 
                          else
@@ -207,13 +207,13 @@ activatedItemList model =
         )
 
 shapedActivatedItemList :: forall r w i . State -> HH.HTML Action
-shapedActivatedItemList model =
+shapedActivatedItemList state =
     let
         listItem ( icon, label ) =
             List.Item.listItem
                 (List.Item.defaultConfig
                     { selected =
-                        (if model.shapedActivated == label then
+                        (if state.shapedActivated == label then
                             Just List.Item.Activated
 
                          else
@@ -268,13 +268,13 @@ folderList =
         )
 
 listWithTrailingCheckbox :: forall r w i . State -> HH.HTML Action
-listWithTrailingCheckbox model =
+listWithTrailingCheckbox state =
     let
         listItem label =
             List.Item.listItem
                 (List.Item.defaultConfig
                     { selected =
-                        (if Set.member label model.checkboxes then
+                        (if Set.member label state.checkboxes then
                             Just List.Item.Selected
 
                          else
@@ -288,11 +288,11 @@ listWithTrailingCheckbox model =
                             { onChange = (ToggleCheckbox label)
                             , state =
                                 (Just
-                                    (if Set.member label model.checkboxes then
-                                        Checkbox.checked
+                                    (if Set.member label state.checkboxes then
+                                        Checkbox.Checked
 
                                      else
-                                        Checkbox.unchecked
+                                        Checkbox.Unchecked
                                     )
                                 )
                         )
@@ -315,13 +315,13 @@ listWithTrailingCheckbox model =
         )
 
 listWithTrailingRadioButton :: forall r w i . State -> HH.HTML Action
-listWithTrailingRadioButton model =
+listWithTrailingRadioButton state =
     let
         listItem label =
             List.Item.listItem
                 (List.Item.defaultConfig
                     { selected =
-                        (if model.radio == Just label then
+                        (if state.radio == Just label then
                             Just List.Item.Selected
 
                          else
@@ -332,7 +332,7 @@ listWithTrailingRadioButton model =
                 , HH.div [ HP.class_ mdc_list_item__meta ]
                     [ Radio.radio
                         (Radio.defaultConfig
-                            { checked = (model.radio == Just label)
+                            { checked = (state.radio == Just label)
                             , onChange = (SetRadio label)
                         )
                     ]
@@ -358,6 +358,6 @@ focusList =
             (List.repeat 2 $ List.Item.listItem List.Item.defaultConfig [ HH.text "Line item" ])
         , HH.text "\x00A0"
         , Button.button Button.Raised
-            (Button.defaultConfig { onClick = (Focus "my-list"))
-            "Focus"
+            (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Focus "my-list") ] })
+            [ HH.text "Focus" ]
         ]

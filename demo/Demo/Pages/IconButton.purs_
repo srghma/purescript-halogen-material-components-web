@@ -15,7 +15,7 @@ import HalogenMWC.Button as Button
 import HalogenMWC.IconButton as IconButton
 import HalogenMWC.IconToggle as IconToggle
 import Material.Classes.Typography
-import Set
+import Data.Set
 
 data State =
     { ons :: Set String }
@@ -29,29 +29,29 @@ data Action
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: forall r w i . Action -> State -> ( State, Cmd Action )
-update w i model =
-    case w i of
+handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
+handleAction =
+    case _ of
         Toggle id ->
-            ( { model
+            ( { state
                 | ons =
-                    if Set.member id model.ons then
-                        Set.remove id model.ons
+                    if Set.member id state.ons then
+                        Set.remove id state.ons
 
                     else
-                        Set.insert id model.ons
+                        Set.insert id state.ons
               }
-            , Cmd.none
+            
             )
 
         Focus id ->
-            ( model, Task.attempt Focused (Browser.Dom.focus id) )
+            ( state, Task.attempt Focused (Browser.Dom.focus id) )
 
         Focused _ ->
-            ( model, Cmd.none )
+            ( state )
 
-render :: forall r w i . State -> CatalogPage Action
-render model =
+catalogPage :: CatalogPage
+catalogPage =
     { title: "Icon Button"
     , prelude: "Icons are appropriate for buttons that allow a user to take actions or make a selection, such as adding or removing a star to an item."
     , resources:
@@ -62,7 +62,7 @@ render model =
     , hero =
         [ IconToggle.iconToggle
             (IconToggle.defaultConfig
-                { on = (Set.member "icon-button-hero" model.ons)
+                { on = (Set.member "icon-button-hero" state.ons)
                 , onChange = (Toggle "icon-button-hero")
             )
             { offIcon: "favorite_border"
@@ -75,7 +75,7 @@ render model =
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Icon Toggle" ]
         , IconToggle.iconToggle
             (IconToggle.defaultConfig
-                { on = (Set.member "icon-button-toggle" model.ons)
+                { on = (Set.member "icon-button-toggle" state.ons)
                 , onChange = (Toggle "icon-button-toggle")
             )
             { offIcon: "favorite_border"
@@ -90,14 +90,14 @@ render model =
                 "wifi"
             , HH.text "\x00A0"
             , Button.button Button.Raised
-                (Button.defaultConfig { onClick = (Focus "my-icon-button"))
-                "Focus"
+                (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Focus "my-icon-button") ] })
+                [ HH.text "Focus" ]
             ]
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Focus Icon Toggle" ]
         , HH.div []
             [ IconToggle.iconToggle
                 (IconToggle.defaultConfig
-                    { on = (Set.member "icon-button-toggle" model.ons)
+                    { on = (Set.member "icon-button-toggle" state.ons)
                     , onChange = (Toggle "icon-button-toggle")
                     , additionalAttributes = [ HP.id_ "my-icon-toggle" ]
                 )
@@ -106,8 +106,8 @@ render model =
                 }
             , HH.text "\x00A0"
             , Button.button Button.Raised
-                (Button.defaultConfig { onClick = (Focus "my-icon-toggle"))
-                "Focus"
+                (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Focus "my-icon-toggle") ] })
+                [ HH.text "Focus" ]
             ]
         ]
     }

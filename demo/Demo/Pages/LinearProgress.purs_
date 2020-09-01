@@ -22,12 +22,12 @@ initialState = unit
 data Action
     = NoOp
 
-update :: forall r w i . Action -> State -> State
-update w i model =
-    model
+handleAction :: forall r w i . Action -> State -> State
+handleAction =
+    state
 
-render :: forall r w i . State -> CatalogPage Action
-render model =
+catalogPage :: CatalogPage
+catalogPage =
     { title: "Linear Progress Indicator"
     , prelude: "Progress indicators display the length of a process or express an unspecified wait time."
     , resources:

@@ -13,18 +13,18 @@ initialState =
 data Action
     = SetSelectedIndex Int
 
-update :: forall r w i . Action -> State -> State
-update w i model =
-    case w i of
+handleAction :: forall r w i . Action -> State -> State
+handleAction =
+    case _ of
         SetSelectedIndex index ->
-            { model | selectedIndex = index }
+            { state | selectedIndex = index }
 
 render :: forall r w i . State -> DrawerPage Action
-render model =
+catalogPage =
     { title: "Permanent Drawer"
     , drawer =
         Drawer.Permanent.drawer Drawer.Permanent.defaultConfig
-            (DrawerPage.drawerBody SetSelectedIndex model.selectedIndex)
+            (DrawerPage.drawerBody SetSelectedIndex state.selectedIndex)
     , scrim: Nothing
     , onMenuClick: Nothing
     }

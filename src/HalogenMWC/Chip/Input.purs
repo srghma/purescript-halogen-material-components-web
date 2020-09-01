@@ -14,8 +14,7 @@ type Config i
     , onDelete :: Maybe (Event -> i)
     }
 
-data Chip i
-  = Chip (Config i) String
+data Chip i = Chip (Config i) String
 
 defaultConfig :: forall i. Config i
 defaultConfig =

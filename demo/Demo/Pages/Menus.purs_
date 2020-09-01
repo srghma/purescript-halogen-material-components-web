@@ -29,17 +29,17 @@ data Action
     = Open
     | Close
 
-update :: forall r w i . Action -> State -> State
-update w i model =
-    case w i of
+handleAction :: forall r w i . Action -> State -> State
+handleAction =
+    case _ of
         Open ->
-            { model | open = true }
+            { state | open = true }
 
         Close ->
-            { model | open = false }
+            { state | open = false }
 
-render :: forall r w i . State -> CatalogPage Action
-render model =
+catalogPage :: CatalogPage
+catalogPage =
     { title: "Menu"
     , prelude: "Menus display a list of choices on a transient sheet of material."
     , resources:
@@ -47,14 +47,14 @@ render model =
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Menu"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-menu"
         }
-    , hero: [ heroMenu model ]
+    , hero: [ heroMenu state ]
     , content:
         [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Anchored menu" ]
         , HH.div [ mdc_menu_surface____anchor ]
-            [ Button.button Button.Text (Button.defaultConfig { onClick = Open) "Open menu"
+            [ Button.button Button.Text (Button.defaultConfig { additionalAttributes = [ HE.onClick (const Open) ] }) [ HH.text "Open menu" ]
             , Menu.menu
                 (Menu.defaultConfig
-                    { open = model.open
+                    { open = state.open
                     , onClose = Close
                 )
                 [ List.list (List.defaultConfig { wrapFocus = true)
@@ -84,7 +84,7 @@ listItem label =
     List.Item.listItem (List.Item.defaultConfig { onClick = Close) [ HH.text label ]
 
 heroMenu :: forall r w i . State -> HH.HTML w i
-heroMenu model =
+heroMenu state =
     HH.div
         [ HP.class_ "mdc-menu-surface mdc-menu-surface--open"
         , HP.style "position: relative; transform-origin: left top 0px; left: 0px; top: 0px; z-index: 0;"

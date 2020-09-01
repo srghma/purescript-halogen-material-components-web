@@ -1,7 +1,7 @@
 module Demo.Pages.Switch where
 
 import Demo.HOC.CatalogPage
-import Dict
+import Data.Map
 import Protolude
 import Data.Array as Array
 import Data.Maybe as Maybe
@@ -18,42 +18,42 @@ import HalogenMWC.Switch as Switch
 import Material.Classes.Typography
 
 data State =
-    { switches :: Dict String Boolean }
+    { switches :: Map String Boolean }
 
 initialState :: forall r w i . State
 initialState =
-    { switches: Dict.fromList [ ( "hero-switch", true ) ] }
+    { switches: Map.fromList [ ( "hero-switch", true ) ] }
 
 data Action
     = Toggle String
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: forall r w i . Action -> State -> ( State, Cmd Action )
-update w i model =
-    case w i of
+handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
+handleAction =
+    case _ of
         Toggle id ->
-            ( { model
+            ( { state
                 | switches =
-                    Dict.update id
+                    Map.handleAction id
                         (\state -> Just (not (Maybe.fromMaybe false state)))
-                        model.switches
+                        state.switches
               }
-            , Cmd.none
+            
             )
 
         Focus id ->
-            ( model, Task.attempt Focused (Browser.Dom.focus id) )
+            ( state, Task.attempt Focused (Browser.Dom.focus id) )
 
         Focused _ ->
-            ( model, Cmd.none )
+            ( state )
 
 isChecked :: forall r w i . String -> State -> Boolean
-isChecked id model =
-    Maybe.fromMaybe false (Dict.get id model.switches)
+isChecked id state =
+    Maybe.fromMaybe false (Map.get id state.switches)
 
-render :: forall r w i . State -> CatalogPage Action
-render model =
+catalogPage :: CatalogPage
+catalogPage =
     { title: "Switch"
     , prelude: "Switches communicate an action a user can take. They are typically placed throughout your UI, in places like dialogs, forms, cards, and toolbars."
     , resources:
@@ -61,17 +61,17 @@ render model =
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Switch"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-switch"
         }
-    , hero: heroSwitch model
+    , hero: heroSwitch state
     , content:
         [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Switch" ]
-        , demoSwitch model
+        , demoSwitch state
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Focus Switch" ]
-        , focusSwitch model
+        , focusSwitch state
         ]
     }
 
 heroSwitch :: forall r w i . State -> Array (HH.HTML Action)
-heroSwitch model =
+heroSwitch state =
     let
         id =
             "hero-switch"
@@ -84,14 +84,14 @@ heroSwitch model =
         )
         [ Switch.switch
             (Switch.defaultConfig
-                { checked = (isChecked id model)
+                { checked = (isChecked id state)
                 , onChange = (Toggle id)
             )
         ]
     ]
 
 demoSwitch :: forall r w i . State -> HH.HTML Action
-demoSwitch model =
+demoSwitch state =
     let
         id =
             "demo-switch"
@@ -104,13 +104,13 @@ demoSwitch model =
         )
         [ Switch.switch
             (Switch.defaultConfig
-                { checked = (isChecked id model)
+                { checked = (isChecked id state)
                 , onChange = (Toggle id)
             )
         ]
 
 focusSwitch :: forall r w i . State -> HH.HTML Action
-focusSwitch model =
+focusSwitch state =
     let
         id =
             "my-switch"
@@ -125,16 +125,16 @@ focusSwitch model =
             )
             [ Switch.switch
                 (Switch.defaultConfig
-                    { checked = (isChecked id model)
+                    { checked = (isChecked id state)
                     , onChange = (Toggle id)
                     , additionalAttributes = [ HP.id_ id ]
                 )
             ]
         , HH.text "\x00A0"
         , Button.button Button.Raised
-            (Button.defaultConfig { onClick = (Focus "my-switch"))
-            "Focus switch"
+            (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Focus "my-switch") ] })
+            [ HH.text "Focus switch" ]
         , Button.button Button.Raised
-            (Button.defaultConfig { onClick = (Focus "my-form-field"))
-            "Focus form field"
+            (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Focus "my-form-field") ] })
+            [ HH.text "Focus form field" ]
         ]

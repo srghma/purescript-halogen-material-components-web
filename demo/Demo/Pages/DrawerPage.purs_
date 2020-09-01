@@ -49,7 +49,7 @@ render lift { title, drawer, scrim, onMenuClick } =
                                 Just handleClick ->
                                     Icon.icon
                                         [ mdc_top_app_bar__navigation_icon
-                                        , HH.Events.onClick handleClick
+                                        , HE.onClick handleClick
                                         ]
                                         "menu"
 

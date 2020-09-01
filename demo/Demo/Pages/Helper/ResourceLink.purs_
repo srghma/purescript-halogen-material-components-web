@@ -26,6 +26,7 @@ render { link, title, icon, altText } =
                 [ HP.href link
                 , HP.target "_blank"
                 ]
+            }
         )
         [ HH.div [ HP.class_ mdc_list_item__graphic ]
             [ HH.img

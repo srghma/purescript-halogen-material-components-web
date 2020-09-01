@@ -35,17 +35,17 @@ data Action
     = Close
     | Show Dialog
 
-update :: forall r w i . Action -> State -> State
-update w i model =
-    case w i of
+handleAction :: forall r w i . Action -> State -> State
+handleAction =
+    case _ of
         Close ->
-            { model | open = Nothing }
+            { state | open = Nothing }
 
         Show id ->
-            { model | open = Just id }
+            { state | open = Just id }
 
-render :: forall r w i . State -> CatalogPage Action
-render model =
+catalogPage :: CatalogPage
+catalogPage =
     { title: "Dialog"
     , prelude: "Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks."
     , resources:
@@ -56,45 +56,48 @@ render model =
     , hero: heroDialog
     , content:
         [ Button.button Button.Text
-            (Button.defaultConfig { onClick = (Show AlertDialog))
-            "Alert"
+            (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Show AlertDialog) ] })
+            [ HH.text "Alert" ]
         , HH.text " "
         , Button.button Button.Text
-            (Button.defaultConfig { onClick = (Show SimpleDialog))
-            "Simple"
+            (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Show SimpleDialog) ] })
+            [ HH.text "Simple" ]
         , HH.text " "
         , Button.button Button.Text
-            (Button.defaultConfig { onClick = (Show ConfirmationDialog))
-            "Confirmation"
+            (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Show ConfirmationDialog) ] })
+            [ HH.text "Confirmation" ]
         , HH.text " "
         , Button.button Button.Text
-            (Button.defaultConfig { onClick = (Show ScrollableDialog))
-            "Scrollable"
+            (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Show ScrollableDialog) ] })
+            [ HH.text "Scrollable" ]
         , HH.text " "
-        , alertDialog model
-        , simpleDialog model
-        , confirmationDialog model
-        , scrollableDialog model
+        , alertDialog state
+        , simpleDialog state
+        , confirmationDialog state
+        , scrollableDialog state
         ]
     }
 
 alertDialog :: forall r w i . State -> HH.HTML Action
-alertDialog model =
+alertDialog state =
     Dialog.dialog
         (Dialog.defaultConfig
-            { open = (model.open == Just AlertDialog)
+            { open = (state.open == Just AlertDialog)
             , onClose = Close
         )
         { title: Nothing
         , content: [ HH.text "Discard draft?" ]
         , actions =
-            [ Button.button Button.Text (Button.defaultConfig { onClick = Close) "Cancel"
-            , Button.button Button.Text (Button.defaultConfig { onClick = Close) "Discard"
+            let
+              conf = Button.defaultConfig { additionalAttributes = [ HE.onClick (const Close) ] }
+            in
+            [ Button.button Button.Text conf [ HH.text "Cancel" ]
+            , Button.button Button.Text conf [ HH.text "Discard" ]
             ]
         }
 
 simpleDialog :: forall r w i . State -> HH.HTML Action
-simpleDialog model =
+simpleDialog state =
     let
         listItem ( icon, label ) =
             List.Item.listItem
@@ -108,7 +111,7 @@ simpleDialog model =
     in
     Dialog.dialog
         (Dialog.defaultConfig
-            { open = (model.open == Just SimpleDialog)
+            { open = (state.open == Just SimpleDialog)
             , onClose = Close
         )
         { title: Just "Select an account"
@@ -125,7 +128,7 @@ simpleDialog model =
         }
 
 confirmationDialog :: forall r w i . State -> HH.HTML Action
-confirmationDialog model =
+confirmationDialog state =
     let
         listItem ( checked, label ) =
             List.Item.listItem List.Item.defaultConfig
@@ -136,7 +139,7 @@ confirmationDialog model =
     in
     Dialog.dialog
         (Dialog.defaultConfig
-            { open = (model.open == Just ConfirmationDialog)
+            { open = (state.open == Just ConfirmationDialog)
             , onClose = Close
         )
         { title: Just "Phone ringtone"
@@ -150,16 +153,19 @@ confirmationDialog model =
                 )
             ]
         , actions =
-            [ Button.button Button.Text (Button.defaultConfig { onClick = Close) "Cancel"
-            , Button.button Button.Text (Button.defaultConfig { onClick = Close) "OK"
+            let
+              conf = Button.defaultConfig { additionalAttributes = [ HE.onClick (const Close) ] }
+            in
+            [ Button.button Button.Text conf [ HH.text "Cancel" ]
+            , Button.button Button.Text conf [ HH.text "Ok" ]
             ]
         }
 
 scrollableDialog :: forall r w i . State -> HH.HTML Action
-scrollableDialog model =
+scrollableDialog state =
     Dialog.dialog
         (Dialog.defaultConfig
-            { open = (model.open == Just ScrollableDialog)
+            { open = (state.open == Just ScrollableDialog)
             , onClose = Close
         )
         { title: Just "The Wonderful Wizard of Oz"
@@ -252,8 +258,11 @@ scrollableDialog model =
                 ]
             ]
         , actions =
-            [ Button.button Button.Text (Button.defaultConfig { onClick = Close) "Decline"
-            , Button.button Button.Text (Button.defaultConfig { onClick = Close) "Continue"
+            let
+              conf = Button.defaultConfig { additionalAttributes = [ HE.onClick (const Close) ] }
+            in
+            [ Button.button Button.Text conf "Decline"
+            , Button.button Button.Text conf "Continue"
             ]
         }
 
@@ -269,8 +278,8 @@ heroDialog =
             , HH.div [ HP.class_ mdc_dialog__content ]
                 [ HH.text "Turn up the jams and have a good time." ]
             , HH.div [ HP.class_ mdc_dialog__actions ]
-                [ Button.button Button.Text Button.defaultConfig "Decline"
-                , Button.button Button.Text Button.defaultConfig "Accept"
+                [ Button.button Button.Text Button.defaultConfig [ HH.text "Decline" ]
+                , Button.button Button.Text Button.defaultConfig [ HH.text "Accept" ]
                 ]
             ]
         ]

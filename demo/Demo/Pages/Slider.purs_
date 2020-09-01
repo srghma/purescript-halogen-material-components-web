@@ -1,7 +1,7 @@
 module Demo.Pages.Slider where
 
 import Demo.HOC.CatalogPage
-import Dict
+import Data.Map
 import Protolude
 import Data.Array as Array
 import Data.Maybe as Maybe
@@ -17,12 +17,12 @@ import HalogenMWC.Slider as Slider
 import Material.Classes.Typography
 
 data State =
-    { sliders :: Dict String Float }
+    { sliders :: Map String Float }
 
 initialState :: forall r w i . State
 initialState =
     { sliders =
-        Dict.fromList
+        Map.fromList
             [ ( "hero-slider", 25 )
             , ( "continuous-slider", 25 )
             , ( "discrete-slider", 25 )
@@ -35,20 +35,20 @@ data Action
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: forall r w i . Action -> State -> ( State, Cmd Action )
-update w i model =
-    case w i of
+handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
+handleAction =
+    case _ of
         Changed id value ->
-            ( { model | sliders = Dict.insert id value model.sliders }, Cmd.none )
+            ( { state | sliders = Map.insert id value state.sliders } )
 
         Focus id ->
-            ( model, Task.attempt Focused (Browser.Dom.focus id) )
+            ( state, Task.attempt Focused (Browser.Dom.focus id) )
 
         Focused _ ->
-            ( model, Cmd.none )
+            ( state )
 
-render :: forall r w i . State -> CatalogPage Action
-render model =
+catalogPage :: CatalogPage
+catalogPage =
     { title: "Slider"
     , prelude: "Sliders let users select from a range of values by moving the slider thumb."
     , resources:
@@ -56,54 +56,54 @@ render model =
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Slider"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-slider"
         }
-    , hero: [ heroSlider model ]
+    , hero: [ heroSlider state ]
     , content:
         [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Continuous" ]
-        , continuousSlider model
+        , continuousSlider state
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Discrete" ]
-        , discreteSlider model
+        , discreteSlider state
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Discrete with Tick Marks" ]
-        , discreteSliderWithTickMarks model
+        , discreteSliderWithTickMarks state
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Focus Slider" ]
-        , focusSlider model
+        , focusSlider state
         ]
     }
 
 heroSlider :: forall r w i . State -> HH.HTML Action
-heroSlider model =
+heroSlider state =
     let
         id =
             "hero-slider"
     in
     Slider.slider
         (Slider.defaultConfig
-            { value = (Dict.get id model.sliders)
+            { value = (Map.get id state.sliders)
             , onInput = (Changed id)
         )
 
 continuousSlider :: forall r w i . State -> HH.HTML Action
-continuousSlider model =
+continuousSlider state =
     let
         id =
             "continuous-slider"
     in
     Slider.slider
         (Slider.defaultConfig
-            { value = (Dict.get id model.sliders)
+            { value = (Map.get id state.sliders)
             , onInput = (Changed id)
             , min = (Just 0)
             , max = (Just 50)
         )
 
 discreteSlider :: forall r w i . State -> HH.HTML Action
-discreteSlider model =
+discreteSlider state =
     let
         id =
             "discrete-slider"
     in
     Slider.slider
         (Slider.defaultConfig
-            { value = (Dict.get id model.sliders)
+            { value = (Map.get id state.sliders)
             , onInput = (Changed id)
             , discrete = true
             , min = (Just 0)
@@ -112,14 +112,14 @@ discreteSlider model =
         )
 
 discreteSliderWithTickMarks :: forall r w i . State -> HH.HTML Action
-discreteSliderWithTickMarks model =
+discreteSliderWithTickMarks state =
     let
         id =
             "discrete-slider-with-tick-marks"
     in
     Slider.slider
         (Slider.defaultConfig
-            { value = (Dict.get id model.sliders)
+            { value = (Map.get id state.sliders)
             , onInput = (Changed id)
             , discrete = true
             , min = (Just 0)
@@ -129,7 +129,7 @@ discreteSliderWithTickMarks model =
         )
 
 focusSlider :: forall r w i . State -> HH.HTML Action
-focusSlider model =
+focusSlider state =
     let
         id =
             "my-slider"
@@ -137,12 +137,12 @@ focusSlider model =
     HH.div []
         [ Slider.slider
             (Slider.defaultConfig
-                { value = (Dict.get id model.sliders)
+                { value = (Map.get id state.sliders)
                 , onInput = (Changed id)
                 , additionalAttributes = [ HP.id_ id ]
             )
         , HH.text "\x00A0"
         , Button.button Button.Raised
-            (Button.defaultConfig { onClick = (Focus id))
-            "Focus"
+            (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Focus id) ] })
+            [ HH.text "Focus" ]
         ]

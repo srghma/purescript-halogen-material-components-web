@@ -22,12 +22,12 @@ initialState = unit
 data Action
     = NoOp
 
-update :: forall r w i . Action -> State -> State
-update w i model =
-    model
+handleAction :: forall r w i . Action -> State -> State
+handleAction =
+    state
 
-render :: forall r w i . State -> CatalogPage Action
-render model =
+catalogPage :: CatalogPage
+catalogPage =
     { title: "Elevation"
     , prelude: "Elevation is the relative depth, or distance, between two surfaces along the z-axis."
     , resources:

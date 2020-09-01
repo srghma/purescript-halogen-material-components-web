@@ -24,12 +24,12 @@ initialState = unit
 data Action
     = NoOp
 
-update :: forall r w i . Action -> State -> State
-update w i model =
-    model
+handleAction :: forall r w i . Action -> State -> State
+handleAction =
+    state
 
-render :: forall r w i . State -> CatalogPage Action
-render model =
+catalogPage :: CatalogPage
+catalogPage =
     { title: "Ripple"
     , prelude: "Ripples are visual representations used to communicate the status of a component or interactive element."
     , resources:

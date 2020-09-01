@@ -22,12 +22,12 @@ initialState = unit
 data Action
     = NoOp
 
-update :: forall r w i . Action -> State -> State
-update w i model =
-    model
+handleAction :: forall r w i . Action -> State -> State
+handleAction =
+    state
 
 render :: forall r w i . State -> TopAppBarPage Action
-render model =
+catalogPage =
     { fixedAdjust: mdc_top_app_bar____short_fixed_adjust
     , topAppBar =
         TopAppBar.short TopAppBar.defaultConfig

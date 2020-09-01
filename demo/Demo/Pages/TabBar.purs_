@@ -39,29 +39,29 @@ data Action
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: forall r w i . Action -> State -> ( State, Cmd Action )
-update w i model =
-    case w i of
+handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
+handleAction =
+    case _ of
         SetActiveHeroTab index ->
-            ( { model | activeHeroTab = index }, Cmd.none )
+            ( { state | activeHeroTab = index } )
 
         SetActiveIconTab index ->
-            ( { model | activeIconTab = index }, Cmd.none )
+            ( { state | activeIconTab = index } )
 
         SetActiveStackedTab index ->
-            ( { model | activeStackedTab = index }, Cmd.none )
+            ( { state | activeStackedTab = index } )
 
         SetActiveScrollingTab index ->
-            ( { model | activeScrollingTab = index }, Cmd.none )
+            ( { state | activeScrollingTab = index } )
 
         Focus id ->
-            ( model, Task.attempt Focused (Browser.Dom.focus id) )
+            ( state, Task.attempt Focused (Browser.Dom.focus id) )
 
         Focused _ ->
-            ( model, Cmd.none )
+            ( state )
 
-render :: forall r w i . State -> CatalogPage Action
-render model =
+catalogPage :: CatalogPage
+catalogPage =
     { title: "Tab Bar"
     , prelude: "Tabs organize and allow navigation between groups of content that are related and at the same level of hierarchy. The Tab Bar contains the Tab Scroller and Tab components."
     , resources:
@@ -69,49 +69,49 @@ render model =
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-TabBar"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-tab-bar"
         }
-    , hero: [ heroTabs model "tabs-hero-tabs" ]
+    , hero: [ heroTabs state "tabs-hero-tabs" ]
     , content:
         [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Tabs with icons next to labels" ]
-        , tabsWithIcons model
+        , tabsWithIcons state
         , HH.h3 [ mdc_typography____subtitle1 ]
             [ HH.text "Tabs with icons above labels and indicators restricted to content" ]
-        , tabsWithStackedIcons model
+        , tabsWithStackedIcons state
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Scrolling tabs" ]
-        , scrollingTabs model
+        , scrollingTabs state
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Focus tabs" ]
-        , focusTabs model
+        , focusTabs state
         ]
     }
 
 heroTabs :: forall r w i . State -> String -> HH.HTML Action
-heroTabs model index =
+heroTabs state index =
     TabBar.tabBar TabBar.defaultConfig
         [ Tab.tab
             (Tab.defaultConfig
-                { active = (model.activeHeroTab == 0)
+                { active = (state.activeHeroTab == 0)
                 , onClick = (SetActiveHeroTab 0)
             )
             { label: "Home", icon: Nothing }
         , Tab.tab
             (Tab.defaultConfig
-                { active = (model.activeHeroTab == 1)
+                { active = (state.activeHeroTab == 1)
                 , onClick = (SetActiveHeroTab 1)
             )
             { label: "Merchandise", icon: Nothing }
         , Tab.tab
             (Tab.defaultConfig
-                { active = (model.activeHeroTab == 2)
+                { active = (state.activeHeroTab == 2)
                 , onClick = (SetActiveHeroTab 2)
             )
             { label: "About Us", icon: Nothing }
         ]
 
 tabsWithIcons :: forall r w i . State -> HH.HTML Action
-tabsWithIcons model =
+tabsWithIcons state =
     let
         config index =
             Tab.defaultConfig
-                { active = (model.activeIconTab == index)
+                { active = (state.activeIconTab == index)
                 , onClick = (SetActiveIconTab index)
     in
     TabBar.tabBar TabBar.defaultConfig
@@ -121,11 +121,11 @@ tabsWithIcons model =
         ]
 
 tabsWithStackedIcons :: forall r w i . State -> HH.HTML Action
-tabsWithStackedIcons model =
+tabsWithStackedIcons state =
     let
         config index =
             Tab.defaultConfig
-                { active = (model.activeStackedTab == index)
+                { active = (state.activeStackedTab == index)
                 , onClick = (SetActiveStackedTab index)
     in
     TabBar.tabBar
@@ -139,11 +139,11 @@ tabsWithStackedIcons model =
         ]
 
 scrollingTabs :: forall r w i . State -> HH.HTML Action
-scrollingTabs model =
+scrollingTabs state =
     let
         config index =
             Tab.defaultConfig
-                { active = (model.activeScrollingTab == index)
+                { active = (state.activeScrollingTab == index)
                 , onClick = (SetActiveScrollingTab index)
     in
     TabBar.tabBar TabBar.defaultConfig
@@ -155,7 +155,7 @@ scrollingTabs model =
         )
 
 focusTabs :: forall r w i . State -> HH.HTML Action
-focusTabs model =
+focusTabs state =
     HH.div []
         [ TabBar.tabBar
             (TabBar.defaultConfig
@@ -163,25 +163,25 @@ focusTabs model =
             )
             [ Tab.tab
                 (Tab.defaultConfig
-                    { active = (model.activeHeroTab == 0)
+                    { active = (state.activeHeroTab == 0)
                     , onClick = (SetActiveHeroTab 0)
                 )
                 { label: "Home", icon: Nothing }
             , Tab.tab
                 (Tab.defaultConfig
-                    { active = (model.activeHeroTab == 1)
+                    { active = (state.activeHeroTab == 1)
                     , onClick = (SetActiveHeroTab 1)
                 )
                 { label: "Merchandise", icon: Nothing }
             , Tab.tab
                 (Tab.defaultConfig
-                    { active = (model.activeHeroTab == 2)
+                    { active = (state.activeHeroTab == 2)
                     , onClick = (SetActiveHeroTab 2)
                 )
                 { label: "About Us", icon: Nothing }
             ]
         , HH.text "\x00A0"
         , Button.button Button.Raised
-            (Button.defaultConfig { onClick = (Focus "my-tabs"))
-            "Focus"
+            (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Focus "my-tabs") ] })
+            [ HH.text "Focus" ]
         ]

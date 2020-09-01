@@ -26,17 +26,17 @@ data Action
     = Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: forall r w i . Action -> State -> ( State, Cmd Action )
-update w i model =
-    case w i of
+handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
+handleAction =
+    case _ of
         Focus id ->
-            ( model, Task.attempt Focused (Browser.Dom.focus id) )
+            ( state, Task.attempt Focused (Browser.Dom.focus id) )
 
         Focused _ ->
-            ( model, Cmd.none )
+            ( state )
 
-render :: forall r w i . State -> CatalogPage Action
-render model =
+catalogPage :: CatalogPage
+catalogPage =
     { title: "Floating Action Button"
     , prelude: "Floating action buttons represents the primary action in an application. Only one floating action button is recommended per screen to represent the most common action."
     , resources:
@@ -90,8 +90,8 @@ render model =
                 "favorite_border"
             , HH.text "\x00A0"
             , Button.button Button.Raised
-                (Button.defaultConfig { onClick = (Focus "my-fab"))
-                "Focus"
+                (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Focus "my-fab") ] })
+                [ HH.text "Focus" ]
             ]
         ]
     }

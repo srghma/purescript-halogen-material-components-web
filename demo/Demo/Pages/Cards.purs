@@ -130,7 +130,9 @@ focusCard =
       , actions: Just demoActions
       }
   , HH.text "\x00A0"
-  , Button.button Button.Raised (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ WithFocus.Focus "my-card") ] }) [ HH.text "Focus" ]
+  , Button.button Button.Raised
+    (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ WithFocus.Focus "my-card") ] })
+    [ HH.text "Focus" ]
   ]
 
 demoMedia :: forall r w i . HH.HTML w i

@@ -50,35 +50,35 @@ data Action
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: forall r w i . Action -> State -> ( State, Cmd Action )
-update w i model =
-    case w i of
+handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
+handleAction =
+    case _ of
         HeroChanged hero ->
-            ( { model | hero = hero }, Cmd.none )
+            ( { state | hero = hero } )
 
         FilledChanged filled ->
-            ( { model | filled = filled }, Cmd.none )
+            ( { state | filled = filled } )
 
         OutlinedChanged outlined ->
-            ( { model | outlined = outlined }, Cmd.none )
+            ( { state | outlined = outlined } )
 
         FilledWithIconChanged filledWithIcon ->
-            ( { model | filledWithIcon = filledWithIcon }, Cmd.none )
+            ( { state | filledWithIcon = filledWithIcon } )
 
         OutlinedWithIconChanged outlinedWithIcon ->
-            ( { model | outlinedWithIcon = outlinedWithIcon }, Cmd.none )
+            ( { state | outlinedWithIcon = outlinedWithIcon } )
 
         FocusedChanged focused ->
-            ( { model | focused = focused }, Cmd.none )
+            ( { state | focused = focused } )
 
         Focus id ->
-            ( model, Task.attempt Focused (Browser.Dom.focus id) )
+            ( state, Task.attempt Focused (Browser.Dom.focus id) )
 
         Focused _ ->
-            ( model, Cmd.none )
+            ( state )
 
-render :: forall r w i . State -> CatalogPage Action
-render model =
+catalogPage :: CatalogPage
+catalogPage =
     { title: "Select"
     , prelude: "Selects allow users to select from a single-option menu."
     , resources:
@@ -86,27 +86,27 @@ render model =
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Select"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-select"
         }
-    , hero: [ heroSelect model ]
+    , hero: [ heroSelect state ]
     , content:
         [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Filled" ]
-        , filledSelect model
+        , filledSelect state
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Outlined" ]
-        , outlinedSelect model
+        , outlinedSelect state
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Filled with Icon" ]
-        , filledWithIconSelect model
+        , filledWithIconSelect state
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Outlined with Icon" ]
-        , outlinedWithIconSelect model
+        , outlinedWithIconSelect state
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Focus Select" ]
-        , focusSelect model
+        , focusSelect state
         ]
     }
 
 heroSelect :: forall r w i . State -> HH.HTML Action
-heroSelect model =
+heroSelect state =
     Select.filled
         (Select.defaultConfig
             { label = (Just "Fruit")
-            , selected = (Just model.hero)
+            , selected = (Just state.hero)
             , onChange = HeroChanged
         )
         firstItem
@@ -132,33 +132,33 @@ remainingItems =
     ]
 
 filledSelect :: forall r w i . State -> HH.HTML Action
-filledSelect model =
+filledSelect state =
     Select.filled
         (Select.defaultConfig
             { label = (Just "Fruit")
-            , selected = (Just model.filled)
+            , selected = (Just state.filled)
             , onChange = FilledChanged
         )
         firstItem
         remainingItems
 
 outlinedSelect :: forall r w i . State -> HH.HTML Action
-outlinedSelect model =
+outlinedSelect state =
     Select.outlined
         (Select.defaultConfig
             { label = (Just "Fruit")
-            , selected = (Just model.outlined)
+            , selected = (Just state.outlined)
             , onChange = OutlinedChanged
         )
         firstItem
         remainingItems
 
 filledWithIconSelect :: forall r w i . State -> HH.HTML Action
-filledWithIconSelect model =
+filledWithIconSelect state =
     Select.filled
         (Select.defaultConfig
             { label = (Just "Fruit")
-            , selected = (Just model.filledWithIcon)
+            , selected = (Just state.filledWithIcon)
             , leadingIcon = (Just (Select.icon [] "favorite"))
             , onChange = FilledWithIconChanged
         )
@@ -166,11 +166,11 @@ filledWithIconSelect model =
         remainingItems
 
 outlinedWithIconSelect :: forall r w i . State -> HH.HTML Action
-outlinedWithIconSelect model =
+outlinedWithIconSelect state =
     Select.outlined
         (Select.defaultConfig
             { label = (Just "Fruit")
-            , selected = (Just model.outlinedWithIcon)
+            , selected = (Just state.outlinedWithIcon)
             , leadingIcon = (Just (Select.icon [] "favorite"))
             , onChange = OutlinedWithIconChanged
         )
@@ -178,13 +178,13 @@ outlinedWithIconSelect model =
         remainingItems
 
 focusSelect :: forall r w i . State -> HH.HTML Action
-focusSelect model =
+focusSelect state =
     HH.div
         [ HP.style "display: flex; align-items: center;"
         ]
         [ Select.filled
             (Select.defaultConfig
-                { selected = (Just model.focused)
+                { selected = (Just state.focused)
                 , onChange = FocusedChanged
                 , additionalAttributes = [ HP.id_ "my-select" ]
             )
@@ -192,6 +192,6 @@ focusSelect model =
             remainingItems
         , HH.text "\x00A0"
         , Button.button Button.Raised
-            (Button.defaultConfig { onClick = (Focus "my-select"))
-            "Focus"
+            (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Focus "my-select") ] })
+            [ HH.text "Focus" ]
         ]

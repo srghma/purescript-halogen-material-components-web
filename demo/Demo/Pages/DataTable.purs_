@@ -13,7 +13,7 @@ import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.DataTable as DataTable
 import Material.Classes.Typography
-import Set
+import Data.Set
 
 data State =
     { selected :: Set String }
@@ -28,34 +28,34 @@ data Action
     | AllSelected
     | AllUnselected
 
-update :: forall r w i . Action -> State -> State
-update w i model =
-    case w i of
+handleAction :: forall r w i . Action -> State -> State
+handleAction =
+    case _ of
         NoOp ->
-            model
+            state
 
         ItemSelected key ->
-            { model
+            { state
                 | selected =
-                    if Set.member key model.selected then
-                        Set.remove key model.selected
+                    if Set.member key state.selected then
+                        Set.remove key state.selected
 
                     else
-                        Set.insert key model.selected
+                        Set.insert key state.selected
             }
 
         AllSelected ->
-            { model
+            { state
                 | selected =
                     Set.fromList
                         [ "Frozen yogurt", "Ice cream sandwich", "Eclair" ]
             }
 
         AllUnselected ->
-            { model | selected = Set.empty }
+            { state | selected = Set.empty }
 
-render :: forall r w i . State -> CatalogPage Action
-render model =
+catalogPage :: CatalogPage
+catalogPage =
     { title: "Data Table"
     , prelude: "Data tables display information in a way that’s easy to scan, so that users can look for patterns and insights."
     , resources:
@@ -68,7 +68,7 @@ render model =
         [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Data Table Standard" ]
         , standardDataTable
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Data Table with Row Selection" ]
-        , dataTableWithRowSelection model
+        , dataTableWithRowSelection state
         ]
     }
 
@@ -120,13 +120,13 @@ standardDataTable =
         }
 
 dataTableWithRowSelection :: forall r w i . State -> HH.HTML Action
-dataTableWithRowSelection model =
+dataTableWithRowSelection state =
     let
         allSelected =
-            Set.size model.selected == 3
+            Set.size state.selected == 3
 
         allUnselected =
-            Set.size model.selected == 0
+            Set.size state.selected == 0
 
         headerRow { onChange, state } { desert, carbs, protein, comments } =
             [ DataTable.row []
@@ -155,10 +155,10 @@ dataTableWithRowSelection model =
                         { state =
                             (Just
                                 (if selected then
-                                    Checkbox.checked
+                                    Checkbox.Checked
 
                                  else
-                                    Checkbox.unchecked
+                                    Checkbox.Unchecked
                                 )
                             )
                         , onChange = onChange
@@ -180,13 +180,13 @@ dataTableWithRowSelection model =
                         AllSelected
                 , state =
                     if allSelected then
-                        Checkbox.checked
+                        Checkbox.Checked
 
                     else if allUnselected then
-                        Checkbox.unchecked
+                        Checkbox.Unchecked
 
                     else
-                        Checkbox.indeterminate
+                        Checkbox.Indeterminate
                 }
                 label
         , tbody =
@@ -194,7 +194,7 @@ dataTableWithRowSelection model =
                 (\({ desert } as data_) ->
                     row
                         { onChange: ItemSelected desert
-                        , selected: Set.member desert model.selected
+                        , selected: Set.member desert state.selected
                         }
                         data_
                 )

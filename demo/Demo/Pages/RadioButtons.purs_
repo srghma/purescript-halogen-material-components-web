@@ -1,7 +1,7 @@
 module Demo.Pages.RadioButtons where
 
 import Demo.HOC.CatalogPage
-import Dict
+import Data.Map
 import Protolude
 import Data.Array as Array
 import Data.Maybe as Maybe
@@ -18,12 +18,12 @@ import HalogenMWC.Radio as Radio
 import Material.Classes.Typography
 
 data State =
-    { radios :: Dict String String }
+    { radios :: Map String String }
 
 initialState :: forall r w i . State
 initialState =
     { radios =
-        Dict.fromList
+        Map.fromList
             [ ( "hero", "radio-buttons-hero-radio-1" )
             , ( "example", "radio-buttons-example-radio-1" )
             ]
@@ -34,26 +34,26 @@ data Action
     | Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: forall r w i . Action -> State -> ( State, Cmd Action )
-update w i model =
-    case w i of
+handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
+handleAction =
+    case _ of
         Set group index ->
-            ( { model | radios = Dict.insert group index model.radios }, Cmd.none )
+            ( { state | radios = Map.insert group index state.radios } )
 
         Focus id ->
-            ( model, Task.attempt Focused (Browser.Dom.focus id) )
+            ( state, Task.attempt Focused (Browser.Dom.focus id) )
 
         Focused _ ->
-            ( model, Cmd.none )
+            ( state )
 
 isSelected :: forall r w i . String -> String -> State -> Boolean
-isSelected group index model =
-    Dict.get group model.radios
+isSelected group index state =
+    Map.get group state.radios
         # map ((==) index)
         # Maybe.fromMaybe false
 
-render :: forall r w i . State -> CatalogPage Action
-render model =
+catalogPage :: CatalogPage
+catalogPage =
     { title: "Radio Button"
     , prelude: "Buttons communicate an action a user can take. They are typically placed throughout your UI, in places like dialogs, forms, cards, and toolbars."
     , resources:
@@ -61,33 +61,33 @@ render model =
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Radio"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-radio"
         }
-    , hero: [ heroRadioGroup model ]
+    , hero: [ heroRadioGroup state ]
     , content:
         [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Radio Buttons" ]
-        , exampleRadioGroup model
+        , exampleRadioGroup state
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Focus Radio Button" ]
         , focusRadio
         ]
     }
 
 heroRadio :: forall r w i . State -> String -> String -> HH.HTML Action
-heroRadio model group index =
+heroRadio state group index =
     Radio.radio
         (Radio.defaultConfig
-            { checked = (isSelected group index model)
+            { checked = (isSelected group index state)
             , onChange = (Set group index)
             , additionalAttributes = [ HP.style "margin: 0 10px;" ]
         )
 
 heroRadioGroup :: forall r w i . State -> HH.HTML Action
-heroRadioGroup model =
+heroRadioGroup state =
     HH.div []
-        [ heroRadio model "hero" "radio-buttons-hero-radio-1"
-        , heroRadio model "hero" "radio-buttons-hero-radio-2"
+        [ heroRadio state "hero" "radio-buttons-hero-radio-1"
+        , heroRadio state "hero" "radio-buttons-hero-radio-2"
         ]
 
 radio :: forall r w i . State -> String -> String -> String -> HH.HTML Action
-radio model group index label =
+radio state group index label =
     FormField.formField
         (FormField.defaultConfig
             { label = (Just label)
@@ -97,16 +97,16 @@ radio model group index label =
         )
         [ Radio.radio
             (Radio.defaultConfig
-                { checked = (isSelected group index model)
+                { checked = (isSelected group index state)
                 , onChange = (Set group index)
             )
         ]
 
 exampleRadioGroup :: forall r w i . State -> HH.HTML Action
-exampleRadioGroup model =
+exampleRadioGroup state =
     HH.div []
-        [ radio model "example" "radio-buttons-example-radio-1" "Radio 1"
-        , radio model "example" "radio-buttons-example-radio-2" "Radio 2"
+        [ radio state "example" "radio-buttons-example-radio-1" "Radio 1"
+        , radio state "example" "radio-buttons-example-radio-2" "Radio 2"
         ]
 
 focusRadio :: forall r w i . HH.HTML Action
@@ -116,6 +116,6 @@ focusRadio =
             (Radio.defaultConfig { additionalAttributes = [ HP.id_ "my-radio" ])
         , HH.text "\x00A0"
         , Button.button Button.Raised
-            (Button.defaultConfig { onClick = (Focus "my-radio"))
-            "Focus"
+            (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Focus "my-radio") ] })
+            [ HH.text "Focus" ]
         ]

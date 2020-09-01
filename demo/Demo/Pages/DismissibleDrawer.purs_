@@ -25,28 +25,28 @@ data Action
     | CloseDrawer
     | SetSelectedIndex Int
 
-update :: forall r w i . Action -> State -> State
-update w i model =
-    case w i of
+handleAction :: forall r w i . Action -> State -> State
+handleAction =
+    case _ of
         ToggleDrawer ->
-            { model | open = not model.open }
+            { state | open = not state.open }
 
         CloseDrawer ->
-            { model | open = false }
+            { state | open = false }
 
         SetSelectedIndex index ->
-            { model | selectedIndex = index }
+            { state | selectedIndex = index }
 
 render :: forall r w i . State -> DrawerPage Action
-render model =
+catalogPage =
     { title: "Dismissible Drawer"
     , drawer =
         Drawer.Dismissible.drawer
             (Drawer.Dismissible.defaultConfig
-                { open = model.open
+                { open = state.open
                 , onClose = CloseDrawer
             )
-            (DrawerPage.drawerBody SetSelectedIndex model.selectedIndex)
+            (DrawerPage.drawerBody SetSelectedIndex state.selectedIndex)
     , onMenuClick: Just ToggleDrawer
     , scrim: Nothing
     }

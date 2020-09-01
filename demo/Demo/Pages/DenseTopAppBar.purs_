@@ -22,12 +22,12 @@ initialState = unit
 data Action
     = NoOp
 
-update :: forall r w i . Action -> State -> State
-update w i model =
-    model
+handleAction :: forall r w i . Action -> State -> State
+handleAction =
+    state
 
 render :: forall r w i . State -> TopAppBarPage Action
-render model =
+catalogPage =
     { fixedAdjust: mdc_top_app_bar____dense_fixed_adjust
     , topAppBar =
         TopAppBar.regular (TopAppBar.defaultConfig { dense = true)
@@ -37,6 +37,7 @@ render model =
                     [ IconButton.iconButton
                         (IconButton.defaultConfig
                             { additionalAttributes = [ mdc_top_app_bar__navigation_icon ]
+                            }
                         )
                         "menu"
                     , HH.span [ mdc_top_app_bar__title ] [ HH.text "Dense" ]
@@ -46,16 +47,19 @@ render model =
                     [ IconButton.iconButton
                         (IconButton.defaultConfig
                             { additionalAttributes = [ mdc_top_app_bar__action_item ]
+                            }
                         )
                         "file_download"
                     , IconButton.iconButton
                         (IconButton.defaultConfig
                             { additionalAttributes = [ mdc_top_app_bar__action_item ]
+                            }
                         )
                         "print"
                     , IconButton.iconButton
                         (IconButton.defaultConfig
                             { additionalAttributes = [ mdc_top_app_bar__action_item ]
+                            }
                         )
                         "bookmark"
                     ]

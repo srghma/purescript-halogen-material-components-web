@@ -28,17 +28,17 @@ data Action
     = Focus String
     | Focused (Result Browser.Dom.Error ())
 
-update :: forall r w i . Action -> State -> ( State, Cmd Action )
-update w i model =
-    case w i of
+handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
+handleAction =
+    case _ of
         Focus id ->
-            ( model, Task.attempt Focused (Browser.Dom.focus id) )
+            ( state, Task.attempt Focused (Browser.Dom.focus id) )
 
         Focused _ ->
-            ( model, Cmd.none )
+            ( state )
 
-render :: forall r w i . State -> CatalogPage Action
-render model =
+catalogPage :: CatalogPage
+catalogPage =
     { title: "Text Field"
     , prelude: "Text fields allow users to input, edit, and select text. Text fields typically reside in forms but can appear in other places, like dialog boxes and search."
     , resources:
@@ -46,33 +46,33 @@ render model =
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-TextField"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-textfield"
         }
-    , hero: [ heroTextFields model ]
+    , hero: [ heroTextFields state ]
     , content:
         [ HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Filled" ]
-        , filledTextFields model
+        , filledTextFields state
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Shaped Filled" ]
-        , shapedFilledTextFields model
+        , shapedFilledTextFields state
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Outlined" ]
-        , outlinedTextFields model
+        , outlinedTextFields state
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Shaped Outlined (TODO)" ]
-        , shapedOutlinedTextFields model
+        , shapedOutlinedTextFields state
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Text Fields without Label" ]
-        , textFieldsWithoutLabel model
+        , textFieldsWithoutLabel state
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Text Fields with Character Counter" ]
-        , textFieldsWithCharacterCounter model
+        , textFieldsWithCharacterCounter state
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Textarea" ]
-        , textareaTextField model
+        , textareaTextField state
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Full Width" ]
-        , fullwidthTextField model
+        , fullwidthTextField state
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Full Width Textarea" ]
-        , fullwidthTextareaTextField model
+        , fullwidthTextareaTextField state
         , HH.h3 [ mdc_typography____subtitle1 ] [ HH.text "Focus Text Field" ]
         , focusTextField
         ]
     }
 
 heroTextFields :: forall r w i . State -> HH.HTML Action
-heroTextFields model =
+heroTextFields state =
     HH.div heroTextFieldContainer
         [ HH.div textFieldContainerHero
             [ TextField.filled
@@ -89,7 +89,7 @@ heroTextFields model =
         ]
 
 filledTextFields :: forall r w i . State -> HH.HTML w i
-filledTextFields model =
+filledTextFields state =
     HH.div textFieldRow
         [ HH.div textFieldContainer
             [ TextField.filled
@@ -117,7 +117,7 @@ filledTextFields model =
         ]
 
 shapedFilledTextFields :: forall r w i . State -> HH.HTML w i
-shapedFilledTextFields model =
+shapedFilledTextFields state =
     HH.div textFieldRow
         [ HH.div textFieldContainer
             [ TextField.filled
@@ -148,7 +148,7 @@ shapedFilledTextFields model =
         ]
 
 outlinedTextFields :: forall r w i . State -> HH.HTML w i
-outlinedTextFields model =
+outlinedTextFields state =
     HH.div textFieldRow
         [ HH.div textFieldContainer
             [ TextField.outlined
@@ -176,7 +176,7 @@ outlinedTextFields model =
         ]
 
 shapedOutlinedTextFields :: forall r w i . State -> HH.HTML w i
-shapedOutlinedTextFields model =
+shapedOutlinedTextFields state =
     HH.div textFieldRow
         [ HH.div textFieldContainer
             [ TextField.outlined
@@ -204,7 +204,7 @@ shapedOutlinedTextFields model =
         ]
 
 textFieldsWithoutLabel :: forall r w i . State -> HH.HTML w i
-textFieldsWithoutLabel model =
+textFieldsWithoutLabel state =
     HH.div textFieldRow
         [ HH.div textFieldContainer
             [ TextField.outlined TextField.defaultConfig
@@ -227,7 +227,7 @@ textFieldsWithoutLabel model =
         ]
 
 textFieldsWithCharacterCounter :: forall r w i . State -> HH.HTML w i
-textFieldsWithCharacterCounter model =
+textFieldsWithCharacterCounter state =
     HH.div textFieldRow
         [ HH.div textFieldContainer
             [ TextField.outlined
@@ -253,7 +253,7 @@ textFieldsWithCharacterCounter model =
         ]
 
 textareaTextField :: forall r w i . State -> HH.HTML w i
-textareaTextField model =
+textareaTextField state =
     HH.div textFieldContainer
         [ TextArea.outlined
             (TextArea.defaultConfig { label = (Just "Standard"))
@@ -261,7 +261,7 @@ textareaTextField model =
         ]
 
 fullwidthTextField :: forall r w i . State -> HH.HTML w i
-fullwidthTextField model =
+fullwidthTextField state =
     HH.div textFieldContainer
         [ TextField.filled
             (TextField.defaultConfig
@@ -272,7 +272,7 @@ fullwidthTextField model =
         ]
 
 fullwidthTextareaTextField :: forall r w i . State -> HH.HTML w i
-fullwidthTextareaTextField model =
+fullwidthTextareaTextField state =
     HH.div textFieldRowFullwidth
         [ HH.div textFieldContainer
             [ TextArea.outlined
@@ -290,11 +290,12 @@ focusTextField =
         [ TextField.filled
             (TextField.defaultConfig
                 { additionalAttributes = [ HP.id_ "my-text-field" ]
+                }
             )
         , HH.text "\x00A0"
         , Button.button Button.Raised
-            (Button.defaultConfig { onClick = (Focus "my-text-field"))
-            "Focus"
+            (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Focus "my-text-field") ] })
+            [ HH.text "Focus" ]
         ]
 
 heroTextFieldContainer :: forall r w i . Array (IProp r i)

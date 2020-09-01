@@ -29,29 +29,29 @@ data Action
     | SnackbarClosed Snackbar.MessageId
     | Click Snackbar.MessageId
 
-update :: forall r w i . Action -> State -> ( State, Cmd Action )
-update w i model =
-    case w i of
+handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
+handleAction =
+    case _ of
         ShowBaseline ->
-            ( { model | queue = Snackbar.addMessage baselineMessage model.queue }
-            , Cmd.none
+            ( { state | queue = Snackbar.addMessage baselineMessage state.queue }
+            
             )
 
         ShowLeading ->
-            ( { model | queue = Snackbar.addMessage leadingMessage model.queue }
-            , Cmd.none
+            ( { state | queue = Snackbar.addMessage leadingMessage state.queue }
+            
             )
 
         ShowStacked ->
-            ( { model | queue = Snackbar.addMessage stackedMessage model.queue }
-            , Cmd.none
+            ( { state | queue = Snackbar.addMessage stackedMessage state.queue }
+            
             )
 
         SnackbarClosed messageId ->
-            ( { model | queue = Snackbar.close messageId model.queue }, Cmd.none )
+            ( { state | queue = Snackbar.close messageId state.queue } )
 
         Click messageId ->
-            ( model, Cmd.none )
+            ( state )
 
 baselineMessage :: forall r w i . Snackbar.Message Action
 baselineMessage =
@@ -76,8 +76,8 @@ stackedMessage =
         , onActionButtonClick = Click
         , actionIcon = (Just "close")
 
-render :: forall r w i . State -> CatalogPage Action
-render model =
+catalogPage :: CatalogPage
+catalogPage =
     { title: "Snackbar"
     , prelude: "Snackbars provide brief feedback about an operation through a message at the bottom of the screen."
     , resources:
@@ -111,7 +111,7 @@ render model =
             (Snackbar.defaultConfig { onClosed: SnackbarClosed }
                 , closeOnEscape = true
             )
-            model.queue
+            state.queue
         ]
     }
 

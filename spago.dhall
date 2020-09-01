@@ -23,6 +23,8 @@
   , "argonaut-codecs"
   , "argonaut-generic"
   , "routing"
+  , "ordered-collections"
+  , "profunctor-lenses"
   ]
 , packages = ./packages.dhall
 , sources =
