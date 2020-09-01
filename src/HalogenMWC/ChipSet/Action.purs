@@ -36,15 +36,11 @@ chip (Chip config label) =
                 ]
             <> config.additionalAttributes
         )
-        ( [ HH.div
-              [ HP.class_ mdc_chip__ripple ]
-              ( Array.catMaybes
-                  [ Just rippleElt
-                  , leadingIconElt config.icon
-                  , Just $ primaryActionElt label
-                  ]
-              )
-          ]
+        ( Array.catMaybes
+            [ Just rippleElt
+            , leadingIconElt config.icon
+            , Just $ primaryActionElt label
+            ]
         )
     ]
 

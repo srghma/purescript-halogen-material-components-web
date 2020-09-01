@@ -46,7 +46,7 @@ catalogPage =
           ]
   }
 
-heroCard :: forall r w i. HH.HTML w i
+heroCard :: forall w i. HH.HTML w i
 heroCard =
   Card.card
     ( Card.defaultConfig
@@ -141,10 +141,10 @@ focusCard =
         [ HH.text "Focus" ]
     ]
 
-demoMedia :: forall r w i. HH.HTML w i
+demoMedia :: forall w i. HH.HTML w i
 demoMedia = Card.mediaView (Just Card.SixteenToNine) [] "https://aforemny.github.io/material-components-web-elm/images/photos/3x2/2.jpg"
 
-demoTitle :: forall r w i. HH.HTML w i
+demoTitle :: forall w i. HH.HTML w i
 demoTitle =
   HH.div
     [ HP.style "padding: 1rem;" ]
@@ -160,7 +160,7 @@ demoTitle =
         [ HH.text "by Kurt Wagner" ]
     ]
 
-demoBody :: forall r w i. HH.HTML w i
+demoBody :: forall w i. HH.HTML w i
 demoBody =
   HH.div
     [ HP.classes [ mdc_typography____body2, mdc_theme____text_secondary_on_background ]

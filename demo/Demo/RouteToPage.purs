@@ -33,7 +33,7 @@ import Demo.HOC.CatalogPage as Demo.HOC.CatalogPage
 import Demo.Route as Demo.Route
 
 pagesRec :: Demo.Route.PagesRec (H.Component (Const Void) Unit Void Aff)
-pagesRec =
+pagesRec = spy "pagesRec"
   { "Index": Demo.Pages.Index.component
   , "Buttons": Demo.HOC.CatalogPage.mkComponent Demo.Route.Buttons Demo.Pages.Buttons.catalogPage
   , "Card": Demo.HOC.CatalogPage.mkComponent Demo.Route.Card Demo.Pages.Cards.catalogPage
@@ -63,5 +63,5 @@ pagesRec =
   , "Typography": Demo.HOC.CatalogPage.mkComponent Demo.Route.Typography Demo.Pages.Buttons.catalogPage
   }
 
-routeToPage :: forall r w i. Demo.Route.Route -> H.Component (Const Void) Unit Void Aff
+routeToPage :: Demo.Route.Route -> H.Component (Const Void) Unit Void Aff
 routeToPage route = Demo.Route.extractFromPagesRec route pagesRec

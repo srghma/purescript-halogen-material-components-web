@@ -2,28 +2,14 @@ module Demo.Pages.Chips.Content where
 
 import Data.Set (Set)
 import Data.Set as Set
-import Demo.HOC.CatalogPage
-import Halogen
-import Halogen
-import Material.Classes.Typography
-import Protolude
-import Protolude
+import Demo.HOC.CatalogPage (ChildSlots, Input, Message, Query)
+import Material.Classes.Typography (mdc_typography____body2, mdc_typography____subtitle1)
+import Protolude (class Eq, Aff, Maybe(..), Tuple(..), Unit, bind, const, identity, map, pure, unit, unless, when, ($), (-), (/=), (/\))
 import Data.Array as Array
-import Data.Array as Array
-import Data.Maybe as Maybe
-import Data.Maybe as Maybe
 import Halogen as H
-import Halogen as H
-import Halogen.HTML (IProp)
-import Halogen.HTML (IProp)
-import Halogen.HTML as HH
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
-import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Button as Button
 import HalogenMWC.Chip.Action as Chip.Action
 import HalogenMWC.Chip.Choice as Chip.Choice
@@ -36,7 +22,7 @@ import HalogenMWC.ChipSet.Input as ChipSet.Input
 import Web.UIEvent.KeyboardEvent (KeyboardEvent)
 import Web.UIEvent.KeyboardEvent as Web.UIEvent.KeyboardEvent
 import Data.String as String
-import Demo.Utils
+import Demo.Utils (focusById)
 
 type State
   = { size :: Size
@@ -131,9 +117,9 @@ handleAction = case _ of
               { input = ""
               , inputChips =
                 if Array.elem trimmedInput state.inputChips then
-                  Array.snoc state.inputChips trimmedInput
-                else
                   state.inputChips
+                else
+                  Array.snoc state.inputChips trimmedInput
               }
           )
     _ -> pure unit
@@ -160,7 +146,7 @@ render state =
     , focusChips state
     ]
 
-choiceChips :: forall r w i. State -> HH.HTML w Action
+choiceChips :: forall w. State -> HH.HTML w Action
 choiceChips state =
   let
     toLabel = case _ of
@@ -183,7 +169,7 @@ choiceChips state =
       , Chip.Choice.Chip Chip.Choice.defaultConfig ExtraLarge
       ]
 
-inputChips :: forall r w i. State -> HH.HTML w Action
+inputChips :: forall w. State -> HH.HTML w Action
 inputChips state =
   HH.div
     [ HP.style "position: relative; display: flex;"
@@ -210,14 +196,14 @@ inputChips state =
         ]
     ]
 
-filterChips1 :: forall r w i. State -> HH.HTML w Action
+filterChips1 :: forall w. State -> HH.HTML w Action
 filterChips1 state =
   let
     chip accessory =
       Chip.Filter.Chip
         ( Chip.Filter.defaultConfig
             { selected = Set.member accessory state.accessories
-            , onChange = Just (const $ AccessoriesChanged accessory)
+            , onChange = Just $ const $ AccessoriesChanged accessory
             }
         )
         accessory
@@ -231,7 +217,7 @@ filterChips1 state =
           ]
       )
 
-filterChips2 :: forall r w i. State -> HH.HTML w Action
+filterChips2 :: forall w. State -> HH.HTML w Action
 filterChips2 state =
   let
     chip label =
@@ -239,7 +225,7 @@ filterChips2 state =
         ( Chip.Filter.defaultConfig
             { selected = Set.member label state.contacts
             , icon = Just "face"
-            , onChange = Just (const $ ContactChanged label)
+            , onChange = Just $ const $ ContactChanged label
             }
         )
         label
@@ -253,7 +239,7 @@ filterChips2 state =
           ]
       )
 
-actionChips :: forall r w i. State -> HH.HTML w Action
+actionChips :: forall w. State -> HH.HTML w Action
 actionChips state =
   let
     chip (icon /\ label) =
@@ -273,7 +259,7 @@ actionChips state =
           ]
       )
 
-shapedChips :: forall r w i. HH.HTML w i
+shapedChips :: forall w i. HH.HTML w i
 shapedChips =
   let
     chip =
@@ -292,7 +278,7 @@ shapedChips =
           ]
       )
 
-focusChips :: forall r w i. State -> HH.HTML w Action
+focusChips :: forall w. State -> HH.HTML w Action
 focusChips state =
   HH.div []
     [ ChipSet.Choice.chipSet
