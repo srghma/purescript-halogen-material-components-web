@@ -1,24 +1,11 @@
 -- from https://github.com/rnons/purescript-halogen-storybook/
 module Demo.App where
 
-import Protolude
-import Data.Const (Const)
-import Data.Functor (mapFlipped)
-import Data.Map as Map
-import Data.Maybe (Maybe(..))
-import Data.Symbol (SProxy(..))
-import Data.Tuple (Tuple(..))
-import Effect.Aff (Aff, launchAff_)
-import Global.Unsafe (unsafeDecodeURI, unsafeEncodeURI)
-import Halogen as H
+import Protolude (Aff, Const, Maybe(..), SProxy(..), Unit, Void, absurd, const, discard, pure, unit, ($))
+import Halogen (Component, ComponentHTML, HalogenM, Slot, defaultEval, mkComponent, mkEval, put) as H
 import Halogen.HTML as HH
-import Halogen.HTML.Properties as HP
-import Halogen.VDom.Driver as H
-import Routing.Hash as Routing
-import Web.HTML.HTMLElement (HTMLElement)
-import Debug.Trace
-import Demo.Route
-import Demo.RouteToPage
+import Demo.Route (Route(..))
+import Demo.RouteToPage (routeToPage)
 
 data Query a
   = Navigate Route a

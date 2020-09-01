@@ -1,19 +1,14 @@
 module Demo.Pages.Cards where
 
-import Demo.HOC.CatalogPage
-import Demo.Utils
-import Halogen
-import Material.Classes.Theme
-import Material.Classes.Typography
-import Protolude
+import Demo.HOC.CatalogPage (CatalogPage)
+import Demo.Utils (mkComponentStatic)
+import Material.Classes.Theme (mdc_theme____text_secondary_on_background)
+import Material.Classes.Typography (mdc_typography____body2, mdc_typography____headline6, mdc_typography____subtitle2)
+import Protolude (Const, Maybe(..), Unit, Void, const, ($))
 import Data.Array as Array
-import Data.Maybe as Maybe
-import Halogen as H
-import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Button as Button
 import HalogenMWC.Card as Card
 import HalogenMWC.IconButton as IconButton

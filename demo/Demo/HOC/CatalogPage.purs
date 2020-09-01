@@ -1,13 +1,11 @@
 module Demo.HOC.CatalogPage where
 
-import Halogen
-import Material.Classes.Drawer
-import Material.Classes.TopAppBar
-import Material.Classes.Typography
-import Protolude
+import Material.Classes.Drawer (mdc_drawer__content, mdc_drawer_app_content, mdc_list_item__graphic)
+import Material.Classes.TopAppBar (mdc_top_app_bar____fixed_adjust, mdc_top_app_bar__navigation_icon, mdc_top_app_bar__row, mdc_top_app_bar__section, mdc_top_app_bar__section____align_start, mdc_top_app_bar__title)
+import Material.Classes.Typography (mdc_typography, mdc_typography____body1, mdc_typography____headline5, mdc_typography____headline6)
+import Protolude (Aff, Const, Maybe(..), SProxy(..), Unit, Void, absurd, const, map, not, unit, (<>), (==))
 import DOM.HTML.Indexed as I
 import Data.Array as Array
-import Data.Maybe as Maybe
 import Demo.Route (Route)
 import Demo.Route as Route
 import Halogen as H
@@ -15,7 +13,6 @@ import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Drawer.Dismissible as Drawer.Dismissible
 import HalogenMWC.IconButton as IconButton
 import HalogenMWC.List as List

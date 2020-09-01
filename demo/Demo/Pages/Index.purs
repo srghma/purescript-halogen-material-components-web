@@ -1,8 +1,7 @@
 module Demo.Pages.Index where
 
-import Protolude
-import Material.Classes.TopAppBar
-import Data.Const (Const(..))
+import Protolude (Const, Maybe(..), Unit, Void, const, map, unit)
+import Material.Classes.TopAppBar (mdc_top_app_bar__navigation_icon, mdc_top_app_bar__row, mdc_top_app_bar__section, mdc_top_app_bar__section____align_start, mdc_top_app_bar__title)
 import Halogen as H
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
@@ -12,7 +11,6 @@ import HalogenMWC.ImageList.Item as ImageList.Item
 import HalogenMWC.TopAppBar as TopAppBar
 import Demo.Route (Route)
 import Demo.Route as Route
-import Routing.Duplex as Routing.Duplex
 
 type State
   = Unit

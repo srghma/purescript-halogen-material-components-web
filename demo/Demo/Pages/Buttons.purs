@@ -1,23 +1,15 @@
 module Demo.Pages.Buttons where
 
-import Demo.HOC.CatalogPage
-import Demo.Utils
-import Halogen
-import Material.Classes.Typography
-import Protolude
-import Data.Array as Array
-import Data.Maybe as Maybe
+import Demo.HOC.CatalogPage (CatalogPage)
+import Demo.Utils (mkComponentStatic)
+import Material.Classes.Typography (mdc_typography____subtitle1)
+import Protolude (Const, Maybe(..), Unit, Void, const, ($), (<>))
 import Demo.Pages.Buttons.Css as Demo.Pages.Buttons.Css
-import Halogen as H
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Button as Button
-import Web.DOM.ParentNode (QuerySelector(..))
-import Web.HTML (HTMLElement)
-import Web.HTML.HTMLElement as Web.HTML.HTMLElement
 import Demo.MkComponent.WithFocus as WithFocus
 
 type State

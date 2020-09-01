@@ -1,7 +1,6 @@
 module Demo.RouteToPage where
 
 import Protolude
-import Data.Const (Const(..))
 import Halogen (Component) as H
 import Demo.Pages.Index as Demo.Pages.Index
 import Demo.Pages.Buttons as Demo.Pages.Buttons

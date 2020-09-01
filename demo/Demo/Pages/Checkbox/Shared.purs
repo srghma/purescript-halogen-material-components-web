@@ -1,23 +1,13 @@
 module Demo.Pages.Checkbox.Shared where
 
-import Data.Map (Map)
-import Data.Map as Map
-import Demo.Utils
-import Halogen
-import Material.Classes.Typography
-import Protolude
+import Demo.Utils (focusById)
+import Protolude (Aff, Const, Maybe(..), Unit, Void, const, ($))
 import DOM.HTML.Indexed (HTMLinput) as I
-import Data.Array as Array
 import Data.Lens (Lens')
 import Data.Lens as Lens
-import Data.Maybe as Maybe
 import Halogen as H
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
-import Halogen.HTML.Events as HE
-import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
-import HalogenMWC.Button as Button
 import HalogenMWC.Checkbox as Checkbox
 
 data Action state

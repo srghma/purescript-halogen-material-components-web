@@ -4,12 +4,11 @@ import Prelude
 import DOM.HTML.Indexed as I
 import Data.Array as Array
 import Data.Maybe (Maybe(..))
-import Halogen (AttrName(..), ClassName, ElemName(..), PropName(..))
+import Halogen (ClassName, ElemName(..), PropName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import HalogenMWC.Button as Button
-import HalogenMWC.IconButton (iconButtonMaterialIcons)
 import HalogenMWC.IconButton as IconButton
 import Material.Classes.Card (mdc_card, mdc_card____outlined, mdc_card__action, mdc_card__action____button, mdc_card__action____icon, mdc_card__action_buttons, mdc_card__action_icons, mdc_card__actions, mdc_card__actions____full_bleed, mdc_card__media, mdc_card__media____16_9, mdc_card__media____square, mdc_card__primary_action)
 

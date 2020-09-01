@@ -9,7 +9,7 @@ import Halogen (AttrName(..), ElemName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
-import Material.Classes.List (mdc_list_item, mdc_list_item____activated, mdc_list_item____disabled, mdc_list_item____selected, mdc_list_item__graphic, mdc_list_item__meta, mdc_list_item__primary_text, mdc_list_item__secondary_text, mdc_list_item__text)
+import Material.Classes.List (mdc_list_item, mdc_list_item____activated, mdc_list_item____disabled, mdc_list_item____selected, mdc_list_item__primary_text, mdc_list_item__secondary_text, mdc_list_item__text)
 
 type Config w i
   = { disabled :: Boolean

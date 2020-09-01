@@ -7,7 +7,7 @@ import Halogen (ClassName, ElemName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
-import Material.Classes.TopAppBar (mdc_top_app_bar, mdc_top_app_bar____dense, mdc_top_app_bar____fixed, mdc_top_app_bar____prominent, mdc_top_app_bar____short, mdc_top_app_bar____short_collapsed, mdc_top_app_bar__row, mdc_top_app_bar__section)
+import Material.Classes.TopAppBar (mdc_top_app_bar, mdc_top_app_bar____dense, mdc_top_app_bar____fixed, mdc_top_app_bar____prominent, mdc_top_app_bar____short, mdc_top_app_bar____short_collapsed)
 
 type Config i
   = { dense :: Boolean

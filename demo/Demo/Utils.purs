@@ -1,7 +1,7 @@
 module Demo.Utils where
 
-import Protolude
-import Web.HTML
+import Protolude (Effect, Maybe, Unit, bind, const, error, maybe, pure, throwError, unit, ($), (<<<), (<=<), (<>), (=<<), (>>=))
+import Web.HTML (HTMLElement, window)
 import Halogen as H
 import Halogen.HTML as HH
 import Web.DOM.ParentNode (QuerySelector(..), querySelector)

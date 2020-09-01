@@ -5,7 +5,6 @@ import Data.Maybe (Maybe(..))
 import Control.Monad.Except (runExcept)
 import Data.Either (either)
 import Data.Either (hush) as Either
-import Data.Maybe (Maybe(..))
 import Foreign (F, Foreign)
 import Foreign (readBoolean, unsafeToForeign) as Foreign
 import Foreign.Index (readProp) as Foreign

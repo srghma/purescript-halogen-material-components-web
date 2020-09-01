@@ -5,15 +5,9 @@ import Data.Argonaut.Decode (class DecodeJson)
 import Data.Argonaut.Decode.Generic.Rep (genericDecodeJson)
 import Data.Argonaut.Encode (class EncodeJson)
 import Data.Argonaut.Encode.Generic.Rep (genericEncodeJson)
-import Data.Const (Const)
 import Data.Generic.Rep (class Generic)
 import Data.Generic.Rep.Show (genericShow)
-import Data.Map (Map, fromFoldable)
-import Data.Tuple (Tuple(..))
-import Effect.Aff (Aff)
-import Halogen as H
-import Halogen.HTML as HH
-import Routing.Duplex as Routing.Duplex
+import Routing.Duplex (RouteDuplex', print) as Routing.Duplex
 import Routing.Duplex.Generic (noArgs, sum) as Routing.Duplex
 import Routing.Duplex.Generic.Syntax ((/))
 
