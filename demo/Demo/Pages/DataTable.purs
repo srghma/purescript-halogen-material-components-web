@@ -12,6 +12,7 @@ import Halogen.HTML.Properties as HP
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.DataTable as DataTable
+import HalogenMWC.Checkbox as Checkbox
 import Material.Classes.Typography
 import Data.Set (Set)
 import Data.Set as Set
@@ -19,15 +20,12 @@ import Demo.Utils
 
 type State = { selected :: Set String }
 
-initialState :: forall r w i . State
-initialState = { selected: Set.empty }
-
 data Action
     = ItemSelected String
     | AllSelected
     | AllUnselected
 
-handleAction :: forall r w i . Action -> State -> State
+handleAction :: Action -> H.HalogenM State Action () Void Aff Unit
 handleAction =
   case _ of
     ItemSelected key ->
@@ -38,8 +36,8 @@ handleAction =
             else
                 Set.insert key state.selected
         }
-    AllSelected -> H.modify_ \state -> state { selected = Set.fromList [ "Frozen yogurt", "Ice cream sandwich", "Eclair" ] }
-    AllUnselected -> H.modify_ \state -> state { selected = Set.empty }
+    AllSelected -> H.modify_ \state -> state { selected = Set.fromFoldable [ "Frozen yogurt", "Ice cream sandwich", "Eclair" ] }
+    AllUnselected -> H.modify_ \state -> state { selected = (Set.empty :: Set String) }
 
 catalogPage :: CatalogPage
 catalogPage =
@@ -52,14 +50,24 @@ catalogPage =
         }
     , hero: mkComponentStatic standardDataTable
     , content:
-        [ HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Data Table Standard" ]
-        , standardDataTable
-        , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Data Table with Row Selection" ]
-        , dataTableWithRowSelection state
-        ]
+        let
+            render :: forall w. State -> HH.HTML w Action
+            render state =
+              HH.div_
+                [ HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Data Table Standard" ]
+                , standardDataTable
+                , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Data Table with Row Selection" ]
+                , dataTableWithRowSelection state
+                ]
+        in
+          H.mkComponent
+            { initialState: const { selected: Set.empty }
+            , render
+            , eval: H.mkEval H.defaultEval { handleAction = handleAction }
+            }
     }
 
-label :: forall r w i . { desert :: String, carbs :: String, protein :: String, comments :: String }
+label :: { desert :: String, carbs :: String, protein :: String, comments :: String }
 label =
     { desert: "Desert"
     , carbs: "Carbs (g)"
@@ -67,8 +75,8 @@ label =
     , comments: "Comments"
     }
 
-data :: forall r w i . Array { desert :: String, carbs :: String, protein :: String, comments :: String }
-data =
+datum :: Array { desert :: String, carbs :: String, protein :: String, comments :: String }
+datum =
     [ { desert: "Frozen yogurt"
       , carbs: "24"
       , protein: "4.0"
@@ -88,98 +96,84 @@ data =
 
 standardDataTable :: forall w i . HH.HTML w i
 standardDataTable =
-    let
-        row { desert, carbs, protein, comments } =
-            DataTable.row []
-                [ DataTable.cell [] [ HH.text desert ]
-                , DataTable.numericCell [] [ HH.text carbs ]
-                , DataTable.numericCell [] [ HH.text protein ]
-                , DataTable.cell [] [ HH.text comments ]
-                ]
-    in
-    DataTable.dataTable DataTable.defaultConfig
-        { thead: [ row label ]
-        , tbody: map row data
-        }
+  let
+    row :: forall r . _ -> DataTable.Row r w i
+    row { desert, carbs, protein, comments } =
+      { attributes: []
+      , nodes:
+        [ DataTable.Cell { numeric: false, attributes: [], nodes: [ HH.text desert ] }
+        , DataTable.Cell { numeric: true, attributes: [], nodes: [ HH.text carbs ] }
+        , DataTable.Cell { numeric: true, attributes: [], nodes: [ HH.text protein ] }
+        , DataTable.Cell { numeric: false, attributes: [], nodes: [ HH.text comments ] }
+        ]
+      }
+  in
+  DataTable.dataTable DataTable.defaultConfig
+      { thead: [ row label ]
+      , tbody: map row datum
+      }
 
 dataTableWithRowSelection :: forall r w i . State -> HH.HTML w Action
 dataTableWithRowSelection state =
-    let
-        allSelected =
-            Set.size state.selected == 3
+  let
+    allSelected = Set.size state.selected == 3
 
-        allUnselected =
-            Set.size state.selected == 0
+    allUnselected = Set.size state.selected == 0
 
-        headerRow { onChange, state } { desert, carbs, protein, comments } =
-            [ DataTable.row []
-                [ DataTable.checkboxCell []
-                    (Checkbox.defaultConfig
-                        { state = (Just state)
-                        , onChange = onChange
-                    )
-                , DataTable.cell [] [ HH.text desert ]
-                , DataTable.numericCell [] [ HH.text carbs ]
-                , DataTable.numericCell [] [ HH.text protein ]
-                , DataTable.cell [] [ HH.text comments ]
-                ]
-            ]
-
-        row { onChange, selected } { desert, carbs, protein, comments } =
-            DataTable.row
-                (if selected then
-                    DataTable.selected
-
-                 else
-                    []
-                )
-                [ DataTable.checkboxCell []
-                    (Checkbox.defaultConfig
-                        { state =
-                            (Just
-                                (if selected then
-                                    Checkbox.Checked
-
-                                 else
-                                    Checkbox.Unchecked
-                                )
-                            )
-                        , onChange = onChange
-                    )
-                , DataTable.cell [] [ HH.text desert ]
-                , DataTable.numericCell [] [ HH.text carbs ]
-                , DataTable.numericCell [] [ HH.text protein ]
-                , DataTable.cell [] [ HH.text comments ]
-                ]
-    in
-    DataTable.dataTable DataTable.defaultConfig
-        { thead =
-            headerRow
-                { onChange =
-                    if allSelected then
-                        AllUnselected
-
-                    else
-                        AllSelected
-                , state =
-                    if allSelected then
-                        Checkbox.Checked
-
-                    else if allUnselected then
-                        Checkbox.Unchecked
-
-                    else
-                        Checkbox.Indeterminate
-                }
-                label
-        , tbody =
-            map
-                (\({ desert } as data_) ->
-                    row
-                        { onChange: ItemSelected desert
-                        , selected: Set.member desert state.selected
-                        }
-                        data_
-                )
-                data
+    headerRow { onChange, state } { desert, carbs, protein, comments } =
+      [ { attributes: []
+        , nodes:
+          [ DataTable.CheckboxCell
+            { config:
+              Checkbox.defaultConfig
+              { state = Just state
+              , onChange = onChange
+              }
+            , attributes: []
+            }
+          , DataTable.Cell { numeric: false, attributes: [], nodes: [ HH.text desert ] }
+          , DataTable.Cell { numeric: true,  attributes: [], nodes: [ HH.text carbs ] }
+          , DataTable.Cell { numeric: true,  attributes: [], nodes: [ HH.text protein ] }
+          , DataTable.Cell { numeric: false, attributes: [], nodes: [ HH.text comments ] }
+          ]
         }
+      ]
+
+    row { onChange, selected } { desert, carbs, protein, comments } =
+        { attributes: if selected then DataTable.selected else []
+        , nodes:
+          [ DataTable.CheckboxCell
+            { attributes: []
+            , config:
+              Checkbox.defaultConfig
+              { state = Just $ if selected then Checkbox.Checked else Checkbox.Unchecked
+              , onChange = onChange
+              }
+            }
+          , DataTable.Cell { numeric: false, attributes: [], nodes: [ HH.text desert ] }
+          , DataTable.Cell { numeric: true, attributes: [], nodes: [ HH.text carbs ] }
+          , DataTable.Cell { numeric: true, attributes: [], nodes: [ HH.text protein ] }
+          , DataTable.Cell { numeric: false, attributes: [], nodes: [ HH.text comments ] }
+          ]
+        }
+  in
+  DataTable.dataTable DataTable.defaultConfig
+    { thead:
+      headerRow
+      { onChange: Just $ if allSelected then const $ AllUnselected else const $ AllSelected
+      , state:
+          if allSelected then Checkbox.Checked
+          else if allUnselected then Checkbox.Unchecked
+          else Checkbox.Indeterminate
+      }
+      label
+    , tbody:
+      map
+      (\data_ -> row
+        { onChange: Just $ const $ ItemSelected data_.desert
+        , selected: Set.member data_.desert state.selected
+        }
+        data_
+      )
+      datum
+    }
