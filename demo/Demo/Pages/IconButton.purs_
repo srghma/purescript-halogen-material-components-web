@@ -33,8 +33,7 @@ handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
 handleAction =
     case _ of
         Toggle id ->
-            ( { state
-                | ons =
+            ( {  ons =
                     if Set.member id state.ons then
                         Set.delete id state.ons
 

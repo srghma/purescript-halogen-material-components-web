@@ -39,7 +39,7 @@ handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
 handleAction =
     case _ of
         Set group index ->
-            ( { state | radios = Map.insert group index state.radios } )
+            ( { radios = Map.insert group index state.radios } )
 
         Focus id ->
             ( state, Task.attempt Focused (Browser.Dom.focus id) )

@@ -43,16 +43,16 @@ handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
 handleAction =
     case _ of
         SetActiveHeroTab index ->
-            ( { state | activeHeroTab = index } )
+            ( { activeHeroTab = index } )
 
         SetActiveIconTab index ->
-            ( { state | activeIconTab = index } )
+            ( { activeIconTab = index } )
 
         SetActiveStackedTab index ->
-            ( { state | activeStackedTab = index } )
+            ( { activeStackedTab = index } )
 
         SetActiveScrollingTab index ->
-            ( { state | activeScrollingTab = index } )
+            ( { activeScrollingTab = index } )
 
         Focus id ->
             ( state, Task.attempt Focused (Browser.Dom.focus id) )

@@ -34,8 +34,7 @@ handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
 handleAction =
     case _ of
         Toggle id ->
-            ( { state
-                | switches =
+            ( {  switches =
                     Map.handleAction id
                         (\state -> Just (not (Maybe.fromMaybe false state)))
                         state.switches

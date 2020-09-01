@@ -39,10 +39,10 @@ handleAction :: forall r w i . Action -> State -> State
 handleAction =
     case _ of
         Close ->
-            { state | open = Nothing }
+            { open = Nothing }
 
         Show id ->
-            { state | open = Just id }
+            { open = Just id }
 
 catalogPage :: CatalogPage
 catalogPage =

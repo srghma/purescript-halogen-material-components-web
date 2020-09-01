@@ -40,7 +40,7 @@ handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
 handleAction =
     case _ of
         Changed id value ->
-            ( { state | sliders = Map.insert id value state.sliders } )
+            ( { sliders = Map.insert id value state.sliders } )
 
         Focus id ->
             ( state, Task.attempt Focused (Browser.Dom.focus id) )

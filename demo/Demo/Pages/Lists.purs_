@@ -47,8 +47,7 @@ handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
 handleAction =
     case _ of
         ToggleCheckbox id ->
-            ( { state
-                | checkboxes =
+            ( {  checkboxes =
                     if Set.member id state.checkboxes then
                         Set.delete id state.checkboxes
 
@@ -59,13 +58,13 @@ handleAction =
             )
 
         SetRadio id ->
-            ( { state | radio = Just id } )
+            ( { radio = Just id } )
 
         SetActivated id ->
-            ( { state | activated = id } )
+            ( { activated = id } )
 
         SetShapedActivated id ->
-            ( { state | shapedActivated = id } )
+            ( { shapedActivated = id } )
 
         Focus id ->
             ( state, Task.attempt Focused (Browser.Dom.focus id) )

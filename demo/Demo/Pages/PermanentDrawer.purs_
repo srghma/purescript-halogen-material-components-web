@@ -17,7 +17,7 @@ handleAction :: forall r w i . Action -> State -> State
 handleAction =
     case _ of
         SetSelectedIndex index ->
-            { state | selectedIndex = index }
+            { selectedIndex = index }
 
 render :: forall r w i . State -> DrawerPage Action
 catalogPage =

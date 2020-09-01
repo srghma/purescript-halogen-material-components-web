@@ -29,13 +29,13 @@ handleAction :: forall r w i . Action -> State -> State
 handleAction =
     case _ of
         ToggleDrawer ->
-            { state | open = not state.open }
+            { open = not state.open }
 
         CloseDrawer ->
-            { state | open = false }
+            { open = false }
 
         SetSelectedIndex index ->
-            { state | selectedIndex = index }
+            { selectedIndex = index }
 
 render :: forall r w i . State -> DrawerPage Action
 catalogPage =

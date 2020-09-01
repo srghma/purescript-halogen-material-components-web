@@ -15,44 +15,31 @@ import HalogenMWC.DataTable as DataTable
 import Material.Classes.Typography
 import Data.Set (Set)
 import Data.Set as Set
-data State =
-    { selected :: Set String }
+import Demo.Utils
+
+type State = { selected :: Set String }
 
 initialState :: forall r w i . State
-initialState =
-    { selected: Set.empty }
+initialState = { selected: Set.empty }
 
 data Action
-    = NoOp
-    | ItemSelected String
+    = ItemSelected String
     | AllSelected
     | AllUnselected
 
 handleAction :: forall r w i . Action -> State -> State
 handleAction =
-    case _ of
-        NoOp ->
-            state
-
-        ItemSelected key ->
-            { state
-                | selected =
-                    if Set.member key state.selected then
-                        Set.delete key state.selected
-
-                    else
-                        Set.insert key state.selected
-            }
-
-        AllSelected ->
-            { state
-                | selected =
-                    Set.fromList
-                        [ "Frozen yogurt", "Ice cream sandwich", "Eclair" ]
-            }
-
-        AllUnselected ->
-            { state | selected = Set.empty }
+  case _ of
+    ItemSelected key ->
+      H.modify_ \state -> state
+        { selected =
+            if Set.member key state.selected then
+                Set.delete key state.selected
+            else
+                Set.insert key state.selected
+        }
+    AllSelected -> H.modify_ \state -> state { selected = Set.fromList [ "Frozen yogurt", "Ice cream sandwich", "Eclair" ] }
+    AllUnselected -> H.modify_ \state -> state { selected = Set.empty }
 
 catalogPage :: CatalogPage
 catalogPage =
@@ -63,7 +50,7 @@ catalogPage =
         , documentation: Just "https://material.io/components/web/catalog/data-tables/"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-data-table"
         }
-    , hero: heroDataTable
+    , hero: mkComponentStatic standardDataTable
     , content:
         [ HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Data Table Standard" ]
         , standardDataTable
@@ -71,10 +58,6 @@ catalogPage =
         , dataTableWithRowSelection state
         ]
     }
-
-heroDataTable :: forall r w i . Array (HH.HTML w i)
-heroDataTable =
-    [ standardDataTable ]
 
 label :: forall r w i . { desert :: String, carbs :: String, protein :: String, comments :: String }
 label =

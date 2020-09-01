@@ -33,22 +33,22 @@ handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
 handleAction =
     case _ of
         ShowBaseline ->
-            ( { state | queue = Snackbar.addMessage baselineMessage state.queue }
+            ( { queue = Snackbar.addMessage baselineMessage state.queue }
             
             )
 
         ShowLeading ->
-            ( { state | queue = Snackbar.addMessage leadingMessage state.queue }
+            ( { queue = Snackbar.addMessage leadingMessage state.queue }
             
             )
 
         ShowStacked ->
-            ( { state | queue = Snackbar.addMessage stackedMessage state.queue }
+            ( { queue = Snackbar.addMessage stackedMessage state.queue }
             
             )
 
         SnackbarClosed messageId ->
-            ( { state | queue = Snackbar.close messageId state.queue } )
+            ( { queue = Snackbar.close messageId state.queue } )
 
         Click messageId ->
             ( state )

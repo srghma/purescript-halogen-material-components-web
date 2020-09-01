@@ -54,22 +54,22 @@ handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
 handleAction =
     case _ of
         HeroChanged hero ->
-            ( { state | hero = hero } )
+            ( { hero = hero } )
 
         FilledChanged filled ->
-            ( { state | filled = filled } )
+            ( { filled = filled } )
 
         OutlinedChanged outlined ->
-            ( { state | outlined = outlined } )
+            ( { outlined = outlined } )
 
         FilledWithIconChanged filledWithIcon ->
-            ( { state | filledWithIcon = filledWithIcon } )
+            ( { filledWithIcon = filledWithIcon } )
 
         OutlinedWithIconChanged outlinedWithIcon ->
-            ( { state | outlinedWithIcon = outlinedWithIcon } )
+            ( { outlinedWithIcon = outlinedWithIcon } )
 
         FocusedChanged focused ->
-            ( { state | focused = focused } )
+            ( { focused = focused } )
 
         Focus id ->
             ( state, Task.attempt Focused (Browser.Dom.focus id) )
