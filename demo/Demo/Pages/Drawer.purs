@@ -48,7 +48,7 @@ heroDrawer =
           , additionalAttributes = [ HP.href "#drawer" ]
           }
         )
-        [ HH.div [ HP.class_ mdc_list_item__graphic ] [ Icon.icon [] icon ]
+        [ HH.div [ HP.class_ mdc_list_item__graphic ] [ Icon.materialIcon [] icon ]
         , HH.text label
         ]
   in

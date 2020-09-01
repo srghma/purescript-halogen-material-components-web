@@ -118,7 +118,7 @@ simpleDialog state =
               [ HP.style "background-color: rgba(0,0,0,.3); color: #fff;"
               , HP.class_ mdc_list_item__graphic
               ]
-              [ Icon.icon [] icon ]
+              [ Icon.materialIcon [] icon ]
           , HH.text label
           ]
     in

@@ -157,7 +157,7 @@ leadingIconList =
     let
         listItem icon =
             List.Item.listItem List.Item.defaultConfig
-                [ HH.div [ HP.class_ mdc_list_item__graphic ] [ Icon.icon [] icon ]
+                [ HH.div [ HP.class_ mdc_list_item__graphic ] [ Icon.materialIcon [] icon ]
                 , HH.text "Line item"
                 ]
     in
@@ -171,7 +171,7 @@ trailingIconList =
         listItem =
             List.Item.listItem List.Item.defaultConfig
                 [ HH.text "Line item"
-                , HH.div [ HP.class_ mdc_list_item__meta ] [ Icon.icon [] "info" ]
+                , HH.div [ HP.class_ mdc_list_item__meta ] [ Icon.materialIcon [] "info" ]
                 ]
     in
     List.list (List.defaultConfig { additionalAttributes = demoList)
@@ -193,7 +193,7 @@ activatedItemList state =
                         )
                     , onClick = (SetActivated label)
                 )
-                [ HH.div [ HP.class_ mdc_list_item__graphic ] [ Icon.icon [] icon ], HH.text label ]
+                [ HH.div [ HP.class_ mdc_list_item__graphic ] [ Icon.materialIcon [] icon ], HH.text label ]
     in
     List.list (List.defaultConfig { additionalAttributes = demoList)
         (listItem ( "inbox" /\ "Inbox" ))
@@ -220,7 +220,7 @@ shapedActivatedItemList state =
                     , onClick = (SetShapedActivated label)
                     , additionalAttributes = [ HP.style "border-radius: 0 32px 32px 0;" ]
                 )
-                [ HH.div [ HP.class_ mdc_list_item__graphic ] [ Icon.icon [] icon ], HH.text label ]
+                [ HH.div [ HP.class_ mdc_list_item__graphic ] [ Icon.materialIcon [] icon ], HH.text label ]
     in
     List.list (List.defaultConfig { additionalAttributes = demoList)
         (listItem ( "inbox" /\ "Inbox" ))
@@ -241,12 +241,12 @@ folderList =
     let
         listItem { primary, secondary } =
             List.Item.listItem List.Item.defaultConfig
-                [ HH.div [ HP.class mdc_list_item__graphic ] demoIcon [ Icon.icon [] "folder" ]
+                [ HH.div [ HP.class mdc_list_item__graphic ] demoIcon [ Icon.materialIcon [] "folder" ]
                 , List.Item.text []
                     { primary: [ HH.text primary ]
                     , secondary: [ HH.text secondary ]
                     }
-                , HH.div [ HP.class_ mdc_list_item__meta ] [ Icon.icon [] "info" ]
+                , HH.div [ HP.class_ mdc_list_item__meta ] [ Icon.materialIcon [] "info" ]
                 ]
     in
     List.list

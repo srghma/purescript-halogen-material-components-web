@@ -132,7 +132,7 @@ textField type_ config =
     )
 
 icon :: forall w i. Array (IProp I.HTMLi i) -> String -> HH.HTML w i
-icon additionalAttributes iconName = Icon.icon ([ HP.class_ mdc_text_field__icon ] <> additionalAttributes) iconName
+icon additionalAttributes iconName = Icon.materialIcon ([ HP.class_ mdc_text_field__icon ] <> additionalAttributes) iconName
 
 -----------------
 inputElt :: forall w i. Config w i -> HH.HTML w i

@@ -102,7 +102,7 @@ select variant config firstSelectItem remainingSelectItems =
       ]
 
 icon :: forall i w. Array (IProp I.HTMLi i) -> String -> HH.HTML w i
-icon additionalAttributes iconName = Icon.icon ([ HP.class_ mdc_select__icon ] <> additionalAttributes) iconName
+icon additionalAttributes iconName = Icon.materialIcon ([ HP.class_ mdc_select__icon ] <> additionalAttributes) iconName
 
 anchorElt :: forall w i. Array (HH.HTML w i) -> HH.HTML w i
 anchorElt = HH.div [ HP.class_ mdc_select__anchor ]

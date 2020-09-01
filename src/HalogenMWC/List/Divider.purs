@@ -41,5 +41,5 @@ listItem config =
         )
         []
 
-group :: forall i w. HH.HTML w i
-group = HH.hr [ HP.class_ mdc_list_divider ]
+listDivider :: forall i w. HH.HTML w i
+listDivider = HH.hr [ HP.class_ mdc_list_divider ]
