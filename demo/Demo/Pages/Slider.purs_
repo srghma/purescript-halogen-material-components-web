@@ -91,8 +91,8 @@ continuousSlider state =
         (Slider.defaultConfig
             { value = (Map.get id state.sliders)
             , onInput = (Changed id)
-            , min = (Just 0)
-            , max = (Just 50)
+            , min = Just 0
+            , max = Just 50
         )
 
 discreteSlider :: forall r w i . State -> HH.HTML w Action
@@ -106,9 +106,9 @@ discreteSlider state =
             { value = (Map.get id state.sliders)
             , onInput = (Changed id)
             , discrete = true
-            , min = (Just 0)
-            , max = (Just 50)
-            , step = (Just 1)
+            , min = Just 0
+            , max = Just 50
+            , step = Just 1
         )
 
 discreteSliderWithTickMarks :: forall r w i . State -> HH.HTML w Action
@@ -122,9 +122,9 @@ discreteSliderWithTickMarks state =
             { value = (Map.get id state.sliders)
             , onInput = (Changed id)
             , discrete = true
-            , min = (Just 0)
-            , max = (Just 50)
-            , step = (Just 1)
+            , min = Just 0
+            , max = Just 50
+            , step = Just 1
             , displayMarkers = true
         )
 

@@ -102,7 +102,7 @@ render routeOfThisCatalogPage catalogPage state =
                     processItem { route, label } =
                       List.Item.listItem
                         ( List.Item.defaultConfig
-                            { selection = if routeOfThisCatalogPage == route then Just List.Item.Activated else Nothing
+                            { selected = if routeOfThisCatalogPage == route then Just List.Item.Activated else Nothing
                             , href = Just (Route.toString route)
                             }
                         )

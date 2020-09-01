@@ -104,8 +104,8 @@ heroSelect :: forall r w i . State -> HH.HTML w Action
 heroSelect state =
     Select.filled
         (Select.defaultConfig
-            { label = (Just "Fruit")
-            , selected = (Just state.hero)
+            { label = Just "Fruit"
+            , selected = Just state.hero
             , onChange = HeroChanged
         )
         firstItem
@@ -134,8 +134,8 @@ filledSelect :: forall r w i . State -> HH.HTML w Action
 filledSelect state =
     Select.filled
         (Select.defaultConfig
-            { label = (Just "Fruit")
-            , selected = (Just state.filled)
+            { label = Just "Fruit"
+            , selected = Just state.filled
             , onChange = FilledChanged
         )
         firstItem
@@ -145,8 +145,8 @@ outlinedSelect :: forall r w i . State -> HH.HTML w Action
 outlinedSelect state =
     Select.outlined
         (Select.defaultConfig
-            { label = (Just "Fruit")
-            , selected = (Just state.outlined)
+            { label = Just "Fruit"
+            , selected = Just state.outlined
             , onChange = OutlinedChanged
         )
         firstItem
@@ -156,9 +156,9 @@ filledWithIconSelect :: forall r w i . State -> HH.HTML w Action
 filledWithIconSelect state =
     Select.filled
         (Select.defaultConfig
-            { label = (Just "Fruit")
-            , selected = (Just state.filledWithIcon)
-            , leadingIcon = (Just (Select.icon [] "favorite"))
+            { label = Just "Fruit"
+            , selected = Just state.filledWithIcon
+            , leadingIcon = Just (Select.icon [] "favorite")
             , onChange = FilledWithIconChanged
         )
         firstItem
@@ -168,9 +168,9 @@ outlinedWithIconSelect :: forall r w i . State -> HH.HTML w Action
 outlinedWithIconSelect state =
     Select.outlined
         (Select.defaultConfig
-            { label = (Just "Fruit")
-            , selected = (Just state.outlinedWithIcon)
-            , leadingIcon = (Just (Select.icon [] "favorite"))
+            { label = Just "Fruit"
+            , selected = Just state.outlinedWithIcon
+            , leadingIcon = Just (Select.icon [] "favorite")
             , onChange = OutlinedWithIconChanged
         )
         firstItem
@@ -183,7 +183,7 @@ focusSelect state =
         ]
         [ Select.filled
             (Select.defaultConfig
-                { selected = (Just state.focused)
+                { selected = Just state.focused
                 , onChange = FocusedChanged
                 , additionalAttributes = [ HP.id_ "my-select" ]
             )

@@ -51,13 +51,13 @@ catalogPage =
         , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Mini Floating Action Button" ]
         , Fab.fab (Fab.defaultConfig { mini = true) "favorite_border"
         , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Extended FAB" ]
-        , Fab.Extended.fab (Fab.Extended.defaultConfig { icon = (Just "add"))
+        , Fab.Extended.fab (Fab.Extended.defaultConfig { icon = Just "add")
             "Create"
         , HH.h3 [ HP.class_ mdc_typography____subtitle1 ]
             [ HH.text "Extended FAB (Text label followed by icon)" ]
         , Fab.Extended.fab
             (Fab.Extended.defaultConfig
-                { icon = (Just "add")
+                { icon = Just "add"
                 , trailingIcon = true
             )
             "Create"
@@ -80,7 +80,7 @@ catalogPage =
                         ]
                 )
                 "favorite_border"
-            , Fab.Extended.fab (Fab.Extended.defaultConfig { icon = (Just "add"))
+            , Fab.Extended.fab (Fab.Extended.defaultConfig { icon = Just "add")
                 "Create"
             ]
         , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Focus FAB" ]

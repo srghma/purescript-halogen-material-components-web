@@ -22,7 +22,7 @@ render :: forall r w i . State -> DrawerPage Action
 catalogPage =
     { title: "Permanent Drawer"
     , drawer =
-        Drawer.Permanent.drawer Drawer.Permanent.defaultConfig
+        Drawer.Permanent.drawer
             (DrawerPage.drawerBody SetSelectedIndex state.selectedIndex)
     , scrim: Nothing
     , onMenuClick: Nothing

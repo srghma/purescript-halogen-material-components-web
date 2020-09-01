@@ -77,8 +77,8 @@ heroSwitch state =
     in
     [ FormField.formField
         (FormField.defaultConfig
-            { label = (Just "off/on")
-            , for = (Just id)
+            { label = Just "off/on"
+            , for = Just id
             , onClick = (Toggle id)
         )
         [ Switch.switch
@@ -97,8 +97,8 @@ demoSwitch state =
     in
     FormField.formField
         (FormField.defaultConfig
-            { label = (Just "off/on")
-            , for = (Just id)
+            { label = Just "off/on"
+            , for = Just id
             , onClick = (Toggle id)
         )
         [ Switch.switch
@@ -117,8 +117,8 @@ focusSwitch state =
     HH.div []
         [ FormField.formField
             (FormField.defaultConfig
-                { label = (Just "off/on")
-                , for = (Just id)
+                { label = Just "off/on"
+                , for = Just id
                 , onClick = (Toggle id)
                 , additionalAttributes = [ HP.id_ "my-form-field" ]
             )

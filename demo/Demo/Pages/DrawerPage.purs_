@@ -77,11 +77,11 @@ drawerBody setSelectedIndex selectedIndex =
                     )
                 , onClick = (setSelectedIndex index)
     in
-    [ Drawer.Permanent.header []
+    [ Drawer.Permanent.header
         [ HH.h3 [ HP.class_ mdc_drawer__title ] [ HH.text "Mail" ]
         , HH.h6 [ HP.class_ mdc_drawer__subtitle ] [ HH.text "email@material.io" ]
         ]
-    , Drawer.Permanent.content []
+    , Drawer.Permanent.content
         [ Array.group []
             [ List.list List.defaultConfig
                 (List.Item.listItem (listItemConfig 0)

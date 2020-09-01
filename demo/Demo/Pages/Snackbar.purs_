@@ -55,25 +55,25 @@ handleAction =
 baselineMessage :: forall r w i . Snackbar.Message Action
 baselineMessage =
     Snackbar.message "Can't send photo. Retry in 5 seconds."
-        , actionButton = (Just "Retry")
+        , actionButton = Just "Retry"
         , onActionButtonClick = Click
-        , actionIcon = (Just "close")
+        , actionIcon = Just "close"
 
 leadingMessage :: forall r w i . Snackbar.Message Action
 leadingMessage =
     Snackbar.message "Your photo has been archived."
         , leading = true
-        , actionButton = (Just "Undo")
+        , actionButton = Just "Undo"
         , onActionButtonClick = Click
-        , actionIcon = (Just "close")
+        , actionIcon = Just "close"
 
 stackedMessage :: forall r w i . Snackbar.Message Action
 stackedMessage =
     Snackbar.message "This item already has the label \"travel\". You can add a new label."
         , stacked = true
-        , actionButton = (Just "Add a new label")
+        , actionButton = Just "Add a new label"
         , onActionButtonClick = Click
-        , actionIcon = (Just "close")
+        , actionIcon = Just "close"
 
 catalogPage :: CatalogPage
 catalogPage =

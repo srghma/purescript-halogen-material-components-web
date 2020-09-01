@@ -24,7 +24,7 @@ type Config a w i
     , required :: Boolean
     , valid :: Boolean
     , selected :: Maybe a
-    , leadingIcon :: forall a w i. Maybe (HH.HTML w i)
+    , leadingIcon :: Maybe (HH.HTML w i)
     , additionalAttributes :: Array (IProp I.HTMLselect i)
     , onChange :: Maybe (a -> i)
     }

@@ -105,8 +105,8 @@ selectedIndexProp listItems =
             )
         # Array.mapWithIndex
             ( \index listItem_ -> case listItem_ of
-                ListItem.ListItem { selection } ->
-                  if selection /= Nothing then
+                ListItem.ListItem { selected } ->
+                  if selected /= Nothing then
                     Just index
                   else
                     Nothing

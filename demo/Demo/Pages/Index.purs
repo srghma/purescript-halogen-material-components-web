@@ -101,7 +101,7 @@ imageListItems =
   , { route: Route.Checkbox
     , icon: "https://aforemny.github.io/material-components-web-elm/images/checkbox_180px.svg"
     , title: "Checkbox"
-    , subtitle: "Multi-selection controls"
+    , subtitle: "Multi-selected controls"
     }
   , { route: Route.Chips
     , icon: "https://aforemny.github.io/material-components-web-elm/images/chips_180px.svg"
@@ -166,7 +166,7 @@ imageListItems =
   , { route: Route.RadioButton
     , icon: "https://aforemny.github.io/material-components-web-elm/images/radio_180px.svg"
     , title: "Radio"
-    , subtitle: "Single selection controls"
+    , subtitle: "Single selected controls"
     }
   , { route: Route.Ripple
     , icon: "https://aforemny.github.io/material-components-web-elm/images/ripple_180px.svg"
@@ -176,7 +176,7 @@ imageListItems =
   , { route: Route.Select
     , icon: "https://aforemny.github.io/material-components-web-elm/images/form_field_180px.svg"
     , title: "Select"
-    , subtitle: "Popover selection menus"
+    , subtitle: "Popover selected menus"
     }
   , { route: Route.Slider
     , icon: "https://aforemny.github.io/material-components-web-elm/images/slider_180px.svg"

@@ -13,7 +13,7 @@ import Material.Classes.List (mdc_list_item, mdc_list_item____activated, mdc_lis
 
 type Config w i
   = { disabled :: Boolean
-    , selection :: Maybe Selection
+    , selected :: Maybe Selection
     , href :: Maybe String
     , target :: Maybe String
     , additionalAttributes :: Array (IProp I.HTMLa i)
@@ -35,7 +35,7 @@ data ListItem w i
 defaultConfig :: forall w i. Config w i
 defaultConfig =
   { disabled: false
-  , selection: Nothing
+  , selected: Nothing
   , href: Nothing
   , target: Nothing
   , additionalAttributes: []
@@ -55,12 +55,12 @@ listItemView config nodes =
             $ Array.catMaybes
                 [ Just mdc_list_item
                 , if config.disabled then Just mdc_list_item____disabled else Nothing
-                , if config.selection == Just Selected then Just mdc_list_item____selected else Nothing
-                , if config.selection == Just Activated then Just mdc_list_item____activated else Nothing
+                , if config.selected == Just Selected then Just mdc_list_item____selected else Nothing
+                , if config.selected == Just Activated then Just mdc_list_item____activated else Nothing
                 ]
         , map HP.href config.href
         , if config.href /= Nothing then map HP.target config.target else Nothing
-        , if config.selection /= Nothing then Just (HP.attr (AttrName "aria-selected") "true") else Nothing
+        , if config.selected /= Nothing then Just (HP.attr (AttrName "aria-selected") "true") else Nothing
         ]
         <> config.additionalAttributes
   in

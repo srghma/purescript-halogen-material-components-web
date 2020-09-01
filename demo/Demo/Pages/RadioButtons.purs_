@@ -90,8 +90,8 @@ radio :: forall r w i . State -> String -> String -> String -> HH.HTML w Action
 radio state group index label =
     FormField.formField
         (FormField.defaultConfig
-            { label = (Just label)
-            , for = (Just index)
+            { label = Just label
+            , for = Just index
             , onClick = (Set group index)
             , additionalAttributes = [ HP.style "margin: 0 10px;" ]
         )
