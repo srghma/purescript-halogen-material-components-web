@@ -18,13 +18,12 @@ import Halogen.HTML.Properties as HP
 import Material.Classes.IconButton (mdc_icon_button)
 import Control.Bind (bindFlipped)
 
-type Queue i
-  = { messages :: Array (Tuple MessageId (Message i))
-    , nextMessageId :: MessageId
-    }
+type Queue i =
+  { messages :: Array (Tuple MessageId (Message i))
+  , nextMessageId :: MessageId
+  }
 
-newtype MessageId
-  = MessageId Int
+newtype MessageId = MessageId Int
 
 derive newtype instance eqMessageId :: Eq MessageId
 
@@ -56,14 +55,14 @@ addMessage message queue =
   , nextMessageId: inc queue.nextMessageId
   }
 
-type Config i
-  = { closeOnEscape :: Boolean
-    , additionalAttributes :: Array (IProp I.HTMLdiv i)
-    , onClosed :: MessageId -> i
-    }
+type Config i =
+  { closeOnEscape :: Boolean
+  , additionalAttributes :: Array (IProp I.HTMLdiv i)
+  , onClosed :: MessageId -> i
+  }
 
-defaultConfig :: forall i. (MessageId -> i) -> Config i
-defaultConfig onClosed =
+defaultConfig :: forall i. { onClosed :: MessageId -> i } -> Config i
+defaultConfig { onClosed } =
   { closeOnEscape: false
   , additionalAttributes: []
   , onClosed
@@ -92,35 +91,33 @@ snackbar config queue =
       )
       [ surfaceElt (MessageId currentMessageId) (Maybe.fromMaybe (defaultMessage "") currentMessage) ]
 
-newtype Message i
-  = Message
-  { label :: String
-  , actionButton :: Maybe String
+type Message i =
+  { label               :: String
+  , actionButton        :: Maybe String
   , onActionButtonClick :: Maybe (MessageId -> i)
-  , actionIcon :: Maybe String
-  , onActionIconClick :: Maybe (MessageId -> i)
-  , leading :: Boolean
-  , stacked :: Boolean
-  , timeoutMs :: Maybe Int
+  , actionIcon          :: Maybe String
+  , onActionIconClick   :: Maybe (MessageId -> i)
+  , leading             :: Boolean
+  , stacked             :: Boolean
+  , timeoutMs           :: Maybe Int
   }
 
 defaultMessage :: forall i. String -> Message i
 defaultMessage label =
-  Message
     { label
-    , actionButton: Nothing
+    , actionButton:        Nothing
     , onActionButtonClick: Nothing
-    , actionIcon: Nothing
-    , onActionIconClick: Nothing
-    , leading: false
-    , stacked: false
-    , timeoutMs: Just 5000
+    , actionIcon:          Nothing
+    , onActionIconClick:   Nothing
+    , leading:             false
+    , stacked:             false
+    , timeoutMs:           Just 5000
     }
 
 leadingCs :: forall i. Maybe (Message i) -> Maybe ClassName
 leadingCs =
   bindFlipped
-    ( \(Message message) ->
+    ( \message ->
         if message.leading then
           Just mdc_snackbar____leading
         else
@@ -130,7 +127,7 @@ leadingCs =
 stackedCs :: forall i. Maybe (Message i) -> Maybe ClassName
 stackedCs =
   bindFlipped
-    ( \(Message message) ->
+    ( \message ->
         if message.stacked then
           Just mdc_snackbar____stacked
         else
@@ -144,7 +141,7 @@ timeoutMsProp message =
 
     normalizedTimeoutMs =
       message
-        # bindFlipped (\(Message message') -> map (clamp 4000 10000) message'.timeoutMs)
+        # bindFlipped (\message' -> map (clamp 4000 10000) message'.timeoutMs)
         # Maybe.fromMaybe indefiniteTimeout
   in
     HP.prop (PropName "timeoutMs") normalizedTimeoutMs
@@ -154,13 +151,14 @@ closedHandler messageId config = HE.handler (EventType "MDCSnackbar:closed") (\_
 
 surfaceElt :: forall w i. MessageId -> Message i -> HH.HTML w i
 surfaceElt messageId message =
-  HH.div [ HP.class_ mdc_snackbar__surface ]
+  HH.div
+    [ HP.class_ mdc_snackbar__surface ]
     [ labelElt message
     , actionsElt messageId message
     ]
 
 labelElt :: forall w i. Message i -> HH.HTML w i
-labelElt (Message message) =
+labelElt message =
   HH.div
     [ HP.class_ mdc_snackbar__label
     , HP.attr (AttrName "aria-role") "status"
@@ -178,13 +176,13 @@ actionsElt messageId message =
     )
 
 actionButtonElt :: forall w i. MessageId -> Message i -> Maybe (HH.HTML w i)
-actionButtonElt messageId (Message message) =
+actionButtonElt messageId message =
   map
     ( \actionButtonLabel ->
         HH.button
           ( Array.catMaybes
               [ Just $ HP.classes [ mdc_button, mdc_snackbar__action ]
-              , actionButtonClickHandler messageId (Message message)
+              , actionButtonClickHandler messageId message
               ]
           )
           [ HH.text actionButtonLabel ]
@@ -192,16 +190,16 @@ actionButtonElt messageId (Message message) =
     message.actionButton
 
 actionButtonClickHandler :: forall i. MessageId -> Message i -> Maybe (IProp I.HTMLbutton i)
-actionButtonClickHandler messageId (Message message) = map (\f -> HE.onClick (\_ -> f messageId)) message.onActionButtonClick
+actionButtonClickHandler messageId message = map (\f -> HE.onClick (\_ -> f messageId)) message.onActionButtonClick
 
 actionIconEltMaterialIcons :: forall w i. MessageId -> Message i -> Maybe (HH.HTML w i)
-actionIconEltMaterialIcons messageId (Message message) =
+actionIconEltMaterialIcons messageId message =
   map
     ( \actionIconLabel ->
         HH.i
           ( Array.catMaybes
               [ Just $ HP.classes [ mdc_icon_button, mdc_snackbar__dismiss, material_icons ]
-              , actionIconClickHandler messageId (Message message)
+              , actionIconClickHandler messageId message
               ]
           )
           [ HH.text actionIconLabel ]
@@ -209,4 +207,4 @@ actionIconEltMaterialIcons messageId (Message message) =
     message.actionIcon
 
 actionIconClickHandler :: forall i. MessageId -> Message i -> Maybe (IProp I.HTMLi i)
-actionIconClickHandler messageId (Message message) = map (\f -> HE.onClick (\_ -> f messageId)) message.onActionIconClick
+actionIconClickHandler messageId message = map (\f -> HE.onClick (\_ -> f messageId)) message.onActionIconClick
