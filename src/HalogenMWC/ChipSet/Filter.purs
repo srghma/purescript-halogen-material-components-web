@@ -1,21 +1,22 @@
 module HalogenMWC.ChipSet.Filter where
 
 import Prelude
-import Data.Maybe (Maybe(..))
+
 import DOM.HTML.Indexed as I
-import MaterialIconsFont.Classes (material_icons)
-import Web.Event.Event (EventType(..))
 import Data.Array as Array
+import Data.Maybe (Maybe(..))
 import Halogen (AttrName(..), ElemName(..), PropName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import HalogenMWC.Chip.Filter as Chip
-import HalogenMWC.Chip.Filter (Chip(..))
-import Halogen.SVG.Elements as Halogen.SVG.Elements
 import Halogen.SVG.Attributes as Halogen.SVG.Attributes
+import Halogen.SVG.Elements as Halogen.SVG.Elements
+import HalogenMWC.Chip.Filter (Chip(..))
+import HalogenMWC.Chip.Filter as Chip
 import Material.Classes.Chips (mdc_chip, mdc_chip____touch, mdc_chip__checkmark, mdc_chip__checkmark_path, mdc_chip__checkmark_svg, mdc_chip__icon, mdc_chip__icon____leading, mdc_chip__primary_action, mdc_chip__ripple, mdc_chip__text, mdc_chip__touch, mdc_chip_set, mdc_chip_set____filter, mdc_touch_target_wrapper)
+import MaterialIconsFont.Classes (material_icons)
+import Web.Event.Event (EventType(..))
 
 chipSet :: forall w i. Array (IProp I.HTMLdiv i) -> Array (Chip i) -> HH.HTML w i
 chipSet additionalAttributes chips =
@@ -43,7 +44,7 @@ chip (Chip config label) =
         )
         ( Array.catMaybes
             [ Just rippleElt
-            , leadingIconElt config
+            , leadingIconEltMaterialIcons config
             , Just checkmarkElt
             , Just $ primaryActionElt label
             ]
@@ -53,8 +54,8 @@ chip (Chip config label) =
 rippleElt :: forall w i. HH.HTML w i
 rippleElt = HH.div [ HP.class_ mdc_chip__ripple ] []
 
-leadingIconElt :: forall w i. Chip.Config i -> Maybe (HH.HTML w i)
-leadingIconElt config =
+leadingIconEltMaterialIcons :: forall w i. Chip.Config i -> Maybe (HH.HTML w i)
+leadingIconEltMaterialIcons config =
   map
     ( \iconName ->
         HH.i

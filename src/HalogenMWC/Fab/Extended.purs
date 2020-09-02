@@ -44,17 +44,17 @@ fab config label =
     )
     ( Array.catMaybes
         [ Just $ rippleElt
-        , leadingIconElt config
+        , leadingIconEltMaterialIcons config
         , Just $ labelElt label
-        , trailingIconElt config
+        , trailingIconEltMaterialIcons config
         ]
     )
 
 rippleElt :: forall w i. HH.HTML w i
 rippleElt = HH.div [ HP.class_ mdc_fab__ripple ] []
 
-leadingIconElt :: forall w i. Config i -> Maybe (HH.HTML w i)
-leadingIconElt config = case config.icon, config.trailingIcon of
+leadingIconEltMaterialIcons :: forall w i. Config i -> Maybe (HH.HTML w i)
+leadingIconEltMaterialIcons config = case config.icon, config.trailingIcon of
   Just iconName, false ->
     Just
       ( HH.span
@@ -66,7 +66,7 @@ leadingIconElt config = case config.icon, config.trailingIcon of
 labelElt :: forall w i. String -> HH.HTML w i
 labelElt label = HH.span [ HP.class_ mdc_fab__label ] [ HH.text label ]
 
-trailingIconElt :: forall w i. Config i -> Maybe (HH.HTML w i)
-trailingIconElt config = case config.icon, config.trailingIcon of
+trailingIconEltMaterialIcons :: forall w i. Config i -> Maybe (HH.HTML w i)
+trailingIconEltMaterialIcons config = case config.icon, config.trailingIcon of
   Just iconName, true -> Just (HH.span [ HP.class_ material_icons, HP.class_ mdc_fab__icon ] [ HH.text iconName ])
   _, _ -> Nothing

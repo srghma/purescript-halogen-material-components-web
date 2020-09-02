@@ -114,19 +114,19 @@ tabContentElt barConfig config content =
     [ HP.class_ mdc_tab__content ]
     ( if barConfig.indicatorSpansContent then
         Array.catMaybes
-          [ tabIconElt content.icon
+          [ tabIconEltMaterialIcons content.icon
           , Just $ tabTextLabelElt content.label
           , Just $ tabIndicatorElt
           ]
       else
         Array.catMaybes
-          [ tabIconElt content.icon
+          [ tabIconEltMaterialIcons content.icon
           , Just $ tabTextLabelElt content.label
           ]
     )
 
-tabIconElt :: forall w i. Maybe String -> Maybe (HH.HTML w i)
-tabIconElt =
+tabIconEltMaterialIcons :: forall w i. Maybe String -> Maybe (HH.HTML w i)
+tabIconEltMaterialIcons =
   map
     ( \iconName ->
         HH.span

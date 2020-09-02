@@ -88,7 +88,7 @@ shapedButtons = buttonsRow (Button.button Button.Unelevated) [ HP.style "border-
 linkButtons :: forall w i. HH.HTML w i
 linkButtons = buttonsRow (\config -> Button.buttonLink Button.Text (config { additionalAttributes = [ HP.href "#buttons" ] })) []
 
-focusButton :: forall r w i. HH.HTML w WithFocus.Action
+focusButton :: forall w. HH.HTML w WithFocus.Action
 focusButton =
   HH.div_
     [ Button.button Button.Raised (Button.defaultConfig { additionalAttributes = [ HP.id_ "my-button" ] }) [ HH.text "Button" ]
@@ -108,11 +108,11 @@ buttonsRow button additionalAttributes =
     HH.div_
       [ button config [ HH.text "Default" ]
       , button (config { additionalClasses = [ Demo.Pages.Buttons.Css.styles.my_button_dense ] }) [ HH.text "Dense" ]
-      , button config [ Button.buttonIcon "favorite", HH.text "Icon" ]
+      , button config [ Button.buttonIconMaterialIcons "favorite", HH.text "Icon" ]
       ]
 
-heroMargin :: forall r w i. IProp ( style :: String | r ) i
+heroMargin :: forall r i. IProp ( style :: String | r ) i
 heroMargin = HP.style "margin: 16px 32px;"
 
-rowMargin :: forall r w i. IProp ( style :: String | r ) i
+rowMargin :: forall r i. IProp ( style :: String | r ) i
 rowMargin = HP.style "margin: 8px 16px;"

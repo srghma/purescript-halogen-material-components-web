@@ -9,7 +9,7 @@ import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Core (ClassName)
 import Halogen.HTML.Properties as HP
-import HalogenMWC.Button.Common (Variant(..), buttonLabel, buttonIcon, defaultConfig) as Export
+import HalogenMWC.Button.Common (Variant(..), buttonLabel, buttonIconMaterialIcons, defaultConfig) as Export
 import HalogenMWC.Button.Common (Variant)
 import HalogenMWC.Button.Common as Common
 import Prelude

@@ -69,8 +69,8 @@ touchElt = HH.div [ HP.class_ mdc_button__touch ] []
 buttonLabel :: forall w i. String -> HH.HTML w i
 buttonLabel label = HH.span [ HP.class_ mdc_button__label ] [ HH.text label ]
 
-buttonIcon :: forall w i. String -> HH.HTML w i
-buttonIcon iconName =
+buttonIconMaterialIcons :: forall w i. String -> HH.HTML w i
+buttonIconMaterialIcons iconName =
   HH.i
     [ HP.classes [ mdc_button__icon, material_icons ]
     , HP.attr (AttrName "aria-hidden") "true"

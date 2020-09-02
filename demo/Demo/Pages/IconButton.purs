@@ -46,7 +46,7 @@ catalogPage =
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-icon-button"
         }
     , hero:
-        [ IconToggle.iconToggle
+        [ IconToggle.iconToggleMaterialIcons
             (IconToggle.defaultConfig
                 { on = Set.member "icon-button-hero" state.ons
                 , onChange = Toggle "icon-button-hero"
@@ -58,9 +58,9 @@ catalogPage =
         ]
     , content:
         [ HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Icon Button" ]
-        , IconButton.iconButton IconButton.defaultConfig "wifi"
+        , IconButton.iconButtonMaterialIcons IconButton.defaultConfig "wifi"
         , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Icon Toggle" ]
-        , IconToggle.iconToggle
+        , IconToggle.iconToggleMaterialIcons
             (IconToggle.defaultConfig
                 { on = Set.member "icon-button-toggle" state.ons
                 , onChange = Toggle "icon-button-toggle"
@@ -71,7 +71,7 @@ catalogPage =
             }
         , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Focus Icon Button" ]
         , HH.div_
-            [ IconButton.iconButton
+            [ IconButton.iconButtonMaterialIcons
                 (IconButton.defaultConfig
                     { additionalAttributes = [ HP.id_ "my-icon-button" ]
                     }
@@ -84,7 +84,7 @@ catalogPage =
             ]
         , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Focus Icon Toggle" ]
         , HH.div_
-            [ IconToggle.iconToggle
+            [ IconToggle.iconToggleMaterialIcons
                 (IconToggle.defaultConfig
                     { on = Set.member "icon-button-toggle" state.ons
                     , onChange = Toggle "icon-button-toggle"

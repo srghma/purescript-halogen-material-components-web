@@ -1,19 +1,20 @@
 module HalogenMWC.ChipSet.Choice where
 
-import HalogenMWC.Chip.Choice (Chip(..))
-import Material.Classes.Chips (mdc_chip, mdc_chip____touch, mdc_chip__icon, mdc_chip__icon____leading, mdc_chip__primary_action, mdc_chip__ripple, mdc_chip__text, mdc_chip__touch, mdc_chip_set, mdc_chip_set____choice, mdc_touch_target_wrapper)
 import Prelude
-import Data.Maybe (Maybe(..))
+
 import DOM.HTML.Indexed as I
-import MaterialIconsFont.Classes (material_icons)
-import Web.Event.Event (Event, EventType(..))
 import Data.Array as Array
+import Data.Maybe (Maybe(..))
 import Halogen (AttrName(..), ElemName(..), PropName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
+import HalogenMWC.Chip.Choice (Chip(..))
 import HalogenMWC.Chip.Choice as Chip.Choice
+import Material.Classes.Chips (mdc_chip, mdc_chip____touch, mdc_chip__icon, mdc_chip__icon____leading, mdc_chip__primary_action, mdc_chip__ripple, mdc_chip__text, mdc_chip__touch, mdc_chip_set, mdc_chip_set____choice, mdc_touch_target_wrapper)
+import MaterialIconsFont.Classes (material_icons)
+import Web.Event.Event (Event, EventType(..))
 
 type Config a i
   = { selected :: Maybe a
@@ -56,7 +57,7 @@ chip selected onChange toLabel (Chip config value) =
         )
         ( Array.catMaybes
             [ Just rippleElt
-            , leadingIconElt config
+            , leadingIconEltMaterialIcons config
             , Just $ primaryActionElt (toLabel value)
             ]
         )
@@ -74,8 +75,8 @@ interactionHandler = map (HE.handler (EventType "MDCChip:interaction"))
 rippleElt :: forall w i. HH.HTML w i
 rippleElt = HH.div [ HP.class_ mdc_chip__ripple ] []
 
-leadingIconElt :: forall w i. Chip.Choice.Config i -> Maybe (HH.HTML w i)
-leadingIconElt config =
+leadingIconEltMaterialIcons :: forall w i. Chip.Choice.Config i -> Maybe (HH.HTML w i)
+leadingIconEltMaterialIcons config =
   map
     ( \iconName ->
         HH.i

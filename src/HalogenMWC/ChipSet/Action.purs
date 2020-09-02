@@ -1,18 +1,19 @@
 module HalogenMWC.ChipSet.Action where
 
 import Prelude
-import Data.Maybe (Maybe(..))
+
 import DOM.HTML.Indexed as I
-import MaterialIconsFont.Classes (material_icons)
-import Web.Event.Event (Event, EventType(..))
 import Data.Array as Array
+import Data.Maybe (Maybe(..))
 import Halogen (AttrName(..), ElemName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Material.Classes.Chips (mdc_chip, mdc_chip____touch, mdc_chip__icon, mdc_chip__icon____leading, mdc_chip__primary_action, mdc_chip__ripple, mdc_chip__text, mdc_chip__touch, mdc_chip_set, mdc_touch_target_wrapper)
 import HalogenMWC.Chip.Action (Chip(..))
+import Material.Classes.Chips (mdc_chip, mdc_chip____touch, mdc_chip__icon, mdc_chip__icon____leading, mdc_chip__primary_action, mdc_chip__ripple, mdc_chip__text, mdc_chip__touch, mdc_chip_set, mdc_touch_target_wrapper)
+import MaterialIconsFont.Classes (material_icons)
+import Web.Event.Event (Event, EventType(..))
 
 chipSet :: forall w i. Array (IProp I.HTMLdiv i) -> Array (Chip i) -> HH.HTML w i
 chipSet additionalAttributes chips =
@@ -38,7 +39,7 @@ chip (Chip config label) =
         )
         ( Array.catMaybes
             [ Just rippleElt
-            , leadingIconElt config.icon
+            , leadingIconEltMaterialIcons config.icon
             , Just $ primaryActionElt label
             ]
         )
@@ -50,8 +51,8 @@ rippleElt = HH.div [ HP.class_ mdc_chip__ripple ] []
 interactionHandler :: forall r i. Maybe (Event -> i) -> Maybe (IProp r i)
 interactionHandler = map (HE.handler (EventType "MDCChip:interaction"))
 
-leadingIconElt :: forall w i. Maybe String -> Maybe (HH.HTML w i)
-leadingIconElt =
+leadingIconEltMaterialIcons :: forall w i. Maybe String -> Maybe (HH.HTML w i)
+leadingIconEltMaterialIcons =
   map
     ( \iconName ->
         HH.i

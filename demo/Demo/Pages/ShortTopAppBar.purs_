@@ -34,18 +34,18 @@ catalogPage =
             [ HH.section [ HP.class_ mdc_top_app_bar__row ] []
                 [ TopAppBar.section
                     [ HP.class_ mdc_top_app_bar__section____align_start ]
-                    [ IconButton.iconButton
+                    [ IconButton.iconButtonMaterialIcons
                         (IconButton.defaultConfig
-                            { additionalAttributes = [ HP.class_ mdc_top_app_bar__navigation_icon ]
+                            { additionalClasses = [ mdc_top_app_bar__navigation_icon ]
                         )
                         "menu"
                     , HH.span [ HP.class_ mdc_top_app_bar__title ] [ HH.text "Short" ]
                     ]
                 , TopAppBar.section
                     [ HP.class_ mdc_top_app_bar__section____align_end ]
-                    [ IconButton.iconButton
+                    [ IconButton.iconButtonMaterialIcons
                         (IconButton.defaultConfig
-                            { additionalAttributes = [ HP.class_ mdc_top_app_bar__action_item ]
+                            { additionalClasses = [ mdc_top_app_bar__action_item ]
                         )
                         "file_download"
                     ]

@@ -35,7 +35,7 @@ squareToClassName :: Boolean -> Array ClassName
 squareToClassName true = [ rmwc_avatar____square ]
 squareToClassName false = []
 
-avatarImage ::
+avatarImageMaterialIcons ::
   forall w i.
   { size :: Size
   , url :: String
@@ -44,7 +44,7 @@ avatarImage ::
   , contain :: Boolean
   } ->
   HH.HTML w i
-avatarImage config =
+avatarImageMaterialIcons config =
   HH.span
     [ HP.title config.name
     , HP.classes
@@ -82,7 +82,6 @@ avatarInitials config =
     , HP.classes
         $ [ rmwc_icon
           , rmwc_icon____component
-          , material_icons
           , rmwc_avatar
           , sizeToClassName config.size
           ]

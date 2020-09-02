@@ -11,17 +11,13 @@ import Material.Classes.IconButton (mdc_icon_button)
 import MaterialIconsFont.Classes (material_icons)
 
 type Config i
-  = { disabled :: Boolean
-    , label :: Maybe String
-    , additionalClasses :: Array ClassName
+  = { additionalClasses :: Array ClassName
     , additionalAttributes :: Array (IProp I.HTMLbutton i)
     }
 
 defaultConfig :: forall i. Config i
 defaultConfig =
-  { disabled: false
-  , label: Nothing
-  , additionalClasses: []
+  { additionalClasses: []
   , additionalAttributes: []
   }
 
@@ -31,7 +27,7 @@ iconButton config =
     ( [ HP.classes $ [ mdc_icon_button ] <> config.additionalClasses
       , HP.tabIndex 0
       ]
-        <> config.additionalAttributes
+      <> config.additionalAttributes
     )
 
 iconButtonMaterialIcons :: forall w i. Config i -> String -> HH.HTML w i
@@ -40,6 +36,6 @@ iconButtonMaterialIcons config iconName =
     ( [ HP.classes $ [ mdc_icon_button, material_icons ] <> config.additionalClasses
       , HP.tabIndex 0
       ]
-        <> config.additionalAttributes
+      <> config.additionalAttributes
     )
     [ HH.text iconName ]

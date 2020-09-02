@@ -173,7 +173,7 @@ actionsElt messageId message =
   HH.div [ HP.class_ mdc_snackbar__actions ]
     ( Array.catMaybes
         [ actionButtonElt messageId message
-        , actionIconElt messageId message
+        , actionIconEltMaterialIcons messageId message
         ]
     )
 
@@ -194,8 +194,8 @@ actionButtonElt messageId (Message message) =
 actionButtonClickHandler :: forall i. MessageId -> Message i -> Maybe (IProp I.HTMLbutton i)
 actionButtonClickHandler messageId (Message message) = map (\f -> HE.onClick (\_ -> f messageId)) message.onActionButtonClick
 
-actionIconElt :: forall w i. MessageId -> Message i -> Maybe (HH.HTML w i)
-actionIconElt messageId (Message message) =
+actionIconEltMaterialIcons :: forall w i. MessageId -> Message i -> Maybe (HH.HTML w i)
+actionIconEltMaterialIcons messageId (Message message) =
   map
     ( \actionIconLabel ->
         HH.i

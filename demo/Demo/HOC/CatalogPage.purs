@@ -73,13 +73,13 @@ render routeOfThisCatalogPage catalogPage state =
             [ HP.class_ mdc_top_app_bar__row ]
             [ HH.section
                 [ HP.classes [ mdc_top_app_bar__section, mdc_top_app_bar__section____align_start ] ]
-                [ IconButton.iconButton
+                [ IconButton.iconButtonMaterialIcons
                     ( IconButton.defaultConfig
-                        { additionalClasses = [ mdc_top_app_bar__navigation_icon, material_icons ]
+                        { additionalClasses = [ mdc_top_app_bar__navigation_icon ]
                         , additionalAttributes = [ HE.onClick (const Toggle) ]
                         }
                     )
-                    [ HH.text "menu" ]
+                    "menu"
                 , HH.span
                     [ HP.class_ mdc_top_app_bar__title
                     , HP.style "text-transform: uppercase; font-weight: 400;"

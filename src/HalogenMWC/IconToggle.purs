@@ -30,8 +30,8 @@ defaultConfig =
   , onChange: Nothing
   }
 
-iconToggle :: forall w i. Config i -> { onIcon :: String, offIcon :: String } -> HH.HTML w i
-iconToggle config { onIcon, offIcon } =
+iconToggleMaterialIcons :: forall w i. Config i -> { onIcon :: String, offIcon :: String } -> HH.HTML w i
+iconToggleMaterialIcons config { onIcon, offIcon } =
   HH.element (ElemName "mdc-icon-button")
     ( [ HP.class_ mdc_icon_button
       , HP.prop (PropName "on") config.on

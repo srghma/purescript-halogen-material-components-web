@@ -45,11 +45,11 @@ fab config iconName =
         <> config.additionalAttributes
     )
     [ rippleElt
-    , iconElt iconName
+    , iconEltMaterialIcons iconName
     ]
 
 rippleElt :: forall w i. HH.HTML w i
 rippleElt = HH.div [ HP.class_ mdc_fab__ripple ] []
 
-iconElt :: forall w i. String -> HH.HTML w i
-iconElt iconName = HH.span [ HP.class_ material_icons, HP.class_ mdc_fab__icon ] [ HH.text iconName ]
+iconEltMaterialIcons :: forall w i. String -> HH.HTML w i
+iconEltMaterialIcons iconName = HH.span [ HP.class_ material_icons, HP.class_ mdc_fab__icon ] [ HH.text iconName ]
