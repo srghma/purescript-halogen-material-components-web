@@ -18,7 +18,7 @@ render :: forall r w i . State -> TopAppBarPage Action
 catalogPage =
     { fixedAdjust: mdc_top_app_bar____fixed_adjust
     , topAppBar =
-        TopAppBar.regular (TopAppBar.defaultConfig { fixed = true)
+        TopAppBar.topAppBar TopAppBar.Regular (TopAppBar.defaultConfig { fixed = true)
             [ HH.section [ HP.class_ mdc_top_app_bar__row ] []
                 [ TopAppBar.section
                     [ HP.class_ mdc_top_app_bar__section____align_start ]

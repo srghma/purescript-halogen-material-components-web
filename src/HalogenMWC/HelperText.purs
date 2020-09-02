@@ -30,7 +30,7 @@ helperText config string =
     [ HH.text string ]
 
 helperLine :: forall w i. Array (HH.HTML w i) -> HH.HTML w i
-helperLine = HH.div ([ HP.class_ mdc_text_field_helper_line ])
+helperLine = HH.div [ HP.class_ mdc_text_field_helper_line ]
 
 characterCounter :: forall w i. HH.HTML w i
-characterCounter = HH.div ([ HP.class_ mdc_text_field_character_counter ]) []
+characterCounter = HH.div [ HP.class_ mdc_text_field_character_counter ] []

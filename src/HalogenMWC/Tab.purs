@@ -17,13 +17,10 @@ type Content
     , icon :: Maybe String
     }
 
-defaultConfig :: forall i. Config i
-defaultConfig =
+defaultConfig :: forall i. Content -> Config i
+defaultConfig content =
   { active: false
   , additionalAttributes: []
   , onClick: Nothing
-  , content:
-    { label: ""
-    , icon: Nothing
-    }
+  , content
   }

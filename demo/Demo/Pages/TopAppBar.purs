@@ -30,36 +30,40 @@ catalogPage =
         [ HH.div
             [ HP.style "width: 480px; height: 72px;"
             ]
-            [ TopAppBar.regular
-                (TopAppBar.defaultConfig { additionalAttributes = [ HP.style "position: static;" ])
-                [ TopAppBar.section
-                    [ HP.class_ mdc_top_app_bar__section____align_start ]
-                    [ IconButton.iconButtonMaterialIcons
-                        (IconButton.defaultConfig
-                            { additionalClasses = [ mdc_top_app_bar__navigation_icon ]
-                        )
-                        "menu"
-                    , HH.span [ HP.class_ mdc_top_app_bar__title ] [ HH.text "Title" ]
-                    ]
-                , TopAppBar.section
-                    [ HP.class_ mdc_top_app_bar__section____align_end ]
-                    [ IconButton.iconButtonMaterialIcons
-                        (IconButton.defaultConfig
-                            { additionalClasses = [ mdc_top_app_bar__action_item ]
-                        )
-                        "file_download"
-                    , IconButton.iconButtonMaterialIcons
-                        (IconButton.defaultConfig
-                            { additionalClasses = [ mdc_top_app_bar__action_item ]
-                        )
-                        "print"
-                    , IconButton.iconButtonMaterialIcons
-                        (IconButton.defaultConfig
-                            { additionalClasses = [ mdc_top_app_bar__action_item ]
-                        )
-                        "more_vert"
-                    ]
-                ]
+            [ TopAppBar.topAppBar TopAppBar.Regular
+              (TopAppBar.defaultConfig { additionalAttributes = [ HP.style "position: static;" ] })
+              [ TopAppBar.section
+                  [ HP.class_ mdc_top_app_bar__section____align_start ]
+                  [ IconButton.iconButtonMaterialIcons
+                      (IconButton.defaultConfig
+                          { additionalClasses = [ mdc_top_app_bar__navigation_icon ]
+                          }
+                      )
+                      "menu"
+                  , HH.span [ HP.class_ mdc_top_app_bar__title ] [ HH.text "Title" ]
+                  ]
+              , TopAppBar.section
+                  [ HP.class_ mdc_top_app_bar__section____align_end ]
+                  [ IconButton.iconButtonMaterialIcons
+                      (IconButton.defaultConfig
+                          { additionalClasses = [ mdc_top_app_bar__action_item ]
+                          }
+                      )
+                      "file_download"
+                  , IconButton.iconButtonMaterialIcons
+                      (IconButton.defaultConfig
+                          { additionalClasses = [ mdc_top_app_bar__action_item ]
+                          }
+                      )
+                      "print"
+                  , IconButton.iconButtonMaterialIcons
+                      (IconButton.defaultConfig
+                          { additionalClasses = [ mdc_top_app_bar__action_item ]
+                          }
+                      )
+                      "more_vert"
+                  ]
+              ]
             ]
         ]
     , content:
@@ -79,8 +83,7 @@ catalogPage =
 iframe :: forall r w i . String -> Url -> HH.HTML w i
 iframe title route =
     let
-        stringUrl =
-            Route.toString route
+      stringUrl = Route.toString route
     in
     HH.div
         [ HP.style "display: inline-block; -ms-flex: 1 1 45%; flex: 1 1 45%; -ms-flex-pack: distribute; justify-content: space-around; min-height: 200px; min-width: 400px; padding: 15px;"
