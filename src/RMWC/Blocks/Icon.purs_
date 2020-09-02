@@ -42,10 +42,10 @@ iconComponent size =
   [ HP.classes $ [rmwc_icon, rmwc_icon____component, material_icons] <> maybeSizeToClassName size
   ]
 
-iconUrl :: forall w i . { url :: Url, size :: Maybe Size } -> HH.HTML w i
+iconUrl :: forall w i . { url :: Route.Route, size :: Maybe Size } -> HH.HTML w i
 iconUrl config =
   HH.i
   [ HP.classes $ [rmwc_icon, rmwc_icon____url, material_icons] <> maybeSizeToClassName config.size
-  , HP.style $ "background-image: url(" <> Url.unUrl config.url <> ");"
+  , HP.style $ "background-image: url(" <> Route.Route.unUrl config.url <> ");"
   ]
   []

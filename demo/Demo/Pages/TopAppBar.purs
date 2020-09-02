@@ -1,21 +1,23 @@
 module Demo.Pages.TopAppBar where
 
-import Demo.HOC.CatalogPage (CatalogPage)
-import Demo.Route
+import Demo.Route as Route
+import Demo.Utils
+import Halogen
+import Material.Classes.Typography
 import Protolude
+
 import Data.Array as Array
 import Data.Maybe as Maybe
-import Halogen
+import Demo.HOC.CatalogPage (CatalogPage)
 import Halogen as H
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
-import Halogen.HTML.Properties as HP
 import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.IconButton as IconButton
 import HalogenMWC.TopAppBar as TopAppBar
-import Material.Classes.Typography
-import Demo.Utils
+import Material.Classes.TopAppBar
 
 catalogPage :: CatalogPage
 catalogPage =
@@ -32,8 +34,7 @@ catalogPage =
             ]
             [ TopAppBar.topAppBar TopAppBar.Regular
               (TopAppBar.defaultConfig { additionalAttributes = [ HP.style "position: static;" ] })
-              [ HH.section [ HP.classes [ mdc_top_app_bar__section ] ]
-                  [ HP.class_ mdc_top_app_bar__section____align_start ]
+              [ HH.section [ HP.classes [ mdc_top_app_bar__section, mdc_top_app_bar__section____align_start ] ]
                   [ IconButton.iconButtonMaterialIcons
                       (IconButton.defaultConfig
                           { additionalClasses = [ mdc_top_app_bar__navigation_icon ]
@@ -42,8 +43,7 @@ catalogPage =
                       "menu"
                   , HH.span [ HP.class_ mdc_top_app_bar__title ] [ HH.text "Title" ]
                   ]
-              , HH.section [ HP.classes [ mdc_top_app_bar__section ] ]
-                  [ HP.class_ mdc_top_app_bar__section____align_end ]
+              , HH.section [ HP.classes [ mdc_top_app_bar__section, mdc_top_app_bar__section____align_end ] ]
                   [ IconButton.iconButtonMaterialIcons
                       (IconButton.defaultConfig
                           { additionalClasses = [ mdc_top_app_bar__action_item ]
@@ -70,17 +70,17 @@ catalogPage =
         [ HH.div
             [ HP.style "display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; min-height: 200px;"
             ]
-            [ iframe "Standard" Route.StandardTopAppBar
-            , iframe "Fixed" Route.FixedTopAppBar
-            , iframe "Dense" Route.DenseTopAppBar
-            , iframe "Prominent" Route.ProminentTopAppBar
-            , iframe "Short" Route.ShortTopAppBar
-            , iframe "Short - Always Collapsed" Route.ShortCollapsedTopAppBar
+            [ iframe "Standard"                 Route.TopAppBar_Standard
+            , iframe "Fixed"                    Route.TopAppBar_Fixed
+            , iframe "Dense"                    Route.TopAppBar_Dense
+            , iframe "Prominent"                Route.TopAppBar_Prominent
+            , iframe "Short"                    Route.TopAppBar_Short
+            , iframe "Short - Always Collapsed" Route.TopAppBar_ShortCollapsed
             ]
         ]
     }
 
-iframe :: forall r w i . String -> Url -> HH.HTML w i
+iframe :: forall r w i . String -> Route.Route -> HH.HTML w i
 iframe title route =
     let
       stringUrl = Route.toString route

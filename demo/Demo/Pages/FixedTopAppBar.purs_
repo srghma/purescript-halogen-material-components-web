@@ -1,4 +1,4 @@
-module Demo.Pages.FixedTopAppBar where
+module Demo.Pages.TopAppBar_Fixed where
 
 import Demo.TopAppBarPage
 import Protolude
