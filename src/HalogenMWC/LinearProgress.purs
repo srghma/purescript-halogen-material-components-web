@@ -28,8 +28,8 @@ defaultConfig =
   , additionalAttributes: []
   }
 
-linearProgress :: forall w i. Variant -> Config i -> HH.HTML w i
-linearProgress variant config =
+linearProgress :: forall w i. Config i -> Variant -> HH.HTML w i
+linearProgress config variant =
   HH.element (ElemName "mdc-linear-progress")
     ( [ HP.classes
           $ Array.catMaybes

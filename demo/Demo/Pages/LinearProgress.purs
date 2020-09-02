@@ -8,12 +8,14 @@ import Protolude
 
 import Data.Array as Array
 import Data.Maybe as Maybe
+import Demo.Route (Route(..))
 import Halogen as H
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import HalogenMWC.LinearProgress (Variant(..), linearProgress)
 import HalogenMWC.LinearProgress as LinearProgress
 
 catalogPage :: CatalogPage
@@ -25,18 +27,15 @@ catalogPage =
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-LinearProgress"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-linear-progress"
         }
-    , hero: mkComponentStatic $ HH.div_ [ LinearProgress.linearProgress (LinearProgress.Determinate 0.5) ]
+    , hero: mkComponentStatic $ HH.div_ [ LinearProgress.linearProgress LinearProgress.defaultConfig (LinearProgress.Determinate 0.5) ]
     , content: mkComponentStatic $ HH.div_
         [ HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Buffered" ]
-        , LinearProgress.linearProgress LinearProgress.Buffered LinearProgress.defaultConfig { progress: 0.5, buffered: 0.75 }
+        , LinearProgress.linearProgress LinearProgress.defaultConfig (LinearProgress.Buffered { progress: 0.5, buffer: 0.75 })
         , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Indeterminate" ]
-        , LinearProgress.linearProgress LinearProgress.Indeterminate LinearProgress.defaultConfig
+        , LinearProgress.linearProgress LinearProgress.defaultConfig LinearProgress.Indeterminate
         , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Reversed" ]
-        , LinearProgress.determinate
-          (LinearProgress.defaultConfig { reverse = true })
-          { progress: 0.5 }
+        , LinearProgress.linearProgress (LinearProgress.defaultConfig { reverse = true }) (LinearProgress.Determinate 0.5)
         , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Reversed Buffered" ]
-        , LinearProgress.buffered (LinearProgress.defaultConfig { reverse = true })
-          { progress: 0.5, buffered: 0.75 }
+        , LinearProgress.linearProgress (LinearProgress.defaultConfig { reverse = true }) (LinearProgress.Buffered { progress: 0.5, buffer: 0.75 })
         ]
     }
