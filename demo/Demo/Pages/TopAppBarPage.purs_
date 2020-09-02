@@ -26,7 +26,7 @@ render lift { topAppBar, fixedAdjust } =
             ]
             [ topAppBar
             , HH.div [ fixedAdjust ]
-                (List.repeat 4 (HH.p [] [ HH.text demoParagraph ]))
+                (Array.replicate 4 (HH.p [] [ HH.text demoParagraph ]))
             ]
 
 demoParagraph :: forall r w i . String

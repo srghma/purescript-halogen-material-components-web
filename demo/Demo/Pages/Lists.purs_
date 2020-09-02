@@ -120,7 +120,7 @@ heroList =
     [ List.list
         (List.defaultConfig { additionalAttributes = (HP.style "background: #fff;" :: demoList))
         listItem
-        (List.repeat 2 listItem)
+        (Array.replicate 2 listItem)
     ]
 
 singleLineList :: forall w i . HH.HTML w i
@@ -131,7 +131,7 @@ singleLineList =
     in
     List.list (List.defaultConfig { additionalAttributes = demoList)
         listItem
-        (List.repeat 2 listItem)
+        (Array.replicate 2 listItem)
 
 twoLineList :: forall w i . HH.HTML w i
 twoLineList =
@@ -150,7 +150,7 @@ twoLineList =
             , additionalAttributes = demoList
         )
         listItem
-        (List.repeat 2 listItem)
+        (Array.replicate 2 listItem)
 
 leadingIconList :: forall w i . HH.HTML w i
 leadingIconList =
@@ -176,7 +176,7 @@ trailingIconList =
     in
     List.list (List.defaultConfig { additionalAttributes = demoList)
         listItem
-        (List.repeat 2 listItem)
+        (Array.replicate 2 listItem)
 
 activatedItemList :: forall r w i . State -> HH.HTML w Action
 activatedItemList state =
@@ -353,7 +353,7 @@ focusList =
                 { additionalAttributes = (demoList <> [ HP.id_ "my-list" ])
             )
             (List.Item.listItem List.Item.defaultConfig [ HH.text "Line item" ])
-            (List.repeat 2 $ List.Item.listItem List.Item.defaultConfig [ HH.text "Line item" ])
+            (Array.replicate 2 $ List.Item.listItem List.Item.defaultConfig [ HH.text "Line item" ])
         , HH.text "\x00A0"
         , Button.button Button.Raised
             (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Focus "my-list") ] })

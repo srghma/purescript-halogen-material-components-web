@@ -1,32 +1,21 @@
 module Demo.Pages.ImageList where
 
 import Demo.HOC.CatalogPage
+import Demo.Utils
+import Halogen
+import Material.Classes.Typography
 import Protolude
+
 import Data.Array as Array
 import Data.Maybe as Maybe
-import Halogen
 import Halogen as H
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
-import Halogen.HTML.Properties as HP
 import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.ImageList as ImageList
 import HalogenMWC.ImageList.Item as ImageList.Item
-import Material.Classes.Typography
-
-data State =
-    Unit
-
-initialState :: forall r w i . State
-initialState = unit
-
-data Action
-    = NoOp
-
-handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
-handleAction =
-    state
 
 catalogPage :: CatalogPage
 catalogPage =
@@ -37,14 +26,15 @@ catalogPage =
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-ImageList"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-image-list"
         }
-    , hero =
+    , hero: mkComponentStatic $ HH.div_
         [ ImageList.imageList
             (ImageList.defaultConfig
-                { additionalAttributes = [ HP.style "width: 300px;" ]
+              { additionalAttributes = [ HP.style "width: 300px;" ]
+              }
             )
-            (List.repeat 15 imageListHeroItem)
+            (Array.replicate 15 imageListHeroItem)
         ]
-    , content:
+    , content: mkComponentStatic $ HH.div_
         [ HH.h3
             [ HP.class_ mdc_typography____subtitle1 ]
             [ HH.text "Standard Image Array with Text Protection" ]
@@ -62,6 +52,7 @@ standardImageList =
         (ImageList.defaultConfig
             { withTextProtection = true
             , additionalAttributes = [ HP.style "max-width: 900px;" ]
+            }
         )
         (map standardItem standardImages)
 
@@ -70,44 +61,46 @@ masonryImageList =
     ImageList.imageList
         (ImageList.defaultConfig
             { masonry = true
-            , additionalAttributes =
-                [ HP.style "max-width: 900px; column-count: 5; column-gap: 16px;"
-                ]
+            , additionalAttributes = [ HP.style "max-width: 900px; column-count: 5; column-gap: 16px;" ]
+            }
         )
         (map masonryItem masonryImages)
 
-imageListHeroItem :: forall r w i . ImageList.Item w i
+imageListHeroItem :: forall r w i . ImageList.Item.ImageListItem w i
 imageListHeroItem =
-    ImageList.Item.imageListItem
+    ImageList.Item.ImageListItem
         (ImageList.Item.defaultConfig
             { additionalAttributes =
                 [ HP.style "width: calc(100% / 5 - 4.2px); margin: 2px;"
                 ]
+            , image = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAABNJREFUCB1jZGBg+A/EDEwgAgQADigBA//q6GsAAAAASUVORK5CYII%3D"
+            }
         )
-        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAABNJREFUCB1jZGBg+A/EDEwgAgQADigBA//q6GsAAAAASUVORK5CYII%3D"
 
-standardItem :: forall r w i . String -> ImageList.Item w i
-standardItem route =
+standardItem :: forall r w i . String -> ImageList.Item.ImageListItem w i
+standardItem image =
     -- TODO:
     -- ImageList.imageAspectContainer
     --   [ HP.style "padding-bottom: 66.66667%;" ]
-    ImageList.Item.imageListItem
+    ImageList.Item.ImageListItem
         (ImageList.Item.defaultConfig
             { label = Just "Text label"
             , additionalAttributes =
                 [ HP.style "width: calc(100% / 5 - 4.2px); margin: 2px;"
                 ]
+            , image = image
+            }
         )
-        route
 
-masonryItem :: forall r w i . String -> ImageList.Item w i
-masonryItem route =
-    ImageList.Item.imageListItem
+masonryItem :: forall r w i . String -> ImageList.Item.ImageListItem w i
+masonryItem image =
+    ImageList.Item.ImageListItem
         (ImageList.Item.defaultConfig
             { label = Just "Text label"
             , additionalAttributes = [ HP.style "margin-bottom: 16px;" ]
+            , image = image
+            }
         )
-        route
 
 standardImages :: forall r w i . Array String
 standardImages =

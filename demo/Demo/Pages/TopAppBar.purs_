@@ -38,7 +38,7 @@ catalogPage =
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-TopAppBar"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-top-app-bar"
         }
-    , hero =
+    , hero:
         [ HH.div
             [ HP.style "width: 480px; height: 72px;"
             ]
