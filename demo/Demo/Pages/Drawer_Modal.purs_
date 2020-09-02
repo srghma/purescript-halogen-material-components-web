@@ -1,4 +1,4 @@
-module Demo.Pages.Drawer.Modal where
+module Demo.Pages.Drawer_Modal where
 
 import Demo.DrawerPage as DrawerPage
 import HalogenMWC.Drawer.Modal as Drawer.Modal

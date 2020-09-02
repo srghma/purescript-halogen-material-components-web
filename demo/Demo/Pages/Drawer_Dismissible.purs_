@@ -1,4 +1,4 @@
-module Demo.Pages.Drawer.Dismissible where
+module Demo.Pages.Drawer_Dismissible where
 
 
 import Demo.DrawerPage as DrawerPage
