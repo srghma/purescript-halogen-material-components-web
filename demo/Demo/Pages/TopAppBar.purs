@@ -28,59 +28,56 @@ catalogPage =
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-TopAppBar"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-top-app-bar"
         }
-    , hero:
-        [ HH.div
-            [ HP.style "width: 480px; height: 72px;"
-            ]
-            [ TopAppBar.topAppBar TopAppBar.Regular
-              (TopAppBar.defaultConfig { additionalAttributes = [ HP.style "position: static;" ] })
-              [ HH.section [ HP.classes [ mdc_top_app_bar__section, mdc_top_app_bar__section____align_start ] ]
-                  [ IconButton.iconButtonMaterialIcons
-                      (IconButton.defaultConfig
-                          { additionalClasses = [ mdc_top_app_bar__navigation_icon ]
-                          }
-                      )
-                      "menu"
-                  , HH.span [ HP.class_ mdc_top_app_bar__title ] [ HH.text "Title" ]
-                  ]
-              , HH.section [ HP.classes [ mdc_top_app_bar__section, mdc_top_app_bar__section____align_end ] ]
-                  [ IconButton.iconButtonMaterialIcons
-                      (IconButton.defaultConfig
-                          { additionalClasses = [ mdc_top_app_bar__action_item ]
-                          }
-                      )
-                      "file_download"
-                  , IconButton.iconButtonMaterialIcons
-                      (IconButton.defaultConfig
-                          { additionalClasses = [ mdc_top_app_bar__action_item ]
-                          }
-                      )
-                      "print"
-                  , IconButton.iconButtonMaterialIcons
-                      (IconButton.defaultConfig
-                          { additionalClasses = [ mdc_top_app_bar__action_item ]
-                          }
-                      )
-                      "more_vert"
-                  ]
-              ]
-            ]
+    , hero: mkComponentStatic $
+        HH.div
+        [ HP.style "width: 480px; height: 72px;"
         ]
-    , content:
-        [ HH.div
-            [ HP.style "display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; min-height: 200px;"
-            ]
-            [ iframe "Standard"                 Route.TopAppBar_Standard
-            , iframe "Fixed"                    Route.TopAppBar_Fixed
-            , iframe "Dense"                    Route.TopAppBar_Dense
-            , iframe "Prominent"                Route.TopAppBar_Prominent
-            , iframe "Short"                    Route.TopAppBar_Short
-            , iframe "Short - Always Collapsed" Route.TopAppBar_ShortCollapsed
-            ]
+        [ TopAppBar.topAppBar TopAppBar.Regular
+          (TopAppBar.defaultConfig { additionalAttributes = [ HP.style "position: static;" ] })
+          [ HH.section [ HP.classes [ mdc_top_app_bar__section, mdc_top_app_bar__section____align_start ] ]
+              [ IconButton.iconButtonMaterialIcons
+                  (IconButton.defaultConfig
+                      { additionalClasses = [ mdc_top_app_bar__navigation_icon ]
+                      }
+                  )
+                  "menu"
+              , HH.span [ HP.class_ mdc_top_app_bar__title ] [ HH.text "Title" ]
+              ]
+          , HH.section [ HP.classes [ mdc_top_app_bar__section, mdc_top_app_bar__section____align_end ] ]
+              [ IconButton.iconButtonMaterialIcons
+                  (IconButton.defaultConfig
+                      { additionalClasses = [ mdc_top_app_bar__action_item ]
+                      }
+                  )
+                  "file_download"
+              , IconButton.iconButtonMaterialIcons
+                  (IconButton.defaultConfig
+                      { additionalClasses = [ mdc_top_app_bar__action_item ]
+                      }
+                  )
+                  "print"
+              , IconButton.iconButtonMaterialIcons
+                  (IconButton.defaultConfig
+                      { additionalClasses = [ mdc_top_app_bar__action_item ]
+                      }
+                  )
+                  "more_vert"
+              ]
+          ]
+        ]
+    , content: mkComponentStatic $ HH.div
+        [ HP.style "display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; min-height: 200px;"
+        ]
+        [ iframe "Standard"                 Route.TopAppBar_Standard
+        , iframe "Fixed"                    Route.TopAppBar_Fixed
+        , iframe "Dense"                    Route.TopAppBar_Dense
+        , iframe "Prominent"                Route.TopAppBar_Prominent
+        , iframe "Short"                    Route.TopAppBar_Short
+        , iframe "Short - Always Collapsed" Route.TopAppBar_ShortCollapsed
         ]
     }
 
-iframe :: forall r w i . String -> Route.Route -> HH.HTML w i
+iframe :: forall w i . String -> Route.Route -> HH.HTML w i
 iframe title route =
     let
       stringUrl = Route.toString route
@@ -100,5 +97,4 @@ iframe title route =
             [ HP.style "width: 100%; height: 200px;"
             , HP.src stringUrl
             ]
-            []
         ]

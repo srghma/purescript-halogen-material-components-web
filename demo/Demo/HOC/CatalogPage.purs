@@ -68,7 +68,7 @@ render :: Route -> CatalogPage -> State -> HH.ComponentHTML Action ChildSlots Af
 render routeOfThisCatalogPage catalogPage state =
   HH.div
     catalogPageContainer
-    [ TopAppBar.topAppBar TopAppBar.defaultConfig
+    [ TopAppBar.topAppBar TopAppBar.Regular TopAppBar.defaultConfig
         [ HH.section
             [ HP.class_ mdc_top_app_bar__row ]
             [ HH.section

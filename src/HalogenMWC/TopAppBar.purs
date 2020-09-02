@@ -9,12 +9,12 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Material.Classes.TopAppBar (mdc_top_app_bar, mdc_top_app_bar____dense, mdc_top_app_bar____fixed, mdc_top_app_bar____prominent, mdc_top_app_bar____short, mdc_top_app_bar____short_collapsed)
 
-type Config i
-  = { dense :: Boolean
-    , variant :: Variant
-    , fixed :: Boolean
-    , additionalAttributes :: Array (IProp I.HTMLdiv i)
-    }
+type Config i =
+  { dense :: Boolean
+  , fixed :: Boolean
+  , additionalClasses :: Array ClassName
+  , additionalAttributes :: Array (IProp I.HTMLdiv i)
+  }
 
 data Variant
   = Regular
@@ -25,23 +25,23 @@ data Variant
 defaultConfig :: forall i. Config i
 defaultConfig =
   { dense: false
-  , variant: Regular
   , fixed: false
+  , additionalClasses: []
   , additionalAttributes: []
   }
 
-topAppBar :: forall i w. Config i -> Array (HH.HTML w i) -> HH.HTML w i
-topAppBar config =
+topAppBar :: forall i w. Variant -> Config i -> Array (HH.HTML w i) -> HH.HTML w i
+topAppBar variant config =
   HH.element (ElemName "mdc-top-app-bar")
-    ( [ HP.classes
-          $ Array.concat
-              [ [ mdc_top_app_bar ]
-              , variantCs config.variant
-              , if config.dense then [ mdc_top_app_bar____dense ] else []
-              , if config.fixed then [ mdc_top_app_bar____fixed ] else []
-              ]
+    ( [ HP.classes $ Array.concat
+        [ [ mdc_top_app_bar ]
+        , variantCs variant
+        , if config.dense then [ mdc_top_app_bar____dense ] else []
+        , if config.fixed then [ mdc_top_app_bar____fixed ] else []
+        , config.additionalClasses
+        ]
       ]
-        <> config.additionalAttributes
+      <> config.additionalAttributes
     )
 
 variantCs :: Variant -> Array ClassName

@@ -39,7 +39,7 @@ component =
   render :: forall r w i. State -> H.ComponentHTML Action () m
   render _ =
     HH.div_
-      [ TopAppBar.topAppBar TopAppBar.defaultConfig
+      [ TopAppBar.topAppBar TopAppBar.Regular TopAppBar.defaultConfig
           [ HH.section
               [ HP.class_ mdc_top_app_bar__row
               ]

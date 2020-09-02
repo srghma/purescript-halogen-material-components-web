@@ -36,7 +36,7 @@ render page =
     [ page.drawer
     , Maybe.fromMaybe (HH.text "") page.scrim
     , HH.div [ HP.class_ mdc_drawer_app_content ]
-        [ TopAppBar.topAppBar TopAppBar.defaultConfig
+        [ TopAppBar.topAppBar TopAppBar.Regular TopAppBar.defaultConfig
             [ HH.section [ HP.class_ mdc_top_app_bar__row ]
                 [ HH.section [ HP.classes [ mdc_top_app_bar__section, mdc_top_app_bar__section____align_start ] ]
                     [ case page.onMenuClick of
