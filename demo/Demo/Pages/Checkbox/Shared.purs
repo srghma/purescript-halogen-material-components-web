@@ -1,5 +1,4 @@
 module Demo.Pages.Checkbox.Shared where
-
 import Demo.Utils (focusById)
 import Protolude (Aff, Const, Maybe(..), Unit, Void, const, ($))
 import DOM.HTML.Indexed (HTMLinput) as I

@@ -14,19 +14,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Elevation as Elevation
 import HalogenMWC.Ripple as Ripple
 import Material.Classes.Typography
-
-data State =
-    Unit
-
-initialState :: forall r w i . State
-initialState = unit
-
-data Action
-    = NoOp
-
-handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
-handleAction =
-    state
+import Demo.Utils
 
 catalogPage :: CatalogPage
 catalogPage =

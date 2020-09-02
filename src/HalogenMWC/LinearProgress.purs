@@ -19,7 +19,7 @@ type Config i
 data Variant
   = Indeterminate
   | Determinate Number
-  | Buffered Number Number
+  | Buffered { progress :: Number, buffer :: Number }
 
 defaultConfig :: forall i. Config i
 defaultConfig =
@@ -65,13 +65,13 @@ progressProp :: forall r i. Variant -> IProp r i
 progressProp variant =
   HP.prop (PropName "progress") case variant of
     Determinate progress -> progress
-    Buffered progress _ -> progress
+    Buffered { progress } -> progress
     _ -> 0.0
 
 bufferProp :: forall r i. Variant -> IProp r i
 bufferProp variant =
   HP.prop (PropName "buffer") case variant of
-    Buffered _ buffer -> buffer
+    Buffered { buffer } -> buffer
     _ -> 0.0
 
 bufferingDotsElt :: forall w i. HH.HTML w i

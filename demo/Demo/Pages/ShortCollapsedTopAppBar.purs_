@@ -3,19 +3,7 @@ module Demo.Pages.ShortCollapsedTopAppBar where
 import Demo.TopAppBarPage
 import HalogenMWC.IconButton as IconButton
 import HalogenMWC.TopAppBar as TopAppBar
-
-data State =
-    Unit
-
-initialState :: forall r w i . State
-initialState = unit
-
-data Action
-    = NoOp
-
-handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
-handleAction =
-    state
+import Demo.Utils
 
 render :: forall r w i . State -> TopAppBarPage Action
 catalogPage =
