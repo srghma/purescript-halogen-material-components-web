@@ -32,7 +32,7 @@ catalogPage =
             ]
             [ TopAppBar.topAppBar TopAppBar.Regular
               (TopAppBar.defaultConfig { additionalAttributes = [ HP.style "position: static;" ] })
-              [ TopAppBar.section
+              [ HH.section [ HP.classes [ mdc_top_app_bar__section ] ]
                   [ HP.class_ mdc_top_app_bar__section____align_start ]
                   [ IconButton.iconButtonMaterialIcons
                       (IconButton.defaultConfig
@@ -42,7 +42,7 @@ catalogPage =
                       "menu"
                   , HH.span [ HP.class_ mdc_top_app_bar__title ] [ HH.text "Title" ]
                   ]
-              , TopAppBar.section
+              , HH.section [ HP.classes [ mdc_top_app_bar__section ] ]
                   [ HP.class_ mdc_top_app_bar__section____align_end ]
                   [ IconButton.iconButtonMaterialIcons
                       (IconButton.defaultConfig

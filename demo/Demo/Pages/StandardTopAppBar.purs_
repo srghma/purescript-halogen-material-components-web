@@ -20,7 +20,7 @@ catalogPage =
     , topAppBar =
         TopAppBar.topAppBar TopAppBar.defaultConfig
             [ HH.section [ HP.class_ mdc_top_app_bar__row ] []
-                [ TopAppBar.section
+                [ HH.section [ HP.classes [ mdc_top_app_bar__section ] ]
                     [ HP.class_ mdc_top_app_bar__section____align_start ]
                     [ IconButton.iconButtonMaterialIcons
                         (IconButton.defaultConfig
@@ -29,7 +29,7 @@ catalogPage =
                         "menu"
                     , HH.span [ HP.class_ mdc_top_app_bar__title ] [ HH.text "Standard" ]
                     ]
-                , TopAppBar.section
+                , HH.section [ HP.classes [ mdc_top_app_bar__section ] ]
                     [ HP.class_ mdc_top_app_bar__section____align_end ]
                     [ IconButton.iconButtonMaterialIcons
                         (IconButton.defaultConfig
