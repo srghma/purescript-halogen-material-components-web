@@ -87,7 +87,7 @@ filledSelect state =
         (Select.defaultConfig
             { label = Just "Fruit"
             , selected = Just state.filled
-            , onChange = FilledChanged
+            , onChange = Just FilledChanged
             }
         )
         firstItem
@@ -99,7 +99,7 @@ outlinedSelect state =
         (Select.defaultConfig
             { label = Just "Fruit"
             , selected = Just state.outlined
-            , onChange = OutlinedChanged
+            , onChange = Just OutlinedChanged
             }
         )
         firstItem
@@ -112,7 +112,7 @@ filledWithIconSelect state =
             { label = Just "Fruit"
             , selected = Just state.filledWithIcon
             , leadingIcon = Just (Select.icon [] "favorite")
-            , onChange = FilledWithIconChanged
+            , onChange = Just FilledWithIconChanged
             }
         )
         firstItem
@@ -125,7 +125,7 @@ outlinedWithIconSelect state =
             { label = Just "Fruit"
             , selected = Just state.outlinedWithIcon
             , leadingIcon = Just (Select.icon [] "favorite")
-            , onChange = OutlinedWithIconChanged
+            , onChange = Just OutlinedWithIconChanged
             }
         )
         firstItem
@@ -139,7 +139,7 @@ focusSelect state =
         [ Select.select Select.Filled
             (Select.defaultConfig
                 { selected = Just state.focused
-                , onChange = FocusedChanged
+                , onChange = Just FocusedChanged
                 , additionalAttributes = [ HP.id_ "my-select" ]
                 }
             )
