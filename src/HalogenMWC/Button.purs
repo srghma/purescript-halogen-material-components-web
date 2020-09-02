@@ -31,7 +31,7 @@ button variant config =
     commonProps =
       [ HP.classes (Common.commonClasses variant config.touch <> config.additionalClasses)
       , HP.disabled config.disabled
-      , HP.prop (PropName "tabIndex") (if config.disabled then -1 else 0)
+      , HP.tabIndex (if config.disabled then -1 else 0)
       ]
   in
     \content ->

@@ -49,7 +49,7 @@ radio config =
             , HP.checked config.checked
             , HP.disabled config.disabled
             ]
-              <> config.additionalAttributes
+            <> config.additionalAttributes
           )
           [ nativeControlElt config
           , backgroundElt
@@ -68,7 +68,7 @@ nativeControlElt config =
       , HP.type_ InputRadio
       , HP.checked config.checked
       ]
-        <> changeHandler config.onChange
+      <> changeHandler config.onChange
     )
 
 backgroundElt :: forall w i. HH.HTML w i

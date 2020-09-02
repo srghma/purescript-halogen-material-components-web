@@ -1,6 +1,6 @@
 module Demo.Pages.LinearProgress where
 
-import Demo.HOC.CatalogPage
+import Demo.HOC.CatalogPage (CatalogPage)
 import Demo.Utils
 import Halogen
 import Material.Classes.Typography

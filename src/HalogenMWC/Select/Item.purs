@@ -10,8 +10,7 @@ type Config a i
     , additionalAttributes :: Array (IProp I.HTMLa i)
     }
 
-data SelectItem w a i
-  = SelectItem (Config a i) (Array (HH.HTML w i))
+data SelectItem a w i = SelectItem (Config a i) (Array (HH.HTML w i))
 
 defaultConfig :: forall i a. a -> Config a i
 defaultConfig value =

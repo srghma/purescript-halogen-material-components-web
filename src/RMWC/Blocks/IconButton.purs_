@@ -38,7 +38,7 @@ iconButton
 iconButton config =
   HH.button
     [ HP.role "button"
-    , HP.tabindex "0"
+    , HP.tabIndex "0"
     , HP.aria-label config.label
     , HP.classes
       [ rmwc_icon

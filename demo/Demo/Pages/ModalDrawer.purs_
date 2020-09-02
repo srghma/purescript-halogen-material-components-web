@@ -1,49 +1,40 @@
 module Demo.Pages.Drawer.Modal where
-    ( State
-    , Action(..)
-    , initialState
-    , update
-    , render
-    )
 
 import Demo.DrawerPage as DrawerPage
 import HalogenMWC.Drawer.Modal as Drawer.Modal
 
-type State = { open :: Boolean
-    , selectedIndex :: Int
-    }
+type State =
+  { open :: Boolean
+  , selectedIndex :: Int
+  }
 
 initialState :: forall r w i . State
 initialState =
-    { open: false
-    , selectedIndex: 0
-    }
+  { open: false
+  , selectedIndex: 0
+  }
 
 data Action
-    = OpenDrawer
-    | CloseDrawer
-    | SetSelectedIndex Int
+  = OpenDrawer
+  | CloseDrawer
+  | SetSelectedIndex Int
 
 handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
 handleAction =
     case _ of
-        OpenDrawer ->
-            { open = true }
+        OpenDrawer -> H.modify_ (_ { open = true })
+        CloseDrawer -> H.modify_ (_ { open = false })
+        SetSelectedIndex index -> H.modify_ (_ { selectedIndex = index })
 
-        CloseDrawer ->
-            { open = false }
-
-        SetSelectedIndex index ->
-            { selectedIndex = index }
-
-render :: forall r w i . State -> DrawerPage Action
+catalogPage :: forall r w i . State -> DrawerPage Action
 catalogPage =
     { title: "Modal Drawer"
-    , drawer =
+    , drawer:
         Drawer.Modal.drawer
             (Drawer.Modal.defaultConfig
                 { open = state.open
                 , onClose = Just $ const $ CloseDrawer
+                }
             )
             (DrawerPage.drawerBody SetSelectedIndex state.selectedIndex)
     , scrim: Just (Drawer.Modal.scrim [] [])

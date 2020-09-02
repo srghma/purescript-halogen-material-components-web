@@ -1,6 +1,6 @@
 module Demo.Pages.Fabs where
 
-import Demo.HOC.CatalogPage
+import Demo.HOC.CatalogPage (CatalogPage)
 import Protolude
 import Data.Array as Array
 import Data.Maybe as Maybe

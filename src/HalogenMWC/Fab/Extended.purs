@@ -37,7 +37,7 @@ fab config label =
         [ Just $ HP.classes
             $ [ mdc_fab, mdc_fab____extended ]
             <> if config.exited then [ mdc_fab____exited ] else []
-        , Just $ HP.prop (PropName "tabIndex") 0
+        , Just $ HP.tabIndex 0
         , map HE.onClick config.onClick
         ]
         <> config.additionalAttributes

@@ -1,6 +1,6 @@
 module Demo.Pages.Dialog where
 
-import Demo.HOC.CatalogPage
+import Demo.HOC.CatalogPage (CatalogPage)
 import Demo.Utils
 import Halogen
 import Material.Classes.List
@@ -27,6 +27,10 @@ data Dialog
   | ConfirmationDialog
   | ScrollableDialog
   | SimpleDialog
+
+type ChildSlots = ()
+
+type Message = Void
 
 derive instance eqDialog :: Eq Dialog
 
@@ -89,11 +93,11 @@ catalogPage =
           }
   }
 
-alertDialog :: forall r w i . State -> HH.HTML w Action
+alertDialog :: forall w . State -> HH.HTML w Action
 alertDialog state =
   Dialog.dialog
     (Dialog.defaultConfig
-        { open = (state.open == Just AlertDialog)
+        { open = state.open == Just AlertDialog
         , onClose = Just $ const $ Close
         }
     )

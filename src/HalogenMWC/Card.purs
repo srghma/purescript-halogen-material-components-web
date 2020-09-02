@@ -103,7 +103,7 @@ primaryAction :: forall w i. Array (IProp I.HTMLdiv i) -> Array (HH.HTML w i) ->
 primaryAction additionalAttributes =
   HH.div
     ( [ HP.class_ mdc_card__primary_action
-      , HP.prop (PropName "tabIndex") 0
+      , HP.tabIndex 0
       ]
         <> additionalAttributes
     )

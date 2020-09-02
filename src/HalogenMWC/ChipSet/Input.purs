@@ -45,9 +45,6 @@ chip (Chip config label) =
         )
     ]
 
-tabIndexProp :: forall r i. Int -> IProp r i
-tabIndexProp = HP.prop (PropName "tabIndex")
-
 removalHandler :: forall r i. Chip.Config i -> Maybe (IProp r i)
 removalHandler config = map (HE.handler (EventType "MDCChip:removal")) config.onDelete
 
@@ -64,7 +61,7 @@ leadingIconEltMaterialIcons config =
 primaryActionElt :: forall w i. String -> HH.HTML w i
 primaryActionElt label =
   HH.span
-    [ HP.class_ mdc_chip__primary_action, HP.attr (AttrName "role") "gridcell", tabIndexProp (-1) ]
+    [ HP.class_ mdc_chip__primary_action, HP.attr (AttrName "role") "gridcell", HP.tabIndex (-1) ]
     [ textElt label, touchElt ]
 
 textElt :: forall w i. String -> HH.HTML w i
@@ -79,7 +76,7 @@ trailingIconEltMaterialIcons config =
     ( const
         $ HH.i
             [ HP.classes [ material_icons, mdc_chip__icon, mdc_chip__icon____trailing ]
-            , tabIndexProp (-1)
+            , HP.tabIndex (-1)
             , HP.attr (AttrName "role") "button"
             ]
             [ HH.text (Maybe.fromMaybe "cancel" config.trailingIcon) ]

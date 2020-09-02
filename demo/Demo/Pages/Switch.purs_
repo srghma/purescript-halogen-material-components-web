@@ -1,6 +1,6 @@
 module Demo.Pages.Switch where
 
-import Demo.HOC.CatalogPage
+import Demo.HOC.CatalogPage (CatalogPage)
 import Data.Map (Map)
 import Data.Map as Map
 import Protolude
@@ -27,8 +27,7 @@ initialState =
 data Action
     = Toggle String
     | Focus String
-    | Focused (Result Browser.Dom.Error ())
-
+    
 handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
 handleAction =
     case _ of
@@ -79,12 +78,12 @@ heroSwitch state =
         (FormField.defaultConfig
             { label = Just "off/on"
             , for = Just id
-            , onClick = (Toggle id)
+            , onClick = Just $ const $ Toggle id)
         )
         [ Switch.switch
             (Switch.defaultConfig
                 { checked = (isChecked id state)
-                , onChange = (Toggle id)
+                , onChange = Just $ const $ Toggle id)
             )
         ]
     ]
@@ -99,12 +98,12 @@ demoSwitch state =
         (FormField.defaultConfig
             { label = Just "off/on"
             , for = Just id
-            , onClick = (Toggle id)
+            , onClick = Just $ const $ Toggle id)
         )
         [ Switch.switch
             (Switch.defaultConfig
                 { checked = (isChecked id state)
-                , onChange = (Toggle id)
+                , onChange = Just $ const $ Toggle id)
             )
         ]
 
@@ -119,13 +118,13 @@ focusSwitch state =
             (FormField.defaultConfig
                 { label = Just "off/on"
                 , for = Just id
-                , onClick = (Toggle id)
+                , onClick = Just $ const $ Toggle id)
                 , additionalAttributes = [ HP.id_ "my-form-field" ]
             )
             [ Switch.switch
                 (Switch.defaultConfig
                     { checked = (isChecked id state)
-                    , onChange = (Toggle id)
+                    , onChange = Just $ const $ Toggle id)
                     , additionalAttributes = [ HP.id_ id ]
                 )
             ]

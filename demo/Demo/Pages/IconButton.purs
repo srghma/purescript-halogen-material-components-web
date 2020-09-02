@@ -1,6 +1,6 @@
 module Demo.Pages.IconButton where
 
-import Demo.HOC.CatalogPage
+import Demo.HOC.CatalogPage (CatalogPage)
 import Protolude
 import Data.Array as Array
 import Data.Maybe as Maybe
@@ -20,6 +20,10 @@ import Data.Set as Set
 import Demo.Utils
 
 type State = { ons :: Set String }
+
+type ChildSlots = ()
+
+type Message = Void
 
 initialState :: forall r w i . State
 initialState = { ons: Set.empty }

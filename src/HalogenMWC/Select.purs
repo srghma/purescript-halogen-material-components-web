@@ -52,8 +52,8 @@ select ::
   Eq a =>
   Variant ->
   Config a w i ->
-  Select.Item.SelectItem w a i ->
-  Array (Select.Item.SelectItem w a i) ->
+  Select.Item.SelectItem a w i ->
+  Array (Select.Item.SelectItem a w i) ->
   HH.HTML w i
 select variant config firstSelectItem remainingSelectItems =
   let
@@ -133,7 +133,7 @@ notchedOutlineElt config =
     , HH.div [ HP.class_ mdc_notched_outline__trailing ] []
     ]
 
-menuElt :: forall a w i. Maybe (HH.HTML w i) -> Maybe a -> Maybe (a -> i) -> Select.Item.SelectItem w a i -> Array (Select.Item.SelectItem w a i) -> HH.HTML w i
+menuElt :: forall a w i. Maybe (HH.HTML w i) -> Maybe a -> Maybe (a -> i) -> Select.Item.SelectItem a w i -> Array (Select.Item.SelectItem a w i) -> HH.HTML w i
 menuElt leadingIcon selected onChange firstSelectItem remainingSelectItems =
   Menu.menu
     ( Menu.defaultConfig
@@ -142,18 +142,21 @@ menuElt leadingIcon selected onChange firstSelectItem remainingSelectItems =
         }
     )
     [ List.list (List.defaultConfig { wrapFocus = true })
-        (listItem (Maybe.isJust leadingIcon) selected onChange firstSelectItem)
-        (map (listItem (Maybe.isJust leadingIcon) selected onChange) remainingSelectItems)
+        (listItem (Maybe.isJust leadingIcon) onChange firstSelectItem)
+        (map (listItem (Maybe.isJust leadingIcon) onChange) remainingSelectItems)
     ]
 
-listItem :: forall a w i. Boolean -> Maybe a -> Maybe (a -> i) -> Select.Item.SelectItem w a i -> List.Item.ListItem w i
-listItem showLeadingIcon selected onChange (Select.Item.SelectItem config nodes) =
-  List.Item.listItem
-    (listItemConfig selected onChange config)
+listItem :: forall a w i. Boolean -> Maybe (a -> i) -> Select.Item.SelectItem a w i -> List.Item.ListItem w i
+listItem showLeadingIcon onChange (Select.Item.SelectItem (config :: Select.Item.Config a i) nodes) =
+  let
+      listItemConfig' :: List.Item.Config w i
+      listItemConfig' = listItemConfig onChange config
+  in
+  List.Item.listItem listItemConfig'
     (if showLeadingIcon then [ HH.div [ HP.class_ mdc_list_item__graphic ] nodes ] else nodes)
 
-listItemConfig :: forall a i w. Maybe a -> Maybe (a -> i) -> Select.Item.Config a i -> List.Item.Config w i
-listItemConfig selectedValue onChange config =
+listItemConfig :: forall a i w. Maybe (a -> i) -> Select.Item.Config a i -> List.Item.Config w i
+listItemConfig onChange config =
   List.Item.defaultConfig
     { disabled = config.disabled
     , additionalAttributes = config.additionalAttributes

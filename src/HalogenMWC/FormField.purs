@@ -35,7 +35,7 @@ formField config nodes =
   HH.element (ElemName "mdc-form-field")
     ( [ HP.classes $ [ mdc_form_field ] <> (if config.alignEnd then [ mdc_form_field____align_end ] else [])
       ]
-        <> config.additionalAttributes
+      <> config.additionalAttributes
     )
     (nodes <> [ labelElt config ])
 

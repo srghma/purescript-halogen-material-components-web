@@ -39,7 +39,7 @@ fab config iconName =
               else
                 []
                   <> if config.exited then [ mdc_fab____exited ] else []
-        , Just $ HP.prop (PropName "tabIndex") 0
+        , Just $ HP.tabIndex 0
         , map HE.onClick config.onClick
         ]
         <> config.additionalAttributes

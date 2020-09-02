@@ -1,10 +1,5 @@
 module Demo.Pages.Drawer.Dismissible where
-    ( State
-    , Action(..)
-    , initialState
-    , update
-    , render
-    )
+
 
 import Demo.DrawerPage as DrawerPage
 import HalogenMWC.Drawer.Dismissible as Drawer.Dismissible

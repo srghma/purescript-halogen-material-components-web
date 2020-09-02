@@ -1,6 +1,6 @@
 module Demo.Pages.TabBar where
 
-import Demo.HOC.CatalogPage
+import Demo.HOC.CatalogPage (CatalogPage)
 import Protolude
 import Data.Array as Array
 import Data.Maybe as Maybe
@@ -36,8 +36,7 @@ data Action
     | SetActiveStackedTab Int
     | SetActiveScrollingTab Int
     | Focus String
-    | Focused (Result Browser.Dom.Error ())
-
+    
 handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
 handleAction =
     case _ of
@@ -88,19 +87,19 @@ heroTabs state index =
         [ Tab.tab
             (Tab.defaultConfig
                 { active = (state.activeHeroTab == 0)
-                , onClick = (SetActiveHeroTab 0)
+                , onClick = Just $ const $ SetActiveHeroTab 0)
             )
             { label: "Home", icon: Nothing }
         , Tab.tab
             (Tab.defaultConfig
                 { active = (state.activeHeroTab == 1)
-                , onClick = (SetActiveHeroTab 1)
+                , onClick = Just $ const $ SetActiveHeroTab 1)
             )
             { label: "Merchandise", icon: Nothing }
         , Tab.tab
             (Tab.defaultConfig
                 { active = (state.activeHeroTab == 2)
-                , onClick = (SetActiveHeroTab 2)
+                , onClick = Just $ const $ SetActiveHeroTab 2)
             )
             { label: "About Us", icon: Nothing }
         ]
@@ -111,7 +110,7 @@ tabsWithIcons state =
         config index =
             Tab.defaultConfig
                 { active = (state.activeIconTab == index)
-                , onClick = (SetActiveIconTab index)
+                , onClick = Just $ const $ SetActiveIconTab index)
     in
     TabBar.tabBar TabBar.defaultConfig
         [ Tab.tab (config 0) { label: "Recents", icon: Just "access_time" }
@@ -125,7 +124,7 @@ tabsWithStackedIcons state =
         config index =
             Tab.defaultConfig
                 { active = (state.activeStackedTab == index)
-                , onClick = (SetActiveStackedTab index)
+                , onClick = Just $ const $ SetActiveStackedTab index)
     in
     TabBar.tabBar
         (TabBar.defaultConfig
@@ -143,7 +142,7 @@ scrollingTabs state =
         config index =
             Tab.defaultConfig
                 { active = (state.activeScrollingTab == index)
-                , onClick = (SetActiveScrollingTab index)
+                , onClick = Just $ const $ SetActiveScrollingTab index)
     in
     TabBar.tabBar TabBar.defaultConfig
         (List.indexedMap
@@ -163,19 +162,19 @@ focusTabs state =
             [ Tab.tab
                 (Tab.defaultConfig
                     { active = (state.activeHeroTab == 0)
-                    , onClick = (SetActiveHeroTab 0)
+                    , onClick = Just $ const $ SetActiveHeroTab 0)
                 )
                 { label: "Home", icon: Nothing }
             , Tab.tab
                 (Tab.defaultConfig
                     { active = (state.activeHeroTab == 1)
-                    , onClick = (SetActiveHeroTab 1)
+                    , onClick = Just $ const $ SetActiveHeroTab 1)
                 )
                 { label: "Merchandise", icon: Nothing }
             , Tab.tab
                 (Tab.defaultConfig
                     { active = (state.activeHeroTab == 2)
-                    , onClick = (SetActiveHeroTab 2)
+                    , onClick = Just $ const $ SetActiveHeroTab 2)
                 )
                 { label: "About Us", icon: Nothing }
             ]

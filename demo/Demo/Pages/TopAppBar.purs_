@@ -1,6 +1,6 @@
 module Demo.Pages.TopAppBar where
 
-import Demo.HOC.CatalogPage
+import Demo.HOC.CatalogPage (CatalogPage)
 import Demo.Route
 import Protolude
 import Data.Array as Array
