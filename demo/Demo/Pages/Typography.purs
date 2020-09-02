@@ -1,16 +1,19 @@
 module Demo.Pages.Typography where
 
-import Demo.HOC.CatalogPage (CatalogPage)
+import Demo.Utils
+import Halogen
 import Protolude
+
 import Data.Array as Array
 import Data.Maybe as Maybe
-import Halogen
+import Demo.HOC.CatalogPage (CatalogPage)
 import Halogen as H
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
-import Halogen.HTML.Properties as HP
 import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
+import Material.Classes.Typography
 import Demo.Utils
 
 catalogPage :: CatalogPage
@@ -22,8 +25,8 @@ catalogPage =
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-Typography"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-typography"
         }
-    , hero: [ HH.h1 [ HP.class_ mdc_typography____headline1 ] [ HH.text "Typography" ] ]
-    , content:
+    , hero: mkComponentStatic $ HH.h1 [ HP.class_ mdc_typography____headline1 ] [ HH.text "Typography" ]
+    , content: mkComponentStatic $ HH.div_
         [ HH.h1 [ HP.class_ mdc_typography____headline1 ] [ HH.text "Headline 1" ]
         , HH.h2 [ HP.class_ mdc_typography____headline2 ] [ HH.text "Headline 2" ]
         , HH.h3 [ HP.class_ mdc_typography____headline3 ] [ HH.text "Headline 3" ]
