@@ -61,5 +61,5 @@ config =
               (DrawerPage.drawerBody SetSelectedIndex state.selectedIndex)
         }
   , scrim: Just (Drawer.Modal.scrim [])
-  , onMenuClick: Just (\mouseEvent -> OpenDrawer)
+  , onMenuClick: Just OpenDrawer
   }

@@ -26,7 +26,7 @@ import Web.UIEvent.MouseEvent (MouseEvent)
 type DrawerPage drawerQuery =
   { title :: String
   , drawer :: H.Component drawerQuery Unit Void Aff
-  , onMenuClick :: Maybe (forall a . MouseEvent -> a -> drawerQuery a)
+  , onMenuClick :: Maybe (Unit -> drawerQuery Unit)
   , scrim :: Maybe (HH.ComponentHTML (Action drawerQuery) (ChildSlots drawerQuery) Aff)
   }
 
@@ -38,15 +38,15 @@ type ChildSlots drawerQuery =
   ( drawer :: H.Slot drawerQuery Void Unit
   )
 
-data Action drawerQuery = HandleClick (forall a . MouseEvent -> a -> drawerQuery a) MouseEvent
+data Action drawerQuery = HandleClick (Unit -> drawerQuery Unit)
 
 type Input = Unit
 
 type Message = Void
 
-handleAction :: (Action drawerQuery) -> H.HalogenM State (Action drawerQuery) (ChildSlots drawerQuery) Message Aff Unit
+handleAction :: forall drawerQuery . (Action drawerQuery) -> H.HalogenM State (Action drawerQuery) (ChildSlots drawerQuery) Message Aff Unit
 handleAction = case _ of
-  HandleClick f mouseEvent -> H.request (SProxy :: SProxy "drawer") unit (f mouseEvent)
+  HandleClick f -> H.tell (SProxy :: SProxy "drawer") unit f
 
 render :: forall drawerQuery . DrawerPage drawerQuery -> State -> HH.ComponentHTML (Action drawerQuery) (ChildSlots drawerQuery) Aff
 render page state =
@@ -66,7 +66,7 @@ render page state =
                   Just f ->
                       Icon.materialIcon
                         [ HP.class_ mdc_top_app_bar__navigation_icon
-                        , HE.onClick (HandleClick f)
+                        , HE.onClick (\_ -> HandleClick f)
                         ]
                         "menu"
                   Nothing -> HH.text ""
