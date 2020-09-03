@@ -21,7 +21,7 @@ data Action
   | SetSelectedIndex Int
 
 data Query a =
-  OpenDrawer MouseEvent a
+  OpenDrawer a
 
 type Input = Unit
 
@@ -37,7 +37,7 @@ handleAction =
 
 handleQuery :: forall a. Query a -> H.HalogenM State Action ChildSlots Message Aff (Maybe a)
 handleQuery = case _ of
-  OpenDrawer _mouseEvent next -> do
+  OpenDrawer next -> do
     H.modify_ (_ { open = true })
     pure (Just next)
 
@@ -61,5 +61,5 @@ config =
               (DrawerPage.drawerBody SetSelectedIndex state.selectedIndex)
         }
   , scrim: Just (Drawer.Modal.scrim [])
-  -- | , onMenuClick: Just OpenDrawer
+  , onMenuClick: Just (\mouseEvent -> OpenDrawer)
   }

@@ -60,6 +60,7 @@ config =
               )
               (DrawerPage.drawerBody SetSelectedIndex state.selectedIndex)
         }
+  , onMenuClick: Nothing
   -- | , onMenuClick: Just ToggleDrawer
   , scrim: Nothing
   }

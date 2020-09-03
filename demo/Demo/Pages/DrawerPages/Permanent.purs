@@ -35,5 +35,5 @@ config =
       , render: \state -> Drawer.Permanent.drawer (DrawerPage.drawerBody SetSelectedIndex state.selectedIndex)
       }
   , scrim: Nothing
-  -- | , onMenuClick: Nothing
+  , onMenuClick: Nothing
   }

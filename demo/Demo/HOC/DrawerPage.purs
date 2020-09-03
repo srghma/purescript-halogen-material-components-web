@@ -26,8 +26,8 @@ import Web.UIEvent.MouseEvent (MouseEvent)
 type DrawerPage drawerQuery =
   { title :: String
   , drawer :: H.Component drawerQuery Unit Void Aff
-  -- | , onMenuClick :: Maybe (MouseEvent -> drawerQuery)
-  , scrim :: Maybe (HH.ComponentHTML Action (ChildSlots drawerQuery) Aff)
+  , onMenuClick :: Maybe (forall a . MouseEvent -> a -> drawerQuery a)
+  , scrim :: Maybe (HH.ComponentHTML (Action drawerQuery) (ChildSlots drawerQuery) Aff)
   }
 
 type State = Unit
@@ -38,13 +38,17 @@ type ChildSlots drawerQuery =
   ( drawer :: H.Slot drawerQuery Void Unit
   )
 
-type Action = Void
+data Action drawerQuery = HandleClick (forall a . MouseEvent -> a -> drawerQuery a) MouseEvent
 
 type Input = Unit
 
 type Message = Void
 
-render :: forall drawerQuery . DrawerPage drawerQuery -> State -> HH.ComponentHTML Action (ChildSlots drawerQuery) Aff
+handleAction :: (Action drawerQuery) -> H.HalogenM State (Action drawerQuery) (ChildSlots drawerQuery) Message Aff Unit
+handleAction = case _ of
+  HandleClick f mouseEvent -> H.request (SProxy :: SProxy "drawer") unit (f mouseEvent)
+
+render :: forall drawerQuery . DrawerPage drawerQuery -> State -> HH.ComponentHTML (Action drawerQuery) (ChildSlots drawerQuery) Aff
 render page state =
   HH.div
     [ HP.style "display: -ms-flexbox; display: flex; height: 100vh;"
@@ -58,16 +62,15 @@ render page state =
             [ HP.class_ mdc_top_app_bar__row ]
             [ HH.section
               [ HP.classes [ mdc_top_app_bar__section, mdc_top_app_bar__section____align_start ] ]
-              [
-                -- | case page.onMenuClick of
-                -- |   Just handleClick ->
-                -- |       Icon.materialIcon
-                -- |         [ HP.class_ mdc_top_app_bar__navigation_icon
-                -- |         , HE.onClick handleClick
-                -- |         ]
-                -- |         "menu"
-                -- |   Nothing -> HH.text ""
-                HH.span [ HP.class_ mdc_top_app_bar__title ] [ HH.text page.title ]
+              [ case page.onMenuClick of
+                  Just f ->
+                      Icon.materialIcon
+                        [ HP.class_ mdc_top_app_bar__navigation_icon
+                        , HE.onClick (HandleClick f)
+                        ]
+                        "menu"
+                  Nothing -> HH.text ""
+              , HH.span [ HP.class_ mdc_top_app_bar__title ] [ HH.text page.title ]
               ]
             ]
           ]
