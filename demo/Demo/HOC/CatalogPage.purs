@@ -32,25 +32,20 @@ type CatalogPage
     , content :: H.Component (Const Void) Unit Void Aff
     }
 
-type State
-  = { isDrawerOpen :: Boolean }
+type State = { isDrawerOpen :: Boolean }
 
-type Query
-  = Const Void
+type Query = Const Void
 
-type ChildSlots
-  = ( hero :: H.Slot (Const Void) Void Unit
-    , content :: H.Slot (Const Void) Void Unit
-    )
+type ChildSlots =
+  ( hero :: H.Slot (Const Void) Void Unit
+  , content :: H.Slot (Const Void) Void Unit
+  )
 
-data Action
-  = Toggle
+data Action = Toggle
 
-type Input
-  = Unit
+type Input = Unit
 
-type Message
-  = Void
+type Message = Void
 
 mkComponent :: Route -> CatalogPage -> H.Component Query Input Message Aff
 mkComponent routeOfThisCatalogPage catalogPage =

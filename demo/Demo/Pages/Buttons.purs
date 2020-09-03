@@ -12,17 +12,13 @@ import Halogen.HTML.Properties as HP
 import HalogenMWC.Button as Button
 import Demo.MkComponent.WithFocus as WithFocus
 
-type State
-  = Unit
+type State = Unit
 
-type Query
-  = Const Void
+type Query = Const Void
 
-type Input
-  = Unit
+type Input = Unit
 
-type Message
-  = Void
+type Message = Void
 
 catalogPage :: CatalogPage
 catalogPage =

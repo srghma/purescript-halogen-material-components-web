@@ -191,7 +191,7 @@ scrollableDialog state =
         )
         { title: Just "The Wonderful Wizard of Oz"
         , content:
-            [ HH.p []
+            [ HH.p_
                 [ HH.text """
                     Dorothy lived in the midst of the great Kansas prairies,
                     with Uncle Henry, who was a farmer, and Aunt Em, who was
@@ -210,7 +210,7 @@ scrollableDialog state =
                     led down into the small, dark hole.
                   """
                 ]
-            , HH.p []
+            , HH.p_
                 [ HH.text """
                     When Dorothy stood in the doorway and looked around, she
                     could see nothing but the great gray prairie on every side.
@@ -225,7 +225,7 @@ scrollableDialog state =
                     the house was as dull and gray as everything else.
                   """
                 ]
-            , HH.p []
+            , HH.p_
                 [ HH.text """
                     When Aunt Em came there to live she was a young, pretty
                     wife. The sun and wind had changed her, too. They had taken
@@ -240,7 +240,7 @@ scrollableDialog state =
                     laugh at.
                   """
                 ]
-            , HH.p []
+            , HH.p_
                 [ HH.text """
                     Uncle Henry never laughed. He worked hard from morning till
                     night and did not know what joy was. He was gray also, from
@@ -248,7 +248,7 @@ scrollableDialog state =
                     solemn, and rarely spoke.
                   """
                 ]
-            , HH.p []
+            , HH.p_
                 [ HH.text """
                     It was Toto that made Dorothy laugh, and saved her from
                     growing as gray as her other surroundings. Toto was not
@@ -258,7 +258,7 @@ scrollableDialog state =
                     played with him, and loved him dearly.
                   """
                 ]
-            , HH.p []
+            , HH.p_
                 [ HH.text """
                     Today, however, they were not playing. Uncle Henry sat upon
                     the doorstep and looked anxiously at the sky, which was
@@ -267,7 +267,7 @@ scrollableDialog state =
                     the dishes.
                   """
                 ]
-            , HH.p []
+            , HH.p_
                 [ HH.text """
                     From the far north they heard a low wail of the wind, and
                     Uncle Henry and Dorothy could see where the long grass
