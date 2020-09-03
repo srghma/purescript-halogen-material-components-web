@@ -15,8 +15,8 @@ import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Material.Classes.Elevation
 
-catalogPage :: CatalogPage
-catalogPage =
+config :: CatalogPage
+config =
     { title: "Elevation"
     , prelude: "Elevation is the relative depth, or distance, between two surfaces along the z-axis."
     , resources:

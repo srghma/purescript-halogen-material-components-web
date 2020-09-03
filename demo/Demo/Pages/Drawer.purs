@@ -5,6 +5,7 @@ import Demo.Utils
 import Halogen
 import Material.Classes.Typography
 import Protolude
+import Demo.Route as Route
 
 import Data.Array as Array
 import Data.Maybe as Maybe
@@ -21,8 +22,8 @@ import HalogenMWC.List.Item as List.Item
 import Material.Classes.Drawer
 -- | import Material.Classes.List
 
-catalogPage :: CatalogPage
-catalogPage =
+config :: CatalogPage
+config =
   { title: "Drawer"
   , prelude: "The navigation drawer slides in from the left and contains the navigation destinations for your app."
   , resources:
@@ -32,9 +33,9 @@ catalogPage =
       }
   , hero: mkComponentStatic $ HH.div_ heroDrawer
   , content: mkComponentStatic $ HH.div_
-      [ iframe "Permanent" "#permanent-drawer"
-      , iframe "Dismissible" "#dismissible-drawer"
-      , iframe "Modal" "#modal-drawer"
+      [ iframe "Permanent"   Route.Drawer_Permanent
+      , iframe "Dismissible" Route.Drawer_Dismissible
+      , iframe "Modal"       Route.Drawer_Modal
       ]
   }
 
@@ -70,20 +71,23 @@ heroDrawer =
     ]
   ]
 
-iframe :: forall r w i . String -> String -> HH.HTML w i
+iframe :: forall r w i . String -> Route.Route -> HH.HTML w i
 iframe label route =
+  let
+    stringUrl = Route.toString route
+  in
   HH.div
     [ HP.style "display: inline-block; -ms-flex: 1 1 80%; flex: 1 1 80%; -ms-flex-pack: distribute; justify-content: space-around; min-height: 400px; min-width: 400px; padding: 15px;"
     ]
     [ HH.div_
         [ HH.a
-            [ HP.href route
+            [ HP.href stringUrl
             , HP.target "_blank"
             ]
             [ HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text label ] ]
         ]
     , HH.iframe
-        [ HP.src route
+        [ HP.src stringUrl
         , HP.style "height: 400px; width: 100vw; max-width: 780px;"
         ]
     ]

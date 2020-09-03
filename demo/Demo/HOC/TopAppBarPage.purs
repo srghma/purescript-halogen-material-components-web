@@ -14,12 +14,26 @@ import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
-type TopAppBarPage w i =
+type TopAppBarPage =
   { fixedAdjust :: ClassName
-  , topAppBar :: HH.HTML w i
+  , topAppBar :: HH.ComponentHTML Void () Aff
   }
 
-render :: forall w i . TopAppBarPage w i -> HH.HTML w i
+type Query = Const Void
+
+type Input = Unit
+
+type Message = Void
+
+mkComponent :: TopAppBarPage -> H.Component Query Input Message Aff
+mkComponent config =
+  H.mkComponent
+    { initialState: const unit
+    , render: const $ render config
+    , eval: H.mkEval H.defaultEval
+    }
+
+render :: TopAppBarPage -> HH.ComponentHTML Void () Aff
 render config =
   HH.div
     [ HP.class_ mdc_typography

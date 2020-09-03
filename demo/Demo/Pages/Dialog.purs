@@ -49,8 +49,8 @@ handleAction =
     Close -> H.modify_ (_ { open = Nothing })
     Show id -> H.modify_ (_ { open = Just id })
 
-catalogPage :: CatalogPage
-catalogPage =
+config :: CatalogPage
+config =
   { title: "Dialog"
   , prelude: "Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks."
   , resources:

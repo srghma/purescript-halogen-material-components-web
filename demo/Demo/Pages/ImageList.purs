@@ -17,8 +17,8 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.ImageList as ImageList
 import HalogenMWC.ImageList.Item as ImageList.Item
 
-catalogPage :: CatalogPage
-catalogPage =
+config :: CatalogPage
+config =
     { title: "Image List"
     , prelude: "Image lists display a collection of images in an organized grid."
     , resources:

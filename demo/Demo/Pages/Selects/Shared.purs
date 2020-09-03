@@ -1,4 +1,4 @@
-module Demo.Pages.Selects.Shared where
+module Demo.Pages.Select.Shared where
 
 import Demo.HOC.CatalogPage (CatalogPage)
 import Protolude

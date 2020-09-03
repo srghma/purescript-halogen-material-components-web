@@ -1,4 +1,4 @@
-module Demo.Pages.Selects where
+module Demo.Pages.Select where
 
 import Demo.HOC.CatalogPage (CatalogPage)
 import Protolude
@@ -16,11 +16,11 @@ import HalogenMWC.Select as Select
 import HalogenMWC.Select.Item as Select.Item
 import Material.Classes.Typography
 import Demo.Utils
-import Demo.Pages.Selects.Hero as Hero
-import Demo.Pages.Selects.Content as Content
+import Demo.Pages.Select.Hero as Hero
+import Demo.Pages.Select.Content as Content
 
-catalogPage :: CatalogPage
-catalogPage =
+config :: CatalogPage
+config =
     { title: "Select"
     , prelude: "Selects allow users to select from a single-option menu."
     , resources:

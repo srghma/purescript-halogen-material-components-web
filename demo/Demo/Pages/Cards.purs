@@ -1,4 +1,4 @@
-module Demo.Pages.Cards where
+module Demo.Pages.Card where
 
 import Demo.HOC.CatalogPage (CatalogPage)
 import Demo.Utils (mkComponentStatic)
@@ -26,8 +26,8 @@ type Input
 type Message
   = Void
 
-catalogPage :: CatalogPage
-catalogPage =
+config :: CatalogPage
+config =
   { title: "Card"
   , prelude: "Cards contain content and actions about a single subject."
   , resources:

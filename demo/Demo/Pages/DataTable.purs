@@ -39,8 +39,8 @@ handleAction =
     AllSelected -> H.modify_ \state -> state { selected = Set.fromFoldable [ "Frozen yogurt", "Ice cream sandwich", "Eclair" ] }
     AllUnselected -> H.modify_ \state -> state { selected = (Set.empty :: Set String) }
 
-catalogPage :: CatalogPage
-catalogPage =
+config :: CatalogPage
+config =
     { title: "Data Table"
     , prelude: "Data tables display information in a way that’s easy to scan, so that users can look for patterns and insights."
     , resources:

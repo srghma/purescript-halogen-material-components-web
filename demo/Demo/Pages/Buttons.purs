@@ -1,10 +1,10 @@
-module Demo.Pages.Buttons where
+module Demo.Pages.Button where
 
 import Demo.HOC.CatalogPage (CatalogPage)
 import Demo.Utils (mkComponentStatic)
 import Material.Classes.Typography (mdc_typography____subtitle1)
 import Protolude (Const, Maybe(..), Unit, Void, const, ($), (<>))
-import Demo.Pages.Buttons.Css as Demo.Pages.Buttons.Css
+import Demo.Pages.Button.Css as Demo.Pages.Button.Css
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
@@ -20,8 +20,8 @@ type Input = Unit
 
 type Message = Void
 
-catalogPage :: CatalogPage
-catalogPage =
+config :: CatalogPage
+config =
   { title: "Button"
   , prelude: "Buttons communicate an action a user can take. They are typically placed throughout your UI, in places like dialogs, forms, cards, and toolbars."
   , resources:
@@ -103,7 +103,7 @@ buttonsRow button additionalAttributes =
   in
     HH.div_
       [ button config [ HH.text "Default" ]
-      , button (config { additionalClasses = [ Demo.Pages.Buttons.Css.styles.my_button_dense ] }) [ HH.text "Dense" ]
+      , button (config { additionalClasses = [ Demo.Pages.Button.Css.styles.my_button_dense ] }) [ HH.text "Dense" ]
       , button config [ Button.buttonIconMaterialIcons "favorite", HH.text "Icon" ]
       ]
 

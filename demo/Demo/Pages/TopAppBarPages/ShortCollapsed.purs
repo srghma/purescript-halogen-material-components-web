@@ -10,7 +10,7 @@ import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import HalogenMWC.IconButton as IconButton
 
-config :: forall w i . TopAppBarPage w i
+config :: TopAppBarPage
 config =
     { fixedAdjust: mdc_top_app_bar____short_fixed_adjust
     , topAppBar:

@@ -40,8 +40,8 @@ handleAction =
         }
       Focus id -> H.liftEffect $ focusById id
 
-catalogPage :: CatalogPage
-catalogPage =
+config :: CatalogPage
+config =
     { title: "Icon Button"
     , prelude: "Icons are appropriate for buttons that allow a user to take actions or make a selected, such as adding or removing a star to an item."
     , resources:

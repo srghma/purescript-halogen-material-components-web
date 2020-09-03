@@ -1,4 +1,4 @@
-module Demo.Pages.Fabs where
+module Demo.Pages.Fab where
 
 import Demo.HOC.CatalogPage (CatalogPage)
 import Protolude
@@ -18,8 +18,8 @@ import Material.Classes.Typography
 import Demo.Utils
 import Demo.MkComponent.WithFocus as WithFocus
 
-catalogPage :: CatalogPage
-catalogPage =
+config :: CatalogPage
+config =
     { title: "Floating Action Button"
     , prelude: "Floating action buttons represents the primary action in an application. Only one floating action button is recommended per screen to represent the most common action."
     , resources:

@@ -1,4 +1,4 @@
-module Demo.Pages.Lists where
+module Demo.Pages.List where
 
 import Demo.HOC.CatalogPage (CatalogPage)
 import Halogen
@@ -60,8 +60,8 @@ handleAction =
       SetShapedActivated id -> H.modify_ (_ { shapedActivated = id })
       Focus id              -> H.liftEffect $ focusById id
 
-catalogPage :: CatalogPage
-catalogPage =
+config :: CatalogPage
+config =
     { title: "List"
     , prelude: "Lists present multiple line items vertically as a single continuous element."
     , resources:

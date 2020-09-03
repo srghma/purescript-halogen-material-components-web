@@ -17,7 +17,7 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.IconButton as IconButton
 import HalogenMWC.TopAppBar as TopAppBar
 
-config :: forall w i . TopAppBarPage w i
+config :: TopAppBarPage
 config =
   { fixedAdjust: mdc_top_app_bar____dense_fixed_adjust
   , topAppBar:

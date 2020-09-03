@@ -48,10 +48,10 @@ type Input = Unit
 type Message = Void
 
 mkComponent :: Route -> CatalogPage -> H.Component Query Input Message Aff
-mkComponent routeOfThisCatalogPage catalogPage =
+mkComponent routeOfThisCatalogPage config =
   H.mkComponent
     { initialState: const { isDrawerOpen: false }
-    , render: render routeOfThisCatalogPage catalogPage
+    , render: render routeOfThisCatalogPage config
     , eval: H.mkEval H.defaultEval { handleAction = handleAction }
     }
 
@@ -60,9 +60,9 @@ handleAction = case _ of
   Toggle -> H.modify_ \state -> state { isDrawerOpen = not state.isDrawerOpen }
 
 render :: Route -> CatalogPage -> State -> HH.ComponentHTML Action ChildSlots Aff
-render routeOfThisCatalogPage catalogPage state =
+render routeOfThisCatalogPage config state =
   HH.div
-    catalogPageContainer
+    configContainer
     [ TopAppBar.topAppBar TopAppBar.Regular TopAppBar.defaultConfig
         [ HH.section
             [ HP.class_ mdc_top_app_bar__row ]
@@ -111,13 +111,13 @@ render routeOfThisCatalogPage catalogPage state =
         , HH.div
             ([ HP.classes [ mdc_top_app_bar____fixed_adjust, mdc_drawer_app_content ] ] <> demoContent)
             [ HH.div demoContentTransition
-                [ HH.h1 [ HP.class_ mdc_typography____headline5 ] [ HH.text catalogPage.title ]
-                , HH.p [ HP.class_ mdc_typography____body1 ] [ HH.text catalogPage.prelude ]
-                , HH.slot (SProxy :: SProxy "hero") unit catalogPage.hero unit absurd
+                [ HH.h1 [ HP.class_ mdc_typography____headline5 ] [ HH.text config.title ]
+                , HH.p [ HP.class_ mdc_typography____body1 ] [ HH.text config.prelude ]
+                , HH.slot (SProxy :: SProxy "hero") unit config.hero unit absurd
                 , HH.h2 ([ HP.class_ mdc_typography____headline6 ] <> demoTitle) [ HH.text "Resources" ]
-                , resourcesList catalogPage.resources
+                , resourcesList config.resources
                 , HH.h2 ([ HP.class_ mdc_typography____headline6 ] <> demoTitle) [ HH.text "Demos" ]
-                , HH.slot (SProxy :: SProxy "content") unit catalogPage.content unit absurd
+                , HH.slot (SProxy :: SProxy "content") unit config.content unit absurd
                 ]
             ]
         ]
@@ -201,8 +201,8 @@ catalogDrawerItems =
   , { label: "Typography", route: Route.Typography }
   ]
 
-catalogPageContainer :: forall r w i. Array (IProp I.HTMLdiv i)
-catalogPageContainer =
+configContainer :: forall r w i. Array (IProp I.HTMLdiv i)
+configContainer =
   [ HP.style "position: relative;"
   , HP.class_ mdc_typography
   ]

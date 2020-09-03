@@ -44,6 +44,14 @@ type Input = Unit
 
 type Message = Void
 
+mkComponent :: forall drawerQuery . DrawerPage drawerQuery -> H.Component Query Input Message Aff
+mkComponent config =
+  H.mkComponent
+    { initialState: const unit
+    , render: render config
+    , eval: H.mkEval H.defaultEval { handleAction = handleAction }
+    }
+
 handleAction :: forall drawerQuery . (Action drawerQuery) -> H.HalogenM State (Action drawerQuery) (ChildSlots drawerQuery) Message Aff Unit
 handleAction = case _ of
   HandleClick f -> H.tell (SProxy :: SProxy "drawer") unit f

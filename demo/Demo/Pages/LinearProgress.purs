@@ -18,8 +18,8 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.LinearProgress (Variant(..), linearProgress)
 import HalogenMWC.LinearProgress as LinearProgress
 
-catalogPage :: CatalogPage
-catalogPage =
+config :: CatalogPage
+config =
     { title: "Linear Progress Indicator"
     , prelude: "Progress indicators display the length of a process or express an unspecified wait time."
     , resources:

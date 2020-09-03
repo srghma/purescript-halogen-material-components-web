@@ -1,12 +1,12 @@
-module Demo.Pages.Chips where
+module Demo.Pages.Chip where
 
 import Demo.HOC.CatalogPage (CatalogPage)
 import Protolude (Maybe(..))
-import Demo.Pages.Chips.Hero as Hero
-import Demo.Pages.Chips.Content as Content
+import Demo.Pages.Chip.Hero as Hero
+import Demo.Pages.Chip.Content as Content
 
-catalogPage :: CatalogPage
-catalogPage =
+config :: CatalogPage
+config =
   { title: "Chips"
   , prelude: "Chips are compact elements that allow users to enter information, select a choice, filter content, or trigger an action."
   , resources:

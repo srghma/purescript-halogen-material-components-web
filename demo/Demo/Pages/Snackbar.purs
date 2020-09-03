@@ -73,8 +73,8 @@ stackedMessage =
     , actionIcon = Just "close"
     }
 
-catalogPage :: CatalogPage
-catalogPage =
+config :: CatalogPage
+config =
     { title: "Snackbar"
     , prelude: "Snackbars provide brief feedback about an operation through a message at the bottom of the screen."
     , resources:

@@ -34,8 +34,8 @@ handleAction =
         Changed id value -> H.modify_ (Map.insert id value)
         Focus id -> H.liftEffect $ focusById id
 
-catalogPage :: CatalogPage
-catalogPage =
+config :: CatalogPage
+config =
     { title: "Slider"
     , prelude: "Sliders let users select from a range of values by moving the slider thumb."
     , resources:

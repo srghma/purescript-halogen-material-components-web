@@ -1,4 +1,4 @@
-module Demo.Pages.Chips.Content where
+module Demo.Pages.Chip.Content where
 
 import Data.Set (Set)
 import Data.Set as Set

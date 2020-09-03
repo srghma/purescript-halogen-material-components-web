@@ -17,8 +17,8 @@ import Material.Classes.Elevation
 import MaterialIconsFont.Classes
 import Demo.Utils
 
-catalogPage :: CatalogPage
-catalogPage =
+config :: CatalogPage
+config =
     { title: "Ripple"
     , prelude: "Ripples are visual representations used to communicate the status of a component or interactive element."
     , resources:

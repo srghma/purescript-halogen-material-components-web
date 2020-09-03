@@ -16,8 +16,8 @@ import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import Material.Classes.Typography
 import Demo.Utils
 
-catalogPage :: CatalogPage
-catalogPage =
+config :: CatalogPage
+config =
     { title: "Typography"
     , prelude: "Roboto is the standard typeface on Android and Chrome."
     , resources:

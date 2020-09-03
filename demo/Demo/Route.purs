@@ -45,6 +45,9 @@ data Route
   | TopAppBar_Prominent
   | TopAppBar_Short
   | TopAppBar_ShortCollapsed
+  | Drawer_Permanent
+  | Drawer_Dismissible
+  | Drawer_Modal
 
 derive instance genericRoute :: Generic Route _
 
@@ -63,38 +66,41 @@ instance decodeJsonRoute :: DecodeJson Route where
 
 type PagesRec a
   = { "Index" :: a
-    , "Buttons" :: a
-    , "Card" :: a
-    , "Checkbox" :: a
-    , "Chips" :: a
-    , "DataTable" :: a
-    , "Dialog" :: a
-    , "Drawer" :: a
-    , "Elevation" :: a
-    , "Fab" :: a
-    , "IconButton" :: a
-    , "ImageList" :: a
-    , "LayoutGrid" :: a
-    , "List" :: a
-    , "LinearProgress" :: a
-    , "Menu" :: a
-    , "RadioButton" :: a
-    , "Ripple" :: a
-    , "Select" :: a
-    , "Slider" :: a
-    , "Snackbar" :: a
-    , "Switch" :: a
-    , "TabBar" :: a
-    , "TextField" :: a
-    , "Theme" :: a
-    , "TopAppBar" :: a
-    , "Typography" :: a
-    , "TopAppBar_Standard" :: a
-    , "TopAppBar_Fixed" :: a
-    , "TopAppBar_Dense" :: a
-    , "TopAppBar_Prominent" :: a
-    , "TopAppBar_Short" :: a
+    , "Buttons"                  :: a
+    , "Card"                     :: a
+    , "Checkbox"                 :: a
+    , "Chips"                    :: a
+    , "DataTable"                :: a
+    , "Dialog"                   :: a
+    , "Drawer"                   :: a
+    , "Elevation"                :: a
+    , "Fab"                      :: a
+    , "IconButton"               :: a
+    , "ImageList"                :: a
+    , "LayoutGrid"               :: a
+    , "List"                     :: a
+    , "LinearProgress"           :: a
+    , "Menu"                     :: a
+    , "RadioButton"              :: a
+    , "Ripple"                   :: a
+    , "Select"                   :: a
+    , "Slider"                   :: a
+    , "Snackbar"                 :: a
+    , "Switch"                   :: a
+    , "TabBar"                   :: a
+    , "TextField"                :: a
+    , "Theme"                    :: a
+    , "TopAppBar"                :: a
+    , "Typography"               :: a
+    , "TopAppBar_Standard"       :: a
+    , "TopAppBar_Fixed"          :: a
+    , "TopAppBar_Dense"          :: a
+    , "TopAppBar_Prominent"      :: a
+    , "TopAppBar_Short"          :: a
     , "TopAppBar_ShortCollapsed" :: a
+    , "Drawer_Permanent"         :: a
+    , "Drawer_Dismissible"       :: a
+    , "Drawer_Modal"             :: a
     }
 
 -- NOTE: without a `Routing.Duplex.root $` to allow hashed routing
@@ -134,9 +140,12 @@ routeCodec =
     , "TopAppBar_Prominent":      "top-app-bar" / "prominent" / Routing.Duplex.noArgs
     , "TopAppBar_Short":          "top-app-bar" / "short" / Routing.Duplex.noArgs
     , "TopAppBar_ShortCollapsed": "top-app-bar" / "short-collapsed" / Routing.Duplex.noArgs
+    , "Drawer_Permanent":         "drawer" / "permanent"/ Routing.Duplex.noArgs
+    , "Drawer_Dismissible":       "drawer" / "dismissible"/ Routing.Duplex.noArgs
+    , "Drawer_Modal":             "drawer" / "modal"/ Routing.Duplex.noArgs
     }
 
-extractFromPagesRec :: forall a. Route -> PagesRec a -> a
+extractFromPagesRec ::                       forall a. Route -> PagesRec a -> a
 extractFromPagesRec Index                    = _."Index"
 extractFromPagesRec Buttons                  = _."Buttons"
 extractFromPagesRec Card                     = _."Card"
@@ -170,6 +179,10 @@ extractFromPagesRec TopAppBar_Dense          = _."TopAppBar_Dense"
 extractFromPagesRec TopAppBar_Prominent      = _."TopAppBar_Prominent"
 extractFromPagesRec TopAppBar_Short          = _."TopAppBar_Short"
 extractFromPagesRec TopAppBar_ShortCollapsed = _."TopAppBar_ShortCollapsed"
+extractFromPagesRec Drawer_Permanent         = _."Drawer_Permanent"
+extractFromPagesRec Drawer_Dismissible       = _."Drawer_Dismissible"
+extractFromPagesRec Drawer_Modal             = _."Drawer_Modal"
+
 
 toString :: Route -> String
 toString route = "#" <> Routing.Duplex.print routeCodec route

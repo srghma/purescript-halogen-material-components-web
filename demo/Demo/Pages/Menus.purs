@@ -1,4 +1,4 @@
-module Demo.Pages.Menus where
+module Demo.Pages.Menu where
 
 import Demo.HOC.CatalogPage (CatalogPage)
 import Demo.Utils
@@ -41,8 +41,8 @@ handleAction =
        Open -> H.modify_ (_ { open = true })
        Close -> H.modify_ (_ { open = false })
 
-catalogPage :: CatalogPage
-catalogPage =
+config :: CatalogPage
+config =
     { title: "Menu"
     , prelude: "Menus display a list of choices on a transient sheet of material."
     , resources:

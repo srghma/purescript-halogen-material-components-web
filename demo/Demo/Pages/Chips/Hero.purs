@@ -1,4 +1,4 @@
-module Demo.Pages.Chips.Hero where
+module Demo.Pages.Chip.Hero where
 
 import Demo.HOC.CatalogPage (ChildSlots, Message, Query)
 import Protolude (Aff, Maybe(..), Unit, const, identity)

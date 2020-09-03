@@ -1,4 +1,4 @@
-module Demo.Pages.TextFields where
+module Demo.Pages.TextField where
 
 import Halogen
 import Material.Classes.Typography
@@ -20,8 +20,8 @@ import HalogenMWC.TextArea as TextArea
 import HalogenMWC.TextField as TextField
 import Demo.MkComponent.WithFocus as WithFocus
 
-catalogPage :: CatalogPage
-catalogPage =
+config :: CatalogPage
+config =
     { title: "Text Field"
     , prelude: "Text fields allow users to input, edit, and select text. Text fields typically reside in forms but can appear in other places, like dialog boxes and search."
     , resources:

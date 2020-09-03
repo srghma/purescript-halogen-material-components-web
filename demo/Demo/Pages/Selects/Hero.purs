@@ -1,11 +1,11 @@
-module Demo.Pages.Selects.Hero where
+module Demo.Pages.Select.Hero where
 
 import Protolude
 import Halogen as H
 import Halogen.HTML as HH
 import HalogenMWC.Chip.Choice as Chip.Choice
 import HalogenMWC.ChipSet.Choice as ChipSet.Choice
-import Demo.Pages.Selects.Shared
+import Demo.Pages.Select.Shared
 import HalogenMWC.Select as Select
 import HalogenMWC.Select.Item as Select.Item
 

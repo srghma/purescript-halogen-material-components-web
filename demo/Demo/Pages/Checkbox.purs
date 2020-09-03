@@ -5,8 +5,8 @@ import Protolude (Maybe(..))
 import Demo.Pages.Checkbox.Content as Content
 import Demo.Pages.Checkbox.Hero as Hero
 
-catalogPage :: CatalogPage
-catalogPage =
+config :: CatalogPage
+config =
   { title: "Checkbox"
   , prelude: "Checkboxes allow the user to select multiple options from a set."
   , resources:

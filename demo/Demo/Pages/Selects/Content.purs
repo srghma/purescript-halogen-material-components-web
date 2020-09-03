@@ -1,4 +1,4 @@
-module Demo.Pages.Selects.Content where
+module Demo.Pages.Select.Content where
 
 import Data.Set (Set)
 import Data.Set as Set
@@ -22,7 +22,7 @@ import Web.UIEvent.KeyboardEvent (KeyboardEvent)
 import Web.UIEvent.KeyboardEvent as Web.UIEvent.KeyboardEvent
 import Data.String as String
 import Demo.Utils (focusById)
-import Demo.Pages.Selects.Shared
+import Demo.Pages.Select.Shared
 import HalogenMWC.Select as Select
 import HalogenMWC.Select.Item as Select.Item
 

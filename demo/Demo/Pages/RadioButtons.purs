@@ -1,4 +1,4 @@
-module Demo.Pages.RadioButtons where
+module Demo.Pages.RadioButton where
 
 import Demo.HOC.CatalogPage (CatalogPage)
 import Data.Map (Map)
@@ -35,8 +35,8 @@ handleAction =
         Set index -> H.put index
         Focus id -> H.liftEffect $ focusById id
 
-catalogPage :: CatalogPage
-catalogPage =
+config :: CatalogPage
+config =
   { title: "Radio Button"
   , prelude: "Buttons communicate an action a user can take. They are typically placed throughout your UI, in places like dialogs, forms, cards, and toolbars."
   , resources:

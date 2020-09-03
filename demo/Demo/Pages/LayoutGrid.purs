@@ -18,8 +18,8 @@ import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.LayoutGrid as LayoutGrid
 
-catalogPage :: CatalogPage
-catalogPage =
+config :: CatalogPage
+config =
     { title: "Layout Grid"
     , prelude: "Material design’s responsive UI is based on a 12-column grid layout."
     , resources:

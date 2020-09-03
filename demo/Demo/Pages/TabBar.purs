@@ -52,8 +52,8 @@ handleAction =
         SetActiveScrollingTab index -> H.modify_ (_ { activeScrollingTab = index })
         Focus id                    -> H.liftEffect $ focusById id
 
-catalogPage :: CatalogPage
-catalogPage =
+config :: CatalogPage
+config =
   { title: "Tab Bar"
   , prelude: "Tabs organize and allow navigation between groups of content that are related and at the same level of hierarchy. The Tab Bar contains the Tab Scroller and Tab components."
   , resources:

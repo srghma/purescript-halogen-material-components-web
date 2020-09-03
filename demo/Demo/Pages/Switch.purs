@@ -42,8 +42,8 @@ handleAction =
 isChecked :: forall r w i . String -> State -> Boolean
 isChecked id state = Maybe.fromMaybe false (Map.lookup id state)
 
-catalogPage :: CatalogPage
-catalogPage =
+config :: CatalogPage
+config =
   { title: "Switch"
   , prelude: "Switches communicate an action a user can take. They are typically placed throughout your UI, in places like dialogs, forms, cards, and toolbars."
   , resources:

@@ -19,8 +19,8 @@ import HalogenMWC.IconButton as IconButton
 import HalogenMWC.TopAppBar as TopAppBar
 import Material.Classes.TopAppBar
 
-catalogPage :: CatalogPage
-catalogPage =
+config :: CatalogPage
+config =
     { title: "Top App Bar"
     , prelude: "Top App Bars are a container for items such as application title, navigation icon, and action items."
     , resources:

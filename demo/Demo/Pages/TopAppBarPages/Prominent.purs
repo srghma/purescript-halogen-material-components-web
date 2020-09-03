@@ -16,7 +16,7 @@ import Demo.Utils
 import Material.Classes.TopAppBar
 import HalogenMWC.IconButton as IconButton
 
-config :: forall w i . TopAppBarPage w i
+config :: TopAppBarPage
 config =
     { fixedAdjust: mdc_top_app_bar____prominent_fixed_adjust
     , topAppBar:
