@@ -196,7 +196,7 @@ catalogDrawerItems =
   , { label: "Switch", route: Route.Switch }
   , { label: "Tab Bar", route: Route.TabBar }
   , { label: "Text Field", route: Route.TextField }
-  , { label: "Theme", route: Route.Theme }
+  -- | , { label: "Theme", route: Route.Theme }
   , { label: "Top App Bar", route: Route.TopAppBar }
   , { label: "Typography", route: Route.Typography }
   ]

@@ -203,11 +203,11 @@ imageListItems =
     , title: "Text field"
     , subtitle: "Single and multiline text fields"
     }
-  , { route: Route.Theme
-    , icon: "https://aforemny.github.io/material-components-web-elm/images/ic_theme_24px.svg"
-    , title: "Theme"
-    , subtitle: "Using primary and accent colors"
-    }
+  -- | , { route: Route.Theme
+  -- |   , icon: "https://aforemny.github.io/material-components-web-elm/images/ic_theme_24px.svg"
+  -- |   , title: "Theme"
+  -- |   , subtitle: "Using primary and accent colors"
+  -- |   }
   , { route: Route.TopAppBar
     , icon: "https://aforemny.github.io/material-components-web-elm/images/top_app_bar_180px.svg"
     , title: "Top App Bar"

@@ -36,7 +36,7 @@ data Route
   | Switch
   | TabBar
   | TextField
-  | Theme
+  -- | | Theme
   | TopAppBar
   | Typography
   | TopAppBar_Standard
@@ -89,7 +89,7 @@ type PagesRec a
     , "Switch"                   :: a
     , "TabBar"                   :: a
     , "TextField"                :: a
-    , "Theme"                    :: a
+    -- | , "Theme"                    :: a
     , "TopAppBar"                :: a
     , "Typography"               :: a
     , "TopAppBar_Standard"       :: a
@@ -131,7 +131,7 @@ routeCodec =
     , "Switch":                   "switch" / Routing.Duplex.noArgs
     , "TabBar":                   "tabbar" / Routing.Duplex.noArgs
     , "TextField":                "textfield" / Routing.Duplex.noArgs
-    , "Theme":                    "theme" / Routing.Duplex.noArgs
+    -- | , "Theme":                    "theme" / Routing.Duplex.noArgs
     , "TopAppBar":                "topappbar" / Routing.Duplex.noArgs
     , "Typography":               "typography" / Routing.Duplex.noArgs
     , "TopAppBar_Standard":       "top-app-bar" / "standard" / Routing.Duplex.noArgs
@@ -170,7 +170,7 @@ extractFromPagesRec Snackbar                 = _."Snackbar"
 extractFromPagesRec Switch                   = _."Switch"
 extractFromPagesRec TabBar                   = _."TabBar"
 extractFromPagesRec TextField                = _."TextField"
-extractFromPagesRec Theme                    = _."Theme"
+-- | extractFromPagesRec Theme                    = _."Theme"
 extractFromPagesRec TopAppBar                = _."TopAppBar"
 extractFromPagesRec Typography               = _."Typography"
 extractFromPagesRec TopAppBar_Standard       = _."TopAppBar_Standard"
