@@ -1,26 +1,29 @@
 module HalogenMWC.Checkbox where
 
-import Halogen (AttrName(..), ElemName(..), PropName(..))
-import Material.Classes.Checkbox (mdc_checkbox, mdc_checkbox____touch, mdc_checkbox__background, mdc_checkbox__checkmark, mdc_checkbox__checkmark_path, mdc_checkbox__mixedmark, mdc_checkbox__native_control, mdc_touch_target_wrapper)
 import Prelude
-import Data.Maybe (Maybe(..))
-import Web.Event.Event (Event)
+
 import DOM.HTML.Indexed as I
 import DOM.HTML.Indexed.InputType (InputType(..))
+import Data.Array as Array
+import Data.Maybe (Maybe(..))
+import Halogen (AttrName(..), ClassName(..), ElemName(..), PropName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.SVG.Attributes as Halogen.SVG.Attributes
 import Halogen.SVG.Elements as Halogen.SVG.Elements
 import HalogenMWC.Utils (checkboxChangeHandler) as Utils
+import Material.Classes.Checkbox (mdc_checkbox, mdc_checkbox____touch, mdc_checkbox__background, mdc_checkbox__checkmark, mdc_checkbox__checkmark_path, mdc_checkbox__mixedmark, mdc_checkbox__native_control, mdc_touch_target_wrapper)
+import Web.Event.Event (Event)
 
-type Config i
-  = { state :: Maybe State
-    , disabled :: Boolean
-    , additionalAttributes :: Array (IProp I.HTMLinput i)
-    , onChange :: Maybe (Event -> i)
-    , touch :: Boolean
-    }
+type Config i =
+  { state :: Maybe State
+  , disabled :: Boolean
+  , additionalClasses :: Array ClassName
+  , additionalAttributes :: Array (IProp I.HTMLinput i)
+  , onChange :: Maybe (Event -> i)
+  , touch :: Boolean
+  }
 
 data State
   = Unchecked
@@ -33,6 +36,7 @@ defaultConfig :: forall i. Config i
 defaultConfig =
   { state: Nothing
   , disabled: false
+  , additionalClasses: []
   , additionalAttributes: []
   , onChange: Nothing
   , touch: true
@@ -49,14 +53,16 @@ checkbox config =
   in
     wrapTouch
       $ HH.element (ElemName "mdc-checkbox")
-          ( [ HP.classes
-                $ [ mdc_checkbox ]
-                <> (if config.touch then [ mdc_checkbox____touch ] else [])
+          ( [ HP.classes $ Array.concat
+                [ [ mdc_checkbox ]
+                  , (if config.touch then [ mdc_checkbox____touch ] else [])
+                  , config.additionalClasses
+                ]
             , HP.checked (config.state == Just Checked)
             , HP.prop (PropName "indeterminate") (config.state == Just Indeterminate)
             , HP.disabled config.disabled
             ]
-              <> config.additionalAttributes
+            <> config.additionalAttributes
           )
           [ nativeControlElt config
           , backgroundElt

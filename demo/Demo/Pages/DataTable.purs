@@ -99,12 +99,13 @@ standardDataTable =
   let
     row :: forall r . _ -> DataTable.Row r w i
     row { desert, carbs, protein, comments } =
-      { attributes: []
+      { additionalAttributes: []
+      , additionalClasses: []
       , nodes:
-        [ DataTable.Cell { numeric: false, attributes: [], nodes: [ HH.text desert ] }
-        , DataTable.Cell { numeric: true, attributes: [], nodes: [ HH.text carbs ] }
-        , DataTable.Cell { numeric: true, attributes: [], nodes: [ HH.text protein ] }
-        , DataTable.Cell { numeric: false, attributes: [], nodes: [ HH.text comments ] }
+        [ DataTable.Cell { numeric: false, additionalAttributes: [], additionalClasses: [], nodes: [ HH.text desert ] }
+        , DataTable.Cell { numeric: true, additionalAttributes: [], additionalClasses: [], nodes: [ HH.text carbs ] }
+        , DataTable.Cell { numeric: true, additionalAttributes: [], additionalClasses: [], nodes: [ HH.text protein ] }
+        , DataTable.Cell { numeric: false, additionalAttributes: [], additionalClasses: [], nodes: [ HH.text comments ] }
         ]
       }
   in
@@ -121,7 +122,8 @@ dataTableWithRowSelection state =
     allUnselected = Set.size state.selected == 0
 
     headerRow { onChange, state } { desert, carbs, protein, comments } =
-      [ { attributes: []
+      [ { additionalAttributes: []
+        , additionalClasses: []
         , nodes:
           [ DataTable.CheckboxCell
             { config:
@@ -129,31 +131,34 @@ dataTableWithRowSelection state =
               { state = Just state
               , onChange = onChange
               }
-            , attributes: []
+            , additionalAttributes: []
+            , additionalClasses: []
             }
-          , DataTable.Cell { numeric: false, attributes: [], nodes: [ HH.text desert ] }
-          , DataTable.Cell { numeric: true,  attributes: [], nodes: [ HH.text carbs ] }
-          , DataTable.Cell { numeric: true,  attributes: [], nodes: [ HH.text protein ] }
-          , DataTable.Cell { numeric: false, attributes: [], nodes: [ HH.text comments ] }
+          , DataTable.Cell { numeric: false, additionalAttributes: [], additionalClasses: [], nodes: [ HH.text desert ] }
+          , DataTable.Cell { numeric: true,  additionalAttributes: [], additionalClasses: [], nodes: [ HH.text carbs ] }
+          , DataTable.Cell { numeric: true,  additionalAttributes: [], additionalClasses: [], nodes: [ HH.text protein ] }
+          , DataTable.Cell { numeric: false, additionalAttributes: [], additionalClasses: [], nodes: [ HH.text comments ] }
           ]
         }
       ]
 
     row { onChange, selected } { desert, carbs, protein, comments } =
-        { attributes: if selected then DataTable.selected else []
+        { additionalAttributes: if selected then DataTable.selected else []
+        , additionalClasses: []
         , nodes:
           [ DataTable.CheckboxCell
-            { attributes: []
+            { additionalAttributes: []
+            , additionalClasses: []
             , config:
               Checkbox.defaultConfig
               { state = Just $ if selected then Checkbox.Checked else Checkbox.Unchecked
               , onChange = onChange
               }
             }
-          , DataTable.Cell { numeric: false, attributes: [], nodes: [ HH.text desert ] }
-          , DataTable.Cell { numeric: true, attributes: [], nodes: [ HH.text carbs ] }
-          , DataTable.Cell { numeric: true, attributes: [], nodes: [ HH.text protein ] }
-          , DataTable.Cell { numeric: false, attributes: [], nodes: [ HH.text comments ] }
+          , DataTable.Cell { numeric: false, additionalAttributes: [], additionalClasses: [], nodes: [ HH.text desert ] }
+          , DataTable.Cell { numeric: true, additionalAttributes: [], additionalClasses: [], nodes: [ HH.text carbs ] }
+          , DataTable.Cell { numeric: true, additionalAttributes: [], additionalClasses: [], nodes: [ HH.text protein ] }
+          , DataTable.Cell { numeric: false, additionalAttributes: [], additionalClasses: [], nodes: [ HH.text comments ] }
           ]
         }
   in
