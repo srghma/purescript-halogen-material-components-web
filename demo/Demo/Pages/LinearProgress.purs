@@ -27,7 +27,7 @@ config =
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-LinearProgress"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-linear-progress"
         }
-    , hero: mkComponentStatic $ HH.div_ [ LinearProgress.linearProgress LinearProgress.defaultConfig (LinearProgress.Determinate 0.5) ]
+    , hero: mkComponentStatic $ LinearProgress.linearProgress LinearProgress.defaultConfig (LinearProgress.Determinate 0.5)
     , content: mkComponentStatic $ HH.div_
         [ HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Buffered" ]
         , LinearProgress.linearProgress LinearProgress.defaultConfig (LinearProgress.Buffered { progress: 0.5, buffer: 0.75 })

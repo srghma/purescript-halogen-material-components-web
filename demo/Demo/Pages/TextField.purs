@@ -93,7 +93,7 @@ filledTextFields =
       [ TextField.filled
         (TextField.defaultConfig
           { label = Just "Standard"
-          , leadingIcon = Just (TextField.icon [] "event")
+          , leadingIcon = Just (TextField.iconMaterialIcons [] "event")
           }
         )
       , demoHelperText
@@ -102,7 +102,7 @@ filledTextFields =
       [ TextField.filled
         (TextField.defaultConfig
           { label = Just "Standard"
-          , trailingIcon = Just (TextField.icon [] "delete")
+          , trailingIcon = Just (TextField.iconMaterialIcons [] "delete")
           }
         )
       , demoHelperText
@@ -125,7 +125,7 @@ shapedFilledTextFields =
       [ TextField.filled
         (TextField.defaultConfig
           { label = Just "Standard"
-          , leadingIcon = Just (TextField.icon [] "event")
+          , leadingIcon = Just (TextField.iconMaterialIcons [] "event")
           , additionalAttributes = [ HP.style "border-radius: 16px 16px 0 0;" ]
           }
         )
@@ -135,7 +135,7 @@ shapedFilledTextFields =
       [ TextField.filled
         (TextField.defaultConfig
           { label = Just "Standard"
-          , trailingIcon = Just (TextField.icon [] "delete")
+          , trailingIcon = Just (TextField.iconMaterialIcons [] "delete")
           , additionalAttributes = [ HP.style "border-radius: 16px 16px 0 0;" ]
           }
         )
@@ -158,7 +158,7 @@ outlinedTextFields =
       [ TextField.outlined
         (TextField.defaultConfig
           { label = Just "Standard"
-          , leadingIcon = Just (TextField.icon [] "event")
+          , leadingIcon = Just (TextField.iconMaterialIcons [] "event")
           }
         )
       , demoHelperText
@@ -167,7 +167,7 @@ outlinedTextFields =
       [ TextField.outlined
         (TextField.defaultConfig
           { label = Just "Standard"
-          , trailingIcon = Just (TextField.icon [] "delete")
+          , trailingIcon = Just (TextField.iconMaterialIcons [] "delete")
           }
         )
       , demoHelperText
@@ -189,7 +189,7 @@ shapedOutlinedTextFields =
       [ TextField.outlined
         (TextField.defaultConfig
           { label = Just "Standard"
-          , leadingIcon = Just (TextField.icon [] "event")
+          , leadingIcon = Just (TextField.iconMaterialIcons [] "event")
           }
         )
       , demoHelperText
@@ -198,7 +198,7 @@ shapedOutlinedTextFields =
       [ TextField.outlined
         (TextField.defaultConfig
           { label = Just "Standard"
-          , trailingIcon = Just (TextField.icon [] "delete")
+          , trailingIcon = Just (TextField.iconMaterialIcons [] "delete")
           }
         )
       , demoHelperText
@@ -215,7 +215,7 @@ textFieldsWithoutLabel =
     , HH.div textFieldContainer
       [ TextField.outlined
         (TextField.defaultConfig
-          { leadingIcon = Just (TextField.icon [] "event")
+          { leadingIcon = Just (TextField.iconMaterialIcons [] "event")
           }
         )
       , demoHelperText
@@ -223,7 +223,7 @@ textFieldsWithoutLabel =
     , HH.div textFieldContainer
       [ TextField.outlined
         (TextField.defaultConfig
-          { trailingIcon = Just (TextField.icon [] "delete")
+          { trailingIcon = Just (TextField.iconMaterialIcons [] "delete")
           }
         )
       , demoHelperText
@@ -241,7 +241,7 @@ textFieldsWithCharacterCounter =
     , HH.div textFieldContainer
       [ TextField.outlined
         (TextField.defaultConfig
-          { leadingIcon = Just (TextField.icon [] "event")
+          { leadingIcon = Just (TextField.iconMaterialIcons [] "event")
           , maxLength = Just 18
           }
         )
@@ -250,7 +250,7 @@ textFieldsWithCharacterCounter =
     , HH.div textFieldContainer
       [ TextField.outlined
         (TextField.defaultConfig
-          { trailingIcon = Just (TextField.icon [] "delete")
+          { trailingIcon = Just (TextField.iconMaterialIcons [] "delete")
           , maxLength = Just 18
           }
         )

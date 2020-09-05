@@ -1,7 +1,5 @@
 module HalogenMWC.Select where
 
-import Material.Classes.Select (mdc_floating_label, mdc_line_ripple, mdc_notched_outline, mdc_notched_outline__leading, mdc_notched_outline__notch, mdc_notched_outline__trailing, mdc_select, mdc_select____outlined, mdc_select____with_leading_icon, mdc_select__anchor, mdc_select__dropdown_icon, mdc_select__icon, mdc_select__menu, mdc_select__selected_text)
-import Prelude (class Eq, map, negate, ($), (<>), (==))
 import DOM.HTML.Indexed as I
 import Data.Array as Array
 import Data.FoldableWithIndex (findMapWithIndex)
@@ -17,6 +15,9 @@ import HalogenMWC.List.Item as List.Item
 import HalogenMWC.Menu as Menu
 import HalogenMWC.Select.Item as Select.Item
 import Material.Classes.List (mdc_list_item__graphic)
+import Material.Classes.Select (mdc_floating_label, mdc_line_ripple, mdc_notched_outline, mdc_notched_outline__leading, mdc_notched_outline__notch, mdc_notched_outline__trailing, mdc_select, mdc_select____outlined, mdc_select____with_leading_icon, mdc_select__anchor, mdc_select__dropdown_icon, mdc_select__icon, mdc_select__menu, mdc_select__selected_text)
+import MaterialIconsFont.Classes (material_icons)
+import Prelude (class Eq, map, negate, ($), (<>), (==))
 
 type Config a w i
   = { label :: Maybe String
@@ -101,8 +102,8 @@ select variant config firstSelectItem remainingSelectItems =
       , menuElt config.leadingIcon config.selected config.onChange firstSelectItem remainingSelectItems
       ]
 
-icon :: forall i w. Array (IProp I.HTMLi i) -> String -> HH.HTML w i
-icon additionalAttributes iconName = Icon.materialIcon ([ HP.class_ mdc_select__icon ] <> additionalAttributes) iconName
+iconMaterialIcons :: forall i w. Array (IProp I.HTMLi i) -> String -> HH.HTML w i
+iconMaterialIcons additionalAttributes iconName = HH.i ([ HP.classes [ material_icons, mdc_select__icon ] ] <> additionalAttributes) [ HH.text iconName ]
 
 anchorElt :: forall w i. Array (HH.HTML w i) -> HH.HTML w i
 anchorElt = HH.div [ HP.class_ mdc_select__anchor ]
@@ -153,6 +154,7 @@ listItem showLeadingIcon onChange (Select.Item.SelectItem (config :: Select.Item
       listItemConfig' = listItemConfig onChange config
   in
   List.Item.listItem listItemConfig'
+    -- TODO: elm version renders this badly too
     (if showLeadingIcon then [ HH.div [ HP.class_ mdc_list_item__graphic ] nodes ] else nodes)
 
 listItemConfig :: forall a i w. Maybe (a -> i) -> Select.Item.Config a i -> List.Item.Config w i

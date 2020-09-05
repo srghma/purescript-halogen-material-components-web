@@ -29,10 +29,10 @@ config =
         }
     , hero: mkComponentStatic $ HH.div_
         [ demoGrid
-          { additionalClasses: [], additionalAttributes: [] }
+          { additionalClasses: [], additionalStyle: "" }
           [ HH.div
             [ HP.class_ mdc_layout_grid__inner ]
-            (Array.replicate 3 (demoCell { additionalClasses: [], additionalAttributes: [] }))
+            (Array.replicate 3 (demoCell { additionalClasses: [], additionalStyle: "" }))
           ]
         ]
     , content: mkComponentStatic $ HH.div_
@@ -56,70 +56,69 @@ config =
         ]
     }
 
-demoGrid :: forall w i . { additionalClasses :: Array ClassName, additionalAttributes :: Array (IProp I.HTMLdiv i) } -> Array (HH.HTML w i) -> HH.HTML w i
+demoGrid :: forall w i . { additionalClasses :: Array ClassName, additionalStyle :: String } -> Array (HH.HTML w i) -> HH.HTML w i
 demoGrid options =
   HH.div
   ( [ HP.classes $ [ mdc_layout_grid ] <> options.additionalClasses
-    , HP.style "background: rgba(0,0,0,.2); min-width: 360px;"
+    , HP.style $ "background: rgba(0,0,0,.2); min-width: 360px;" <> options.additionalStyle
     ]
-    <> options.additionalAttributes
   )
 
-demoCell :: forall w i . { additionalClasses :: Array ClassName, additionalAttributes :: Array (IProp I.HTMLdiv i) } -> HH.HTML w i
+demoCell :: forall w i . { additionalClasses :: Array ClassName, additionalStyle :: String } -> HH.HTML w i
 demoCell options =
   HH.div
   ( [ HP.classes $ [ mdc_layout_grid__cell ] <> options.additionalClasses
-    , HP.style "background: rgba(0,0,0,.2); height: 100px;"
+    , HP.style $ "background: rgba(0,0,0,.2); height: 100px;" <> options.additionalStyle
     ]
-    <> options.additionalAttributes)
+  )
   []
 
 columnsGrid :: forall w i . HH.HTML w i
 columnsGrid =
-    demoGrid { additionalClasses: [], additionalAttributes: [] }
+    demoGrid { additionalClasses: [], additionalStyle: "" }
         [ HH.div [ HP.class_ mdc_layout_grid__inner ]
-            [ demoCell { additionalClasses: [ mdc_layout_grid__cell____span_6 ], additionalAttributes: [] }
-            , demoCell { additionalClasses: [ mdc_layout_grid__cell____span_3 ], additionalAttributes: [] }
-            , demoCell { additionalClasses: [ mdc_layout_grid__cell____span_2 ], additionalAttributes: [] }
-            , demoCell { additionalClasses: [ mdc_layout_grid__cell____span_1 ], additionalAttributes: [] }
-            , demoCell { additionalClasses: [ mdc_layout_grid__cell____span_3 ], additionalAttributes: [] }
-            , demoCell { additionalClasses: [ mdc_layout_grid__cell____span_1 ], additionalAttributes: [] }
-            , demoCell { additionalClasses: [ mdc_layout_grid__cell____span_8 ], additionalAttributes: [] }
+            [ demoCell { additionalClasses: [ mdc_layout_grid__cell____span_6 ], additionalStyle: "" }
+            , demoCell { additionalClasses: [ mdc_layout_grid__cell____span_3 ], additionalStyle: "" }
+            , demoCell { additionalClasses: [ mdc_layout_grid__cell____span_2 ], additionalStyle: "" }
+            , demoCell { additionalClasses: [ mdc_layout_grid__cell____span_1 ], additionalStyle: "" }
+            , demoCell { additionalClasses: [ mdc_layout_grid__cell____span_3 ], additionalStyle: "" }
+            , demoCell { additionalClasses: [ mdc_layout_grid__cell____span_1 ], additionalStyle: "" }
+            , demoCell { additionalClasses: [ mdc_layout_grid__cell____span_8 ], additionalStyle: "" }
             ]
         ]
 
 leftAlignedGrid :: forall w i . HH.HTML w i
 leftAlignedGrid =
     demoGrid
-      { additionalClasses: [ mdc_layout_grid____align_left ], additionalAttributes: [ HP.style "max-width: 800px;" ] }
+      { additionalClasses: [ mdc_layout_grid____align_left ], additionalStyle: "max-width: 800px;" }
       [ HH.div [ HP.class_ mdc_layout_grid__inner ]
-          [ demoCell { additionalClasses: [], additionalAttributes: [] }
-          , demoCell { additionalClasses: [], additionalAttributes: [] }
-          , demoCell { additionalClasses: [], additionalAttributes: [] }
+          [ demoCell { additionalClasses: [], additionalStyle: "" }
+          , demoCell { additionalClasses: [], additionalStyle: "" }
+          , demoCell { additionalClasses: [], additionalStyle: "" }
           ]
       ]
 
 rightAlignedGrid :: forall w i . HH.HTML w i
 rightAlignedGrid =
     demoGrid
-      { additionalClasses: [ mdc_layout_grid____align_right ], additionalAttributes: [ HP.style "max-width: 800px;" ] }
-      [ HH.div [ HP.class_ mdc_layout_grid__inner ] (Array.replicate 3 (demoCell { additionalClasses: [], additionalAttributes: [] }))
+      { additionalClasses: [ mdc_layout_grid____align_right ], additionalStyle: "max-width: 800px;" }
+      [ HH.div [ HP.class_ mdc_layout_grid__inner ] (Array.replicate 3 (demoCell { additionalClasses: [], additionalStyle: "" }))
       ]
 
 cellAlignmentGrid :: forall w i . HH.HTML w i
 cellAlignmentGrid =
     let
-        innerHeight = HP.style "min-height: 200px;"
-        cellHeight = HP.style "max-height: 50px;"
+        innerHeight = "min-height: 200px;"
+        cellHeight = "max-height: 50px;"
     in
     demoGrid
-      { additionalClasses: [], additionalAttributes: [ HP.style "min-height: 200px;" ] }
+      { additionalClasses: [], additionalStyle: "min-height: 200px;" }
       [ HH.div
         [ HP.class_ mdc_layout_grid__inner
-        , innerHeight
+        , HP.style innerHeight
         ]
-        [ demoCell { additionalClasses: [ mdc_layout_grid__cell____align_top ], additionalAttributes: [ cellHeight ] }
-        , demoCell { additionalClasses: [ mdc_layout_grid__cell____align_middle ], additionalAttributes: [ cellHeight ] }
-        , demoCell { additionalClasses: [ mdc_layout_grid__cell____align_bottom ], additionalAttributes: [ cellHeight ] }
+        [ demoCell { additionalClasses: [ mdc_layout_grid__cell____align_top ], additionalStyle: cellHeight }
+        , demoCell { additionalClasses: [ mdc_layout_grid__cell____align_middle ], additionalStyle: cellHeight }
+        , demoCell { additionalClasses: [ mdc_layout_grid__cell____align_bottom ], additionalStyle: cellHeight }
         ]
       ]

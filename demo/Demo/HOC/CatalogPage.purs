@@ -113,7 +113,7 @@ render routeOfThisCatalogPage config state =
             [ HH.div demoContentTransition
                 [ HH.h1 [ HP.class_ mdc_typography____headline5 ] [ HH.text config.title ]
                 , HH.p [ HP.class_ mdc_typography____body1 ] [ HH.text config.prelude ]
-                , HH.slot (SProxy :: SProxy "hero") unit config.hero unit absurd
+                , HH.div hero [ HH.slot (SProxy :: SProxy "hero") unit config.hero unit absurd ]
                 , HH.h2 ([ HP.class_ mdc_typography____headline6 ] <> demoTitle) [ HH.text "Resources" ]
                 , resourcesList config.resources
                 , HH.h2 ([ HP.class_ mdc_typography____headline6 ] <> demoTitle) [ HH.text "Demos" ]
@@ -124,7 +124,7 @@ render routeOfThisCatalogPage config state =
     ]
 
 resourcesList ::
-  forall r w i.
+  forall w i.
   { materialDesignGuidelines :: Maybe String
   , documentation :: Maybe String
   , sourceCode :: Maybe String

@@ -111,7 +111,7 @@ filledWithIconSelect state =
         (Select.defaultConfig
             { label = Just "Fruit"
             , selected = Just state.filledWithIcon
-            , leadingIcon = Just (Select.icon [] "favorite")
+            , leadingIcon = Just (Select.iconMaterialIcons [] "favorite")
             , onChange = Just FilledWithIconChanged
             }
         )
@@ -124,7 +124,7 @@ outlinedWithIconSelect state =
         (Select.defaultConfig
             { label = Just "Fruit"
             , selected = Just state.outlinedWithIcon
-            , leadingIcon = Just (Select.icon [] "favorite")
+            , leadingIcon = Just (Select.iconMaterialIcons [] "favorite")
             , onChange = Just OutlinedWithIconChanged
             }
         )

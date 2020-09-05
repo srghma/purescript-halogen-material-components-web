@@ -1,12 +1,11 @@
 module HalogenMWC.TextField where
 
-import Material.Classes.LineRipple (mdc_line_ripple)
-import Material.Classes.Textfield (mdc_floating_label, mdc_floating_label____float_above, mdc_notched_outline, mdc_notched_outline__leading, mdc_notched_outline__notch, mdc_notched_outline__trailing, mdc_text_field, mdc_text_field____disabled, mdc_text_field____fullwidth, mdc_text_field____no_label, mdc_text_field____outlined, mdc_text_field____with_leading_icon, mdc_text_field____with_trailing_icon, mdc_text_field__icon, mdc_text_field__input)
 import Prelude
-import Data.Maybe (Maybe(..), maybe)
+
 import DOM.HTML.Indexed as I
 import DOM.HTML.Indexed.InputType (InputType)
 import Data.Array as Array
+import Data.Maybe (Maybe(..), maybe)
 import Data.Maybe as Maybe
 import Halogen (AttrName(..), ElemName(..), PropName(..))
 import Halogen.HTML (IProp)
@@ -15,6 +14,9 @@ import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import HalogenMWC.Icon as Icon
 import HalogenMWC.Utils as Utils
+import Material.Classes.LineRipple (mdc_line_ripple)
+import Material.Classes.Textfield (mdc_floating_label, mdc_floating_label____float_above, mdc_notched_outline, mdc_notched_outline__leading, mdc_notched_outline__notch, mdc_notched_outline__trailing, mdc_text_field, mdc_text_field____disabled, mdc_text_field____fullwidth, mdc_text_field____no_label, mdc_text_field____outlined, mdc_text_field____with_leading_icon, mdc_text_field____with_trailing_icon, mdc_text_field__icon, mdc_text_field__input)
+import MaterialIconsFont.Classes (material_icons)
 
 type Config w i
   = { label :: Maybe String
@@ -131,8 +133,8 @@ textField type_ config =
         ]
     )
 
-icon :: forall w i. Array (IProp I.HTMLi i) -> String -> HH.HTML w i
-icon additionalAttributes iconName = Icon.materialIcon ([ HP.class_ mdc_text_field__icon ] <> additionalAttributes) iconName
+iconMaterialIcons :: forall w i. Array (IProp I.HTMLi i) -> String -> HH.HTML w i
+iconMaterialIcons additionalAttributes iconName = HH.i ([ HP.classes [ material_icons, mdc_text_field__icon ] ] <> additionalAttributes) [ HH.text iconName ]
 
 -----------------
 inputElt :: forall w i. Config w i -> HH.HTML w i
