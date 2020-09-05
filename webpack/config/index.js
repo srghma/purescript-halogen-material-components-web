@@ -18,7 +18,7 @@ export default async function({
     // mode: 'development',
 
     output: {
-      path: path.resolve(root, production ? 'dist' : 'dist-dev'),
+      path: path.resolve(root, production ? 'docs' : 'docs-dev'),
       filename: 'index.js',
       publicPath: '/',
     },

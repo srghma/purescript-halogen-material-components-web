@@ -3,7 +3,7 @@
   "version": "0.21.1",
   "private": true,
   "scripts": {
-    "clean": "rm -rfd output .spago node_modules dist/*.css dist/*.js",
+    "clean": "rm -rfd output .spago node_modules docs docs-dev",
     "build": "babel-node --presets '@babel/preset-env' ./webpack/build.js",
     "dev": "babel-node --presets '@babel/preset-env' ./webpack/dev.js"
   },
