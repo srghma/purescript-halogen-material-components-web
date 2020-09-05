@@ -20,7 +20,7 @@ export default async function({
     output: {
       path: path.resolve(root, production ? 'docs' : 'docs-dev'),
       filename: 'index.js',
-      publicPath: '/',
+      publicPath: '',
     },
 
     entry: { main: path.resolve(root, "demo", "index.js") },
