@@ -13,12 +13,12 @@ export default async function({
     target: 'web',
     node: false,
 
-    // mode: production ? 'production' : 'development',
+    mode: production ? 'production' : 'development',
     // mode: 'production',
-    mode: 'development',
+    // mode: 'development',
 
     output: {
-      path: path.resolve(root, 'dist'),
+      path: path.resolve(root, production ? 'dist' : 'dist-dev'),
       filename: 'index.js',
       publicPath: '/',
     },
