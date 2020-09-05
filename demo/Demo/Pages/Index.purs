@@ -11,6 +11,7 @@ import HalogenMWC.ImageList.Item as ImageList.Item
 import HalogenMWC.TopAppBar as TopAppBar
 import Demo.Route (Route)
 import Demo.Route as Route
+import Demo.Blocks.Header as Demo.Blocks.Header
 
 type State
   = Unit
@@ -55,11 +56,7 @@ component =
                           [ HP.src "https://material-components-web.appspot.com/images/ic_component_24px_white.svg"
                           ]
                       ]
-                  , HH.span
-                      [ HP.class_ mdc_top_app_bar__title
-                      , HP.style "text-transform: uppercase; font-weight: 400;"
-                      ]
-                      [ HH.text "Material Components for Halogen" ]
+                  , Demo.Blocks.Header.header
                   ]
               ]
           ]

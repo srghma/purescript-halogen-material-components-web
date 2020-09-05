@@ -18,6 +18,7 @@ import HalogenMWC.IconButton as IconButton
 import HalogenMWC.List as List
 import HalogenMWC.List.Item as List.Item
 import HalogenMWC.TopAppBar as TopAppBar
+import Demo.Blocks.Header as Demo.Blocks.Header
 
 type CatalogPage
   = { title :: String
@@ -74,11 +75,7 @@ render routeOfThisCatalogPage config state =
                         }
                     )
                     "menu"
-                , HH.span
-                    [ HP.class_ mdc_top_app_bar__title
-                    , HP.style "text-transform: uppercase; font-weight: 400;"
-                    ]
-                    [ HH.text "Material Components for Halogen" ]
+                , Demo.Blocks.Header.header
                 ]
             ]
         ]
