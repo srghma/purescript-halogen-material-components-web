@@ -1,19 +1,13 @@
 module Demo.Pages.Elevation where
 
 import Demo.HOC.CatalogPage (CatalogPage)
-import Demo.Utils
-import Halogen
-import Protolude
+import Demo.Utils (mkComponentStatic)
+import Protolude (Maybe(..), ($))
 
-import Data.Array as Array
-import Data.Maybe as Maybe
-import Halogen as H
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
-import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
-import Material.Classes.Elevation
+import Material.Classes.Elevation (mdc_elevation____z0, mdc_elevation____z1, mdc_elevation____z10, mdc_elevation____z11, mdc_elevation____z12, mdc_elevation____z13, mdc_elevation____z14, mdc_elevation____z15, mdc_elevation____z16, mdc_elevation____z17, mdc_elevation____z18, mdc_elevation____z19, mdc_elevation____z2, mdc_elevation____z20, mdc_elevation____z21, mdc_elevation____z22, mdc_elevation____z23, mdc_elevation____z24, mdc_elevation____z3, mdc_elevation____z4, mdc_elevation____z5, mdc_elevation____z6, mdc_elevation____z7, mdc_elevation____z8, mdc_elevation____z9)
 
 config :: CatalogPage
 config =

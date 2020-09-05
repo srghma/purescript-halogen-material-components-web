@@ -1,26 +1,21 @@
 module Demo.Pages.Dialog where
 
 import Demo.HOC.CatalogPage (CatalogPage)
-import Demo.Utils
-import Halogen
-import Material.Classes.List
-import Protolude
+import Demo.Utils (mkComponentStatic)
+import Material.Classes.List (mdc_list_item__graphic)
+import Protolude (class Eq, Aff, Maybe(..), Unit, Void, const, map, ($), (/\), (==))
 
-import Data.Array as Array
-import Data.Maybe as Maybe
 import Halogen as H
-import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Button as Button
 import HalogenMWC.Dialog as Dialog
 import HalogenMWC.Icon as Icon
 import HalogenMWC.List as List
 import HalogenMWC.List.Item as List.Item
 import HalogenMWC.Radio as Radio
-import Material.Classes.Dialog
+import Material.Classes.Dialog (mdc_dialog, mdc_dialog____open, mdc_dialog__actions, mdc_dialog__content, mdc_dialog__surface, mdc_dialog__title)
 
 data Dialog
   = AlertDialog

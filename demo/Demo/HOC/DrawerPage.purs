@@ -1,27 +1,21 @@
 module Demo.HOC.DrawerPage where
 
-import Halogen
-import Material.Classes.Drawer
-import Material.Classes.TopAppBar
-import Protolude
+import Material.Classes.Drawer (mdc_drawer__subtitle, mdc_drawer__title, mdc_drawer_app_content, mdc_list_item__graphic)
+import Material.Classes.TopAppBar (mdc_top_app_bar____fixed_adjust, mdc_top_app_bar__navigation_icon, mdc_top_app_bar__row, mdc_top_app_bar__section, mdc_top_app_bar__section____align_start, mdc_top_app_bar__title)
+import Protolude (Aff, Const, Maybe(..), SProxy(..), Unit, Void, absurd, const, unit, ($), (==))
 
-import DOM.HTML.Indexed as I
 import Data.Array as Array
 import Data.Maybe as Maybe
 import Halogen as H
-import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
-import HalogenMWC.Drawer.Dismissible as Drawer.Dismissible
 import HalogenMWC.Drawer.Permanent as Drawer.Permanent
 import HalogenMWC.Icon as Icon
 import HalogenMWC.List as List
 import HalogenMWC.List.Divider as List.Divider
 import HalogenMWC.List.Item as List.Item
 import HalogenMWC.TopAppBar as TopAppBar
-import Web.UIEvent.MouseEvent (MouseEvent)
 
 type DrawerPage drawerQuery =
   { title :: String

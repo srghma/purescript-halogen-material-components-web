@@ -5,7 +5,7 @@ import Prelude
 import DOM.HTML.Indexed as I
 import Data.Array as Array
 import Data.Maybe (Maybe(..))
-import Halogen
+import Halogen (AttrName(..), ClassName, ElemName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP

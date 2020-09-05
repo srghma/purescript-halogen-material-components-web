@@ -1,21 +1,15 @@
 module Demo.Pages.Ripple where
 
 import Demo.HOC.CatalogPage (CatalogPage)
-import Protolude
-import Data.Array as Array
-import Data.Maybe as Maybe
-import Halogen
-import Halogen as H
+import Protolude (Maybe(..), ($))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Events as HE
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Ripple as Ripple
-import Material.Classes.Typography
-import Material.Classes.Elevation
-import MaterialIconsFont.Classes
-import Demo.Utils
+import Material.Classes.Typography (mdc_typography____subtitle1)
+import Material.Classes.Elevation (mdc_elevation____z2)
+import MaterialIconsFont.Classes (material_icons)
+import Demo.Utils (mkComponentStatic)
 
 config :: CatalogPage
 config =

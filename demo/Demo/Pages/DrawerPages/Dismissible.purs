@@ -5,11 +5,7 @@ import HalogenMWC.Drawer.Dismissible as Drawer.Dismissible
 import Web.UIEvent.MouseEvent (MouseEvent)
 
 import Protolude
-import Data.Array as Array
 import Halogen as H
-import Halogen.HTML as HH
-import Halogen.HTML.Events as HE
-import Halogen.HTML.Properties as HP
 
 type State =
   { open :: Boolean

@@ -1,19 +1,14 @@
 module Demo.Pages.TextField where
 
-import Halogen
-import Material.Classes.Typography
-import Protolude
+import Material.Classes.Typography (mdc_typography____subtitle1)
+import Protolude (Maybe(..), const, ($))
 
-import Data.Array as Array
-import Data.Maybe as Maybe
 import Demo.HOC.CatalogPage (CatalogPage)
 import Demo.Utils (mkComponentStatic)
-import Halogen as H
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Button as Button
 import HalogenMWC.HelperText as HelperText
 import HalogenMWC.TextArea as TextArea

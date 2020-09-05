@@ -2,11 +2,7 @@ module Demo.Pages.DrawerPages.Permanent where
 
 import Demo.HOC.DrawerPage as DrawerPage
 import Protolude
-import Data.Array as Array
 import Halogen as H
-import Halogen.HTML as HH
-import Halogen.HTML.Events as HE
-import Halogen.HTML.Properties as HP
 import HalogenMWC.Drawer.Permanent as Drawer.Permanent
 
 type State = { selectedIndex :: Int }

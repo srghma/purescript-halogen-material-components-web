@@ -5,12 +5,11 @@ import Prelude
 import DOM.HTML.Indexed as I
 import Data.Array as Array
 import Data.Maybe (Maybe(..))
-import Halogen (ElemName(..), PropName(..))
+import Halogen (ElemName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import HalogenMWC.Fab (fabMateiralIcons)
 import Material.Classes.Fab (mdc_fab, mdc_fab____exited, mdc_fab____extended, mdc_fab__icon, mdc_fab__label, mdc_fab__ripple)
 import MaterialIconsFont.Classes (material_icons)
 import Web.UIEvent.MouseEvent (MouseEvent)

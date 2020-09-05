@@ -2,14 +2,9 @@ module Demo.Pages.DrawerPages.Modal where
 
 import Demo.HOC.DrawerPage as DrawerPage
 import HalogenMWC.Drawer.Modal as Drawer.Modal
-import Web.UIEvent.MouseEvent (MouseEvent)
 
 import Protolude
-import Data.Array as Array
 import Halogen as H
-import Halogen.HTML as HH
-import Halogen.HTML.Events as HE
-import Halogen.HTML.Properties as HP
 
 type State =
   { open :: Boolean

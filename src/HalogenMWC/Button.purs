@@ -3,7 +3,7 @@ module HalogenMWC.Button
   , module Export
   ) where
 
-import Halogen (ElemName(..), PropName(..))
+import Halogen (ElemName(..))
 import DOM.HTML.Indexed as I
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH

@@ -1,18 +1,13 @@
 module Demo.HOC.TopAppBarPage where
 
-import Halogen
-import Material.Classes.Typography
-import Protolude
+import Halogen (ClassName)
+import Material.Classes.Typography (mdc_typography)
+import Protolude (Aff, Const, Unit, Void, const, unit, ($))
 
-import DOM.HTML.Indexed (HTMLdiv) as I
 import Data.Array as Array
-import Data.Maybe as Maybe
 import Halogen as H
-import Halogen.HTML (IProp)
 import Halogen.HTML as HH
-import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 
 type TopAppBarPage =
   { fixedAdjust :: ClassName

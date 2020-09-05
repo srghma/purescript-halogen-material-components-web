@@ -1,21 +1,17 @@
 module Demo.Pages.TabBar where
 
 import Demo.HOC.CatalogPage (CatalogPage)
-import Protolude
+import Protolude (Aff, Maybe(..), Unit, Void, const, ($), (<>), (==))
 import Data.Array as Array
-import Data.Maybe as Maybe
-import Halogen
 import Halogen as H
-import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Events as HE
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Button as Button
 import HalogenMWC.Tab as Tab
 import HalogenMWC.TabBar as TabBar
-import Material.Classes.Typography
-import Demo.Utils
+import Material.Classes.Typography (mdc_typography____subtitle1)
+import Demo.Utils (focusById)
 
 type ChildSlots = ()
 

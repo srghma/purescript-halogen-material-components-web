@@ -7,7 +7,7 @@ import Data.Array as Array
 import Data.Maybe (Maybe(..))
 import Data.Maybe as Maybe
 import Data.Tuple (Tuple)
-import Halogen (AttrName(..), ElemName(..), PropName(..))
+import Halogen (AttrName(..), ElemName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE

@@ -9,7 +9,6 @@ import Halogen (ElemName(..), PropName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
-import HalogenMWC.Icon as Icon
 import HalogenMWC.List as List
 import HalogenMWC.List.Item as List.Item
 import HalogenMWC.Menu as Menu
@@ -17,7 +16,7 @@ import HalogenMWC.Select.Item as Select.Item
 import Material.Classes.List (mdc_list_item__graphic)
 import Material.Classes.Select (mdc_floating_label, mdc_line_ripple, mdc_notched_outline, mdc_notched_outline__leading, mdc_notched_outline__notch, mdc_notched_outline__trailing, mdc_select, mdc_select____outlined, mdc_select____with_leading_icon, mdc_select__anchor, mdc_select__dropdown_icon, mdc_select__icon, mdc_select__menu, mdc_select__selected_text)
 import MaterialIconsFont.Classes (material_icons)
-import Prelude (class Eq, map, negate, ($), (<>), (==))
+import Prelude
 
 type Config a w i
   = { label :: Maybe String

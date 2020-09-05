@@ -1,25 +1,18 @@
 module Demo.Pages.Drawer where
 
 import Demo.HOC.CatalogPage (CatalogPage)
-import Demo.Utils
-import Halogen
-import Material.Classes.Typography
-import Protolude
+import Demo.Utils (mkComponentStatic)
+import Material.Classes.Typography (mdc_typography____subtitle1)
+import Protolude (Maybe(..), map, ($), (/\))
 import Demo.Route as Route
 
-import Data.Array as Array
-import Data.Maybe as Maybe
-import Halogen as H
-import Halogen.HTML (IProp)
 import Halogen.HTML as HH
-import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Drawer.Permanent as Drawer.Permanent
 import HalogenMWC.Icon as Icon
 import HalogenMWC.List as List
 import HalogenMWC.List.Item as List.Item
-import Material.Classes.Drawer
+import Material.Classes.Drawer (mdc_drawer__subtitle, mdc_drawer__title, mdc_list_item__graphic)
 -- | import Material.Classes.List
 
 config :: CatalogPage

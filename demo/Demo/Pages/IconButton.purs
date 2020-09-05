@@ -1,23 +1,18 @@
 module Demo.Pages.IconButton where
 
 import Demo.HOC.CatalogPage (CatalogPage)
-import Protolude
-import Data.Array as Array
-import Data.Maybe as Maybe
-import Halogen
+import Protolude (Aff, Maybe(..), Unit, Void, const, ($))
 import Halogen as H
-import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Events as HE
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Button as Button
 import HalogenMWC.IconButton as IconButton
 import HalogenMWC.IconToggle as IconToggle
-import Material.Classes.Typography
+import Material.Classes.Typography (mdc_typography____subtitle1)
 import Data.Set (Set)
 import Data.Set as Set
-import Demo.Utils
+import Demo.Utils (focusById)
 
 type State = { ons :: Set String }
 

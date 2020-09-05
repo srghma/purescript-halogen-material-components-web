@@ -1,23 +1,16 @@
 module Demo.Pages.TopAppBar where
 
 import Demo.Route as Route
-import Demo.Utils
-import Halogen
-import Material.Classes.Typography
-import Protolude
+import Demo.Utils (mkComponentStatic)
+import Material.Classes.Typography (mdc_typography____subtitle1)
+import Protolude (Maybe(..), ($))
 
-import Data.Array as Array
-import Data.Maybe as Maybe
 import Demo.HOC.CatalogPage (CatalogPage)
-import Halogen as H
-import Halogen.HTML (IProp)
 import Halogen.HTML as HH
-import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.IconButton as IconButton
 import HalogenMWC.TopAppBar as TopAppBar
-import Material.Classes.TopAppBar
+import Material.Classes.TopAppBar (mdc_top_app_bar__action_item, mdc_top_app_bar__navigation_icon, mdc_top_app_bar__section, mdc_top_app_bar__section____align_end, mdc_top_app_bar__section____align_start, mdc_top_app_bar__title)
 
 config :: CatalogPage
 config =

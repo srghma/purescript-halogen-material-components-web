@@ -6,7 +6,7 @@ import DOM.HTML.Indexed as I
 import DOM.HTML.Indexed.InputType (InputType(..))
 import Data.Array as Array
 import Data.Maybe (Maybe(..))
-import Halogen (AttrName(..), ClassName(..), ElemName(..), PropName(..))
+import Halogen (AttrName(..), ClassName, ElemName(..), PropName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP

@@ -1,24 +1,20 @@
 module Demo.Pages.Snackbar where
 
-import Demo.Utils
-import Halogen
-import Material.Classes.Button
-import Material.Classes.IconButton
-import Material.Classes.Snackbar
-import MaterialIconsFont.Classes
-import Protolude
+import Demo.Utils (mkComponentStatic)
+import Halogen (AttrName(..))
+import Material.Classes.Button (mdc_button)
+import Material.Classes.IconButton (mdc_icon_button)
+import Material.Classes.Snackbar (mdc_snackbar, mdc_snackbar____open, mdc_snackbar__action, mdc_snackbar__actions, mdc_snackbar__dismiss, mdc_snackbar__label, mdc_snackbar__surface)
+import MaterialIconsFont.Classes (material_icons)
+import Protolude (Aff, Maybe(..), Unit, Void, const, pure, unit, ($))
 
 import DOM.HTML.Indexed.ButtonType (ButtonType(..))
-import DOM.HTML.Indexed.InputType (InputType(..))
-import Data.Array as Array
-import Data.Maybe as Maybe
 import Demo.HOC.CatalogPage (CatalogPage)
 import Halogen as H
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Button as Button
 import HalogenMWC.Snackbar as Snackbar
 

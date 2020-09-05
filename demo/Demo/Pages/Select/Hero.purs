@@ -1,13 +1,10 @@
 module Demo.Pages.Select.Hero where
 
-import Protolude
+import Protolude (Aff, Maybe(..), Unit, const)
 import Halogen as H
 import Halogen.HTML as HH
-import HalogenMWC.Chip.Choice as Chip.Choice
-import HalogenMWC.ChipSet.Choice as ChipSet.Choice
-import Demo.Pages.Select.Shared
+import Demo.Pages.Select.Shared (ChildSlots, Fruit, Input, Message, Query, firstItem, remainingItems)
 import HalogenMWC.Select as Select
-import HalogenMWC.Select.Item as Select.Item
 
 type State =
   { hero :: Maybe Fruit

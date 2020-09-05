@@ -1,12 +1,11 @@
 module Demo.Pages.List where
 
 import Demo.HOC.CatalogPage (CatalogPage)
-import Halogen
-import Material.Classes.Typography
-import Protolude
+import Halogen (AttrName(..))
+import Material.Classes.Typography (mdc_typography____subtitle1)
+import Protolude (Aff, Maybe(..), Unit, Void, const, map, ($), (/\), (<>), (==))
 
 import Data.Array as Array
-import Data.Maybe as Maybe
 import Data.Set (Set)
 import Data.Set as Set
 import Demo.Utils (mkComponentStatic)
@@ -15,15 +14,14 @@ import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Button as Button
 import HalogenMWC.Checkbox as Checkbox
 import HalogenMWC.Icon as Icon
 import HalogenMWC.List as List
 import HalogenMWC.List.Item as List.Item
 import HalogenMWC.Radio as Radio
-import Material.Classes.List
-import Demo.Utils
+import Material.Classes.List (mdc_list_item__graphic, mdc_list_item__meta)
+import Demo.Utils (focusById, mkComponentStatic)
 
 type State =
   { checkboxes :: Set String

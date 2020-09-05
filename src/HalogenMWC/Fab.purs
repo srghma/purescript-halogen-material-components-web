@@ -5,7 +5,7 @@ import Data.Maybe (Maybe(..))
 import DOM.HTML.Indexed as I
 import MaterialIconsFont.Classes (material_icons)
 import Data.Array as Array
-import Halogen (ElemName(..), PropName(..))
+import Halogen (ElemName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE

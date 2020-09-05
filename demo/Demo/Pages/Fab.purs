@@ -1,21 +1,15 @@
 module Demo.Pages.Fab where
 
 import Demo.HOC.CatalogPage (CatalogPage)
-import Protolude
-import Data.Array as Array
-import Data.Maybe as Maybe
-import Halogen
-import Halogen as H
-import Halogen.HTML (IProp)
+import Protolude (Maybe(..), const, ($))
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Events as HE
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.Button as Button
 import HalogenMWC.Fab as Fab
 import HalogenMWC.Fab.Extended as Fab.Extended
-import Material.Classes.Typography
-import Demo.Utils
+import Material.Classes.Typography (mdc_typography____subtitle1)
+import Demo.Utils (mkComponentStatic)
 import Demo.MkComponent.WithFocus as WithFocus
 
 config :: CatalogPage

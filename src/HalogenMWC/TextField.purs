@@ -12,7 +12,6 @@ import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import HalogenMWC.Icon as Icon
 import HalogenMWC.Utils as Utils
 import Material.Classes.LineRipple (mdc_line_ripple)
 import Material.Classes.Textfield (mdc_floating_label, mdc_floating_label____float_above, mdc_notched_outline, mdc_notched_outline__leading, mdc_notched_outline__notch, mdc_notched_outline__trailing, mdc_text_field, mdc_text_field____disabled, mdc_text_field____fullwidth, mdc_text_field____no_label, mdc_text_field____outlined, mdc_text_field____with_leading_icon, mdc_text_field____with_trailing_icon, mdc_text_field__icon, mdc_text_field__input)

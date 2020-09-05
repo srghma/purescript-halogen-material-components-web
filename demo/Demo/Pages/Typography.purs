@@ -1,21 +1,12 @@
 module Demo.Pages.Typography where
 
-import Demo.Utils
-import Halogen
-import Protolude
+import Demo.Utils (mkComponentStatic)
+import Protolude (Maybe(..), ($))
 
-import Data.Array as Array
-import Data.Maybe as Maybe
 import Demo.HOC.CatalogPage (CatalogPage)
-import Halogen as H
-import Halogen.HTML (IProp)
 import Halogen.HTML as HH
-import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
-import Material.Classes.Typography
-import Demo.Utils
-
+import Material.Classes.Typography (mdc_typography____body1, mdc_typography____body2, mdc_typography____button, mdc_typography____caption, mdc_typography____headline1, mdc_typography____headline2, mdc_typography____headline3, mdc_typography____headline4, mdc_typography____headline5, mdc_typography____headline6, mdc_typography____overline, mdc_typography____subtitle1, mdc_typography____subtitle2)
 config :: CatalogPage
 config =
     { title: "Typography"
@@ -43,8 +34,10 @@ config =
         ]
     }
 
+body1Paragraph :: String
 body1Paragraph =
     "Body 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam."
 
+body2Paragraph :: String
 body2Paragraph =
     "Body 2. Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate aliquid ad quas sunt voluptatum officia dolorum cumque, possimus nihil molestias sapiente necessitatibus dolor saepe inventore, soluta id accusantium voluptas beatae."

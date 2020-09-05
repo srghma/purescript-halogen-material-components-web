@@ -1,21 +1,12 @@
 module Demo.Pages.LinearProgress where
 
 import Demo.HOC.CatalogPage (CatalogPage)
-import Demo.Utils
-import Halogen
-import Material.Classes.Typography
-import Protolude
+import Demo.Utils (mkComponentStatic)
+import Material.Classes.Typography (mdc_typography____subtitle1)
+import Protolude (Maybe(..), ($))
 
-import Data.Array as Array
-import Data.Maybe as Maybe
-import Demo.Route (Route(..))
-import Halogen as H
-import Halogen.HTML (IProp)
 import Halogen.HTML as HH
-import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
-import HalogenMWC.LinearProgress (Variant(..), linearProgress)
 import HalogenMWC.LinearProgress as LinearProgress
 
 config :: CatalogPage

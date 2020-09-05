@@ -1,19 +1,13 @@
 module Demo.Pages.ImageList where
 
 import Demo.HOC.CatalogPage (CatalogPage)
-import Demo.Utils
-import Halogen
-import Material.Classes.Typography
-import Protolude
+import Demo.Utils (mkComponentStatic)
+import Material.Classes.Typography (mdc_typography____subtitle1)
+import Protolude (Maybe(..), map, ($))
 
 import Data.Array as Array
-import Data.Maybe as Maybe
-import Halogen as H
-import Halogen.HTML (IProp)
 import Halogen.HTML as HH
-import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
 import HalogenMWC.ImageList as ImageList
 import HalogenMWC.ImageList.Item as ImageList.Item
 

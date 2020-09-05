@@ -2,7 +2,6 @@ module HalogenMWC.IconButton where
 
 import Prelude
 import DOM.HTML.Indexed as I
-import Data.Maybe (Maybe(..))
 import Halogen (ClassName, ElemName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH

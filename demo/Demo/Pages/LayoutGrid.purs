@@ -1,22 +1,15 @@
 module Demo.Pages.LayoutGrid where
 
 import Demo.HOC.CatalogPage (CatalogPage)
-import Demo.Utils
-import Halogen
-import Material.Classes.LayoutGrid
-import Material.Classes.Typography
-import Protolude
+import Demo.Utils (mkComponentStatic)
+import Halogen (ClassName)
+import Material.Classes.LayoutGrid (mdc_layout_grid, mdc_layout_grid____align_left, mdc_layout_grid____align_right, mdc_layout_grid__cell, mdc_layout_grid__cell____align_bottom, mdc_layout_grid__cell____align_middle, mdc_layout_grid__cell____align_top, mdc_layout_grid__cell____span_1, mdc_layout_grid__cell____span_2, mdc_layout_grid__cell____span_3, mdc_layout_grid__cell____span_6, mdc_layout_grid__cell____span_8, mdc_layout_grid__inner)
+import Material.Classes.Typography (mdc_typography____body1, mdc_typography____subtitle1)
+import Protolude (Maybe(..), ($), (<>))
 
-import DOM.HTML.Indexed as I
 import Data.Array as Array
-import Data.Maybe as Maybe
-import Halogen as H
-import Halogen.HTML (IProp)
 import Halogen.HTML as HH
-import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as Halogen.HTML.Properties.ARIA
-import HalogenMWC.LayoutGrid as LayoutGrid
 
 config :: CatalogPage
 config =
