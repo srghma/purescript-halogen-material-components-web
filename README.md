@@ -1,5 +1,15 @@
 # Material Components for Halogen
 
+this lib is using js files from https://github.com/aforemny/material-components-web-elm
+
+(the custom html elementes mainly)
+
+AND
+
+css files from https://github.com/material-components/material-components-web
+
+# Hacking
+
 1. how to regenerate classes
 
 check https://github.com/srghma/generate-halogen-generate-css-classes
