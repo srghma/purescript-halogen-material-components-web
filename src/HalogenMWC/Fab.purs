@@ -28,8 +28,8 @@ defaultConfig =
   , additionalAttributes: []
   }
 
-fab :: forall w i. Config i -> String -> HH.HTML w i
-fab config iconName =
+fabMateiralIcons :: forall w i. Config i -> String -> HH.HTML w i
+fabMateiralIcons config iconName =
   HH.element (ElemName "mdc-fab")
     ( Array.catMaybes
         [ Just $ HP.classes
@@ -52,4 +52,4 @@ rippleElt :: forall w i. HH.HTML w i
 rippleElt = HH.div [ HP.class_ mdc_fab__ripple ] []
 
 iconEltMaterialIcons :: forall w i. String -> HH.HTML w i
-iconEltMaterialIcons iconName = HH.span [ HP.class_ material_icons, HP.class_ mdc_fab__icon ] [ HH.text iconName ]
+iconEltMaterialIcons iconName = HH.span [ HP.classes [ material_icons, mdc_fab__icon ] ] [ HH.text iconName ]

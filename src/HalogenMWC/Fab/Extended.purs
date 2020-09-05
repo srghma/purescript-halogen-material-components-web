@@ -1,16 +1,18 @@
 module HalogenMWC.Fab.Extended where
 
-import Halogen (ElemName(..), PropName(..))
-import Material.Classes.Fab (mdc_fab, mdc_fab____exited, mdc_fab____extended, mdc_fab__icon, mdc_fab__label, mdc_fab__ripple)
-import MaterialIconsFont.Classes (material_icons)
 import Prelude
-import Data.Maybe (Maybe(..))
+
 import DOM.HTML.Indexed as I
 import Data.Array as Array
+import Data.Maybe (Maybe(..))
+import Halogen (ElemName(..), PropName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
+import HalogenMWC.Fab (fabMateiralIcons)
+import Material.Classes.Fab (mdc_fab, mdc_fab____exited, mdc_fab____extended, mdc_fab__icon, mdc_fab__label, mdc_fab__ripple)
+import MaterialIconsFont.Classes (material_icons)
 import Web.UIEvent.MouseEvent (MouseEvent)
 
 type Config i
@@ -30,8 +32,8 @@ defaultConfig =
   , additionalAttributes: []
   }
 
-fab :: forall w i. Config i -> String -> HH.HTML w i
-fab config label =
+fabMateiralIcons :: forall w i. Config i -> String -> HH.HTML w i
+fabMateiralIcons config label =
   HH.element (ElemName "mdc-fab")
     ( Array.catMaybes
         [ Just $ HP.classes
@@ -58,7 +60,7 @@ leadingIconEltMaterialIcons config = case config.icon, config.trailingIcon of
   Just iconName, false ->
     Just
       ( HH.span
-          [ HP.class_ material_icons, HP.class_ mdc_fab__icon ]
+          [ HP.classes [ material_icons, mdc_fab__icon ] ]
           [ HH.text iconName ]
       )
   _, _ -> Nothing
@@ -68,5 +70,5 @@ labelElt label = HH.span [ HP.class_ mdc_fab__label ] [ HH.text label ]
 
 trailingIconEltMaterialIcons :: forall w i. Config i -> Maybe (HH.HTML w i)
 trailingIconEltMaterialIcons config = case config.icon, config.trailingIcon of
-  Just iconName, true -> Just (HH.span [ HP.class_ material_icons, HP.class_ mdc_fab__icon ] [ HH.text iconName ])
+  Just iconName, true -> Just (HH.span [ HP.classes [ material_icons, mdc_fab__icon ] ] [ HH.text iconName ])
   _, _ -> Nothing
