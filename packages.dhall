@@ -6,7 +6,7 @@ let overrides = {=}
 let additions = {=}
 
 in      upstream
-    //  https://raw.githubusercontent.com/srghma/dotfiles/master/spago/packages.dhall sha256:da57a54570c83b3d6ba32782ef80ddcf26237361d5d83bfeb8734cc1cd1c3d30
-          upstream.(https://raw.githubusercontent.com/srghma/dotfiles/master/spago/upstreamTypeChunk.dhall sha256:1f07f2737ec9a052fa448d4f2c3058ed5bb68ea66622ac3d1f74bd78eeeac09b)
+    //  https://raw.githubusercontent.com/srghma/my-purescript-package-sets/master/packages.dhall sha256:6d1a867eb821ae07fea3021b3df23c083c30137d644767e271503c32aa460fd4
+          upstream.(https://raw.githubusercontent.com/srghma/my-purescript-package-sets/master/upstreamTypeChunk.dhall sha256:1f07f2737ec9a052fa448d4f2c3058ed5bb68ea66622ac3d1f74bd78eeeac09b)
     //  overrides
     //  additions
