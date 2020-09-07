@@ -14,12 +14,12 @@ import HalogenMWC.Button.Common (Variant)
 import HalogenMWC.Button.Common as Common
 import Prelude
 
-type Config r i
-  = { disabled :: Boolean
-    , touch :: Boolean
-    , additionalClasses :: Array ClassName
-    , additionalAttributes :: Array (IProp r i) -- put `HE.onClick (\_ -> Increment)` here
-    }
+type Config r i =
+  { disabled :: Boolean
+  , touch :: Boolean
+  , additionalClasses :: Array ClassName
+  , additionalAttributes :: Array (IProp r i) -- put `HE.onClick (\_ -> Increment)` here
+  }
 
 button :: forall w i. Variant -> Config I.HTMLbutton i -> Array (HH.HTML w i) -> HH.HTML w i
 button variant config =
