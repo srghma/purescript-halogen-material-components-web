@@ -1,6 +1,4 @@
-// import "./index.scss"
-import "material-components-web-elm/dist/material-components-web-elm.css"
-import "material-components-web-elm/dist/material-components-web-elm.js"
+import "./index.scss"
 import { main } from './Main.purs'
 
 main()

@@ -47,8 +47,6 @@
   },
   "dependencies": {
     "material-components-web": "~7.0.0",
-    "@webcomponents/custom-elements": "^1.4.2",
-    "material-components-web-elm": "^5.0.0",
     "xhr2": "^0.2.0"
   }
 }

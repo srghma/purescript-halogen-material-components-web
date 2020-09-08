@@ -108,7 +108,7 @@ primaryAction additionalAttributes =
         <> additionalAttributes
     )
 
-button :: forall w i. Button.Config I.HTMLbutton i -> Array (HH.HTML w i) -> HH.HTML w i
+button :: forall w i. Button.Config i -> Array (HH.HTML w i) -> HH.HTML w i
 button config =
   Button.button Button.Text
     ( config

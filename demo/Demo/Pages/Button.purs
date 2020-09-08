@@ -1,16 +1,18 @@
 module Demo.Pages.Button where
 
+import DOM.HTML.Indexed (HTMLbutton) as I
 import Demo.HOC.CatalogPage (CatalogPage)
-import Demo.Utils (mkComponentStatic)
-import Material.Classes.Typography (mdc_typography____subtitle1)
-import Protolude (Const, Maybe(..), Unit, Void, const, ($), (<>))
+import Demo.MkComponent.WithFocus as WithFocus
 import Demo.Pages.Button.Css as Demo.Pages.Button.Css
+import Demo.Utils (mkComponentStatic)
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import HalogenMWC.Button as Button
-import Demo.MkComponent.WithFocus as WithFocus
+import HalogenMWC.Button.Link as Button.Link
+import Material.Classes.Typography (mdc_typography____subtitle1)
+import Protolude (Const, Maybe(..), Unit, Void, const, ($), (<>))
 
 type State = Unit
 
@@ -82,7 +84,20 @@ shapedButtons :: forall w i. HH.HTML w i
 shapedButtons = buttonsRow (Button.button Button.Unelevated) [ HP.style "border-radius: 18px;" ]
 
 linkButtons :: forall w i. HH.HTML w i
-linkButtons = buttonsRow (\config -> Button.buttonLink Button.Text (config { additionalAttributes = [ HP.href "#buttons" ] })) []
+linkButtons =
+  let
+    additionalAttributes = [ rowMargin, HP.href "#buttons" ]
+
+    config = Button.Link.defaultConfig { additionalAttributes = additionalAttributes }
+
+    denseConf = Button.Link.defaultConfig { additionalAttributes = additionalAttributes, additionalClasses = [ Demo.Pages.Button.Css.styles.my_button_dense ] }
+  in
+    HH.div_
+      [ Button.Link.buttonLink Button.Link.Text config [ HH.text "Default" ]
+      , Button.Link.buttonLink Button.Link.Text denseConf [ HH.text "Dense" ]
+      , Button.Link.buttonLink Button.Link.Text config [ Button.buttonIconMaterialIcons "favorite", HH.text "Icon" ]
+      ]
+
 
 focusButton :: forall w. HH.HTML w WithFocus.Action
 focusButton =
@@ -91,12 +106,12 @@ focusButton =
     , HH.text "\x00A0"
     , Button.button Button.Raised (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ WithFocus.Focus "my-button") ] }) [ HH.text "Focus" ]
     , HH.text "\x00A0"
-    , Button.buttonLink Button.Raised (Button.defaultConfig { additionalAttributes = [ HP.id_ "my-link-button", HP.href "#buttons" ] }) [ HH.text "Link button" ]
+    , Button.Link.buttonLink Button.Raised (Button.Link.defaultConfig { additionalAttributes = [ HP.id_ "my-link-button", HP.href "#buttons" ] }) [ HH.text "Link button" ]
     , HH.text "\x00A0"
     , Button.button Button.Raised (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ WithFocus.Focus "my-link-button") ] }) [ HH.text "Focus" ]
     ]
 
-buttonsRow :: forall r w i. (Button.Config ( style :: String | r ) i -> Array (HH.HTML w i) -> HH.HTML w i) -> Array (IProp ( style :: String | r ) i) -> HH.HTML w i
+buttonsRow :: forall r w i. (Button.Config i -> Array (HH.HTML w i) -> HH.HTML w i) -> Array (IProp I.HTMLbutton i) -> HH.HTML w i
 buttonsRow button additionalAttributes =
   let
     config = Button.defaultConfig { additionalAttributes = [ rowMargin ] <> additionalAttributes }
