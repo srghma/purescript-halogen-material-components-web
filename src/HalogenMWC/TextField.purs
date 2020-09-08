@@ -93,13 +93,13 @@ textField type_ config =
       , HP.prop (PropName "valid") config.valid
       , HP.prop (PropName "minLength") (Maybe.fromMaybe (-1) config.minLength)
       , HP.prop (PropName "maxLength") (Maybe.fromMaybe (-1) config.maxLength)
+      , HP.attr (AttrName "min") (maybe "" show config.min)
+      , HP.attr (AttrName "max") (maybe "" show config.max)
+      , HP.attr (AttrName "step") (maybe "" show config.step)
       ]
         <> Array.catMaybes
             [ map (HP.prop (PropName "pattern")) config.pattern
             , map (HP.prop (PropName "value")) config.value
-            , map (HP.prop (PropName "min")) config.min
-            , map (HP.prop (PropName "max")) config.max
-            , map (HP.prop (PropName "step")) config.step
             ]
         <> config.additionalAttributes
     )
