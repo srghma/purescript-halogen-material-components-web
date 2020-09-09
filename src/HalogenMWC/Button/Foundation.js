@@ -4,26 +4,28 @@ const MDCRipple = require('@material/ripple/component').MDCRipple;
 
 const matches = require('@material/dom/ponyfill').matches;
 
+const applyPassive = require('@material/dom/events').applyPassive; // Result can be cached
 
-exports.attachFoundation = function(htmlElement, isUnbounded) {
+// XXX: getRoot is Nullary, but it's impossible
+exports.attachFoundation = function(htmlElement, unbounded, options) {
   return function() {
     const adapter = {
-      addClass:                             (className) => instance.root.classList.add(className),
-      browserSupportsCssVars:               () => util.supportsCssVariables(window),
-      computeBoundingRect:                  () => instance.root.getBoundingClientRect(),
-      containsEventTarget:                  (target) => instance.root.contains(target),
-      deregisterDocumentInteractionHandler: (evtType, handler) => document.documentElement.removeEventListener(evtType, handler, applyPassive()),
-      deregisterInteractionHandler:         (evtType, handler) => instance.root.removeEventListener(evtType, handler, applyPassive()),
-      deregisterResizeHandler:              (handler) => window.removeEventListener('resize', handler),
-      getWindowPageOffset:                  () => ({ x: window.pageXOffset, y: window.pageYOffset }),
-      isSurfaceActive:                      () => matches(instance.root, ':active'),
-      isSurfaceDisabled:                    () => Boolean(instance.disabled),
-      isUnbounded:                          () => Boolean(instance.unbounded),
-      registerDocumentInteractionHandler:   (evtType, handler) => document.documentElement.addEventListener(evtType, handler, applyPassive()),
-      registerInteractionHandler:           (evtType, handler) => instance.root.addEventListener(evtType, handler, applyPassive()),
-      registerResizeHandler:                (handler) => window.addEventListener('resize', handler),
-      removeClass:                          (className) => instance.root.classList.remove(className),
-      updateCssVariable:                    (varName, value) => instance.root.style.setProperty(varName, value),
+      addClass:                             function(className) { options.addClass(className)() },
+      browserSupportsCssVars:               function() { return util.supportsCssVariables(window) },
+      computeBoundingRect:                  function() { return options.root.getBoundingClientRect() },
+      containsEventTarget:                  function(target) { return options.root.contains(target) },
+      deregisterDocumentInteractionHandler: function(evtType, handler) { return document.documentElement.removeEventListener(evtType, handler, applyPassive()) },
+      deregisterInteractionHandler:         function(evtType, handler) { return options.root.removeEventListener(evtType, handler, applyPassive()) },
+      deregisterResizeHandler:              function(handler) { return window.removeEventListener('resize', handler) },
+      getWindowPageOffset:                  function() { return { x: window.pageXOffset, y: window.pageYOffset } },
+      isSurfaceActive:                      function() { return matches(options.root, ':active') },
+      isSurfaceDisabled:                    options.isSurfaceDisabled,
+      isUnbounded:                          function() { return unbounded },
+      registerDocumentInteractionHandler:   function(evtType, handler) { return document.documentElement.addEventListener(evtType, handler, applyPassive()) },
+      registerInteractionHandler:           function(evtType, handler) { return options.root.addEventListener(evtType, handler, applyPassive()) }, // TODO: support user events other than click
+      registerResizeHandler:                function(handler) { return window.addEventListener('resize', handler) },
+      removeClass:                          function(className) { options.removeClass(className)() },
+      updateCssVariable:                    function(varName, value) { return options.root.style.setProperty(varName, value) }, // TODO: support user style prop
     };
 
     const foundation = new MDCRippleFoundation(adapter);
