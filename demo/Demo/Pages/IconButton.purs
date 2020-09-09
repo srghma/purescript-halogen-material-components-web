@@ -87,7 +87,7 @@ config =
                         )
                         "wifi"
                     , HH.text "\x00A0"
-                    , Button.button Button.Raised
+                    , Button.buttonView Button.Raised
                         (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Focus "my-icon-button") ] })
                         [ HH.text "Focus" ]
                     ]
@@ -104,7 +104,7 @@ config =
                         , onIcon: "favorite"
                         }
                     , HH.text "\x00A0"
-                    , Button.button Button.Raised
+                    , Button.buttonView Button.Raised
                         (Button.defaultConfig { additionalAttributes = [ HE.onClick $ const $ Focus "my-icon-toggle" ] })
                         [ HH.text "Focus" ]
                     ]

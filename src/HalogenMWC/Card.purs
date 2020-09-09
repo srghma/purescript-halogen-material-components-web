@@ -110,7 +110,7 @@ primaryAction additionalAttributes =
 
 button :: forall w i. Button.Config i -> Array (HH.HTML w i) -> HH.HTML w i
 button config =
-  Button.button Button.Text
+  Button.buttonView Button.Text
     ( config
         { additionalClasses = [ mdc_card__action, mdc_card__action____button ] <> config.additionalClasses
         }

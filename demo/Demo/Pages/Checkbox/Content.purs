@@ -59,7 +59,7 @@ focusCheckbox =
             }
         )
     , HH.text "\x00A0"
-    , Button.button
+    , Button.buttonView
         Button.Raised
         (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Focus "my-checkbox") ] })
         [ HH.text "Focus" ]

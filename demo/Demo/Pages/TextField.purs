@@ -295,7 +295,7 @@ focusTextField =
         }
       )
     , HH.text "\x00A0"
-    , Button.button Button.Raised
+    , Button.buttonView Button.Raised
       (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ WithFocus.Focus "my-text-field") ] })
       [ HH.text "Focus" ]
     ]

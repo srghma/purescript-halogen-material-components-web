@@ -138,7 +138,7 @@ focusSlider state =
           }
         )
     , HH.text "\x00A0"
-    , Button.button Button.Raised
+    , Button.buttonView Button.Raised
         (Button.defaultConfig { additionalAttributes = [ HE.onClick (\_ -> Focus id) ] })
         [ HH.text "Focus" ]
     ]

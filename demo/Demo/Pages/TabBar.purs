@@ -167,7 +167,7 @@ focusTabs state =
             }
         ]
     , HH.text "\x00A0"
-    , Button.button Button.Raised
+    , Button.buttonView Button.Raised
         (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Focus "my-tabs") ] })
         [ HH.text "Focus" ]
     ]

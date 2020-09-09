@@ -112,21 +112,21 @@ config =
           , eval: H.mkEval H.defaultEval { handleAction = handleAction }
           , render: \state ->
               HH.div_
-              [ Button.button Button.Raised
+              [ Button.buttonView Button.Raised
                   (Button.defaultConfig
                       { additionalAttributes = [ buttonMargin, HE.onClick (const ShowBaseline) ]
                       }
                   )
                   [ HH.text "Baseline" ]
               , HH.text " "
-              , Button.button Button.Raised
+              , Button.buttonView Button.Raised
                   (Button.defaultConfig
                       { additionalAttributes = [ buttonMargin, HE.onClick (const ShowLeading) ]
                       }
                   )
                   [ HH.text "Leading" ]
               , HH.text " "
-              , Button.button Button.Raised
+              , Button.buttonView Button.Raised
                   (Button.defaultConfig
                       { additionalAttributes = [ buttonMargin, HE.onClick (const ShowStacked) ]
                       }

@@ -28,7 +28,7 @@ config =
         , HH.h6 [ HP.class_ mdc_typography____subtitle2 ] [ HH.text "Subtitle 2" ]
         , HH.p [ HP.class_ mdc_typography____body1 ] [ HH.text body1Paragraph ]
         , HH.p [ HP.class_ mdc_typography____body2 ] [ HH.text body2Paragraph ]
-        , HH.div [ HP.class_ mdc_typography____button ] [ HH.text "Button.button Button.Text" ]
+        , HH.div [ HP.class_ mdc_typography____button ] [ HH.text "Button.buttonView Button.Text" ]
         , HH.div [ HP.class_ mdc_typography____caption ] [ HH.text "Caption text" ]
         , HH.div [ HP.class_ mdc_typography____overline ] [ HH.text "Overline text" ]
         ]

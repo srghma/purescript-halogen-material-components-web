@@ -317,7 +317,7 @@ focusList =
         (List.Item.listItem List.Item.defaultConfig [ HH.text "Line item" ])
         (Array.replicate 2 $ List.Item.listItem List.Item.defaultConfig [ HH.text "Line item" ])
     , HH.text "\x00A0"
-    , Button.button Button.Raised
+    , Button.buttonView Button.Raised
         (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Focus "my-list") ] })
         [ HH.text "Focus" ]
     ]

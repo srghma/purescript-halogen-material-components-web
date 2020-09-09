@@ -59,19 +59,19 @@ config =
         render :: forall w. State -> HH.HTML w Action
         render state =
           HH.div_
-            [ Button.button Button.Text
+            [ Button.buttonView Button.Text
                 (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Show AlertDialog) ] })
                 [ HH.text "Alert" ]
             , HH.text " "
-            , Button.button Button.Text
+            , Button.buttonView Button.Text
                 (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Show SimpleDialog) ] })
                 [ HH.text "Simple" ]
             , HH.text " "
-            , Button.button Button.Text
+            , Button.buttonView Button.Text
                 (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Show ConfirmationDialog) ] })
                 [ HH.text "Confirmation" ]
             , HH.text " "
-            , Button.button Button.Text
+            , Button.buttonView Button.Text
                 (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Show ScrollableDialog) ] })
                 [ HH.text "Scrollable" ]
             , HH.text " "
@@ -102,8 +102,8 @@ alertDialog state =
         let
           conf = Button.defaultConfig { additionalAttributes = [ HE.onClick (const Close) ] }
         in
-        [ Button.button Button.Text conf [ HH.text "Cancel" ]
-        , Button.button Button.Text conf [ HH.text "Discard" ]
+        [ Button.buttonView Button.Text conf [ HH.text "Cancel" ]
+        , Button.buttonView Button.Text conf [ HH.text "Discard" ]
         ]
     }
 
@@ -171,8 +171,8 @@ confirmationDialog state =
             let
               conf = Button.defaultConfig { additionalAttributes = [ HE.onClick (const Close) ] }
             in
-            [ Button.button Button.Text conf [ HH.text "Cancel" ]
-            , Button.button Button.Text conf [ HH.text "Ok" ]
+            [ Button.buttonView Button.Text conf [ HH.text "Cancel" ]
+            , Button.buttonView Button.Text conf [ HH.text "Ok" ]
             ]
         }
 
@@ -277,8 +277,8 @@ scrollableDialog state =
             let
               conf = Button.defaultConfig { additionalAttributes = [ HE.onClick (const Close) ] }
             in
-            [ Button.button Button.Text conf [ HH.text "Decline" ]
-            , Button.button Button.Text conf [ HH.text "Continue" ]
+            [ Button.buttonView Button.Text conf [ HH.text "Decline" ]
+            , Button.buttonView Button.Text conf [ HH.text "Continue" ]
             ]
         }
 
@@ -294,8 +294,8 @@ heroDialog =
         , HH.div [ HP.class_ mdc_dialog__content ] [ HH.text "Turn up the jams and have a good time." ]
         , HH.div
           [ HP.class_ mdc_dialog__actions ]
-          [ Button.button Button.Text Button.defaultConfig [ HH.text "Decline" ]
-          , Button.button Button.Text Button.defaultConfig [ HH.text "Accept" ]
+          [ Button.buttonView Button.Text Button.defaultConfig [ HH.text "Decline" ]
+          , Button.buttonView Button.Text Button.defaultConfig [ HH.text "Accept" ]
           ]
         ]
     ]

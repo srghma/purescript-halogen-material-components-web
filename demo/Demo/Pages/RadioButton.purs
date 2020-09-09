@@ -62,7 +62,7 @@ config =
             , HH.div_
                 [ Radio.radio (Radio.defaultConfig { additionalAttributes = [ HP.id_ "my-radio" ] })
                 , HH.text "\x00A0"
-                , Button.button Button.Raised
+                , Button.buttonView Button.Raised
                     (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Focus "my-radio") ] })
                     [ HH.text "Focus" ]
                 ]

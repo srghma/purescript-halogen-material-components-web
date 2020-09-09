@@ -12,7 +12,7 @@ import Halogen.HTML.Properties as HP
 import HalogenMWC.Button as Button
 import HalogenMWC.Button.Link as Button.Link
 import Material.Classes.Typography (mdc_typography____subtitle1)
-import Protolude (Const, Maybe(..), Unit, Void, const, ($), (<>))
+import Protolude
 
 type State = Unit
 
@@ -37,10 +37,10 @@ config =
 
       render =
         HH.div_
-          [ Button.button Button.Text config [ HH.text "Text" ]
-          , Button.button Button.Raised config [ HH.text "Raised" ]
-          , Button.button Button.Unelevated config [ HH.text "Unelevated" ]
-          , Button.button Button.Outlined config [ HH.text "Outlined" ]
+          [ HH.slot_ (SProxy :: SProxy "text-button") unit Button.button ({ variant: Button.Text, config, insides: [ HH.text "Text" ] })
+          , Button.buttonView Button.Raised config [ HH.text "Raised" ]
+          , Button.buttonView Button.Unelevated config [ HH.text "Unelevated" ]
+          , Button.buttonView Button.Outlined config [ HH.text "Outlined" ]
           ]
     in
       mkComponentStatic render
@@ -69,19 +69,19 @@ config =
   }
 
 textButtons :: forall w i. HH.HTML w i
-textButtons = buttonsRow (Button.button Button.Text) []
+textButtons = buttonsRow (Button.buttonView Button.Text) []
 
 raisedButtons :: forall w i. HH.HTML w i
-raisedButtons = buttonsRow (Button.button Button.Raised) []
+raisedButtons = buttonsRow (Button.buttonView Button.Raised) []
 
 unelevatedButtons :: forall w i. HH.HTML w i
-unelevatedButtons = buttonsRow (Button.button Button.Unelevated) []
+unelevatedButtons = buttonsRow (Button.buttonView Button.Unelevated) []
 
 outlinedButtons :: forall w i. HH.HTML w i
-outlinedButtons = buttonsRow (Button.button Button.Outlined) []
+outlinedButtons = buttonsRow (Button.buttonView Button.Outlined) []
 
 shapedButtons :: forall w i. HH.HTML w i
-shapedButtons = buttonsRow (Button.button Button.Unelevated) [ HP.style "border-radius: 18px;" ]
+shapedButtons = buttonsRow (Button.buttonView Button.Unelevated) [ HP.style "border-radius: 18px;" ]
 
 linkButtons :: forall w i. HH.HTML w i
 linkButtons =
@@ -102,13 +102,13 @@ linkButtons =
 focusButton :: forall w. HH.HTML w WithFocus.Action
 focusButton =
   HH.div_
-    [ Button.button Button.Raised (Button.defaultConfig { additionalAttributes = [ HP.id_ "my-button" ] }) [ HH.text "Button" ]
+    [ Button.buttonView Button.Raised (Button.defaultConfig { additionalAttributes = [ HP.id_ "my-button" ] }) [ HH.text "Button" ]
     , HH.text "\x00A0"
-    , Button.button Button.Raised (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ WithFocus.Focus "my-button") ] }) [ HH.text "Focus" ]
+    , Button.buttonView Button.Raised (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ WithFocus.Focus "my-button") ] }) [ HH.text "Focus" ]
     , HH.text "\x00A0"
     , Button.Link.buttonLink Button.Raised (Button.Link.defaultConfig { additionalAttributes = [ HP.id_ "my-link-button", HP.href "#buttons" ] }) [ HH.text "Link button" ]
     , HH.text "\x00A0"
-    , Button.button Button.Raised (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ WithFocus.Focus "my-link-button") ] }) [ HH.text "Focus" ]
+    , Button.buttonView Button.Raised (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ WithFocus.Focus "my-link-button") ] }) [ HH.text "Focus" ]
     ]
 
 buttonsRow :: forall r w i. (Button.Config i -> Array (HH.HTML w i) -> HH.HTML w i) -> Array (IProp I.HTMLbutton i) -> HH.HTML w i

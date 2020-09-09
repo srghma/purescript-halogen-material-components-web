@@ -62,7 +62,7 @@ config =
               HH.div_
               [ HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Anchored menu" ]
               , HH.div [ HP.class_ mdc_menu_surface____anchor ]
-                  [ Button.button Button.Text (Button.defaultConfig { additionalAttributes = [ HE.onClick (const Open) ] }) [ HH.text "Open menu" ]
+                  [ Button.buttonView Button.Text (Button.defaultConfig { additionalAttributes = [ HE.onClick (const Open) ] }) [ HH.text "Open menu" ]
                   , Menu.menu
                       (Menu.defaultConfig
                           { open = state.open

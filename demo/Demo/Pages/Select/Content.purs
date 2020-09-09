@@ -131,7 +131,7 @@ focusSelect state =
             firstItem
             remainingItems
         , HH.text "\x00A0"
-        , Button.button Button.Raised
+        , Button.buttonView Button.Raised
             (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ Focus "my-select") ] })
             [ HH.text "Focus" ]
         ]

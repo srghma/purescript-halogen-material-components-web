@@ -67,7 +67,7 @@ config =
           , HH.div [ HP.style "display: flex;" ]
               [ Fab.fabMateiralIcons (Fab.defaultConfig { additionalAttributes = [ HP.id_ "my-fab" ] }) "favorite_border"
               , HH.text "\x00A0"
-              , Button.button Button.Raised
+              , Button.buttonView Button.Raised
                   (Button.defaultConfig { additionalAttributes = [ HE.onClick $ const $ WithFocus.Focus "my-fab" ] })
                   [ HH.text "Focus" ]
               ]
