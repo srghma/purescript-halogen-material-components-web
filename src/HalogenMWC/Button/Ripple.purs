@@ -3,12 +3,35 @@ module HalogenMWC.Button.Ripple where
 import Material.Classes.Ripple
 import Protolude
 
+import DOM.HTML.Indexed as I
 import Data.Int as Int
 import Effect.Uncurried as EFn
+import FRP.Event (Event) as Event
 import Halogen (ClassName(..))
+import Halogen (ComponentSlot, ElemName(..))
+import Halogen as H
+import Halogen.HTML (IProp)
+import Halogen.HTML as HH
+import Halogen.HTML.Core (ClassName)
+import Halogen.HTML.Events (onKeyUp)
+import Halogen.HTML.Events as HE
+import Halogen.HTML.Properties as HP
+import HalogenMWC.Button.Implementation (Variant)
+import HalogenMWC.Button.Implementation as Implementation
+import HalogenMWC.Button.Insides as Insides
+import HalogenMWC.Utils as Utils
 import Math as Math
-import Web.HTML (HTMLElement)
+import Web.Event.Event (EventType(..))
+import Web.Event.Event as Web.Event.Event
+import Web.HTML as Web.HTML
 import Web.HTML.HTMLElement as Web.HTML.HTMLElement
+import Web.HTML.Window as Web.HTML.Window
+import Web.TouchEvent (TouchEvent)
+import Web.TouchEvent.Touch as Web.TouchEvent.Touch
+import Web.TouchEvent.TouchList as Web.TouchEvent.TouchList
+import Web.TouchEvent.TouchEvent as Web.TouchEvent.TouchEvent
+import Web.UIEvent.MouseEvent (MouseEvent)
+import Web.UIEvent.MouseEvent as Web.UIEvent.MouseEvent
 
 cssClasses ::
   { "BG_FOCUSED"      :: ClassName
@@ -42,16 +65,17 @@ foreign import numbers ::
   , "TAP_DELAY_MS"            :: Int -- Delay between touch and simulated mouse events on touch devices
   }
 
+---- GET LAYOUT ------------------------------------------------------
+
 layoutInternal
-  :: Web.HTML.HTMLElement.DOMRect -- this.adapter.computeBoundingRect()
-  -> Boolean
+  :: { rootDomRect :: Web.HTML.HTMLElement.DOMRect, isUnbounded :: Boolean }
   -> { maxRadius :: Number
      , initialSize :: Int
      , fgScale :: Number
      }
-layoutInternal = \frame isUnbounded ->
+layoutInternal = \{ rootDomRect, isUnbounded } ->
   let
-    maxDim = Math.max frame.height frame.width
+    maxDim = Math.max rootDomRect.height rootDomRect.width
 
     -- Ripple is sized as a fraction of the largest dimension of the surface, then scales up using a CSS scale transform
     initialSize =
@@ -66,7 +90,7 @@ layoutInternal = \frame isUnbounded ->
     maxRadius =
       if isUnbounded
         then maxDim
-        else getBoundedRadius frame
+        else getBoundedRadius rootDomRect
 
     fgScale = maxRadius / Int.toNumber initialSize
   in
@@ -75,8 +99,8 @@ layoutInternal = \frame isUnbounded ->
   , fgScale
   }
   where
-    getBoundedRadius frame =
-      let hypotenuse = Math.sqrt (Math.pow frame.width 2.0 + Math.pow frame.height 2.0)
+    getBoundedRadius rootDomRect =
+      let hypotenuse = Math.sqrt (Math.pow rootDomRect.width 2.0 + Math.pow rootDomRect.height 2.0)
        in hypotenuse + numbers."PADDING"
 
 updateCssVarsCommon
@@ -93,26 +117,106 @@ updateCssVarsCommon { initialSize, fgScale } =
 
 updateCssVarsUnbounded
   :: { initialSize :: Int
-     , frame :: Web.HTML.HTMLElement.DOMRect
+     , rootDomRect :: Web.HTML.HTMLElement.DOMRect
      }
   -> { "VAR_LEFT" :: String
      , "VAR_TOP"  :: String
      }
-updateCssVarsUnbounded { initialSize, frame }=
+updateCssVarsUnbounded { initialSize, rootDomRect }=
   let
-    left = Int.round ((frame.width / 2.0) - Int.toNumber (initialSize / 2))
-    top = Int.round ((frame.height / 2.0) - Int.toNumber (initialSize / 2))
+    left = Int.round ((rootDomRect.width / 2.0) - Int.toNumber (initialSize / 2))
+    top = Int.round ((rootDomRect.height / 2.0) - Int.toNumber (initialSize / 2))
   in
     { "VAR_LEFT": show left <> "px"
     , "VAR_TOP":  show top <> "px"
     }
 
--- | layout(): void {
--- |   if (this.layoutFrame_) {
--- |     cancelAnimationFrame(this.layoutFrame_);
--- |   }
--- |   this.layoutFrame_ = requestAnimationFrame(() => {
--- |     this.layoutInternal_();
--- |     this.layoutFrame_ = 0;
--- |   });
--- | }
+---- getFgTranslationCoordinates_ ------------------------------------------------------
+
+type MDCRipplePoint
+  = { x :: Number
+    , y :: Number
+    }
+
+type FgTranslationCoordinates
+  = { startPoint :: MDCRipplePoint
+    , endPoint :: MDCRipplePoint
+    }
+
+fgTranslationCoordinatesToTranslateForUnbounded ::
+  FgTranslationCoordinates ->
+  { "VAR_FG_TRANSLATE_START" :: String
+  , "VAR_FG_TRANSLATE_END" :: String
+  }
+fgTranslationCoordinatesToTranslateForUnbounded = \coords ->
+  { "VAR_FG_TRANSLATE_START": print coords.startPoint
+  , "VAR_FG_TRANSLATE_END": print coords.endPoint
+  }
+  where
+    print { x, y } = show x <> "px, " <> show y <> "px"
+
+getFgTranslationCoordinatesPonter
+  :: { normalizedEventCoords :: MDCRipplePoint
+     , initialSize :: Int
+     , rootDomRect :: Web.HTML.HTMLElement.DOMRect
+     }
+  -> FgTranslationCoordinates
+getFgTranslationCoordinatesPonter
+  { normalizedEventCoords
+  , initialSize
+  , rootDomRect
+  } =
+  let
+    -- Center the element around the start point.
+    startPoint =
+      { x: normalizedEventCoords.x - Int.toNumber (initialSize / 2)
+      , y: normalizedEventCoords.y - Int.toNumber (initialSize / 2)
+      }
+
+    endPoint =
+      { x: (rootDomRect.width / 2.0) - Int.toNumber (initialSize / 2)
+      , y: (rootDomRect.height / 2.0) - Int.toNumber (initialSize / 2)
+      }
+   in { startPoint, endPoint }
+
+-------------------
+
+getNormalizedEventCoordsDefault :: Web.HTML.HTMLElement.DOMRect -> MDCRipplePoint
+getNormalizedEventCoordsDefault rootDomRect = { x: rootDomRect.width / 2.0, y: rootDomRect.height / 2.0 }
+
+getNormalizedEventCoordsTouchEvent
+  :: { touchEvent :: TouchEvent
+     , scrollX :: Int
+     , scrollY :: Int
+     , rootDomRect :: Web.HTML.HTMLElement.DOMRect
+     }
+  -> MDCRipplePoint
+getNormalizedEventCoordsTouchEvent
+  { touchEvent
+  , scrollX
+  , scrollY
+  , rootDomRect
+  } =
+    case Web.TouchEvent.TouchList.item 0 $ Web.TouchEvent.TouchEvent.changedTouches touchEvent of
+         Just touchEventItem ->
+           { x: Int.toNumber (Web.TouchEvent.Touch.pageX touchEventItem) - (Int.toNumber scrollX + rootDomRect.left)
+           , y: Int.toNumber (Web.TouchEvent.Touch.pageY touchEventItem) - (Int.toNumber scrollY + rootDomRect.top)
+           }
+         _ -> getNormalizedEventCoordsDefault rootDomRect
+
+getNormalizedEventCoordsMouseEvent
+  :: { mouseEvent :: MouseEvent
+     , scrollX :: Int
+     , scrollY :: Int
+     , rootDomRect :: Web.HTML.HTMLElement.DOMRect
+     }
+  -> MDCRipplePoint
+getNormalizedEventCoordsMouseEvent
+  { mouseEvent
+  , scrollX
+  , scrollY
+  , rootDomRect
+  } =
+  { x: Int.toNumber (Web.UIEvent.MouseEvent.pageX mouseEvent) - (Int.toNumber scrollX + rootDomRect.left)
+  , y: Int.toNumber (Web.UIEvent.MouseEvent.pageY mouseEvent) - (Int.toNumber scrollY + rootDomRect.top)
+  }

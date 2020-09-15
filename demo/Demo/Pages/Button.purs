@@ -37,7 +37,7 @@ config =
 
       render =
         HH.div_
-          [ HH.slot_ (SProxy :: SProxy "text-button") unit Button.button ({ variant: Button.Text, config, insides: [ HH.text "Text" ] })
+          [ HH.slot_ (SProxy :: SProxy "text-button") unit Button.button ({ variant: Button.Text, config, content: [ HH.text "Text" ] })
           , Button.buttonView Button.Raised config [ HH.text "Raised" ]
           , Button.buttonView Button.Unelevated config [ HH.text "Unelevated" ]
           , Button.buttonView Button.Outlined config [ HH.text "Outlined" ]
