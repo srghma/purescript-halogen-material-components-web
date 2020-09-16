@@ -8,6 +8,7 @@ import HalogenMWC.Button.Ripple
 import Protolude
 
 import DOM.HTML.Indexed as I
+import Data.Array (concat) as Array
 import Data.String as String
 import FRP.Event (Event) as Event
 import Halogen (ComponentSlot, ElemName(..))
@@ -51,7 +52,7 @@ buttonView variant config =
       [ HP.classes (Implementation.commonClasses variant <> config.additionalClasses)
       , HP.disabled config.disabled
       , HP.tabIndex (if config.disabled then -1 else 0)
-      , HP.ref (H.RefLabel "button")
+      , HP.ref buttonRefLabel
       ]
   in
     \content ->
@@ -118,6 +119,8 @@ isUnbounded = false
 
 styleVar x y = x <> ": " <> y
 
+buttonRefLabel = H.RefLabel "button"
+
 button :: H.Component Query (Input (H.ComponentSlot ChildSlots Aff Action) Action) Message Aff
 button =
   H.mkComponent
@@ -135,10 +138,12 @@ button =
     , render: \state ->
         let
           rippleClasses =
-            [ cssClasses."ROOT" ]
-            <> if isUnbounded then [ cssClasses."UNBOUNDED" ] else []
-            <> if (spy "render state" state).focusedClass then [ cssClasses."BG_FOCUSED" ] else []
-            <> if state.activationState.isActivated then [ cssClasses."FG_ACTIVATION" ] else []
+            Array.concat
+            [ [ cssClasses."ROOT" ]
+            , if isUnbounded then [ cssClasses."UNBOUNDED" ] else []
+            , if state.focusedClass then [ cssClasses."BG_FOCUSED" ] else []
+            , if state.activationState.isActivated then [ cssClasses."FG_ACTIVATION" ] else []
+            ]
         in
           Implementation.wrapTouch
             [ HH.button
@@ -164,7 +169,7 @@ button =
                              ]
                 , HP.disabled state.input.config.disabled
                 , HP.tabIndex (if state.input.config.disabled then -1 else 0)
-                , HP.ref (H.RefLabel "button")
+                , HP.ref buttonRefLabel
 
                 -- | , HE.handler (EventType "pointerdown") (const PointerActivation) -- TODO
                 , HE.onTouchStart TouchActivation
@@ -195,21 +200,28 @@ defaultActivationState =
   , wasElementMadeActive: false
   }
 
-getButtonHtmlElementRef = H.getHTMLElementRef (H.RefLabel "button")
-
 layoutAndModifyState :: H.HalogenM (State (H.ComponentSlot ChildSlots Aff Action) Action) Action ChildSlots Message Aff Unit
-layoutAndModifyState = getButtonHtmlElementRef >>= traverse_ \(htmlElement :: Web.HTML.HTMLElement) -> do
-  (rootDomRect :: Web.HTML.HTMLElement.DOMRect) <- H.liftEffect $ Web.HTML.HTMLElement.getBoundingClientRect htmlElement
+layoutAndModifyState = do
+  traceM "layoutAndModifyState"
 
-  let { maxRadius, initialSize, fgScale } = layoutInternal { rootDomRect, isUnbounded }
+  H.getHTMLElementRef buttonRefLabel >>= traverse_ \(htmlElement :: Web.HTML.HTMLElement) -> do
+    traceM { message: "layoutAndModifyState updating", htmlElement }
 
-  H.modify_ \state -> spy "state after" $ state
-    { styleCommonVars = updateCssVarsCommon { initialSize, fgScale }
-    , styleVars =
-        if isUnbounded
-          then StyleVars__Unbounded $ updateCssVarsUnbounded { initialSize, rootDomRect }
-          else StyleVars__Empty
-    }
+    (rootDomRect :: Web.HTML.HTMLElement.DOMRect) <- H.liftEffect $ Web.HTML.HTMLElement.getBoundingClientRect htmlElement
+
+    let { maxRadius, initialSize, fgScale } = layoutInternal { rootDomRect, isUnbounded }
+
+    H.modify_ \state -> spy "layoutAndModifyState state after modify" $ state
+      { styleCommonVars = updateCssVarsCommon { initialSize, fgScale }
+      , styleVars =
+          if isUnbounded
+            then StyleVars__Unbounded $ updateCssVarsUnbounded { initialSize, rootDomRect }
+            else StyleVars__Empty
+      }
+
+    newState <- H.get
+
+    traceM { message: "layoutAndModifyState newState", newState }
 
 handleAction :: Action -> H.HalogenM (State (H.ComponentSlot ChildSlots Aff Action) Action) Action ChildSlots Message Aff Unit
 handleAction action =
@@ -227,8 +239,8 @@ handleAction action =
             void $ H.subscribe event'
 
             layoutAndModifyState
-       Focus -> H.modify_ \state -> spy "state after" $ state { focusedClass = true }
-       Blur -> H.modify_ \state -> spy "state after" $ state { focusedClass = false }
+       Focus -> H.modify_ \state -> spy "Focus state after" $ if state.focusedClass then state else state { focusedClass = true }
+       Blur -> H.modify_ \state -> spy "Blur state after" $ if state.focusedClass then state { focusedClass = false } else state
        WindowResized -> layoutAndModifyState
        TouchActivation touchEvent -> pure unit
        MouseActivation mouseEvent -> do
@@ -236,7 +248,7 @@ handleAction action =
 
           if state.input.config.disabled then pure unit else
             if state.activationState.isActivated then pure unit else
-              getButtonHtmlElementRef >>= traverse_ \(htmlElement :: Web.HTML.HTMLElement) -> do
+              H.getHTMLElementRef buttonRefLabel >>= traverse_ \(htmlElement :: Web.HTML.HTMLElement) -> do
                 ({ rootDomRect
                  , scrollX
                  , scrollY
@@ -274,7 +286,7 @@ handleAction action =
 
                           in StyleVars__NonUnbounded $ fgTranslationCoordinatesToTranslateForUnbounded fgTranslationCoordinates
 
-                H.modify_ \state' -> spy "state after" $ state'
+                H.modify_ \state' -> spy "MouseActivation state after" $ state'
                   { activationState =
                     { activationEvent:       state'.activationState.activationEvent
                     , hasDeactivationUXRun:  state'.activationState.hasDeactivationUXRun
@@ -283,6 +295,7 @@ handleAction action =
                     , wasActivatedByPointer: true
                     , wasElementMadeActive:  state'.activationState.wasElementMadeActive
                     }
+                  , focusedClass = true
                   , styleCommonVars = styleCommonVars
                   , styleVars = styleVars
                   }
