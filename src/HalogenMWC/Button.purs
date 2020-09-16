@@ -73,10 +73,10 @@ data Action
   | Focus
   | Blur
   | WindowResized
-  | TouchActivation TouchEvent
-  | MouseActivation MouseEvent
-  | KeyActivation
-  | Deactivation
+  | TouchActivate TouchEvent
+  | MouseActivate MouseEvent
+  | KeyActivate
+  | Deactivate
 
 type Message = Void
 
@@ -98,20 +98,18 @@ data StyleVars
     , "VAR_TOP"  :: String
     }
 
+data ActivationState
+  = ActivationState__Idle
+  | ActivationState__Activated
+  | ActivationState__Deactivated
+
 type State w i =
   { input                   :: Input w i
-  , focusedClass            :: Boolean
+  , focused            :: Boolean
   , styleCommonVars         :: StyleCommonVars
   , styleVars               :: StyleVars
   , previousActivationEvent :: Maybe Web.Event.Event.Event
-  , activationState ::
-    { activationEvent       :: Maybe Web.Event.Event.Event
-    , hasDeactivationUXRun  :: Boolean
-    , isActivated           :: Boolean
-    , isProgrammatic        :: Boolean
-    , wasActivatedByPointer :: Boolean
-    , wasElementMadeActive  :: Boolean
-    }
+  , activationState :: ActivationState
   }
 
 isUnbounded :: Boolean
@@ -126,14 +124,14 @@ button =
   H.mkComponent
     { initialState: \input ->
       { input
-      , focusedClass: false
       , styleCommonVars:
           { "VAR_FG_SCALE": "0" -- https://github.com/material-components/material-components-web/blob/83d83f131118073943a6a45923b37b3a961bd894/packages/mdc-ripple/foundation.ts#L103
           , "VAR_FG_SIZE": "0px"
           }
       , styleVars: StyleVars__Empty
       , previousActivationEvent: Nothing
-      , activationState: defaultActivationState
+      , focused: false
+      , activationState: ActivationState__Idle
       }
     , render: \state ->
         let
@@ -141,8 +139,11 @@ button =
             Array.concat
             [ [ cssClasses."ROOT" ]
             , if isUnbounded then [ cssClasses."UNBOUNDED" ] else []
-            , if state.focusedClass then [ cssClasses."BG_FOCUSED" ] else []
-            , if state.activationState.isActivated then [ cssClasses."FG_ACTIVATION" ] else []
+            , if state.focused then [ cssClasses."BG_FOCUSED" ] else []
+            , case state.activationState of
+                   ActivationState__Idle -> []
+                   ActivationState__Activated -> [ cssClasses."FG_ACTIVATION" ]
+                   ActivationState__Deactivated -> [ cssClasses."FG_DEACTIVATION" ]
             ]
         in
           Implementation.wrapTouch
@@ -172,10 +173,10 @@ button =
                 , HP.ref buttonRefLabel
 
                 -- | , HE.handler (EventType "pointerdown") (const PointerActivation) -- TODO
-                , HE.onTouchStart TouchActivation
-                , HE.onMouseDown MouseActivation
-                -- | , HE.onKeyDown (const KeyActivation)
-                -- | , HE.onKeyUp (const Deactivation) -- only when onKeyDown worked?
+                , HE.onTouchStart TouchActivate
+                , HE.onMouseDown MouseActivate
+                -- | , HE.onKeyDown (const KeyActivate)
+                -- | , HE.onKeyUp (const Deactivate) -- only when onKeyDown worked?
 
                 , HE.onFocus (const Focus)
                 , HE.onBlur (const Blur)
@@ -190,15 +191,6 @@ button =
         , handleAction = handleAction
         }
     }
-
-defaultActivationState =
-  { activationEvent: Nothing
-  , hasDeactivationUXRun: false
-  , isActivated: false
-  , isProgrammatic: false
-  , wasActivatedByPointer: false
-  , wasElementMadeActive: false
-  }
 
 layoutAndModifyState :: H.HalogenM (State (H.ComponentSlot ChildSlots Aff Action) Action) Action ChildSlots Message Aff Unit
 layoutAndModifyState = do
@@ -239,69 +231,105 @@ handleAction action =
             void $ H.subscribe event'
 
             layoutAndModifyState
-       Focus -> H.modify_ \state -> spy "Focus state after" $ if state.focusedClass then state else state { focusedClass = true }
-       Blur -> H.modify_ \state -> spy "Blur state after" $ if state.focusedClass then state { focusedClass = false } else state
+       Focus -> H.modify_ \state -> spy "Focus state after" $ if state.focused then state else state { focused = true }
+       Blur -> H.modify_ \state -> spy "Blur state after" $ if state.focused then state { focused = false } else state
        WindowResized -> layoutAndModifyState
-       TouchActivation touchEvent -> pure unit
-       MouseActivation mouseEvent -> do
+       TouchActivate touchEvent -> pure unit
+       MouseActivate mouseEvent -> do
           state <- H.get
 
-          if state.input.config.disabled then pure unit else
-            if state.activationState.isActivated then pure unit else
-              H.getHTMLElementRef buttonRefLabel >>= traverse_ \(htmlElement :: Web.HTML.HTMLElement) -> do
-                ({ rootDomRect
-                 , scrollX
-                 , scrollY
-                 }
-                ) <- H.liftEffect do
-                   (rootDomRect :: Web.HTML.HTMLElement.DOMRect) <- Web.HTML.HTMLElement.getBoundingClientRect htmlElement
-                   (window :: Window) <- Web.HTML.window
-                   (scrollX :: Int) <- Web.HTML.Window.scrollX window
-                   (scrollY :: Int) <- Web.HTML.Window.scrollY window
-                   pure
-                     { rootDomRect
+          case state.input.config.disabled, state.activationState of
+               false, ActivationState__Idle -> do
+                 H.getHTMLElementRef buttonRefLabel >>= traverse_ \(htmlElement :: Web.HTML.HTMLElement) -> do
+                   ({ rootDomRect
                      , scrollX
                      , scrollY
                      }
+                   ) <- H.liftEffect do
+                       (rootDomRect :: Web.HTML.HTMLElement.DOMRect) <- Web.HTML.HTMLElement.getBoundingClientRect htmlElement
+                       (window :: Window) <- Web.HTML.window
+                       (scrollX :: Int) <- Web.HTML.Window.scrollX window
+                       (scrollY :: Int) <- Web.HTML.Window.scrollY window
+                       pure
+                         { rootDomRect
+                         , scrollX
+                         , scrollY
+                         }
 
-                let { maxRadius, initialSize, fgScale } = layoutInternal { rootDomRect, isUnbounded }
+                   let { maxRadius, initialSize, fgScale } = layoutInternal { rootDomRect, isUnbounded }
 
-                let (styleCommonVars :: StyleCommonVars) = updateCssVarsCommon { initialSize, fgScale }
-                let (styleVars :: StyleVars) =
-                      if isUnbounded
-                        then StyleVars__Unbounded $ updateCssVarsUnbounded { initialSize, rootDomRect }
-                        else let
-                          (normalizedEventCoords :: MDCRipplePoint) = getNormalizedEventCoordsMouseEvent
-                            { mouseEvent
-                            , scrollX
-                            , scrollY
-                            , rootDomRect
-                            }
+                   let (styleCommonVars :: StyleCommonVars) = updateCssVarsCommon { initialSize, fgScale }
+                   let (styleVars :: StyleVars) =
+                         if isUnbounded
+                           then StyleVars__Unbounded $ updateCssVarsUnbounded { initialSize, rootDomRect }
+                           else let
+                             (normalizedEventCoords :: MDCRipplePoint) = getNormalizedEventCoordsMouseEvent
+                               { mouseEvent
+                               , scrollX
+                               , scrollY
+                               , rootDomRect
+                               }
 
-                          (fgTranslationCoordinates :: FgTranslationCoordinates) = getFgTranslationCoordinatesPonter
-                            { normalizedEventCoords
-                            , initialSize
-                            , rootDomRect
-                            }
+                             (fgTranslationCoordinates :: FgTranslationCoordinates) = getFgTranslationCoordinatesPonter
+                               { normalizedEventCoords
+                               , initialSize
+                               , rootDomRect
+                               }
 
-                          in StyleVars__NonUnbounded $ fgTranslationCoordinatesToTranslateForUnbounded fgTranslationCoordinates
+                             in StyleVars__NonUnbounded $ fgTranslationCoordinatesToTranslateForUnbounded fgTranslationCoordinates
 
-                H.modify_ \state' -> spy "MouseActivation state after" $ state'
-                  { activationState =
-                    { activationEvent:       state'.activationState.activationEvent
-                    , hasDeactivationUXRun:  state'.activationState.hasDeactivationUXRun
-                    , isActivated:           true
-                    , isProgrammatic:        true
-                    , wasActivatedByPointer: true
-                    , wasElementMadeActive:  state'.activationState.wasElementMadeActive
+                   H.modify_ \state' -> spy "MouseActivate state after" $ state'
+                     { activationState = ActivationState__Activated
+                     , focused = true
+                     , styleCommonVars = styleCommonVars
+                     , styleVars = styleVars
+                     }
+               _, _ -> pure unit
+       KeyActivate -> pure unit
+       Deactivate -> do
+          state <- H.get
+
+          case state.activationState of
+               ActivationState__Activated -> do
+                  H.modify_ \state' -> spy "Deactivate state after" $ state'
+                    { activationState = ActivationState__Deactivated
                     }
-                  , focusedClass = true
-                  , styleCommonVars = styleCommonVars
-                  , styleVars = styleVars
-                  }
-       KeyActivation -> pure unit
-       Deactivation -> pure unit
+                  -- | this.adapter.deregisterInteractionHandler('keyup', this.deactivateHandler_);
+                  -- | POINTER_DEACTIVATION_EVENT_TYPES.forEach((evtType) => {
+                  -- |   this.adapter.deregisterDocumentInteractionHandler(
+                  -- |       evtType, this.deactivateHandler_);
+                  -- | });
 
+                  -- | requestAnimationFrame(() => {
+                  -- |   this.activationState_.hasDeactivationUXRun = true;
+
+                  -- |   if (wasActivatedByPointer || wasElementMadeActive) {
+                  -- |     // This method is called both when a pointing device is released, and when the activation animation ends.
+                  -- |     // The deactivation animation should only run after both of those occur.
+                  -- |     const {FG_DEACTIVATION} = MDCRippleFoundation.cssClasses;
+                  -- |     const {hasDeactivationUXRun, isActivated} = this.activationState_;
+                  -- |     const activationHasEnded = hasDeactivationUXRun || !isActivated;
+
+                  -- |     if (activationHasEnded && this.activationAnimationHasEnded_) {
+                  -- |       const {FG_ACTIVATION} = MDCRippleFoundation.cssClasses;
+                  -- |       this.adapter.removeClass(FG_ACTIVATION);
+                  -- |       this.activationAnimationHasEnded_ = false;
+                  -- |       this.adapter.computeBoundingRect();
+
+                  -- |       this.adapter.addClass(FG_DEACTIVATION);
+                  -- |       this.fgDeactivationRemovalTimer_ = setTimeout(() => {
+                  -- |         this.adapter.removeClass(FG_DEACTIVATION);
+                  -- |       }, numbers.FG_DEACTIVATION_MS);
+                  -- |     }
+                  -- |   }
+
+                  -- |   this.previousActivationEvent_ = this.activationState_.activationEvent;
+                  -- |   this.activationState_ = this.defaultActivationState_();
+                  -- |   // Touch devices may fire additional events for the same interaction within a short time.
+                  -- |   // Store the previous event until it's safe to assume that subsequent events are for new interactions.
+                  -- |   setTimeout(() => this.previousActivationEvent_ = undefined, MDCRippleFoundation.numbers.TAP_DELAY_MS);
+                  -- | });
+               _ -> pure unit
        -- | Finalize -> do
        -- |   case state.activationTimer_ of
        -- |        Just activationTimer_ -> clearTimeout(this.activationTimer_)
