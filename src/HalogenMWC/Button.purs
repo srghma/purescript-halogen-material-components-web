@@ -25,6 +25,7 @@ import HalogenMWC.Button.Insides as Insides
 import HalogenMWC.Utils as Utils
 import Web.DOM (Element)
 import Web.DOM.Document as Web.DOM.Document
+import Web.DOM.Element as Web.DOM.Element
 import Web.Event.Event (EventType(..))
 import Web.Event.Event as Web.Event.Event
 import Web.HTML as Web.HTML
@@ -34,7 +35,6 @@ import Web.HTML.Window (Window)
 import Web.HTML.Window as Web.HTML.Window
 import Web.TouchEvent (TouchEvent)
 import Web.UIEvent.MouseEvent (MouseEvent)
-import Web.DOM.Element as Web.DOM.Element
 
 type Config i =
   { disabled :: Boolean
@@ -243,67 +243,72 @@ handleAction action =
        MouseActivate mouseEvent -> do
           state <- H.get
 
-          case state.input.config.disabled, state.activationState of
-               false, ActivationState__Idle -> do
-                 H.getHTMLElementRef buttonRefLabel >>= traverse_ \(htmlElement :: Web.HTML.HTMLElement) -> do
-                   ( { rootDomRect
-                     , scrollX
-                     , scrollY
-                     , documentElement
-                     }
-                   ) <- H.liftEffect do
-                       (rootDomRect :: Web.HTML.HTMLElement.DOMRect) <- Web.HTML.HTMLElement.getBoundingClientRect htmlElement
-                       (window :: Window) <- Web.HTML.window
-                       (scrollX :: Int) <- Web.HTML.Window.scrollX window
-                       (scrollY :: Int) <- Web.HTML.Window.scrollY window
+          if state.input.config.disabled then pure unit else
+            case state.activationState of
+                ActivationState__Idle -> do
+                  H.getHTMLElementRef buttonRefLabel >>= traverse_ \(htmlElement :: Web.HTML.HTMLElement) -> do
+                    ( { rootDomRect
+                      , scrollX
+                      , scrollY
+                      , documentElement
+                      }
+                    ) <- H.liftEffect do
+                        (rootDomRect :: Web.HTML.HTMLElement.DOMRect) <- Web.HTML.HTMLElement.getBoundingClientRect htmlElement
+                        (window :: Window) <- Web.HTML.window
+                        (scrollX :: Int) <- Web.HTML.Window.scrollX window
+                        (scrollY :: Int) <- Web.HTML.Window.scrollY window
 
-                       (documentElement :: Element) <- (Web.DOM.Document.documentElement =<< Web.HTML.HTMLDocument.toDocument <$> Web.HTML.Window.document window)
-                          >>= maybe (throwError $ error "no document element (html)") pure
+                        (documentElement :: Element) <- (Web.DOM.Document.documentElement =<< Web.HTML.HTMLDocument.toDocument <$> Web.HTML.Window.document window)
+                            >>= maybe (throwError $ error "no document element (html)") pure
 
-                       pure
-                         { rootDomRect
-                         , scrollX
-                         , scrollY
-                         , documentElement
-                         }
+                        pure
+                          { rootDomRect
+                          , scrollX
+                          , scrollY
+                          , documentElement
+                          }
 
-                   let { maxRadius, initialSize, fgScale } = layoutInternal { rootDomRect, isUnbounded }
+                    let { maxRadius, initialSize, fgScale } = layoutInternal { rootDomRect, isUnbounded }
 
-                   let (styleCommonVars :: StyleCommonVars) = updateCssVarsCommon { initialSize, fgScale }
-                   let (styleVars :: StyleVars) =
-                         if isUnbounded
-                           then StyleVars__Unbounded $ updateCssVarsUnbounded { initialSize, rootDomRect }
-                           else let
-                             (normalizedEventCoords :: MDCRipplePoint) = getNormalizedEventCoordsMouseEvent
-                               { mouseEvent
-                               , scrollX
-                               , scrollY
-                               , rootDomRect
-                               }
+                    let (styleCommonVars :: StyleCommonVars) = updateCssVarsCommon { initialSize, fgScale }
+                    let (styleVars :: StyleVars) =
+                          if isUnbounded
+                            then StyleVars__Unbounded $ updateCssVarsUnbounded { initialSize, rootDomRect }
+                            else let
+                              (normalizedEventCoords :: MDCRipplePoint) = getNormalizedEventCoordsMouseEvent
+                                { mouseEvent
+                                , scrollX
+                                , scrollY
+                                , rootDomRect
+                                }
 
-                             (fgTranslationCoordinates :: FgTranslationCoordinates) = getFgTranslationCoordinatesPonter
-                               { normalizedEventCoords
-                               , initialSize
-                               , rootDomRect
-                               }
+                              (fgTranslationCoordinates :: FgTranslationCoordinates) = getFgTranslationCoordinatesPonter
+                                { normalizedEventCoords
+                                , initialSize
+                                , rootDomRect
+                                }
 
-                             in StyleVars__Bounded $ fgTranslationCoordinatesToTranslateForUnbounded fgTranslationCoordinates
+                              in StyleVars__Bounded $ fgTranslationCoordinatesToTranslateForUnbounded fgTranslationCoordinates
 
-                   H.modify_ \state' -> spy "MouseActivate state after" $ state'
-                     { activationState = ActivationState__Activated
-                     , focused = true
-                     , styleCommonVars = styleCommonVars
-                     , styleVars = styleVars
-                     }
+                    H.modify_ \state' -> spy "MouseActivate state after" $ state'
+                      { activationState = ActivationState__Activated
+                      , focused = true -- for faster render, will render once instead of 2 times
+                      , styleCommonVars = styleCommonVars
+                      , styleVars = styleVars
+                      }
 
-                   void $ H.subscribe' \subscriptionId ->
-                     Utils.eventListenerEventSourceWithOptionsMany
-                        pointer_deactivation_event_types
-                        Utils.unsafePassiveIfSupportsAddEventListenerOptions
-                        (Web.DOM.Element.toEventTarget documentElement)
-                     <#> const (Deactivate subscriptionId)
+                    void $ H.subscribe' \subscriptionId ->
+                      Utils.eventListenerEventSourceWithOptionsMany
+                          pointer_deactivation_event_types
+                          Utils.unsafePassiveIfSupportsAddEventListenerOptions
+                          (Web.DOM.Element.toEventTarget documentElement)
+                      <#> const (Deactivate subscriptionId)
 
-               _, _ -> pure unit
+                ActivationState__Deactivated -> do
+                  H.modify_ \state' -> state'
+                    { activationState = ActivationState__Activated
+                    }
+                _ -> pure unit
        KeyActivate -> pure unit
        DeactivationEnded ->
          H.modify_ \state' -> spy "DeactivationEnded state after" $ state'
