@@ -79,7 +79,6 @@ data Action
   | WindowResized
   | TouchActivate TouchEvent
   | MouseActivate MouseEvent
-  | KeyActivate
   | Deactivate H.SubscriptionId
   | DeactivationEnded
 
@@ -108,20 +107,30 @@ data ActivationState
   | ActivationState__Activated
   | ActivationState__Deactivated
 
+derive instance eqActivationState :: Eq ActivationState
+
 type State w i =
   { input                   :: Input w i
-  , focused            :: Boolean
+  , focused                 :: Boolean
   , styleCommonVars         :: StyleCommonVars
   , styleVars               :: StyleVars
   , previousActivationEvent :: Maybe Web.Event.Event.Event
-  , activationState :: ActivationState
+  , activationState         :: ActivationState
   }
+
+setStateActivationStateEfficiently :: forall w i . State w i -> ActivationState -> State w i
+setStateActivationStateEfficiently state new = if state.activationState == new then state else state { activationState = new }
+
+setStateFocusedEfficiently :: forall w i . State w i -> Boolean -> State w i
+setStateFocusedEfficiently state new = if state.focused == new then state else state { focused = new }
 
 isUnbounded :: Boolean
 isUnbounded = false
 
+styleVar :: String -> String -> String
 styleVar x y = x <> ": " <> y
 
+buttonRefLabel :: H.RefLabel
 buttonRefLabel = H.RefLabel "button"
 
 button :: H.Component Query (Input (H.ComponentSlot ChildSlots Aff Action) Action) Message Aff
@@ -154,12 +163,11 @@ button =
           Implementation.wrapTouch
             [ HH.button
               ( [ HP.classes $
-                  spy "render classes" $
                   ( Implementation.commonClasses state.input.variant
                   <> rippleClasses
                   <> state.input.config.additionalClasses
                   )
-                , HP.style $ String.joinWith "; " $ spy "render style" $
+                , HP.style $ String.joinWith "; " $
                     [ styleVar strings."VAR_FG_SCALE" state.styleCommonVars."VAR_FG_SCALE"
                     , styleVar strings."VAR_FG_SIZE" state.styleCommonVars."VAR_FG_SIZE"
                     ] <>
@@ -177,7 +185,6 @@ button =
                 , HP.tabIndex (if state.input.config.disabled then -1 else 0)
                 , HP.ref buttonRefLabel
 
-                -- | , HE.handler (EventType "pointerdown") (const PointerActivation) -- TODO
                 , HE.onTouchStart TouchActivate
                 , HE.onMouseDown MouseActivate
                 -- | , HE.onKeyDown (const KeyActivate)
@@ -199,16 +206,12 @@ button =
 
 layoutAndModifyState :: H.HalogenM (State (H.ComponentSlot ChildSlots Aff Action) Action) Action ChildSlots Message Aff Unit
 layoutAndModifyState = do
-  traceM "layoutAndModifyState"
-
   H.getHTMLElementRef buttonRefLabel >>= traverse_ \(htmlElement :: Web.HTML.HTMLElement) -> do
-    traceM { message: "layoutAndModifyState updating", htmlElement }
-
     (rootDomRect :: Web.HTML.HTMLElement.DOMRect) <- H.liftEffect $ Web.HTML.HTMLElement.getBoundingClientRect htmlElement
 
     let { maxRadius, initialSize, fgScale } = layoutInternal { rootDomRect, isUnbounded }
 
-    H.modify_ \state -> spy "layoutAndModifyState state after modify" $ state
+    H.modify_ \state -> state
       { styleCommonVars = updateCssVarsCommon { initialSize, fgScale }
       , styleVars =
           if isUnbounded
@@ -216,160 +219,130 @@ layoutAndModifyState = do
             else StyleVars__Empty
       }
 
-    newState <- H.get
+activationLogicGo
+  :: forall event
+   .  ( { event :: event
+        , scrollX :: Int
+        , scrollY :: Int
+        , rootDomRect :: Web.HTML.HTMLElement.DOMRect
+        }
+        -> MDCRipplePoint
+      )
+  -> event
+  -> H.HalogenM (State (H.ComponentSlot ChildSlots Aff Action) Action) Action ChildSlots Message Aff Unit
+activationLogicGo getNormalizedEventCoords event =
+  H.getHTMLElementRef buttonRefLabel >>= traverse_ \(htmlElement :: Web.HTML.HTMLElement) -> do
+    ( { rootDomRect
+      , scrollX
+      , scrollY
+      , documentElement
+      }
+    ) <- H.liftEffect do
+        (rootDomRect :: Web.HTML.HTMLElement.DOMRect) <- Web.HTML.HTMLElement.getBoundingClientRect htmlElement
+        (window :: Window) <- Web.HTML.window
+        (scrollX :: Int) <- Web.HTML.Window.scrollX window
+        (scrollY :: Int) <- Web.HTML.Window.scrollY window
 
-    traceM { message: "layoutAndModifyState newState", newState }
+        (documentElement :: Element) <- (Web.DOM.Document.documentElement =<< Web.HTML.HTMLDocument.toDocument <$> Web.HTML.Window.document window)
+            >>= maybe (throwError $ error "no document element (html)") pure
+
+        pure
+          { rootDomRect
+          , scrollX
+          , scrollY
+          , documentElement
+          }
+
+    let { maxRadius, initialSize, fgScale } = layoutInternal { rootDomRect, isUnbounded }
+
+    let (styleCommonVars :: StyleCommonVars) = updateCssVarsCommon { initialSize, fgScale }
+    let (styleVars :: StyleVars) =
+          if isUnbounded
+            then StyleVars__Unbounded $ updateCssVarsUnbounded { initialSize, rootDomRect }
+            else let
+              (normalizedEventCoords :: MDCRipplePoint) = getNormalizedEventCoords
+                { event
+                , scrollX
+                , scrollY
+                , rootDomRect
+                }
+
+              (fgTranslationCoordinates :: FgTranslationCoordinates) = getFgTranslationCoordinatesPonter
+                { normalizedEventCoords
+                , initialSize
+                , rootDomRect
+                }
+
+              in StyleVars__Bounded $ fgTranslationCoordinatesToTranslateForUnbounded fgTranslationCoordinates
+
+    H.modify_ \state' -> state'
+      { activationState = ActivationState__Activated
+      , focused = true -- for faster render, will render once instead of 2 times
+      , styleCommonVars = styleCommonVars
+      , styleVars = styleVars
+      }
+
+    void $ H.subscribe' \pointerReleasedSubscriptionId ->
+      Utils.eventListenerEventSourceWithOptionsMany
+          pointer_deactivation_event_types
+          Utils.unsafePassiveIfSupportsAddEventListenerOptions
+          (Web.DOM.Element.toEventTarget documentElement)
+      <#> const (Deactivate pointerReleasedSubscriptionId)
+
+activationLogic
+  :: forall event
+   .  ( { event :: event
+        , scrollX :: Int
+        , scrollY :: Int
+        , rootDomRect :: Web.HTML.HTMLElement.DOMRect
+        }
+        -> MDCRipplePoint
+      )
+  -> event
+  -> H.HalogenM (State (H.ComponentSlot ChildSlots Aff Action) Action) Action ChildSlots Message Aff Unit
+activationLogic getNormalizedEventCoords event = do
+  state <- H.get
+
+  if state.input.config.disabled then pure unit else
+    case state.activationState of
+        ActivationState__Idle -> activationLogicGo getNormalizedEventCoords event
+        ActivationState__Deactivated -> activationLogicGo getNormalizedEventCoords event
+        _ -> pure unit
 
 handleAction :: Action -> H.HalogenM (State (H.ComponentSlot ChildSlots Aff Action) Action) Action ChildSlots Message Aff Unit
-handleAction action =
-  case spy "action" action of
+handleAction =
+  case _ of
        Initialize ->
           when isUnbounded do
             window <- H.liftEffect Web.HTML.window
 
-            let event :: Event.Event Web.Event.Event.Event
-                event = Utils.eventListenerEventSourceWithOptions (EventType "resize") Utils.unsafePassiveIfSupportsAddEventListenerOptions (Web.HTML.Window.toEventTarget window)
+            let event :: Event.Event Action
+                event =
+                  (Utils.eventListenerEventSourceWithOptions (EventType "resize") Utils.unsafePassiveIfSupportsAddEventListenerOptions (Web.HTML.Window.toEventTarget window))
+                  <#> const WindowResized
 
-                event' :: Event.Event Action
-                event' = event <#> const WindowResized
-
-            void $ H.subscribe event'
+            void $ H.subscribe event
 
             layoutAndModifyState
-       Focus -> H.modify_ \state -> spy "Focus state after" $ if state.focused then state else state { focused = true }
-       Blur -> H.modify_ \state -> spy "Blur state after" $ if state.focused then state { focused = false } else state
+
+       Focus -> H.modify_ \state -> setStateFocusedEfficiently state true
+       Blur -> H.modify_ \state -> setStateFocusedEfficiently state false
+
        WindowResized -> layoutAndModifyState
-       TouchActivate touchEvent -> pure unit
-       MouseActivate mouseEvent -> do
-          state <- H.get
 
-          if state.input.config.disabled then pure unit else
-            case state.activationState of
-                ActivationState__Idle -> do
-                  H.getHTMLElementRef buttonRefLabel >>= traverse_ \(htmlElement :: Web.HTML.HTMLElement) -> do
-                    ( { rootDomRect
-                      , scrollX
-                      , scrollY
-                      , documentElement
-                      }
-                    ) <- H.liftEffect do
-                        (rootDomRect :: Web.HTML.HTMLElement.DOMRect) <- Web.HTML.HTMLElement.getBoundingClientRect htmlElement
-                        (window :: Window) <- Web.HTML.window
-                        (scrollX :: Int) <- Web.HTML.Window.scrollX window
-                        (scrollY :: Int) <- Web.HTML.Window.scrollY window
+       TouchActivate touchEvent -> activationLogic getNormalizedEventCoordsTouchEvent touchEvent
+       MouseActivate mouseEvent -> activationLogic getNormalizedEventCoordsMouseEvent mouseEvent
 
-                        (documentElement :: Element) <- (Web.DOM.Document.documentElement =<< Web.HTML.HTMLDocument.toDocument <$> Web.HTML.Window.document window)
-                            >>= maybe (throwError $ error "no document element (html)") pure
-
-                        pure
-                          { rootDomRect
-                          , scrollX
-                          , scrollY
-                          , documentElement
-                          }
-
-                    let { maxRadius, initialSize, fgScale } = layoutInternal { rootDomRect, isUnbounded }
-
-                    let (styleCommonVars :: StyleCommonVars) = updateCssVarsCommon { initialSize, fgScale }
-                    let (styleVars :: StyleVars) =
-                          if isUnbounded
-                            then StyleVars__Unbounded $ updateCssVarsUnbounded { initialSize, rootDomRect }
-                            else let
-                              (normalizedEventCoords :: MDCRipplePoint) = getNormalizedEventCoordsMouseEvent
-                                { mouseEvent
-                                , scrollX
-                                , scrollY
-                                , rootDomRect
-                                }
-
-                              (fgTranslationCoordinates :: FgTranslationCoordinates) = getFgTranslationCoordinatesPonter
-                                { normalizedEventCoords
-                                , initialSize
-                                , rootDomRect
-                                }
-
-                              in StyleVars__Bounded $ fgTranslationCoordinatesToTranslateForUnbounded fgTranslationCoordinates
-
-                    H.modify_ \state' -> spy "MouseActivate state after" $ state'
-                      { activationState = ActivationState__Activated
-                      , focused = true -- for faster render, will render once instead of 2 times
-                      , styleCommonVars = styleCommonVars
-                      , styleVars = styleVars
-                      }
-
-                    void $ H.subscribe' \subscriptionId ->
-                      Utils.eventListenerEventSourceWithOptionsMany
-                          pointer_deactivation_event_types
-                          Utils.unsafePassiveIfSupportsAddEventListenerOptions
-                          (Web.DOM.Element.toEventTarget documentElement)
-                      <#> const (Deactivate subscriptionId)
-
-                ActivationState__Deactivated -> do
-                  H.modify_ \state' -> state'
-                    { activationState = ActivationState__Activated
-                    }
-                _ -> pure unit
-       KeyActivate -> pure unit
-       DeactivationEnded ->
-         H.modify_ \state' -> spy "DeactivationEnded state after" $ state'
-           { activationState = ActivationState__Idle
-           }
-       Deactivate subscriptionId -> do
-          H.unsubscribe subscriptionId
+       Deactivate pointerReleasedSubscriptionId -> do
+          H.unsubscribe pointerReleasedSubscriptionId
 
           state <- H.get
 
           case state.activationState of
                ActivationState__Activated -> do
-                  H.modify_ \state' -> spy "Deactivate state after" $ state'
-                    { activationState = ActivationState__Deactivated
-                    }
+                  H.modify_ \state' -> setStateActivationStateEfficiently state' ActivationState__Deactivated
 
                   void $ H.subscribe (Utils.mkTimeoutEvent DeactivationEnded numbers."FG_DEACTIVATION_MS")
-
-                  -- | this.adapter.deregisterInteractionHandler('keyup', this.deactivateHandler_);
-                  -- | POINTER_DEACTIVATION_EVENT_TYPES.forEach((evtType) => {
-                  -- |   this.adapter.deregisterDocumentInteractionHandler(
-                  -- |       evtType, this.deactivateHandler_);
-                  -- | });
-
-                  -- | requestAnimationFrame(() => {
-                  -- |   this.activationState_.hasDeactivationUXRun = true;
-
-                  -- |   if (wasActivatedByPointer || wasElementMadeActive) {
-                  -- |     // This method is called both when a pointing device is released, and when the activation animation ends.
-                  -- |     // The deactivation animation should only run after both of those occur.
-                  -- |     const {FG_DEACTIVATION} = MDCRippleFoundation.cssClasses;
-                  -- |     const {hasDeactivationUXRun, isActivated} = this.activationState_;
-                  -- |     const activationHasEnded = hasDeactivationUXRun || !isActivated;
-
-                  -- |     if (activationHasEnded && this.activationAnimationHasEnded_) {
-                  -- |       const {FG_ACTIVATION} = MDCRippleFoundation.cssClasses;
-                  -- |       this.adapter.removeClass(FG_ACTIVATION);
-                  -- |       this.activationAnimationHasEnded_ = false;
-                  -- |       this.adapter.computeBoundingRect();
-
-                  -- |       this.adapter.addClass(FG_DEACTIVATION);
-                  -- |       this.fgDeactivationRemovalTimer_ = setTimeout(() => {
-                  -- |         this.adapter.removeClass(FG_DEACTIVATION);
-                  -- |       }, numbers.FG_DEACTIVATION_MS);
-                  -- |     }
-                  -- |   }
-
-                  -- |   this.previousActivationEvent_ = this.activationState_.activationEvent;
-                  -- |   this.activationState_ = this.defaultActivationState_();
-                  -- |   // Touch devices may fire additional events for the same interaction within a short time.
-                  -- |   // Store the previous event until it's safe to assume that subsequent events are for new interactions.
-                  -- |   setTimeout(() => this.previousActivationEvent_ = undefined, MDCRippleFoundation.numbers.TAP_DELAY_MS);
-                  -- | });
                _ -> pure unit
-       -- | Finalize -> do
-       -- |   case state.activationTimer_ of
-       -- |        Just activationTimer_ -> clearTimeout(this.activationTimer_)
-       -- |        _ -> pure unit
 
-       -- |   case state.fgDeactivationRemovalTimer_ of
-       -- |        Just fgDeactivationRemovalTimer_ -> clearTimeout(this.fgDeactivationRemovalTimer_);
-       -- |        _ -> pure unit
-
-       -- |   if isUnbounded then window.removeEventListener('resize', handler)
+       DeactivationEnded -> H.modify_ \state' -> setStateActivationStateEfficiently state' ActivationState__Idle

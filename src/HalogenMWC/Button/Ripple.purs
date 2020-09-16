@@ -66,18 +66,18 @@ strings =
   }
 
 numbers ::
-  { "DEACTIVATION_TIMEOUT_MS" :: Int -- Corresponds to $mdc-ripple-translate-duration (i.e. activation animation duration)
-  , "FG_DEACTIVATION_MS"      :: Int -- Corresponds to $mdc-ripple-fade-out-duration (i.e. deactivation animation duration)
+  { "FG_DEACTIVATION_MS"      :: Int -- Corresponds to $mdc-ripple-fade-out-duration (i.e. deactivation animation duration)
+  -- | , "DEACTIVATION_TIMEOUT_MS" :: Int -- Corresponds to $mdc-ripple-translate-duration (i.e. activation animation duration)
   , "INITIAL_ORIGIN_SCALE"    :: Number
   , "PADDING"                 :: Number
-  , "TAP_DELAY_MS"            :: Int -- Delay between touch and simulated mouse events on touch devices
+  -- | , "TAP_DELAY_MS"            :: Int -- Delay between touch and simulated mouse events on touch devices
   }
 numbers =
-  { "DEACTIVATION_TIMEOUT_MS":     225
-  , "FG_DEACTIVATION_MS":          150
+  { "FG_DEACTIVATION_MS":          1500
+  -- | , "DEACTIVATION_TIMEOUT_MS":     225
   , "INITIAL_ORIGIN_SCALE":        0.6
   , "PADDING":                     10.0
-  , "TAP_DELAY_MS":                300
+  -- | , "TAP_DELAY_MS":                300
   }
 
 pointer_deactivation_event_types :: Array EventType
@@ -208,19 +208,19 @@ getNormalizedEventCoordsDefault :: Web.HTML.HTMLElement.DOMRect -> MDCRipplePoin
 getNormalizedEventCoordsDefault rootDomRect = { x: rootDomRect.width / 2.0, y: rootDomRect.height / 2.0 }
 
 getNormalizedEventCoordsTouchEvent
-  :: { touchEvent :: TouchEvent
+  :: { event :: TouchEvent
      , scrollX :: Int
      , scrollY :: Int
      , rootDomRect :: Web.HTML.HTMLElement.DOMRect
      }
   -> MDCRipplePoint
 getNormalizedEventCoordsTouchEvent
-  { touchEvent
+  { event
   , scrollX
   , scrollY
   , rootDomRect
   } =
-    case Web.TouchEvent.TouchList.item 0 $ Web.TouchEvent.TouchEvent.changedTouches touchEvent of
+    case Web.TouchEvent.TouchList.item 0 $ Web.TouchEvent.TouchEvent.changedTouches event of
          Just touchEventItem ->
            { x: Int.toNumber (Web.TouchEvent.Touch.pageX touchEventItem) - (Int.toNumber scrollX + rootDomRect.left)
            , y: Int.toNumber (Web.TouchEvent.Touch.pageY touchEventItem) - (Int.toNumber scrollY + rootDomRect.top)
@@ -228,19 +228,19 @@ getNormalizedEventCoordsTouchEvent
          _ -> getNormalizedEventCoordsDefault rootDomRect
 
 getNormalizedEventCoordsMouseEvent
-  :: { mouseEvent :: MouseEvent
+  :: { event :: MouseEvent
      , scrollX :: Int
      , scrollY :: Int
      , rootDomRect :: Web.HTML.HTMLElement.DOMRect
      }
   -> MDCRipplePoint
 getNormalizedEventCoordsMouseEvent
-  { mouseEvent
+  { event
   , scrollX
   , scrollY
   , rootDomRect
   } =
-  { x: Int.toNumber (Web.UIEvent.MouseEvent.pageX mouseEvent) - (Int.toNumber scrollX + rootDomRect.left)
-  , y: Int.toNumber (Web.UIEvent.MouseEvent.pageY mouseEvent) - (Int.toNumber scrollY + rootDomRect.top)
+  { x: Int.toNumber (Web.UIEvent.MouseEvent.pageX event) - (Int.toNumber scrollX + rootDomRect.left)
+  , y: Int.toNumber (Web.UIEvent.MouseEvent.pageY event) - (Int.toNumber scrollY + rootDomRect.top)
   }
 
