@@ -277,7 +277,8 @@ activationLogicGo getNormalizedEventCoords event =
 
     H.modify_ \state' -> state'
       { activationState = ActivationState__Activated
-      , focused = true -- for faster render, will render once instead of 2 times
+      -- for faster render, will render once instead of 2 times, because Focus action comes after mouseEvent
+      , focused = true
       , styleCommonVars = styleCommonVars
       , styleVars = styleVars
       }
@@ -342,6 +343,7 @@ handleAction =
                ActivationState__Activated -> do
                   H.modify_ \state' -> setStateActivationStateEfficiently state' ActivationState__Deactivated
 
+                  -- TODO: how not to register if already registered?
                   void $ H.subscribe (Utils.mkTimeoutEvent DeactivationEnded numbers."FG_DEACTIVATION_MS")
                _ -> pure unit
 
