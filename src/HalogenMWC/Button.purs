@@ -116,6 +116,8 @@ type State w i =
 isUnbounded :: Boolean
 isUnbounded = false
 
+styleVar x y = x <> ": " <> y
+
 button :: H.Component Query (Input (H.ComponentSlot ChildSlots Aff Action) Action) Message Aff
 button =
   H.mkComponent
@@ -141,15 +143,12 @@ button =
           Implementation.wrapTouch
             [ HH.button
               ( [ HP.classes $
-                  spy "classes" $
+                  spy "render classes" $
                   ( Implementation.commonClasses state.input.variant
                   <> rippleClasses
                   <> state.input.config.additionalClasses
                   )
-                , HP.style $ String.joinWith "; "
-                  let styleVar x y = x <> ": " <> y
-                   in
-                    spy "style" $
+                , HP.style $ String.joinWith "; " $ spy "render style" $
                     [ styleVar strings."VAR_FG_SCALE" state.styleCommonVars."VAR_FG_SCALE"
                     , styleVar strings."VAR_FG_SIZE" state.styleCommonVars."VAR_FG_SIZE"
                     ] <>

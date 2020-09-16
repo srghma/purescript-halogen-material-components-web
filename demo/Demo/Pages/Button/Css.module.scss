@@ -7,3 +7,15 @@
   @include button.ink-color(#84565E);
   @include button.density(-3);
 }
+
+.heroMargin {
+  margin: 16px 32px;
+}
+
+.rowMargin {
+  margin: 8px 16px;
+}
+
+.shapedButtons {
+  border-radius: 18px;
+}

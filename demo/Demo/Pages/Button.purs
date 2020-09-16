@@ -1,10 +1,13 @@
 module Demo.Pages.Button where
 
+import Protolude
+
 import DOM.HTML.Indexed (HTMLbutton) as I
 import Demo.HOC.CatalogPage (CatalogPage)
 import Demo.MkComponent.WithFocus as WithFocus
 import Demo.Pages.Button.Css as Demo.Pages.Button.Css
 import Demo.Utils (mkComponentStatic)
+import Halogen (ClassName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
@@ -12,7 +15,6 @@ import Halogen.HTML.Properties as HP
 import HalogenMWC.Button as Button
 import HalogenMWC.Button.Link as Button.Link
 import Material.Classes.Typography (mdc_typography____subtitle1)
-import Protolude
 
 type State = Unit
 
@@ -33,7 +35,7 @@ config =
     }
   , hero:
     let
-      config = Button.defaultConfig { additionalAttributes = [ heroMargin ] }
+      config = Button.defaultConfig { additionalClasses = [ Demo.Pages.Button.Css.styles.heroMargin ] }
 
       render =
         HH.div_
@@ -81,16 +83,16 @@ outlinedButtons :: forall w i. HH.HTML w i
 outlinedButtons = buttonsRow (Button.buttonView Button.Outlined) []
 
 shapedButtons :: forall w i. HH.HTML w i
-shapedButtons = buttonsRow (Button.buttonView Button.Unelevated) [ HP.style "border-radius: 18px;" ]
+shapedButtons = buttonsRow (Button.buttonView Button.Unelevated) [ Demo.Pages.Button.Css.styles.shapedButtons ]
 
 linkButtons :: forall w i. HH.HTML w i
 linkButtons =
   let
-    additionalAttributes = [ rowMargin, HP.href "#buttons" ]
+    additionalAttributes = [ HP.href "#buttons" ]
 
-    config = Button.Link.defaultConfig { additionalAttributes = additionalAttributes }
+    config = Button.Link.defaultConfig { additionalAttributes = additionalAttributes, additionalClasses = [ Demo.Pages.Button.Css.styles.rowMargin ] }
 
-    denseConf = Button.Link.defaultConfig { additionalAttributes = additionalAttributes, additionalClasses = [ Demo.Pages.Button.Css.styles.my_button_dense ] }
+    denseConf = Button.Link.defaultConfig { additionalAttributes = additionalAttributes, additionalClasses = [ Demo.Pages.Button.Css.styles.my_button_dense, Demo.Pages.Button.Css.styles.rowMargin ] }
   in
     HH.div_
       [ Button.Link.buttonLink Button.Link.Text config [ HH.text "Default" ]
@@ -111,19 +113,13 @@ focusButton =
     , Button.buttonView Button.Raised (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ WithFocus.Focus "my-link-button") ] }) [ HH.text "Focus" ]
     ]
 
-buttonsRow :: forall r w i. (Button.Config i -> Array (HH.HTML w i) -> HH.HTML w i) -> Array (IProp I.HTMLbutton i) -> HH.HTML w i
-buttonsRow button additionalAttributes =
+buttonsRow :: forall r w i. (Button.Config i -> Array (HH.HTML w i) -> HH.HTML w i) -> Array ClassName -> HH.HTML w i
+buttonsRow button additionalClasses =
   let
-    config = Button.defaultConfig { additionalAttributes = [ rowMargin ] <> additionalAttributes }
+    config = Button.defaultConfig { additionalClasses = [ Demo.Pages.Button.Css.styles.rowMargin ] <> additionalClasses }
   in
     HH.div_
       [ button config [ HH.text "Default" ]
-      , button (config { additionalClasses = [ Demo.Pages.Button.Css.styles.my_button_dense ] }) [ HH.text "Dense" ]
+      , button (config { additionalClasses = config.additionalClasses <> [ Demo.Pages.Button.Css.styles.my_button_dense ] }) [ HH.text "Dense" ]
       , button config [ Button.buttonIconMaterialIcons "favorite", HH.text "Icon" ]
       ]
-
-heroMargin :: forall r i. IProp ( style :: String | r ) i
-heroMargin = HP.style "margin: 16px 32px;"
-
-rowMargin :: forall r i. IProp ( style :: String | r ) i
-rowMargin = HP.style "margin: 8px 16px;"

@@ -5,4 +5,7 @@ import Halogen.HTML (ClassName)
 
 foreign import styles ::
   { my_button_dense :: ClassName
+  , heroMargin :: ClassName
+  , rowMargin :: ClassName
+  , shapedButtons :: ClassName
   }
