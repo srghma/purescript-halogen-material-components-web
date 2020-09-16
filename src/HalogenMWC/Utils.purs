@@ -15,6 +15,7 @@ import Halogen.HTML.Properties (IProp)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.Event.Event as E
 import Web.Event.EventTarget as ET
+import Effect.Timer as Timer
 
 prop :: forall value r i. PropName value -> PropValue -> IProp r i
 prop = unsafeCoerce Property
@@ -117,3 +118,27 @@ eventListenerEventSourceWithOptions eventType options target =
     addEventListenerWithOptions eventType listener (addEventListenerOptionsToInternal options) target
     let removeOptions = eventListenerOptionsToInternal $ addEventListenerOptionsToEventListenerOptions options
     pure $ removeEventListenerWithOptions eventType listener removeOptions target
+
+mkTimeoutEvent :: forall action . action -> Int -> Event.Event action
+mkTimeoutEvent action time =
+  Event.makeEvent \push -> do
+    timeoutId <- Timer.setTimeout time (push action)
+    pure $ Timer.clearTimeout timeoutId
+
+eventListenerEventSourceWithOptionsMany
+  :: Array E.EventType
+  -> AddEventListenerOptions
+  -> ET.EventTarget
+  -> Event.Event E.Event
+eventListenerEventSourceWithOptionsMany eventTypes options target =
+  Event.makeEvent \push -> do
+    listener <- ET.eventListener push
+
+    let addOptions = addEventListenerOptionsToInternal unsafePassiveIfSupportsAddEventListenerOptions
+
+    for_ eventTypes \eventType -> addEventListenerWithOptions eventType listener addOptions target
+
+    let removeOptions = eventListenerOptionsToInternal $ addEventListenerOptionsToEventListenerOptions unsafePassiveIfSupportsAddEventListenerOptions
+
+    pure $
+      for_ eventTypes \eventType -> removeEventListenerWithOptions eventType listener removeOptions target

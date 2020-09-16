@@ -16,6 +16,7 @@
   , "tuples"
   , "either"
   , "foldable-traversable"
+  , "js-timers"
   ----
   , "protolude"
   , "routing-duplex"

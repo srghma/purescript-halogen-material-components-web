@@ -65,6 +65,14 @@ foreign import numbers ::
   , "TAP_DELAY_MS"            :: Int -- Delay between touch and simulated mouse events on touch devices
   }
 
+pointer_deactivation_event_types :: Array EventType
+pointer_deactivation_event_types =
+  [ EventType "touchend"
+  , EventType "pointerup"
+  , EventType "mouseup"
+  , EventType "contextmenu"
+  ]
+
 ---- GET LAYOUT ------------------------------------------------------
 
 layoutInternal
@@ -220,3 +228,4 @@ getNormalizedEventCoordsMouseEvent
   { x: Int.toNumber (Web.UIEvent.MouseEvent.pageX mouseEvent) - (Int.toNumber scrollX + rootDomRect.left)
   , y: Int.toNumber (Web.UIEvent.MouseEvent.pageY mouseEvent) - (Int.toNumber scrollY + rootDomRect.top)
   }
+

@@ -8,9 +8,9 @@ import HalogenMWC.Button.Ripple
 import Protolude
 
 import DOM.HTML.Indexed as I
-import Data.Array (concat) as Array
+import Data.Array as Array
 import Data.String as String
-import FRP.Event (Event) as Event
+import FRP.Event as Event
 import Halogen (ComponentSlot, ElemName(..))
 import Halogen as H
 import Halogen.HTML (IProp)
@@ -23,14 +23,18 @@ import HalogenMWC.Button.Implementation (Variant)
 import HalogenMWC.Button.Implementation as Implementation
 import HalogenMWC.Button.Insides as Insides
 import HalogenMWC.Utils as Utils
+import Web.DOM (Element)
+import Web.DOM.Document as Web.DOM.Document
 import Web.Event.Event (EventType(..))
 import Web.Event.Event as Web.Event.Event
 import Web.HTML as Web.HTML
+import Web.HTML.HTMLDocument as Web.HTML.HTMLDocument
 import Web.HTML.HTMLElement as Web.HTML.HTMLElement
 import Web.HTML.Window (Window)
 import Web.HTML.Window as Web.HTML.Window
 import Web.TouchEvent (TouchEvent)
 import Web.UIEvent.MouseEvent (MouseEvent)
+import Web.DOM.Element as Web.DOM.Element
 
 type Config i =
   { disabled :: Boolean
@@ -76,7 +80,8 @@ data Action
   | TouchActivate TouchEvent
   | MouseActivate MouseEvent
   | KeyActivate
-  | Deactivate
+  | Deactivate H.SubscriptionId
+  | DeactivationEnded
 
 type Message = Void
 
@@ -89,7 +94,7 @@ type StyleCommonVars =
 
 data StyleVars
   = StyleVars__Empty
-  | StyleVars__NonUnbounded
+  | StyleVars__Bounded
     { "VAR_FG_TRANSLATE_START" :: String
     , "VAR_FG_TRANSLATE_END" :: String
     }
@@ -164,9 +169,9 @@ button =
                              [ styleVar strings."VAR_LEFT" styleVars__Unbounded."VAR_LEFT"
                              , styleVar strings."VAR_TOP" styleVars__Unbounded."VAR_TOP"
                              ]
-                           StyleVars__NonUnbounded styleVars__NonUnbounded ->
-                             [ styleVar strings."VAR_FG_TRANSLATE_END" styleVars__NonUnbounded."VAR_FG_TRANSLATE_END"
-                             , styleVar strings."VAR_FG_TRANSLATE_START" styleVars__NonUnbounded."VAR_FG_TRANSLATE_START"
+                           StyleVars__Bounded styleVars__Bounded ->
+                             [ styleVar strings."VAR_FG_TRANSLATE_END" styleVars__Bounded."VAR_FG_TRANSLATE_END"
+                             , styleVar strings."VAR_FG_TRANSLATE_START" styleVars__Bounded."VAR_FG_TRANSLATE_START"
                              ]
                 , HP.disabled state.input.config.disabled
                 , HP.tabIndex (if state.input.config.disabled then -1 else 0)
@@ -241,19 +246,25 @@ handleAction action =
           case state.input.config.disabled, state.activationState of
                false, ActivationState__Idle -> do
                  H.getHTMLElementRef buttonRefLabel >>= traverse_ \(htmlElement :: Web.HTML.HTMLElement) -> do
-                   ({ rootDomRect
+                   ( { rootDomRect
                      , scrollX
                      , scrollY
+                     , documentElement
                      }
                    ) <- H.liftEffect do
                        (rootDomRect :: Web.HTML.HTMLElement.DOMRect) <- Web.HTML.HTMLElement.getBoundingClientRect htmlElement
                        (window :: Window) <- Web.HTML.window
                        (scrollX :: Int) <- Web.HTML.Window.scrollX window
                        (scrollY :: Int) <- Web.HTML.Window.scrollY window
+
+                       (documentElement :: Element) <- (Web.DOM.Document.documentElement =<< Web.HTML.HTMLDocument.toDocument <$> Web.HTML.Window.document window)
+                          >>= maybe (throwError $ error "no document element (html)") pure
+
                        pure
                          { rootDomRect
                          , scrollX
                          , scrollY
+                         , documentElement
                          }
 
                    let { maxRadius, initialSize, fgScale } = layoutInternal { rootDomRect, isUnbounded }
@@ -276,7 +287,7 @@ handleAction action =
                                , rootDomRect
                                }
 
-                             in StyleVars__NonUnbounded $ fgTranslationCoordinatesToTranslateForUnbounded fgTranslationCoordinates
+                             in StyleVars__Bounded $ fgTranslationCoordinatesToTranslateForUnbounded fgTranslationCoordinates
 
                    H.modify_ \state' -> spy "MouseActivate state after" $ state'
                      { activationState = ActivationState__Activated
@@ -284,9 +295,23 @@ handleAction action =
                      , styleCommonVars = styleCommonVars
                      , styleVars = styleVars
                      }
+
+                   void $ H.subscribe' \subscriptionId ->
+                     Utils.eventListenerEventSourceWithOptionsMany
+                        pointer_deactivation_event_types
+                        Utils.unsafePassiveIfSupportsAddEventListenerOptions
+                        (Web.DOM.Element.toEventTarget documentElement)
+                     <#> const (Deactivate subscriptionId)
+
                _, _ -> pure unit
        KeyActivate -> pure unit
-       Deactivate -> do
+       DeactivationEnded ->
+         H.modify_ \state' -> spy "DeactivationEnded state after" $ state'
+           { activationState = ActivationState__Idle
+           }
+       Deactivate subscriptionId -> do
+          H.unsubscribe subscriptionId
+
           state <- H.get
 
           case state.activationState of
@@ -294,6 +319,9 @@ handleAction action =
                   H.modify_ \state' -> spy "Deactivate state after" $ state'
                     { activationState = ActivationState__Deactivated
                     }
+
+                  void $ H.subscribe (Utils.mkTimeoutEvent DeactivationEnded numbers."FG_DEACTIVATION_MS")
+
                   -- | this.adapter.deregisterInteractionHandler('keyup', this.deactivateHandler_);
                   -- | POINTER_DEACTIVATION_EVENT_TYPES.forEach((evtType) => {
                   -- |   this.adapter.deregisterDocumentInteractionHandler(
