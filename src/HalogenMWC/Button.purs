@@ -19,6 +19,7 @@ import HalogenMWC.Button.Insides (buttonIconMaterialIcons, buttonLabel) as Insid
 import HalogenMWC.Ripple.Common (RippleAction__Common, RippleState, initialRippleState) as Ripple
 import HalogenMWC.Ripple.Bounded (handleAction) as Ripple
 import HalogenMWC.Ripple.HTML (rippleClasses, rippleProps, rippleStyles) as Ripple
+import HalogenMWC.Button.WithRippleCommon
 
 type Config i =
   { disabled :: Boolean
@@ -52,38 +53,10 @@ buttonView variant config =
 
 ------------------------------------------------
 
-type Query = Const Void
-
-type Input w i =
-  { variant :: Variant
-  , config :: Config i
-  , content :: Array (HH.HTML w i)
-  }
-
-type ChildSlots = ()
-
-type State w i =
-  { input       :: Input w i
-  , rippleState :: Ripple.RippleState
-  }
-
-data Action = RippleAction Ripple.RippleAction__Common
-
-type Message = Void
-
-buttonRefLabel :: H.RefLabel
-buttonRefLabel = H.RefLabel "button"
-
-isUnbounded :: Boolean
-isUnbounded = false
-
-button :: H.Component Query (Input (H.ComponentSlot ChildSlots Aff Action) Action) Message Aff
+button :: H.Component Query (Input Config (H.ComponentSlot ChildSlots Aff Action) Action) Message Aff
 button =
   H.mkComponent
-    { initialState: \input ->
-      { input
-      , rippleState: Ripple.initialRippleState
-      }
+    { initialState: initialState
     , render: \state ->
         buttonView
           state.input.variant
@@ -100,12 +73,10 @@ button =
         }
       }
 
-handleAction :: Action -> H.HalogenM (State (H.ComponentSlot ChildSlots Aff Action) Action) Action ChildSlots Message Aff Unit
+handleAction :: Action -> H.HalogenM (State Config (H.ComponentSlot ChildSlots Aff Action) Action) Action ChildSlots Message Aff Unit
 handleAction =
   case _ of
        RippleAction rippleAction -> do
          state <- H.get
 
-         Halogen.Query.HalogenM.imapState (\rippleState -> state { rippleState = rippleState }) (\state -> state.rippleState)
-          $ Halogen.Query.HalogenM.mapAction RippleAction
-          $ Ripple.handleAction state.input.config.disabled (H.getHTMLElementRef buttonRefLabel) rippleAction
+         liftRippleHandleAction state $ Ripple.handleAction state.input.config.disabled (H.getHTMLElementRef buttonRefLabel) rippleAction
