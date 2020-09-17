@@ -45,8 +45,12 @@ buttonView variant config =
   in
     \content ->
       Implementation.wrapTouch
-        [ HH.button (commonProps <> config.additionalAttributes) (Implementation.commonHtml content)
+        [ HH.button
+          (commonProps <> config.additionalAttributes)
+          (Implementation.commonHtml content)
         ]
+
+------------------------------------------------
 
 type Query = Const Void
 
@@ -67,9 +71,6 @@ data Action = RippleAction Ripple.RippleAction__Common
 
 type Message = Void
 
-styleVar :: String -> String -> String
-styleVar x y = x <> ": " <> y
-
 buttonRefLabel :: H.RefLabel
 buttonRefLabel = H.RefLabel "button"
 
@@ -84,23 +85,16 @@ button =
       , rippleState: Ripple.initialRippleState
       }
     , render: \state ->
-        Implementation.wrapTouch
-          [ HH.button
-            ( [ HP.classes $
-                ( Implementation.commonClasses state.input.variant
-                <> Ripple.rippleClasses false state.rippleState
-                <> state.input.config.additionalClasses
-                )
-              , HP.style $ Ripple.rippleStyles state.rippleState
-              , HP.disabled state.input.config.disabled
-              , HP.tabIndex (if state.input.config.disabled then -1 else 0)
-              , HP.ref buttonRefLabel
-              ]
+        buttonView
+          state.input.variant
+          { disabled: state.input.config.disabled
+          , additionalClasses: Ripple.rippleClasses isUnbounded state.rippleState <> state.input.config.additionalClasses
+          , additionalAttributes:
+            [ HP.style (Ripple.rippleStyles state.rippleState) ]
             <> (Ripple.rippleProps <#> map RippleAction)
             <> state.input.config.additionalAttributes
-            )
-            (Implementation.commonHtml state.input.content)
-          ]
+          }
+          state.input.content
     , eval: H.mkEval $ H.defaultEval
         { handleAction = handleAction
         }
