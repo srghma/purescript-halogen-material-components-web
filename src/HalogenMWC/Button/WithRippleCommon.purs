@@ -31,9 +31,12 @@ type State config w i =
   , rippleState :: Ripple.RippleState
   }
 
-data Action = RippleAction Ripple.RippleAction__Common
+data Action
+  = RippleAction Ripple.RippleAction__Common
+  | Click
 
-type Message = Void
+data Message
+  = Clicked
 
 buttonRefLabel :: H.RefLabel
 buttonRefLabel = H.RefLabel "button"

@@ -2,6 +2,7 @@ module HalogenMWC.Button.Link
   ( module HalogenMWC.Button.Link
   , module Implementation
   , module Insides
+  , module HalogenMWC.Button.WithRippleCommon
   ) where
 
 import Protolude
@@ -11,6 +12,7 @@ import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Core (ClassName)
 import Halogen.HTML.Properties as HP
+import Halogen.HTML.Events as HE
 import Halogen.Query.HalogenM as Halogen.Query.HalogenM
 import HalogenMWC.Button.Implementation (Variant)
 import HalogenMWC.Button.Implementation (Variant(..), commonClasses, commonHtml, wrapTouch) as Implementation
@@ -58,7 +60,9 @@ buttonLink =
           state.input.variant
           { additionalClasses: Ripple.rippleClasses isUnbounded state.rippleState <> state.input.config.additionalClasses
           , additionalAttributes:
-            [ HP.style (Ripple.rippleStyles state.rippleState) ]
+            [ HP.style (Ripple.rippleStyles state.rippleState)
+            , HE.onClick (const Click)
+            ]
             <> (Ripple.rippleProps <#> map RippleAction)
             <> state.input.config.additionalAttributes
           }
@@ -78,3 +82,4 @@ handleAction =
          state <- H.get
 
          liftRippleHandleAction state $ Ripple.handleAction disabled (H.getHTMLElementRef buttonRefLabel) rippleAction
+       Click -> H.raise Clicked

@@ -2,8 +2,10 @@ module HalogenMWC.Button
   ( module HalogenMWC.Button
   , module Implementation
   , module Insides
+  , module HalogenMWC.Button.WithRippleCommon
   ) where
 
+import HalogenMWC.Button.WithRippleCommon
 import Protolude
 
 import DOM.HTML.Indexed as I
@@ -11,15 +13,15 @@ import Halogen as H
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Core (ClassName)
+import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.Query.HalogenM as Halogen.Query.HalogenM
-import HalogenMWC.Button.Implementation (Variant)
 import HalogenMWC.Button.Implementation (Variant(..), commonClasses, commonHtml, wrapTouch) as Implementation
+import HalogenMWC.Button.Implementation (Variant)
 import HalogenMWC.Button.Insides (buttonIconMaterialIcons, buttonLabel) as Insides
-import HalogenMWC.Ripple.Common (RippleAction__Common, RippleState, initialRippleState) as Ripple
 import HalogenMWC.Ripple.Bounded (handleAction) as Ripple
+import HalogenMWC.Ripple.Common (RippleAction__Common, RippleState, initialRippleState) as Ripple
 import HalogenMWC.Ripple.HTML (rippleClasses, rippleProps, rippleStyles) as Ripple
-import HalogenMWC.Button.WithRippleCommon
 
 type Config i =
   { disabled :: Boolean
@@ -63,7 +65,9 @@ button =
           { disabled: state.input.config.disabled
           , additionalClasses: Ripple.rippleClasses isUnbounded state.rippleState <> state.input.config.additionalClasses
           , additionalAttributes:
-            [ HP.style (Ripple.rippleStyles state.rippleState) ]
+            [ HP.style (Ripple.rippleStyles state.rippleState)
+            , HE.onClick (const Click)
+            ]
             <> (Ripple.rippleProps <#> map RippleAction)
             <> state.input.config.additionalAttributes
           }
@@ -80,3 +84,4 @@ handleAction =
          state <- H.get
 
          liftRippleHandleAction state $ Ripple.handleAction state.input.config.disabled (H.getHTMLElementRef buttonRefLabel) rippleAction
+       Click -> H.raise Clicked

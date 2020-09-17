@@ -58,8 +58,8 @@ type RippleState =
 initialRippleState :: RippleState
 initialRippleState =
   { styleCommonVars:
-      { "VAR_FG_SCALE": "0" -- https://github.com/material-components/material-components-web/blob/83d83f131118073943a6a45923b37b3a961bd894/packages/mdc-ripple/foundation.ts#L103
-      , "VAR_FG_SIZE": "0px"
+      { "VAR_FG_SCALE": "1" -- from css, the 0 will result in error (element wont be able to focus)
+      , "VAR_FG_SIZE": "0"
       }
   , styleVars: StyleVars__Empty
   , focused: false

@@ -184,7 +184,15 @@ focusButton =
 
   , HH.text "\x00A0"
 
-  , Button.buttonView Button.Raised (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ WithFocus.Focus "my-button") ] }) [ HH.text "Focus" ]
+  , HH.slot (SProxy :: SProxy "focus-maker-1") unit
+    Button.button
+    { variant: Button.Raised
+    , config: Button.defaultConfig
+    , content: [ HH.text "Focus with ripple" ]
+    }
+    (case _ of
+          Button.Clicked -> WithFocus.Focus "focus-target-1"
+    )
 
   , HH.text "\x00A0"
 
@@ -196,7 +204,7 @@ focusButton =
 
   , HH.text "\x00A0"
 
-  , Button.buttonView Button.Raised (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ WithFocus.Focus "focus-target-2") ] }) [ HH.text "Focus" ]
+  , Button.buttonView Button.Raised (Button.defaultConfig { additionalAttributes = [ HE.onClick (const $ WithFocus.Focus "focus-target-2") ] }) [ HH.text "Focus without ripple" ]
   ]
 
 buttonsRow =
