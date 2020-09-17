@@ -11,7 +11,7 @@ import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import HalogenMWC.Button as Button
-import HalogenMWC.Button.Link as Button.Link
+import HalogenMWC.ButtonLink as ButtonLink
 import Material.Classes.Typography (mdc_typography____subtitle1)
 
 type State = Unit
@@ -157,19 +157,19 @@ linkButtons =
   let
     additionalAttributes = [ HP.href "#buttons" ]
   in
-    [ HH.slot_ (SProxy :: SProxy "link-default") unit Button.Link.buttonLink
+    [ HH.slot_ (SProxy :: SProxy "link-default") unit ButtonLink.buttonLink
       { variant: Button.Text
-      , config: Button.Link.defaultConfig { additionalAttributes = additionalAttributes, additionalClasses = buttonsRow.default.additionalClasses }
+      , config: ButtonLink.defaultConfig { additionalAttributes = additionalAttributes, additionalClasses = buttonsRow.default.additionalClasses }
       , content: buttonsRow.default.html
       }
-    , HH.slot_ (SProxy :: SProxy "link-dense") unit Button.Link.buttonLink
+    , HH.slot_ (SProxy :: SProxy "link-dense") unit ButtonLink.buttonLink
       { variant: Button.Text
-      , config: Button.Link.defaultConfig { additionalAttributes = additionalAttributes, additionalClasses = buttonsRow.dense.additionalClasses }
+      , config: ButtonLink.defaultConfig { additionalAttributes = additionalAttributes, additionalClasses = buttonsRow.dense.additionalClasses }
       , content: buttonsRow.dense.html
       }
-    , HH.slot_ (SProxy :: SProxy "link-icon") unit Button.Link.buttonLink
+    , HH.slot_ (SProxy :: SProxy "link-icon") unit ButtonLink.buttonLink
       { variant: Button.Text
-      , config: Button.Link.defaultConfig { additionalAttributes = additionalAttributes, additionalClasses = buttonsRow.icon.additionalClasses }
+      , config: ButtonLink.defaultConfig { additionalAttributes = additionalAttributes, additionalClasses = buttonsRow.icon.additionalClasses }
       , content: buttonsRow.icon.html
       }
     ]
@@ -196,9 +196,9 @@ focusButton =
 
   , HH.text "\x00A0"
 
-  , HH.slot_ (SProxy :: SProxy "focus-target-2") unit Button.Link.buttonLink
+  , HH.slot_ (SProxy :: SProxy "focus-target-2") unit ButtonLink.buttonLink
     { variant: Button.Raised
-    , config: Button.Link.defaultConfig { additionalAttributes = [ HP.id_ "focus-target-2", HP.href "#buttons" ] }
+    , config: ButtonLink.defaultConfig { additionalAttributes = [ HP.id_ "focus-target-2", HP.href "#buttons" ] }
     , content: [ HH.text "Link button" ]
     }
 

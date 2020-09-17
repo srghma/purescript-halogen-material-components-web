@@ -1,5 +1,5 @@
-module HalogenMWC.Button.Link
-  ( module HalogenMWC.Button.Link
+module HalogenMWC.ButtonLink
+  ( module HalogenMWC.ButtonLink
   , module Implementation
   , module Insides
   , module HalogenMWC.Button.WithRippleCommon
