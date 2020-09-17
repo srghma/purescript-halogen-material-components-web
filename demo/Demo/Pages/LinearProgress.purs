@@ -3,7 +3,7 @@ module Demo.Pages.LinearProgress where
 import Demo.HOC.CatalogPage (CatalogPage)
 import Demo.Utils (mkComponentStatic)
 import Material.Classes.Typography (mdc_typography____subtitle1)
-import Protolude (Maybe(..), ($))
+import Protolude
 
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP

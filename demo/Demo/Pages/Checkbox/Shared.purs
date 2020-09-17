@@ -1,6 +1,6 @@
 module Demo.Pages.Checkbox.Shared where
 import Demo.Utils (focusById)
-import Protolude (Aff, Const, Maybe(..), Unit, Void, const, ($))
+import Protolude
 import DOM.HTML.Indexed (HTMLinput) as I
 import Data.Lens (Lens')
 import Data.Lens as Lens

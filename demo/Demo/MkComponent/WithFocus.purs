@@ -1,6 +1,6 @@
 module Demo.MkComponent.WithFocus where
 
-import Protolude (Aff, Unit, const, unit, ($))
+import Protolude
 import Halogen as H
 import Halogen.HTML as HH
 import Demo.Utils (focusById)

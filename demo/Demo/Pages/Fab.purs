@@ -1,7 +1,7 @@
 module Demo.Pages.Fab where
 
 import Demo.HOC.CatalogPage (CatalogPage)
-import Protolude (Maybe(..), const, ($))
+import Protolude
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Events as HE

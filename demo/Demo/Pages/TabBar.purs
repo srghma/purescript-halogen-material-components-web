@@ -1,7 +1,7 @@
 module Demo.Pages.TabBar where
 
 import Demo.HOC.CatalogPage (CatalogPage)
-import Protolude (Aff, Maybe(..), Unit, Void, const, ($), (<>), (==))
+import Protolude
 import Data.Array as Array
 import Halogen as H
 import Halogen.HTML as HH

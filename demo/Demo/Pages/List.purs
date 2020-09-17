@@ -3,7 +3,7 @@ module Demo.Pages.List where
 import Demo.HOC.CatalogPage (CatalogPage)
 import Halogen (AttrName(..))
 import Material.Classes.Typography (mdc_typography____subtitle1)
-import Protolude (Aff, Maybe(..), Unit, Void, const, map, ($), (/\), (<>), (==))
+import Protolude
 
 import Data.Array as Array
 import Data.Set (Set)

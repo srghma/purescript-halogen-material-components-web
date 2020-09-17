@@ -4,42 +4,21 @@ module HalogenMWC.Button
   , module Insides
   ) where
 
-import HalogenMWC.Ripple.Bounded
 import Protolude
 
 import DOM.HTML.Indexed as I
-import Data.Array as Array
-import Data.String as String
-import FRP.Event as Event
-import Halogen (ComponentSlot, ElemName(..))
 import Halogen as H
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Core (ClassName)
-import Halogen.HTML.Events (onKeyUp)
-import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.Query.HalogenM as Halogen.Query.HalogenM
 import HalogenMWC.Button.Implementation (Variant)
-import HalogenMWC.Button.Implementation as Implementation
-import HalogenMWC.Button.Insides as Insides
-import HalogenMWC.Utils as Utils
-import Web.DOM (Element)
-import Web.DOM.Document as Web.DOM.Document
-import Web.DOM.Element as Web.DOM.Element
-import Web.Event.Event (EventType(..))
-import Web.Event.Event as Web.Event.Event
-import Web.HTML as Web.HTML
-import Web.HTML.HTMLDocument as Web.HTML.HTMLDocument
-import Web.HTML.HTMLElement as Web.HTML.HTMLElement
-import Web.HTML.Window (Window)
-import Web.HTML.Window as Web.HTML.Window
-import Web.TouchEvent (TouchEvent)
-import Web.UIEvent.MouseEvent (MouseEvent)
-import HalogenMWC.Ripple.Common as Ripple
-import HalogenMWC.Ripple.Bounded as Ripple
-import HalogenMWC.Ripple.Constants as Ripple
-import HalogenMWC.Ripple.HTML as Ripple
+import HalogenMWC.Button.Implementation (Variant(..), commonClasses, commonHtml, wrapTouch) as Implementation
+import HalogenMWC.Button.Insides (buttonIconMaterialIcons, buttonLabel) as Insides
+import HalogenMWC.Ripple.Common (RippleAction__Common, RippleState, initialRippleState) as Ripple
+import HalogenMWC.Ripple.Bounded (handleAction) as Ripple
+import HalogenMWC.Ripple.HTML (rippleClasses, rippleProps, rippleStyles) as Ripple
 
 type Config i =
   { disabled :: Boolean
@@ -94,6 +73,7 @@ styleVar x y = x <> ": " <> y
 buttonRefLabel :: H.RefLabel
 buttonRefLabel = H.RefLabel "button"
 
+isUnbounded :: Boolean
 isUnbounded = false
 
 button :: H.Component Query (Input (H.ComponentSlot ChildSlots Aff Action) Action) Message Aff

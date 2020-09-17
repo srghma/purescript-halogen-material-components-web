@@ -1,6 +1,6 @@
 module Demo.Pages.Select.Hero where
 
-import Protolude (Aff, Maybe(..), Unit, const)
+import Protolude
 import Halogen as H
 import Halogen.HTML as HH
 import Demo.Pages.Select.Shared (ChildSlots, Fruit, Input, Message, Query, firstItem, remainingItems)

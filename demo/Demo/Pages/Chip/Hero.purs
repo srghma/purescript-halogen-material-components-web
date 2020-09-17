@@ -1,7 +1,7 @@
 module Demo.Pages.Chip.Hero where
 
 import Demo.HOC.CatalogPage (ChildSlots, Message, Query)
-import Protolude (Aff, Maybe(..), Unit, const, identity)
+import Protolude
 import Halogen as H
 import Halogen.HTML as HH
 import HalogenMWC.Chip.Choice as Chip.Choice

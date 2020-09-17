@@ -1,7 +1,7 @@
 module Demo.Pages.Typography where
 
 import Demo.Utils (mkComponentStatic)
-import Protolude (Maybe(..), ($))
+import Protolude
 
 import Demo.HOC.CatalogPage (CatalogPage)
 import Halogen.HTML as HH

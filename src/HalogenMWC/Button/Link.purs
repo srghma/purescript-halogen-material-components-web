@@ -4,15 +4,14 @@ module HalogenMWC.Button.Link
   , module Insides
   ) where
 
-import Halogen (ElemName(..))
 import DOM.HTML.Indexed as I
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Core (ClassName)
 import Halogen.HTML.Properties as HP
 import HalogenMWC.Button.Implementation (Variant)
-import HalogenMWC.Button.Implementation as Implementation
-import HalogenMWC.Button.Insides as Insides
+import HalogenMWC.Button.Implementation (Variant(..), commonClasses, commonHtml, wrapTouch) as Implementation
+import HalogenMWC.Button.Insides (buttonIconMaterialIcons, buttonLabel) as Insides
 import Prelude
 
 type Config i =

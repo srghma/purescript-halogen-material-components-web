@@ -3,7 +3,7 @@ module Demo.Pages.Switch where
 import Demo.HOC.CatalogPage (CatalogPage)
 import Data.Map (Map)
 import Data.Map as Map
-import Protolude (Aff, Maybe(..), Unit, Void, const, not, ($), (/\))
+import Protolude
 import Data.Maybe as Maybe
 import Halogen as H
 import Halogen.HTML as HH

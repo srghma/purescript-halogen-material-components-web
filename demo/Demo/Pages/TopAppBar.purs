@@ -3,7 +3,7 @@ module Demo.Pages.TopAppBar where
 import Demo.Route as Route
 import Demo.Utils (mkComponentStatic)
 import Material.Classes.Typography (mdc_typography____subtitle1)
-import Protolude (Maybe(..), ($))
+import Protolude
 
 import Demo.HOC.CatalogPage (CatalogPage)
 import Halogen.HTML as HH

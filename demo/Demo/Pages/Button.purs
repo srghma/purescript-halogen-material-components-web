@@ -2,13 +2,11 @@ module Demo.Pages.Button where
 
 import Protolude
 
-import DOM.HTML.Indexed (HTMLbutton) as I
 import Demo.HOC.CatalogPage (CatalogPage)
 import Demo.MkComponent.WithFocus as WithFocus
 import Demo.Pages.Button.Css as Demo.Pages.Button.Css
 import Demo.Utils (mkComponentStatic)
-import Halogen (ClassName(..))
-import Halogen.HTML (IProp)
+import Halogen (ClassName)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP

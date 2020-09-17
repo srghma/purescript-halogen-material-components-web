@@ -1,9 +1,9 @@
 module Demo.HOC.CatalogPage where
 
 import Material.Classes.Drawer (mdc_drawer__content, mdc_drawer_app_content, mdc_list_item__graphic)
-import Material.Classes.TopAppBar (mdc_top_app_bar____fixed_adjust, mdc_top_app_bar__navigation_icon, mdc_top_app_bar__row, mdc_top_app_bar__section, mdc_top_app_bar__section____align_start, mdc_top_app_bar__title)
+import Material.Classes.TopAppBar (mdc_top_app_bar____fixed_adjust, mdc_top_app_bar__navigation_icon, mdc_top_app_bar__row, mdc_top_app_bar__section, mdc_top_app_bar__section____align_start)
 import Material.Classes.Typography (mdc_typography, mdc_typography____body1, mdc_typography____headline5, mdc_typography____headline6)
-import Protolude (Aff, Const, Maybe(..), SProxy(..), Unit, Void, absurd, const, map, not, unit, (<>), (==))
+import Protolude
 import DOM.HTML.Indexed as I
 import Data.Array as Array
 import Demo.Route (Route)

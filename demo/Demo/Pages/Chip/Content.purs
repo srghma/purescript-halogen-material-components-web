@@ -4,7 +4,7 @@ import Data.Set (Set)
 import Data.Set as Set
 import Demo.HOC.CatalogPage (ChildSlots, Input, Message, Query)
 import Material.Classes.Typography (mdc_typography____body2, mdc_typography____subtitle1)
-import Protolude (class Eq, Aff, Maybe(..), Tuple(..), Unit, bind, const, identity, map, pure, unit, unless, when, ($), (-), (/=), (/\))
+import Protolude
 import Data.Array as Array
 import Halogen as H
 import Halogen.HTML as HH

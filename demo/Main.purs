@@ -1,6 +1,6 @@
 module Main where
 
-import Protolude (Effect, Maybe(..), Unit, bind, launchAff_, liftEffect, unit, void, when, ($), (/=))
+import Protolude
 import Demo.App (Query(..), app)
 import Demo.Route (routeCodec)
 import Halogen (mkTell) as H

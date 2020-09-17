@@ -2,7 +2,7 @@ module Demo.Pages.Elevation where
 
 import Demo.HOC.CatalogPage (CatalogPage)
 import Demo.Utils (mkComponentStatic)
-import Protolude (Maybe(..), ($))
+import Protolude
 
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH

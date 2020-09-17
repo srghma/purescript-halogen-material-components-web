@@ -1,7 +1,7 @@
 module Demo.Pages.Select.Content where
 
 import Material.Classes.Typography (mdc_typography____subtitle1)
-import Protolude (Aff, Maybe(..), Unit, const, ($))
+import Protolude
 import Halogen as H
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE

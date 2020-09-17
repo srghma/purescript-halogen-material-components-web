@@ -1,6 +1,6 @@
 module Demo.Utils where
 
-import Protolude (Effect, Maybe, Unit, bind, const, error, maybe, pure, throwError, unit, ($), (<<<), (<=<), (<>), (=<<), (>>=))
+import Protolude
 import Web.HTML (HTMLElement, window)
 import Halogen as H
 import Halogen.HTML as HH

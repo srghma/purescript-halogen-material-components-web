@@ -1,7 +1,7 @@
 module Demo.Pages.Chip where
 
 import Demo.HOC.CatalogPage (CatalogPage)
-import Protolude (Maybe(..))
+import Protolude
 import Demo.Pages.Chip.Hero as Hero
 import Demo.Pages.Chip.Content as Content
 

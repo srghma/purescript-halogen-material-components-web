@@ -4,7 +4,7 @@ import Demo.HOC.CatalogPage (CatalogPage)
 import Demo.Utils (mkComponentStatic)
 import Material.Classes.Theme (mdc_theme____text_secondary_on_background)
 import Material.Classes.Typography (mdc_typography____body2, mdc_typography____headline6, mdc_typography____subtitle2)
-import Protolude (Const, Maybe(..), Unit, Void, const, ($))
+import Protolude
 import Data.Array as Array
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE

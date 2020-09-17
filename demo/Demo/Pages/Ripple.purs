@@ -1,7 +1,7 @@
 module Demo.Pages.Ripple where
 
 import Demo.HOC.CatalogPage (CatalogPage)
-import Protolude (Maybe(..), ($))
+import Protolude
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP

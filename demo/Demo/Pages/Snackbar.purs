@@ -6,7 +6,7 @@ import Material.Classes.Button (mdc_button)
 import Material.Classes.IconButton (mdc_icon_button)
 import Material.Classes.Snackbar (mdc_snackbar, mdc_snackbar____open, mdc_snackbar__action, mdc_snackbar__actions, mdc_snackbar__dismiss, mdc_snackbar__label, mdc_snackbar__surface)
 import MaterialIconsFont.Classes (material_icons)
-import Protolude (Aff, Maybe(..), Unit, Void, const, pure, unit, ($))
+import Protolude
 
 import DOM.HTML.Indexed.ButtonType (ButtonType(..))
 import Demo.HOC.CatalogPage (CatalogPage)

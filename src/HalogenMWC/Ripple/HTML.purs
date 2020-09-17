@@ -1,35 +1,15 @@
 module HalogenMWC.Ripple.HTML where
 
-import HalogenMWC.Ripple.Common
+import HalogenMWC.Ripple.Common (RippleAction__Common, RippleState)
 import Protolude
 
 import Data.Array as Array
 import Data.String as String
-import Halogen (ComponentSlot, ElemName(..))
-import Halogen as H
 import Halogen.HTML (IProp)
-import Halogen.HTML as HH
 import Halogen.HTML.Core (ClassName)
-import Halogen.HTML.Events (onKeyUp)
 import Halogen.HTML.Events as HE
-import Halogen.HTML.Properties as HP
-import Halogen.Query.HalogenM as Halogen.Query.HalogenM
-import HalogenMWC.Button.Implementation (Variant)
-import HalogenMWC.Button.Implementation as Implementation
-import HalogenMWC.Button.Insides as Insides
-import HalogenMWC.Ripple.Common as Ripple
-import HalogenMWC.Ripple.Constants as Ripple
-import HalogenMWC.Utils as Utils
-import Web.DOM (Element)
-import Web.DOM.Document as Web.DOM.Document
-import Web.DOM.Element as Web.DOM.Element
-import Web.Event.Event (EventType(..))
-import Web.Event.Event as Web.Event.Event
-import Web.HTML as Web.HTML
-import Web.HTML.HTMLDocument as Web.HTML.HTMLDocument
-import Web.HTML.HTMLElement as Web.HTML.HTMLElement
-import Web.HTML.Window (Window)
-import Web.HTML.Window as Web.HTML.Window
+import HalogenMWC.Ripple.Common (ActivationState(..), RippleAction__Common(..), StyleVars(..)) as Ripple
+import HalogenMWC.Ripple.Constants (cssClasses, strings) as Ripple
 import Web.TouchEvent (TouchEvent)
 import Web.UIEvent.FocusEvent (FocusEvent)
 import Web.UIEvent.MouseEvent (MouseEvent)

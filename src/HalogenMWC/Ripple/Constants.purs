@@ -1,37 +1,9 @@
 module HalogenMWC.Ripple.Constants where
 
-import Material.Classes.Ripple
-import Protolude
+import Material.Classes.Ripple (mdc_ripple_upgraded, mdc_ripple_upgraded____background_focused, mdc_ripple_upgraded____foreground_activation, mdc_ripple_upgraded____foreground_deactivation, mdc_ripple_upgraded____unbounded)
 
-import DOM.HTML.Indexed as I
-import Data.Int as Int
-import Effect.Uncurried as EFn
-import FRP.Event (Event) as Event
-import Halogen (ClassName(..))
-import Halogen (ComponentSlot, ElemName(..))
-import Halogen as H
-import Halogen.HTML (IProp)
-import Halogen.HTML as HH
 import Halogen.HTML.Core (ClassName)
-import Halogen.HTML.Events (onKeyUp)
-import Halogen.HTML.Events as HE
-import Halogen.HTML.Properties as HP
-import HalogenMWC.Button.Implementation (Variant)
-import HalogenMWC.Button.Implementation as Implementation
-import HalogenMWC.Button.Insides as Insides
-import HalogenMWC.Utils as Utils
-import Math as Math
 import Web.Event.Event (EventType(..))
-import Web.Event.Event as Web.Event.Event
-import Web.HTML as Web.HTML
-import Web.HTML.HTMLElement as Web.HTML.HTMLElement
-import Web.HTML.Window as Web.HTML.Window
-import Web.TouchEvent (TouchEvent)
-import Web.TouchEvent.Touch as Web.TouchEvent.Touch
-import Web.TouchEvent.TouchList as Web.TouchEvent.TouchList
-import Web.TouchEvent.TouchEvent as Web.TouchEvent.TouchEvent
-import Web.UIEvent.MouseEvent (MouseEvent)
-import Web.UIEvent.MouseEvent as Web.UIEvent.MouseEvent
 
 cssClasses ::
   { "BG_FOCUSED"      :: ClassName

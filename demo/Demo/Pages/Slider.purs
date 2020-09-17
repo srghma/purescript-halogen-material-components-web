@@ -3,7 +3,7 @@ module Demo.Pages.Slider where
 import Demo.HOC.CatalogPage (CatalogPage)
 import Data.Map (Map)
 import Data.Map as Map
-import Protolude (Aff, Maybe(..), Unit, Void, const, ($), (/\))
+import Protolude
 import Halogen as H
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP

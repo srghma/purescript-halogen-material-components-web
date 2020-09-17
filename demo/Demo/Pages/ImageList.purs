@@ -3,7 +3,7 @@ module Demo.Pages.ImageList where
 import Demo.HOC.CatalogPage (CatalogPage)
 import Demo.Utils (mkComponentStatic)
 import Material.Classes.Typography (mdc_typography____subtitle1)
-import Protolude (Maybe(..), map, ($))
+import Protolude
 
 import Data.Array as Array
 import Halogen.HTML as HH

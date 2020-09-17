@@ -1,7 +1,7 @@
 module Demo.Pages.DataTable where
 
 import Demo.HOC.CatalogPage (CatalogPage)
-import Protolude (Aff, Maybe(..), Unit, Void, const, map, ($), (==))
+import Protolude
 import Halogen as H
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP

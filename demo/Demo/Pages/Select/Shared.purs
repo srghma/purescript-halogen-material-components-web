@@ -1,6 +1,6 @@
 module Demo.Pages.Select.Shared where
 
-import Protolude (class Eq, Const, Maybe(..), Unit, Void)
+import Protolude
 import Halogen.HTML as HH
 import HalogenMWC.Select.Item as Select.Item
 

@@ -5,7 +5,7 @@ import Demo.Utils (mkComponentStatic)
 import Halogen (ClassName)
 import Material.Classes.LayoutGrid (mdc_layout_grid, mdc_layout_grid____align_left, mdc_layout_grid____align_right, mdc_layout_grid__cell, mdc_layout_grid__cell____align_bottom, mdc_layout_grid__cell____align_middle, mdc_layout_grid__cell____align_top, mdc_layout_grid__cell____span_1, mdc_layout_grid__cell____span_2, mdc_layout_grid__cell____span_3, mdc_layout_grid__cell____span_6, mdc_layout_grid__cell____span_8, mdc_layout_grid__inner)
 import Material.Classes.Typography (mdc_typography____body1, mdc_typography____subtitle1)
-import Protolude (Maybe(..), ($), (<>))
+import Protolude
 
 import Data.Array as Array
 import Halogen.HTML as HH

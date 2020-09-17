@@ -3,7 +3,7 @@ module Demo.Pages.Dialog where
 import Demo.HOC.CatalogPage (CatalogPage)
 import Demo.Utils (mkComponentStatic)
 import Material.Classes.List (mdc_list_item__graphic)
-import Protolude (class Eq, Aff, Maybe(..), Unit, Void, const, map, ($), (/\), (==))
+import Protolude
 
 import Halogen as H
 import Halogen.HTML as HH

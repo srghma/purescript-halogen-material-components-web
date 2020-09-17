@@ -1,7 +1,7 @@
 module Demo.Pages.TextField where
 
 import Material.Classes.Typography (mdc_typography____subtitle1)
-import Protolude (Maybe(..), const, ($))
+import Protolude
 
 import Demo.HOC.CatalogPage (CatalogPage)
 import Demo.Utils (mkComponentStatic)

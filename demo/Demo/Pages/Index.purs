@@ -1,7 +1,7 @@
 module Demo.Pages.Index where
 
-import Protolude (Const, Maybe(..), Unit, Void, const, map, unit)
-import Material.Classes.TopAppBar (mdc_top_app_bar__navigation_icon, mdc_top_app_bar__row, mdc_top_app_bar__section, mdc_top_app_bar__section____align_start, mdc_top_app_bar__title)
+import Protolude
+import Material.Classes.TopAppBar (mdc_top_app_bar__navigation_icon, mdc_top_app_bar__row, mdc_top_app_bar__section, mdc_top_app_bar__section____align_start)
 import Halogen as H
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP

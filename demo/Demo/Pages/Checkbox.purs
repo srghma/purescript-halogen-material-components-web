@@ -1,7 +1,7 @@
 module Demo.Pages.Checkbox where
 
 import Demo.HOC.CatalogPage (CatalogPage)
-import Protolude (Maybe(..))
+import Protolude
 import Demo.Pages.Checkbox.Content as Content
 import Demo.Pages.Checkbox.Hero as Hero
 

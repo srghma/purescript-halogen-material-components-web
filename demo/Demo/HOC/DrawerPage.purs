@@ -2,7 +2,7 @@ module Demo.HOC.DrawerPage where
 
 import Material.Classes.Drawer (mdc_drawer__subtitle, mdc_drawer__title, mdc_drawer_app_content, mdc_list_item__graphic)
 import Material.Classes.TopAppBar (mdc_top_app_bar____fixed_adjust, mdc_top_app_bar__navigation_icon, mdc_top_app_bar__row, mdc_top_app_bar__section, mdc_top_app_bar__section____align_start, mdc_top_app_bar__title)
-import Protolude (Aff, Const, Maybe(..), SProxy(..), Unit, Void, absurd, const, unit, ($), (==))
+import Protolude
 
 import Data.Array as Array
 import Data.Maybe as Maybe

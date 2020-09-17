@@ -1,7 +1,7 @@
 module Demo.Pages.Select where
 
 import Demo.HOC.CatalogPage (CatalogPage)
-import Protolude (Maybe(..))
+import Protolude
 import Demo.Pages.Select.Hero as Hero
 import Demo.Pages.Select.Content as Content
 

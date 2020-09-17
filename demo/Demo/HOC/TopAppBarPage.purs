@@ -2,7 +2,7 @@ module Demo.HOC.TopAppBarPage where
 
 import Halogen (ClassName)
 import Material.Classes.Typography (mdc_typography)
-import Protolude (Aff, Const, Unit, Void, const, unit, ($))
+import Protolude
 
 import Data.Array as Array
 import Halogen as H

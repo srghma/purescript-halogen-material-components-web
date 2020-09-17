@@ -1,7 +1,7 @@
 module Demo.Pages.Checkbox.Hero where
 
 import Demo.Pages.Checkbox.Shared (Action, ChildSlots, Message, Query, checkbox, handleAction)
-import Protolude (Aff, Maybe(..), SProxy(..), Unit, const)
+import Protolude
 import Halogen as H
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
