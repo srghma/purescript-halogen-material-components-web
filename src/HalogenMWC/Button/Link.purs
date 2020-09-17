@@ -35,7 +35,10 @@ defaultConfig =
 buttonLinkView :: forall w i. Variant -> Config i -> Array (HH.HTML w i) -> HH.HTML w i
 buttonLinkView variant config =
   let
-    commonProps = [ HP.classes (Implementation.commonClasses variant <> config.additionalClasses) ]
+    commonProps =
+      [ HP.classes (Implementation.commonClasses variant <> config.additionalClasses)
+      , HP.ref buttonRefLabel
+      ]
   in
     \content ->
       Implementation.wrapTouch
