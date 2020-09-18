@@ -1,4 +1,4 @@
-module HalogenMWC.Button.Implementation where
+module HalogenMWC.Implementation.Button.HTML where
 
 import Prelude
 import Data.Array as Array

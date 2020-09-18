@@ -15,14 +15,12 @@ import Web.UIEvent.FocusEvent (FocusEvent)
 import Web.UIEvent.MouseEvent (MouseEvent)
 
 styleVar :: String -> String -> String
-styleVar x y = x <> ": " <> y
+styleVar x y = x <> ": " <> y <> ";"
 
-
-rippleClasses :: Boolean -> RippleState -> Array ClassName
-rippleClasses isUnbounded rippleState =
+rippleClassesBounded :: RippleState -> Array ClassName
+rippleClassesBounded rippleState =
   Array.concat
   [ [ Ripple.cssClasses."ROOT" ]
-  , if isUnbounded then [ Ripple.cssClasses."UNBOUNDED" ] else []
   , if rippleState.focused then [ Ripple.cssClasses."BG_FOCUSED" ] else []
   , case rippleState.activationState of
          Ripple.ActivationState__Idle -> []
@@ -30,9 +28,14 @@ rippleClasses isUnbounded rippleState =
          Ripple.ActivationState__Deactivated -> [ Ripple.cssClasses."FG_DEACTIVATION" ]
   ]
 
+rippleClassesUnbounded :: RippleState -> Array ClassName
+rippleClassesUnbounded rippleState =
+  if isUnbounded then [ Ripple.cssClasses."UNBOUNDED" ] else []
+  <> rippleClassesBounded
+
 rippleStyles :: RippleState -> String
 rippleStyles rippleState =
-  String.joinWith "; " $
+  String.joinWith " " $
   [ styleVar Ripple.strings."VAR_FG_SCALE" rippleState.styleCommonVars."VAR_FG_SCALE"
   , styleVar Ripple.strings."VAR_FG_SIZE" rippleState.styleCommonVars."VAR_FG_SIZE"
   ] <>
@@ -54,7 +57,7 @@ rippleProps =
   [ HE.onTouchStart Ripple.TouchActivate
   , HE.onMouseDown Ripple.MouseActivate
   -- | , HE.onKeyDown (const KeyActivate)
-  -- | , HE.onKeyUp (const Deactivate) -- only when onKeyDown worked?
+  -- | , HE.onKeyUp (const KeyDeactivate) -- register only when onKeyDown worked?
 
   , HE.onFocus (const Ripple.Focus)
   , HE.onBlur (const Ripple.Blur)
