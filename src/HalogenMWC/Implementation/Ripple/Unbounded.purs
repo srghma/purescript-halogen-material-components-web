@@ -1,4 +1,4 @@
-module HalogenMWC.Ripple.Unbounded where
+module HalogenMWC.Implementation.Ripple.Unbounded where
 
 import Protolude
 

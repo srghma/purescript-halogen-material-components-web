@@ -1,4 +1,4 @@
-module HalogenMWC.Button.WithRippleCommon where
+module HalogenMWC.Implementation.Button.WithRippleCommon where
 
 import Protolude
 

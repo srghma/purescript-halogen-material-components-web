@@ -1,4 +1,4 @@
-module HalogenMWC.ButtonLink
+module HalogenMWC.Implementation.ButtonLink
   ( module HalogenMWC.ButtonLink
   , module Implementation
   , module Insides

@@ -1,4 +1,4 @@
-module HalogenMWC.Ripple.Constants where
+module HalogenMWC.Implementation.Ripple.Constants where
 
 import Material.Classes.Ripple (mdc_ripple_upgraded, mdc_ripple_upgraded____background_focused, mdc_ripple_upgraded____foreground_activation, mdc_ripple_upgraded____foreground_deactivation, mdc_ripple_upgraded____unbounded)
 

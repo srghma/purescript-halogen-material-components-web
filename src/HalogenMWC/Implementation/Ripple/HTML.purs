@@ -1,4 +1,4 @@
-module HalogenMWC.Ripple.HTML where
+module HalogenMWC.Implementation.Ripple.HTML where
 
 import HalogenMWC.Ripple.Common (RippleAction__Common, RippleState)
 import Protolude

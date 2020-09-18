@@ -1,4 +1,4 @@
-module HalogenMWC.Ripple.Common where
+module HalogenMWC.Implementation.Ripple.Common where
 
 import HalogenMWC.Ripple.Calculations (FgTranslationCoordinates, MDCRipplePoint, fgTranslationCoordinatesToTranslateForUnbounded, getFgTranslationCoordinatesPonter, getNormalizedEventCoordsMouseEvent, getNormalizedEventCoordsTouchEvent, layoutInternal, updateCssVarsCommon, updateCssVarsUnbounded)
 import HalogenMWC.Ripple.Constants (numbers, pointer_deactivation_event_types)

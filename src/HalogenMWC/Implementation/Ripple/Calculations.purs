@@ -1,4 +1,4 @@
-module HalogenMWC.Ripple.Calculations where
+module HalogenMWC.Implementation.Ripple.Calculations where
 
 import Protolude
 

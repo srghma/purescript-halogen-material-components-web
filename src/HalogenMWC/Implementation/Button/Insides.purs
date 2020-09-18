@@ -1,4 +1,4 @@
-module HalogenMWC.Button.Insides where
+module HalogenMWC.Implementation.Button.Insides where
 
 import Halogen (AttrName(..))
 import Halogen.HTML as HH

@@ -1,4 +1,4 @@
-module HalogenMWC.Button
+module HalogenMWC.Implementation.Button
   ( module HalogenMWC.Button
   , module Implementation
   , module Insides
