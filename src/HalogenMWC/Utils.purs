@@ -142,3 +142,6 @@ eventListenerEventSourceWithOptionsMany eventTypes options target =
 
     pure $
       for_ eventTypes \eventType -> removeEventListenerWithOptions eventType listener removeOptions target
+
+styleVar :: String -> String -> String
+styleVar x y = x <> ": " <> y <> ";"

@@ -1,6 +1,6 @@
 module HalogenMWC.Implementation.Ripple.HTML where
 
-import HalogenMWC.Ripple.Common (RippleAction__Common, RippleState)
+import HalogenMWC.Implementation.Ripple.Common (RippleAction__Common, RippleState)
 import Protolude
 
 import Data.Array as Array
@@ -8,30 +8,12 @@ import Data.String as String
 import Halogen.HTML (IProp)
 import Halogen.HTML.Core (ClassName)
 import Halogen.HTML.Events as HE
-import HalogenMWC.Ripple.Common (ActivationState(..), RippleAction__Common(..), StyleVars(..)) as Ripple
-import HalogenMWC.Ripple.Constants (cssClasses, strings) as Ripple
+import HalogenMWC.Implementation.Ripple.Common (ActivationState(..), RippleAction__Common(..), StyleVars(..)) as Ripple
+import HalogenMWC.Implementation.Ripple.Constants (cssClasses, strings) as Ripple
+import HalogenMWC.Utils
 import Web.TouchEvent (TouchEvent)
 import Web.UIEvent.FocusEvent (FocusEvent)
 import Web.UIEvent.MouseEvent (MouseEvent)
-
-styleVar :: String -> String -> String
-styleVar x y = x <> ": " <> y <> ";"
-
-rippleClassesBounded :: RippleState -> Array ClassName
-rippleClassesBounded rippleState =
-  Array.concat
-  [ [ Ripple.cssClasses."ROOT" ]
-  , if rippleState.focused then [ Ripple.cssClasses."BG_FOCUSED" ] else []
-  , case rippleState.activationState of
-         Ripple.ActivationState__Idle -> []
-         Ripple.ActivationState__Activated -> [ Ripple.cssClasses."FG_ACTIVATION" ]
-         Ripple.ActivationState__Deactivated -> [ Ripple.cssClasses."FG_DEACTIVATION" ]
-  ]
-
-rippleClassesUnbounded :: RippleState -> Array ClassName
-rippleClassesUnbounded rippleState =
-  if isUnbounded then [ Ripple.cssClasses."UNBOUNDED" ] else []
-  <> rippleClassesBounded
 
 rippleStyles :: RippleState -> String
 rippleStyles rippleState =

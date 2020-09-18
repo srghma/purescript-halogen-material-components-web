@@ -11,7 +11,7 @@ import Web.TouchEvent.TouchList as Web.TouchEvent.TouchList
 import Web.TouchEvent.TouchEvent as Web.TouchEvent.TouchEvent
 import Web.UIEvent.MouseEvent (MouseEvent)
 import Web.UIEvent.MouseEvent as Web.UIEvent.MouseEvent
-import HalogenMWC.Ripple.Constants (numbers)
+import HalogenMWC.Implementation.Ripple.Constants (numbers)
 
 ---- GET LAYOUT ------------------------------------------------------
 

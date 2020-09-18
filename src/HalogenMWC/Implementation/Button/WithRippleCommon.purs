@@ -9,12 +9,10 @@ import Halogen.HTML as HH
 import Halogen.HTML.Core (ClassName)
 import Halogen.HTML.Properties as HP
 import Halogen.Query.HalogenM as Halogen.Query.HalogenM
-import HalogenMWC.Button.Implementation (Variant)
-import HalogenMWC.Button.Implementation (Variant(..), commonClasses, commonHtml, wrapTouch) as Implementation
-import HalogenMWC.Button.Insides (buttonIconMaterialIcons, buttonLabel) as Insides
-import HalogenMWC.Ripple.Common (RippleAction__Common, RippleState, initialRippleState) as Ripple
-import HalogenMWC.Ripple.Bounded (handleAction) as Ripple
-import HalogenMWC.Ripple.HTML (rippleClasses, rippleProps, rippleStyles) as Ripple
+import HalogenMWC.Implementation.Button.HTML (Variant)
+import HalogenMWC.Implementation.Button.HTML (Variant(..), commonClasses, commonHtml, wrapTouch) as Implementation
+import HalogenMWC.Implementation.Button.Insides (buttonIconMaterialIcons, buttonLabel) as Insides
+import HalogenMWC.Ripple.Bounded as Ripple
 
 type Query = Const Void
 
@@ -32,7 +30,7 @@ type State config w i =
   }
 
 data Action
-  = RippleAction Ripple.RippleAction__Common
+  = RippleAction Ripple.RippleAction
   | Click
 
 data Message

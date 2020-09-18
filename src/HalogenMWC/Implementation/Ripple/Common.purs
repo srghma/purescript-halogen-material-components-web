@@ -1,7 +1,7 @@
 module HalogenMWC.Implementation.Ripple.Common where
 
-import HalogenMWC.Ripple.Calculations (FgTranslationCoordinates, MDCRipplePoint, fgTranslationCoordinatesToTranslateForUnbounded, getFgTranslationCoordinatesPonter, getNormalizedEventCoordsMouseEvent, getNormalizedEventCoordsTouchEvent, layoutInternal, updateCssVarsCommon, updateCssVarsUnbounded)
-import HalogenMWC.Ripple.Constants (numbers, pointer_deactivation_event_types)
+import HalogenMWC.Implementation.Ripple.Calculations (FgTranslationCoordinates, MDCRipplePoint, fgTranslationCoordinatesToTranslateForUnbounded, getFgTranslationCoordinatesPonter, getNormalizedEventCoordsMouseEvent, getNormalizedEventCoordsTouchEvent, layoutInternal, updateCssVarsCommon, updateCssVarsUnbounded)
+import HalogenMWC.Implementation.Ripple.Constants (numbers, pointer_deactivation_event_types)
 import Protolude
 
 import Halogen as H
@@ -22,6 +22,7 @@ type StyleCommonVars =
   , "VAR_FG_SIZE"  :: String
   }
 
+-- TODO: split for each like `type StyleVarsBounded/StyleVarsUnbounded = Maybe ...`
 data StyleVars
   = StyleVars__Empty
   | StyleVars__Bounded
@@ -205,7 +206,7 @@ activationLogic
 ----------------------------------------------------------
 
 handleAction__Common
-  :: forall event slots output
+  :: forall slots output
    . Boolean
   -> Boolean
   -> H.HalogenM RippleState RippleAction__Common slots output Aff (Maybe Web.HTML.HTMLElement)

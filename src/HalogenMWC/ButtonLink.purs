@@ -1,8 +1,8 @@
-module HalogenMWC.Implementation.ButtonLink
+module HalogenMWC.ButtonLink
   ( module HalogenMWC.ButtonLink
   , module Implementation
   , module Insides
-  , module HalogenMWC.Button.WithRippleCommon
+  , module HalogenMWC.Implementation.Button.WithRippleCommon
   ) where
 
 import Protolude
@@ -14,13 +14,11 @@ import Halogen.HTML.Core (ClassName)
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Events as HE
 import Halogen.Query.HalogenM as Halogen.Query.HalogenM
-import HalogenMWC.Button.Implementation (Variant)
-import HalogenMWC.Button.Implementation (Variant(..), commonClasses, commonHtml, wrapTouch) as Implementation
-import HalogenMWC.Button.Insides (buttonIconMaterialIcons, buttonLabel) as Insides
-import HalogenMWC.Ripple.Common (RippleAction__Common, RippleState, initialRippleState) as Ripple
-import HalogenMWC.Ripple.Bounded (handleAction) as Ripple
-import HalogenMWC.Ripple.HTML (rippleClasses, rippleProps, rippleStyles) as Ripple
-import HalogenMWC.Button.WithRippleCommon
+import HalogenMWC.Implementation.Button.HTML (Variant)
+import HalogenMWC.Implementation.Button.HTML (Variant(..), commonClasses, commonHtml, wrapTouch) as Implementation
+import HalogenMWC.Implementation.Button.Insides (buttonIconMaterialIcons, buttonLabel) as Insides
+import HalogenMWC.Implementation.Button.WithRippleCommon
+import HalogenMWC.Ripple.Bounded as Ripple
 
 
 type Config i =
@@ -39,7 +37,6 @@ buttonLinkView variant config =
   let
     commonProps =
       [ HP.classes (Implementation.commonClasses variant <> config.additionalClasses)
-      , HP.ref buttonRefLabel
       ]
   in
     \content ->
@@ -58,10 +55,11 @@ buttonLink =
     , render: \state ->
         buttonLinkView
           state.input.variant
-          { additionalClasses: Ripple.rippleClasses isUnbounded state.rippleState <> state.input.config.additionalClasses
+          { additionalClasses: Ripple.rippleClasses state.rippleState <> state.input.config.additionalClasses
           , additionalAttributes:
             [ HP.style (Ripple.rippleStyles state.rippleState)
             , HE.onClick (const Click)
+            , HP.ref buttonRefLabel
             ]
             <> (Ripple.rippleProps <#> map RippleAction)
             <> state.input.config.additionalAttributes
@@ -71,15 +69,15 @@ buttonLink =
         { handleAction = handleAction
         }
       }
+  where
+    disabled :: Boolean
+    disabled = false
 
-disabled :: Boolean
-disabled = false
+    handleAction :: Action -> H.HalogenM (State Config (H.ComponentSlot ChildSlots Aff Action) Action) Action ChildSlots Message Aff Unit
+    handleAction =
+      case _ of
+          RippleAction rippleAction -> do
+            state <- H.get
 
-handleAction :: Action -> H.HalogenM (State Config (H.ComponentSlot ChildSlots Aff Action) Action) Action ChildSlots Message Aff Unit
-handleAction =
-  case _ of
-       RippleAction rippleAction -> do
-         state <- H.get
-
-         liftRippleHandleAction state $ Ripple.handleAction disabled (H.getHTMLElementRef buttonRefLabel) rippleAction
-       Click -> H.raise Clicked
+            liftRippleHandleAction state $ Ripple.handleAction disabled (H.getHTMLElementRef buttonRefLabel) rippleAction
+          Click -> H.raise Clicked

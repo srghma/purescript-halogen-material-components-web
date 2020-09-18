@@ -1,0 +1,13 @@
+.demoBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 100px;
+  padding: 1rem;
+  cursor: pointer;
+  user-select: none;
+  background-color: #fff;
+  overflow: hidden;
+  position: relative;
+}
