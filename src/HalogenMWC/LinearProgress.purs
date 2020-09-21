@@ -8,7 +8,7 @@ import Halogen (AttrName(..), ClassName, ElemName(..), PropName(..))
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
-import Material.Classes.LinearProgress (mdc_linear_progress, mdc_linear_progress____indeterminate, mdc_linear_progress__bar, mdc_linear_progress__bar_inner, mdc_linear_progress__buffer, mdc_linear_progress__buffering_dots, mdc_linear_progress__primary_bar, mdc_linear_progress__secondary_bar)
+import Material.Classes.LinearProgress
 
 type Config i
   = { reverse :: Boolean
@@ -75,7 +75,7 @@ bufferProp variant =
     _ -> 0.0
 
 bufferingDotsElt :: forall w i. HH.HTML w i
-bufferingDotsElt = HH.div [ HP.class_ mdc_linear_progress__buffering_dots ] []
+bufferingDotsElt = HH.div [ HP.class_ mdc_linear_progress__buffer_dots ] []
 
 bufferElt :: forall w i. HH.HTML w i
 bufferElt = HH.div [ HP.class_ mdc_linear_progress__buffer ] []
