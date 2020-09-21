@@ -24,4 +24,4 @@ wrapInputElement label inputElement =
          LabelConfig__With labelConfig -> [ labelElement labelConfig ]
          LabelConfig__Without _ -> []
   )
-  <> [ inputElement, lineRippleElement ]
+  <> inputElement <> [ lineRippleElement ]

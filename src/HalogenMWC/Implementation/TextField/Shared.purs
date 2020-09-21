@@ -17,11 +17,16 @@ data LabelConfig
     }
   | LabelConfig__Without String
 
+rootLabelClasses = \config -> noLabelClass config.label <> disabledClass config.disabled
+
 noLabelClass :: LabelConfig -> Array ClassName
 noLabelClass =
   case _ of
        LabelConfig__Without _ -> [ mdc_text_field____no_label ]
        LabelConfig__With _ -> []
+
+disabledClass :: Boolean -> Array ClassName
+disabledClass = if _ then [ mdc_text_field____disabled ] else []
 
 inputLabelProp =
   case _ of
