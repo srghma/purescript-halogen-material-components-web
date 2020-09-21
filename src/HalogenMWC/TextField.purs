@@ -17,27 +17,27 @@ import Material.Classes.LineRipple (mdc_line_ripple)
 import Material.Classes.Textfield (mdc_floating_label, mdc_floating_label____float_above, mdc_notched_outline, mdc_notched_outline__leading, mdc_notched_outline__notch, mdc_notched_outline__trailing, mdc_text_field, mdc_text_field____disabled, mdc_text_field____fullwidth, mdc_text_field____no_label, mdc_text_field____outlined, mdc_text_field____with_leading_icon, mdc_text_field____with_trailing_icon, mdc_text_field__icon, mdc_text_field__input)
 import MaterialIconsFont.Classes (material_icons)
 
-type Config w i
-  = { label :: Maybe String
-    , fullwidth :: Boolean
-    , value :: Maybe String
-    , placeholder :: Maybe String
-    , disabled :: Boolean
-    , required :: Boolean
-    , valid :: Boolean
-    , minLength :: Maybe Int
-    , maxLength :: Maybe Int
-    , pattern :: Maybe String
-    , type_ :: Maybe InputType
-    , min :: Maybe Int
-    , max :: Maybe Int
-    , step :: Maybe Int
-    , leadingIcon :: Maybe (HH.HTML w i)
-    , trailingIcon :: Maybe (HH.HTML w i)
-    , additionalAttributes :: Array (IProp I.HTMLinput i)
-    , onInput :: Maybe (String -> i)
-    , onChange :: Maybe (String -> i)
-    }
+type Config w i =
+  { label :: Maybe String
+  , fullwidth :: Boolean
+  , value :: Maybe String
+  , placeholder :: Maybe String
+  , disabled :: Boolean
+  , required :: Boolean
+  , valid :: Boolean
+  , minLength :: Maybe Int
+  , maxLength :: Maybe Int
+  , pattern :: Maybe String
+  , type_ :: Maybe InputType
+  , min :: Maybe Int
+  , max :: Maybe Int
+  , step :: Maybe Int
+  , leadingIcon :: Maybe (HH.HTML w i)
+  , trailingIcon :: Maybe (HH.HTML w i)
+  , additionalAttributes :: Array (IProp I.HTMLinput i)
+  , onInput :: Maybe (String -> i)
+  , onChange :: Maybe (String -> i)
+  }
 
 defaultConfig :: forall w i. Config w i
 defaultConfig =
@@ -160,7 +160,7 @@ ariaLabelAttr config =
 
 labelElt :: forall w i. Config w i -> HH.HTML w i
 labelElt config = case config.label of
-  Just str ->
+  Just label' ->
     HH.div
       [ if Maybe.fromMaybe "" config.value /= "" then
           HP.classes [ mdc_floating_label, mdc_floating_label____float_above ]
@@ -168,26 +168,26 @@ labelElt config = case config.label of
           HP.class_ mdc_floating_label
       , Utils.prop (PropName "foucClassNames") (Utils.propFromArrayClassName [ mdc_floating_label____float_above ])
       ]
-      [ HH.text str ]
+      [ HH.text label' ]
   Nothing -> HH.text ""
 
 lineRippleElt :: forall w i. HH.HTML w i
 lineRippleElt = HH.div [ HP.class_ mdc_line_ripple ] []
 
 notchedOutlineElt :: forall w i. Config w i -> HH.HTML w i
-notchedOutlineElt config =
+notchedOutlineElt = \config ->
   HH.div
     [ HP.class_ mdc_notched_outline ]
     [ notchedOutlineLeadingElt
     , notchedOutlineNotchElt config
     , notchedOutlineTrailingElt
     ]
+  where
+    notchedOutlineNotchElt :: Config w i -> HH.HTML w i
+    notchedOutlineNotchElt config = HH.div [ HP.class_ mdc_notched_outline__notch ] [ labelElt config ]
 
-notchedOutlineLeadingElt :: forall w i. HH.HTML w i
-notchedOutlineLeadingElt = HH.div [ HP.class_ mdc_notched_outline__leading ] []
+    notchedOutlineLeadingElt :: HH.HTML w i
+    notchedOutlineLeadingElt = HH.div [ HP.class_ mdc_notched_outline__leading ] []
 
-notchedOutlineTrailingElt :: forall w i. HH.HTML w i
-notchedOutlineTrailingElt = HH.div [ HP.class_ mdc_notched_outline__trailing ] []
-
-notchedOutlineNotchElt :: forall w i. Config w i -> HH.HTML w i
-notchedOutlineNotchElt config = HH.div [ HP.class_ mdc_notched_outline__notch ] [ labelElt config ]
+    notchedOutlineTrailingElt :: HH.HTML w i
+    notchedOutlineTrailingElt = HH.div [ HP.class_ mdc_notched_outline__trailing ] []
