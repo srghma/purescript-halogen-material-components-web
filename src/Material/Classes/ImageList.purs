@@ -26,3 +26,4 @@ mdc_image_list__label = ClassName "mdc-image-list__label"
 
 mdc_image_list__supporting :: ClassName
 mdc_image_list__supporting = ClassName "mdc-image-list__supporting"
+

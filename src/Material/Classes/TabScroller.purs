@@ -29,3 +29,4 @@ mdc_tab_scroller__scroll_content = ClassName "mdc-tab-scroller__scroll-content"
 
 mdc_tab_scroller__test :: ClassName
 mdc_tab_scroller__test = ClassName "mdc-tab-scroller__test"
+

@@ -59,3 +59,4 @@ mdc_list_item__graphic = ClassName "mdc-list-item__graphic"
 
 mdc_list_item__text :: ClassName
 mdc_list_item__text = ClassName "mdc-list-item__text"
+

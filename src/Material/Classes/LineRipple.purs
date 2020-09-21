@@ -11,3 +11,4 @@ mdc_line_ripple____active = ClassName "mdc-line-ripple--active"
 
 mdc_line_ripple____deactivating :: ClassName
 mdc_line_ripple____deactivating = ClassName "mdc-line-ripple--deactivating"
+

@@ -41,3 +41,4 @@ mdc_snackbar__label = ClassName "mdc-snackbar__label"
 
 mdc_snackbar__surface :: ClassName
 mdc_snackbar__surface = ClassName "mdc-snackbar__surface"
+
