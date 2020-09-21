@@ -77,8 +77,8 @@ button =
     handleAction :: Action -> H.HalogenM (State Config (H.ComponentSlot ChildSlots Aff Action) Action) Action ChildSlots Message Aff Unit
     handleAction =
       case _ of
-          RippleAction rippleAction -> do
+          RippleAction rippleAction -> H.getHTMLElementRef buttonRefLabel >>= traverse_ \rootElement -> do
             state <- H.get
 
-            liftRippleHandleAction state $ Ripple.handleAction state.input.config.disabled (H.getHTMLElementRef buttonRefLabel) rippleAction
+            liftRippleHandleAction state $ Ripple.handleAction state.input.config.disabled rootElement rippleAction
           Click -> H.raise Clicked

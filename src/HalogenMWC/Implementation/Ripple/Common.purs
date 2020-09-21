@@ -87,14 +87,13 @@ type GetNormalizedEventCoordsFn event =
 layoutAndModifyState
   :: forall output slots action
    . Boolean
-  -> H.HalogenM RippleState action slots output Aff (Maybe Web.HTML.HTMLElement)
+  -> Web.HTML.HTMLElement
   -> H.HalogenM RippleState action slots output Aff Unit
 layoutAndModifyState
   isUnbounded
-  getRootElementRef
+  rootElement
   = do
-  getRootElementRef >>= traverse_ \(htmlElement :: Web.HTML.HTMLElement) -> do
-    (rootDomRect :: Web.HTML.HTMLElement.DOMRect) <- H.liftEffect $ Web.HTML.HTMLElement.getBoundingClientRect htmlElement
+    (rootDomRect :: Web.HTML.HTMLElement.DOMRect) <- H.liftEffect $ Web.HTML.HTMLElement.getBoundingClientRect rootElement
 
     let { maxRadius, initialSize, fgScale } = layoutInternal { rootDomRect, isUnbounded }
 
@@ -112,24 +111,23 @@ layoutAndModifyState
 activationLogicGo
   :: forall event slots output
    . Boolean
-  -> (H.HalogenM RippleState RippleAction__Common slots output Aff (Maybe Web.HTML.HTMLElement))
+  -> Web.HTML.HTMLElement
   -> GetNormalizedEventCoordsFn event
   -> event
   -> H.HalogenM RippleState RippleAction__Common slots output Aff Unit
 activationLogicGo
   isUnbounded
-  getRootElementRef
+  rootElement
   getNormalizedEventCoords
   event
-  =
-  getRootElementRef >>= traverse_ \(htmlElement :: Web.HTML.HTMLElement) -> do
+  = do
     ( { rootDomRect
       , scrollX
       , scrollY
       , documentElement
       }
     ) <- H.liftEffect do
-        (rootDomRect :: Web.HTML.HTMLElement.DOMRect) <- Web.HTML.HTMLElement.getBoundingClientRect htmlElement
+        (rootDomRect :: Web.HTML.HTMLElement.DOMRect) <- Web.HTML.HTMLElement.getBoundingClientRect rootElement
         (window :: Window) <- Web.HTML.window
         (scrollX :: Int) <- Web.HTML.Window.scrollX window
         (scrollY :: Int) <- Web.HTML.Window.scrollY window
@@ -185,22 +183,22 @@ activationLogic
   :: forall event slots output
    . Boolean
   -> Boolean
-  -> (H.HalogenM RippleState RippleAction__Common slots output Aff (Maybe Web.HTML.HTMLElement))
+  -> Web.HTML.HTMLElement
   -> GetNormalizedEventCoordsFn event
   -> event
   -> H.HalogenM RippleState RippleAction__Common slots output Aff Unit
 activationLogic
   isDisabled
   isUnbounded
-  getRootElementRef
+  rootElement
   getNormalizedEventCoords
   event
   =
   if isDisabled then pure unit else do
      state <- H.get
      case state.activationState of
-         ActivationState__Idle -> activationLogicGo isUnbounded getRootElementRef getNormalizedEventCoords event
-         ActivationState__Deactivated -> activationLogicGo isUnbounded getRootElementRef getNormalizedEventCoords event
+         ActivationState__Idle -> activationLogicGo isUnbounded rootElement getNormalizedEventCoords event
+         ActivationState__Deactivated -> activationLogicGo isUnbounded rootElement getNormalizedEventCoords event
          _ -> pure unit
 
 ----------------------------------------------------------
@@ -209,20 +207,20 @@ handleAction__Common
   :: forall slots output
    . Boolean
   -> Boolean
-  -> H.HalogenM RippleState RippleAction__Common slots output Aff (Maybe Web.HTML.HTMLElement)
+  -> Web.HTML.HTMLElement
   -> RippleAction__Common
   -> H.HalogenM RippleState RippleAction__Common slots output Aff Unit
 handleAction__Common
   isDisabled
   isUnbounded
-  getRootElementRef
+  rootElement
   =
   case _ of
        Focus -> H.modify_ \state -> setStateFocusedEfficiently state true
        Blur -> H.modify_ \state -> setStateFocusedEfficiently state false
 
-       TouchActivate touchEvent -> activationLogic isDisabled isUnbounded getRootElementRef getNormalizedEventCoordsTouchEvent touchEvent
-       MouseActivate mouseEvent -> activationLogic isDisabled isUnbounded getRootElementRef getNormalizedEventCoordsMouseEvent mouseEvent
+       TouchActivate touchEvent -> activationLogic isDisabled isUnbounded rootElement getNormalizedEventCoordsTouchEvent touchEvent
+       MouseActivate mouseEvent -> activationLogic isDisabled isUnbounded rootElement getNormalizedEventCoordsMouseEvent mouseEvent
 
        Deactivate pointerReleasedSubscriptionId -> do
           H.unsubscribe pointerReleasedSubscriptionId

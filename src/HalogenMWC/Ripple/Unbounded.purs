@@ -23,6 +23,7 @@ import Halogen.HTML (IProp)
 import Web.TouchEvent (TouchEvent)
 import Web.UIEvent.FocusEvent (FocusEvent)
 import Web.UIEvent.MouseEvent (MouseEvent)
+import Halogen.Query.HalogenM as Halogen.Query.HalogenM
 
 data RippleAction
   = Initialize
@@ -35,22 +36,21 @@ rippleClasses rippleState = [ cssClasses."UNBOUNDED" ] <> Bounded.rippleClasses 
 handleAction
   :: forall slots output action
    . Boolean
-  -> H.HalogenM RippleState RippleAction slots output Aff (Maybe Web.HTML.HTMLElement)
+  -> Web.HTML.HTMLElement
   -> RippleAction
   -> H.HalogenM RippleState RippleAction slots output Aff Unit
-handleAction = \isDisabled getRootElementRef ->
+handleAction = \isDisabled rootElement ->
   case _ of
-    Initialize -> handleAction__Initialize getRootElementRef
-    WindowResized -> layoutAndModifyState true getRootElementRef
+    Initialize -> handleAction__Initialize rootElement
+    WindowResized -> layoutAndModifyState true rootElement
 
-    -- | RippleAction__Common rippleAction__Common -> Halogen.Query.HalogenM.mapAction RippleAction__Common $ handleAction__Common isDisabled true getRootElementRef rippleAction__Common
-    RippleAction__Common rippleAction__Common -> pure unit
+    RippleAction__Common rippleAction__Common -> Halogen.Query.HalogenM.mapAction RippleAction__Common $ handleAction__Common isDisabled true rootElement rippleAction__Common
   where
     handleAction__Initialize
       :: forall output slots
-      . H.HalogenM RippleState RippleAction slots output Aff (Maybe Web.HTML.HTMLElement)
+      . Web.HTML.HTMLElement
       -> H.HalogenM RippleState RippleAction slots output Aff Unit
-    handleAction__Initialize getRootElementRef = do
+    handleAction__Initialize rootElement = do
       -- register WindowResized
       window <- H.liftEffect Web.HTML.window
 
@@ -62,7 +62,7 @@ handleAction = \isDisabled getRootElementRef ->
       void $ H.subscribe event
 
       -- Unbounded ripples need layout logic applied immediately to set coordinates for both shade and ripple
-      layoutAndModifyState true getRootElementRef
+      layoutAndModifyState true rootElement
 
 rippleProps
   :: forall r

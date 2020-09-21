@@ -25,15 +25,11 @@ newtype RippleAction = RippleAction RippleAction__Common
 handleAction
   :: forall slots output
    . Boolean
-  -> H.HalogenM RippleState RippleAction slots output Aff (Maybe Web.HTML.HTMLElement)
+  -> Web.HTML.HTMLElement
   -> RippleAction
   -> H.HalogenM RippleState RippleAction slots output Aff Unit
-handleAction isDisabled getRootElementRef (RippleAction rippleAction__common) =
-  Halogen.Query.HalogenM.mapAction RippleAction $
-    handleAction__Common isDisabled false (getRootElementRef') rippleAction__common
-  where
-        getRootElementRef' :: H.HalogenM RippleState RippleAction__Common slots output Aff (Maybe Web.HTML.HTMLElement)
-        getRootElementRef' = Halogen.Query.HalogenM.mapAction (\(RippleAction x) -> x) getRootElementRef
+handleAction isDisabled rootElement (RippleAction rippleAction__common) =
+  Halogen.Query.HalogenM.mapAction RippleAction $ handleAction__Common isDisabled false rootElement rippleAction__common
 
 rippleClasses :: RippleState -> Array ClassName
 rippleClasses rippleState =
