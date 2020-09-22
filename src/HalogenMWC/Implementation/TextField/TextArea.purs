@@ -24,7 +24,12 @@ type Config =
   , rows :: Int
   , cols :: Int
   , resizable :: Boolean
-  , disabled :: Boolean
+
+  , disabled  :: Boolean
+  , focused   :: Boolean
+  , fullwidth :: Boolean
+  , invalid   :: Boolean
+
   , helperTextId :: Maybe String
   , minLength :: Maybe Int
 
@@ -64,7 +69,7 @@ inputElement = \config ->
         [ map (HP.attr (AttrName "minLength") <<< show) config.minLength
         , map (HP.attr (AttrName "maxLength") <<< show <<< characterCounterOrMaxLength) $ config.internalCounterOrMaxLength
         ]
-      <> inputLabelProp config.label
+      <> inputARIALabelProp config.label
       <> HelperText.maybeInputProps config.helperTextId
     ]
     <> case config.internalCounterOrMaxLength of

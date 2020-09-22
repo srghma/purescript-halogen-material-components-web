@@ -15,20 +15,34 @@ data LabelConfig
     { id :: String
     , labelText :: String
     }
-  | LabelConfig__Without String
+  | LabelConfig__Without
+    String -- labelText
 
-rootLabelClasses = \config -> noLabelClass config.label <> disabledClass config.disabled
+rootLabelClasses = \config ->
+  Array.catMaybes
+  [ noLabelClass       config.label
+  , disabledClass      config.disabled
+  , focusedClass       config.focused
+  , fullwidthClass     config.fullwidth
+  , invalidClass       config.invalid
+  -- | , labelFloatingClass config.labelFloating
+  ]
+  where
+    noLabelClass :: LabelConfig -> Maybe ClassName
+    noLabelClass =
+      case _ of
+          LabelConfig__Without _ -> Just mdc_text_field____no_label
+          LabelConfig__With _ -> Nothing
 
-noLabelClass :: LabelConfig -> Array ClassName
-noLabelClass =
-  case _ of
-       LabelConfig__Without _ -> [ mdc_text_field____no_label ]
-       LabelConfig__With _ -> []
+    disabledClass         = if _ then Just mdc_text_field____disabled else Nothing
+    focusedClass          = if _ then Just mdc_text_field____focused else Nothing
+    fullwidthClass        = if _ then Just mdc_text_field____fullwidth else Nothing
+    invalidClass          = if _ then Just mdc_text_field____invalid else Nothing
+    -- | labelFloatingClass    = if _ then Just mdc_text_field____label_floating else Nothing
+    -- | withLeadingIconClass  = if _ then Just mdc_text_field____with_leading_icon else Nothing
+    -- | withTrailingIconClass = if _ then Just mdc_text_field____with_trailing_icon else Nothing
 
-disabledClass :: Boolean -> Array ClassName
-disabledClass = if _ then [ mdc_text_field____disabled ] else []
-
-inputLabelProp =
+inputARIALabelProp =
   case _ of
     LabelConfig__Without labelText -> [ HP.ARIA.label labelText ]
     LabelConfig__With labelConfig -> [ HP.ARIA.labelledBy labelConfig.id ]

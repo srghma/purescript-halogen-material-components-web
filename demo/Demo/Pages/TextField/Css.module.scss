@@ -1,0 +1,20 @@
+
+.textFieldContainerHero {
+  min-width: 200px; padding: 20px;
+}
+
+.textFieldContainerHeroRoot {
+  display: -ms-flexbox; display: flex; -ms-flex: 1 1 100%; flex: 1 1 100%; -ms-flex-pack: distribute; justify-content: space-around; -ms-flex-wrap: wrap; flex-wrap: wrap;
+}
+
+.textFieldContainer {
+  min-width: 200px;
+}
+
+.textFieldRowFullwidth {
+  display: block;
+}
+
+.textFieldRow {
+  display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap;
+}
