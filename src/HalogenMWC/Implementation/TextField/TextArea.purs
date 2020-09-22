@@ -15,6 +15,10 @@ import HalogenMWC.Implementation.TextField.HelperText as HelperText
 import HalogenMWC.Implementation.TextField.OutlinedShared as OutlinedShared
 import HalogenMWC.Implementation.TextField.CharacterCounter as CharacterCounter
 
+data CharacterCounterOrMaxLengthType
+  = CharacterCounterType__External_or_MaxLength Int -- maxLength OR the `_.max` from CharacterCounterConfig
+  | CharacterCounterType__Internal CharacterCounter.CharacterCounterConfig
+
 type Config =
   { label :: LabelConfig
   , rows :: Int
@@ -22,17 +26,27 @@ type Config =
   , resizable :: Boolean
   , disabled :: Boolean
   , helperTextId :: Maybe String
-  , maxLength :: Maybe Int
   , minLength :: Maybe Int
 
   -- only when want to render internally
-  , internalCounter :: Maybe CharacterCounter.CharacterCounterConfig -- TODO: should be in sync with `maxLength`
+  , internalCounterOrMaxLength :: Maybe CharacterCounterOrMaxLengthType
   }
+
+characterCounterOrMaxLength :: CharacterCounterOrMaxLengthType -> Int
+characterCounterOrMaxLength =
+  case _ of
+       CharacterCounterType__External_or_MaxLength maxLength -> maxLength
+       CharacterCounterType__Internal config -> config.max
 
 resizerClass :: Boolean -> Array ClassName
 resizerClass = if _ then [ mdc_text_field__resizer ] else []
 
 textareaClasses = [ mdc_text_field____textarea ]
+
+internalCounterClass =
+  case _ of
+    Just (CharacterCounterType__Internal _) -> [ mdc_text_field____with_internal_counter ]
+    _ -> []
 
 -------------------------
 
@@ -48,13 +62,13 @@ inputElement = \config ->
       ]
       <> Array.catMaybes
         [ map (HP.attr (AttrName "minLength") <<< show) config.minLength
-        , map (HP.attr (AttrName "maxLength") <<< show) config.maxLength
+        , map (HP.attr (AttrName "maxLength") <<< show <<< characterCounterOrMaxLength) $ config.internalCounterOrMaxLength
         ]
       <> inputLabelProp config.label
       <> HelperText.maybeInputProps config.helperTextId
     ]
-    <> case config.internalCounter of
-            Just counterConfig -> [ CharacterCounter.characterCounter counterConfig ]
+    <> case config.internalCounterOrMaxLength of
+            Just (CharacterCounterType__Internal counterConfig) -> [ CharacterCounter.characterCounter counterConfig ]
             _ -> []
   )
 
@@ -62,13 +76,13 @@ inputElement = \config ->
 filled :: forall w i . Config -> HH.HTML w i
 filled config =
   HH.label
-  [ HP.classes $ FilledShared.filledClasses <> textareaClasses <> rootLabelClasses config ]
-  (FilledShared.wrapInputElement config.label $ inputElement config)
+  [ HP.classes $ FilledShared.filledClasses <> textareaClasses <> rootLabelClasses config <> internalCounterClass config.internalCounterOrMaxLength ]
+  (FilledShared.wrapInputElement config.label [ inputElement config ])
 
 outlined :: forall w i . Config -> HH.HTML w i
 outlined config =
   HH.label
-  [ HP.classes $ OutlinedShared.outlinedClasses <> textareaClasses <> rootLabelClasses config ]
+  [ HP.classes $ OutlinedShared.outlinedClasses <> textareaClasses <> rootLabelClasses config <> internalCounterClass config.internalCounterOrMaxLength ]
   [ inputElement config
   , OutlinedShared.notchedOutlineElement config.label
   ]
