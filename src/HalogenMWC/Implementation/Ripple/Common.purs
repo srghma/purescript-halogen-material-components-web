@@ -59,7 +59,7 @@ type RippleState =
 initialRippleState :: RippleState
 initialRippleState =
   { styleCommonVars:
-      { "VAR_FG_SCALE": "1" -- from css, the 0 will result in error (element wont be able to focus)
+      { "VAR_FG_SCALE": "1" -- from css, the 0 will result in error (element won't be able to focus)
       , "VAR_FG_SIZE": "0"
       }
   , styleVars: StyleVars__Empty

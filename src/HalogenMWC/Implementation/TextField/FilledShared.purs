@@ -19,7 +19,7 @@ rippleElement = HH.span [ HP.class_ mdc_text_field__ripple ] []
 data LineRippleState
   = LineRippleState__Idle
   | LineRippleState__Active Int -- active class is added, deactivating is removed
-  -- | | LineRippleState__Deactivating -- show active and deactivating classes, start listening for transision end, then go to idle
+  -- | | LineRippleState__Deactivating -- show active and deactivating classes, start listening for transition end, then go to idle
 
 lineRippleElement =
   case _ of

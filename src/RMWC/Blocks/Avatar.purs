@@ -63,7 +63,7 @@ avatarImageMaterialIcons config =
         ]
         []
     , HH.div
-        [ HP.classes [ rmwc_avatar__text ] -- TODO: image wont be visible without it (width is 0)
+        [ HP.classes [ rmwc_avatar__text ] -- TODO: image won't be visible without it (width is 0)
         ]
         []
     ]
