@@ -22,7 +22,7 @@ type HelperTextConfig =
 
 maybeInputProps =
   case _ of
-    Just id -> inputProps id
+    Just { id } -> inputProps id
     _ -> []
 
 inputProps id =
@@ -30,6 +30,7 @@ inputProps id =
   , HP.ARIA.describedBy id
   ]
 
+helperText :: forall w i . HelperTextConfig -> HH.HTML w i
 helperText config =
   HH.div
   ( [ HP.classes $ Array.catMaybes
@@ -45,3 +46,4 @@ helperText config =
     ]
     <> if config.validation then [ HP.ARIA.role "alert" ] else []
   )
+  []

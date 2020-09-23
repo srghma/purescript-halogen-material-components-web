@@ -13,9 +13,12 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as HP.ARIA
 import HalogenMWC.Implementation.TextField.CharacterCounter as CharacterCounter
-import HalogenMWC.Implementation.TextField.FilledShared as FilledShared
+import HalogenMWC.Implementation.TextField.CharacterCounter (CharacterCounterConfig)
+import HalogenMWC.Implementation.TextField.HelperText (HelperTextConfig)
 import HalogenMWC.Implementation.TextField.HelperText as HelperText
+import HalogenMWC.Implementation.TextField.FilledShared as FilledShared
 import HalogenMWC.Implementation.TextField.OutlinedShared as OutlinedShared
+import HalogenMWC.Implementation.TextField.HelperTextAndCharacterCounter as HelperTextAndCharacterCounter
 
 type Config i =
   { label                     :: LabelConfig
@@ -27,8 +30,11 @@ type Config i =
   , fullwidth :: Boolean
   , invalid   :: Boolean
 
-  , helperTextId              :: Maybe String
-  , maxLength                 :: Maybe Int
+  , helperText                :: Maybe HelperTextConfig
+  , characterCounter          :: Maybe CharacterCounterConfig
+
+  -- | , maxLength                 :: Maybe Int
+
   , minLength                 :: Maybe Int
   , prefix                    :: Maybe String
   , suffix                    :: Maybe String
@@ -36,6 +42,7 @@ type Config i =
   , additionalAttributesInput :: Array (IProp I.HTMLinput i)
   , additionalClassesRoot     :: Array ClassName
   , additionalAttributesRoot  :: Array (IProp I.HTMLlabel i)
+  , lineRippleState           :: FilledShared.LineRippleState
   }
 
 defaultConfig { label } =
@@ -44,7 +51,7 @@ defaultConfig { label } =
   , type_:                     InputText
   , disabled:                  false
   , helperTextId:              Nothing
-  , maxLength:                 Nothing
+  -- | , maxLength:                 Nothing
   , minLength:                 Nothing
   , prefix:                    Nothing
   , suffix:                    Nothing
@@ -63,10 +70,10 @@ inputElement config =
     ]
     <> Array.catMaybes
       [ map (HP.attr (AttrName "minLength") <<< show) config.minLength
-      , map (HP.attr (AttrName "maxLength") <<< show) config.maxLength
+      , map (HP.attr (AttrName "maxLength") <<< show <<< _.max) config.characterCounter
       ]
     <> inputARIALabelProp config.label
-    <> HelperText.maybeInputProps config.helperTextId
+    <> HelperText.maybeInputProps config.helperText
     <> config.additionalAttributesInput
   )
 
@@ -84,13 +91,13 @@ maybeSuffixElement = map \s -> suffixElement [ HH.text s ]
 
 -------------------------
 
-filled :: forall w i . Config i -> HH.HTML w i
-filled = \config ->
+filled :: forall w i . Config i -> Array (HH.HTML w i)
+filled = HelperTextAndCharacterCounter.wrapRenderBoth \config ->
   HH.label
   ( [ HP.classes $ FilledShared.filledClasses <> rootLabelClasses config <> config.additionalClassesRoot
     ] <> config.additionalAttributesRoot
   )
-  ( FilledShared.wrapInputElement config.label $
+  ( FilledShared.wrapInputElement config $
     Array.catMaybes
     [ maybePrefixElement config.prefix
     , Just $ inputElement config
@@ -98,8 +105,8 @@ filled = \config ->
     ]
   )
 
-outlined :: forall w i . Config i -> HH.HTML w i
-outlined = \config ->
+outlined :: forall w i . Config i -> Array (HH.HTML w i)
+outlined = HelperTextAndCharacterCounter.wrapRenderBoth \config ->
   HH.label [ HP.classes $ OutlinedShared.outlinedClasses <> rootLabelClasses config ]
   ( Array.catMaybes
     [ maybePrefixElement config.prefix

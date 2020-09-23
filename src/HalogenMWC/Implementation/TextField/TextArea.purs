@@ -78,16 +78,16 @@ inputElement = \config ->
   )
 
 
-filled :: forall w i . Config -> HH.HTML w i
-filled config =
-  HH.label
-  [ HP.classes $ FilledShared.filledClasses <> textareaClasses <> rootLabelClasses config <> internalCounterClass config.internalCounterOrMaxLength ]
-  (FilledShared.wrapInputElement config.label [ inputElement config ])
+-- | filled :: forall w i . Config -> HH.HTML w i
+-- | filled config =
+-- |   HH.label
+-- |   [ HP.classes $ FilledShared.filledClasses <> textareaClasses <> rootLabelClasses config <> internalCounterClass config.internalCounterOrMaxLength ]
+-- |   (FilledShared.wrapInputElement config.label [ inputElement config ])
 
-outlined :: forall w i . Config -> HH.HTML w i
-outlined config =
-  HH.label
-  [ HP.classes $ OutlinedShared.outlinedClasses <> textareaClasses <> rootLabelClasses config <> internalCounterClass config.internalCounterOrMaxLength ]
-  [ inputElement config
-  , OutlinedShared.notchedOutlineElement config.label
-  ]
+-- | outlined :: forall w i . Config -> HH.HTML w i
+-- | outlined config =
+-- |   HH.label
+-- |   [ HP.classes $ OutlinedShared.outlinedClasses <> textareaClasses <> rootLabelClasses config <> internalCounterClass config.internalCounterOrMaxLength ]
+-- |   [ inputElement config
+-- |   , OutlinedShared.notchedOutlineElement config.label
+-- |   ]
