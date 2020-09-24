@@ -20,13 +20,12 @@ import HalogenMWC.Implementation.TextField.FilledShared as FilledShared
 import HalogenMWC.Implementation.TextField.OutlinedShared as OutlinedShared
 import HalogenMWC.Implementation.TextField.HelperTextAndCharacterCounter as HelperTextAndCharacterCounter
 
-type Config i =
-  { label                     :: LabelConfig
-  , placeholder               :: Maybe String
-  , type_                     :: InputType
+type ConfigManagedByUser r =
+  ( label       :: LabelConfig
+  , placeholder :: Maybe String
+  , type_       :: InputType
 
   , disabled  :: Boolean
-  , focused   :: Boolean
   , fullwidth :: Boolean
   , invalid   :: Boolean
 
@@ -38,28 +37,22 @@ type Config i =
   , minLength                 :: Maybe Int
   , prefix                    :: Maybe String
   , suffix                    :: Maybe String
-  , additionalClassesInput    :: Array ClassName
-  , additionalAttributesInput :: Array (IProp I.HTMLinput i)
-  , additionalClassesRoot     :: Array ClassName
-  , additionalAttributesRoot  :: Array (IProp I.HTMLlabel i)
-  , lineRippleState           :: FilledShared.LineRippleState
-  }
 
-defaultConfig { label } =
-  { label
-  , placeholder:               Nothing
-  , type_:                     InputText
-  , disabled:                  false
-  , helperTextId:              Nothing
-  -- | , maxLength:                 Nothing
-  , minLength:                 Nothing
-  , prefix:                    Nothing
-  , suffix:                    Nothing
-  , additionalClassesInput:    []
-  , additionalAttributesInput: []
-  , additionalClassesRoot:     []
-  , additionalAttributesRoot:  []
-  }
+  , additionalClassesRoot     :: Array ClassName
+  , additionalClassesInput    :: Array ClassName
+  | r )
+
+type ConfigManagedByComponent r =
+  ( focused                   :: Boolean
+  , lineRippleState           :: FilledShared.LineRippleState
+  | r )
+
+type ConfigAddedByComponent i r =
+  ( additionalAttributesRoot  :: Array (IProp I.HTMLlabel i)
+  , additionalAttributesInput :: Array (IProp I.HTMLinput i)
+  | r )
+
+type Config i = Record (ConfigManagedByUser + ConfigManagedByComponent + ConfigAddedByComponent i + ())
 
 inputElement config =
   HH.input

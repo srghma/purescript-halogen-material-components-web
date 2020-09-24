@@ -1,24 +1,9 @@
 module HalogenMWC.Implementation.Ripple.Constants where
 
-import Material.Classes.Ripple (mdc_ripple_upgraded, mdc_ripple_upgraded____background_focused, mdc_ripple_upgraded____foreground_activation, mdc_ripple_upgraded____foreground_deactivation, mdc_ripple_upgraded____unbounded)
+import Material.Classes.Ripple
 
 import Halogen.HTML.Core (ClassName)
 import Web.Event.Event (EventType(..))
-
-cssClasses ::
-  { "BG_FOCUSED"      :: ClassName
-  , "FG_ACTIVATION"   :: ClassName
-  , "FG_DEACTIVATION" :: ClassName
-  , "ROOT"            :: ClassName
-  , "UNBOUNDED"       :: ClassName
-  }
-cssClasses =
-  { "BG_FOCUSED":      mdc_ripple_upgraded____background_focused
-  , "FG_ACTIVATION":   mdc_ripple_upgraded____foreground_activation
-  , "FG_DEACTIVATION": mdc_ripple_upgraded____foreground_deactivation
-  , "ROOT":            mdc_ripple_upgraded
-  , "UNBOUNDED":       mdc_ripple_upgraded____unbounded
-  }
 
 strings ::
   { "VAR_FG_SCALE"           :: String

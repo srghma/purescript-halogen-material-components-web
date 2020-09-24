@@ -9,7 +9,7 @@ import Halogen.HTML (IProp)
 import Halogen.HTML.Core (ClassName)
 import Halogen.HTML.Events as HE
 import HalogenMWC.Implementation.Ripple.Common (ActivationState(..), RippleAction__Common(..), StyleVars(..)) as Ripple
-import HalogenMWC.Implementation.Ripple.Constants (cssClasses, strings) as Ripple
+import HalogenMWC.Implementation.Ripple.Constants (strings) as Ripple
 import HalogenMWC.Utils
 import Web.TouchEvent (TouchEvent)
 import Web.UIEvent.FocusEvent (FocusEvent)

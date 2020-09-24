@@ -18,7 +18,7 @@ rippleElement = HH.span [ HP.class_ mdc_text_field__ripple ] []
 -- | NOTE: only for filled, not outlined
 data LineRippleState
   = LineRippleState__Idle
-  | LineRippleState__Active Int -- active class is added, deactivating is removed
+  | LineRippleState__Active Number -- active class is added, deactivating is removed
   -- | | LineRippleState__Deactivating -- show active and deactivating classes, start listening for transition end, then go to idle
 
 lineRippleElement =
@@ -34,8 +34,8 @@ lineRippleElement =
          ]
          []
   where
-    xCoordinatePxRender :: Int -> String
-    xCoordinatePxRender int = styleVar "transform-origin" (show int <> "px center")
+    xCoordinatePxRender :: Number -> String
+    xCoordinatePxRender x = styleVar "transform-origin" (show x <> "px center")
 
 filledClasses = [ mdc_text_field, mdc_text_field____filled ]
 

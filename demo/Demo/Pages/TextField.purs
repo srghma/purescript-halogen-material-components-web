@@ -15,6 +15,7 @@ import HalogenMWC.TextArea as TextArea
 import HalogenMWC.TextField.Filled as TextField.Filled
 import Demo.MkComponent.WithFocus as WithFocus
 import Demo.Pages.TextField.Css as Css
+import Demo.Pages.TextField.Hero as Demo.Pages.TextField.Hero
 
 config :: CatalogPage
 config =
@@ -25,29 +26,7 @@ config =
         , documentation: Just "https://package.elm-lang.org/packages/aforemny/material-components-web-elm/latest/Material-TextField"
         , sourceCode: Just "https://github.com/material-components/material-components-web/tree/master/packages/mdc-textfield"
         }
-    , hero: mkComponentStatic $
-          HH.div
-          [ HP.class_ Css.styles.textFieldContainerHeroRoot
-          ]
-          [ HH.div
-            [ HP.class_ Css.styles.textFieldContainerHero ]
-            [ HH.slot_
-              (SProxy :: SProxy "filled")
-              unit
-              TextField.Filled.filled
-              { config: TextField.Filled.defaultConfig
-                { label = "Standard"
-                }
-              }
-            ]
-          -- | , HH.div [ HP.class_ Css.styles.textFieldContainerHero ]
-          -- |     [ TextField.outlined
-          -- |         (TextField.defaultConfig
-          -- |             { label = Just "Standard"
-          -- |             }
-          -- |         )
-          -- |     ]
-          ]
+    , hero: Demo.Pages.TextField.Hero.component
     , content: WithFocus.mkComponent $ HH.div_
         [ HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Filled" ]
         -- | , filledTextFields

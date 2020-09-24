@@ -19,6 +19,7 @@ import Halogen.HTML (IProp)
 import Web.TouchEvent (TouchEvent)
 import Web.UIEvent.FocusEvent (FocusEvent)
 import Web.UIEvent.MouseEvent (MouseEvent)
+import Material.Classes.Ripple
 
 newtype RippleAction = RippleAction RippleAction__Common
 
@@ -34,12 +35,12 @@ handleAction isDisabled rootElement (RippleAction rippleAction__common) =
 rippleClasses :: RippleState -> Array ClassName
 rippleClasses rippleState =
   Array.concat
-  [ [ cssClasses."ROOT" ]
-  , if rippleState.focused then [ cssClasses."BG_FOCUSED" ] else []
+  [ [ mdc_ripple_upgraded ]
+  , if rippleState.focused then [ mdc_ripple_upgraded____background_focused ] else []
   , case rippleState.activationState of
          ActivationState__Idle -> []
-         ActivationState__Activated -> [ cssClasses."FG_ACTIVATION" ]
-         ActivationState__Deactivated -> [ cssClasses."FG_DEACTIVATION" ]
+         ActivationState__Activated -> [ mdc_ripple_upgraded____foreground_activation ]
+         ActivationState__Deactivated -> [ mdc_ripple_upgraded____foreground_deactivation ]
   ]
 
 rippleProps

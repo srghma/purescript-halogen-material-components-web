@@ -16,7 +16,7 @@ data LabelConfig
     , labelText :: String
     }
   | LabelConfig__Without
-    String -- labelText
+    String -- labelText in props
 
 rootLabelClasses = \config ->
   Array.catMaybes

@@ -24,6 +24,7 @@ import Web.TouchEvent (TouchEvent)
 import Web.UIEvent.FocusEvent (FocusEvent)
 import Web.UIEvent.MouseEvent (MouseEvent)
 import Halogen.Query.HalogenM as Halogen.Query.HalogenM
+import Material.Classes.Ripple
 
 data RippleAction
   = Initialize
@@ -31,7 +32,7 @@ data RippleAction
   | RippleAction__Common RippleAction__Common
 
 rippleClasses :: RippleState -> Array ClassName
-rippleClasses rippleState = [ cssClasses."UNBOUNDED" ] <> Bounded.rippleClasses rippleState
+rippleClasses rippleState = [ mdc_ripple_upgraded____unbounded ] <> Bounded.rippleClasses rippleState
 
 handleAction
   :: forall slots output action
