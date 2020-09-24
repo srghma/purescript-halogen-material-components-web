@@ -79,7 +79,7 @@ defaultConfig { label, value } =
   , additionalClassesRoot:     []
   , additionalClassesInput:    []
 
-  , shake: false
+  , shake: false -- remove and use 'invalid' instead?
   , required: false
   }
 
@@ -126,17 +126,20 @@ handlePointerDown mclientX = do
             -- TODO:
             -- the transform-origin doesn't work, when on span.mdc-line-ripple,
             -- but works when on span.mdc-line-ripple::after
+
             Nothing -> H.modify_ $ setEfficientlyStateFocusState (FocusState__Active Nothing)
             Just clientX -> do
               (inputElementDomRect :: Web.HTML.HTMLElement.DOMRect) <- H.liftEffect $ Web.HTML.HTMLElement.getBoundingClientRect inputElement
               let normalizedX = Int.toNumber clientX - inputElementDomRect.left
+
+              -- TODO:
+              -- not needed for outlined actually, only for filled, can set Nothing
               H.modify_ $ setEfficientlyStateFocusState (FocusState__Active (Just normalizedX))
 
 handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
 handleAction action =
   case spy "action" action of
-        Action__Receive newInput -> H.modify_ \state ->
-          setEfficiently (Lens.prop (SProxy :: SProxy "value")) newInput.value state -- TODO: handle all
+        Action__Receive newInput -> H.modify_ \state -> Record.merge state newInput -- TODO: can be optimized?
 
         Action__Focus -> H.modify_ $ setEfficientlyStateFocusState (FocusState__Active Nothing)
         Action__Blur -> H.modify_ $ setEfficientlyStateFocusState FocusState__Idle
@@ -148,4 +151,3 @@ handleAction action =
           case Web.TouchEvent.TouchList.item 0 $ Web.TouchEvent.TouchEvent.changedTouches touchEvent of
                Just touchEventItem -> handlePointerDown (Just $ Web.TouchEvent.Touch.clientX touchEventItem)
                _ -> handlePointerDown Nothing
-

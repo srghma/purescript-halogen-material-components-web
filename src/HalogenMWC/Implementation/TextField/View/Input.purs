@@ -109,7 +109,10 @@ filled = HelperTextAndCharacterCounter.wrapRenderBoth \config ->
 
 outlined :: forall w i . Config i -> Array (HH.HTML w i)
 outlined = HelperTextAndCharacterCounter.wrapRenderBoth \config ->
-  HH.label [ HP.classes $ OutlinedShared.outlinedClasses <> rootLabelClasses config ]
+  HH.label
+  ( [ HP.classes $ OutlinedShared.outlinedClasses <> rootLabelClasses config <> config.additionalClassesRoot
+    ] <> config.additionalAttributesRoot
+  )
   ( Array.catMaybes
     [ maybePrefixElement config.prefix
     , Just $ inputElement config

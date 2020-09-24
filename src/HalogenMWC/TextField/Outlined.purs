@@ -1,5 +1,5 @@
-module HalogenMWC.TextField.Filled
-  ( module HalogenMWC.TextField.Filled
+module HalogenMWC.TextField.Outlined
+  ( module HalogenMWC.TextField.Outlined
   , module Export
   ) where
 
@@ -40,15 +40,13 @@ import Web.UIEvent.MouseEvent as Web.UIEvent.MouseEvent
 import HalogenMWC.Implementation.TextField.Component.Shared
 import HalogenMWC.Implementation.TextField.Component.Shared (Message(..), Query(..), Input, State, Action(..), defaultConfig) as Export
 
-filled :: H.Component Query Input Message Aff
-filled =
+outlined :: H.Component Query Input Message Aff
+outlined =
   H.mkComponent
     { initialState: \input -> Record.union input
       { focusState: FocusState__Idle
       }
-    , render: \state ->
-        trace { message: "render filled", state } $ const $ HH.div_ $ TextField.Input.filled $ Record.Builder.build
-          (Record.Builder.union additionalAttributes) state
+    , render: \state -> trace { message: "render outlined", state } $ const $ HH.div_ $ TextField.Input.outlined $ Record.union state additionalAttributes
     , eval: H.mkEval $ H.defaultEval
         { handleAction = handleAction
         , receive = \input -> Just $ Action__Receive input
