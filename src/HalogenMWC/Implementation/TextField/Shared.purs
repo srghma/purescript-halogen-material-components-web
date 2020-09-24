@@ -47,9 +47,15 @@ inputARIALabelProp =
     LabelConfig__Without labelText -> [ HP.ARIA.label labelText ]
     LabelConfig__With labelConfig -> [ HP.ARIA.labelledBy labelConfig.id ]
 
-labelElement labelConfig =
+labelElement :: ∀ t33 t34 t55 t64. { focused ∷ Boolean , required ∷ Boolean , shake ∷ Boolean , value ∷ String | t55 } → { id ∷ String , labelText ∷ String | t64 } → HH.HTML t34 t33
+labelElement config labelConfig =
   HH.span
-  [ HP.class_ mdc_floating_label
+  [ HP.classes $ Array.catMaybes
+    [ Just mdc_floating_label
+    , if config.focused || config.value /= "" then Just mdc_floating_label____float_above else Nothing
+    , if config.required then Just mdc_floating_label____required else Nothing
+    , if config.shake then Just mdc_floating_label____shake else Nothing
+    ]
   , HP.id_ labelConfig.id
   ]
   [ HH.text labelConfig.labelText

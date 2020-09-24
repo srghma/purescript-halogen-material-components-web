@@ -4,6 +4,7 @@ import HalogenMWC.Implementation.TextField.Shared
 import Material.Classes.Textfield
 import Protolude
 
+import DOM.HTML.Indexed (HTMLinput)
 import DOM.HTML.Indexed as I
 import DOM.HTML.Indexed.InputType (InputType(..))
 import Data.Array as Array
@@ -12,13 +13,13 @@ import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as HP.ARIA
-import HalogenMWC.Implementation.TextField.CharacterCounter as CharacterCounter
 import HalogenMWC.Implementation.TextField.CharacterCounter (CharacterCounterConfig)
+import HalogenMWC.Implementation.TextField.CharacterCounter as CharacterCounter
+import HalogenMWC.Implementation.TextField.FilledShared as FilledShared
 import HalogenMWC.Implementation.TextField.HelperText (HelperTextConfig)
 import HalogenMWC.Implementation.TextField.HelperText as HelperText
-import HalogenMWC.Implementation.TextField.FilledShared as FilledShared
-import HalogenMWC.Implementation.TextField.OutlinedShared as OutlinedShared
 import HalogenMWC.Implementation.TextField.HelperTextAndCharacterCounter as HelperTextAndCharacterCounter
+import HalogenMWC.Implementation.TextField.OutlinedShared as OutlinedShared
 
 type ConfigManagedByUser r =
   ( label       :: LabelConfig
@@ -40,6 +41,10 @@ type ConfigManagedByUser r =
 
   , additionalClassesRoot     :: Array ClassName
   , additionalClassesInput    :: Array ClassName
+
+  , value :: String
+  , shake :: Boolean
+  , required :: Boolean
   | r )
 
 type ConfigManagedByComponent r =
@@ -54,6 +59,10 @@ type ConfigAddedByComponent i r =
 
 type Config i = Record (ConfigManagedByUser + ConfigManagedByComponent + ConfigAddedByComponent i + ())
 
+inputElement
+  :: ∀ i w
+  . Config i
+  → HH.HTML w i
 inputElement config =
   HH.input
   (
@@ -105,6 +114,6 @@ outlined = HelperTextAndCharacterCounter.wrapRenderBoth \config ->
     [ maybePrefixElement config.prefix
     , Just $ inputElement config
     , maybeSuffixElement config.suffix
-    , Just $ OutlinedShared.notchedOutlineElement config.label
+    , Just $ OutlinedShared.notchedOutlineElement config
     ]
   )

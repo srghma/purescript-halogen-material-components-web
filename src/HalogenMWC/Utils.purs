@@ -3,6 +3,7 @@ module HalogenMWC.Utils where
 import Protolude
 
 import Data.Either (hush)
+import Effect.Timer as Timer
 import Effect.Unsafe (unsafePerformEffect)
 import FRP.Event as Event
 import Foreign (F, Foreign)
@@ -15,7 +16,8 @@ import Halogen.HTML.Properties (IProp)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.Event.Event as E
 import Web.Event.EventTarget as ET
-import Effect.Timer as Timer
+import Data.Lens as Lens
+import Data.Lens (Lens')
 
 prop :: forall value r i. PropName value -> PropValue -> IProp r i
 prop = unsafeCoerce Property
@@ -145,3 +147,12 @@ eventListenerEventSourceWithOptionsMany eventTypes options target =
 
 styleVar :: String -> String -> String
 styleVar x y = x <> ": " <> y <> ";"
+
+setEfficiently :: forall state part . Eq part => Lens' state part -> part -> state -> state
+setEfficiently = setEfficientlyCustomEq (==)
+
+setEfficientlyCustomEq :: forall state part . (part -> part -> Boolean) -> Lens' state part -> part -> state -> state
+setEfficientlyCustomEq eq lens new state =
+  if eq (Lens.view lens state) new
+    then state
+    else Lens.set lens new state

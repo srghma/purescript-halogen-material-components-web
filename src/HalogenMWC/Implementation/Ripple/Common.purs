@@ -1,10 +1,12 @@
 module HalogenMWC.Implementation.Ripple.Common where
 
-import HalogenMWC.Implementation.Ripple.Calculations (FgTranslationCoordinates, MDCRipplePoint, fgTranslationCoordinatesToTranslateForUnbounded, getFgTranslationCoordinatesPonter, getNormalizedEventCoordsMouseEvent, getNormalizedEventCoordsTouchEvent, layoutInternal, updateCssVarsCommon, updateCssVarsUnbounded)
-import HalogenMWC.Implementation.Ripple.Constants (numbers, pointer_deactivation_event_types)
 import Protolude
 
+import Data.Lens.Record (prop) as Lens
 import Halogen as H
+import HalogenMWC.Implementation.Ripple.Calculations (FgTranslationCoordinates, MDCRipplePoint, fgTranslationCoordinatesToTranslateForUnbounded, getFgTranslationCoordinatesPonter, getNormalizedEventCoordsMouseEvent, getNormalizedEventCoordsTouchEvent, layoutInternal, updateCssVarsCommon, updateCssVarsUnbounded)
+import HalogenMWC.Implementation.Ripple.Constants (numbers, pointer_deactivation_event_types)
+import HalogenMWC.Utils (setEfficiently)
 import HalogenMWC.Utils as Utils
 import Web.DOM (Element)
 import Web.DOM.Document as Web.DOM.Document
@@ -68,11 +70,11 @@ initialRippleState =
   }
 
 
-setStateActivationStateEfficiently :: RippleState -> ActivationState -> RippleState
-setStateActivationStateEfficiently state new = if state.activationState == new then state else state { activationState = new }
+setStateActivationStateEfficiently :: ActivationState -> RippleState -> RippleState
+setStateActivationStateEfficiently = setEfficiently (Lens.prop (SProxy :: SProxy "activationState"))
 
-setStateFocusedEfficiently :: RippleState -> Boolean -> RippleState
-setStateFocusedEfficiently state new = if state.focused == new then state else state { focused = new }
+setStateFocusedEfficiently :: Boolean -> RippleState -> RippleState
+setStateFocusedEfficiently = setEfficiently (Lens.prop (SProxy :: SProxy "focused"))
 
 type GetNormalizedEventCoordsFn event =
   { event :: event
@@ -216,8 +218,8 @@ handleAction__Common
   rootElement
   =
   case _ of
-       Focus -> H.modify_ \state -> setStateFocusedEfficiently state true
-       Blur -> H.modify_ \state -> setStateFocusedEfficiently state false
+       Focus -> H.modify_ $ setStateFocusedEfficiently true
+       Blur -> H.modify_ $ setStateFocusedEfficiently false
 
        TouchActivate touchEvent -> activationLogic isDisabled isUnbounded rootElement getNormalizedEventCoordsTouchEvent touchEvent
        MouseActivate mouseEvent -> activationLogic isDisabled isUnbounded rootElement getNormalizedEventCoordsMouseEvent mouseEvent
@@ -229,11 +231,11 @@ handleAction__Common
 
           case state.activationState of
                ActivationState__Activated -> do
-                  H.modify_ \state' -> setStateActivationStateEfficiently state' ActivationState__Deactivated
+                  H.modify_ $ setStateActivationStateEfficiently ActivationState__Deactivated
 
                   -- TODO: how not to register if already registered?
                   void $ H.subscribe (Utils.mkTimeoutEvent DeactivationEnded numbers."FG_DEACTIVATION_MS")
                _ -> pure unit
 
-       DeactivationEnded -> H.modify_ \state' -> setStateActivationStateEfficiently state' ActivationState__Idle
+       DeactivationEnded -> H.modify_ $ setStateActivationStateEfficiently ActivationState__Idle
 

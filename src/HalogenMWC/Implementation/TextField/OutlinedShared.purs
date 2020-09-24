@@ -22,12 +22,13 @@ notchedOutlineTrailingElement = HH.span [ HP.class_ mdc_notched_outline__trailin
 
 outlinedClasses = [ mdc_text_field, mdc_text_field____outlined ]
 
-notchedOutlineElement label =
+notchedOutlineElement :: ∀ t19 t20 t38. { focused ∷ Boolean , label ∷ LabelConfig , required ∷ Boolean , shake ∷ Boolean , value ∷ String | t38 } → HH.HTML t20 t19
+notchedOutlineElement config =
   HH.span [ HP.class_ mdc_notched_outline ]
   ( Array.catMaybes
     [ Just notchedOutlineLeadingElement
-    , case label of
-           LabelConfig__With labelConfig -> Just $ labelWrapper [ labelElement labelConfig ]
+    , case config.label of
+           LabelConfig__With labelConfig -> Just $ labelWrapper [ labelElement config labelConfig ]
            LabelConfig__Without _ -> Nothing
     , Just notchedOutlineTrailingElement
     ]

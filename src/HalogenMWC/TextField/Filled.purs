@@ -12,6 +12,7 @@ import DOM.HTML.Indexed as I
 import DOM.HTML.Indexed.InputType (InputType(..))
 import Data.Array as Array
 import Data.Int as Int
+import Data.Lens.Record as Lens
 import Halogen (AttrName(..), ElemName(..), PropName(..))
 import Halogen as H
 import Halogen.HTML (IProp)
@@ -25,6 +26,7 @@ import HalogenMWC.Implementation.TextField.FilledShared (LineRippleState(..)) as
 import HalogenMWC.Implementation.TextField.Input (Config) as Export
 import HalogenMWC.Implementation.TextField.Input as TextField.Input
 import HalogenMWC.Implementation.TextField.Shared (LabelConfig(..)) as Export
+import HalogenMWC.Utils (setEfficiently, setEfficientlyCustomEq)
 import HalogenMWC.Utils as Utils
 import Record as Record
 import Record.Builder as Record.Builder
@@ -39,15 +41,11 @@ import Web.UIEvent.MouseEvent as Web.UIEvent.MouseEvent
 
 type Query = Const Void
 
-type ConfigManagedByComponentInternal r =
-  ( value :: String
-  | r )
-
-type Input = Record (TextField.Input.ConfigManagedByUser + ConfigManagedByComponentInternal + ())
+type Input = Record (TextField.Input.ConfigManagedByUser + ())
 
 type Message = Void
 
-type State = Record (TextField.Input.ConfigManagedByUser + TextField.Input.ConfigManagedByComponent + ConfigManagedByComponentInternal + ())
+type State = Record (TextField.Input.ConfigManagedByUser + TextField.Input.ConfigManagedByComponent + ())
 
 data Action
   = Action__Focus
@@ -82,6 +80,9 @@ defaultConfig { label, value } =
 
   , additionalClassesRoot:     []
   , additionalClassesInput:    []
+
+  , shake: false
+  , required: false
   }
 
 filled :: H.Component Query Input Message Aff
@@ -93,8 +94,7 @@ filled =
       }
     , render: \state ->
         HH.div_ $ TextField.Input.filled $ Record.Builder.build
-          ( Record.Builder.delete (SProxy :: SProxy "value") >>>
-            Record.Builder.union
+          ( Record.Builder.union
               { additionalAttributesRoot:
                   [ HE.onMouseDown Action__PointerDown__Mouse
                   , HE.onTouchStart Action__PointerDown__Touch
@@ -115,24 +115,21 @@ filled =
         }
       }
   where
-    setEfficientlyStateFocused :: Boolean -> _ -> _
-    setEfficientlyStateFocused new state =
-      if state.focused == new
-        then state
-        else state { focused = new }
+    setEfficientlyStateFocused :: Boolean -> State -> State
+    setEfficientlyStateFocused = setEfficiently (Lens.prop (SProxy :: SProxy "focused"))
 
-    setEfficientlyStateValue :: String -> _ -> _
-    setEfficientlyStateValue new state =
-      if state.value == new
-        then state
-        else state { value = new }
+    setEfficientlyStateValue :: String -> State -> State
+    setEfficientlyStateValue = setEfficiently (Lens.prop (SProxy :: SProxy "value"))
 
-    setEfficientlyStateLineRippleState :: FilledShared.LineRippleState -> _ -> _
-    setEfficientlyStateLineRippleState new state =
-      case new, state.lineRippleState of
-           FilledShared.LineRippleState__Idle, FilledShared.LineRippleState__Idle -> state
-           FilledShared.LineRippleState__Active _, FilledShared.LineRippleState__Active _ -> state -- probably animation already finished, no need to set new center point
-           _, _ -> state { lineRippleState = new }
+    setEfficientlyStateLineRippleState :: FilledShared.LineRippleState -> State -> State
+    setEfficientlyStateLineRippleState = setEfficientlyCustomEq
+      (\old new ->
+        case old, new of
+             FilledShared.LineRippleState__Idle, FilledShared.LineRippleState__Idle -> true
+             FilledShared.LineRippleState__Active _, FilledShared.LineRippleState__Active _ -> true -- probably animation already finished, no need to set new center point
+             _, _ -> false
+      )
+      (Lens.prop (SProxy :: SProxy "lineRippleState"))
 
     handlePointerDown :: Int -> H.HalogenM State Action ChildSlots Message Aff Unit
     handlePointerDown clientX = do

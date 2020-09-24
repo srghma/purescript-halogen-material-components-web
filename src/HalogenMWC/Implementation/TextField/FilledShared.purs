@@ -39,12 +39,13 @@ lineRippleElement =
 
 filledClasses = [ mdc_text_field, mdc_text_field____filled ]
 
-wrapInputElement { label, lineRippleState } inputElement =
+wrapInputElement :: ∀ t27 t28 t44. { focused ∷ Boolean , label ∷ LabelConfig , lineRippleState ∷ LineRippleState , required ∷ Boolean , shake ∷ Boolean , value ∷ String | t44 } → Array (HH.HTML t27 t28) → Array (HH.HTML t27 t28)
+wrapInputElement config inputElement =
   [ rippleElement ]
   <>
-  ( case label of
-         LabelConfig__With labelConfig -> [ labelElement labelConfig ]
+  ( case config.label of
+         LabelConfig__With labelConfig -> [ labelElement config labelConfig ]
          LabelConfig__Without _ -> []
   )
   <> inputElement <>
-  [ lineRippleElement lineRippleState ]
+  [ lineRippleElement config.lineRippleState ]
