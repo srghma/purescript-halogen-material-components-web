@@ -23,7 +23,13 @@ notchedOutlineTrailingElement = HH.span [ HP.class_ mdc_notched_outline__trailin
 outlinedClasses = [ mdc_text_field, mdc_text_field____outlined ]
 
 notchedOutlineElement config =
-  HH.span [ HP.class_ mdc_notched_outline ]
+  HH.span
+  [ HP.classes $ Array.catMaybes
+    [ Just mdc_notched_outline
+    , Just mdc_notched_outline____upgraded
+    , if shouldFloat config then Just mdc_notched_outline____notched else Nothing
+    ]
+  ]
   ( Array.catMaybes
     [ Just notchedOutlineLeadingElement
     , case config.label of

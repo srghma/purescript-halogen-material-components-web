@@ -33,7 +33,7 @@ lineRippleElement =
     xCoordinatePxRender :: Number -> String
     xCoordinatePxRender x = styleVar "transform-origin" (show x <> "px center")
 
-filledClasses = [ mdc_text_field, mdc_text_field____filled, mdc_text_field____focused ]
+filledClasses = [ mdc_text_field, mdc_text_field____filled ]
 
 wrapInputElement :: ∀ t27 t28 t44. { label ∷ LabelConfig , focusState ∷ FocusState , required ∷ Boolean , shake ∷ Boolean , value ∷ String | t44 } → Array (HH.HTML t27 t28) → Array (HH.HTML t27 t28)
 wrapInputElement config inputElement =

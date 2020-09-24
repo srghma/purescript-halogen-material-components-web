@@ -107,6 +107,9 @@ filled = HelperTextAndCharacterCounter.wrapRenderBoth \config ->
     ]
   )
 
+-- | wrapRenderBoth i c = Array.singleton (i c)
+-- | wrapRenderBoth = HelperTextAndCharacterCounter.wrapRenderBoth
+
 outlined :: forall w i . Config i -> Array (HH.HTML w i)
 outlined = HelperTextAndCharacterCounter.wrapRenderBoth \config ->
   HH.label

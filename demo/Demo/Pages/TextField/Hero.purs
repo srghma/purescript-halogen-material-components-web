@@ -71,7 +71,7 @@ component =
             unit
             TextField.Outlined.outlined
               ( TextField.Outlined.defaultConfig
-                { label: TextField.Outlined.LabelConfig__With { id: "hero-filled", labelText: "Standard outlined" }
+                { label: TextField.Outlined.LabelConfig__With { id: "hero-filled", labelText: "outlined" }
                 , value: state.outlinedValue
                 }
               )

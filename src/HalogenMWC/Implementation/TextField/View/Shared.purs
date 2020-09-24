@@ -59,16 +59,23 @@ isFocused =
        FocusState__Idle -> false
        _ -> true
 
+isDirty :: String -> Boolean
+isDirty x = x /= ""
+
+shouldFloat config = isFocused config.focusState || isDirty config.value
+
+labelClasses :: ∀ t21. { focusState ∷ FocusState , required ∷ Boolean , shake ∷ Boolean , value ∷ String | t21 } → Array ClassName
+labelClasses config =
+  Array.catMaybes
+    [ Just mdc_floating_label
+    , if shouldFloat config then Just mdc_floating_label____float_above else Nothing
+    , if config.required then Just mdc_floating_label____required else Nothing
+    , if config.shake then Just mdc_floating_label____shake else Nothing
+    ]
+
 labelElement config labelConfig =
-  let
-      isDirty = config.value /= ""
-  in HH.span
-    [ HP.classes $ Array.catMaybes
-      [ Just mdc_floating_label
-      , if isFocused config.focusState || isDirty then Just mdc_floating_label____float_above else Nothing
-      , if config.required then Just mdc_floating_label____required else Nothing
-      , if config.shake then Just mdc_floating_label____shake else Nothing
-      ]
+  HH.span
+    [ HP.classes $ labelClasses config
     , HP.id_ labelConfig.id
     ]
     [ HH.text labelConfig.labelText
