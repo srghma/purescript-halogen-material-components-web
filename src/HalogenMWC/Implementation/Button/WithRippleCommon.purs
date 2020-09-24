@@ -34,7 +34,7 @@ data Action
   | Click
 
 data Message
-  = Clicked
+  = Message__Clicked
 
 buttonRefLabel :: H.RefLabel
 buttonRefLabel = H.RefLabel "button"

@@ -42,7 +42,8 @@ type Query = Const Void
 
 type Input = Record (TextField.Input.ConfigManagedByUser + ())
 
-type Message = Void
+data Message
+  = Message__Input String
 
 type State = Record (TextField.Input.ConfigManagedByUser + TextField.Input.ConfigManagedByComponent + ())
 
@@ -52,6 +53,7 @@ data Action
   | Action__Input String
   | Action__PointerDown__Mouse MouseEvent
   | Action__PointerDown__Touch TouchEvent
+  | Action__Receive Input
 
 type ChildSlots = ()
 
@@ -84,6 +86,21 @@ defaultConfig { label, value } =
   , required: false
   }
 
+additionalAttributesRoot  :: Array (IProp I.HTMLlabel Action)
+additionalAttributesRoot =
+  [ HE.onMouseDown Action__PointerDown__Mouse
+  , HE.onTouchStart Action__PointerDown__Touch
+  ]
+
+additionalAttributesInput :: Array (IProp I.HTMLinput Action)
+additionalAttributesInput =
+  -- https://github.com/material-components/material-components-web/blob/a3212b2099765947f2a41d71af2cd95fcbca4b97/packages/mdc-textfield/foundation.ts#L151
+  [ HE.onFocus (const Action__Focus)
+  , HE.onBlur (const Action__Blur)
+  , HE.onValueInput Action__Input
+  , HP.ref inputRefLabel
+  ]
+
 filled :: H.Component Query Input Message Aff
 filled =
   H.mkComponent
@@ -93,23 +110,14 @@ filled =
     , render: \state ->
         trace { message: "render", state } $ const $ HH.div_ $ TextField.Input.filled $ Record.Builder.build
           ( Record.Builder.union
-              { additionalAttributesRoot:
-                  [ HE.onMouseDown Action__PointerDown__Mouse
-                  , HE.onTouchStart Action__PointerDown__Touch
-                  ]
-              , additionalAttributesInput:
-                  -- https://github.com/material-components/material-components-web/blob/a3212b2099765947f2a41d71af2cd95fcbca4b97/packages/mdc-textfield/foundation.ts#L151
-                  [ HE.onFocus (const Action__Focus)
-                  , HE.onBlur (const Action__Blur)
-                  , HE.onValueInput Action__Input
-                  , HP.ref inputRefLabel
-                  , HP.value state.value
-                  ]
+              { additionalAttributesRoot
+              , additionalAttributesInput
               }
           )
           state
     , eval: H.mkEval $ H.defaultEval
         { handleAction = handleAction
+        , receive = \input -> Just $ Action__Receive input
         }
       }
   where
@@ -145,9 +153,12 @@ filled =
     handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
     handleAction action =
       case spy "action" action of
+            Action__Receive newInput -> H.modify_ \state ->
+              setEfficiently (Lens.prop (SProxy :: SProxy "value")) newInput.value state -- TODO: handle all
+
             Action__Focus -> H.modify_ $ setEfficientlyStateFocusState (FocusState__Active Nothing)
             Action__Blur -> H.modify_ $ setEfficientlyStateFocusState FocusState__Idle
-            Action__Input input -> H.modify_ $ setEfficientlyStateValue input
+            Action__Input input -> H.raise $ Message__Input input
 
             -- only for filled
             Action__PointerDown__Mouse mouseEvent -> handlePointerDown (Just $ Web.UIEvent.MouseEvent.clientX mouseEvent)

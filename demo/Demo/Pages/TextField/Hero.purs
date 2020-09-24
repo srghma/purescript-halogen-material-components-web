@@ -26,10 +26,10 @@ type Input = Unit
 type Message = Void
 
 data Action
-  = ChangeFilled String
+  = MessageFromFilled TextField.Filled.Message
 
 type ChildSlots =
-  ( filled :: H.Slot (Const Void) Void Unit
+  ( filled :: H.Slot TextField.Filled.Query TextField.Filled.Message Unit
   )
 
 type State =
@@ -48,7 +48,7 @@ component =
         ]
         [ HH.div
           [ HP.class_ Css.styles.textFieldContainerHero ]
-          [ HH.slot_
+          [ HH.slot
             (SProxy :: SProxy "filled")
             unit
             TextField.Filled.filled
@@ -57,6 +57,7 @@ component =
                 , value: state.filledValue
                 }
               )
+            MessageFromFilled
           ]
         -- | , HH.div [ HP.class_ Css.styles.textFieldContainerHero ]
         -- |     [ TextField.outlined
@@ -74,4 +75,4 @@ component =
       handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
       handleAction =
         case _ of
-             ChangeFilled new -> H.modify_ $ setEfficiently (Lens.prop (SProxy :: SProxy "filledValue")) new
+             MessageFromFilled (TextField.Filled.Message__Input newValue) -> H.modify_ $ setEfficiently (Lens.prop (SProxy :: SProxy "filledValue")) newValue

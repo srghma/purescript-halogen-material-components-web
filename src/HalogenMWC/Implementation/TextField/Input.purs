@@ -68,6 +68,7 @@ inputElement config =
     [ HP.classes $ [ mdc_text_field__input ] <> config.additionalClassesInput
     , HP.type_ config.type_
     , HP.disabled config.disabled
+    , HP.value config.value
     ]
     <> Array.catMaybes
       [ map (HP.attr (AttrName "minLength") <<< show) config.minLength

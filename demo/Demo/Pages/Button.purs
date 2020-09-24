@@ -191,7 +191,7 @@ focusButton =
     , content: [ HH.text "Focus with ripple" ]
     }
     (case _ of
-          Button.Clicked -> WithFocus.Focus "focus-target-1"
+          Button.Message__Clicked -> WithFocus.Focus "focus-target-1"
     )
 
   , HH.text "\x00A0"

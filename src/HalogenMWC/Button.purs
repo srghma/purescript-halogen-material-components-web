@@ -81,4 +81,4 @@ button =
             state <- H.get
 
             liftRippleHandleAction state $ Ripple.handleAction state.input.config.disabled rootElement rippleAction
-          Click -> H.raise Clicked
+          Click -> H.raise Message__Clicked

@@ -80,4 +80,4 @@ buttonLink =
             state <- H.get
 
             liftRippleHandleAction state $ Ripple.handleAction disabled rootElement rippleAction
-          Click -> H.raise Clicked
+          Click -> H.raise Message__Clicked
