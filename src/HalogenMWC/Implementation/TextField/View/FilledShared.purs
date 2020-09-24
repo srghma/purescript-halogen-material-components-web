@@ -1,6 +1,6 @@
-module HalogenMWC.Implementation.TextField.FilledShared where
+module HalogenMWC.Implementation.TextField.View.FilledShared where
 
-import HalogenMWC.Implementation.TextField.Shared
+import HalogenMWC.Implementation.TextField.View.Shared
 import Material.Classes.Textfield
 import Protolude
 
@@ -11,7 +11,7 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as HP.ARIA
 import HalogenMWC.Utils (styleVar)
-import HalogenMWC.Implementation.TextField.Shared
+import HalogenMWC.Implementation.TextField.View.Shared
 
 rippleElement = HH.span [ HP.class_ mdc_text_field__ripple ] []
 

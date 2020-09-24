@@ -1,6 +1,6 @@
-module HalogenMWC.Implementation.TextField.HelperTextAndCharacterCounter where
+module HalogenMWC.Implementation.TextField.View.HelperTextAndCharacterCounter where
 
-import HalogenMWC.Implementation.TextField.Shared
+import HalogenMWC.Implementation.TextField.View.Shared
 import Material.Classes.Textfield
 import Protolude
 
@@ -12,13 +12,13 @@ import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as HP.ARIA
-import HalogenMWC.Implementation.TextField.CharacterCounter as CharacterCounter
-import HalogenMWC.Implementation.TextField.CharacterCounter (CharacterCounterConfig)
-import HalogenMWC.Implementation.TextField.HelperText (HelperTextConfig)
-import HalogenMWC.Implementation.TextField.HelperText as HelperText
-import HalogenMWC.Implementation.TextField.FilledShared as FilledShared
-import HalogenMWC.Implementation.TextField.OutlinedShared as OutlinedShared
-import HalogenMWC.Implementation.TextField.HelperLine as HelperLine
+import HalogenMWC.Implementation.TextField.View.CharacterCounter as CharacterCounter
+import HalogenMWC.Implementation.TextField.View.CharacterCounter (CharacterCounterConfig)
+import HalogenMWC.Implementation.TextField.View.HelperText (HelperTextConfig)
+import HalogenMWC.Implementation.TextField.View.HelperText as HelperText
+import HalogenMWC.Implementation.TextField.View.FilledShared as FilledShared
+import HalogenMWC.Implementation.TextField.View.OutlinedShared as OutlinedShared
+import HalogenMWC.Implementation.TextField.View.HelperLine as HelperLine
 
 
 renderBoth

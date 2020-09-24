@@ -1,4 +1,4 @@
-module HalogenMWC.Implementation.TextField.OutlinedShared where
+module HalogenMWC.Implementation.TextField.View.OutlinedShared where
 
 import Material.Classes.Textfield
 import Protolude
@@ -9,7 +9,7 @@ import Halogen (ClassName)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as HP.ARIA
-import HalogenMWC.Implementation.TextField.Shared
+import HalogenMWC.Implementation.TextField.View.Shared
 
 labelWrapper =
   HH.span

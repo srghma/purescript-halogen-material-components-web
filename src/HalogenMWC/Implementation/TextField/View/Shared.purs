@@ -1,4 +1,4 @@
-module HalogenMWC.Implementation.TextField.Shared where
+module HalogenMWC.Implementation.TextField.View.Shared where
 
 import Material.Classes.Textfield
 import Protolude

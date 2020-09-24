@@ -1,4 +1,4 @@
-module HalogenMWC.Implementation.TextField.HelperText where
+module HalogenMWC.Implementation.TextField.View.HelperText where
 
 import Material.Classes.Textfield
 import Protolude
@@ -9,9 +9,9 @@ import Halogen (ClassName)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as HP.ARIA
-import HalogenMWC.Implementation.TextField.Shared
-import HalogenMWC.Implementation.TextField.FilledShared as FilledShared
-import HalogenMWC.Implementation.TextField.OutlinedShared as OutlinedShared
+import HalogenMWC.Implementation.TextField.View.Shared
+import HalogenMWC.Implementation.TextField.View.FilledShared as FilledShared
+import HalogenMWC.Implementation.TextField.View.OutlinedShared as OutlinedShared
 
 type HelperTextConfig =
   { id :: String
