@@ -22,7 +22,6 @@ notchedOutlineTrailingElement = HH.span [ HP.class_ mdc_notched_outline__trailin
 
 outlinedClasses = [ mdc_text_field, mdc_text_field____outlined ]
 
-notchedOutlineElement :: ∀ t19 t20 t38. { focused ∷ Boolean , label ∷ LabelConfig , required ∷ Boolean , shake ∷ Boolean , value ∷ String | t38 } → HH.HTML t20 t19
 notchedOutlineElement config =
   HH.span [ HP.class_ mdc_notched_outline ]
   ( Array.catMaybes

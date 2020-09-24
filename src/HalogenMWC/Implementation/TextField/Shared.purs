@@ -10,6 +10,13 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as HP.ARIA
 
+-- https://github.com/material-components/material-components-web/blob/a3212b2099765947f2a41d71af2cd95fcbca4b97/packages/mdc-line-ripple/foundation.ts#L68
+-- | NOTE: only for filled, not outlined
+data FocusState
+  = FocusState__Idle
+  | FocusState__Active (Maybe Number) -- active class is added, deactivating is removed
+  -- | | FocusState__Deactivating -- show active and deactivating classes, start listening for transition end, then go to idle
+
 data LabelConfig
   = LabelConfig__With
     { id :: String
@@ -22,7 +29,7 @@ rootLabelClasses = \config ->
   Array.catMaybes
   [ noLabelClass       config.label
   , disabledClass      config.disabled
-  , focusedClass       config.focused
+  , focusedClass       (isFocused config.focusState)
   , fullwidthClass     config.fullwidth
   , invalidClass       config.invalid
   -- | , labelFloatingClass config.labelFloating
@@ -47,16 +54,22 @@ inputARIALabelProp =
     LabelConfig__Without labelText -> [ HP.ARIA.label labelText ]
     LabelConfig__With labelConfig -> [ HP.ARIA.labelledBy labelConfig.id ]
 
-labelElement :: ∀ t33 t34 t55 t64. { focused ∷ Boolean , required ∷ Boolean , shake ∷ Boolean , value ∷ String | t55 } → { id ∷ String , labelText ∷ String | t64 } → HH.HTML t34 t33
+isFocused =
+  case _ of
+       FocusState__Idle -> false
+       _ -> true
+
 labelElement config labelConfig =
-  HH.span
-  [ HP.classes $ Array.catMaybes
-    [ Just mdc_floating_label
-    , if config.focused || config.value /= "" then Just mdc_floating_label____float_above else Nothing
-    , if config.required then Just mdc_floating_label____required else Nothing
-    , if config.shake then Just mdc_floating_label____shake else Nothing
+  let
+      isDirty = config.value /= ""
+  in HH.span
+    [ HP.classes $ Array.catMaybes
+      [ Just mdc_floating_label
+      , if isFocused config.focusState || isDirty then Just mdc_floating_label____float_above else Nothing
+      , if config.required then Just mdc_floating_label____required else Nothing
+      , if config.shake then Just mdc_floating_label____shake else Nothing
+      ]
+    , HP.id_ labelConfig.id
     ]
-  , HP.id_ labelConfig.id
-  ]
-  [ HH.text labelConfig.labelText
-  ]
+    [ HH.text labelConfig.labelText
+    ]

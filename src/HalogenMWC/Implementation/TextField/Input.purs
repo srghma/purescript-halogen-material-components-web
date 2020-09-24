@@ -48,8 +48,7 @@ type ConfigManagedByUser r =
   | r )
 
 type ConfigManagedByComponent r =
-  ( focused                   :: Boolean
-  , lineRippleState           :: FilledShared.LineRippleState
+  ( focusState           :: FocusState
   | r )
 
 type ConfigAddedByComponent i r =

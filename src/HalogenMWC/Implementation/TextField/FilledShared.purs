@@ -11,27 +11,23 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as HP.ARIA
 import HalogenMWC.Utils (styleVar)
+import HalogenMWC.Implementation.TextField.Shared
 
 rippleElement = HH.span [ HP.class_ mdc_text_field__ripple ] []
 
--- https://github.com/material-components/material-components-web/blob/a3212b2099765947f2a41d71af2cd95fcbca4b97/packages/mdc-line-ripple/foundation.ts#L68
--- | NOTE: only for filled, not outlined
-data LineRippleState
-  = LineRippleState__Idle
-  | LineRippleState__Active Number -- active class is added, deactivating is removed
-  -- | | LineRippleState__Deactivating -- show active and deactivating classes, start listening for transition end, then go to idle
-
 lineRippleElement =
   case _ of
-       LineRippleState__Idle ->
+       FocusState__Idle ->
          HH.span
          [HP.class_ mdc_line_ripple]
          []
-       LineRippleState__Active xCoordinatePx ->
+       FocusState__Active maybeXCoordinatePx ->
          HH.span
-         [ HP.classes [ mdc_line_ripple, mdc_line_ripple____active ]
-         , HP.style $ xCoordinatePxRender xCoordinatePx
-         ]
+         ( Array.catMaybes $
+           [ Just $ HP.classes [ mdc_line_ripple, mdc_line_ripple____active ]
+           , map (HP.style <<< xCoordinatePxRender) maybeXCoordinatePx
+           ]
+         )
          []
   where
     xCoordinatePxRender :: Number -> String
@@ -39,7 +35,7 @@ lineRippleElement =
 
 filledClasses = [ mdc_text_field, mdc_text_field____filled ]
 
-wrapInputElement :: ∀ t27 t28 t44. { focused ∷ Boolean , label ∷ LabelConfig , lineRippleState ∷ LineRippleState , required ∷ Boolean , shake ∷ Boolean , value ∷ String | t44 } → Array (HH.HTML t27 t28) → Array (HH.HTML t27 t28)
+wrapInputElement :: ∀ t27 t28 t44. { label ∷ LabelConfig , focusState ∷ FocusState , required ∷ Boolean , shake ∷ Boolean , value ∷ String | t44 } → Array (HH.HTML t27 t28) → Array (HH.HTML t27 t28)
 wrapInputElement config inputElement =
   [ rippleElement ]
   <>
@@ -48,4 +44,4 @@ wrapInputElement config inputElement =
          LabelConfig__Without _ -> []
   )
   <> inputElement <>
-  [ lineRippleElement config.lineRippleState ]
+  [ lineRippleElement config.focusState ]

@@ -21,8 +21,7 @@ import Halogen.HTML.Core (ClassName)
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.Query.HalogenM as Halogen.Query.HalogenM
-import HalogenMWC.Implementation.TextField.FilledShared (LineRippleState(..))
-import HalogenMWC.Implementation.TextField.FilledShared (LineRippleState(..)) as FilledShared
+import HalogenMWC.Implementation.TextField.Shared (FocusState(..))
 import HalogenMWC.Implementation.TextField.Input (Config) as Export
 import HalogenMWC.Implementation.TextField.Input as TextField.Input
 import HalogenMWC.Implementation.TextField.Shared (LabelConfig(..)) as Export
@@ -89,11 +88,10 @@ filled :: H.Component Query Input Message Aff
 filled =
   H.mkComponent
     { initialState: \input -> Record.union input
-      { focused: false
-      , lineRippleState: FilledShared.LineRippleState__Idle
+      { focusState: FocusState__Idle
       }
     , render: \state ->
-        HH.div_ $ TextField.Input.filled $ Record.Builder.build
+        trace { message: "render", state } $ const $ HH.div_ $ TextField.Input.filled $ Record.Builder.build
           ( Record.Builder.union
               { additionalAttributesRoot:
                   [ HE.onMouseDown Action__PointerDown__Mouse
@@ -115,45 +113,45 @@ filled =
         }
       }
   where
-    setEfficientlyStateFocused :: Boolean -> State -> State
-    setEfficientlyStateFocused = setEfficiently (Lens.prop (SProxy :: SProxy "focused"))
-
     setEfficientlyStateValue :: String -> State -> State
     setEfficientlyStateValue = setEfficiently (Lens.prop (SProxy :: SProxy "value"))
 
-    setEfficientlyStateLineRippleState :: FilledShared.LineRippleState -> State -> State
-    setEfficientlyStateLineRippleState = setEfficientlyCustomEq
+    setEfficientlyStateFocusState :: FocusState -> State -> State
+    setEfficientlyStateFocusState = setEfficientlyCustomEq
       (\old new ->
         case old, new of
-             FilledShared.LineRippleState__Idle, FilledShared.LineRippleState__Idle -> true
-             FilledShared.LineRippleState__Active _, FilledShared.LineRippleState__Active _ -> true -- probably animation already finished, no need to set new center point
+             FocusState__Idle, FocusState__Idle -> true
+             FocusState__Active _, FocusState__Active _ -> true -- probably animation already finished, no need to set new center point
              _, _ -> false
       )
-      (Lens.prop (SProxy :: SProxy "lineRippleState"))
+      (Lens.prop (SProxy :: SProxy "focusState"))
 
-    handlePointerDown :: Int -> H.HalogenM State Action ChildSlots Message Aff Unit
-    handlePointerDown clientX = do
+    handlePointerDown :: Maybe Int -> H.HalogenM State Action ChildSlots Message Aff Unit
+    handlePointerDown mclientX = do
       state <- H.get
 
       if state.disabled then pure unit else
-        H.getHTMLElementRef inputRefLabel >>= traverse_ \(inputElement :: HTMLElement) -> do
-           (inputElementDomRect :: Web.HTML.HTMLElement.DOMRect) <- H.liftEffect $ Web.HTML.HTMLElement.getBoundingClientRect inputElement
-           let normalizedX = Int.toNumber clientX - inputElementDomRect.left
-
-           H.modify_ $
-             setEfficientlyStateLineRippleState (FilledShared.LineRippleState__Active normalizedX)
-             >>> setEfficientlyStateFocused true
+        H.getHTMLElementRef inputRefLabel >>= traverse_ \(inputElement :: HTMLElement) ->
+           case mclientX of
+                -- TODO:
+                -- the transform-origin doesn't work, when on span.mdc-line-ripple,
+                -- but works when on span.mdc-line-ripple::after
+                Nothing -> H.modify_ $ setEfficientlyStateFocusState (FocusState__Active Nothing)
+                Just clientX -> do
+                  (inputElementDomRect :: Web.HTML.HTMLElement.DOMRect) <- H.liftEffect $ Web.HTML.HTMLElement.getBoundingClientRect inputElement
+                  let normalizedX = Int.toNumber clientX - inputElementDomRect.left
+                  H.modify_ $ setEfficientlyStateFocusState (FocusState__Active (Just normalizedX))
 
     handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
-    handleAction =
-      case _ of
-            Action__Focus -> H.modify_ $ setEfficientlyStateFocused true
-            Action__Blur -> H.modify_ $ setEfficientlyStateFocused false
+    handleAction action =
+      case spy "action" action of
+            Action__Focus -> H.modify_ $ setEfficientlyStateFocusState (FocusState__Active Nothing)
+            Action__Blur -> H.modify_ $ setEfficientlyStateFocusState FocusState__Idle
             Action__Input input -> H.modify_ $ setEfficientlyStateValue input
 
             -- only for filled
-            Action__PointerDown__Mouse mouseEvent -> handlePointerDown (Web.UIEvent.MouseEvent.clientX mouseEvent)
+            Action__PointerDown__Mouse mouseEvent -> handlePointerDown (Just $ Web.UIEvent.MouseEvent.clientX mouseEvent)
             Action__PointerDown__Touch touchEvent -> do
               case Web.TouchEvent.TouchList.item 0 $ Web.TouchEvent.TouchEvent.changedTouches touchEvent of
-                   Just touchEventItem -> handlePointerDown (Web.TouchEvent.Touch.clientX touchEventItem)
-                   _ -> pure unit
+                   Just touchEventItem -> handlePointerDown (Just $ Web.TouchEvent.Touch.clientX touchEventItem)
+                   _ -> handlePointerDown Nothing
