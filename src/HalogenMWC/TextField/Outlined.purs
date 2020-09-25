@@ -21,7 +21,7 @@ import Halogen.HTML.Core (ClassName)
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.Query.HalogenM as Halogen.Query.HalogenM
-import HalogenMWC.Implementation.TextField.View.Shared (FocusState(..))
+import HalogenMWC.Implementation.TextField.View.Shared (ActivationState(..))
 import HalogenMWC.Implementation.TextField.View.Input (Config) as Export
 import HalogenMWC.Implementation.TextField.View.Input as TextField.Input
 import HalogenMWC.Implementation.TextField.View.Shared (LabelConfig(..)) as Export
@@ -44,7 +44,7 @@ outlined :: H.Component Query Input Message Aff
 outlined =
   H.mkComponent
     { initialState: \input -> Record.union input
-      { focusState: FocusState__Idle
+      { activationState: ActivationState__Idle
       }
     , render: \state -> trace { message: "render outlined", state } $ const $ HH.div_ $ TextField.Input.outlined $ Record.union state additionalAttributes
     , eval: H.mkEval $ H.defaultEval

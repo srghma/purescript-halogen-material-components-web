@@ -45,10 +45,10 @@ component =
   H.mkComponent
     { initialState: \_ ->
       { filledValue: "prefilled"
-      , outlinedValue: ""
+      , outlinedValue: "asdf"
       }
     , render: \state ->
-        HH.div
+        trace { message: "render root", state } $ const $ HH.div
         [ HP.class_ Css.styles.textFieldContainerHeroRoot
         ]
         [ HH.div
@@ -71,7 +71,7 @@ component =
             unit
             TextField.Outlined.outlined
               ( TextField.Outlined.defaultConfig
-                { label: TextField.Outlined.LabelConfig__With { id: "hero-filled", labelText: "outlined" }
+                { label: TextField.Outlined.LabelConfig__With { id: "hero-outlined", labelText: "outlined" }
                 , value: state.outlinedValue
                 }
               )

@@ -10,13 +10,6 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as HP.ARIA
 
--- https://github.com/material-components/material-components-web/blob/a3212b2099765947f2a41d71af2cd95fcbca4b97/packages/mdc-line-ripple/foundation.ts#L68
--- | NOTE: only for filled, not outlined
-data FocusState
-  = FocusState__Idle
-  | FocusState__Active (Maybe Number) -- active class is added, deactivating is removed
-  -- | | FocusState__Deactivating -- show active and deactivating classes, start listening for transition end, then go to idle
-
 data LabelConfig
   = LabelConfig__With
     { id :: String
@@ -25,11 +18,11 @@ data LabelConfig
   | LabelConfig__Without
     String -- labelText in props
 
-rootLabelClasses = \config ->
+rootLabelClasses = \isFocused config ->
   Array.catMaybes
   [ noLabelClass       config.label
   , disabledClass      config.disabled
-  , focusedClass       (isFocused config.focusState)
+  , focusedClass       (isFocused config.activationState)
   , fullwidthClass     config.fullwidth
   , invalidClass       config.invalid
   -- | , labelFloatingClass config.labelFloating
@@ -54,28 +47,23 @@ inputARIALabelProp =
     LabelConfig__Without labelText -> [ HP.ARIA.label labelText ]
     LabelConfig__With labelConfig -> [ HP.ARIA.labelledBy labelConfig.id ]
 
-isFocused =
-  case _ of
-       FocusState__Idle -> false
-       _ -> true
-
 isDirty :: String -> Boolean
 isDirty x = x /= ""
 
-shouldFloat config = isFocused config.focusState || isDirty config.value
+shouldFloat isActive config = isActive config.activationState || isDirty config.value
 
-labelClasses :: ∀ t21. { focusState ∷ FocusState , required ∷ Boolean , shake ∷ Boolean , value ∷ String | t21 } → Array ClassName
-labelClasses config =
+labelClasses :: ∀ t21 activationState. (activationState -> Boolean) -> { activationState ∷ activationState , required ∷ Boolean , shake ∷ Boolean , value ∷ String | t21 } → Array ClassName
+labelClasses isActive = \config ->
   Array.catMaybes
     [ Just mdc_floating_label
-    , if shouldFloat config then Just mdc_floating_label____float_above else Nothing
+    , if shouldFloat isActive config then Just mdc_floating_label____float_above else Nothing
     , if config.required then Just mdc_floating_label____required else Nothing
     , if config.shake then Just mdc_floating_label____shake else Nothing
     ]
 
-labelElement config labelConfig =
+labelElement isActive config labelConfig =
   HH.span
-    [ HP.classes $ labelClasses config
+    [ HP.classes $ labelClasses isActive config
     , HP.id_ labelConfig.id
     ]
     [ HH.text labelConfig.labelText

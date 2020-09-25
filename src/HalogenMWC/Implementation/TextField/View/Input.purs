@@ -21,6 +21,12 @@ import HalogenMWC.Implementation.TextField.View.HelperText as HelperText
 import HalogenMWC.Implementation.TextField.View.HelperTextAndCharacterCounter as HelperTextAndCharacterCounter
 import HalogenMWC.Implementation.TextField.View.OutlinedShared as OutlinedShared
 
+type ConfigAddedByComponentOnRender i r =
+  ( additionalAttributesRoot  :: Array (IProp I.HTMLlabel i)
+  , additionalAttributesInput :: Array (IProp I.HTMLinput i)
+  | r
+  )
+
 type ConfigManagedByUser r =
   ( label       :: LabelConfig
   , placeholder :: Maybe String
@@ -45,22 +51,21 @@ type ConfigManagedByUser r =
   , value :: String
   , shake :: Boolean
   , required :: Boolean
-  | r )
+  | r
+  )
 
-type ConfigManagedByComponent r =
-  ( focusState           :: FocusState
-  | r )
+type ConfigManagedByComponent activationState r =
+  ( activationState :: activationState
+  | r
+  )
 
-type ConfigAddedByComponent i r =
-  ( additionalAttributesRoot  :: Array (IProp I.HTMLlabel i)
-  , additionalAttributesInput :: Array (IProp I.HTMLinput i)
-  | r )
+type ConfigFilled i = Record (ConfigManagedByUser + ConfigManagedByComponent FilledShared.ActivationState + ConfigAddedByComponentOnRender i + ())
 
-type Config i = Record (ConfigManagedByUser + ConfigManagedByComponent + ConfigAddedByComponent i + ())
+type ConfigOutlined i = Record (ConfigManagedByUser + ConfigManagedByComponent OutlinedShared.ActivationState + ConfigAddedByComponentOnRender i + ())
 
 inputElement
-  :: ∀ i w
-  . Config i
+  :: ∀ i w activationState
+  . Record (ConfigManagedByUser + ConfigManagedByComponent activationState + ConfigAddedByComponentOnRender i + ())
   → HH.HTML w i
 inputElement config =
   HH.input
@@ -93,33 +98,36 @@ maybeSuffixElement = map \s -> suffixElement [ HH.text s ]
 
 -------------------------
 
-filled :: forall w i . Config i -> Array (HH.HTML w i)
-filled = HelperTextAndCharacterCounter.wrapRenderBoth \config ->
-  HH.label
-  ( [ HP.classes $ FilledShared.filledClasses <> rootLabelClasses config <> config.additionalClassesRoot
-    ] <> config.additionalAttributesRoot
-  )
-  ( FilledShared.wrapInputElement config $
-    Array.catMaybes
-    [ maybePrefixElement config.prefix
-    , Just $ inputElement config
-    , maybeSuffixElement config.suffix
-    ]
-  )
+filled :: forall w i . ConfigFilled i -> Array (HH.HTML w i)
+filled = HelperTextAndCharacterCounter.wrapRenderBoth renderInternal
+  where
+    renderInternal :: ConfigFilled i -> HH.HTML w i
+    renderInternal = \config ->
+      HH.label
+      ( [ HP.classes $ FilledShared.filledClasses <> rootLabelClasses FilledShared.isFocused config <> config.additionalClassesRoot
+        ] <> config.additionalAttributesRoot
+      )
+      ( FilledShared.wrapInputElement config $
+        Array.catMaybes
+        [ maybePrefixElement config.prefix
+        , Just $ inputElement config
+        , maybeSuffixElement config.suffix
+        ]
+      )
 
--- | wrapRenderBoth i c = Array.singleton (i c)
--- | wrapRenderBoth = HelperTextAndCharacterCounter.wrapRenderBoth
-
-outlined :: forall w i . Config i -> Array (HH.HTML w i)
-outlined = HelperTextAndCharacterCounter.wrapRenderBoth \config ->
-  HH.label
-  ( [ HP.classes $ OutlinedShared.outlinedClasses <> rootLabelClasses config <> config.additionalClassesRoot
-    ] <> config.additionalAttributesRoot
-  )
-  ( Array.catMaybes
-    [ maybePrefixElement config.prefix
-    , Just $ inputElement config
-    , maybeSuffixElement config.suffix
-    , Just $ OutlinedShared.notchedOutlineElement config
-    ]
-  )
+outlined :: forall w i . ConfigOutlined i -> Array (HH.HTML w i)
+outlined = HelperTextAndCharacterCounter.wrapRenderBoth renderInternal
+  where
+    renderInternal :: ConfigOutlined i -> HH.HTML w i
+    renderInternal = \config ->
+      HH.label
+      ( [ HP.classes $ OutlinedShared.outlinedClasses <> rootLabelClasses OutlinedShared.isFocused config <> config.additionalClassesRoot
+        ] <> config.additionalAttributesRoot
+      )
+      ( Array.catMaybes
+        [ maybePrefixElement config.prefix
+        , Just $ inputElement config
+        , maybeSuffixElement config.suffix
+        , Just $ OutlinedShared.notchedOutlineElement config
+        ]
+      )
