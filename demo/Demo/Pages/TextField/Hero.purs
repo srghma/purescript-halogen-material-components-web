@@ -13,8 +13,6 @@ import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import HalogenMWC.Button as Button
-import HalogenMWC.HelperText as HelperText
-import HalogenMWC.TextArea as TextArea
 import HalogenMWC.TextField.Filled as TextField.Filled
 import HalogenMWC.TextField.Outlined as TextField.Outlined
 import HalogenMWC.Utils (setEfficiently)
