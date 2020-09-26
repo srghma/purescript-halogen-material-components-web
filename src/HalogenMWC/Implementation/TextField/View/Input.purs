@@ -8,6 +8,7 @@ import DOM.HTML.Indexed (HTMLinput)
 import DOM.HTML.Indexed as I
 import DOM.HTML.Indexed.InputType (InputType(..))
 import Data.Array as Array
+import Data.String as String
 import Halogen (AttrName(..), ClassName)
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
@@ -54,21 +55,22 @@ type ConfigManagedByUser r =
   , value :: String
   , shake :: Boolean
   , required :: Boolean
+  , endAligned :: Boolean
+  , ltrText :: Boolean
+
   | r
   )
 
-type ConfigManagedByComponent activationState r =
-  ( activationState :: activationState
+type ConfigManagedByComponent r =
+  ( focused :: Boolean
   | r
   )
 
-type ConfigFilled i = Record (ConfigManagedByUser + ConfigManagedByComponent FilledShared.ActivationState + ConfigAddedByComponentOnRender i + ())
-
-type ConfigOutlined i = Record (ConfigManagedByUser + ConfigManagedByComponent OutlinedShared.ActivationState + ConfigAddedByComponentOnRender i + ())
+type Config i = Record (ConfigManagedByUser + ConfigManagedByComponent + ConfigAddedByComponentOnRender i + ())
 
 inputElement
-  :: ∀ i w activationState
-  . Record (ConfigManagedByUser + ConfigManagedByComponent activationState + ConfigAddedByComponentOnRender i + ())
+  :: ∀ i w
+  . Record (ConfigManagedByUser + ConfigManagedByComponent + ConfigAddedByComponentOnRender i + ())
   → HH.HTML w i
 inputElement config =
   HH.input
@@ -80,7 +82,11 @@ inputElement config =
     ]
     <> Array.catMaybes
       [ map (HP.attr (AttrName "minLength") <<< show) config.minLength
-      , map (HP.attr (AttrName "maxLength") <<< show <<< _.max) config.characterCounter
+      , map (HP.attr (AttrName "maxLength") <<< show) $
+        case config.characterCounterOrMaxLength of
+             CharacterCounterOrMaxLength__Only_MaxLength int -> Just int
+             CharacterCounterOrMaxLength__Enabled int -> Just int
+             _ -> Nothing
       ]
     <> inputARIALabelProp config.label
     <> HelperText.maybeInputProps config.helperText
@@ -101,69 +107,104 @@ maybeSuffixElement = map \s -> suffixElement [ HH.text s ]
 
 -------------------------
 
-filled :: forall w i . ConfigFilled i -> Array (HH.HTML w i)
-filled = HelperTextAndCharacterCounter.wrapRenderBoth renderInternal
+configToRenderBoth
+  :: forall i w
+   . Config i
+  -> { helperText       :: Maybe HelperTextConfig
+     , characterCounter :: Maybe CharacterCounterConfig
+     }
+configToRenderBoth config =
+  { helperText: config.helperText
+  , characterCounter:
+      case config.characterCounterOrMaxLength of
+           CharacterCounterOrMaxLength__Enabled max ->
+             Just
+             { value: String.length config.value
+             , max
+             }
+           _ -> Nothing
+  }
+
+renderInternalAndBoth renderInternal = \config -> [ renderInternal config ] <> HelperTextAndCharacterCounter.renderBoth (configToRenderBoth config)
+
+filled :: forall w i . Config i -> Array (HH.HTML w i)
+filled = renderInternalAndBoth renderInternal
   where
-    renderInternal :: ConfigFilled i -> HH.HTML w i
+    renderInternal :: Config i -> HH.HTML w i
     renderInternal = \config ->
+      let
+        labelFloating = config.focused || isDirty config.value
+      in
       HH.label
       ( [ HP.classes $
-          textFieldLabelClasses config
-          { disabled:       config.disabled
-          , end_aligned:    config.endAligned
-          , filled:         true
-          , focused:        config.focused
-          , fullwidth:      config.fullwidth
-          , invalid:        config.invalid
-          , label_floating: config.focused || isDirty config.value
-          , ltr_text:       config.ltrText
-          , label:          config.label
-          , outlined:       false
-          , textarea:       false
+          textFieldLabelClasses
+          { disabled:      config.disabled
+          , endAligned:    config.endAligned
+          , filled:        true
+          , focused:       config.focused
+          , fullwidth:     config.fullwidth
+          , invalid:       config.invalid
+          , labelFloating
+          , ltrText:       config.ltrText
+          , noLabel:       isNoLabel config.label
+          , outlined:      false
+          , textarea:      false
           }
           <> config.additionalClassesRoot
         ] <> config.additionalAttributesRoot
       )
-      ( FilledShared.wrapInputElement config $
-        Array.catMaybes
-        [ maybePrefixElement config.prefix
-        , Just $ inputElement config
-        , maybeSuffixElement config.suffix
-        ]
+      ( FilledShared.wrapInputElement
+        { floatAbove: labelFloating
+        , focused:    config.focused
+        , label:      config.label
+        , required:   config.required
+        , shake:      config.shake
+        }
+        ( Array.catMaybes
+          [ maybePrefixElement config.prefix
+          , Just $ inputElement config
+          , maybeSuffixElement config.suffix
+          ]
+        )
       )
 
-outlined :: forall w i . ConfigOutlined i -> Array (HH.HTML w i)
-outlined = HelperTextAndCharacterCounter.wrapRenderBoth renderInternal
+outlined :: forall w i . Config i -> Array (HH.HTML w i)
+outlined = renderInternalAndBoth renderInternal
   where
-    isLabelValidWhenAttemtpToFloadALabel =
-      case _ of
-           LabelConfig__With { widthWhenLabelIsFloting: Nothing } -> unsafeThrowError "THe label is without width when tried to render"
-           _ -> true
-
-    renderInternal :: ConfigOutlined i -> HH.HTML w i
+    renderInternal :: Config i -> HH.HTML w i
     renderInternal = \config ->
-      HH.label
-      ( [ HP.classes $
-          textFieldLabelClasses config
-          { disabled:       config.disabled
-          , end_aligned:    config.endAligned
-          , filled:         true
-          , focused:        config.focused
-          , fullwidth:      config.fullwidth
-          , invalid:        config.invalid
-          , label_floating: (config.focused || isDirty config.value) && isLabelValidWhenAttemtpToFloadALabel config.label
-          , ltr_text:       config.ltrText
-          , label:          config.label
-          , outlined:       false
-          , textarea:       false
-          }
-          <> config.additionalClassesRoot
-        ] <> config.additionalAttributesRoot
-      )
-      ( Array.catMaybes
-        [ maybePrefixElement config.prefix
-        , Just $ inputElement config
-        , maybeSuffixElement config.suffix
-        , Just $ OutlinedShared.notchedOutlineElement config
-        ]
-      )
+      let
+        labelFloating = config.focused || isDirty config.value
+        noLabel = isNoLabel config.label
+      in
+        HH.label
+        ( [ HP.classes $
+            textFieldLabelClasses
+            { disabled:      config.disabled
+            , endAligned:    config.endAligned
+            , filled:        false
+            , focused:       config.focused
+            , fullwidth:     config.fullwidth
+            , invalid:       config.invalid -- TODO: when required AND was touched (https://curvy-expensive-cobra.glitch.me/)
+            , labelFloating
+            , ltrText:       config.ltrText
+            , noLabel
+            , outlined:      true
+            , textarea:      false
+            }
+            <> config.additionalClassesRoot
+          ] <> config.additionalAttributesRoot
+        )
+        ( Array.catMaybes
+          [ maybePrefixElement config.prefix
+          , Just $ inputElement config
+          , maybeSuffixElement config.suffix
+          , Just $ OutlinedShared.notchedOutlineElement
+              { noLabel
+              , floatAbove: labelFloating
+              , label:      config.label
+              , required:   config.required
+              , shake:      config.shake
+              }
+          ]
+        )

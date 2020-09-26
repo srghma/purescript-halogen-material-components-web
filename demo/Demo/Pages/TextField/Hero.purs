@@ -58,8 +58,8 @@ component =
             unit
             TextField.Filled.filled
               ( TextField.Filled.defaultConfig
-                { label: TextField.Filled.LabelConfig__With { id: "hero-filled", labelText: "Standard filled" }
-                , value: state.filledValue
+                { label = TextField.Filled.LabelConfig__With { id: "hero-filled", labelText: "Standard filled" }
+                , value = state.filledValue
                 }
               )
             MessageFromFilled
@@ -71,8 +71,8 @@ component =
             unit
             TextField.Outlined.outlined
               ( TextField.Outlined.defaultConfig
-                { label: TextField.Outlined.LabelConfig__With { id: "hero-outlined", labelText: "outlined" }
-                , value: state.outlinedValue
+                { label = TextField.Outlined.LabelConfig__With { id: "hero-outlined", labelText: "outlined" }
+                , value = state.outlinedValue
                 }
               )
             MessageFromOutlined

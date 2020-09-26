@@ -21,7 +21,6 @@ import Halogen.HTML.Core (ClassName)
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.Query.HalogenM as Halogen.Query.HalogenM
-import HalogenMWC.Implementation.TextField.View.Shared (ActivationState(..))
 import HalogenMWC.Implementation.TextField.View.Input (Config) as Export
 import HalogenMWC.Implementation.TextField.View.Input as TextField.Input
 import HalogenMWC.Implementation.TextField.View.Shared (LabelConfig(..)) as Export
@@ -44,7 +43,7 @@ filled :: H.Component Query Input Message Aff
 filled =
   H.mkComponent
     { initialState: \input -> Record.union input
-      { activationState: ActivationState__Idle
+      { focused: false
       }
     , render: \state ->
         trace { message: "render filled", state } $ const $ HH.div_ $ TextField.Input.filled $ Record.Builder.build

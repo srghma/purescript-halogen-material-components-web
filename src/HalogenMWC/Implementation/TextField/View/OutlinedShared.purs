@@ -12,51 +12,39 @@ import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as HP.ARIA
 import HalogenMWC.Utils (styleVar)
 
-data ActivationState
-  = ActivationState__Idle
-  | ActivationState__Active
-    { focused :: Boolean
-    , notchWidth :: Int
-    }
+notchedOutlineLeadingElement = Just $ HH.div [ HP.class_ mdc_notched_outline__leading ] []
 
-isFocused =
-  case _ of
-       ActivationState__Active { focused } -> focused
-       _ -> false
+notchedOutlineTrailingElement = Just $ HH.div [ HP.class_ mdc_notched_outline__trailing ] []
 
-isActive =
-  case _ of
-       ActivationState__Active _ -> true
-       _ -> false
-
-outlineNotchWrapper = \activationState ->
-  HH.span $ Array.catMaybes
-  [ Just $ HP.class_ mdc_notched_outline__notch
-  , notchWidth activationState
-  ]
-  where
-    notchWidth =
-      case _ of
-           ActivationState__Idle -> Nothing
-           ActivationState__Active { notchWidth } -> Just $ HP.style $ styleVar "width" (show notchWidth <> "px")
-
-notchedOutlineLeadingElement = HH.span [ HP.class_ mdc_notched_outline__leading ] []
-
-notchedOutlineTrailingElement = HH.span [ HP.class_ mdc_notched_outline__trailing ] []
-
+notchedOutlineElement :: ∀ t52 t53 t83. { noLabel :: Boolean, floatAbove ∷ Boolean , label ∷ LabelConfig , required ∷ Boolean , shake ∷ Boolean | t83 } → HH.HTML t53 t52
 notchedOutlineElement config =
-  HH.span
+  HH.div
   [ HP.classes $ Array.catMaybes
     [ Just mdc_notched_outline
-    , Just mdc_notched_outline____upgraded
-    , if shouldFloat isActive config then Just mdc_notched_outline____notched else Nothing
+    -- | XXX:
+    -- | makes label display incorrectly when floated,
+    -- | requires `width` style to be calculated
+    -- | , Just mdc_notched_outline____upgraded
+    , if config.floatAbove then Just mdc_notched_outline____notched else Nothing
+    , if config.noLabel then Just mdc_notched_outline____no_label else Nothing
     ]
   ]
   ( Array.catMaybes
-    [ Just notchedOutlineLeadingElement
+    [ notchedOutlineLeadingElement
     , case config.label of
-           LabelConfig__With labelConfig -> Just $ outlineNotchWrapper config.activationState [ labelElement isActive config labelConfig ]
+           LabelConfig__With labelConfig ->
+             Just $
+                HH.div
+                [ HP.class_ mdc_notched_outline__notch
+                ]
+                [ floatingLabelSpanElement
+                  { labelConfig: labelConfig
+                  , floatAbove: config.floatAbove
+                  , required: config.required
+                  , shake: config.shake
+                  }
+                ]
            LabelConfig__Without _ -> Nothing
-    , Just notchedOutlineTrailingElement
+    , notchedOutlineTrailingElement
     ]
   )

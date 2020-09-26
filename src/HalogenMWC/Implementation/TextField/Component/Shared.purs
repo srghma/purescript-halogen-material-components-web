@@ -18,7 +18,6 @@ import Halogen.HTML.Core (ClassName)
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.Query.HalogenM as Halogen.Query.HalogenM
-import HalogenMWC.Implementation.TextField.View.Input as TextField.Input
 import HalogenMWC.Utils (setEfficiently, setEfficientlyCustomEq)
 import HalogenMWC.Utils as Utils
 import Record as Record
@@ -31,25 +30,27 @@ import Web.TouchEvent.TouchEvent as Web.TouchEvent.TouchEvent
 import Web.TouchEvent.TouchList as Web.TouchEvent.TouchList
 import Web.UIEvent.MouseEvent (MouseEvent)
 import Web.UIEvent.MouseEvent as Web.UIEvent.MouseEvent
+import HalogenMWC.Implementation.TextField.View.Shared
+import HalogenMWC.Implementation.TextField.View.Input
 
 type Query = Const Void
 
-type Input = Record (TextField.Input.ConfigManagedByUser + ())
+type Input = Record (ConfigManagedByUser + ())
 
 data Message
   = Message__Input String
 
-type StateShared activationState = Record (TextField.Input.ConfigManagedByUser + TextField.Input.ConfigManagedByComponent activationState + ())
+type State = Record (ConfigManagedByUser + ConfigManagedByComponent + ())
 
 type ChildSlots = ()
 
 inputRefLabel :: H.RefLabel
 inputRefLabel = H.RefLabel "input"
 
-defaultConfig :: _ -> Input
-defaultConfig { label, value } =
-  { label
-  , value
+defaultConfig :: Input
+defaultConfig =
+  { label: LabelConfig__Without "dummy"
+  , value: ""
 
   , placeholder: Nothing
   , type_:       InputText
@@ -59,7 +60,7 @@ defaultConfig { label, value } =
   , invalid:   false
 
   , helperText:       Nothing
-  , characterCounter: Nothing
+  , characterCounterOrMaxLength: CharacterCounterOrMaxLength__All_Disabled
 
   , minLength:                 Nothing
   , prefix:                    Nothing
@@ -70,7 +71,43 @@ defaultConfig { label, value } =
 
   , shake: false -- remove and use 'invalid' instead?
   , required: false
+  , endAligned: false
+  , ltrText: false
   }
 
-setEfficientlyStateValue :: forall activationState . String -> StateShared activationState -> StateShared activationState
-setEfficientlyStateValue = setEfficiently (Lens.prop (SProxy :: SProxy "value"))
+setEfficientlyStateFocused :: forall activationState . Boolean -> State -> State
+setEfficientlyStateFocused = setEfficiently (Lens.prop (SProxy :: SProxy "focused"))
+
+data Action
+  = Action__Focus
+  | Action__Blur
+  | Action__Input String
+  | Action__Receive Input
+
+additionalAttributes =
+  { additionalAttributesRoot
+  , additionalAttributesInput
+  }
+  where
+    additionalAttributesRoot  :: Array (IProp I.HTMLlabel Action)
+    additionalAttributesRoot = []
+      -- | [ HE.onMouseDown Action__PointerDown__Mouse
+      -- | , HE.onTouchStart Action__PointerDown__Touch
+      -- | ]
+
+    additionalAttributesInput :: Array (IProp I.HTMLinput Action)
+    additionalAttributesInput =
+      -- https://github.com/material-components/material-components-web/blob/a3212b2099765947f2a41d71af2cd95fcbca4b97/packages/mdc-textfield/foundation.ts#L151
+      [ HE.onFocus (const Action__Focus)
+      , HE.onBlur (const Action__Blur)
+      , HE.onValueInput Action__Input
+      , HP.ref inputRefLabel
+      ]
+
+handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
+handleAction action =
+  case spy "action" action of
+        Action__Receive newInput -> H.modify_ $ Record.merge newInput
+        Action__Focus -> H.modify_ $ setEfficientlyStateFocused true
+        Action__Blur -> H.modify_ $ setEfficientlyStateFocused false
+        Action__Input input -> H.raise $ Message__Input input

@@ -13,39 +13,28 @@ import Halogen.HTML.Properties.ARIA as HP.ARIA
 import HalogenMWC.Utils (styleVar)
 import HalogenMWC.Implementation.TextField.View.Shared
 
-rippleElement = HH.span [ HP.class_ mdc_text_field__ripple ] []
-
-lineRippleElement = \config ->
-    HH.span
-    [ HP.classes $ Array.catMaybes
-      [ Just mdc_line_ripple
-      , activeClass config
-      ]
-    ]
-    []
-  where
-    activeClass config = if config.focused then Just mdc_line_ripple____active else Nothing
-
-    -- TODO: it doesn't work anyway on official 7.0v https://curvy-expensive-cobra.glitch.me/
-
-    -- | rippleCenterPoint =
-    -- |   case _ of
-    -- |        ActivationState__Active { rippleCenterPoint: Just rippleCenterPoint } -> Just $ HP.style $ styleVar "transform-origin" (show rippleCenterPoint <> "px center")
-    -- |        _ -> Nothing
-
-wrapInputElement :: ∀ t27 t28 t44. { label ∷ LabelConfig , focused ∷ Boolean, required ∷ Boolean , shake ∷ Boolean , value ∷ String | t44 } → Array (HH.HTML t27 t28) → Array (HH.HTML t27 t28)
-wrapInputElement config inputElement =
-  [ rippleElement ]
+wrapInputElement :: ∀ t2 t3 t42. { floatAbove ∷ Boolean , focused ∷ Boolean , label ∷ LabelConfig , required ∷ Boolean , shake ∷ Boolean | t42 } → Array (HH.HTML t3 t2) → Array (HH.HTML t3 t2)
+wrapInputElement = \config inputElement ->
+  rippleElement
   <> case config.label of
          LabelConfig__With labelConfig ->
            Array.singleton $ floatingLabelSpanElement
-             { floadAbove: config.focused || isDirty config.value
-             , focused: config.focused
+             { labelConfig
+             , floatAbove: config.floatAbove
              , required: config.required
              , shake: config.shake
-             ----
-             , labelConfig
              }
          LabelConfig__Without _ -> []
   <> inputElement
-  [ lineRippleElement config.activationState ]
+  <> [ lineRippleElement config ]
+  where
+    rippleElement = [ HH.span [ HP.class_ mdc_text_field__ripple ] [] ]
+
+    lineRippleElement = \config ->
+      HH.span
+      [ HP.classes $ Array.catMaybes
+        [ Just mdc_line_ripple
+        , if config.focused then Just mdc_line_ripple____active else Nothing
+        ]
+      ]
+      []

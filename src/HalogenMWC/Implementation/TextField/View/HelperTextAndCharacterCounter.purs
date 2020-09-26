@@ -20,12 +20,10 @@ import HalogenMWC.Implementation.TextField.View.FilledShared as FilledShared
 import HalogenMWC.Implementation.TextField.View.OutlinedShared as OutlinedShared
 import HalogenMWC.Implementation.TextField.View.HelperLine as HelperLine
 
-
 renderBoth
-  :: forall w i r
+  :: forall w i
    . { helperText       :: Maybe HelperTextConfig
      , characterCounter :: Maybe CharacterCounterConfig
-     | r
      }
   -> Array (HH.HTML w i)
 renderBoth { helperText, characterCounter } =
@@ -37,10 +35,3 @@ renderBoth { helperText, characterCounter } =
             , map HelperText.helperText helperText
             ]
          ]
-
-wrapRenderBoth
-  :: ∀ r i w
-  . ({ characterCounter ∷ Maybe CharacterCounterConfig , helperText ∷ Maybe HelperTextConfig | r } → HH.HTML w i)
-  → { characterCounter ∷ Maybe CharacterCounterConfig , helperText ∷ Maybe HelperTextConfig | r }
-  → Array (HH.HTML w i)
-wrapRenderBoth renderInternal config = [ renderInternal config ] <> renderBoth config
