@@ -44,8 +44,6 @@ notchedOutlineLeadingElement = HH.span [ HP.class_ mdc_notched_outline__leading 
 
 notchedOutlineTrailingElement = HH.span [ HP.class_ mdc_notched_outline__trailing ] []
 
-outlinedClasses = [ mdc_text_field, mdc_text_field____outlined ]
-
 notchedOutlineElement config =
   HH.span
   [ HP.classes $ Array.catMaybes

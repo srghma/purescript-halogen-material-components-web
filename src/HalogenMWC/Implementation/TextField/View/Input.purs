@@ -27,6 +27,11 @@ type ConfigAddedByComponentOnRender i r =
   | r
   )
 
+data CharacterCounterOrMaxLength
+  = CharacterCounterOrMaxLength__All_Disabled
+  | CharacterCounterOrMaxLength__Only_MaxLength Int
+  | CharacterCounterOrMaxLength__Enabled Int
+
 type ConfigManagedByUser r =
   ( label       :: LabelConfig
   , placeholder :: Maybe String
@@ -36,10 +41,8 @@ type ConfigManagedByUser r =
   , fullwidth :: Boolean
   , invalid   :: Boolean
 
-  , helperText                :: Maybe HelperTextConfig
-  , characterCounter          :: Maybe CharacterCounterConfig
-
-  -- | , maxLength                 :: Maybe Int
+  , helperText                  :: Maybe HelperTextConfig
+  , characterCounterOrMaxLength :: CharacterCounterOrMaxLength
 
   , minLength                 :: Maybe Int
   , prefix                    :: Maybe String
@@ -104,7 +107,21 @@ filled = HelperTextAndCharacterCounter.wrapRenderBoth renderInternal
     renderInternal :: ConfigFilled i -> HH.HTML w i
     renderInternal = \config ->
       HH.label
-      ( [ HP.classes $ FilledShared.filledClasses <> rootLabelClasses FilledShared.isFocused config <> config.additionalClassesRoot
+      ( [ HP.classes $
+          textFieldLabelClasses config
+          { disabled:       config.disabled
+          , end_aligned:    config.endAligned
+          , filled:         true
+          , focused:        config.focused
+          , fullwidth:      config.fullwidth
+          , invalid:        config.invalid
+          , label_floating: config.focused || isDirty config.value
+          , ltr_text:       config.ltrText
+          , label:          config.label
+          , outlined:       false
+          , textarea:       false
+          }
+          <> config.additionalClassesRoot
         ] <> config.additionalAttributesRoot
       )
       ( FilledShared.wrapInputElement config $
@@ -118,10 +135,29 @@ filled = HelperTextAndCharacterCounter.wrapRenderBoth renderInternal
 outlined :: forall w i . ConfigOutlined i -> Array (HH.HTML w i)
 outlined = HelperTextAndCharacterCounter.wrapRenderBoth renderInternal
   where
+    isLabelValidWhenAttemtpToFloadALabel =
+      case _ of
+           LabelConfig__With { widthWhenLabelIsFloting: Nothing } -> unsafeThrowError "THe label is without width when tried to render"
+           _ -> true
+
     renderInternal :: ConfigOutlined i -> HH.HTML w i
     renderInternal = \config ->
       HH.label
-      ( [ HP.classes $ OutlinedShared.outlinedClasses <> rootLabelClasses OutlinedShared.isFocused config <> config.additionalClassesRoot
+      ( [ HP.classes $
+          textFieldLabelClasses config
+          { disabled:       config.disabled
+          , end_aligned:    config.endAligned
+          , filled:         true
+          , focused:        config.focused
+          , fullwidth:      config.fullwidth
+          , invalid:        config.invalid
+          , label_floating: (config.focused || isDirty config.value) && isLabelValidWhenAttemtpToFloadALabel config.label
+          , ltr_text:       config.ltrText
+          , label:          config.label
+          , outlined:       false
+          , textarea:       false
+          }
+          <> config.additionalClassesRoot
         ] <> config.additionalAttributesRoot
       )
       ( Array.catMaybes

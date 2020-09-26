@@ -12,20 +12,35 @@ import Halogen.HTML.Properties.ARIA as HP.ARIA
 
 data LabelConfig
   = LabelConfig__With
-    { id :: String
+    { id :: String -- for aria-labe
     , labelText :: String
     }
   | LabelConfig__Without
     String -- labelText in props
 
-rootLabelClasses = \isFocused config ->
+data LabelConfig__Outline
+  = LabelConfig__With
+    { id :: String -- for aria-labe
+    , labelText :: String
+    , widthWhenLabelIsFloting :: Maybe Int
+    }
+  | LabelConfig__Without
+    String -- labelText in props
+
+textFieldLabelClasses = \config ->
   Array.catMaybes
-  [ noLabelClass       config.label
-  , disabledClass      config.disabled
-  , focusedClass       (isFocused config.activationState)
-  , fullwidthClass     config.fullwidth
-  , invalidClass       config.invalid
-  -- | , labelFloatingClass config.labelFloating
+  [ Just mdc_text_field
+  , if config.disabled       then Just mdc_text_field____disabled else Nothing
+  , if config.end_aligned    then Just mdc_text_field____end_aligned else Nothing
+  , if config.filled         then Just mdc_text_field____filled else Nothing
+  , if config.focused        then Just mdc_text_field____focused else Nothing
+  , if config.fullwidth      then Just mdc_text_field____fullwidth else Nothing
+  , if config.invalid        then Just mdc_text_field____invalid else Nothing
+  , if config.label_floating then Just mdc_text_field____label_floating else Nothing
+  , if config.ltr_text       then Just mdc_text_field____ltr_text else Nothing
+  , noLabelClass config.label
+  , if config.outlined       then Just mdc_text_field____outlined else Nothing
+  , if config.textarea       then Just mdc_text_field____textarea else Nothing
   ]
   where
     noLabelClass :: LabelConfig -> Maybe ClassName
@@ -34,37 +49,26 @@ rootLabelClasses = \isFocused config ->
           LabelConfig__Without _ -> Just mdc_text_field____no_label
           LabelConfig__With _ -> Nothing
 
-    disabledClass         = if _ then Just mdc_text_field____disabled else Nothing
-    focusedClass          = if _ then Just mdc_text_field____focused else Nothing
-    fullwidthClass        = if _ then Just mdc_text_field____fullwidth else Nothing
-    invalidClass          = if _ then Just mdc_text_field____invalid else Nothing
-    -- | labelFloatingClass    = if _ then Just mdc_text_field____label_floating else Nothing
-    -- | withLeadingIconClass  = if _ then Just mdc_text_field____with_leading_icon else Nothing
-    -- | withTrailingIconClass = if _ then Just mdc_text_field____with_trailing_icon else Nothing
-
 inputARIALabelProp =
   case _ of
+    LabelConfig__With labelConfig -> [ HP.ARIA.labelledBy labelConfig.id ] -- link to floatingLabelSpanElement
     LabelConfig__Without labelText -> [ HP.ARIA.label labelText ]
-    LabelConfig__With labelConfig -> [ HP.ARIA.labelledBy labelConfig.id ]
 
 isDirty :: String -> Boolean
 isDirty x = x /= ""
 
-shouldFloat isActive config = isActive config.activationState || isDirty config.value
-
-labelClasses :: ∀ t21 activationState. (activationState -> Boolean) -> { activationState ∷ activationState , required ∷ Boolean , shake ∷ Boolean , value ∷ String | t21 } → Array ClassName
-labelClasses isActive = \config ->
-  Array.catMaybes
-    [ Just mdc_floating_label
-    , if shouldFloat isActive config then Just mdc_floating_label____float_above else Nothing
-    , if config.required then Just mdc_floating_label____required else Nothing
-    , if config.shake then Just mdc_floating_label____shake else Nothing
-    ]
-
-labelElement isActive config labelConfig =
+floatingLabelSpanElement = \config ->
   HH.span
-    [ HP.classes $ labelClasses isActive config
-    , HP.id_ labelConfig.id
+    [ HP.classes $ labelClasses config
+    , HP.id_ config.labelConfig.id
     ]
-    [ HH.text labelConfig.labelText
+    [ HH.text config.labelConfig.labelText
     ]
+  where
+    labelClasses = \config ->
+      Array.catMaybes
+        [ Just mdc_floating_label
+        , if config.floadAbove then Just mdc_floating_label____float_above else Nothing
+        , if config.required then Just mdc_floating_label____required else Nothing
+        , if config.shake then Just mdc_floating_label____shake else Nothing
+        ]
