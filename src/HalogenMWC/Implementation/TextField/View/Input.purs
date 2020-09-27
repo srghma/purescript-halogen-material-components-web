@@ -38,7 +38,6 @@ type ConfigManagedByUser i r =
   , type_       :: InputType
 
   , disabled  :: Boolean
-  , fullwidth :: Boolean
   , invalid   :: Boolean
 
   , helperText                  :: Maybe HelperTextConfig
@@ -64,11 +63,27 @@ type ConfigManagedByComponent r =
   | r
   )
 
-type Config i = Record (ConfigManagedByUser i + ConfigManagedByComponent + ConfigAddedByComponentOnRender i + ())
+type ConfigFilled i = Record
+  ( ConfigManagedByUser i
+  + ConfigManagedByComponent
+  + ConfigAddedByComponentOnRender i
+
+  -- | Note: Do not use mdc-text-field--outlined to style a full width text field.
+  -- | Note: Do not use mdc-floating-label within mdc-text-field--fullwidth. Labels should not be included as part of the DOM structure of a full width text field.
+  + ( fullwidth :: Boolean
+    )
+  )
+
+type ConfigOutlined i = Record
+  ( ConfigManagedByUser i
+  + ConfigManagedByComponent
+  + ConfigAddedByComponentOnRender i
+  + ()
+  )
 
 inputElement
-  :: ∀ i w
-  . Record (ConfigManagedByUser i + ConfigManagedByComponent + ConfigAddedByComponentOnRender i + ())
+  :: ∀ i w r
+  . Record (ConfigManagedByUser i + ConfigManagedByComponent + ConfigAddedByComponentOnRender i + r)
   → HH.HTML w i
 inputElement config =
   HH.input
@@ -107,7 +122,7 @@ maybeSuffixElement = map \s -> suffixElement [ HH.text s ]
 
 configToRenderBoth
   :: forall i w
-   . Config i
+   . _
   -> { helperText       :: Maybe HelperTextConfig
      , characterCounter :: Maybe CharacterCounterConfig
      }
@@ -125,10 +140,10 @@ configToRenderBoth config =
 
 renderInternalAndBoth renderInternal = \config -> HH.div config.additionalAttributesRoot $ [ renderInternal config ] <> HelperTextAndCharacterCounter.renderBoth (configToRenderBoth config)
 
-filled :: forall w i . Config i -> HH.HTML w i
+filled :: forall w i . ConfigFilled i -> HH.HTML w i
 filled = renderInternalAndBoth renderInternal
   where
-    renderInternal :: Config i -> HH.HTML w i
+    renderInternal :: ConfigFilled i -> HH.HTML w i
     renderInternal = \config ->
       let
         labelFloating = config.focused || isDirty config.value
@@ -165,10 +180,10 @@ filled = renderInternalAndBoth renderInternal
         )
       )
 
-outlined :: forall w i . Config i -> HH.HTML w i
+outlined :: forall w i . ConfigOutlined i -> HH.HTML w i
 outlined = renderInternalAndBoth renderInternal
   where
-    renderInternal :: Config i -> HH.HTML w i
+    renderInternal :: ConfigOutlined i -> HH.HTML w i
     renderInternal = \config ->
       let
         labelFloating = config.focused || isDirty config.value
@@ -181,7 +196,7 @@ outlined = renderInternalAndBoth renderInternal
             , endAligned:    config.endAligned
             , filled:        false
             , focused:       config.focused
-            , fullwidth:     config.fullwidth
+            , fullwidth:     false
             , invalid:       config.invalid -- TODO: when required AND was touched (https://curvy-expensive-cobra.glitch.me/)
             , labelFloating
             , ltrText:       config.ltrText
