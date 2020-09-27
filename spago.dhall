@@ -17,20 +17,13 @@
   , "either"
   , "foldable-traversable"
   , "js-timers"
-  ----
   , "protolude"
-  , "routing-duplex"
-  , "generics-rep"
-  , "argonaut-codecs"
-  , "argonaut-generic"
-  , "routing"
-  , "ordered-collections"
   , "profunctor-lenses"
+  , "ordered-collections"
   ]
 , packages = ./packages.dhall
 , sources =
   [ "src/**/*.purs"
   , "test/**/*.purs"
-  , "demo/**/*.purs"
   ]
 }

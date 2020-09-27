@@ -1,4 +1,4 @@
-const spagoConfig = './spago.dhall'
+const spagoConfig = './demo-spago.dhall'
 
 module.exports = {
   compiler:  'psa',
