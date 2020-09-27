@@ -1,5 +1,7 @@
 # Material Components for Halogen
 
+# NOTE: full rewrite is happening, to see prev version that is using html components check `old-impl` branch
+
 this lib is using js files from https://github.com/aforemny/material-components-web-elm
 
 (the custom html elementes mainly)
