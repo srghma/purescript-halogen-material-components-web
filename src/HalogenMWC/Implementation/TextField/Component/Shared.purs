@@ -35,14 +35,23 @@ import HalogenMWC.Implementation.TextField.View.Input
 
 type Query = Const Void
 
-type Input = Record (ConfigManagedByUser + ())
+type Input = Record (ConfigManagedByUser Action + ())
 
 data Message
   = Message__Input String
 
-type State = Record (ConfigManagedByUser + ConfigManagedByComponent + ())
+type State = Record (ConfigManagedByUser Action + ConfigManagedByComponent + ())
 
 type ChildSlots = ()
+
+initialState = \input -> Record.union input
+  { focused: false
+  }
+
+eval = H.mkEval $ H.defaultEval
+  { handleAction = handleAction
+  , receive = \input -> Just $ Action__Receive input
+  }
 
 inputRefLabel :: H.RefLabel
 inputRefLabel = H.RefLabel "input"
@@ -66,8 +75,7 @@ defaultConfig =
   , prefix:                    Nothing
   , suffix:                    Nothing
 
-  , additionalClassesRoot:     []
-  , additionalClassesInput:    []
+  , additionalAttributesRoot: []
 
   , shake: false -- remove and use 'invalid' instead?
   , required: false
@@ -85,16 +93,9 @@ data Action
   | Action__Receive Input
 
 additionalAttributes =
-  { additionalAttributesRoot
-  , additionalAttributesInput
+  { additionalAttributesInput
   }
   where
-    additionalAttributesRoot  :: Array (IProp I.HTMLlabel Action)
-    additionalAttributesRoot = []
-      -- | [ HE.onMouseDown Action__PointerDown__Mouse
-      -- | , HE.onTouchStart Action__PointerDown__Touch
-      -- | ]
-
     additionalAttributesInput :: Array (IProp I.HTMLinput Action)
     additionalAttributesInput =
       -- https://github.com/material-components/material-components-web/blob/a3212b2099765947f2a41d71af2cd95fcbca4b97/packages/mdc-textfield/foundation.ts#L151
@@ -106,8 +107,8 @@ additionalAttributes =
 
 handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
 handleAction action =
-  case spy "action" action of
-        Action__Receive newInput -> H.modify_ $ Record.merge newInput
-        Action__Focus -> H.modify_ $ setEfficientlyStateFocused true
-        Action__Blur -> H.modify_ $ setEfficientlyStateFocused false
-        Action__Input input -> H.raise $ Message__Input input
+  case action of
+       Action__Receive newInput -> H.modify_ $ Record.merge newInput
+       Action__Focus -> H.modify_ $ setEfficientlyStateFocused true
+       Action__Blur -> H.modify_ $ setEfficientlyStateFocused false
+       Action__Input input -> H.raise $ Message__Input input

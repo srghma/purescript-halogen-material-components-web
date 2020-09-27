@@ -23,8 +23,7 @@ import HalogenMWC.Implementation.TextField.View.HelperTextAndCharacterCounter as
 import HalogenMWC.Implementation.TextField.View.OutlinedShared as OutlinedShared
 
 type ConfigAddedByComponentOnRender i r =
-  ( additionalAttributesRoot  :: Array (IProp I.HTMLlabel i)
-  , additionalAttributesInput :: Array (IProp I.HTMLinput i)
+  ( additionalAttributesInput :: Array (IProp I.HTMLinput i)
   | r
   )
 
@@ -33,7 +32,7 @@ data CharacterCounterOrMaxLength
   | CharacterCounterOrMaxLength__Only_MaxLength Int
   | CharacterCounterOrMaxLength__Enabled Int
 
-type ConfigManagedByUser r =
+type ConfigManagedByUser i r =
   ( label       :: LabelConfig
   , placeholder :: Maybe String
   , type_       :: InputType
@@ -49,8 +48,7 @@ type ConfigManagedByUser r =
   , prefix                    :: Maybe String
   , suffix                    :: Maybe String
 
-  , additionalClassesRoot     :: Array ClassName
-  , additionalClassesInput    :: Array ClassName
+  , additionalAttributesRoot :: Array (IProp I.HTMLdiv i)
 
   , value :: String
   , shake :: Boolean
@@ -66,16 +64,16 @@ type ConfigManagedByComponent r =
   | r
   )
 
-type Config i = Record (ConfigManagedByUser + ConfigManagedByComponent + ConfigAddedByComponentOnRender i + ())
+type Config i = Record (ConfigManagedByUser i + ConfigManagedByComponent + ConfigAddedByComponentOnRender i + ())
 
 inputElement
   :: ∀ i w
-  . Record (ConfigManagedByUser + ConfigManagedByComponent + ConfigAddedByComponentOnRender i + ())
+  . Record (ConfigManagedByUser i + ConfigManagedByComponent + ConfigAddedByComponentOnRender i + ())
   → HH.HTML w i
 inputElement config =
   HH.input
   (
-    [ HP.classes $ [ mdc_text_field__input ] <> config.additionalClassesInput
+    [ HP.classes $ [ mdc_text_field__input ]
     , HP.type_ config.type_
     , HP.disabled config.disabled
     , HP.value config.value
@@ -125,9 +123,9 @@ configToRenderBoth config =
            _ -> Nothing
   }
 
-renderInternalAndBoth renderInternal = \config -> [ renderInternal config ] <> HelperTextAndCharacterCounter.renderBoth (configToRenderBoth config)
+renderInternalAndBoth renderInternal = \config -> HH.div config.additionalAttributesRoot $ [ renderInternal config ] <> HelperTextAndCharacterCounter.renderBoth (configToRenderBoth config)
 
-filled :: forall w i . Config i -> Array (HH.HTML w i)
+filled :: forall w i . Config i -> HH.HTML w i
 filled = renderInternalAndBoth renderInternal
   where
     renderInternal :: Config i -> HH.HTML w i
@@ -150,8 +148,7 @@ filled = renderInternalAndBoth renderInternal
           , outlined:      false
           , textarea:      false
           }
-          <> config.additionalClassesRoot
-        ] <> config.additionalAttributesRoot
+        ]
       )
       ( FilledShared.wrapInputElement
         { floatAbove: labelFloating
@@ -168,7 +165,7 @@ filled = renderInternalAndBoth renderInternal
         )
       )
 
-outlined :: forall w i . Config i -> Array (HH.HTML w i)
+outlined :: forall w i . Config i -> HH.HTML w i
 outlined = renderInternalAndBoth renderInternal
   where
     renderInternal :: Config i -> HH.HTML w i
@@ -192,8 +189,7 @@ outlined = renderInternalAndBoth renderInternal
             , outlined:      true
             , textarea:      false
             }
-            <> config.additionalClassesRoot
-          ] <> config.additionalAttributesRoot
+          ]
         )
         ( Array.catMaybes
           [ maybePrefixElement config.prefix

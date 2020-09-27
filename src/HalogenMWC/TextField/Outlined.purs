@@ -42,12 +42,7 @@ import HalogenMWC.Implementation.TextField.Component.Shared (Message(..), Query(
 outlined :: H.Component Query Input Message Aff
 outlined =
   H.mkComponent
-    { initialState: \input -> Record.union input
-      { focused: false
-      }
-    , render: \state -> trace { message: "render outlined", state } $ const $ HH.div_ $ TextField.Input.outlined $ Record.union state additionalAttributes
-    , eval: H.mkEval $ H.defaultEval
-        { handleAction = handleAction
-        , receive = \input -> Just $ Action__Receive input
-        }
-      }
+    { initialState
+    , render: \state -> TextField.Input.outlined $ Record.union state additionalAttributes
+    , eval
+    }
