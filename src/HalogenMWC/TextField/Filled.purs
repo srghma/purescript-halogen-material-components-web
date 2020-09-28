@@ -3,6 +3,7 @@ module HalogenMWC.TextField.Filled
   , module Export
   ) where
 
+import HalogenMWC.Implementation.TextField.Component.Shared
 import Material.Classes.LineRipple
 import Material.Classes.Textfield
 import MaterialIconsFont.Classes
@@ -21,7 +22,8 @@ import Halogen.HTML.Core (ClassName)
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.Query.HalogenM as Halogen.Query.HalogenM
-import HalogenMWC.Implementation.TextField.View.Input (Config) as Export
+import HalogenMWC.Implementation.TextField.Component.Shared (Message(..), Query(..), Action(..)) as Export
+import HalogenMWC.Implementation.TextField.View.Input (ConfigFilled) as Export
 import HalogenMWC.Implementation.TextField.View.Input as TextField.Input
 import HalogenMWC.Implementation.TextField.View.Shared (LabelConfig(..)) as Export
 import HalogenMWC.Utils (setEfficiently, setEfficientlyCustomEq)
@@ -36,8 +38,15 @@ import Web.TouchEvent.TouchEvent as Web.TouchEvent.TouchEvent
 import Web.TouchEvent.TouchList as Web.TouchEvent.TouchList
 import Web.UIEvent.MouseEvent (MouseEvent)
 import Web.UIEvent.MouseEvent as Web.UIEvent.MouseEvent
-import HalogenMWC.Implementation.TextField.Component.Shared
-import HalogenMWC.Implementation.TextField.Component.Shared (Message(..), Query(..), Input, State, Action(..), defaultConfig) as Export
+import HalogenMWC.Implementation.TextField.View.Shared
+import HalogenMWC.Implementation.TextField.View.Input
+
+type Input = Record (ConfigManagedByUser + ( fullwidth :: Boolean ))
+
+type State = Record (ConfigManagedByUser + ConfigManagedByComponent + ( fullwidth :: Boolean ))
+
+defaultConfig :: Input
+defaultConfig = Record.union defaultConfigShared { fullwidth: false }
 
 filled :: H.Component Query Input Message Aff
 filled =

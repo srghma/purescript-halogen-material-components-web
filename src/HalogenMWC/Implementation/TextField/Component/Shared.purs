@@ -35,12 +35,8 @@ import HalogenMWC.Implementation.TextField.View.Input
 
 type Query = Const Void
 
-type Input = Record (ConfigManagedByUser Action + ())
-
 data Message
   = Message__Input String
-
-type State = Record (ConfigManagedByUser Action + ConfigManagedByComponent + ())
 
 type ChildSlots = ()
 
@@ -56,8 +52,8 @@ eval = H.mkEval $ H.defaultEval
 inputRefLabel :: H.RefLabel
 inputRefLabel = H.RefLabel "input"
 
-defaultConfig :: Input
-defaultConfig =
+defaultConfigShared :: Record (ConfigManagedByUser + ())
+defaultConfigShared =
   { label: LabelConfig__Without "dummy"
   , value: ""
 
@@ -65,7 +61,6 @@ defaultConfig =
   , type_:       InputText
 
   , disabled:  false
-  , fullwidth: false
   , invalid:   false
 
   , helperText:       Nothing
@@ -75,7 +70,7 @@ defaultConfig =
   , prefix:                    Nothing
   , suffix:                    Nothing
 
-  , additionalAttributesRoot: []
+  , additionalClassesRoot: []
 
   , shake: false -- remove and use 'invalid' instead?
   , required: false
@@ -83,20 +78,20 @@ defaultConfig =
   , ltrText: false
   }
 
-setEfficientlyStateFocused :: forall activationState . Boolean -> State -> State
+setEfficientlyStateFocused :: forall activationState action . Boolean -> _ -> _
 setEfficientlyStateFocused = setEfficiently (Lens.prop (SProxy :: SProxy "focused"))
 
-data Action
+data Action input
   = Action__Focus
   | Action__Blur
   | Action__Input String
-  | Action__Receive Input
+  | Action__Receive input
 
 additionalAttributes =
   { additionalAttributesInput
   }
   where
-    additionalAttributesInput :: Array (IProp I.HTMLinput Action)
+    additionalAttributesInput :: forall input . Array (IProp I.HTMLinput (Action input))
     additionalAttributesInput =
       -- https://github.com/material-components/material-components-web/blob/a3212b2099765947f2a41d71af2cd95fcbca4b97/packages/mdc-textfield/foundation.ts#L151
       [ HE.onFocus (const Action__Focus)
@@ -105,7 +100,6 @@ additionalAttributes =
       , HP.ref inputRefLabel
       ]
 
-handleAction :: Action -> H.HalogenM State Action ChildSlots Message Aff Unit
 handleAction action =
   case action of
        Action__Receive newInput -> H.modify_ $ Record.merge newInput

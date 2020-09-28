@@ -32,7 +32,7 @@ data CharacterCounterOrMaxLength
   | CharacterCounterOrMaxLength__Only_MaxLength Int
   | CharacterCounterOrMaxLength__Enabled Int
 
-type ConfigManagedByUser i r =
+type ConfigManagedByUser r =
   ( label       :: LabelConfig
   , placeholder :: Maybe String
   , type_       :: InputType
@@ -47,7 +47,7 @@ type ConfigManagedByUser i r =
   , prefix                    :: Maybe String
   , suffix                    :: Maybe String
 
-  , additionalAttributesRoot :: Array (IProp I.HTMLdiv i)
+  , additionalClassesRoot :: Array ClassName
 
   , value :: String
   , shake :: Boolean
@@ -64,7 +64,7 @@ type ConfigManagedByComponent r =
   )
 
 type ConfigFilled i = Record
-  ( ConfigManagedByUser i
+  ( ConfigManagedByUser
   + ConfigManagedByComponent
   + ConfigAddedByComponentOnRender i
 
@@ -75,7 +75,7 @@ type ConfigFilled i = Record
   )
 
 type ConfigOutlined i = Record
-  ( ConfigManagedByUser i
+  ( ConfigManagedByUser
   + ConfigManagedByComponent
   + ConfigAddedByComponentOnRender i
   + ()
@@ -83,7 +83,7 @@ type ConfigOutlined i = Record
 
 inputElement
   :: ∀ i w r
-  . Record (ConfigManagedByUser i + ConfigManagedByComponent + ConfigAddedByComponentOnRender i + r)
+  . Record (ConfigManagedByUser + ConfigManagedByComponent + ConfigAddedByComponentOnRender i + r)
   → HH.HTML w i
 inputElement config =
   HH.input
@@ -138,7 +138,7 @@ configToRenderBoth config =
            _ -> Nothing
   }
 
-renderInternalAndBoth renderInternal = \config -> HH.div config.additionalAttributesRoot $ [ renderInternal config ] <> HelperTextAndCharacterCounter.renderBoth (configToRenderBoth config)
+renderInternalAndBoth renderInternal = \config -> HH.div [ HP.classes config.additionalClassesRoot ] $ [ renderInternal config ] <> HelperTextAndCharacterCounter.renderBoth (configToRenderBoth config)
 
 filled :: forall w i . ConfigFilled i -> HH.HTML w i
 filled = renderInternalAndBoth renderInternal

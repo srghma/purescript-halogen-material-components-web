@@ -21,7 +21,6 @@ import Halogen.HTML.Core (ClassName)
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
 import Halogen.Query.HalogenM as Halogen.Query.HalogenM
-import HalogenMWC.Implementation.TextField.View.Input (Config) as Export
 import HalogenMWC.Implementation.TextField.View.Input as TextField.Input
 import HalogenMWC.Implementation.TextField.View.Shared (LabelConfig(..)) as Export
 import HalogenMWC.Utils (setEfficiently, setEfficientlyCustomEq)
@@ -37,7 +36,16 @@ import Web.TouchEvent.TouchList as Web.TouchEvent.TouchList
 import Web.UIEvent.MouseEvent (MouseEvent)
 import Web.UIEvent.MouseEvent as Web.UIEvent.MouseEvent
 import HalogenMWC.Implementation.TextField.Component.Shared
-import HalogenMWC.Implementation.TextField.Component.Shared (Message(..), Query(..), Input, State, Action(..), defaultConfig) as Export
+import HalogenMWC.Implementation.TextField.Component.Shared (Message(..), Query(..), Action(..)) as Export
+import HalogenMWC.Implementation.TextField.View.Shared
+import HalogenMWC.Implementation.TextField.View.Input
+
+type Input = Record (ConfigManagedByUser + ())
+
+type State = Record (ConfigManagedByUser + ConfigManagedByComponent + ())
+
+defaultConfig :: Input
+defaultConfig = defaultConfigShared
 
 outlined :: H.Component Query Input Message Aff
 outlined =
