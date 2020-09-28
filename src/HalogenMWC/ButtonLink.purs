@@ -48,7 +48,7 @@ buttonLinkView variant config =
 
 ------------------------------------------------
 
-buttonLink :: H.Component Query (Input Config (H.ComponentSlot ChildSlots Aff Action) Action) Message Aff
+buttonLink :: forall slots . H.Component Query (Input Config (H.ComponentSlot slots Aff Action) Action) Message Aff
 buttonLink =
   H.mkComponent
     { initialState: initialState
@@ -73,7 +73,7 @@ buttonLink =
     disabled :: Boolean
     disabled = false
 
-    handleAction :: Action -> H.HalogenM (State Config (H.ComponentSlot ChildSlots Aff Action) Action) Action ChildSlots Message Aff Unit
+    handleAction :: Action -> H.HalogenM (State Config (H.ComponentSlot slots Aff Action) Action) Action slots Message Aff Unit
     handleAction =
       case _ of
           RippleAction rippleAction -> H.getHTMLElementRef buttonRefLabel >>= traverse_ \rootElement -> do

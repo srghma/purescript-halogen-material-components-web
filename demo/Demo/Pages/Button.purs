@@ -148,6 +148,22 @@ config =
              ]
 
           <> focusButton
+
+          <> [ HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Button inside of a button" ]
+
+             , HH.slot_ (SProxy :: SProxy "button-inside-parent") unit Button.button
+               { variant: Button.Outlined
+               , config: Button.defaultConfig { additionalClasses = buttonsRow.icon.additionalClasses <> [ Demo.Pages.Button.Css.styles.shapedButtons ] }
+               , content:
+                 [ HH.text "some text"
+                 , HH.slot_ (SProxy :: SProxy "button-inside-child") unit Button.button
+                   { variant: Button.Outlined
+                   , config: Button.defaultConfig { additionalClasses = buttonsRow.icon.additionalClasses <> [ Demo.Pages.Button.Css.styles.shapedButtons ] }
+                   , content: [ HH.text "some text inside" ]
+                   }
+                 ]
+               }
+             ]
     in
       WithFocus.mkComponent render
   }

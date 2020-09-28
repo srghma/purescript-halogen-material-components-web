@@ -22,8 +22,6 @@ type Input config w i =
   , content :: Array (HH.HTML w i)
   }
 
-type ChildSlots = ()
-
 type State config w i =
   { input       :: Input config w i
   , rippleState :: Ripple.RippleState

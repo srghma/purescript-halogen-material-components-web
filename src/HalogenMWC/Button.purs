@@ -51,7 +51,7 @@ buttonView variant config =
 
 ------------------------------------------------
 
-button :: H.Component Query (Input Config (H.ComponentSlot ChildSlots Aff Action) Action) Message Aff
+button :: forall slots . H.Component Query (Input Config (H.ComponentSlot slots Aff Action) Action) Message Aff
 button =
   H.mkComponent
     { initialState: initialState
@@ -74,7 +74,7 @@ button =
         }
       }
   where
-    handleAction :: Action -> H.HalogenM (State Config (H.ComponentSlot ChildSlots Aff Action) Action) Action ChildSlots Message Aff Unit
+    handleAction :: Action -> H.HalogenM (State Config (H.ComponentSlot slots Aff Action) Action) Action slots Message Aff Unit
     handleAction =
       case _ of
           RippleAction rippleAction -> H.getHTMLElementRef buttonRefLabel >>= traverse_ \rootElement -> do
