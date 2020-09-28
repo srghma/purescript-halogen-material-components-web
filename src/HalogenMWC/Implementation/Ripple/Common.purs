@@ -237,5 +237,8 @@ handleAction__Common
                   void $ H.subscribe (Utils.mkTimeoutEvent DeactivationEnded numbers."FG_DEACTIVATION_MS")
                _ -> pure unit
 
-       DeactivationEnded -> H.modify_ $ setStateActivationStateEfficiently ActivationState__Idle
-
+       DeactivationEnded -> H.modify_ \state ->
+         case state.activationState of
+              ActivationState__Deactivated -> state { activationState = ActivationState__Idle }
+              ActivationState__Activated -> state
+              ActivationState__Idle -> state
