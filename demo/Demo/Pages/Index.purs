@@ -5,10 +5,10 @@ import Material.Classes.TopAppBar (mdc_top_app_bar__navigation_icon, mdc_top_app
 import Halogen as H
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
-import HalogenMWC.IconButton as IconButton
-import HalogenMWC.ImageList as ImageList
-import HalogenMWC.ImageList.Item as ImageList.Item
-import HalogenMWC.TopAppBar as TopAppBar
+-- | import HalogenMWC.IconButton as IconButton
+-- | import HalogenMWC.ImageList as ImageList
+-- | import HalogenMWC.ImageList.Item as ImageList.Item
+-- | import HalogenMWC.TopAppBar as TopAppBar
 import Demo.Route (Route)
 import Demo.Route as Route
 import Demo.Blocks.Header as Demo.Blocks.Header
@@ -40,48 +40,54 @@ component =
   render :: forall r w i. State -> H.ComponentHTML Action () m
   render _ =
     HH.div_
-      [ TopAppBar.topAppBar TopAppBar.Regular TopAppBar.defaultConfig
-          [ HH.section
-              [ HP.class_ mdc_top_app_bar__row
-              ]
-              [ HH.section
-                  [ HP.classes [ mdc_top_app_bar__section, mdc_top_app_bar__section____align_start ]
-                  ]
-                  [ IconButton.iconButton
-                      ( IconButton.defaultConfig
-                          { additionalClasses = [ mdc_top_app_bar__navigation_icon ]
-                          }
-                      )
-                      [ HH.img
-                          [ HP.src "https://material-components-web.appspot.com/images/ic_component_24px_white.svg"
-                          ]
-                      ]
-                  , Demo.Blocks.Header.header
-                  ]
-              ]
-          ]
-      , ImageList.imageList
-          ( ImageList.defaultConfig
-              { additionalAttributes =
-                [ HP.style "max-width: 900px; padding-top: 128px; padding-bottom: 100px;"
-                ]
-              }
-          )
-          ( map
-              ( \{ route, title, icon } ->
-                  ImageList.Item.ImageListItem
-                    ( { label: Just title
-                      , href: Just (Route.toString route)
-                      , image: icon
-                      , additionalAttributes:
-                        [ HP.style "width: calc(100% / 4 - 8.25px); margin: 4px;"
-                        ]
-                      }
-                    )
-              )
-              imageListItems
-          )
-      ]
+      ( map
+        ( \{ route, title, icon } -> HH.a [ HP.href (Route.toString route) ] [ HH.img [ HP.src icon ] ]
+        )
+        imageListItems
+      )
+
+      -- | [ TopAppBar.topAppBar TopAppBar.Regular TopAppBar.defaultConfig
+      -- |     [ HH.section
+      -- |         [ HP.class_ mdc_top_app_bar__row
+      -- |         ]
+      -- |         [ HH.section
+      -- |             [ HP.classes [ mdc_top_app_bar__section, mdc_top_app_bar__section____align_start ]
+      -- |             ]
+      -- |             [ IconButton.iconButton
+      -- |                 ( IconButton.defaultConfig
+      -- |                     { additionalClasses = [ mdc_top_app_bar__navigation_icon ]
+      -- |                     }
+      -- |                 )
+      -- |                 [ HH.img
+      -- |                     [ HP.src "https://material-components-web.appspot.com/images/ic_component_24px_white.svg"
+      -- |                     ]
+      -- |                 ]
+      -- |             , Demo.Blocks.Header.header
+      -- |             ]
+      -- |         ]
+      -- |     ]
+      -- | , ImageList.imageList
+      -- |     ( ImageList.defaultConfig
+      -- |         { additionalAttributes =
+      -- |           [ HP.style "max-width: 900px; padding-top: 128px; padding-bottom: 100px;"
+      -- |           ]
+      -- |         }
+      -- |     )
+      -- |     ( map
+      -- |         ( \{ route, title, icon } ->
+      -- |             ImageList.Item.ImageListItem
+      -- |               ( { label: Just title
+      -- |                 , href: Just (Route.toString route)
+      -- |                 , image: icon
+      -- |                 , additionalAttributes:
+      -- |                   [ HP.style "width: calc(100% / 4 - 8.25px); margin: 4px;"
+      -- |                   ]
+      -- |                 }
+      -- |               )
+      -- |         )
+      -- |         imageListItems
+      -- |     )
+      -- | ]
 
 imageListItems :: forall r w i. Array { route :: Route, icon :: String, title :: String, subtitle :: String }
 imageListItems =

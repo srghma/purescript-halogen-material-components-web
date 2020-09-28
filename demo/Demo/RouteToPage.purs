@@ -30,18 +30,18 @@ import Demo.Pages.TextField      as Demo.Pages.TextField
 -- | import Demo.Pages.TopAppBar      as Demo.Pages.TopAppBar
 import Demo.Pages.Typography     as Demo.Pages.Typography
 
-import Demo.Pages.TopAppBarPages.Standard       as Demo.Pages.TopAppBarPages.Standard
-import Demo.Pages.TopAppBarPages.Fixed          as Demo.Pages.TopAppBarPages.Fixed
-import Demo.Pages.TopAppBarPages.Dense          as Demo.Pages.TopAppBarPages.Dense
-import Demo.Pages.TopAppBarPages.Prominent      as Demo.Pages.TopAppBarPages.Prominent
-import Demo.Pages.TopAppBarPages.Short          as Demo.Pages.TopAppBarPages.Short
-import Demo.Pages.TopAppBarPages.ShortCollapsed as Demo.Pages.TopAppBarPages.ShortCollapsed
-import Demo.Pages.DrawerPages.Permanent         as Demo.Pages.DrawerPages.Permanent
-import Demo.Pages.DrawerPages.Dismissible       as Demo.Pages.DrawerPages.Dismissible
-import Demo.Pages.DrawerPages.Modal             as Demo.Pages.DrawerPages.Modal
+-- | import Demo.Pages.TopAppBarPages.Standard       as Demo.Pages.TopAppBarPages.Standard
+-- | import Demo.Pages.TopAppBarPages.Fixed          as Demo.Pages.TopAppBarPages.Fixed
+-- | import Demo.Pages.TopAppBarPages.Dense          as Demo.Pages.TopAppBarPages.Dense
+-- | import Demo.Pages.TopAppBarPages.Prominent      as Demo.Pages.TopAppBarPages.Prominent
+-- | import Demo.Pages.TopAppBarPages.Short          as Demo.Pages.TopAppBarPages.Short
+-- | import Demo.Pages.TopAppBarPages.ShortCollapsed as Demo.Pages.TopAppBarPages.ShortCollapsed
+-- | import Demo.Pages.DrawerPages.Permanent         as Demo.Pages.DrawerPages.Permanent
+-- | import Demo.Pages.DrawerPages.Dismissible       as Demo.Pages.DrawerPages.Dismissible
+-- | import Demo.Pages.DrawerPages.Modal             as Demo.Pages.DrawerPages.Modal
 
 import Demo.HOC.CatalogPage   as Demo.HOC.CatalogPage
-import Demo.HOC.DrawerPage    as Demo.HOC.DrawerPage
+-- | import Demo.HOC.DrawerPage    as Demo.HOC.DrawerPage
 import Demo.HOC.TopAppBarPage as Demo.HOC.TopAppBarPage
 
 import Demo.Route as Demo.Route

@@ -13,11 +13,11 @@ import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import HalogenMWC.Drawer.Dismissible as Drawer.Dismissible
-import HalogenMWC.IconButton as IconButton
-import HalogenMWC.List as List
-import HalogenMWC.List.Item as List.Item
-import HalogenMWC.TopAppBar as TopAppBar
+-- | import HalogenMWC.Drawer.Dismissible as Drawer.Dismissible
+-- | import HalogenMWC.IconButton as IconButton
+-- | import HalogenMWC.List as List
+-- | import HalogenMWC.List.Item as List.Item
+-- | import HalogenMWC.TopAppBar as TopAppBar
 import Demo.Blocks.Header as Demo.Blocks.Header
 
 type CatalogPage
@@ -63,61 +63,72 @@ render :: Route -> CatalogPage -> State -> HH.ComponentHTML Action ChildSlots Af
 render routeOfThisCatalogPage config state =
   HH.div
     configContainer
-    [ TopAppBar.topAppBar TopAppBar.Regular TopAppBar.defaultConfig
-        [ HH.section
-            [ HP.class_ mdc_top_app_bar__row ]
-            [ HH.section
-                [ HP.classes [ mdc_top_app_bar__section, mdc_top_app_bar__section____align_start ] ]
-                [ IconButton.iconButtonMaterialIcons
-                    ( IconButton.defaultConfig
-                        { additionalClasses = [ mdc_top_app_bar__navigation_icon ]
-                        , additionalAttributes = [ HE.onClick (const Toggle) ]
-                        }
-                    )
-                    "menu"
-                , Demo.Blocks.Header.header
-                ]
-            ]
-        ]
-    , HH.div demoPanel
-        [ Drawer.Dismissible.drawer
-            ( Drawer.Dismissible.defaultConfig
-                { open = state.isDrawerOpen
-                , additionalClasses = [ mdc_top_app_bar____fixed_adjust ]
-                , additionalAttributes = [ HP.style "z-index: 1;" ]
-                }
-            )
-            [ HH.div
-                [ HP.class_ mdc_drawer__content ]
-                [ let
-                    processItem { route, label } =
-                      List.Item.listItem
-                        ( List.Item.defaultConfig
-                            { selected = if routeOfThisCatalogPage == route then Just List.Item.Activated else Nothing
-                            , href = Just (Route.toString route)
-                            }
-                        )
-                        [ HH.text label ]
-                  in
-                    case Array.uncons (map processItem catalogDrawerItems) of
-                      Just { head: listItem, tail: listItems } -> List.list List.defaultConfig listItem listItems
-                      _ -> HH.text ""
-                ]
-            ]
-        , HH.div
-            ([ HP.classes [ mdc_top_app_bar____fixed_adjust, mdc_drawer_app_content ] ] <> demoContent)
-            [ HH.div demoContentTransition
-                [ HH.h1 [ HP.class_ mdc_typography____headline5 ] [ HH.text config.title ]
-                , HH.p [ HP.class_ mdc_typography____body1 ] [ HH.text config.prelude ]
-                , HH.div hero [ HH.slot (SProxy :: SProxy "hero") unit config.hero unit absurd ]
-                , HH.h2 ([ HP.class_ mdc_typography____headline6 ] <> demoTitle) [ HH.text "Resources" ]
-                , resourcesList config.resources
-                , HH.h2 ([ HP.class_ mdc_typography____headline6 ] <> demoTitle) [ HH.text "Demos" ]
-                , HH.slot (SProxy :: SProxy "content") unit config.content unit absurd
-                ]
-            ]
-        ]
+
+    [ HH.h1 [ HP.class_ mdc_typography____headline5 ] [ HH.text config.title ]
+    , HH.p [ HP.class_ mdc_typography____body1 ] [ HH.text config.prelude ]
+    , HH.div hero [ HH.slot (SProxy :: SProxy "hero") unit config.hero unit absurd ]
+    , HH.h2 ([ HP.class_ mdc_typography____headline6 ] <> demoTitle) [ HH.text "Resources" ]
+    , resourcesList config.resources
+    , HH.h2 ([ HP.class_ mdc_typography____headline6 ] <> demoTitle) [ HH.text "Demos" ]
+    , HH.slot (SProxy :: SProxy "content") unit config.content unit absurd
     ]
+
+
+    -- | [ TopAppBar.topAppBar TopAppBar.Regular TopAppBar.defaultConfig
+    -- |     [ HH.section
+    -- |         [ HP.class_ mdc_top_app_bar__row ]
+    -- |         [ HH.section
+    -- |             [ HP.classes [ mdc_top_app_bar__section, mdc_top_app_bar__section____align_start ] ]
+    -- |             [ IconButton.iconButtonMaterialIcons
+    -- |                 ( IconButton.defaultConfig
+    -- |                     { additionalClasses = [ mdc_top_app_bar__navigation_icon ]
+    -- |                     , additionalAttributes = [ HE.onClick (const Toggle) ]
+    -- |                     }
+    -- |                 )
+    -- |                 "menu"
+    -- |             , Demo.Blocks.Header.header
+    -- |             ]
+    -- |         ]
+    -- |     ]
+    -- | , HH.div demoPanel
+    -- |     [ Drawer.Dismissible.drawer
+    -- |         ( Drawer.Dismissible.defaultConfig
+    -- |             { open = state.isDrawerOpen
+    -- |             , additionalClasses = [ mdc_top_app_bar____fixed_adjust ]
+    -- |             , additionalAttributes = [ HP.style "z-index: 1;" ]
+    -- |             }
+    -- |         )
+    -- |         [ HH.div
+    -- |             [ HP.class_ mdc_drawer__content ]
+    -- |             [ let
+    -- |                 processItem { route, label } =
+    -- |                   List.Item.listItem
+    -- |                     ( List.Item.defaultConfig
+    -- |                         { selected = if routeOfThisCatalogPage == route then Just List.Item.Activated else Nothing
+    -- |                         , href = Just (Route.toString route)
+    -- |                         }
+    -- |                     )
+    -- |                     [ HH.text label ]
+    -- |               in
+    -- |                 case Array.uncons (map processItem catalogDrawerItems) of
+    -- |                   Just { head: listItem, tail: listItems } -> List.list List.defaultConfig listItem listItems
+    -- |                   _ -> HH.text ""
+    -- |             ]
+    -- |         ]
+    -- |     , HH.div
+    -- |         ([ HP.classes [ mdc_top_app_bar____fixed_adjust, mdc_drawer_app_content ] ] <> demoContent)
+    -- |         [ HH.div demoContentTransition
+    -- |             [ HH.h1 [ HP.class_ mdc_typography____headline5 ] [ HH.text config.title ]
+    -- |             , HH.p [ HP.class_ mdc_typography____body1 ] [ HH.text config.prelude ]
+    -- |             , HH.div hero [ HH.slot (SProxy :: SProxy "hero") unit config.hero unit absurd ]
+    -- |             , HH.h2 ([ HP.class_ mdc_typography____headline6 ] <> demoTitle) [ HH.text "Resources" ]
+    -- |             , resourcesList config.resources
+    -- |             , HH.h2 ([ HP.class_ mdc_typography____headline6 ] <> demoTitle) [ HH.text "Demos" ]
+    -- |             , HH.slot (SProxy :: SProxy "content") unit config.content unit absurd
+    -- |             ]
+    -- |         ]
+    -- |     ]
+    -- | ]
 
 resourcesList ::
   forall w i.
@@ -127,44 +138,46 @@ resourcesList ::
   } ->
   HH.HTML w i
 resourcesList { materialDesignGuidelines, documentation, sourceCode } =
-  List.list List.defaultConfig
-    ( List.Item.listItem
-        ( List.Item.defaultConfig
-            { href = materialDesignGuidelines
-            , target = Just "_blank"
-            }
-        )
-        [ HH.div ([ HP.class_ mdc_list_item__graphic ] <> resourcesGraphic)
-            [ HH.img ([ HP.src "https://aforemny.github.io/material-components-web-elm/images/ic_material_design_24px.svg" ] <> resourcesGraphic)
-            ]
-        , HH.text "Material Design Guidelines"
-        ]
-    )
-    [ List.Item.listItem
-        ( List.Item.defaultConfig
-            { href = documentation
-            , target = Just "_blank"
-            }
-        )
-        [ HH.div
-            ([ HP.class_ mdc_list_item__graphic ] <> resourcesGraphic)
-            [ HH.img ([ HP.src "https://aforemny.github.io/material-components-web-elm/images/ic_drive_document_24px.svg" ] <> resourcesGraphic)
-            ]
-        , HH.text "Documentation"
-        ]
-    , List.Item.listItem
-        ( List.Item.defaultConfig
-            { href = sourceCode
-            , target = Just "_blank"
-            }
-        )
-        [ HH.div
-            ([ HP.class_ mdc_list_item__graphic ] <> resourcesGraphic)
-            [ HH.img ([ HP.src "https://aforemny.github.io/material-components-web-elm/images/ic_code_24px.svg" ] <> resourcesGraphic)
-            ]
-        , HH.text "Source Code"
-        ]
-    ]
+  HH.text ""
+
+  -- | List.list List.defaultConfig
+  -- |   ( List.Item.listItem
+  -- |       ( List.Item.defaultConfig
+  -- |           { href = materialDesignGuidelines
+  -- |           , target = Just "_blank"
+  -- |           }
+  -- |       )
+  -- |       [ HH.div ([ HP.class_ mdc_list_item__graphic ] <> resourcesGraphic)
+  -- |           [ HH.img ([ HP.src "https://aforemny.github.io/material-components-web-elm/images/ic_material_design_24px.svg" ] <> resourcesGraphic)
+  -- |           ]
+  -- |       , HH.text "Material Design Guidelines"
+  -- |       ]
+  -- |   )
+  -- |   [ List.Item.listItem
+  -- |       ( List.Item.defaultConfig
+  -- |           { href = documentation
+  -- |           , target = Just "_blank"
+  -- |           }
+  -- |       )
+  -- |       [ HH.div
+  -- |           ([ HP.class_ mdc_list_item__graphic ] <> resourcesGraphic)
+  -- |           [ HH.img ([ HP.src "https://aforemny.github.io/material-components-web-elm/images/ic_drive_document_24px.svg" ] <> resourcesGraphic)
+  -- |           ]
+  -- |       , HH.text "Documentation"
+  -- |       ]
+  -- |   , List.Item.listItem
+  -- |       ( List.Item.defaultConfig
+  -- |           { href = sourceCode
+  -- |           , target = Just "_blank"
+  -- |           }
+  -- |       )
+  -- |       [ HH.div
+  -- |           ([ HP.class_ mdc_list_item__graphic ] <> resourcesGraphic)
+  -- |           [ HH.img ([ HP.src "https://aforemny.github.io/material-components-web-elm/images/ic_code_24px.svg" ] <> resourcesGraphic)
+  -- |           ]
+  -- |       , HH.text "Source Code"
+  -- |       ]
+  -- |   ]
 
 catalogDrawerItems :: forall r w i. Array { label :: String, route :: Route }
 catalogDrawerItems =
