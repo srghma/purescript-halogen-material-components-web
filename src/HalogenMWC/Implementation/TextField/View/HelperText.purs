@@ -46,4 +46,4 @@ helperText config =
     ]
     <> if config.validation then [ HP.ARIA.role "alert" ] else []
   )
-  []
+  [HH.text config.text]
