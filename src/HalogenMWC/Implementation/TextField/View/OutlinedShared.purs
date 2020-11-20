@@ -16,7 +16,7 @@ notchedOutlineLeadingElement = Just $ HH.div [ HP.class_ mdc_notched_outline__le
 
 notchedOutlineTrailingElement = Just $ HH.div [ HP.class_ mdc_notched_outline__trailing ] []
 
-notchedOutlineElement :: ∀ t52 t53 t83. { noLabel :: Boolean, floatAbove ∷ Boolean , label ∷ LabelConfig , required ∷ Boolean , shake ∷ Boolean | t83 } → HH.HTML t53 t52
+notchedOutlineElement :: ∀ w i r. { noLabel :: Boolean, floatAbove ∷ Boolean , label ∷ LabelConfig , required ∷ Boolean , shake ∷ Boolean | r } → HH.HTML w i
 notchedOutlineElement config =
   HH.div
   [ HP.classes $ Array.catMaybes

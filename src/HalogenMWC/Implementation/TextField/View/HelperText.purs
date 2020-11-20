@@ -24,11 +24,11 @@ maybeInputProps =
   case _ of
     Just { id } -> inputProps id
     _ -> []
-
-inputProps id =
-  [ HP.ARIA.controls id
-  , HP.ARIA.describedBy id
-  ]
+  where
+    inputProps id =
+      [ HP.ARIA.controls id
+      , HP.ARIA.describedBy id
+      ]
 
 helperText :: forall w i . HelperTextConfig -> HH.HTML w i
 helperText config =
