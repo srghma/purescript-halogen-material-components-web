@@ -69,7 +69,7 @@ export default async function({
 
     optimization: {
       nodeEnv: false,
-      noEmitOnErrors: true,
+      emitOnErrors: false,
     }
   }
 }
