@@ -42,12 +42,8 @@
     "webpack-spago-loader": "https://github.com/srghma/webpack-spago-loader",
     "write-file-webpack-plugin": "^4.5.1"
   },
-  "//TODO deps": {
-    "@material/banner": "~7.0.0",
-    "@material/tooltip": "~7.0.0"
-  },
   "dependencies": {
-    "material-components-web": "~7.0.0",
+    "material-components-web": "~8.0.0",
     "xhr2": "^0.2.0"
   }
 }

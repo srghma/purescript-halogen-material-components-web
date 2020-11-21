@@ -7,7 +7,6 @@ node_modules/
 .psa*
 .spago
 yarn-error.log
-yarn.lock
 package-lock.json
 
 # temporary enabled
