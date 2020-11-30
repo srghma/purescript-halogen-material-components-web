@@ -19,20 +19,28 @@ import HalogenMWC.Implementation.Button.HTML (Variant(..), commonClasses, common
 import HalogenMWC.Implementation.Button.Insides (buttonIconMaterialIcons, buttonLabel) as Insides
 import HalogenMWC.Implementation.Button.WithRippleCommon
 import HalogenMWC.Ripple.Bounded as Ripple
+import HalogenMWC.Utils
 
 
-type Config i =
+type Config =
   { additionalClasses :: Array ClassName
-  , additionalAttributes :: Array (IProp I.HTMLa i)
+  , additionalAttributes :: Array (IProp I.HTMLa Void)
   }
 
-defaultConfig :: forall i . Config i
+defaultConfig :: Config
 defaultConfig =
   { additionalClasses: []
   , additionalAttributes: []
   }
 
-buttonLinkView :: forall w i. Variant -> Config i -> Array (HH.HTML w i) -> HH.HTML w i
+buttonLinkView
+  :: forall w i
+   . Variant
+  -> { additionalClasses :: Array ClassName
+     , additionalAttributes :: Array (IProp I.HTMLa i)
+     }
+  -> Array (HH.HTML w i)
+  -> HH.HTML w i
 buttonLinkView variant config =
   let
     commonProps =
@@ -48,7 +56,7 @@ buttonLinkView variant config =
 
 ------------------------------------------------
 
-buttonLink :: forall slots . H.Component Query (Input Config (H.ComponentSlot slots Aff Action) Action) Message Aff
+buttonLink :: forall slots . H.Component Query (Input Config) Message Aff
 buttonLink =
   H.mkComponent
     { initialState: initialState
@@ -58,13 +66,13 @@ buttonLink =
           { additionalClasses: Ripple.rippleClasses state.rippleState <> state.input.config.additionalClasses
           , additionalAttributes:
             [ HP.style (Ripple.rippleStyles state.rippleState)
-            , HE.onClick (const Click)
+            , HE.onClick (const Action__Click)
             , HP.ref buttonRefLabel
             ]
-            <> (Ripple.rippleProps <#> map RippleAction)
-            <> state.input.config.additionalAttributes
+            <> (Ripple.rippleProps <#> map Action__RippleAction)
+            <> fromPlainIPropArray state.input.config.additionalAttributes
           }
-          state.input.content
+          (fromPlainHTMLArray state.input.content)
     , eval: H.mkEval $ H.defaultEval
         { handleAction = handleAction
         }
@@ -73,11 +81,12 @@ buttonLink =
     disabled :: Boolean
     disabled = false
 
-    handleAction :: Action -> H.HalogenM (State Config (H.ComponentSlot slots Aff Action) Action) Action slots Message Aff Unit
+    -- | handleAction :: Action Config -> H.HalogenM (State Config) (Action Config) slots Message Aff Unit
     handleAction =
       case _ of
-          RippleAction rippleAction -> H.getHTMLElementRef buttonRefLabel >>= traverse_ \rootElement -> do
+          Action__RippleAction rippleAction -> H.getHTMLElementRef buttonRefLabel >>= traverse_ \rootElement -> do
             state <- H.get
 
             liftRippleHandleAction state $ Ripple.handleAction disabled rootElement rippleAction
-          Click -> H.raise Message__Clicked
+          Action__Click -> H.raise Message__Clicked
+          Action__Receive input -> H.modify_ (\state -> state { input = input })

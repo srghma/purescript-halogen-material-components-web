@@ -3,6 +3,8 @@ module HalogenMWC.Utils where
 import Protolude
 
 import Data.Either (hush)
+import Data.Lens (Lens')
+import Data.Lens as Lens
 import Effect.Timer as Timer
 import Effect.Unsafe (unsafePerformEffect)
 import FRP.Event as Event
@@ -10,14 +12,26 @@ import Foreign (F, Foreign)
 import Foreign (readBoolean, unsafeToForeign) as Foreign
 import Foreign.Index (readProp) as Foreign
 import Halogen (ClassName, PropName)
+import Halogen.HTML (HTML(..)) as HH
+import Halogen.HTML (fromPlainHTML)
 import Halogen.HTML.Core (Prop(..), PropValue)
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties (IProp)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.Event.Event as E
 import Web.Event.EventTarget as ET
-import Data.Lens as Lens
-import Data.Lens (Lens')
+
+fromPlainHTMLArray :: forall w i . Array (HH.HTML Void Void) -> Array (HH.HTML w i)
+fromPlainHTMLArray = unsafeCoerce
+-- | fromPlainHTMLArray = map fromPlainHTML
+
+fromPlainIProp :: forall r i . IProp r Void -> IProp r i
+fromPlainIProp = unsafeCoerce
+-- | fromPlainIProp = map absurd
+
+fromPlainIPropArray :: forall r i . Array (IProp r Void) -> Array (IProp r i)
+fromPlainIPropArray = unsafeCoerce
+-- | fromPlainIPropArray = map fromPlainIProp
 
 prop :: forall value r i. PropName value -> PropValue -> IProp r i
 prop = unsafeCoerce Property

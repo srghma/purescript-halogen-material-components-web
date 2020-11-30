@@ -16,20 +16,21 @@ import HalogenMWC.Ripple.Bounded as Ripple
 
 type Query = Const Void
 
-type Input config w i =
+type Input config =
   { variant :: Variant
-  , config :: config i
-  , content :: Array (HH.HTML w i)
+  , config :: config
+  , content :: Array (HH.HTML Void Void)
   }
 
-type State config w i =
-  { input       :: Input config w i
+type State config =
+  { input       :: Input config
   , rippleState :: Ripple.RippleState
   }
 
-data Action
-  = RippleAction Ripple.RippleAction
-  | Click
+data Action config
+  = Action__RippleAction Ripple.RippleAction
+  | Action__Click
+  | Action__Receive (Input config)
 
 data Message
   = Message__Clicked
@@ -40,9 +41,10 @@ buttonRefLabel = H.RefLabel "button"
 isUnbounded :: Boolean
 isUnbounded = false
 
+initialState :: forall config . Input config -> State config
 initialState input =
   { input
   , rippleState: Ripple.initialRippleState
   }
 
-liftRippleHandleAction state x = Halogen.Query.HalogenM.imapState (\rippleState -> state { rippleState = rippleState }) (\state -> state.rippleState) $ Halogen.Query.HalogenM.mapAction RippleAction $ x
+liftRippleHandleAction state x = Halogen.Query.HalogenM.imapState (\rippleState -> state { rippleState = rippleState }) (\state -> state.rippleState) $ Halogen.Query.HalogenM.mapAction Action__RippleAction $ x

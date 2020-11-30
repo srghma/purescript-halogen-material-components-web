@@ -1,5 +1,7 @@
 module HalogenMWC.Implementation.TextField.Component.Shared where
 
+import HalogenMWC.Implementation.TextField.View.Input
+import HalogenMWC.Implementation.TextField.View.Shared
 import Material.Classes.LineRipple
 import Material.Classes.Textfield
 import MaterialIconsFont.Classes
@@ -10,7 +12,7 @@ import DOM.HTML.Indexed.InputType (InputType(..))
 import Data.Array as Array
 import Data.Int as Int
 import Data.Lens.Record as Lens
-import Halogen (AttrName(..), ElemName(..), PropName(..))
+import Halogen (AttrName(..), ElemName(..), HalogenM(..), HalogenQ, PropName(..))
 import Halogen as H
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
@@ -20,6 +22,7 @@ import Halogen.HTML.Properties as HP
 import Halogen.Query.HalogenM as Halogen.Query.HalogenM
 import HalogenMWC.Utils (setEfficiently, setEfficientlyCustomEq)
 import HalogenMWC.Utils as Utils
+import Prim.Row (class Nub, class Union)
 import Record as Record
 import Record.Builder as Record.Builder
 import Web.HTML (HTMLElement)
@@ -30,8 +33,6 @@ import Web.TouchEvent.TouchEvent as Web.TouchEvent.TouchEvent
 import Web.TouchEvent.TouchList as Web.TouchEvent.TouchList
 import Web.UIEvent.MouseEvent (MouseEvent)
 import Web.UIEvent.MouseEvent as Web.UIEvent.MouseEvent
-import HalogenMWC.Implementation.TextField.View.Shared
-import HalogenMWC.Implementation.TextField.View.Input
 
 type Query = Const Void
 
@@ -40,10 +41,12 @@ data Message
 
 type ChildSlots = ()
 
+initialState :: ∀ t14 t16. Union t16 ( focused :: Boolean ) t14 ⇒ Record t16 → Record t14
 initialState = \input -> Record.union input
   { focused: false
   }
 
+eval :: ∀ t57 t60 t64 t73 t79 t80 t81. Union t80 ( focused :: Boolean | t79 ) t81 ⇒ Nub t81 ( focused :: Boolean | t79 ) ⇒ HalogenQ t73 (Action (Record t80)) (Record t80) t64 → HalogenM { focused ∷ Boolean | t79 } (Action (Record t80)) t60 Message t57 t64
 eval = H.mkEval $ H.defaultEval
   { handleAction = handleAction
   , receive = \input -> Just $ Action__Receive input

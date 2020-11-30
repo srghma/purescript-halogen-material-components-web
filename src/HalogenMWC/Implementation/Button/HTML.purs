@@ -13,6 +13,8 @@ data Variant
   | Unelevated
   | Outlined
 
+derive instance eqVariant :: Eq Variant
+
 commonClasses :: Variant -> Array ClassName
 commonClasses = \variant -> variantCs variant <> other
   where
