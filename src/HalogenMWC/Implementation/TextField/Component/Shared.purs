@@ -80,7 +80,7 @@ additionalAttributes =
   { additionalAttributesInput
   }
   where
-    additionalAttributesInput :: forall input . Array (IProp I.HTMLinput (Action input))
+    additionalAttributesInput :: Array (IProp I.HTMLinput (Action input))
     additionalAttributesInput =
       -- https://github.com/material-components/material-components-web/blob/a3212b2099765947f2a41d71af2cd95fcbca4b97/packages/mdc-textfield/foundation.ts#L151
       [ HE.onFocus (const Action__Focus)

@@ -3,7 +3,7 @@ module HalogenMWC.Implementation.TextField.View.Shared where
 import Protolude
 
 import Data.Array as Array
-import Halogen (ClassName(..))
+import Halogen (ClassName)
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP

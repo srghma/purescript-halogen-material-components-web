@@ -7,7 +7,6 @@ import Protolude
 import Data.Array as Array
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
-import HalogenMWC.Implementation.TextField.View.Shared (LabelConfig(..), floatingLabelSpanElement)
 
 wrapInputElement :: ∀ t2 t3 t42. { floatAbove ∷ Boolean , focused ∷ Boolean , label ∷ LabelConfig , required ∷ Boolean , shake ∷ Boolean | t42 } → Array (HH.HTML t3 t2) → Array (HH.HTML t3 t2)
 wrapInputElement = \config inputElement ->

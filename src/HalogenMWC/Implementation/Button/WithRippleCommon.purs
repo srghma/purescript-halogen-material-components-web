@@ -2,7 +2,6 @@ module HalogenMWC.Implementation.Button.WithRippleCommon where
 
 import Protolude
 
-import Halogen (HalogenM(..))
 import Halogen as H
 import Halogen.HTML as HH
 import Halogen.Query.HalogenM as Halogen.Query.HalogenM

@@ -118,7 +118,7 @@ maybeSuffixElement = map \s -> suffixElement [ HH.text s ]
 -------------------------
 
 configToRenderBoth
-  :: forall i w r
+  :: forall r
    . { characterCounterOrMaxLength :: CharacterCounterOrMaxLength
      , helperText :: Maybe
                        { id :: String
