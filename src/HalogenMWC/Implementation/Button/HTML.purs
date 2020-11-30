@@ -7,18 +7,18 @@ import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Material.Classes.Button (mdc_button, mdc_button____outlined, mdc_button____raised, mdc_button____touch, mdc_button____unelevated, mdc_button__ripple, mdc_button__touch, mdc_touch_target_wrapper)
 
-data Variant
+data ButtonVariant
   = Text
   | Raised
   | Unelevated
   | Outlined
 
-derive instance eqVariant :: Eq Variant
+derive instance eqVariant :: Eq ButtonVariant
 
-commonClasses :: Variant -> Array ClassName
+commonClasses :: ButtonVariant -> Array ClassName
 commonClasses = \variant -> variantCs variant <> other
   where
-    variantCs :: Variant -> Array ClassName
+    variantCs :: ButtonVariant -> Array ClassName
     variantCs variant = case variant of
       Text -> []
       Raised -> [ mdc_button____raised ]

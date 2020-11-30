@@ -1,21 +1,18 @@
 module HalogenMWC.Implementation.TextField.View.Input where
 
-import HalogenMWC.Implementation.TextField.View.Shared
-import Material.Classes.Textfield
+import HalogenMWC.Implementation.TextField.View.Shared (LabelConfig, inputARIALabelProp, isDirty, isNoLabel, textFieldLabelClasses)
+import Material.Classes.Textfield (mdc_text_field__affix, mdc_text_field__affix____prefix, mdc_text_field__affix____suffix, mdc_text_field__input)
 import Protolude
 
-import DOM.HTML.Indexed (HTMLinput)
 import DOM.HTML.Indexed as I
-import DOM.HTML.Indexed.InputType (InputType(..))
+import DOM.HTML.Indexed.InputType (InputType)
 import Data.Array as Array
 import Data.String as String
 import Halogen (AttrName(..), ClassName)
 import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as HP.ARIA
 import HalogenMWC.Implementation.TextField.View.CharacterCounter (CharacterCounterConfig)
-import HalogenMWC.Implementation.TextField.View.CharacterCounter as CharacterCounter
 import HalogenMWC.Implementation.TextField.View.FilledShared as FilledShared
 import HalogenMWC.Implementation.TextField.View.HelperText (HelperTextConfig)
 import HalogenMWC.Implementation.TextField.View.HelperText as HelperText
@@ -121,8 +118,17 @@ maybeSuffixElement = map \s -> suffixElement [ HH.text s ]
 -------------------------
 
 configToRenderBoth
-  :: forall i w
-   . _
+  :: forall i w r
+   . { characterCounterOrMaxLength :: CharacterCounterOrMaxLength
+     , helperText :: Maybe
+                       { id :: String
+                       , persistent :: Boolean
+                       , text :: String
+                       , validation :: Boolean
+                       }
+     , value :: String
+     | r
+     }
   -> { helperText       :: Maybe HelperTextConfig
      , characterCounter :: Maybe CharacterCounterConfig
      }
@@ -138,6 +144,32 @@ configToRenderBoth config =
            _ -> Nothing
   }
 
+renderInternalAndBoth :: forall t111 t98 t99.
+  ({ additionalClassesRoot :: Array ClassName
+   , characterCounterOrMaxLength :: CharacterCounterOrMaxLength
+   , helperText :: Maybe
+                     { id :: String
+                     , persistent :: Boolean
+                     , text :: String
+                     , validation :: Boolean
+                     }
+   , value :: String
+   | t111
+   }
+   -> HH.HTML t99 t98
+  )
+  -> { additionalClassesRoot :: Array ClassName
+     , characterCounterOrMaxLength :: CharacterCounterOrMaxLength
+     , helperText :: Maybe
+                       { id :: String
+                       , persistent :: Boolean
+                       , text :: String
+                       , validation :: Boolean
+                       }
+     , value :: String
+     | t111
+     }
+     -> HH.HTML t99 t98
 renderInternalAndBoth renderInternal = \config -> HH.div [ HP.classes config.additionalClassesRoot ] $ [ renderInternal config ] <> HelperTextAndCharacterCounter.renderBoth (configToRenderBoth config)
 
 filled :: forall w i . ConfigFilled i -> HH.HTML w i

@@ -5,8 +5,7 @@ module HalogenMWC.Ripple.Unbounded
 
 import Protolude
 
-import Data.Array (concat) as Array
-import Halogen (ClassName(..))
+import Halogen (ClassName)
 import FRP.Event as Event
 import Halogen as H
 import HalogenMWC.Utils as Utils
@@ -15,8 +14,7 @@ import Web.HTML as Web.HTML
 import Web.HTML.Window as Web.HTML.Window
 import HalogenMWC.Implementation.Ripple.Common (RippleState, initialRippleState) as Export
 import HalogenMWC.Implementation.Ripple.HTML (rippleStyles) as Export
-import HalogenMWC.Implementation.Ripple.Common
-import HalogenMWC.Implementation.Ripple.Constants
+import HalogenMWC.Implementation.Ripple.Common (RippleAction__Common, RippleState, handleAction__Common, layoutAndModifyState)
 import HalogenMWC.Ripple.Bounded as Bounded
 import HalogenMWC.Implementation.Ripple.HTML as HalogenMWC.Implementation.Ripple.HTML
 import Halogen.HTML (IProp)
@@ -24,7 +22,7 @@ import Web.TouchEvent (TouchEvent)
 import Web.UIEvent.FocusEvent (FocusEvent)
 import Web.UIEvent.MouseEvent (MouseEvent)
 import Halogen.Query.HalogenM as Halogen.Query.HalogenM
-import Material.Classes.Ripple
+import Material.Classes.Ripple (mdc_ripple_upgraded____unbounded)
 
 data RippleAction
   = Initialize

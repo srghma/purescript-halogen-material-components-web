@@ -1,18 +1,14 @@
 module HalogenMWC.Implementation.TextField.View.TextArea where
 
-import HalogenMWC.Implementation.TextField.View.Shared
-import Material.Classes.Textfield
+import HalogenMWC.Implementation.TextField.View.Shared (LabelConfig, inputARIALabelProp)
+import Material.Classes.Textfield (mdc_text_field____textarea, mdc_text_field____with_internal_counter, mdc_text_field__input, mdc_text_field__resizer)
 import Protolude
 
-import DOM.HTML.Indexed.InputType (InputType)
 import Data.Array as Array
 import Halogen (AttrName(..), ClassName)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as HP.ARIA
-import HalogenMWC.Implementation.TextField.View.FilledShared as FilledShared
 import HalogenMWC.Implementation.TextField.View.HelperText as HelperText
-import HalogenMWC.Implementation.TextField.View.OutlinedShared as OutlinedShared
 import HalogenMWC.Implementation.TextField.View.CharacterCounter as CharacterCounter
 
 data CharacterCounterOrMaxLengthType
@@ -46,8 +42,10 @@ characterCounterOrMaxLength =
 resizerClass :: Boolean -> Array ClassName
 resizerClass = if _ then [ mdc_text_field__resizer ] else []
 
+textareaClasses :: Array ClassName
 textareaClasses = [ mdc_text_field____textarea ]
 
+internalCounterClass :: Maybe CharacterCounterOrMaxLengthType -> Array ClassName
 internalCounterClass =
   case _ of
     Just (CharacterCounterType__Internal _) -> [ mdc_text_field____with_internal_counter ]
@@ -55,6 +53,19 @@ internalCounterClass =
 
 -------------------------
 
+inputElement
+  :: forall i w r t81.
+  { cols :: Int
+  , disabled :: Boolean
+  , helperTextId :: Maybe { id :: String | r }
+  , internalCounterOrMaxLength :: Maybe CharacterCounterOrMaxLengthType
+  , label :: LabelConfig
+  , minLength :: Maybe Int
+  , resizable :: Boolean
+  , rows :: Int
+  | t81
+  }
+  -> HH.HTML w i
 inputElement = \config ->
   HH.span
   [ HP.classes (resizerClass config.resizable)

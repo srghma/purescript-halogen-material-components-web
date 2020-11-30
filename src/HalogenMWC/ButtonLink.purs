@@ -13,13 +13,12 @@ import Halogen.HTML as HH
 import Halogen.HTML.Core (ClassName)
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Events as HE
-import Halogen.Query.HalogenM as Halogen.Query.HalogenM
-import HalogenMWC.Implementation.Button.HTML (Variant)
-import HalogenMWC.Implementation.Button.HTML (Variant(..), commonClasses, commonHtml, wrapTouch) as Implementation
+import HalogenMWC.Implementation.Button.HTML (ButtonVariant)
+import HalogenMWC.Implementation.Button.HTML (ButtonVariant(..), commonClasses, commonHtml, wrapTouch) as Implementation
 import HalogenMWC.Implementation.Button.Insides (buttonIconMaterialIcons, buttonLabel) as Insides
-import HalogenMWC.Implementation.Button.WithRippleCommon
+import HalogenMWC.Implementation.Button.WithRippleCommon (Action(..), Input, Message(..), Query, State, buttonRefLabel, initialState, isUnbounded, liftRippleHandleAction)
 import HalogenMWC.Ripple.Bounded as Ripple
-import HalogenMWC.Utils
+import HalogenMWC.Utils (fromPlainHTMLArray, fromPlainIPropArray)
 
 
 type Config =
@@ -35,7 +34,7 @@ defaultConfig =
 
 buttonLinkView
   :: forall w i
-   . Variant
+   . ButtonVariant
   -> { additionalClasses :: Array ClassName
      , additionalAttributes :: Array (IProp I.HTMLa i)
      }
@@ -56,7 +55,7 @@ buttonLinkView variant config =
 
 ------------------------------------------------
 
-buttonLink :: forall slots . H.Component Query (Input Config) Message Aff
+buttonLink :: H.Component Query (Input Config) Message Aff
 buttonLink =
   H.mkComponent
     { initialState: initialState

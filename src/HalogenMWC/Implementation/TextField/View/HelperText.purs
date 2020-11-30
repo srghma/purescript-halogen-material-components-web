@@ -1,17 +1,13 @@
 module HalogenMWC.Implementation.TextField.View.HelperText where
 
-import Material.Classes.Textfield
 import Protolude
 
-import DOM.HTML.Indexed.InputType (InputType)
 import Data.Array as Array
-import Halogen (ClassName)
+import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as HP.ARIA
-import HalogenMWC.Implementation.TextField.View.Shared
-import HalogenMWC.Implementation.TextField.View.FilledShared as FilledShared
-import HalogenMWC.Implementation.TextField.View.OutlinedShared as OutlinedShared
+import Material.Classes.Textfield (mdc_text_field_helper_text, mdc_text_field_helper_text____persistent, mdc_text_field_helper_text____validation_msg)
 
 type HelperTextConfig =
   { id :: String
@@ -20,6 +16,12 @@ type HelperTextConfig =
   , validation :: Boolean
   }
 
+maybeInputProps :: forall t12 t5 t6.
+  Maybe
+    { id :: String
+    | t12
+    }
+  -> Array (IProp t6 t5)
 maybeInputProps =
   case _ of
     Just { id } -> inputProps id

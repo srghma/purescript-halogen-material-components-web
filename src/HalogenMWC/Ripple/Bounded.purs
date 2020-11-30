@@ -6,20 +6,19 @@ module HalogenMWC.Ripple.Bounded
 import Protolude
 
 import Data.Array (concat) as Array
-import Halogen (ClassName(..))
+import Halogen (ClassName)
 import Halogen as H
 import HalogenMWC.Implementation.Ripple.Common (RippleState, initialRippleState) as Export
 import HalogenMWC.Implementation.Ripple.HTML (rippleStyles) as Export
 import HalogenMWC.Implementation.Ripple.HTML as HalogenMWC.Implementation.Ripple.HTML
-import HalogenMWC.Implementation.Ripple.Common
+import HalogenMWC.Implementation.Ripple.Common (ActivationState(..), RippleAction__Common, RippleState, handleAction__Common)
 import Web.HTML as Web.HTML
-import HalogenMWC.Implementation.Ripple.Constants
 import Halogen.Query.HalogenM as Halogen.Query.HalogenM
 import Halogen.HTML (IProp)
 import Web.TouchEvent (TouchEvent)
 import Web.UIEvent.FocusEvent (FocusEvent)
 import Web.UIEvent.MouseEvent (MouseEvent)
-import Material.Classes.Ripple
+import Material.Classes.Ripple (mdc_ripple_upgraded, mdc_ripple_upgraded____background_focused, mdc_ripple_upgraded____foreground_activation, mdc_ripple_upgraded____foreground_deactivation)
 
 newtype RippleAction = RippleAction RippleAction__Common
 

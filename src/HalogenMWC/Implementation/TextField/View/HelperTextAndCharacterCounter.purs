@@ -1,23 +1,13 @@
 module HalogenMWC.Implementation.TextField.View.HelperTextAndCharacterCounter where
 
-import HalogenMWC.Implementation.TextField.View.Shared
-import Material.Classes.Textfield
 import Protolude
 
-import DOM.HTML.Indexed as I
-import DOM.HTML.Indexed.InputType (InputType(..))
 import Data.Array as Array
-import Halogen (AttrName(..), ClassName)
-import Halogen.HTML (IProp)
 import Halogen.HTML as HH
-import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as HP.ARIA
 import HalogenMWC.Implementation.TextField.View.CharacterCounter as CharacterCounter
 import HalogenMWC.Implementation.TextField.View.CharacterCounter (CharacterCounterConfig)
 import HalogenMWC.Implementation.TextField.View.HelperText (HelperTextConfig)
 import HalogenMWC.Implementation.TextField.View.HelperText as HelperText
-import HalogenMWC.Implementation.TextField.View.FilledShared as FilledShared
-import HalogenMWC.Implementation.TextField.View.OutlinedShared as OutlinedShared
 import HalogenMWC.Implementation.TextField.View.HelperLine as HelperLine
 
 renderBoth

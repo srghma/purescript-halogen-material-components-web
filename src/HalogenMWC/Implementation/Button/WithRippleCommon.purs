@@ -2,22 +2,17 @@ module HalogenMWC.Implementation.Button.WithRippleCommon where
 
 import Protolude
 
-import DOM.HTML.Indexed as I
+import Halogen (HalogenM(..))
 import Halogen as H
-import Halogen.HTML (IProp)
 import Halogen.HTML as HH
-import Halogen.HTML.Core (ClassName)
-import Halogen.HTML.Properties as HP
 import Halogen.Query.HalogenM as Halogen.Query.HalogenM
-import HalogenMWC.Implementation.Button.HTML (Variant)
-import HalogenMWC.Implementation.Button.HTML (Variant(..), commonClasses, commonHtml, wrapTouch) as Implementation
-import HalogenMWC.Implementation.Button.Insides (buttonIconMaterialIcons, buttonLabel) as Insides
+import HalogenMWC.Implementation.Button.HTML (ButtonVariant)
 import HalogenMWC.Ripple.Bounded as Ripple
 
 type Query = Const Void
 
 type Input config =
-  { variant :: Variant
+  { variant :: ButtonVariant
   , config :: config
   , content :: Array (HH.HTML Void Void)
   }
@@ -47,4 +42,13 @@ initialState input =
   , rippleState: Ripple.initialRippleState
   }
 
-liftRippleHandleAction state x = Halogen.Query.HalogenM.imapState (\rippleState -> state { rippleState = rippleState }) (\state -> state.rippleState) $ Halogen.Query.HalogenM.mapAction Action__RippleAction $ x
+liftRippleHandleAction :: forall output slots config.
+  State config
+  -> H.HalogenM Ripple.RippleState Ripple.RippleAction slots output Aff Unit
+  -> H.HalogenM (State config) (Action config) slots output Aff Unit
+liftRippleHandleAction state x =
+  Halogen.Query.HalogenM.imapState
+  (\rippleState -> state { rippleState = rippleState })
+  (\state' -> state'.rippleState)
+  $ Halogen.Query.HalogenM.mapAction Action__RippleAction
+  $ x

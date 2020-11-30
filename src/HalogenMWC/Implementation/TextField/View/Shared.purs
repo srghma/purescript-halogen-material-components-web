@@ -1,14 +1,14 @@
 module HalogenMWC.Implementation.TextField.View.Shared where
 
-import Material.Classes.Textfield
 import Protolude
 
-import DOM.HTML.Indexed.InputType (InputType)
 import Data.Array as Array
-import Halogen (ClassName)
+import Halogen (ClassName(..))
+import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
 import Halogen.HTML.Properties.ARIA as HP.ARIA
+import Material.Classes.Textfield (mdc_floating_label, mdc_floating_label____float_above, mdc_floating_label____required, mdc_floating_label____shake, mdc_text_field, mdc_text_field____disabled, mdc_text_field____end_aligned, mdc_text_field____filled, mdc_text_field____focused, mdc_text_field____fullwidth, mdc_text_field____invalid, mdc_text_field____label_floating, mdc_text_field____ltr_text, mdc_text_field____no_label, mdc_text_field____outlined, mdc_text_field____textarea)
 
 data LabelConfig
   = LabelConfig__With
@@ -18,6 +18,20 @@ data LabelConfig
   | LabelConfig__Without
     String -- labelText in props
 
+textFieldLabelClasses ::
+  { disabled :: Boolean
+  , endAligned :: Boolean
+  , filled :: Boolean
+  , focused :: Boolean
+  , fullwidth :: Boolean
+  , invalid :: Boolean
+  , labelFloating :: Boolean
+  , ltrText :: Boolean
+  , noLabel :: Boolean
+  , outlined :: Boolean
+  , textarea :: Boolean
+  }
+  -> Array ClassName
 textFieldLabelClasses = \config ->
   Array.catMaybes
   [ Just mdc_text_field
@@ -40,6 +54,7 @@ isNoLabel =
       LabelConfig__Without _ -> true
       _ -> false
 
+inputARIALabelProp :: forall t51 t52. LabelConfig -> Array (IProp t52 t51)
 inputARIALabelProp =
   case _ of
     LabelConfig__With labelConfig -> [ HP.ARIA.labelledBy labelConfig.id ] -- this is a link to floatingLabelSpanElement

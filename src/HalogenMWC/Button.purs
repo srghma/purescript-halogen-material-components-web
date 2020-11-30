@@ -3,24 +3,21 @@ module HalogenMWC.Button
   , module Export
   ) where
 
-import HalogenMWC.Implementation.Button.HTML
-import HalogenMWC.Implementation.Button.WithRippleCommon
-import HalogenMWC.Utils
-import Protolude hiding (Variant)
+import HalogenMWC.Implementation.Button.HTML (ButtonVariant, commonClasses, commonHtml, wrapTouch)
+import HalogenMWC.Implementation.Button.WithRippleCommon (Action(..), Input, Message(..), Query, buttonRefLabel, initialState, liftRippleHandleAction)
+import HalogenMWC.Utils (fromPlainHTMLArray, fromPlainIPropArray)
+import Protolude
 
 import DOM.HTML.Indexed as I
-import Data.Lens.Record as Lens
-import Data.Symbol (SProxy(..))
 import Halogen as H
-import Halogen.HTML (IProp, fromPlainHTML)
+import Halogen.HTML (IProp)
 import Halogen.HTML as HH
 import Halogen.HTML.Core (ClassName)
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Halogen.Query.HalogenM as Halogen.Query.HalogenM
-import HalogenMWC.Implementation.Button.HTML (Variant(..)) as Export
-import HalogenMWC.Implementation.Button.Insides as Export
-import HalogenMWC.Implementation.Button.WithRippleCommon as Export
+import HalogenMWC.Implementation.Button.HTML (ButtonVariant(..)) as Export
+import HalogenMWC.Implementation.Button.Insides (buttonIconMaterialIcons, buttonLabel) as Export
+import HalogenMWC.Implementation.Button.WithRippleCommon (Action(..), Input, Message(..), Query, State, buttonRefLabel, initialState, isUnbounded, liftRippleHandleAction) as Export
 import HalogenMWC.Ripple.Bounded as Ripple
 
 type Config =
@@ -38,7 +35,7 @@ defaultConfig =
 
 buttonView
   :: forall w i
-   . Variant
+   . ButtonVariant
   -> { disabled :: Boolean
      , additionalClasses :: Array ClassName
      , additionalAttributes :: Array (IProp I.HTMLbutton i)

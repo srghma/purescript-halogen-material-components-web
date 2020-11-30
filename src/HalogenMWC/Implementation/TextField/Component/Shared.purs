@@ -1,38 +1,20 @@
 module HalogenMWC.Implementation.TextField.Component.Shared where
 
-import HalogenMWC.Implementation.TextField.View.Input
-import HalogenMWC.Implementation.TextField.View.Shared
-import Material.Classes.LineRipple
-import Material.Classes.Textfield
-import MaterialIconsFont.Classes
+import HalogenMWC.Implementation.TextField.View.Input (CharacterCounterOrMaxLength(..), ConfigManagedByUser)
+import HalogenMWC.Implementation.TextField.View.Shared (LabelConfig(..))
 import Protolude
 
 import DOM.HTML.Indexed as I
 import DOM.HTML.Indexed.InputType (InputType(..))
-import Data.Array as Array
-import Data.Int as Int
 import Data.Lens.Record as Lens
-import Halogen (AttrName(..), ElemName(..), HalogenM(..), HalogenQ, PropName(..))
+import Halogen (HalogenM, HalogenQ)
 import Halogen as H
 import Halogen.HTML (IProp)
-import Halogen.HTML as HH
-import Halogen.HTML.Core (ClassName)
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties as HP
-import Halogen.Query.HalogenM as Halogen.Query.HalogenM
-import HalogenMWC.Utils (setEfficiently, setEfficientlyCustomEq)
-import HalogenMWC.Utils as Utils
+import HalogenMWC.Utils (setEfficiently)
 import Prim.Row (class Nub, class Union)
 import Record as Record
-import Record.Builder as Record.Builder
-import Web.HTML (HTMLElement)
-import Web.HTML.HTMLElement as Web.HTML.HTMLElement
-import Web.TouchEvent (TouchEvent)
-import Web.TouchEvent.Touch as Web.TouchEvent.Touch
-import Web.TouchEvent.TouchEvent as Web.TouchEvent.TouchEvent
-import Web.TouchEvent.TouchList as Web.TouchEvent.TouchList
-import Web.UIEvent.MouseEvent (MouseEvent)
-import Web.UIEvent.MouseEvent as Web.UIEvent.MouseEvent
 
 type Query = Const Void
 
@@ -81,7 +63,7 @@ defaultConfigShared =
   , ltrText: false
   }
 
-setEfficientlyStateFocused :: forall activationState action . Boolean -> _ -> _
+setEfficientlyStateFocused :: forall r . Boolean -> { focused :: Boolean | r } -> { focused :: Boolean | r }
 setEfficientlyStateFocused = setEfficiently (Lens.prop (SProxy :: SProxy "focused"))
 
 data Action input
@@ -90,6 +72,10 @@ data Action input
   | Action__Input String
   | Action__Receive input
 
+additionalAttributes
+  :: forall input .
+  { additionalAttributesInput :: Array (IProp I.HTMLinput (Action input))
+  }
 additionalAttributes =
   { additionalAttributesInput
   }
@@ -103,6 +89,26 @@ additionalAttributes =
       , HP.ref inputRefLabel
       ]
 
+handleAction :: forall t25 t27 t41 t47 t49 t50.
+  Union t27
+    ( focused :: Boolean
+    | t41
+    )
+    t25
+   => Nub t25
+        ( focused :: Boolean
+        | t41
+        )
+       => Action (Record t27)
+          -> HalogenM
+               { focused :: Boolean
+               | t41
+               }
+               t50
+               t49
+               Message
+               t47
+               Unit
 handleAction action =
   case action of
        Action__Receive newInput -> H.modify_ $ Record.merge newInput

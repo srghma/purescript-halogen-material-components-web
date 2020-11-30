@@ -1,8 +1,6 @@
 module HalogenMWC.Implementation.Ripple.Constants where
 
-import Material.Classes.Ripple
 
-import Halogen.HTML.Core (ClassName)
 import Web.Event.Event (EventType(..))
 
 strings ::

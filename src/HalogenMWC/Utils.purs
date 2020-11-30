@@ -12,8 +12,7 @@ import Foreign (F, Foreign)
 import Foreign (readBoolean, unsafeToForeign) as Foreign
 import Foreign.Index (readProp) as Foreign
 import Halogen (ClassName, PropName)
-import Halogen.HTML (HTML(..)) as HH
-import Halogen.HTML (fromPlainHTML)
+import Halogen.HTML (HTML) as HH
 import Halogen.HTML.Core (Prop(..), PropValue)
 import Halogen.HTML.Events as HE
 import Halogen.HTML.Properties (IProp)

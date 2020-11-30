@@ -1,17 +1,13 @@
 module HalogenMWC.Implementation.TextField.View.FilledShared where
 
-import HalogenMWC.Implementation.TextField.View.Shared
-import Material.Classes.Textfield
+import HalogenMWC.Implementation.TextField.View.Shared (LabelConfig(..), floatingLabelSpanElement)
+import Material.Classes.Textfield (mdc_line_ripple, mdc_line_ripple____active, mdc_text_field__ripple)
 import Protolude
 
-import DOM.HTML.Indexed.InputType (InputType)
 import Data.Array as Array
-import Halogen (ClassName)
 import Halogen.HTML as HH
 import Halogen.HTML.Properties as HP
-import Halogen.HTML.Properties.ARIA as HP.ARIA
-import HalogenMWC.Utils (styleVar)
-import HalogenMWC.Implementation.TextField.View.Shared
+import HalogenMWC.Implementation.TextField.View.Shared (LabelConfig(..), floatingLabelSpanElement)
 
 wrapInputElement :: ∀ t2 t3 t42. { floatAbove ∷ Boolean , focused ∷ Boolean , label ∷ LabelConfig , required ∷ Boolean , shake ∷ Boolean | t42 } → Array (HH.HTML t3 t2) → Array (HH.HTML t3 t2)
 wrapInputElement = \config inputElement ->

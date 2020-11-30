@@ -3,14 +3,12 @@ module HalogenMWC.Implementation.Ripple.HTML where
 import HalogenMWC.Implementation.Ripple.Common (RippleAction__Common, RippleState)
 import Protolude
 
-import Data.Array as Array
 import Data.String as String
 import Halogen.HTML (IProp)
-import Halogen.HTML.Core (ClassName)
 import Halogen.HTML.Events as HE
-import HalogenMWC.Implementation.Ripple.Common (ActivationState(..), RippleAction__Common(..), StyleVars(..)) as Ripple
+import HalogenMWC.Implementation.Ripple.Common (RippleAction__Common(..), StyleVars(..)) as Ripple
 import HalogenMWC.Implementation.Ripple.Constants (strings) as Ripple
-import HalogenMWC.Utils
+import HalogenMWC.Utils (styleVar)
 import Web.TouchEvent (TouchEvent)
 import Web.UIEvent.FocusEvent (FocusEvent)
 import Web.UIEvent.MouseEvent (MouseEvent)
