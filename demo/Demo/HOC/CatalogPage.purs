@@ -19,6 +19,7 @@ import Halogen.HTML.Properties as HP
 -- | import HalogenMWC.List.Item as List.Item
 -- | import HalogenMWC.TopAppBar as TopAppBar
 import Demo.Blocks.Header as Demo.Blocks.Header
+import Type.Proxy (Proxy(..))
 
 type CatalogPage
   = { title :: String
@@ -66,11 +67,11 @@ render routeOfThisCatalogPage config state =
 
     [ HH.h1 [ HP.class_ mdc_typography____headline5 ] [ HH.text config.title ]
     , HH.p [ HP.class_ mdc_typography____body1 ] [ HH.text config.prelude ]
-    , HH.div hero [ HH.slot (SProxy :: SProxy "hero") unit config.hero unit absurd ]
+    , HH.div hero [ HH.slot (Proxy :: Proxy "hero") unit config.hero unit absurd ]
     , HH.h2 ([ HP.class_ mdc_typography____headline6 ] <> demoTitle) [ HH.text "Resources" ]
     , resourcesList config.resources
     , HH.h2 ([ HP.class_ mdc_typography____headline6 ] <> demoTitle) [ HH.text "Demos" ]
-    , HH.slot (SProxy :: SProxy "content") unit config.content unit absurd
+    , HH.slot (Proxy :: Proxy "content") unit config.content unit absurd
     ]
 
 
@@ -120,11 +121,11 @@ render routeOfThisCatalogPage config state =
     -- |         [ HH.div demoContentTransition
     -- |             [ HH.h1 [ HP.class_ mdc_typography____headline5 ] [ HH.text config.title ]
     -- |             , HH.p [ HP.class_ mdc_typography____body1 ] [ HH.text config.prelude ]
-    -- |             , HH.div hero [ HH.slot (SProxy :: SProxy "hero") unit config.hero unit absurd ]
+    -- |             , HH.div hero [ HH.slot (Proxy :: Proxy "hero") unit config.hero unit absurd ]
     -- |             , HH.h2 ([ HP.class_ mdc_typography____headline6 ] <> demoTitle) [ HH.text "Resources" ]
     -- |             , resourcesList config.resources
     -- |             , HH.h2 ([ HP.class_ mdc_typography____headline6 ] <> demoTitle) [ HH.text "Demos" ]
-    -- |             , HH.slot (SProxy :: SProxy "content") unit config.content unit absurd
+    -- |             , HH.slot (Proxy :: Proxy "content") unit config.content unit absurd
     -- |             ]
     -- |         ]
     -- |     ]

@@ -13,6 +13,7 @@ import Halogen.HTML.Properties as HP
 import HalogenMWC.Button as Button
 import HalogenMWC.ButtonLink as ButtonLink
 import Material.Classes.Typography (mdc_typography____subtitle1)
+import Type.Proxy
 
 type State = Unit
 
@@ -37,10 +38,10 @@ config =
 
       render =
         HH.div_
-          [ HH.slot_ (SProxy :: SProxy "text-button") unit Button.button ({ variant: Button.Text, config, content: [ HH.text "Text" ] })
-          , HH.slot_ (SProxy :: SProxy "raised-button") unit Button.button ({ variant: Button.Raised, config, content: [ HH.text "Raised" ] })
-          , HH.slot_ (SProxy :: SProxy "unelevated-button") unit Button.button ({ variant: Button.Unelevated, config, content: [ HH.text "Unelevated" ] })
-          , HH.slot_ (SProxy :: SProxy "outlined-button") unit Button.button ({ variant: Button.Outlined, config, content: [ HH.text "Outlined" ] })
+          [ HH.slot_ (Proxy :: Proxy "text-button") unit Button.button ({ variant: Button.Text, config, content: [ HH.text "Text" ] })
+          , HH.slot_ (Proxy :: Proxy "raised-button") unit Button.button ({ variant: Button.Raised, config, content: [ HH.text "Raised" ] })
+          , HH.slot_ (Proxy :: Proxy "unelevated-button") unit Button.button ({ variant: Button.Unelevated, config, content: [ HH.text "Unelevated" ] })
+          , HH.slot_ (Proxy :: Proxy "outlined-button") unit Button.button ({ variant: Button.Outlined, config, content: [ HH.text "Outlined" ] })
           ]
     in
       mkComponentStatic render
@@ -51,17 +52,17 @@ config =
         HH.div_ $
           [ HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Text Button" ]
 
-          , HH.slot_ (SProxy :: SProxy "text-button-default") unit Button.button
+          , HH.slot_ (Proxy :: Proxy "text-button-default") unit Button.button
             { variant: Button.Text
             , config: Button.defaultConfig { additionalClasses = buttonsRow.default.additionalClasses }
             , content: buttonsRow.default.html
             }
-          , HH.slot_ (SProxy :: SProxy "text-button-dense") unit Button.button
+          , HH.slot_ (Proxy :: Proxy "text-button-dense") unit Button.button
             { variant: Button.Text
             , config: Button.defaultConfig { additionalClasses = buttonsRow.dense.additionalClasses }
             , content: buttonsRow.dense.html
             }
-          , HH.slot_ (SProxy :: SProxy "text-button-icon") unit Button.button
+          , HH.slot_ (Proxy :: Proxy "text-button-icon") unit Button.button
             { variant: Button.Text
             , config: Button.defaultConfig { additionalClasses = buttonsRow.icon.additionalClasses }
             , content: buttonsRow.icon.html
@@ -69,17 +70,17 @@ config =
 
           , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Raised Button" ]
 
-          , HH.slot_ (SProxy :: SProxy "raised-button-default") unit Button.button
+          , HH.slot_ (Proxy :: Proxy "raised-button-default") unit Button.button
             { variant: Button.Raised
             , config: Button.defaultConfig { additionalClasses = buttonsRow.default.additionalClasses }
             , content: buttonsRow.default.html
             }
-          , HH.slot_ (SProxy :: SProxy "raised-button-dense") unit Button.button
+          , HH.slot_ (Proxy :: Proxy "raised-button-dense") unit Button.button
             { variant: Button.Raised
             , config: Button.defaultConfig { additionalClasses = buttonsRow.dense.additionalClasses }
             , content: buttonsRow.dense.html
             }
-          , HH.slot_ (SProxy :: SProxy "raised-button-icon") unit Button.button
+          , HH.slot_ (Proxy :: Proxy "raised-button-icon") unit Button.button
             { variant: Button.Raised
             , config: Button.defaultConfig { additionalClasses = buttonsRow.icon.additionalClasses }
             , content: buttonsRow.icon.html
@@ -87,17 +88,17 @@ config =
 
           , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Unelevated Button" ]
 
-          , HH.slot_ (SProxy :: SProxy "unelevated-button-default") unit Button.button
+          , HH.slot_ (Proxy :: Proxy "unelevated-button-default") unit Button.button
             { variant: Button.Unelevated
             , config: Button.defaultConfig { additionalClasses = buttonsRow.default.additionalClasses }
             , content: buttonsRow.default.html
             }
-          , HH.slot_ (SProxy :: SProxy "unelevated-button-dense") unit Button.button
+          , HH.slot_ (Proxy :: Proxy "unelevated-button-dense") unit Button.button
             { variant: Button.Unelevated
             , config: Button.defaultConfig { additionalClasses = buttonsRow.dense.additionalClasses }
             , content: buttonsRow.dense.html
             }
-          , HH.slot_ (SProxy :: SProxy "unelevated-button-icon") unit Button.button
+          , HH.slot_ (Proxy :: Proxy "unelevated-button-icon") unit Button.button
             { variant: Button.Unelevated
             , config: Button.defaultConfig { additionalClasses = buttonsRow.icon.additionalClasses }
             , content: buttonsRow.icon.html
@@ -105,17 +106,17 @@ config =
 
           , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Outlined Button" ]
 
-          , HH.slot_ (SProxy :: SProxy "outlined-button-default") unit Button.button
+          , HH.slot_ (Proxy :: Proxy "outlined-button-default") unit Button.button
             { variant: Button.Outlined
             , config: Button.defaultConfig { additionalClasses = buttonsRow.default.additionalClasses }
             , content: buttonsRow.default.html
             }
-          , HH.slot_ (SProxy :: SProxy "outlined-button-dense") unit Button.button
+          , HH.slot_ (Proxy :: Proxy "outlined-button-dense") unit Button.button
             { variant: Button.Outlined
             , config: Button.defaultConfig { additionalClasses = buttonsRow.dense.additionalClasses }
             , content: buttonsRow.dense.html
             }
-          , HH.slot_ (SProxy :: SProxy "outlined-button-icon") unit Button.button
+          , HH.slot_ (Proxy :: Proxy "outlined-button-icon") unit Button.button
             { variant: Button.Outlined
             , config: Button.defaultConfig { additionalClasses = buttonsRow.icon.additionalClasses }
             , content: buttonsRow.icon.html
@@ -123,17 +124,17 @@ config =
 
           , HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Shaped Button" ]
 
-          , HH.slot_ (SProxy :: SProxy "outlined-button-default") unit Button.button
+          , HH.slot_ (Proxy :: Proxy "outlined-button-default") unit Button.button
             { variant: Button.Outlined
             , config: Button.defaultConfig { additionalClasses = buttonsRow.default.additionalClasses <>  [ Demo.Pages.Button.Css.styles.shapedButtons ] }
             , content: buttonsRow.default.html
             }
-          , HH.slot_ (SProxy :: SProxy "outlined-button-dense") unit Button.button
+          , HH.slot_ (Proxy :: Proxy "outlined-button-dense") unit Button.button
             { variant: Button.Outlined
             , config: Button.defaultConfig { additionalClasses = buttonsRow.dense.additionalClasses <> [ Demo.Pages.Button.Css.styles.shapedButtons ] }
             , content: buttonsRow.dense.html
             }
-          , HH.slot_ (SProxy :: SProxy "outlined-button-icon") unit Button.button
+          , HH.slot_ (Proxy :: Proxy "outlined-button-icon") unit Button.button
             { variant: Button.Outlined
             , config: Button.defaultConfig { additionalClasses = buttonsRow.icon.additionalClasses <> [ Demo.Pages.Button.Css.styles.shapedButtons ] }
             , content: buttonsRow.icon.html
@@ -151,16 +152,19 @@ config =
 
           <> [ HH.h3 [ HP.class_ mdc_typography____subtitle1 ] [ HH.text "Button inside of a button" ]
 
-             , HH.slot_ (SProxy :: SProxy "button-inside-parent") unit Button.button
+             , HH.slot_ (Proxy :: Proxy "button-inside-parent") unit Button.button
                { variant: Button.Outlined
                , config: Button.defaultConfig { additionalClasses = buttonsRow.icon.additionalClasses <> [ Demo.Pages.Button.Css.styles.shapedButtons ] }
                , content:
                  [ HH.text "some text"
-                 , HH.slot_ (SProxy :: SProxy "button-inside-child") unit Button.button
-                   { variant: Button.Outlined
-                   , config: Button.defaultConfig { additionalClasses = buttonsRow.icon.additionalClasses <> [ Demo.Pages.Button.Css.styles.shapedButtons ] }
-                   , content: [ HH.text "some text inside" ]
-                   }
+                 -- | , HH.slot_
+                 -- |   (Proxy :: Proxy "button-inside-child")
+                 -- |   unit
+                 -- |   Button.button
+                 -- |   { variant: Button.Outlined
+                 -- |   , config: Button.defaultConfig { additionalClasses = buttonsRow.icon.additionalClasses <> [ Demo.Pages.Button.Css.styles.shapedButtons ] }
+                 -- |   , content: [ HH.text "some text inside" ]
+                 -- |   }
                  ]
                }
              ]
@@ -173,17 +177,17 @@ linkButtons =
   let
     additionalAttributes = [ HP.href "#buttons" ]
   in
-    [ HH.slot_ (SProxy :: SProxy "link-default") unit ButtonLink.buttonLink
+    [ HH.slot_ (Proxy :: Proxy "link-default") unit ButtonLink.buttonLink
       { variant: Button.Text
       , config: ButtonLink.defaultConfig { additionalAttributes = additionalAttributes, additionalClasses = buttonsRow.default.additionalClasses }
       , content: buttonsRow.default.html
       }
-    , HH.slot_ (SProxy :: SProxy "link-dense") unit ButtonLink.buttonLink
+    , HH.slot_ (Proxy :: Proxy "link-dense") unit ButtonLink.buttonLink
       { variant: Button.Text
       , config: ButtonLink.defaultConfig { additionalAttributes = additionalAttributes, additionalClasses = buttonsRow.dense.additionalClasses }
       , content: buttonsRow.dense.html
       }
-    , HH.slot_ (SProxy :: SProxy "link-icon") unit ButtonLink.buttonLink
+    , HH.slot_ (Proxy :: Proxy "link-icon") unit ButtonLink.buttonLink
       { variant: Button.Text
       , config: ButtonLink.defaultConfig { additionalAttributes = additionalAttributes, additionalClasses = buttonsRow.icon.additionalClasses }
       , content: buttonsRow.icon.html
@@ -192,7 +196,7 @@ linkButtons =
 
 focusButton :: Array (HH.ComponentHTML WithFocus.Action _ Aff)
 focusButton =
-  [ HH.slot_ (SProxy :: SProxy "focus-target-1") unit Button.button
+  [ HH.slot_ (Proxy :: Proxy "focus-target-1") unit Button.button
     { variant: Button.Raised
     , config: Button.defaultConfig { additionalAttributes = [ HP.id_ "focus-target-1" ] }
     , content: [ HH.text "Button" ]
@@ -200,7 +204,7 @@ focusButton =
 
   , HH.text "\x00A0"
 
-  , HH.slot (SProxy :: SProxy "focus-maker-1") unit
+  , HH.slot (Proxy :: Proxy "focus-maker-1") unit
     Button.button
     { variant: Button.Raised
     , config: Button.defaultConfig
@@ -212,7 +216,7 @@ focusButton =
 
   , HH.text "\x00A0"
 
-  , HH.slot_ (SProxy :: SProxy "focus-target-2") unit ButtonLink.buttonLink
+  , HH.slot_ (Proxy :: Proxy "focus-target-2") unit ButtonLink.buttonLink
     { variant: Button.Raised
     , config: ButtonLink.defaultConfig { additionalAttributes = [ HP.id_ "focus-target-2", HP.href "#buttons" ] }
     , content: [ HH.text "Link button" ]

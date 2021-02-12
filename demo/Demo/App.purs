@@ -6,6 +6,7 @@ import Halogen (Component, ComponentHTML, HalogenM, Slot, defaultEval, mkCompone
 import Halogen.HTML as HH
 import Demo.Route (Route(..))
 import Demo.RouteToPage (routeToPage)
+import Type.Proxy
 
 data Query a
   = Navigate Route a
@@ -25,7 +26,7 @@ type Input
 type Slots
   = ( child :: H.Slot (Const Void) Void Route )
 
-_child = SProxy :: SProxy "child"
+_child = Proxy :: Proxy "child"
 
 app :: H.Component Query Input Output Aff
 app =

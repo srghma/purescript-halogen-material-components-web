@@ -6,7 +6,6 @@
   , "event"
   , "halogen-svg"
   , "effect"
-  , "generics-rep"
   , "halogen"
   , "numbers"
   , "prelude"

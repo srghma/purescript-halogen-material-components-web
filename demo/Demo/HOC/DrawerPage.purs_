@@ -55,7 +55,7 @@ render page state =
   HH.div
     [ HP.style "display: -ms-flexbox; display: flex; height: 100vh;"
     ]
-    [ HH.slot (SProxy :: SProxy "drawer") unit page.drawer unit absurd
+    [ HH.slot (Proxy :: Proxy "drawer") unit page.drawer unit absurd
     , Maybe.fromMaybe (HH.text "") page.scrim
     , HH.div
       [ HP.class_ mdc_drawer_app_content ]

@@ -1,12 +1,14 @@
 module Demo.Route where
 
 import Prelude
+
 import Data.Argonaut.Decode (class DecodeJson)
-import Data.Argonaut.Decode.Generic.Rep (genericDecodeJson)
+import Data.Argonaut.Decode.Generic (genericDecodeJson)
 import Data.Argonaut.Encode (class EncodeJson)
-import Data.Argonaut.Encode.Generic.Rep (genericEncodeJson)
+import Data.Argonaut.Encode.Generic (genericEncodeJson)
+import Data.Either (either)
 import Data.Generic.Rep (class Generic)
-import Data.Generic.Rep.Show (genericShow)
+import Data.Show.Generic (genericShow)
 import Routing.Duplex (RouteDuplex', print) as Routing.Duplex
 import Routing.Duplex.Generic (noArgs, sum) as Routing.Duplex
 import Routing.Duplex.Generic.Syntax ((/))
@@ -181,6 +183,5 @@ extractFromPagesRec Typography               = _."Typography"
 -- | extractFromPagesRec Drawer_Dismissible       = _."Drawer_Dismissible"
 -- | extractFromPagesRec Drawer_Modal             = _."Drawer_Modal"
 
-
 toString :: Route -> String
-toString route = "#" <> Routing.Duplex.print routeCodec route
+toString route = "#" <> either show identity (Routing.Duplex.print routeCodec route)

@@ -78,8 +78,8 @@ setStateFocusedEfficiently = setEfficiently (Lens.prop (SProxy :: SProxy "focuse
 
 type GetNormalizedEventCoordsFn event =
   { event :: event
-  , scrollX :: Int
-  , scrollY :: Int
+  , scrollX :: Number
+  , scrollY :: Number
   , rootDomRect :: Web.HTML.HTMLElement.DOMRect
   }
   -> MDCRipplePoint
@@ -131,8 +131,8 @@ activationLogicGo
     ) <- H.liftEffect do
         (rootDomRect :: Web.HTML.HTMLElement.DOMRect) <- Web.HTML.HTMLElement.getBoundingClientRect rootElement
         (window :: Window) <- Web.HTML.window
-        (scrollX :: Int) <- Web.HTML.Window.scrollX window
-        (scrollY :: Int) <- Web.HTML.Window.scrollY window
+        (scrollX :: Number) <- Web.HTML.Window.scrollX window
+        (scrollY :: Number) <- Web.HTML.Window.scrollY window
 
         (documentElement :: Element) <- (Web.DOM.Document.documentElement =<< Web.HTML.HTMLDocument.toDocument <$> Web.HTML.Window.document window)
             >>= maybe (throwError $ error "no document element (html)") pure

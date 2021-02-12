@@ -17,6 +17,7 @@ import HalogenMWC.TextField.Filled as TextField.Filled
 import HalogenMWC.TextField.Outlined as TextField.Outlined
 import HalogenMWC.Utils (setEfficiently)
 import Material.Classes.Typography (mdc_typography____subtitle1)
+import Type.Proxy
 
 type Query = Const Void
 
@@ -52,7 +53,7 @@ component =
         [ HH.div
           [ HP.class_ Css.styles.textFieldContainerHero ]
           [ HH.slot
-            (SProxy :: SProxy "filled")
+            (Proxy :: Proxy "filled")
             unit
             TextField.Filled.filled
               ( TextField.Filled.defaultConfig
@@ -65,7 +66,7 @@ component =
         , HH.div
           [ HP.class_ Css.styles.textFieldContainerHero ]
           [ HH.slot
-            (SProxy :: SProxy "outlined")
+            (Proxy :: Proxy "outlined")
             unit
             TextField.Outlined.outlined
               ( TextField.Outlined.defaultConfig

@@ -134,8 +134,8 @@ getNormalizedEventCoordsDefault rootDomRect = { x: rootDomRect.width / 2.0, y: r
 
 getNormalizedEventCoordsTouchEvent
   :: { event :: TouchEvent
-     , scrollX :: Int
-     , scrollY :: Int
+     , scrollX :: Number
+     , scrollY :: Number
      , rootDomRect :: Web.HTML.HTMLElement.DOMRect
      }
   -> MDCRipplePoint
@@ -147,15 +147,15 @@ getNormalizedEventCoordsTouchEvent
   } =
     case Web.TouchEvent.TouchList.item 0 $ Web.TouchEvent.TouchEvent.changedTouches event of
          Just touchEventItem ->
-           { x: Int.toNumber (Web.TouchEvent.Touch.pageX touchEventItem) - (Int.toNumber scrollX + rootDomRect.left)
-           , y: Int.toNumber (Web.TouchEvent.Touch.pageY touchEventItem) - (Int.toNumber scrollY + rootDomRect.top)
+           { x: Int.toNumber (Web.TouchEvent.Touch.pageX touchEventItem) - scrollX + rootDomRect.left
+           , y: Int.toNumber (Web.TouchEvent.Touch.pageY touchEventItem) - scrollY + rootDomRect.top
            }
          _ -> getNormalizedEventCoordsDefault rootDomRect
 
 getNormalizedEventCoordsMouseEvent
   :: { event :: MouseEvent
-     , scrollX :: Int
-     , scrollY :: Int
+     , scrollX :: Number
+     , scrollY :: Number
      , rootDomRect :: Web.HTML.HTMLElement.DOMRect
      }
   -> MDCRipplePoint
@@ -165,7 +165,7 @@ getNormalizedEventCoordsMouseEvent
   , scrollY
   , rootDomRect
   } =
-  { x: Int.toNumber (Web.UIEvent.MouseEvent.pageX event) - (Int.toNumber scrollX + rootDomRect.left)
-  , y: Int.toNumber (Web.UIEvent.MouseEvent.pageY event) - (Int.toNumber scrollY + rootDomRect.top)
+  { x: Int.toNumber (Web.UIEvent.MouseEvent.pageX event) - scrollX + rootDomRect.left
+  , y: Int.toNumber (Web.UIEvent.MouseEvent.pageY event) - scrollY + rootDomRect.top
   }
 

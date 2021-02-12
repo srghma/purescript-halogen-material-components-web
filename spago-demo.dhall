@@ -1,7 +1,6 @@
 { name = "demo-app"
 , dependencies = (./spago.dhall).dependencies #
   [ "routing-duplex"
-  , "generics-rep"
   , "argonaut-codecs"
   , "argonaut-generic"
   , "routing"
